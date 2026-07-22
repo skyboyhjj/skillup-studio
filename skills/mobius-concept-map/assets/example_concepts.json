@@ -1,0 +1,61 @@
+{
+  "rings": [
+    {
+      "label": "种子层",
+      "R": 200,
+      "w": 30,
+      "yOffset": 120,
+      "color": "#4ECDC4",
+      "subtitle": "阿赖耶识",
+      "concepts": [
+        {
+          "label": "阿赖耶识",
+          "desc": "第八识，含藏一切种子。",
+          "docs": [
+            "唯识三十颂"
+          ],
+          "wuxing": "土",
+          "bagua": "☷坤"
+        },
+        {
+          "label": "种子",
+          "desc": "功能潜能，分本有与新熏。",
+          "docs": [
+            "核心概念"
+          ],
+          "wuxing": "土",
+          "bagua": "☶艮"
+        }
+      ]
+    },
+    {
+      "label": "现行层",
+      "R": 150,
+      "w": 25,
+      "yOffset": 0,
+      "color": "#FF6B6B",
+      "subtitle": "七转识",
+      "concepts": [
+        {
+          "label": "现行",
+          "desc": "种子遇缘生起的活动。",
+          "docs": [
+            "核心概念"
+          ],
+          "wuxing": "木",
+          "bagua": "☳震"
+        },
+        {
+          "label": "遍计所执",
+          "desc": "把虚幻执为实在。",
+          "docs": [
+            "唯识三十颂"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        }
+      ]
+    }
+  ],
+  "subtitle": "拖动旋转 · 点击查看 · 触屏支持 · 示例数据"
+}
