@@ -114,7 +114,10 @@
     <div class="result-card">
       <div class="result-title" id="resultTitle"></div>
       <div class="result-stats" id="resultStats"></div>
-      <button class="btn-download" id="btnDownload">下载 HTML</button>
+      <div class="result-actions">
+        <button class="btn-preview" id="btnPreview">在线预览</button>
+        <button class="btn-download" id="btnDownload">下载 HTML</button>
+      </div>
     </div>
   </div>
 
@@ -148,6 +151,7 @@
   var resultTitle = document.getElementById('resultTitle');
   var resultStats = document.getElementById('resultStats');
   var btnDownload = document.getElementById('btnDownload');
+  var btnPreview = document.getElementById('btnPreview');
   var errorMsg = document.getElementById('errorMsg');
 
   // Emptiness checkboxes
@@ -331,6 +335,14 @@
         btnGenerate.disabled = false;
         btnGenerate.textContent = '生成 HTML';
       });
+  });
+
+  // ---- Preview ----
+  btnPreview.addEventListener('click', function () {
+    if (!generatedHtml) return;
+    var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
   });
 
   // ---- Download ----

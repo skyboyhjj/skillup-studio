@@ -364,6 +364,32 @@ body {
   border-color: #4ECDC4;
 }
 
+/* Result actions */
+.result-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-preview {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #4ECDC4;
+  border: 1px solid #4ECDC4;
+  color: #0a0a1a;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-preview:hover {
+  background: #5de0d7;
+  box-shadow: 0 2px 12px rgba(78, 205, 196, 0.3);
+}
+
 /* Error message */
 .error-msg {
   background: rgba(255, 107, 107, 0.08);
