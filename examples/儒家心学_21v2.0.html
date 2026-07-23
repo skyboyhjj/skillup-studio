@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>莫比乌斯环概念地图 · v2.0</title>
+<title>儒家心学</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; }
@@ -176,10 +176,12 @@ canvas:active { cursor: grabbing; }
 <body>
 <canvas id="canvas"></canvas>
 <div id="ui-layer">
-  <div id="title">唯识论 · 种子现行 · v1.2 修正版</div>
+  <div id="title">儒家心学</div>
   <div id="legend">
     <div style="margin-bottom:6px;font-size:12px;color:rgba(255,255,255,0.4)">三层结构</div>
-    <!--LEGEND_RINGS-->
+    <div><span class="dot" style="background:#C0392B"></span>本原层 · 理</div>
+<div><span class="dot" style="background:#E67E22"></span>修证层 · 格物</div>
+<div><span class="dot" style="background:#F1C40F"></span>境界层 · 天人合一</div>
     <div style="margin:10px 0 6px;font-size:12px;color:rgba(255,255,255,0.4)">五行</div>
     <div><span class="dot" style="background:#2ecc71"></span>木（生长）</div>
     <div><span class="dot" style="background:#e74c3c"></span>火（发散）</div>
@@ -306,41 +308,39 @@ canvas:active { cursor: grabbing; }
   var STORAGE_KEY = 'weishi_mobius_data';
   var DEFAULT_RINGS = [
     {
-      label: '种子层', R: 200, w: 30, yOffset: 120, color: '#4ECDC4',
+      label: '本原层', R: 200, w: 30, yOffset: 120, color: '#C0392B',
       concepts: [
-        { id: 'seed_1', label: '阿赖耶识', desc: '第八识，含藏一切种子，恒转如瀑流。生命宇宙的终极场域。', docs: ['核心概念全梳理', '唯识三十颂'], wuxing:'土', bagua:'☷坤' },
-        { id: 'seed_2', label: '种子', desc: '功能潜能，不是实体。分本有与新熏、有漏与无漏。', docs: ['核心概念全梳理', '种子六义'], wuxing:'土', bagua:'☶艮' },
-        { id: 'seed_3', label: '本有种子', desc: '无始时来法尔具有，非熏习生。先天架构。', docs: ['核心概念全梳理', '量子力学对照'], wuxing:'木', bagua:'☳震' },
-        { id: 'seed_4', label: '新熏种子', desc: '现行活动在阿赖耶识中留下新痕迹。后天学习。', docs: ['核心概念全梳理', '转识成智'], wuxing:'火', bagua:'☲离' },
-        { id: 'seed_5a', label: '有漏种子', desc: '被烦恼所染。不能被消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶'], wuxing:'金', bagua:'☰乾' },
-        { id: 'seed_5', label: '种子六义', desc: '刹那灭·果俱有·恒随转·性决定·待众缘·引自果', docs: ['核心概念全梳理', '性决定'], wuxing:'木', bagua:'☴巽' },
-        { id: 'seed_5b', label: '熏习', desc: '现行反熏阿赖耶识留下新种子。茶壶留茶气。种子现行双向循环。', docs: ['核心概念全梳理', '转识成智'], wuxing:'水', bagua:'☵坎' },
-        { id: 'seed_6', label: '性决定', desc: '善种必生善果，功能即性质，莫之命而常自然。', docs: ['性决定', '从量子浴到玄德'], wuxing:'金', bagua:'☱兑' }
+        { label: '理', desc: '天地万物之根本法则与至善本体，朱熹以为理在万物之先，二程以之为天理，乃儒家形上学体系之最高范畴，统摄道德秩序与宇宙律则。', docs: ["朱子语类", "二程遗书", "近思录"], wuxing:'金', bagua:'☰乾' },
+        { label: '气', desc: '构成天地万物的质料性存在，张载以之为太虚之气，横渠四句即以气之聚散言生死。气的升降出入决定了事物的生成与变化。', docs: ["正蒙", "张载集", "横渠易说"], wuxing:'木', bagua:'☳震' },
+        { label: '心', desc: '心统性情，是主体认知与道德判断的根基。陆九渊言心即理，王阳明以心为宇宙本体，儒家心学之核心范畴，强调先验道德意识的主宰性。', docs: ["象山全集", "传习录", "大学问"], wuxing:'火', bagua:'☲离' },
+        { label: '性', desc: '人所得于天者，孟子主性善，以为仁义礼智根于心；荀子主性恶，强调后天化性起伪。宋儒以性即理，为天理在人身上的直接体现。', docs: ["孟子·告子上", "荀子·性恶", "朱子语类"], wuxing:'土', bagua:'☷坤' },
+        { label: '道', desc: '儒家之道既是宇宙万物的运行法则，亦是人间伦理的最高准则。中庸言道不可须臾离也，道在人伦日用之中，即父子有亲、君臣有义之序。', docs: ["中庸", "论语·里仁", "礼记·礼运"], wuxing:'水', bagua:'☵坎' },
+        { label: '诚', desc: '天之道也，思诚者人之道。诚者真实无妄，是天道之本然与人道之追求。中庸以诚为贯通天人之际的核心范畴，诚则明、明则诚。', docs: ["中庸", "孟子·离娄上", "通书"], wuxing:'金', bagua:'☱兑' },
+        { label: '仁', desc: '儒家核心价值观，孔子以仁为一贯之道。仁者爱人，其本质为恻隐之心、不忍人之心。仁包义礼智信，是全德之名，亦为天人合一之枢纽。', docs: ["论语·颜渊", "孟子·公孙丑上", "仁说"], wuxing:'木', bagua:'☴巽' },
+        { label: '中庸', desc: '执两用中、不偏不倚的至德之境。中庸不仅是方法论原则，更是儒家追求的至高精神境界。中者天下之大本，庸者天下之达道。', docs: ["中庸", "论语·雍也", "二程遗书"], wuxing:'土', bagua:'☶艮' },
       ]
     },
     {
-      label: '现行层', R: 150, w: 25, yOffset: 0, color: '#FF6B6B',
+      label: '修证层', R: 150, w: 25, yOffset: 0, color: '#E67E22',
       concepts: [
-        { id: 'manifest_1', label: '末那识', desc: '第七识，恒审思量执第八见分为我。俱生我执之源。与超越层平等性智形成转依对应。', docs: ['核心概念全梳理', '论语读解'], wuxing:'金', bagua:'☰乾' },
-        { id: 'manifest_2', label: '前六识', desc: '眼耳鼻舌身意，了别外境。善不善俱非。', docs: ['唯识三十颂', '阿赖耶识是暗能量'], wuxing:'水', bagua:'☵坎' },
-        { id: 'manifest_3', label: '现行', desc: '种子遇缘生起的具体精神或物质活动。"种子生现行，现行熏种子"。', docs: ['核心概念全梳理', '转识成智'], wuxing:'木', bagua:'☳震' },
-        { id: 'manifest_4', label: '四分说', desc: '相分·见分·自证分·证自证分。最精密的认知地图。', docs: ['唯识学四分说'], wuxing:'土', bagua:'☷坤' },
-        { id: 'manifest_5', label: '遍行心所', desc: '触·作意·受·想·思——遍一切心的五种基本功能。种子起现行的心理机制。', docs: ['唯识三十颂'], wuxing:'金', bagua:'☱兑' },
-        { id: 'manifest_6', label: '遍计所执', desc: '把虚幻执为实在。一切执着与无明的根源。', docs: ['唯识三十颂', '读解量子力学'], wuxing:'火', bagua:'☲离' },
-        { id: 'manifest_7', label: '依他起性', desc: '众缘和合而生，一切有为法。于依他起上离遍计即显圆成实。非异非不异于圆成实。', docs: ['唯识三十颂'], wuxing:'木', bagua:'☴巽' }
+        { label: '格物', desc: '致知在格物。朱熹释为穷尽事物之理，即就事物上穷究其所以然；王阳明则释为正心之意，格者正也，物者意之用。两说代表了理学与心学的根本分歧。', docs: ["大学", "朱子语类", "传习录"], wuxing:'金', bagua:'☰乾' },
+        { label: '致知', desc: '格物之后自然推极吾之知识以至于极处。朱熹主格物致知为由外而内，先知后行；王阳明则以为致知即致良知，致吾心之良知于事事物物。', docs: ["大学章句", "传习录", "大学问"], wuxing:'火', bagua:'☲离' },
+        { label: '诚意', desc: '毋自欺也，如恶恶臭如好好色。诚意即不自欺欺人，使意念真实无妄，是修身之根本功夫。诚意与慎独密切相关，皆要求内心真实不欺。', docs: ["大学", "朱子语类", "刘宗周诚意章解"], wuxing:'土', bagua:'☷坤' },
+        { label: '正心', desc: '身有所忿懥则不得其正。正心即保持内心之中正平和，不为情绪偏私所扰。心正而后身修，正心是儒家内圣功夫的关键环节。', docs: ["大学", "朱子语类", "近思录"], wuxing:'水', bagua:'☵坎' },
+        { label: '修身', desc: '自天子以至于庶人壹是皆以修身为本。修身是儒家八条目之枢纽，内接诚意正心，外开齐家治国平天下。修身包括德性修养与行为规范两个方面。', docs: ["大学", "论语·宪问", "荀子·修身"], wuxing:'木', bagua:'☳震' },
+        { label: '慎独', desc: '君子必慎其独也。独处时亦能严守道德规范，不因无人监督而懈怠。慎独是诚意之功夫的具体化，体现了儒家道德自律的极致要求。', docs: ["大学", "中庸", "刘宗周人谱"], wuxing:'金', bagua:'☶艮' },
+        { label: '知行合一', desc: '王阳明之核心学说。知是行的主意，行是知的功夫；知是行之始，行是知之成。知而不行只是未知，行而不知只是妄行。知行本为一体两面。', docs: ["传习录", "大学问", "王文成公全书"], wuxing:'火', bagua:'☱兑' },
       ]
     },
     {
-      label: '超越层', R: 100, w: 20, yOffset: -120, color: '#FFD93D',
+      label: '境界层', R: 100, w: 20, yOffset: -120, color: '#F1C40F',
       concepts: [
-        { id: 'transcend_1', label: '超过而非消灭', desc: '有漏种子不能消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶', '从量子浴到玄德'], wuxing:'木', bagua:'☳震' },
-        { id: 'transcend_2', label: '转依', desc: '所依从有漏转为无漏。迷悟依+染净依。', docs: ['转识成智', '深度读解'], wuxing:'水', bagua:'☵坎' },
-        { id: 'transcend_3', label: '转识成智', desc: '八识转四智。末那→平等性智，阿赖耶→大圆镜智。', docs: ['转识成智', '唯识三十颂'], wuxing:'金', bagua:'☰乾' },
-        { id: 'transcend_4', label: '大圆镜智', desc: '阿赖耶转依后，如大圆镜遍照一切而不沾不染。', docs: ['转识成智', '跨框架对话'], wuxing:'土', bagua:'☷坤' },
-        { id: 'transcend_4a', label: '平等性智', desc: '末那识转依后。破我执，水泡回归大海。与现行层末那识形成转依对应。', docs: ['转识成智', '跨框架对话'], wuxing:'金', bagua:'☱兑' },
-        { id: 'transcend_5', label: '愿力', desc: '以觉悟利他为目标的坚定心念。打断轮回的唯一钥匙。', docs: ['核心概念全梳理', '转识成智'], wuxing:'土', bagua:'☶艮' },
-        { id: 'transcend_6', label: '圆成实性', desc: '远离遍计，证悟真如。不生不灭，不垢不净。', docs: ['唯识三十颂', '跨框架对话'], wuxing:'火', bagua:'☲离' },
-        { id: 'transcend_7', label: '真如', desc: '唯识实性。第25颂入性。常如其性故，即唯识实性。', docs: ['唯识三十颂·第25颂'], wuxing:'金', bagua:'☰乾' }
+        { label: '天人合一', desc: '儒家最高理想境界，天德在人心中得以完整体现。程颢以仁者浑然与万物同体，天人合一并非神秘的神秘体验，而是德性修养圆满后的自然呈现。', docs: ["识仁篇", "张载·西铭", "王阳明·大学问"], wuxing:'土', bagua:'☷坤' },
+        { label: '万物一体', desc: '仁者以天地万物为一体。此境界超越物我之分，视天地万物与我休戚相关。万物一体是儒家生态文明观与社群关怀的哲学根基。', docs: ["识仁篇", "大学问", "二程遗书"], wuxing:'水', bagua:'☵坎' },
+        { label: '良知', desc: '王阳明以良知为心之本体，即不虑而知、不学而能的先验道德意识。良知既是是非判断的标准，亦是天地万物的本体依据。', docs: ["传习录", "大学问", "孟子·尽心上"], wuxing:'火', bagua:'☲离' },
+        { label: '致良知', desc: '致吾心之良知于事事物物，则事事物物皆得其理。致良知是阳明心学的核心功夫论，强调在日用常行中推致良知，实现知行的彻底统一。', docs: ["传习录", "王阳明晚年书信", "大学问"], wuxing:'金', bagua:'☰乾' },
+        { label: '境界', desc: '儒家追求的道德精神高度，冯友兰分之为自然功利道德天地四境界。儒家以天地境界为最高，达到与万物同体、与天合德的化境。', docs: ["新原人", "中国哲学史", "境界论"], wuxing:'木', bagua:'☴巽' },
+        { label: '圣贤', desc: '儒家理想人格的终极实现。圣人者人伦之至也，内圣外王是儒家对理想人格的完整描述。圣贤境界是德性修养与经世致用的圆融统一。', docs: ["孟子·万章下", "论语·雍也", "原道"], wuxing:'土', bagua:'☶艮' },
       ]
     }
   ];
@@ -439,10 +439,20 @@ canvas:active { cursor: grabbing; }
 
   // === 五空配置 ===
   var EMPTINESS = {
-    sunyata: true, mirror: true, breath: true, wane: true, ascend: true,
-    mirrorRatio: 0.42, breathPeriod: 10000, breathAmplitude: 15,
-    fadeStart: 35000, fadeEnd: 50000, fadeTarget: 0.15, fadeRestore: 0.5,
-    ascendRatio: 0.2
+    sunyata: true,
+    mirror: true,
+    breath: true,
+    wane: true,
+    ascend: true,
+    mirrorRatio: 0.42,
+    breathPeriod: 10000,
+    breathAmplitude: 15,
+    fadeStart: 35000,
+    fadeEnd: 50000,
+    fadeTarget: 0.15,
+    fadeRestore: 0.5,
+    ascendRatio: 0.2,
+    mirrorRadius: 120
   };
   // 从 localStorage 数据中合并 emptiness 覆盖（如果有）
   function mergeEmptiness(data) {

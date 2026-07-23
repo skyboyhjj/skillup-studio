@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>莫比乌斯环概念地图 · v2.0</title>
+<title>AI概念图</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; }
@@ -176,10 +176,12 @@ canvas:active { cursor: grabbing; }
 <body>
 <canvas id="canvas"></canvas>
 <div id="ui-layer">
-  <div id="title">唯识论 · 种子现行 · v1.2 修正版</div>
+  <div id="title">AI概念图</div>
   <div id="legend">
     <div style="margin-bottom:6px;font-size:12px;color:rgba(255,255,255,0.4)">三层结构</div>
-    <!--LEGEND_RINGS-->
+    <div><span class="dot" style="background:#3498DB"></span>基础层 · 神经网络</div>
+<div><span class="dot" style="background:#2ECC71"></span>架构层 · Transformer</div>
+<div><span class="dot" style="background:#9B59B6"></span>前沿层 · 通用智能AGI</div>
     <div style="margin:10px 0 6px;font-size:12px;color:rgba(255,255,255,0.4)">五行</div>
     <div><span class="dot" style="background:#2ecc71"></span>木（生长）</div>
     <div><span class="dot" style="background:#e74c3c"></span>火（发散）</div>
@@ -306,41 +308,39 @@ canvas:active { cursor: grabbing; }
   var STORAGE_KEY = 'weishi_mobius_data';
   var DEFAULT_RINGS = [
     {
-      label: '种子层', R: 200, w: 30, yOffset: 120, color: '#4ECDC4',
+      label: '基础层', R: 200, w: 30, yOffset: 120, color: '#3498DB',
       concepts: [
-        { id: 'seed_1', label: '阿赖耶识', desc: '第八识，含藏一切种子，恒转如瀑流。生命宇宙的终极场域。', docs: ['核心概念全梳理', '唯识三十颂'], wuxing:'土', bagua:'☷坤' },
-        { id: 'seed_2', label: '种子', desc: '功能潜能，不是实体。分本有与新熏、有漏与无漏。', docs: ['核心概念全梳理', '种子六义'], wuxing:'土', bagua:'☶艮' },
-        { id: 'seed_3', label: '本有种子', desc: '无始时来法尔具有，非熏习生。先天架构。', docs: ['核心概念全梳理', '量子力学对照'], wuxing:'木', bagua:'☳震' },
-        { id: 'seed_4', label: '新熏种子', desc: '现行活动在阿赖耶识中留下新痕迹。后天学习。', docs: ['核心概念全梳理', '转识成智'], wuxing:'火', bagua:'☲离' },
-        { id: 'seed_5a', label: '有漏种子', desc: '被烦恼所染。不能被消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶'], wuxing:'金', bagua:'☰乾' },
-        { id: 'seed_5', label: '种子六义', desc: '刹那灭·果俱有·恒随转·性决定·待众缘·引自果', docs: ['核心概念全梳理', '性决定'], wuxing:'木', bagua:'☴巽' },
-        { id: 'seed_5b', label: '熏习', desc: '现行反熏阿赖耶识留下新种子。茶壶留茶气。种子现行双向循环。', docs: ['核心概念全梳理', '转识成智'], wuxing:'水', bagua:'☵坎' },
-        { id: 'seed_6', label: '性决定', desc: '善种必生善果，功能即性质，莫之命而常自然。', docs: ['性决定', '从量子浴到玄德'], wuxing:'金', bagua:'☱兑' }
+        { label: '神经网络', desc: '模拟生物神经系统信息处理机制的数学模型。由人工神经元及其连接构成，通过调整权重实现模式识别与函数逼近。深度学习的基础架构，支撑了当代AI的核心能力。', docs: ["深度学习（Goodfellow）", "神经网络与深度学习（Nielsen）", "人工神经网络原理"], wuxing:'木', bagua:'☳震' },
+        { label: '深度学习', desc: '基于多层神经网络的特征学习方法。通过逐层抽象提取数据的高层表示，在图像识别、语音处理、自然语言理解等领域取得突破性进展。是当代AI最具影响力的技术范式。', docs: ["深度学习（Goodfellow）", "ImageNet论文（AlexNet）", "深度学习革命"], wuxing:'火', bagua:'☲离' },
+        { label: '自然语言处理', desc: '使计算机理解、生成和处理人类自然语言的技术领域。涵盖分词、句法分析、语义理解、文本生成等任务，是大语言模型的核心应用场景和检验标准。', docs: ["Speech and Language Processing（Jurafsky）", "统计自然语言处理（Manning）", "自然语言处理综论"], wuxing:'水', bagua:'☵坎' },
+        { label: '计算机视觉', desc: '使机器从图像或视频中获取高层语义信息的技术。包括图像分类、目标检测、语义分割、三维重建等，是自动驾驶、医学影像、安防监控等应用的技术基础。', docs: ["Computer Vision（Szeliski）", "Deep Learning for CV", "计算机视觉：算法与应用"], wuxing:'金', bagua:'☰乾' },
+        { label: '强化学习', desc: '智能体通过与环境交互学习最优行为策略的方法。以延迟奖励和试错探索为核心特征，在游戏对弈、机器人控制、资源调度等领域展现强大潜力。AlphaGo即由此技术驱动。', docs: ["Reinforcement Learning（Sutton & Barto）", "AlphaGo论文", "强化学习导论"], wuxing:'木', bagua:'☴巽' },
+        { label: '生成模型', desc: '学习数据分布以生成新样本的概率模型。从VAE到GAN到扩散模型，生成模型在图像合成、文本创作、药物设计等领域持续突破，正深刻改变内容生产方式。', docs: ["Generative Adversarial Networks", "Diffusion Models（Ho et al.）", "生成式深度学习"], wuxing:'水', bagua:'☱兑' },
+        { label: '注意力机制', desc: '使模型动态聚焦于输入序列关键部分的技术。通过计算查询与键的相似度权重，实现对信息的自适应选择。是Transformer架构的基石，彻底改变了序列建模范式。', docs: ["Attention Is All You Need", "BERT论文", "注意力机制详解"], wuxing:'火', bagua:'☶艮' },
       ]
     },
     {
-      label: '现行层', R: 150, w: 25, yOffset: 0, color: '#FF6B6B',
+      label: '架构层', R: 150, w: 25, yOffset: 0, color: '#2ECC71',
       concepts: [
-        { id: 'manifest_1', label: '末那识', desc: '第七识，恒审思量执第八见分为我。俱生我执之源。与超越层平等性智形成转依对应。', docs: ['核心概念全梳理', '论语读解'], wuxing:'金', bagua:'☰乾' },
-        { id: 'manifest_2', label: '前六识', desc: '眼耳鼻舌身意，了别外境。善不善俱非。', docs: ['唯识三十颂', '阿赖耶识是暗能量'], wuxing:'水', bagua:'☵坎' },
-        { id: 'manifest_3', label: '现行', desc: '种子遇缘生起的具体精神或物质活动。"种子生现行，现行熏种子"。', docs: ['核心概念全梳理', '转识成智'], wuxing:'木', bagua:'☳震' },
-        { id: 'manifest_4', label: '四分说', desc: '相分·见分·自证分·证自证分。最精密的认知地图。', docs: ['唯识学四分说'], wuxing:'土', bagua:'☷坤' },
-        { id: 'manifest_5', label: '遍行心所', desc: '触·作意·受·想·思——遍一切心的五种基本功能。种子起现行的心理机制。', docs: ['唯识三十颂'], wuxing:'金', bagua:'☱兑' },
-        { id: 'manifest_6', label: '遍计所执', desc: '把虚幻执为实在。一切执着与无明的根源。', docs: ['唯识三十颂', '读解量子力学'], wuxing:'火', bagua:'☲离' },
-        { id: 'manifest_7', label: '依他起性', desc: '众缘和合而生，一切有为法。于依他起上离遍计即显圆成实。非异非不异于圆成实。', docs: ['唯识三十颂'], wuxing:'木', bagua:'☴巽' }
+        { label: 'Transformer', desc: '基于自注意力机制的序列到序列架构，彻底取代了循环与卷积在NLP领域的主导地位。其并行计算能力与可扩展性使其成为大语言模型的标准架构范式。', docs: ["Attention Is All You Need", "Transformer架构详解", "The Annotated Transformer"], wuxing:'金', bagua:'☰乾' },
+        { label: '大语言模型', desc: '通过海量文本数据训练的超大规模参数语言模型。具备上下文学习、指令遵循、多步推理等涌现能力，正在重塑人机交互方式与知识工作流程。', docs: ["GPT-4论文", "LLaMA论文", "大语言模型综述"], wuxing:'火', bagua:'☲离' },
+        { label: '多模态', desc: '融合处理文本、图像、音频、视频等多种模态信息的技术。跨模态表示学习与对齐是多模态AI的核心挑战，GPT-4V与Gemini代表了这一方向的最新进展。', docs: ["CLIP论文", "BLIP论文", "多模态机器学习综述"], wuxing:'土', bagua:'☷坤' },
+        { label: 'RAG', desc: '检索增强生成技术，将外部知识库检索与语言模型生成相结合。通过动态引入相关文档片段提升回答的准确性与时效性，有效缓解大模型的幻觉问题。', docs: ["RAG原始论文", "检索增强生成综述", "LangChain RAG指南"], wuxing:'木', bagua:'☳震' },
+        { label: 'Agent', desc: '能够自主感知环境、制定计划、调用工具并执行复杂任务的AI系统。以大语言模型为核心推理引擎，结合记忆与工具使用能力，正在向通用自主智能体演进。', docs: ["AutoGPT", "Toolformer论文", "AI Agent综述"], wuxing:'金', bagua:'☱兑' },
+        { label: '微调', desc: '在预训练模型基础上针对特定任务进行参数调整的技术。从全量微调到LoRA、QLoRA等参数高效方法，微调使通用大模型快速适配垂直领域的专业需求。', docs: ["LoRA论文", "QLoRA论文", "微调大语言模型指南"], wuxing:'土', bagua:'☶艮' },
+        { label: '提示工程', desc: '通过精心设计输入提示来优化大模型输出的技术与方法论。包括少样本学习、思维链、自我一致性等策略，直接影响模型在实际应用中的效果与可靠性。', docs: ["Chain-of-Thought论文", "Prompt Engineering Guide", "提示工程实践"], wuxing:'水', bagua:'☵坎' },
       ]
     },
     {
-      label: '超越层', R: 100, w: 20, yOffset: -120, color: '#FFD93D',
+      label: '前沿层', R: 100, w: 20, yOffset: -120, color: '#9B59B6',
       concepts: [
-        { id: 'transcend_1', label: '超过而非消灭', desc: '有漏种子不能消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶', '从量子浴到玄德'], wuxing:'木', bagua:'☳震' },
-        { id: 'transcend_2', label: '转依', desc: '所依从有漏转为无漏。迷悟依+染净依。', docs: ['转识成智', '深度读解'], wuxing:'水', bagua:'☵坎' },
-        { id: 'transcend_3', label: '转识成智', desc: '八识转四智。末那→平等性智，阿赖耶→大圆镜智。', docs: ['转识成智', '唯识三十颂'], wuxing:'金', bagua:'☰乾' },
-        { id: 'transcend_4', label: '大圆镜智', desc: '阿赖耶转依后，如大圆镜遍照一切而不沾不染。', docs: ['转识成智', '跨框架对话'], wuxing:'土', bagua:'☷坤' },
-        { id: 'transcend_4a', label: '平等性智', desc: '末那识转依后。破我执，水泡回归大海。与现行层末那识形成转依对应。', docs: ['转识成智', '跨框架对话'], wuxing:'金', bagua:'☱兑' },
-        { id: 'transcend_5', label: '愿力', desc: '以觉悟利他为目标的坚定心念。打断轮回的唯一钥匙。', docs: ['核心概念全梳理', '转识成智'], wuxing:'土', bagua:'☶艮' },
-        { id: 'transcend_6', label: '圆成实性', desc: '远离遍计，证悟真如。不生不灭，不垢不净。', docs: ['唯识三十颂', '跨框架对话'], wuxing:'火', bagua:'☲离' },
-        { id: 'transcend_7', label: '真如', desc: '唯识实性。第25颂入性。常如其性故，即唯识实性。', docs: ['唯识三十颂·第25颂'], wuxing:'金', bagua:'☰乾' }
+        { label: '通用智能AGI', desc: '具有人类同等或超越人类水平的通用智能能力的人工智能系统。能够跨领域学习、推理和解决问题，是AI研究的终极目标与最深远的技术愿景。', docs: ["AGI Roadmap", "Human-Level AI", "通向AGI之路"], wuxing:'金', bagua:'☰乾' },
+        { label: '对齐Alignment', desc: '确保AI系统行为与人类价值观和意图保持一致的研究领域。包括RLHF、Constitutional AI等技术路线，是防止大模型产生有害输出的关键安全保障。', docs: ["InstructGPT论文", "Constitutional AI论文", "AI对齐研究综述"], wuxing:'火', bagua:'☲离' },
+        { label: '涌现Emergence', desc: '复杂系统中微观组件交互产生的宏观新特性。大模型在规模达到临界点后展现出的推理、编程、创作等能力，被认为是一种涌现现象。涌现机制的揭示是理解AI的关键。', docs: ["Scaling Laws论文", "Emergent Abilities论文", "复杂性与涌现"], wuxing:'木', bagua:'☳震' },
+        { label: 'AI安全', desc: '确保AI系统可靠、可控、无危害的跨学科研究领域。涵盖鲁棒性、可验证性、防御对抗攻击等方面，随着AI能力增强其安全风险也日益凸显。', docs: ["Concrete Problems in AI Safety", "AI安全研究综述", "AI风险评估"], wuxing:'水', bagua:'☵坎' },
+        { label: '意识Consciousness', desc: '探讨AI能否拥有主观体验与自我觉知的哲学与科学前沿问题。涉及全局工作空间理论、整合信息理论等框架，触及了计算与意识的深层关系。', docs: ["Integrated Information Theory", "Global Workspace Theory", "机器意识研究"], wuxing:'火', bagua:'☱兑' },
+        { label: '可解释性', desc: '使AI系统的决策过程透明且可被人类理解的研究方向。机械可解释性试图揭示神经网络内部的信息处理机制，对于建立AI信任与安全审查至关重要。', docs: ["Mechanistic Interpretability论文", "Attention头可视化", "可解释机器学习"], wuxing:'土', bagua:'☷坤' },
+        { label: '人机协作', desc: '人类与AI系统优势互补的协同工作模式。以Copilot为代表，AI作为智能助手增强人类能力而非替代人类。人机协作正在重新定义创造力与生产力的边界。', docs: ["Human-AI Collaboration综述", "Copilot研究", "Augmenting Human Intellect"], wuxing:'木', bagua:'☴巽' },
       ]
     }
   ];
@@ -439,10 +439,20 @@ canvas:active { cursor: grabbing; }
 
   // === 五空配置 ===
   var EMPTINESS = {
-    sunyata: true, mirror: true, breath: true, wane: true, ascend: true,
-    mirrorRatio: 0.42, breathPeriod: 10000, breathAmplitude: 15,
-    fadeStart: 35000, fadeEnd: 50000, fadeTarget: 0.15, fadeRestore: 0.5,
-    ascendRatio: 0.2
+    sunyata: true,
+    mirror: true,
+    breath: true,
+    wane: true,
+    ascend: true,
+    mirrorRatio: 0.42,
+    breathPeriod: 10000,
+    breathAmplitude: 15,
+    fadeStart: 35000,
+    fadeEnd: 50000,
+    fadeTarget: 0.15,
+    fadeRestore: 0.5,
+    ascendRatio: 0.2,
+    mirrorRadius: 120
   };
   // 从 localStorage 数据中合并 emptiness 覆盖（如果有）
   function mergeEmptiness(data) {

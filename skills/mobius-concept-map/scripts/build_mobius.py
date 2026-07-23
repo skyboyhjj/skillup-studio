@@ -125,6 +125,17 @@ def main():
     html = html.replace('唯识论 · 种子现行 · 概念地图', args.title)
     html = html.replace('莫比乌斯环概念地图 · v2.0', args.title)
 
+    # 替换 Legend 三层标注
+    legend_lines = []
+    for r in rings:
+        label = r.get('label', '未命名')
+        color = r.get('color', '#4ECDC4')
+        first_concept = r.get('concepts', [{}])[0].get('label', '')
+        desc = ' · ' + first_concept if first_concept else ''
+        legend_lines.append(
+            '<div><span class="dot" style="background:{}"></span>{}{}</div>'.format(color, label, desc))
+    html = html.replace('<!--LEGEND_RINGS-->', '\n'.join(legend_lines))
+
     with open(args.output, 'w', encoding='utf-8') as f:
         f.write(html)
 

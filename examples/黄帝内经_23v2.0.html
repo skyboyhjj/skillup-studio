@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>莫比乌斯环概念地图 · v2.0</title>
+<title>黄帝内经</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; }
@@ -176,10 +176,12 @@ canvas:active { cursor: grabbing; }
 <body>
 <canvas id="canvas"></canvas>
 <div id="ui-layer">
-  <div id="title">唯识论 · 种子现行 · v1.2 修正版</div>
+  <div id="title">黄帝内经</div>
   <div id="legend">
     <div style="margin-bottom:6px;font-size:12px;color:rgba(255,255,255,0.4)">三层结构</div>
-    <!--LEGEND_RINGS-->
+    <div><span class="dot" style="background:#27AE60"></span>阴阳层 · 阴阳</div>
+<div><span class="dot" style="background:#2980B9"></span>诊治层 · 望闻问切</div>
+<div><span class="dot" style="background:#8E44AD"></span>哲理层 · 天人相应</div>
     <div style="margin:10px 0 6px;font-size:12px;color:rgba(255,255,255,0.4)">五行</div>
     <div><span class="dot" style="background:#2ecc71"></span>木（生长）</div>
     <div><span class="dot" style="background:#e74c3c"></span>火（发散）</div>
@@ -306,41 +308,41 @@ canvas:active { cursor: grabbing; }
   var STORAGE_KEY = 'weishi_mobius_data';
   var DEFAULT_RINGS = [
     {
-      label: '种子层', R: 200, w: 30, yOffset: 120, color: '#4ECDC4',
+      label: '阴阳层', R: 200, w: 30, yOffset: 120, color: '#27AE60',
       concepts: [
-        { id: 'seed_1', label: '阿赖耶识', desc: '第八识，含藏一切种子，恒转如瀑流。生命宇宙的终极场域。', docs: ['核心概念全梳理', '唯识三十颂'], wuxing:'土', bagua:'☷坤' },
-        { id: 'seed_2', label: '种子', desc: '功能潜能，不是实体。分本有与新熏、有漏与无漏。', docs: ['核心概念全梳理', '种子六义'], wuxing:'土', bagua:'☶艮' },
-        { id: 'seed_3', label: '本有种子', desc: '无始时来法尔具有，非熏习生。先天架构。', docs: ['核心概念全梳理', '量子力学对照'], wuxing:'木', bagua:'☳震' },
-        { id: 'seed_4', label: '新熏种子', desc: '现行活动在阿赖耶识中留下新痕迹。后天学习。', docs: ['核心概念全梳理', '转识成智'], wuxing:'火', bagua:'☲离' },
-        { id: 'seed_5a', label: '有漏种子', desc: '被烦恼所染。不能被消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶'], wuxing:'金', bagua:'☰乾' },
-        { id: 'seed_5', label: '种子六义', desc: '刹那灭·果俱有·恒随转·性决定·待众缘·引自果', docs: ['核心概念全梳理', '性决定'], wuxing:'木', bagua:'☴巽' },
-        { id: 'seed_5b', label: '熏习', desc: '现行反熏阿赖耶识留下新种子。茶壶留茶气。种子现行双向循环。', docs: ['核心概念全梳理', '转识成智'], wuxing:'水', bagua:'☵坎' },
-        { id: 'seed_6', label: '性决定', desc: '善种必生善果，功能即性质，莫之命而常自然。', docs: ['性决定', '从量子浴到玄德'], wuxing:'金', bagua:'☱兑' }
+        { label: '阴阳', desc: '宇宙万物之根本对立统一法则。阴静阳动，阴成形阳化气。阴阳互根互用、消长转化，是《黄帝内经》整个理论体系的哲学基石与逻辑起点。', docs: ["素问·阴阳应象大论", "素问·阴阳离合论", "灵枢·阴阳系日月"], wuxing:'水', bagua:'☵坎' },
+        { label: '五行', desc: '木火土金水五种基本物质的运动变化规律。五行相生相克维持动态平衡，用以阐释脏腑间的生理联系与病理传变，构建了中医的系统论思维框架。', docs: ["素问·阴阳应象大论", "素问·五运行大论", "尚书·洪范"], wuxing:'土', bagua:'☷坤' },
+        { label: '脏腑', desc: '五脏六腑之总称。脏为阴主藏精气，腑为阳主传化物。脏腑相表里配合，通过经络相互络属，构成人体生命活动的核心功能系统。', docs: ["素问·五脏生成篇", "素问·灵兰秘典论", "灵枢·本脏"], wuxing:'土', bagua:'☶艮' },
+        { label: '气血', desc: '气为阳主动，血为阴主静。气为血之帅，血为气之母。气血调和则百病不生，气血失调是疾病发生的基本病机之一。', docs: ["素问·调经论", "灵枢·决气", "难经·二十二难"], wuxing:'火', bagua:'☲离' },
+        { label: '经络', desc: '运行气血、联络脏腑肢节的通道系统。十二正经与奇经八脉纵横交错，形成遍及全身的网络。经络学说是针灸治疗的理论基础，亦是针灸学的核心框架。', docs: ["灵枢·经脉", "灵枢·经别", "甲乙经"], wuxing:'木', bagua:'☴巽' },
+        { label: '穴位', desc: '经气输注于体表的特定部位。穴位是经络之气聚集与转输的关键节点，通过刺激穴位可调节相应脏腑经络功能。腧穴分为经穴、奇穴与阿是穴三大类。', docs: ["灵枢·本输", "针灸甲乙经", "铜人腧穴针灸图经"], wuxing:'金', bagua:'☰乾' },
+        { label: '病因', desc: '导致疾病发生的各种因素。《内经》以阴阳为纲，分为外感六淫、内伤七情及饮食劳倦等。三因学说是中医病因分类的经典框架。', docs: ["素问·调经论", "素问·生气通天论", "金匮要略"], wuxing:'水', bagua:'☵坎' },
+        { label: '病机', desc: '疾病发生发展与变化的内在机理。病机十九条概括了各类病变的基本规律，正邪交争是病机的核心，辨别病机是辨证论治的前提。', docs: ["素问·至真要大论", "素问·阴阳应象大论", "素问·标本病传论"], wuxing:'火', bagua:'☳震' },
       ]
     },
     {
-      label: '现行层', R: 150, w: 25, yOffset: 0, color: '#FF6B6B',
+      label: '诊治层', R: 150, w: 25, yOffset: 0, color: '#2980B9',
       concepts: [
-        { id: 'manifest_1', label: '末那识', desc: '第七识，恒审思量执第八见分为我。俱生我执之源。与超越层平等性智形成转依对应。', docs: ['核心概念全梳理', '论语读解'], wuxing:'金', bagua:'☰乾' },
-        { id: 'manifest_2', label: '前六识', desc: '眼耳鼻舌身意，了别外境。善不善俱非。', docs: ['唯识三十颂', '阿赖耶识是暗能量'], wuxing:'水', bagua:'☵坎' },
-        { id: 'manifest_3', label: '现行', desc: '种子遇缘生起的具体精神或物质活动。"种子生现行，现行熏种子"。', docs: ['核心概念全梳理', '转识成智'], wuxing:'木', bagua:'☳震' },
-        { id: 'manifest_4', label: '四分说', desc: '相分·见分·自证分·证自证分。最精密的认知地图。', docs: ['唯识学四分说'], wuxing:'土', bagua:'☷坤' },
-        { id: 'manifest_5', label: '遍行心所', desc: '触·作意·受·想·思——遍一切心的五种基本功能。种子起现行的心理机制。', docs: ['唯识三十颂'], wuxing:'金', bagua:'☱兑' },
-        { id: 'manifest_6', label: '遍计所执', desc: '把虚幻执为实在。一切执着与无明的根源。', docs: ['唯识三十颂', '读解量子力学'], wuxing:'火', bagua:'☲离' },
-        { id: 'manifest_7', label: '依他起性', desc: '众缘和合而生，一切有为法。于依他起上离遍计即显圆成实。非异非不异于圆成实。', docs: ['唯识三十颂'], wuxing:'木', bagua:'☴巽' }
+        { label: '望闻问切', desc: '中医四诊法，合称四诊合参。望诊观色察形，闻诊听声嗅味，问诊详审病史，切诊按脉触诊。四诊互参方能全面把握病情，为辨证论治奠定基础。', docs: ["素问·脉要精微论", "难经·六十一难", "濒湖脉学"], wuxing:'木', bagua:'☴巽' },
+        { label: '辨证论治', desc: '中医临床之核心方法论。通过分析综合四诊所得，辨别疾病的证候类型，据此确立治则治法与处方用药。辨证是前提，论治是目的，体现了中医个体化诊疗精髓。', docs: ["伤寒论", "素问·至真要大论", "景岳全书"], wuxing:'火', bagua:'☲离' },
+        { label: '中药', desc: '以中医药理论为指导用于防治疾病的天然药物。中药以四气五味、归经升降浮沉为理论基础，通过君臣佐使的配伍法则组成方剂，发挥整体调节作用。', docs: ["神农本草经", "伤寒杂病论", "本草纲目"], wuxing:'土', bagua:'☷坤' },
+        { label: '针灸', desc: '以针刺与艾灸为主要手段的物理疗法。针刺通过刺激穴位调节经络气血，艾灸以温热效应温经散寒。针灸疗法简便廉验，是中医药文化的重要组成部分。', docs: ["灵枢·九针十二原", "针灸甲乙经", "针灸大成"], wuxing:'金', bagua:'☰乾' },
+        { label: '推拿', desc: '以手法作用于人体特定部位以防治疾病的疗法。通过推、拿、按、摩等手法疏通经络、调和气血、理筋整复，达到治疗目的。历史悠久，是中医外治法的重要分支。', docs: ["素问·异法方宜论", "千金要方", "小儿推拿秘旨"], wuxing:'木', bagua:'☳震' },
+        { label: '养生', desc: '顺应自然规律以保养生命的学问。内经以法于阴阳、和于术数、食饮有节、起居有常为养生总纲。治未病思想贯穿其中，强调预防为主的生命智慧。', docs: ["素问·上古天真论", "素问·四气调神大论", "千金要方·养性"], wuxing:'水', bagua:'☵坎' },
+        { label: '治未病', desc: '未病先防与既病防变的预防医学思想。上工治未病是《内经》医学的最高追求，体现了中医预防医学的超前意识。这一思想对现代公共卫生体系具有深远启示。', docs: ["素问·四气调神大论", "金匮要略", "黄帝内经·素问"], wuxing:'火', bagua:'☱兑' },
       ]
     },
     {
-      label: '超越层', R: 100, w: 20, yOffset: -120, color: '#FFD93D',
+      label: '哲理层', R: 100, w: 20, yOffset: -120, color: '#8E44AD',
       concepts: [
-        { id: 'transcend_1', label: '超过而非消灭', desc: '有漏种子不能消灭，只能被超过。修行不是除草，是种花。', docs: ['深度读解', '不用打败恶', '从量子浴到玄德'], wuxing:'木', bagua:'☳震' },
-        { id: 'transcend_2', label: '转依', desc: '所依从有漏转为无漏。迷悟依+染净依。', docs: ['转识成智', '深度读解'], wuxing:'水', bagua:'☵坎' },
-        { id: 'transcend_3', label: '转识成智', desc: '八识转四智。末那→平等性智，阿赖耶→大圆镜智。', docs: ['转识成智', '唯识三十颂'], wuxing:'金', bagua:'☰乾' },
-        { id: 'transcend_4', label: '大圆镜智', desc: '阿赖耶转依后，如大圆镜遍照一切而不沾不染。', docs: ['转识成智', '跨框架对话'], wuxing:'土', bagua:'☷坤' },
-        { id: 'transcend_4a', label: '平等性智', desc: '末那识转依后。破我执，水泡回归大海。与现行层末那识形成转依对应。', docs: ['转识成智', '跨框架对话'], wuxing:'金', bagua:'☱兑' },
-        { id: 'transcend_5', label: '愿力', desc: '以觉悟利他为目标的坚定心念。打断轮回的唯一钥匙。', docs: ['核心概念全梳理', '转识成智'], wuxing:'土', bagua:'☶艮' },
-        { id: 'transcend_6', label: '圆成实性', desc: '远离遍计，证悟真如。不生不灭，不垢不净。', docs: ['唯识三十颂', '跨框架对话'], wuxing:'火', bagua:'☲离' },
-        { id: 'transcend_7', label: '真如', desc: '唯识实性。第25颂入性。常如其性故，即唯识实性。', docs: ['唯识三十颂·第25颂'], wuxing:'金', bagua:'☰乾' }
+        { label: '天人相应', desc: '人体与自然界相互感应、彼此贯通的理论。人之生理病理与天地阴阳消长同步，四时变化直接影响脏腑功能。天人相应是中医整体观的核心体现。', docs: ["素问·生气通天论", "素问·六节藏象论", "灵枢·岁露"], wuxing:'土', bagua:'☷坤' },
+        { label: '整体观', desc: '中医认识人体的基本方法论。人体自身及人与自然社会环境构成有机整体，脏腑经络气血相互联系。局部病变可影响全身，整体失调亦反映于局部。', docs: ["素问·阴阳应象大论", "灵枢·经脉", "医学源流论"], wuxing:'木', bagua:'☴巽' },
+        { label: '形神合一', desc: '形体与精神相互依存、不可分割的生命观。形乃神之宅，神乃形之主。形体健壮则神气旺盛，精神调畅则形体安康。此乃心身医学的古典表述。', docs: ["灵枢·天年", "素问·上古天真论", "类经"], wuxing:'火', bagua:'☲离' },
+        { label: '治本', desc: '治病求本乃中医治疗的根本原则。本者病之根本原因，标者病之表象症状。急则治标、缓则治本，最终达到标本兼治、从根本上消除病因的治疗目的。', docs: ["素问·标本病传论", "素问·阴阳应象大论", "景岳全书"], wuxing:'水', bagua:'☵坎' },
+        { label: '正气存内', desc: '正气充足则邪不可干，是中医发病学的基本原理。正气泛指人体正常的生理功能与抗病康复能力。扶助正气是中医治疗与养生的核心策略。', docs: ["素问·刺法论", "素问·评热病论", "灵枢·百病始生"], wuxing:'金', bagua:'☰乾' },
+        { label: '阴阳平衡', desc: '维持机体阴精与阳气相对协调稳定是健康的前提。阴平阳秘精神乃治，阴阳离决精气乃绝。一切治疗手段最终目标皆在于恢复阴阳的动态平衡。', docs: ["素问·生气通天论", "素问·至真要大论", "类经"], wuxing:'土', bagua:'☶艮' },
+        { label: '五行生克', desc: '五行之间存在相生与相克两种基本关系。相生维持系统正常运转，相克防止某行偏亢。生克制化失常是疾病的重要原因，恢复制化则是治疗的关键。', docs: ["素问·五运行大论", "素问·宝命全形论", "难经"], wuxing:'水', bagua:'☱兑' },
+        { label: '经络通则不痛', desc: '通则不痛、痛则不通是中医对疼痛机理的经典概括。经络气血运行通畅则无疼痛，壅滞不通则发为疼痛。此论点为针灸推拿活血通络治痛提供了理论基础。', docs: ["素问·举痛论", "灵枢·经脉", "针灸甲乙经"], wuxing:'木', bagua:'☳震' },
       ]
     }
   ];
@@ -439,10 +441,20 @@ canvas:active { cursor: grabbing; }
 
   // === 五空配置 ===
   var EMPTINESS = {
-    sunyata: true, mirror: true, breath: true, wane: true, ascend: true,
-    mirrorRatio: 0.42, breathPeriod: 10000, breathAmplitude: 15,
-    fadeStart: 35000, fadeEnd: 50000, fadeTarget: 0.15, fadeRestore: 0.5,
-    ascendRatio: 0.2
+    sunyata: true,
+    mirror: true,
+    breath: true,
+    wane: true,
+    ascend: true,
+    mirrorRatio: 0.42,
+    breathPeriod: 10000,
+    breathAmplitude: 15,
+    fadeStart: 35000,
+    fadeEnd: 50000,
+    fadeTarget: 0.15,
+    fadeRestore: 0.5,
+    ascendRatio: 0.2,
+    mirrorRadius: 120
   };
   // 从 localStorage 数据中合并 emptiness 覆盖（如果有）
   function mergeEmptiness(data) {
