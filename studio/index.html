@@ -125,6 +125,15 @@
 
 </div>
 
+<!-- Preview overlay -->
+<div class="preview-overlay" id="previewOverlay">
+  <div class="preview-bar">
+    <span class="preview-label" id="previewLabel">预览</span>
+    <button class="btn-close-preview" id="btnClosePreview">&times;</button>
+  </div>
+  <iframe class="preview-iframe" id="previewIframe" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+</div>
+
 <footer class="site-footer">
   <p>SkillUp Studio &middot; Mobius Concept Map Generator &middot; 2026</p>
 </footer>
@@ -152,6 +161,10 @@
   var resultStats = document.getElementById('resultStats');
   var btnDownload = document.getElementById('btnDownload');
   var btnPreview = document.getElementById('btnPreview');
+  var previewOverlay = document.getElementById('previewOverlay');
+  var previewIframe = document.getElementById('previewIframe');
+  var previewLabel = document.getElementById('previewLabel');
+  var btnClosePreview = document.getElementById('btnClosePreview');
   var errorMsg = document.getElementById('errorMsg');
 
   // Emptiness checkboxes
@@ -337,15 +350,34 @@
       });
   });
 
-  // ---- Preview ----
+  // ---- Preview (iframe overlay) ----
   btnPreview.addEventListener('click', function () {
     if (!generatedHtml) return;
+    var title = titleInput.value.trim() || '概念地图';
     var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
     var url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
+    previewLabel.textContent = title;
+    previewIframe.src = url;
+    previewOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
   });
 
-  // ---- Download ----
+  function closePreview() {
+    previewOverlay.classList.remove('show');
+    previewIframe.src = 'about:blank';
+    document.body.style.overflow = '';
+  }
+
+  btnClosePreview.addEventListener('click', closePreview);
+
+  // ESC to close
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && previewOverlay.classList.contains('show')) {
+      closePreview();
+    }
+  });
+
+  // ---- Download (share-first for mobile) ----
   btnDownload.addEventListener('click', function () {
     if (!generatedHtml) return;
     var title = titleInput.value.trim() || '概念地图';
@@ -355,6 +387,15 @@
       String(today.getDate()).padStart(2, '0');
     var filename = title + '_莫比乌斯概念地图_' + dateStr + '.html';
     var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
+
+    // Mobile-first: use Web Share API if available
+    if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/html' })] })) {
+      var file = new File([blob], filename, { type: 'text/html' });
+      navigator.share({ files: [file], title: title }).catch(function () {});
+      return;
+    }
+
+    // Fallback: Blob download
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
