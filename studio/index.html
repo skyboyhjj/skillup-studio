@@ -337,11 +337,16 @@
   btnDownload.addEventListener('click', function () {
     if (!generatedHtml) return;
     var title = titleInput.value.trim() || '概念地图';
+    var today = new Date();
+    var dateStr = today.getFullYear() + '-' +
+      String(today.getMonth() + 1).padStart(2, '0') + '-' +
+      String(today.getDate()).padStart(2, '0');
+    var filename = title + '_莫比乌斯概念地图_' + dateStr + '.html';
     var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = title + '.html';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     setTimeout(function () {
