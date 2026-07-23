@@ -41,7 +41,7 @@
 
 - 3D 莫比乌斯环数学建模 + 透视投影 + 画家算法
 - CRUD 管理面板（新增/编辑/删除/排序/导入/导出 JSON）
-- localStorage 自动持久化
+- localStorage 自动持久化（按数据集隔离）
 - 五行八卦属性标注（可选）
 - 三种布局模式：八卦方位 / 关联词条 / 同层展示
 - 移动端触屏支持
@@ -60,30 +60,84 @@
 - 音量滑块实时调节
 - localStorage 记忆用户偏好
 
+---
+
 ## 示例
 
-`examples/` 目录包含唯识论知识库的完整演示：
+`examples/` 目录包含多主题概念地图数据集和生成产物。
+
+### 唯识论（初版）
 
 | 文件 | 说明 |
 |:-----|:-----|
-| `weishi-23-nodes.json` | 23 节点五行八卦概念数据（3 层 8/7/8 节点） |
-| `weishi-mobius-v2.0.html` | v2.0 五空动画演示（生成产物） |
-| `weishi-mobius-v1.0.html` | v1.0 莫比乌斯初版（含 CRUD 管理面板） |
-| `weishi-static-concept-map.html` | 静态概念地图（28 节点 6 分类） |
+| [weishi-23-nodes.json](examples/weishi-23-nodes.json) | 23 节点五行八卦概念数据（3 层 8/7/8 节点） |
+| [weishi-mobius-v2.0.html](examples/weishi-mobius-v2.0.html) | v2.0 五空动画演示 |
+| [weishi-mobius-v1.0.html](examples/weishi-mobius-v1.0.html) | v1.0 莫比乌斯初版（含 CRUD 管理面板） |
+| [weishi-static-concept-map.html](examples/weishi-static-concept-map.html) | 静态概念地图（28 节点 6 分类） |
+
+### 儒家心学（21节点）
+
+| 文件 | 说明 |
+|:-----|:-----|
+| [儒家心学_21nodes.json](examples/儒家心学_21nodes.json) | 本原层(8) + 修证层(7) + 境界层(6) |
+| [儒家心学_21v2.0.html](examples/儒家心学_21v2.0.html) | 儒红/橙/金配色五空动画演示 |
+
+### 黄帝内经（23节点）
+
+| 文件 | 说明 |
+|:-----|:-----|
+| [黄帝内经_23nodes.json](examples/黄帝内经_23nodes.json) | 阴阳层(8) + 诊治层(7) + 哲理层(8) |
+| [黄帝内经_23v2.0.html](examples/黄帝内经_23v2.0.html) | 草木绿/蓝/紫配色五空动画演示 |
+
+### 道德经（20节点）
+
+| 文件 | 说明 |
+|:-----|:-----|
+| [道德经_20nodes.json](examples/道德经_20nodes.json) | 体·道(7) + 相·德(7) + 用·玄(6) |
+| [道德经_20v2.0.html](examples/道德经_20v2.0.html) | 五空动画演示 |
+
+### 五行养生（15节点）
+
+| 文件 | 说明 |
+|:-----|:-----|
+| [五行养生_15nodes.json](examples/五行养生_15nodes.json) | 体·五行本质(5) + 相·五蕴对应(5) + 用·调养之道(5) |
+| [五行养生_15v2.0.html](examples/五行养生_15v2.0.html) | 五空动画演示 |
+
+### AI 概念图（21节点）
+
+| 文件 | 说明 |
+|:-----|:-----|
+| [AI概念图_21nodes.json](examples/AI概念图_21nodes.json) | 基础层(7) + 架构层(7) + 前沿层(7) |
+| [AI概念图_21v2.0.html](examples/AI概念图_21v2.0.html) | 科技蓝/创新绿/前沿紫配色五空动画演示 |
+
+---
 
 ## 设计文档
 
-`docs/` 目录包含完整的架构与设计文档：
+`docs/` 目录包含完整的架构与设计文档。
 
 | 文件 | 说明 |
 |:-----|:-----|
-| `莫比乌斯环_五空动画_设计文档_v2.0.md` | 从创意到实现的完整设计书（12章） |
-| `莫比乌斯环_五阶音景_独立提案_v1.0.md` | Web Audio API 五阶音景系统提案 |
+| [莫比乌斯环_五空动画_设计文档_v2.0.md](docs/莫比乌斯环_五空动画_设计文档_v2.0.md) | 从创意到实现的完整设计书（14章），含五阶音景、动画录制系统 |
+| [莫比乌斯环_五阶音景_独立提案_v1.0.md](docs/莫比乌斯环_五阶音景_独立提案_v1.0.md) | Web Audio API 五阶音景系统提案 |
+
+---
 
 ## 快速开始
 
 ```bash
-python3 skills/mobius-concept-map/scripts/build_mobius.py --data examples/weishi-23-nodes.json --title "我的概念地图" --output output.html
+# 从数据集生成 HTML
+python3 skills/mobius-concept-map/scripts/build_mobius.py \
+  --data examples/儒家心学_21nodes.json \
+  --title "我的概念地图" \
+  --output output.html
+
+# 关闭五空动画（纯骨架模式）
+python3 skills/mobius-concept-map/scripts/build_mobius.py \
+  --data examples/AI概念图_21nodes.json \
+  --title "AI概念图" \
+  --no-emptiness \
+  --output output.html
 ```
 
 ### 数据格式
