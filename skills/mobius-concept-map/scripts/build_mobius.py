@@ -136,6 +136,11 @@ def main():
             '<div><span class="dot" style="background:{}"></span>{}{}</div>'.format(color, label, desc))
     html = html.replace('<!--LEGEND_RINGS-->', '\n'.join(legend_lines))
 
+    # 替换 STORAGE_KEY（基于标题生成唯一 key，避免不同数据集互相污染）
+    import hashlib
+    storage_key = 'mobius_' + hashlib.md5(args.title.encode('utf-8')).hexdigest()[:8]
+    html = html.replace("var STORAGE_KEY = 'weishi_mobius_data'", "var STORAGE_KEY = '" + storage_key + "'")
+
     with open(args.output, 'w', encoding='utf-8') as f:
         f.write(html)
 

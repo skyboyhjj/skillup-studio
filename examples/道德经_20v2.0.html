@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>黄帝内经</title>
+<title>道德经</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; }
@@ -176,12 +176,12 @@ canvas:active { cursor: grabbing; }
 <body>
 <canvas id="canvas"></canvas>
 <div id="ui-layer">
-  <div id="title">黄帝内经</div>
+  <div id="title">道德经</div>
   <div id="legend">
     <div style="margin-bottom:6px;font-size:12px;color:rgba(255,255,255,0.4)">三层结构</div>
-    <div><span class="dot" style="background:#27AE60"></span>阴阳层 · 阴阳</div>
-<div><span class="dot" style="background:#2980B9"></span>诊治层 · 望闻问切</div>
-<div><span class="dot" style="background:#8E44AD"></span>哲理层 · 天人相应</div>
+    <div><span class="dot" style="background:#4ECDC4"></span>体·道 · 道</div>
+<div><span class="dot" style="background:#FF6B6B"></span>相·德 · 慈</div>
+<div><span class="dot" style="background:#FFD93D"></span>用·玄 · 玄同</div>
     <div style="margin:10px 0 6px;font-size:12px;color:rgba(255,255,255,0.4)">五行</div>
     <div><span class="dot" style="background:#2ecc71"></span>木（生长）</div>
     <div><span class="dot" style="background:#e74c3c"></span>火（发散）</div>
@@ -305,44 +305,41 @@ canvas:active { cursor: grabbing; }
   }
 
   // === 数据层：localStorage 持久化 ===
-  var STORAGE_KEY = 'mobius_8306e9fa';
+  var STORAGE_KEY = 'mobius_89e44697';
   var DEFAULT_RINGS = [
     {
-      label: '阴阳层', R: 200, w: 30, yOffset: 120, color: '#27AE60',
+      label: '体·道', R: 200, w: 30, yOffset: 120, color: '#4ECDC4',
       concepts: [
-        { label: '阴阳', desc: '宇宙万物之根本对立统一法则。阴静阳动，阴成形阳化气。阴阳互根互用、消长转化，是《黄帝内经》整个理论体系的哲学基石与逻辑起点。', docs: ["素问·阴阳应象大论", "素问·阴阳离合论", "灵枢·阴阳系日月"], wuxing:'水', bagua:'☵坎' },
-        { label: '五行', desc: '木火土金水五种基本物质的运动变化规律。五行相生相克维持动态平衡，用以阐释脏腑间的生理联系与病理传变，构建了中医的系统论思维框架。', docs: ["素问·阴阳应象大论", "素问·五运行大论", "尚书·洪范"], wuxing:'土', bagua:'☷坤' },
-        { label: '脏腑', desc: '五脏六腑之总称。脏为阴主藏精气，腑为阳主传化物。脏腑相表里配合，通过经络相互络属，构成人体生命活动的核心功能系统。', docs: ["素问·五脏生成篇", "素问·灵兰秘典论", "灵枢·本脏"], wuxing:'土', bagua:'☶艮' },
-        { label: '气血', desc: '气为阳主动，血为阴主静。气为血之帅，血为气之母。气血调和则百病不生，气血失调是疾病发生的基本病机之一。', docs: ["素问·调经论", "灵枢·决气", "难经·二十二难"], wuxing:'火', bagua:'☲离' },
-        { label: '经络', desc: '运行气血、联络脏腑肢节的通道系统。十二正经与奇经八脉纵横交错，形成遍及全身的网络。经络学说是针灸治疗的理论基础，亦是针灸学的核心框架。', docs: ["灵枢·经脉", "灵枢·经别", "甲乙经"], wuxing:'木', bagua:'☴巽' },
-        { label: '穴位', desc: '经气输注于体表的特定部位。穴位是经络之气聚集与转输的关键节点，通过刺激穴位可调节相应脏腑经络功能。腧穴分为经穴、奇穴与阿是穴三大类。', docs: ["灵枢·本输", "针灸甲乙经", "铜人腧穴针灸图经"], wuxing:'金', bagua:'☰乾' },
-        { label: '病因', desc: '导致疾病发生的各种因素。《内经》以阴阳为纲，分为外感六淫、内伤七情及饮食劳倦等。三因学说是中医病因分类的经典框架。', docs: ["素问·调经论", "素问·生气通天论", "金匮要略"], wuxing:'水', bagua:'☵坎' },
-        { label: '病机', desc: '疾病发生发展与变化的内在机理。病机十九条概括了各类病变的基本规律，正邪交争是病机的核心，辨别病机是辨证论治的前提。', docs: ["素问·至真要大论", "素问·阴阳应象大论", "素问·标本病传论"], wuxing:'火', bagua:'☳震' },
+        { label: '道', desc: '不可道之道。域/觉知本身。容纳一切旋量生灭、矢量显隐的空集。第1·25章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
+        { label: '无', desc: '天地之始。旋量场的潜能态——尚未平方、同时携带正负双解。第1·40章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
+        { label: '有', desc: '万物之母。旋量被平方后的可观测产物——一切确定的东西。第1·40章。', docs: ["道德经"], wuxing:'木', bagua:'☳震' },
+        { label: '自然', desc: '道法自然。不是\'大自然\'而是\'自己如此\'——旋量场内置的回归动力。第25章。', docs: ["道德经"], wuxing:'土', bagua:'☷坤' },
+        { label: '反者道之动', desc: '720°螺旋法则。从体起用（平方）→摄用归体（开方）的完整周期。第40章。', docs: ["道德经"], wuxing:'火', bagua:'☲离' },
+        { label: '弱者道之用', desc: '道的精微作用——不强制，只内置规律，松手即归。开方的精微机制。第40·43章。', docs: ["道德经"], wuxing:'金', bagua:'☰乾' },
+        { label: '水/上善若水', desc: '水善利万物而不争。觉知域的流动性——容纳一切操作却从不参与。第8·78章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
       ]
     },
     {
-      label: '诊治层', R: 150, w: 25, yOffset: 0, color: '#2980B9',
+      label: '相·德', R: 150, w: 25, yOffset: 0, color: '#FF6B6B',
       concepts: [
-        { label: '望闻问切', desc: '中医四诊法，合称四诊合参。望诊观色察形，闻诊听声嗅味，问诊详审病史，切诊按脉触诊。四诊互参方能全面把握病情，为辨证论治奠定基础。', docs: ["素问·脉要精微论", "难经·六十一难", "濒湖脉学"], wuxing:'木', bagua:'☴巽' },
-        { label: '辨证论治', desc: '中医临床之核心方法论。通过分析综合四诊所得，辨别疾病的证候类型，据此确立治则治法与处方用药。辨证是前提，论治是目的，体现了中医个体化诊疗精髓。', docs: ["伤寒论", "素问·至真要大论", "景岳全书"], wuxing:'火', bagua:'☲离' },
-        { label: '中药', desc: '以中医药理论为指导用于防治疾病的天然药物。中药以四气五味、归经升降浮沉为理论基础，通过君臣佐使的配伍法则组成方剂，发挥整体调节作用。', docs: ["神农本草经", "伤寒杂病论", "本草纲目"], wuxing:'土', bagua:'☷坤' },
-        { label: '针灸', desc: '以针刺与艾灸为主要手段的物理疗法。针刺通过刺激穴位调节经络气血，艾灸以温热效应温经散寒。针灸疗法简便廉验，是中医药文化的重要组成部分。', docs: ["灵枢·九针十二原", "针灸甲乙经", "针灸大成"], wuxing:'金', bagua:'☰乾' },
-        { label: '推拿', desc: '以手法作用于人体特定部位以防治疾病的疗法。通过推、拿、按、摩等手法疏通经络、调和气血、理筋整复，达到治疗目的。历史悠久，是中医外治法的重要分支。', docs: ["素问·异法方宜论", "千金要方", "小儿推拿秘旨"], wuxing:'木', bagua:'☳震' },
-        { label: '养生', desc: '顺应自然规律以保养生命的学问。内经以法于阴阳、和于术数、食饮有节、起居有常为养生总纲。治未病思想贯穿其中，强调预防为主的生命智慧。', docs: ["素问·上古天真论", "素问·四气调神大论", "千金要方·养性"], wuxing:'水', bagua:'☵坎' },
-        { label: '治未病', desc: '未病先防与既病防变的预防医学思想。上工治未病是《内经》医学的最高追求，体现了中医预防医学的超前意识。这一思想对现代公共卫生体系具有深远启示。', docs: ["素问·四气调神大论", "金匮要略", "黄帝内经·素问"], wuxing:'火', bagua:'☱兑' },
+        { label: '慈', desc: '我有三宝，一曰慈。平方时心怀万物——从体起用不伤人。第67章。', docs: ["道德经"], wuxing:'木', bagua:'☳震' },
+        { label: '俭', desc: '二曰俭。平方的节制——不把旋量平方到极致、留回归空间。第67章。', docs: ["道德经"], wuxing:'金', bagua:'☱兑' },
+        { label: '不敢为天下先', desc: '三曰不敢为天下先。不为矢量层的第一——开方的姿态。第67章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
+        { label: '守柔', desc: '柔弱处上。弱者道之用的实践——真正的力量不在平方处，在开方处。第76章。', docs: ["道德经"], wuxing:'金', bagua:'☰乾' },
+        { label: '不争', desc: '夫唯不争故天下莫能与之争。不强力平方对抗矢量。第22·66章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
+        { label: '知足', desc: '知足者富。在平方的半程知道停止——不是消极，是知道何时开方。第33·46章。', docs: ["道德经"], wuxing:'土', bagua:'☷坤' },
+        { label: '无为', desc: '为无为则无不治。不是不做，是平方时不执着于矢量结果。第3·37·48章。', docs: ["道德经"], wuxing:'土', bagua:'☶艮' },
       ]
     },
     {
-      label: '哲理层', R: 100, w: 20, yOffset: -120, color: '#8E44AD',
+      label: '用·玄', R: 100, w: 20, yOffset: -120, color: '#FFD93D',
       concepts: [
-        { label: '天人相应', desc: '人体与自然界相互感应、彼此贯通的理论。人之生理病理与天地阴阳消长同步，四时变化直接影响脏腑功能。天人相应是中医整体观的核心体现。', docs: ["素问·生气通天论", "素问·六节藏象论", "灵枢·岁露"], wuxing:'土', bagua:'☷坤' },
-        { label: '整体观', desc: '中医认识人体的基本方法论。人体自身及人与自然社会环境构成有机整体，脏腑经络气血相互联系。局部病变可影响全身，整体失调亦反映于局部。', docs: ["素问·阴阳应象大论", "灵枢·经脉", "医学源流论"], wuxing:'木', bagua:'☴巽' },
-        { label: '形神合一', desc: '形体与精神相互依存、不可分割的生命观。形乃神之宅，神乃形之主。形体健壮则神气旺盛，精神调畅则形体安康。此乃心身医学的古典表述。', docs: ["灵枢·天年", "素问·上古天真论", "类经"], wuxing:'火', bagua:'☲离' },
-        { label: '治本', desc: '治病求本乃中医治疗的根本原则。本者病之根本原因，标者病之表象症状。急则治标、缓则治本，最终达到标本兼治、从根本上消除病因的治疗目的。', docs: ["素问·标本病传论", "素问·阴阳应象大论", "景岳全书"], wuxing:'水', bagua:'☵坎' },
-        { label: '正气存内', desc: '正气充足则邪不可干，是中医发病学的基本原理。正气泛指人体正常的生理功能与抗病康复能力。扶助正气是中医治疗与养生的核心策略。', docs: ["素问·刺法论", "素问·评热病论", "灵枢·百病始生"], wuxing:'金', bagua:'☰乾' },
-        { label: '阴阳平衡', desc: '维持机体阴精与阳气相对协调稳定是健康的前提。阴平阳秘精神乃治，阴阳离决精气乃绝。一切治疗手段最终目标皆在于恢复阴阳的动态平衡。', docs: ["素问·生气通天论", "素问·至真要大论", "类经"], wuxing:'土', bagua:'☶艮' },
-        { label: '五行生克', desc: '五行之间存在相生与相克两种基本关系。相生维持系统正常运转，相克防止某行偏亢。生克制化失常是疾病的重要原因，恢复制化则是治疗的关键。', docs: ["素问·五运行大论", "素问·宝命全形论", "难经"], wuxing:'水', bagua:'☱兑' },
-        { label: '经络通则不痛', desc: '通则不痛、痛则不通是中医对疼痛机理的经典概括。经络气血运行通畅则无疼痛，壅滞不通则发为疼痛。此论点为针灸推拿活血通络治痛提供了理论基础。', docs: ["素问·举痛论", "灵枢·经脉", "针灸甲乙经"], wuxing:'木', bagua:'☳震' },
+        { label: '玄同', desc: '塞兑闭门挫锐解纷和光同尘——回归体后的无差别境界。第56章。', docs: ["道德经"], wuxing:'水', bagua:'☵坎' },
+        { label: '復命', desc: '归根曰静，静曰復命。开方到底——从矢量完全回归旋量。第16章。', docs: ["道德经"], wuxing:'金', bagua:'☰乾' },
+        { label: '玄德', desc: '生而不有为而不恃长而不宰。从体起用但摄用归体——三轮体空。第10·51章。', docs: ["道德经"], wuxing:'土', bagua:'☷坤' },
+        { label: '恍惚', desc: '道之为物，惟恍惟惚。旋量尚未平方时的量子叠加态——正负双解共源。第21章。', docs: ["道德经"], wuxing:'火', bagua:'☲离' },
+        { label: '小国寡民', desc: '甘食美服安俗乐居——在旋量层（小）安住而非在矢量层（大）追逐。第80章。', docs: ["道德经"], wuxing:'木', bagua:'☴巽' },
+        { label: '为道日损', desc: '损之又损以至于无为。每一口呼气（开方）放下一点执着。第48章。', docs: ["道德经"], wuxing:'金', bagua:'☱兑' },
       ]
     }
   ];
@@ -453,8 +450,7 @@ canvas:active { cursor: grabbing; }
     fadeEnd: 50000,
     fadeTarget: 0.15,
     fadeRestore: 0.5,
-    ascendRatio: 0.2,
-    mirrorRadius: 120
+    ascendRatio: 0.2
   };
   // 从 localStorage 数据中合并 emptiness 覆盖（如果有）
   function mergeEmptiness(data) {
