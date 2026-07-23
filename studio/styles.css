@@ -450,12 +450,26 @@ body {
 }
 
 /* Or label */
-.or-label {
-  text-align: center;
-  margin: 16px 0;
-  color: rgba(255, 255, 255, 0.25);
-  font-size: 12px;
-  letter-spacing: 2px;
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  gap: 16px;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.or-text {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 /* Responsive */
