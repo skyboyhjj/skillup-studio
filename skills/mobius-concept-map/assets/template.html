@@ -13,7 +13,7 @@ canvas:active { cursor: grabbing; }
 #title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.85); font-size: 20px; letter-spacing: 6px; text-shadow: 0 0 20px rgba(78,205,196,0.4); }
 #legend { position: absolute; bottom: 20px; left: 20px; color: rgba(255,255,255,0.7); font-size: 13px; line-height: 2; }
 #legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-#phase-indicator { position: absolute; bottom: 20px; right: 20px; color: rgba(255,255,255,0.6); font-size: 13px; text-align: right; }
+#phase-indicator { position: absolute; bottom: 64px; right: 20px; color: rgba(255,255,255,0.6); font-size: 13px; text-align: right; }
 #hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 2px; }
 #tooltip { position: fixed; pointer-events: none; z-index: 20; display: none; background: rgba(10,10,26,0.92); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px 16px; max-width: 280px; color: #fff; font-size: 13px; line-height: 1.7; box-shadow: 0 4px 24px rgba(0,0,0,0.6); }
 #tooltip .tt-name { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
@@ -52,6 +52,32 @@ canvas:active { cursor: grabbing; }
 #record-area {
   position: fixed; top: 20px; right: 100px; z-index: 40;
   display: flex; flex-direction: column; align-items: center;
+}
+#audio-area {
+  position: fixed; bottom: 20px; right: 20px; z-index: 40;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(10,10,26,0.85); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 8px 14px; pointer-events: auto;
+}
+#audio-btn {
+  background: none; border: none; color: rgba(255,255,255,0.6);
+  font-size: 20px; cursor: pointer; padding: 2px 6px; line-height: 1;
+  transition: color 0.3s;
+}
+#audio-btn:hover { color: rgba(255,255,255,0.9); }
+#audio-btn.active { color: #4ECDC4; }
+#audio-slider {
+  width: 60px; height: 3px; -webkit-appearance: none; appearance: none;
+  background: rgba(255,255,255,0.2); border-radius: 2px; outline: none;
+  cursor: pointer;
+}
+#audio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 10px; height: 10px;
+  border-radius: 50%; background: #4ECDC4; cursor: pointer;
+}
+#audio-slider::-moz-range-thumb {
+  width: 10px; height: 10px;
+  border-radius: 50%; background: #4ECDC4; border: none; cursor: pointer;
 }
 
 #manage-panel {
@@ -187,6 +213,10 @@ canvas:active { cursor: grabbing; }
 <div id="record-area">
   <button id="btn-record" title="录制动画">&#9655; 录制</button>
   <div id="record-info"></div>
+</div>
+<div id="audio-area">
+  <button id="audio-btn" title="音频开关">&#x1f507;</button>
+  <input type="range" id="audio-slider" min="0" max="100" value="60" title="音量">
 </div>
 <div id="manage-panel">
   <div class="mp-header">
@@ -962,13 +992,39 @@ canvas:active { cursor: grabbing; }
       } else {
         recordStream = stream;
       }
-      var mimeType = 'video/webm;codecs=vp9';
-      if (!MediaRecorder.isTypeSupported(mimeType)) {
-        mimeType = 'video/webm;codecs=vp8';
+      // 合并音频流（如果音频引擎已开启）
+      if (audioCtx && audioState > 0) {
+        try {
+          var audioDest = audioCtx.createMediaStreamDestination();
+          audioNodes.masterGain.connect(audioDest);
+          var audioTracks = audioDest.stream.getAudioTracks();
+          for (var ai = 0; ai < audioTracks.length; ai++) {
+            recordStream.addTrack(audioTracks[ai]);
+          }
+        } catch(e) { /* 音频流合并失败，继续无声录制 */ }
       }
-      if (!MediaRecorder.isTypeSupported(mimeType)) {
-        mimeType = 'video/webm';
+      // 桌面端优先 MP4，移动端降级 WebM
+      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      var mimeType = '';
+      if (!isMobile) {
+        // 桌面端：尝试 MP4（H.264 + AAC）
+        if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
+          mimeType = 'video/mp4;codecs=avc1';
+        } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+          mimeType = 'video/mp4';
+        }
       }
+      if (!mimeType) {
+        // 移动端或 MP4 不支持：降级 WebM VP9 → VP8 → 裸 WebM
+        if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+          mimeType = 'video/webm;codecs=vp9';
+        } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8')) {
+          mimeType = 'video/webm;codecs=vp8';
+        } else if (MediaRecorder.isTypeSupported('video/webm')) {
+          mimeType = 'video/webm';
+        }
+      }
+      var ext = mimeType.startsWith('video/mp4') ? 'mp4' : 'webm';
       var options = mimeType ? { mimeType: mimeType, videoBitsPerSecond: 2500000 } : {};
       recordedChunks = [];
       recorder = new MediaRecorder(recordStream, options);
@@ -990,14 +1046,14 @@ canvas:active { cursor: grabbing; }
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = '莫比乌斯概念地图_' + new Date().toISOString().slice(0, 10) + '.webm';
+        a.download = '莫比乌斯概念地图_' + new Date().toISOString().slice(0, 10) + '.' + ext;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         btnRecord.classList.remove('recording');
         btnRecord.innerHTML = '&#9655; 录制';
-        showRecordInfo('录制完成，已下载 (WebM)', '#4ECDC4');
+        showRecordInfo('录制完成，已下载 (' + ext.toUpperCase() + ')', '#4ECDC4');
         if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
         setTimeout(hideRecordInfo, 4000);
         recorder = null;
@@ -1029,6 +1085,347 @@ canvas:active { cursor: grabbing; }
       alert('录制启动失败: ' + err.message);
     }
   });
+
+  // === 五阶音景引擎 ===
+  var AUDIO = {
+    enabled: true, breath: true, construct: true, flow: true, dissolve: true, wane: true,
+    baseFreq: 432, masterVolume: 0.06, breathPeriod: 4000
+  };
+  // 从 localStorage 读取音频配置
+  try {
+    var savedAudio = localStorage.getItem(STORAGE_KEY + '_audio');
+    if (savedAudio) {
+      var aCfg = JSON.parse(savedAudio);
+      for (var ak in aCfg) { if (aCfg.hasOwnProperty(ak)) AUDIO[ak] = aCfg[ak]; }
+    }
+  } catch(e) {}
+
+  var audioCtx = null;
+  var audioState = 0; // 0=静音 1=呼吸+音景 2=仅音景
+  var audioNodes = {}; // 存储所有音频节点引用
+  var audioAnimFrame = null;
+  var audioPhaseCheckTimer = null;
+  var lastAudioPhase = -1;
+  var btnAudio = document.getElementById('audio-btn');
+  var sliderAudio = document.getElementById('audio-slider');
+  sliderAudio.value = Math.round(AUDIO.masterVolume / 0.1 * 100);
+
+  function initAudioEngine() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // 主音量
+    var masterGain = audioCtx.createGain();
+    masterGain.gain.value = AUDIO.masterVolume;
+    masterGain.connect(audioCtx.destination);
+    audioNodes.masterGain = masterGain;
+
+    // === 呼吸层（全程粉色噪声 + 4秒包络） ===
+    var breathGain = audioCtx.createGain();
+    breathGain.gain.value = 0;
+    breathGain.connect(masterGain);
+    audioNodes.breathGain = breathGain;
+
+    // 粉色噪声源（Paul Kellet 算法）
+    var pinkBufSize = 4096;
+    var pinkNode = audioCtx.createScriptProcessor(pinkBufSize, 1, 1);
+    var pb0=0,pb1=0,pb2=0,pb3=0,pb4=0,pb5=0;
+    pinkNode.onaudioprocess = function(e) {
+      var out = e.outputBuffer.getChannelData(0);
+      for (var i=0; i<pinkBufSize; i++) {
+        var w = Math.random()*2-1;
+        pb0=0.99886*pb0+w*0.0555179;
+        pb1=0.99332*pb1+w*0.0750759;
+        pb2=0.96900*pb2+w*0.1538520;
+        pb3=0.86650*pb3+w*0.3104856;
+        pb4=0.55000*pb4+w*0.5329522;
+        pb5=-0.7616*pb5-w*0.0168980;
+        out[i]=(pb0+pb1+pb2+pb3+pb4+pb5+w*0.5362)*0.11;
+      }
+    };
+    // 低通 800Hz
+    var breathFilter = audioCtx.createBiquadFilter();
+    breathFilter.type = 'lowpass';
+    breathFilter.frequency.value = 800;
+    pinkNode.connect(breathFilter);
+    breathFilter.connect(breathGain);
+    // ScriptProcessor 需要连接输出才能运行 onaudioprocess，用静音节点避免直接输出
+    var pinkSilent = audioCtx.createGain();
+    pinkSilent.gain.value = 0;
+    pinkNode.connect(pinkSilent);
+    pinkSilent.connect(audioCtx.destination);
+    audioNodes.pinkNode = pinkNode;
+    audioNodes.breathFilter = breathFilter;
+
+    // === 阶段音景层 ===
+    // 建构层 Gain
+    var constructGain = audioCtx.createGain();
+    constructGain.gain.value = 0;
+    constructGain.connect(masterGain);
+    audioNodes.constructGain = constructGain;
+
+    // 流转层 Gain
+    var flowGain = audioCtx.createGain();
+    flowGain.gain.value = 0;
+    flowGain.connect(masterGain);
+    audioNodes.flowGain = flowGain;
+
+    // 消散层 Gain
+    var dissolveGain = audioCtx.createGain();
+    dissolveGain.gain.value = 0;
+    dissolveGain.connect(masterGain);
+    audioNodes.dissolveGain = dissolveGain;
+
+    // 渐隐层 Gain
+    var waneGain = audioCtx.createGain();
+    waneGain.gain.value = 0;
+    waneGain.connect(masterGain);
+    audioNodes.waneGain = waneGain;
+
+    // 建构层：432Hz 基频 + 864Hz 泛音（20%）
+    var constructOsc1 = audioCtx.createOscillator();
+    constructOsc1.type = 'sine';
+    constructOsc1.frequency.value = AUDIO.baseFreq;
+    var constructOsc2 = audioCtx.createOscillator();
+    constructOsc2.type = 'sine';
+    constructOsc2.frequency.value = AUDIO.baseFreq * 2;
+    var harmonicGain1 = audioCtx.createGain();
+    harmonicGain1.gain.value = 0.2;
+    constructOsc1.connect(constructGain);
+    constructOsc2.connect(harmonicGain1);
+    harmonicGain1.connect(constructGain);
+    constructOsc1.start();
+    constructOsc2.start();
+    audioNodes.constructOsc1 = constructOsc1;
+    audioNodes.constructOsc2 = constructOsc2;
+
+    // 流转层：432Hz + 428Hz（差拍）+ 白噪声低通
+    var flowOsc1 = audioCtx.createOscillator();
+    flowOsc1.type = 'sine';
+    flowOsc1.frequency.value = AUDIO.baseFreq;
+    var flowOsc2 = audioCtx.createOscillator();
+    flowOsc2.type = 'sine';
+    flowOsc2.frequency.value = AUDIO.baseFreq - 4;
+    var flowNoiseBuf = audioCtx.createBufferSource();
+    var noiseBuf = audioCtx.createBuffer(1, audioCtx.sampleRate * 2, audioCtx.sampleRate);
+    var noiseData = noiseBuf.getChannelData(0);
+    for (var ni=0; ni<noiseData.length; ni++) noiseData[ni] = Math.random()*2-1;
+    flowNoiseBuf.buffer = noiseBuf;
+    flowNoiseBuf.loop = true;
+    var flowNoiseFilter = audioCtx.createBiquadFilter();
+    flowNoiseFilter.type = 'lowpass';
+    flowNoiseFilter.frequency.value = 500;
+    var flowNoiseGain = audioCtx.createGain();
+    flowNoiseGain.gain.value = 0.03; // -30dB 约等于 0.032
+    flowNoiseBuf.connect(flowNoiseFilter);
+    flowNoiseFilter.connect(flowNoiseGain);
+    flowNoiseGain.connect(flowGain);
+    flowOsc1.connect(flowGain);
+    flowOsc2.connect(flowGain);
+    flowNoiseBuf.start();
+    flowOsc1.start();
+    flowOsc2.start();
+    audioNodes.flowNoiseBuf = flowNoiseBuf;
+
+    // 消散层：432Hz → 864Hz 滑音
+    var dissolveOsc = audioCtx.createOscillator();
+    dissolveOsc.type = 'sine';
+    dissolveOsc.frequency.value = AUDIO.baseFreq;
+    var dissolveOsc2 = audioCtx.createOscillator();
+    dissolveOsc2.type = 'sine';
+    dissolveOsc2.frequency.value = AUDIO.baseFreq * 2;
+    var dissolveHarmGain = audioCtx.createGain();
+    dissolveHarmGain.gain.value = 0.2;
+    dissolveOsc.connect(dissolveGain);
+    dissolveOsc2.connect(dissolveHarmGain);
+    dissolveHarmGain.connect(dissolveGain);
+    dissolveOsc.start();
+    dissolveOsc2.start();
+    audioNodes.dissolveOsc = dissolveOsc;
+    audioNodes.dissolveOsc2 = dissolveOsc2;
+    audioNodes.dissolveHarmGain = dissolveHarmGain;
+
+    // 渐隐层：216Hz + 偶发泛音
+    var waneOsc = audioCtx.createOscillator();
+    waneOsc.type = 'sine';
+    waneOsc.frequency.value = AUDIO.baseFreq / 2;
+    waneOsc.connect(waneGain);
+    waneOsc.start();
+    audioNodes.waneOsc = waneOsc;
+    // 偶发泛音用独立的 OscillatorNode（按需触发）
+    audioNodes.waneHarmonicOsc = null;
+
+    // 开始呼吸循环 + 阶段切换检查
+    lastAudioPhase = -1;
+    startBreathLoop();
+    startPhaseCheckLoop();
+  }
+
+  // 呼吸包络计算
+  function getBreathGain(elapsed) {
+    var t = (elapsed % AUDIO.breathPeriod) / AUDIO.breathPeriod;
+    if (t < 0.3) return t / 0.3;           // 吸：0→1 (1.2s)
+    if (t < 0.4) return 1.0;               // 停：1 (0.4s)
+    if (t < 0.9) return 1.0 - (t-0.4)/0.5;  // 呼：1→0 (2.0s)
+    return 0;                              // 停：0 (0.4s)
+  }
+
+  // 呼吸层循环
+  function startBreathLoop() {
+    if (audioAnimFrame) cancelAnimationFrame(audioAnimFrame);
+    function tickBreath() {
+      if (!audioCtx || audioState === 0) {
+        // 静音：确保呼吸层为0
+        if (audioNodes.breathGain) audioNodes.breathGain.gain.value = 0;
+        return;
+      }
+      var now = Date.now();
+      var elapsed = (now - startTime) % CYCLE_DURATION;
+      // 呼吸层只在 state=1 时开启
+      if (audioState === 1 && AUDIO.breath) {
+        var g = getBreathGain(elapsed);
+        audioNodes.breathGain.gain.setTargetAtTime(g * 0.5, audioCtx.currentTime, 0.05);
+      } else {
+        audioNodes.breathGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+      }
+      audioAnimFrame = requestAnimationFrame(tickBreath);
+    }
+    tickBreath();
+  }
+
+  // 阶段切换检查
+  function checkAudioPhase() {
+    if (!audioCtx || audioState === 0) return;
+    var elapsed = (Date.now() - startTime) % CYCLE_DURATION;
+    var phase = getPhase(elapsed);
+    if (phase === lastAudioPhase) return;
+    var now = audioCtx.currentTime;
+    var xfadeTime = 0.5;
+
+    audioNodes.constructGain.gain.setTargetAtTime(0, now, xfadeTime/3);
+    audioNodes.flowGain.gain.setTargetAtTime(0, now, xfadeTime/3);
+    audioNodes.dissolveGain.gain.setTargetAtTime(0, now, xfadeTime/3);
+    audioNodes.waneGain.gain.setTargetAtTime(0, now, xfadeTime/3);
+
+    if (phase === PHASE_CONSTRUCT && AUDIO.construct) {
+      audioNodes.constructGain.gain.setTargetAtTime(0.8, now + xfadeTime*0.3, xfadeTime/3);
+      audioNodes.constructGain.gain.setValueAtTime(0.001, now);
+      audioNodes.constructGain.gain.linearRampToValueAtTime(0.8, now + 5);
+    }
+    if (phase === PHASE_FLOW && AUDIO.flow) {
+      audioNodes.flowGain.gain.setTargetAtTime(0.6, now + xfadeTime*0.3, xfadeTime/3);
+    }
+    if (phase === PHASE_EMPTINESS && AUDIO.dissolve) {
+      audioNodes.dissolveGain.gain.setTargetAtTime(0.6, now + xfadeTime*0.3, xfadeTime/3);
+      var phaseElapsed = elapsed - 20000;
+      var fadeIn = Math.min(1, phaseElapsed / 2000);
+      var fadeOut = phaseElapsed > 5000 ? Math.max(0, 1 - (phaseElapsed - 5000) / 10000) : 1;
+      var vol = 0.6 * fadeIn * fadeOut;
+      audioNodes.dissolveGain.gain.setValueAtTime(vol, now);
+      var freq = AUDIO.baseFreq + (AUDIO.baseFreq * 2 - AUDIO.baseFreq) * (phaseElapsed / 15000);
+      audioNodes.dissolveOsc.frequency.setTargetAtTime(Math.min(freq, AUDIO.baseFreq * 2), now, 0.1);
+      audioNodes.dissolveOsc2.frequency.setTargetAtTime(Math.min(freq * 2, AUDIO.baseFreq * 4), now, 0.1);
+      var harmRatio = 0.2 + 0.2 * (phaseElapsed / 15000);
+      audioNodes.dissolveHarmGain.gain.setTargetAtTime(Math.min(harmRatio, 0.4), now, 0.1);
+    }
+    if (phase === PHASE_WANE && AUDIO.wane) {
+      audioNodes.waneGain.gain.setTargetAtTime(0.3, now + xfadeTime*0.3, xfadeTime/3);
+      startWaneHarmonics();
+    } else {
+      stopWaneHarmonics();
+    }
+
+    lastAudioPhase = phase;
+  }
+
+  function startPhaseCheckLoop() {
+    if (audioPhaseCheckTimer) clearInterval(audioPhaseCheckTimer);
+    audioPhaseCheckTimer = setInterval(checkAudioPhase, 200);
+    checkAudioPhase(); // 立即执行一次，消除 200ms 延迟
+  }
+
+  // 渐隐层偶发泛音
+  var waneHarmonicTimer = null;
+  function startWaneHarmonics() {
+    if (waneHarmonicTimer) return;
+    waneHarmonicTimer = setInterval(function() {
+      if (!audioCtx || lastAudioPhase !== PHASE_WANE) return;
+      // 648Hz 短促泛音
+      var osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = AUDIO.baseFreq * 1.5;
+      var gain = audioCtx.createGain();
+      gain.gain.value = 0.018; // ~-35dB
+      osc.connect(gain);
+      gain.connect(audioNodes.waneGain);
+      osc.start();
+      gain.gain.setTargetAtTime(0, audioCtx.currentTime + 0.1, 0.1);
+      osc.stop(audioCtx.currentTime + 0.5);
+    }, 4000);
+  }
+  function stopWaneHarmonics() {
+    if (waneHarmonicTimer) { clearInterval(waneHarmonicTimer); waneHarmonicTimer = null; }
+  }
+
+  // 音频控件交互
+  var audioIcons = ['\u{1F507}', '\u{1F508}', '\u{1F50A}']; // 🔇🔈🔊
+  btnAudio.addEventListener('click', function() {
+    if (audioState === 0) {
+      // 静音 → 开启（呼吸+音景）
+      initAudioEngine();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      audioState = 1;
+      btnAudio.classList.add('active');
+    } else if (audioState === 1) {
+      // 呼吸+音景 → 仅音景
+      audioState = 2;
+    } else {
+      // 仅音景 → 静音
+      audioState = 0;
+      // 静音所有层
+      var now = audioCtx.currentTime;
+      audioNodes.breathGain.gain.setTargetAtTime(0, now, 0.05);
+      audioNodes.constructGain.gain.setTargetAtTime(0, now, 0.1);
+      audioNodes.flowGain.gain.setTargetAtTime(0, now, 0.1);
+      audioNodes.dissolveGain.gain.setTargetAtTime(0, now, 0.1);
+      audioNodes.waneGain.gain.setTargetAtTime(0, now, 0.1);
+      stopWaneHarmonics();
+      lastAudioPhase = -1;
+      btnAudio.classList.remove('active');
+    }
+    btnAudio.innerHTML = audioIcons[audioState];
+    // 保存状态
+    try { localStorage.setItem(STORAGE_KEY + '_audio_state', audioState); } catch(e) {}
+  });
+
+  sliderAudio.addEventListener('input', function() {
+    var val = parseInt(this.value);
+    var vol = val / 100 * 0.1; // 0~0.1
+    AUDIO.masterVolume = vol;
+    if (audioNodes.masterGain) {
+      audioNodes.masterGain.gain.setTargetAtTime(vol, audioCtx.currentTime, 0.05);
+    }
+    try { localStorage.setItem(STORAGE_KEY + '_audio_vol', val); } catch(e) {}
+  });
+
+  // 恢复保存的音频状态
+  try {
+    var savedState = localStorage.getItem(STORAGE_KEY + '_audio_state');
+    if (savedState) {
+      var s = parseInt(savedState);
+      if (s >= 0 && s <= 2) {
+        audioState = s;
+        btnAudio.innerHTML = audioIcons[audioState];
+        if (s > 0) btnAudio.classList.add('active');
+        if (s > 0) {
+          initAudioEngine();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+      }
+    }
+    var savedVol = localStorage.getItem(STORAGE_KEY + '_audio_vol');
+    if (savedVol) sliderAudio.value = savedVol;
+  } catch(e) {}
 
   // === 绘制函数 ===
 
