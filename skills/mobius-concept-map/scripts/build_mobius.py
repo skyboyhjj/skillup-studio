@@ -5,6 +5,8 @@
   python3 build_mobius.py --data data.json --title "标题" --output 输出.html
   python3 build_mobius.py --data data.json --no-emptiness --output 输出.html
   python3 build_mobius.py --data data.json --emptiness '{"wane":false}' --output 输出.html
+
+注：生成的 HTML 内置动画录制功能（WebM VP9），需通过 HTTP 服务器访问。
 """
 import json, argparse, subprocess, re
 from pathlib import Path

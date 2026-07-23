@@ -35,6 +35,24 @@ canvas:active { cursor: grabbing; }
   transition: all 0.3s; font-family: inherit;
 }
 #btn-manage:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
+#btn-record {
+  background: none; border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8); padding: 6px 12px; border-radius: 6px;
+  font-size: 13px; cursor: pointer; font-family: inherit;
+  transition: all 0.3s; white-space: nowrap;
+}
+#btn-record:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+#btn-record.recording { border-color: #FF6B6B; color: #FF6B6B; animation: recordPulse 1s infinite; }
+@keyframes recordPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+#record-info {
+  font-size: 11px; color: #FF6B6B; padding-top: 4px; white-space: nowrap;
+  opacity: 0; transition: opacity 0.3s; text-align: center;
+}
+#record-info.visible { opacity: 1; }
+#record-area {
+  position: fixed; top: 20px; right: 100px; z-index: 40;
+  display: flex; flex-direction: column; align-items: center;
+}
 
 #manage-panel {
   position: fixed; top: 0; left: -420px; width: 400px; height: 100%;
@@ -166,6 +184,10 @@ canvas:active { cursor: grabbing; }
 </div>
 <!-- 管理面板 -->
 <button id="btn-manage" title="概念管理">&#9881; 管理</button>
+<div id="record-area">
+  <button id="btn-record" title="录制动画">&#9655; 录制</button>
+  <div id="record-info"></div>
+</div>
 <div id="manage-panel">
   <div class="mp-header">
     <span>概念管理</span>
@@ -857,6 +879,155 @@ canvas:active { cursor: grabbing; }
   });
   document.getElementById('btn-close-mp').addEventListener('click', function() {
     document.getElementById('manage-panel').classList.remove('open');
+  });
+
+  // === 动画录制功能 ===
+  var recorder = null;
+  var recordedChunks = [];
+  var recordStartTime = 0;
+  var progressTimer = null;
+  var btnRecord = document.getElementById('btn-record');
+  var recordInfo = document.getElementById('record-info');
+
+  function showRecordInfo(msg, color) {
+    recordInfo.textContent = msg;
+    recordInfo.style.color = color || '#FF6B6B';
+    recordInfo.classList.add('visible');
+  }
+  function hideRecordInfo() {
+    recordInfo.classList.remove('visible');
+  }
+
+  btnRecord.addEventListener('click', function() {
+    if (recorder && recorder.state === 'recording') {
+      recorder.stop();
+      return;
+    }
+    if (!canvas.captureStream || !window.MediaRecorder) {
+      alert('当前浏览器不支持录制功能。\n请使用 Chrome/Edge/Firefox 最新版本。');
+      return;
+    }
+    if (location.protocol === 'file:') {
+      var useAnyway = confirm(
+        '录制功能需要 HTTP 协议支持。\n\n' +
+        '当前以 file:// 打开，录制可能失败。\n\n' +
+        '推荐方式：在文件所在目录运行以下命令启动本地服务器：\n' +
+        'python -m http.server 8080\n' +
+        '然后访问 http://localhost:8080/文件名.html\n\n' +
+        '点击"确定"尝试录制，"取消"放弃。'
+      );
+      if (!useAnyway) return;
+    }
+    var mode = prompt(
+      '录制选项（输入数字）：\n1 = 完整周期（' + Math.round(CYCLE_DURATION/1000) + '秒）\n2 = 自定义秒数\n\n直接回车 = ' + Math.round(CYCLE_DURATION/1000) + '秒',
+      '1'
+    );
+    if (mode === null) return;
+
+    var durationMs;
+    if (mode === '1' || mode === '') {
+      durationMs = CYCLE_DURATION + 2000;
+    } else {
+      var secs = parseInt(mode);
+      if (isNaN(secs) || secs < 1 || secs > 300) {
+        alert('请输入 1-300 之间的秒数');
+        return;
+      }
+      durationMs = secs * 1000;
+    }
+
+    var startFromBeginning = confirm(
+      '录制起点：\n\n确定 = 从建构阶段开始（推荐完整录制）\n取消 = 从当前位置继续'
+    );
+
+    if (startFromBeginning) {
+      startTime = Date.now();
+    }
+
+    try {
+      var stream = canvas.captureStream(30);
+      var recScale = Math.min(1, 960 / canvas.width, 720 / canvas.height);
+      var recCanvas = document.createElement('canvas');
+      var recW = Math.round(canvas.width * recScale);
+      var recH = Math.round(canvas.height * recScale);
+      recCanvas.width = recW;
+      recCanvas.height = recH;
+      var recCtx = recCanvas.getContext('2d');
+      var recordStream;
+      if (recScale < 1) {
+        var copyLoop = setInterval(function() {
+          recCtx.drawImage(canvas, 0, 0, recW, recH);
+        }, 1000 / 30);
+        recordStream = recCanvas.captureStream(30);
+      } else {
+        recordStream = stream;
+      }
+      var mimeType = 'video/webm;codecs=vp9';
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = 'video/webm;codecs=vp8';
+      }
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = 'video/webm';
+      }
+      var options = mimeType ? { mimeType: mimeType, videoBitsPerSecond: 2500000 } : {};
+      recordedChunks = [];
+      recorder = new MediaRecorder(recordStream, options);
+
+      recorder.ondataavailable = function(e) {
+        if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      recorder.onstop = function() {
+        if (recScale < 1 && copyLoop) clearInterval(copyLoop);
+        if (recordedChunks.length === 0) {
+          btnRecord.classList.remove('recording');
+          btnRecord.innerHTML = '&#9655; 录制';
+          hideRecordInfo();
+          recorder = null;
+          return;
+        }
+        var blob = new Blob(recordedChunks, { type: mimeType || 'video/webm' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = '莫比乌斯概念地图_' + new Date().toISOString().slice(0, 10) + '.webm';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        btnRecord.classList.remove('recording');
+        btnRecord.innerHTML = '&#9655; 录制';
+        showRecordInfo('录制完成，已下载 (WebM)', '#4ECDC4');
+        if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+        setTimeout(hideRecordInfo, 4000);
+        recorder = null;
+      };
+
+      recordStartTime = Date.now();
+      recorder.start(100);
+      btnRecord.classList.add('recording');
+      btnRecord.innerHTML = '&#9632; 停止';
+      showRecordInfo('录制中... 0% / ' + Math.round(durationMs/1000) + 's');
+
+      progressTimer = setInterval(function() {
+        if (!recorder || recorder.state !== 'recording') {
+          if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+          return;
+        }
+        var elapsed = Date.now() - recordStartTime;
+        var pct = Math.min(100, Math.round(elapsed / durationMs * 100));
+        var remain = Math.max(0, Math.ceil((durationMs - elapsed) / 1000));
+        showRecordInfo('录制中... ' + pct + '% (剩余' + remain + 's)');
+        if (elapsed >= durationMs) {
+          clearInterval(progressTimer);
+          progressTimer = null;
+          recorder.stop();
+        }
+      }, 500);
+
+    } catch(err) {
+      alert('录制启动失败: ' + err.message);
+    }
   });
 
   // === 绘制函数 ===

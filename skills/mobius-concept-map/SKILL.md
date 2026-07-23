@@ -183,6 +183,7 @@ node -e "const m=require('fs').readFileSync('输出.html','utf8').match(/<script
 - **管理面板**：CRUD操作（新增/编辑/删除/排序/导入/导出JSON）
 - **localStorage**：自动持久化用户修改
 - **五行八卦**：可选光晕 + Tooltip显示
+- **动画录制**：内置 WebM VP9 录制，输出视频文件
 
 ---
 
@@ -192,3 +193,4 @@ node -e "const m=require('fs').readFileSync('输出.html','utf8').match(/<script
 2. `wuxing` 取值：`木`/`火`/`土`/`金`/`水`
 3. `bagua` 取值：`☰乾`/`☱兑`/`☲离`/`☳震`/`☴巽`/`☵坎`/`☶艮`/`☷坤`
 4. 交付后提醒用户：拖拽旋转、悬停查看五行八卦、点击看详情、右上角管理概念、导出JSON备份
+5. **录制功能**需通过 HTTP 服务器访问（`python -m http.server 8080`），不支持 `file://` 协议。输出 WebM 格式（VP9 编码），2.5Mbps 码率，自动缩放至 960×720 以降低编码压力。桌面端 Chrome/Edge/Firefox 完整支持，iOS Safari 不支持 Canvas 录制。
