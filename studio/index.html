@@ -354,16 +354,17 @@
   btnPreview.addEventListener('click', function () {
     if (!generatedHtml) return;
     var title = titleInput.value.trim() || '概念地图';
-    var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
     previewLabel.textContent = title;
-    previewIframe.src = url;
+    // Use srcdoc to avoid Blob URL blocking in QQ Browser / WeChat WebView
+    previewIframe.removeAttribute('src');
+    previewIframe.srcdoc = generatedHtml;
     previewOverlay.classList.add('show');
     document.body.style.overflow = 'hidden';
   });
 
   function closePreview() {
     previewOverlay.classList.remove('show');
+    previewIframe.removeAttribute('srcdoc');
     previewIframe.src = 'about:blank';
     document.body.style.overflow = '';
   }
