@@ -389,8 +389,9 @@
     var filename = title + '_莫比乌斯概念地图_' + dateStr + '.html';
     var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
 
-    // Mobile-first: use Web Share API if available
-    if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/html' })] })) {
+    // Mobile-only: use Web Share API (desktop browsers also support it but UX is wrong)
+    var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    if (isMobile && navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/html' })] })) {
       var file = new File([blob], filename, { type: 'text/html' });
       navigator.share({ files: [file], title: title }).catch(function () {});
       return;
