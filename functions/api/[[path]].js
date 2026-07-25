@@ -10,7 +10,7 @@ export async function onRequest(context) {
 
   // 构建转发请求的 headers
   const headers = new Headers(request.headers);
-  headers.set('Host', '121.41.215.36:8000');
+  headers.set('Host', 'meta-skill.org');
 
   const init = {
     method: request.method,
