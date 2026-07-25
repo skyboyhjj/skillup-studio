@@ -1,10 +1,8 @@
 """域名权限中间件
 
-Nginx 通过 X-Domain-Role header 传递域名角色：
+Cloudflare Worker 通过 X-Domain-Role header 传递域名角色：
 - demo: meta-skill.org — 只读（浏览规则库、运行演示）
-- full: hui-skill.cn — 完整读写（注册、标注、修改规则库）
-
-未携带 header 时默认视为 demo 模式。
+- 未携带 header: hui-skill.cn — 完整读写（注册、标注、修改规则库）
 """
 from fastapi import Request, HTTPException, status
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -34,7 +32,7 @@ class DomainGuardMiddleware(BaseHTTPMiddleware):
     """基于域名的权限守卫"""
 
     async def dispatch(self, request: Request, call_next):
-        domain_role = request.headers.get("X-Domain-Role", "demo")
+        domain_role = request.headers.get("X-Domain-Role", "full")
 
         # 检查是否需要写权限
         needs_write = self._needs_write(request)

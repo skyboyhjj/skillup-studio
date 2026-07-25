@@ -23,7 +23,7 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 # CORS
 CORS_ORIGINS = os.getenv(
     "CORS_ORIGINS",
-    "https://meta-skill.org,https://hui-skill.cn,http://localhost:8088,http://localhost:3000"
+    "https://hui-skill.cn,https://meta-skill.org,http://localhost:8088"
 ).split(",")
 
 # AI (DeepSeek)
