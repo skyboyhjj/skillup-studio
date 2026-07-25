@@ -200,7 +200,7 @@
     <span class="preview-label" id="previewLabel">预览</span>
     <button class="btn-close-preview" id="btnClosePreview">&times;</button>
   </div>
-  <iframe class="preview-iframe" id="previewIframe"></iframe>
+  <iframe class="preview-iframe" id="previewIframe" sandbox="allow-scripts allow-same-origin"></iframe>
 </div>
 
 <footer class="site-footer">
@@ -265,22 +265,29 @@
     presetCards.forEach(function (card) {
       var domain = card.getAttribute('data-domain');
       if (cat === 'all' || domain === cat) {
-        card.style.display = '';
-        card.classList.remove('card-hiding');
-        card.classList.add('card-showing');
-        card.addEventListener('animationend', function handler() {
-          card.removeEventListener('animationend', handler);
-          card.classList.remove('card-showing');
-        });
+        // 卡片应该显示
+        if (card.classList.contains('card-hidden')) {
+          // 从隐藏变为显示：加出现动画
+          card.classList.remove('card-hidden');
+          card.classList.add('card-appear');
+          card.addEventListener('animationend', function handler() {
+            card.removeEventListener('animationend', handler);
+            card.classList.remove('card-appear');
+          }, { once: true });
+        }
       } else {
-        card.classList.add('card-hiding');
-        card.classList.remove('card-showing');
-        card.addEventListener('transitionend', function handler() {
-          card.removeEventListener('transitionend', handler);
-          if (card.classList.contains('card-hiding')) {
-            card.style.display = 'none';
-          }
-        });
+        // 卡片应该隐藏：直接从布局移除
+        card.classList.remove('card-appear');
+        card.classList.add('card-hidden');
+      }
+    });
+    // 同时隐藏热门区中不属于当前分类的卡片
+    hotCards.forEach(function (card) {
+      var domain = card.getAttribute('data-domain');
+      if (cat === 'all' || domain === cat) {
+        card.classList.remove('card-hidden');
+      } else {
+        card.classList.add('card-hidden');
       }
     });
   }
@@ -288,9 +295,11 @@
   // ---- Get all visible cards (hot + filtered) ----
   function getAllVisibleCards() {
     var visible = [];
-    hotCards.forEach(function (c) { visible.push(c); });
+    hotCards.forEach(function (c) {
+      if (!c.classList.contains('card-hidden')) visible.push(c);
+    });
     presetCards.forEach(function (c) {
-      if (c.style.display !== 'none') visible.push(c);
+      if (!c.classList.contains('card-hidden')) visible.push(c);
     });
     return visible;
   }

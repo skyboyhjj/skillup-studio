@@ -142,6 +142,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 12px;
   margin-bottom: 20px;
+  contain: layout style;
 }
 
 /* Hot section */
@@ -235,26 +236,25 @@ body {
   border-radius: 10px;
   padding: 16px;
   cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.25s ease, background 0.25s ease;
+  transition: border-color 0.25s ease, background 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Collapse animation for category filtering */
-.preset-card.card-hiding {
-  opacity: 0;
-  transform: scale(0.92);
-  pointer-events: none;
+/* 卡片隐藏：直接从布局中移除，不做过渡动画（避免 grid 布局混乱） */
+.preset-card.card-hidden {
+  display: none;
 }
 
-.preset-card.card-showing {
-  animation: cardReveal 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* 卡片出现动画（仅用于 Tab 切换后新出现的卡片） */
+.preset-card.card-appear {
+  animation: cardReveal 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes cardReveal {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.96);
+    transform: translateY(8px) scale(0.97);
   }
   to {
     opacity: 1;
@@ -592,6 +592,8 @@ body {
   background: #0a0a1a;
   display: none;
   flex-direction: column;
+  isolation: isolate;
+  overscroll-behavior: contain;
 }
 
 .preview-overlay.show {
