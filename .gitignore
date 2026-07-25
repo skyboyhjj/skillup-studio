@@ -1,6 +1,63 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.egg-info/
+dist/
+build/
+
+# Environment
 .env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Trae internal
+.trae/
+
+# Duplicate frontend copy
+meta-skill-org/
+
+# Generated HTML output (root level)
+*.html
+
+# Duplicate data files (already in frontend/studio/preset-data/)
+AI概念图_21nodes.json
+五行养生_15nodes.json
+儒家心学_21nodes.json
+道德经_20nodes.json
+黄帝内经_23nodes.json
+唯识论_23节点_五行八卦.json
+Base-View-SkillUP_23nodes.json
+
+# Diagnostic/debug scripts (root level)
+chk.py
+diag.py
+diag2.py
+diag3.py
+diagnose_502_v2.py
+fix_nginx2.py
+quick.py
+ssl_check.py
+ssl_fix.py
+ssl_setup.py
+ssl_setup2.py
+survey.py
+survey2.py
+test_concept_check.py
+
+# Wuxing test output files
+wuxing_rules/test_*.json
+wuxing_rules/test_*.html
+wuxing_rules/*_莫比乌斯环.html
+
+# Archive
 *.tar.gz
 deploy-log.txt

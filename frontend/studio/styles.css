@@ -368,12 +368,12 @@ body {
 
 .title-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px 14px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 15px;
+  font-size: 14px;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
@@ -381,6 +381,10 @@ body {
 
 .title-input:focus {
   border-color: #4ECDC4;
+}
+
+.title-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
 }
 
 /* Emptiness checkboxes */
@@ -543,6 +547,21 @@ body {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+.result-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+}
+
+.hint-highlight {
+  color: #4FC3F7;
+  font-weight: 700;
+  background: rgba(79, 195, 247, 0.12);
+  padding: 1px 4px;
+  border-radius: 3px;
 }
 
 .btn-preview {
@@ -801,6 +820,18 @@ body {
   flex: 1;
 }
 
+/* Quota inline hint */
+.quota-inline {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(78, 205, 196, 0.6);
+  letter-spacing: 0.5px;
+}
+
+.quota-inline.exhausted {
+  color: #FF6B6B;
+}
+
 .btn-extract {
   flex-shrink: 0;
   padding: 10px 24px;
@@ -816,9 +847,10 @@ body {
   transition: all 0.25s ease;
   white-space: nowrap;
   min-width: 120px;
+  line-height: 1.5;
 }
 
-.btn-extract:hover {
+.btn-extract:hover:not(:disabled) {
   background: linear-gradient(135deg, #5de0d7, #4ECDC4);
   box-shadow: 0 2px 12px rgba(78, 205, 196, 0.3);
   transform: translateY(-1px);
@@ -829,6 +861,14 @@ body {
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+.btn-extract-text,
+.btn-extract-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .spinner {

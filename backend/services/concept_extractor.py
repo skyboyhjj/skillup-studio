@@ -4,6 +4,7 @@
 - 从微信公众号文章 URL 提取正文内容（httpx + HTML 解析）
 - 五行八卦分类（wuxing_engine）
 """
+import asyncio
 import importlib.util
 import json
 import re
@@ -195,6 +196,7 @@ async def extract_concepts_from_text(
     title: str = "",
     deepseek_key: str = "",
     deepseek_url: str = "",
+    max_retries: int = 2,
 ) -> dict:
     """使用 DeepSeek API 从文本中提取概念。
 
@@ -203,6 +205,7 @@ async def extract_concepts_from_text(
         title: 文章标题（可选，用于提示）
         deepseek_key: DeepSeek API Key
         deepseek_url: DeepSeek API Base URL
+        max_retries: 当 API 返回空内容时的最大重试次数
 
     Returns:
         {"success": bool, "data": {...}, "error": str}
@@ -218,52 +221,90 @@ async def extract_concepts_from_text(
         user_prompt += f"文章标题：{title}\n\n"
     user_prompt += f"文本内容：\n{text[:8000]}"  # 限制长度避免 token 超限
 
-    try:
-        async with httpx.AsyncClient(timeout=120.0) as client:
-            response = await client.post(
-                f"{base_url.rstrip('/')}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": "deepseek-v4-pro",
-                    "messages": [
-                        {"role": "system", "content": CONCEPT_EXTRACTION_SYSTEM},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    "temperature": 0.7,
-                    "max_tokens": 4096,
-                },
-            )
+    last_error = None
+    for attempt in range(max_retries + 1):
+        try:
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                response = await client.post(
+                    f"{base_url.rstrip('/')}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": "deepseek-v4-pro",
+                        "messages": [
+                            {"role": "system", "content": CONCEPT_EXTRACTION_SYSTEM},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                        "temperature": 0.7,
+                        "max_tokens": 4096,
+                    },
+                )
 
-            if response.status_code != 200:
-                return {"success": False, "error": f"DeepSeek API 错误: {response.status_code} {response.text[:200]}"}
+                if response.status_code != 200:
+                    last_error = f"DeepSeek API 错误: HTTP {response.status_code}"
+                    # 如果是 429 或 5xx，重试
+                    if response.status_code in (429, 500, 502, 503) and attempt < max_retries:
+                        await asyncio.sleep(2 * (attempt + 1))
+                        continue
+                    return {"success": False, "error": last_error}
 
-            result = response.json()
-            content = result["choices"][0]["message"]["content"]
+                result = response.json()
+                choices = result.get("choices", [])
+                if not choices:
+                    last_error = "DeepSeek API 返回了空的 choices 列表"
+                    if attempt < max_retries:
+                        await asyncio.sleep(2 * (attempt + 1))
+                        continue
+                    return {"success": False, "error": last_error}
 
-            # 提取 JSON（可能被 markdown 代码块包裹）
-            json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', content)
-            if json_match:
-                json_str = json_match.group(1).strip()
-            else:
-                json_str = content.strip()
+                content = choices[0].get("message", {}).get("content", "")
+                if not content or not content.strip():
+                    last_error = "AI 模型返回了空内容，请稍后重试"
+                    if attempt < max_retries:
+                        await asyncio.sleep(2 * (attempt + 1))
+                        continue
+                    return {"success": False, "error": last_error}
 
-            data = json.loads(json_str)
+                # 提取 JSON（可能被 markdown 代码块包裹）
+                json_match = re.search(r'```(?:json)?\s*([\s\S]*?)```', content)
+                if json_match:
+                    json_str = json_match.group(1).strip()
+                else:
+                    json_str = content.strip()
 
-            # 验证基本结构
-            if "rings" not in data:
-                return {"success": False, "error": "LLM 返回的数据缺少 rings 字段"}
+                if not json_str:
+                    return {"success": False, "error": "AI 模型返回的内容为空，无法解析"}
 
-            return {"success": True, "data": data}
+                data = json.loads(json_str)
 
-    except json.JSONDecodeError as e:
-        return {"success": False, "error": f"JSON 解析失败: {str(e)}", "raw_response": content}
-    except httpx.TimeoutException:
-        return {"success": False, "error": "DeepSeek API 请求超时"}
-    except Exception as e:
-        return {"success": False, "error": f"概念提取失败: {str(e)}"}
+                # 验证基本结构
+                if "rings" not in data:
+                    return {"success": False, "error": "AI 返回的数据缺少 rings 字段"}
+
+                return {"success": True, "data": data}
+
+        except json.JSONDecodeError:
+            last_error = "AI 返回格式异常，请稍后重试"
+            if attempt < max_retries:
+                await asyncio.sleep(2 * (attempt + 1))
+                continue
+            return {"success": False, "error": last_error}
+        except httpx.TimeoutException:
+            last_error = "DeepSeek API 请求超时，请稍后重试"
+            if attempt < max_retries:
+                await asyncio.sleep(2 * (attempt + 1))
+                continue
+            return {"success": False, "error": last_error}
+        except Exception as e:
+            last_error = f"概念提取失败: {str(e)}"
+            if attempt < max_retries:
+                await asyncio.sleep(2 * (attempt + 1))
+                continue
+            return {"success": False, "error": last_error}
+
+    return {"success": False, "error": last_error or "概念提取失败"}
 
 
 def run_wuxing_classification(data: dict, domain: str = "default") -> dict:

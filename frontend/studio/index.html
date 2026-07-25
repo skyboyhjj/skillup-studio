@@ -21,7 +21,7 @@
 
     <!-- 输入模式切换 -->
     <div class="mode-tabs" id="modeTabs">
-      <button class="mode-tab active" data-mode="preset">预设数据集</button>
+      <button class="mode-tab active" data-mode="preset">使用模板</button>
       <button class="mode-tab" data-mode="free">自由输入</button>
     </div>
 
@@ -145,7 +145,7 @@
     <div class="mode-panel" id="freePanel" style="display:none">
 
       <div class="free-input-section">
-        <label class="free-input-label">粘贴文本内容</label>
+        <label class="free-input-label">粘贴文本内容 <span class="quota-inline" id="quotaTextLabel">（今日剩余 5 次）</span></label>
         <textarea class="free-textarea" id="freeTextInput" placeholder="在此粘贴文章或文本内容（至少 50 字），系统将自动提取核心概念..."></textarea>
         <div class="free-text-count" id="freeTextCount">0 字</div>
       </div>
@@ -153,7 +153,7 @@
       <div class="or-divider"><span class="or-text">或输入微信公众号文章链接</span></div>
 
       <div class="free-input-section">
-        <label class="free-input-label">微信公众号文章 URL</label>
+        <label class="free-input-label">微信公众号文章 URL <span class="quota-inline" id="quotaUrlLabel">（今日剩余 5 次）</span></label>
         <div class="url-input-row">
           <input type="url" class="title-input url-input" id="freeUrlInput" placeholder="https://mp.weixin.qq.com/s/...">
           <button class="btn-extract" id="btnExtract">
@@ -242,6 +242,7 @@
         <button class="btn-preview" id="btnPreview">在线预览</button>
         <button class="btn-download" id="btnDownload">下载 HTML</button>
       </div>
+      <div class="result-hint">下载后可通过页面右上角<span class="hint-highlight">【管理】</span>按钮进行修改</div>
     </div>
   </div>
 
@@ -619,6 +620,46 @@
   var modeTabs = document.getElementById('modeTabs');
   var extractBtnText = document.querySelector('.btn-extract-text');
   var extractBtnLoading = document.querySelector('.btn-extract-loading');
+  var quotaUrlLabel = document.getElementById('quotaUrlLabel');
+  var quotaTextLabel = document.getElementById('quotaTextLabel');
+
+  // Quota management
+  function fetchQuota() {
+    fetch('/api/studio/quota')
+      .then(function (r) { return r.json(); })
+      .then(function (q) {
+        updateQuotaDisplay(q.remaining_url, q.remaining_text);
+      })
+      .catch(function () {
+        // 静默失败，不影响主流程
+      });
+  }
+
+  function updateQuotaDisplay(remainingUrl, remainingText) {
+    quotaUrlLabel.textContent = '（今日剩余 ' + remainingUrl + ' 次）';
+    quotaTextLabel.textContent = '（今日剩余 ' + remainingText + ' 次）';
+
+    if (remainingUrl <= 0) {
+      quotaUrlLabel.classList.add('exhausted');
+    } else {
+      quotaUrlLabel.classList.remove('exhausted');
+    }
+
+    if (remainingText <= 0) {
+      quotaTextLabel.classList.add('exhausted');
+    } else {
+      quotaTextLabel.classList.remove('exhausted');
+    }
+  }
+
+  function updateQuotaFromResponse(result) {
+    if (result.remaining_url !== undefined && result.remaining_text !== undefined) {
+      updateQuotaDisplay(result.remaining_url, result.remaining_text);
+    }
+  }
+
+  // 初始加载配额
+  fetchQuota();
 
   // Mode switching
   modeTabs.querySelectorAll('.mode-tab').forEach(function (tab) {
@@ -636,6 +677,8 @@
         freePanel.style.display = '';
         // Enable generate if we have extracted data
         btnGenerate.disabled = !currentData;
+        // 刷新配额
+        fetchQuota();
       }
     });
   });
@@ -694,16 +737,36 @@
     })
       .then(function (r) {
         if (!r.ok) {
-          return r.json().then(function (err) {
-            throw new Error(err.detail || '请求失败: ' + r.status);
+          return r.text().then(function (text) {
+            var msg = '请求失败: HTTP ' + r.status;
+            try {
+              var err = JSON.parse(text);
+              msg = err.detail || msg;
+            } catch (e) {
+              if (text) {
+                msg = text.substring(0, 200);
+              } else if (r.status === 502 || r.status === 504) {
+                msg = '服务端处理超时，请稍后重试（AI 模型响应较慢）';
+              }
+            }
+            // 429 限流时刷新配额显示
+            if (r.status === 429) {
+              fetchQuota();
+            }
+            throw new Error(msg);
           });
         }
-        return r.json();
+        return r.json().catch(function () {
+          throw new Error('服务端返回了空响应，请稍后重试');
+        });
       })
       .then(function (result) {
         clearInterval(progressInterval);
         progressFill.style.width = '100%';
         progressText.textContent = '提取完成！';
+
+        // 更新配额显示
+        updateQuotaFromResponse(result);
 
         if (!result.success || !result.data) {
           throw new Error(result.error || '概念提取失败');

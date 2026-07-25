@@ -2,7 +2,7 @@
 import re
 from urllib.parse import urlparse
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from services.concept_extractor import (
@@ -10,6 +10,7 @@ from services.concept_extractor import (
     extract_concepts_from_text,
     run_wuxing_classification,
 )
+from services.rate_limiter import check_and_increment, get_remaining, DAILY_LIMIT_URL, DAILY_LIMIT_TEXT
 
 router = APIRouter(prefix="/api/studio", tags=["studio"])
 
@@ -25,6 +26,30 @@ class ExtractResponse(BaseModel):
     data: dict | None = None
     source: dict | None = None  # 文章来源信息
     error: str | None = None
+    remaining_url: int | None = None  # 今日剩余 URL 提取次数
+    remaining_text: int | None = None  # 今日剩余文字提取次数
+
+
+class QuotaResponse(BaseModel):
+    remaining_url: int
+    remaining_text: int
+    limit_url: int
+    limit_text: int
+
+
+def clean_wechat_url(url: str) -> str:
+    """清理微信公众号 URL，移除追踪参数和 scene 参数"""
+    try:
+        parsed = urlparse(url)
+        # 移除 scene 参数（微信分享追踪参数）
+        query_parts = parsed.query.split('&')
+        cleaned_parts = [p for p in query_parts if not p.startswith('scene=')]
+        cleaned_query = '&'.join(cleaned_parts)
+        # 重建 URL
+        cleaned = parsed._replace(query=cleaned_query)
+        return cleaned.geturl()
+    except Exception:
+        return url
 
 
 def is_wechat_url(url: str) -> bool:
@@ -37,16 +62,34 @@ def is_wechat_url(url: str) -> bool:
 
 
 @router.post("/extract", response_model=ExtractResponse)
-async def extract_concepts(req: ExtractRequest):
+async def extract_concepts(req: ExtractRequest, request: Request):
     """从文字或微信公众号文章提取概念，返回 rings 结构数据。
 
-    - 如果提供 url：先通过 Playwright 获取文章正文，再提取概念
+    - 如果提供 url：先获取文章正文，再提取概念
     - 如果提供 text：直接对文本提取概念
     - 两者都提供时，优先使用 url
+    - 每日限额：URL 提取 5 次，文字提取 5 次（按终端 IP）
     """
     # 参数校验
     if not req.text and not req.url:
         raise HTTPException(status_code=400, detail="请提供 text 或 url 参数")
+
+    # 确定提取类型并检查限额
+    if req.url:
+        extract_type = "url"
+    else:
+        extract_type = "text"
+
+    allowed, used, limit = await check_and_increment(request, extract_type)
+    if not allowed:
+        raise HTTPException(
+            status_code=429,
+            detail=f"今日{extract_type == 'url' and 'URL' or '文字'}提取次数已用完（{limit}/{limit}），请明天再试",
+        )
+
+    # 查询剩余次数
+    remaining_url = await get_remaining(request, "url")
+    remaining_text = await get_remaining(request, "text")
 
     source_info = {}
     text_to_analyze = ""
@@ -60,7 +103,10 @@ async def extract_concepts(req: ExtractRequest):
                 detail="仅支持微信公众号文章链接 (mp.weixin.qq.com)",
             )
 
-        article = await fetch_wechat_article(req.url)
+        # 清理 URL（移除 scene 等追踪参数）
+        cleaned_url = clean_wechat_url(req.url)
+
+        article = await fetch_wechat_article(cleaned_url)
         if "error" in article:
             raise HTTPException(status_code=500, detail=article["error"])
 
@@ -120,4 +166,19 @@ async def extract_concepts(req: ExtractRequest):
         success=True,
         data=data,
         source=source_info,
+        remaining_url=remaining_url,
+        remaining_text=remaining_text,
+    )
+
+
+@router.get("/quota", response_model=QuotaResponse)
+async def get_quota(request: Request):
+    """查询当前终端今日剩余提取次数"""
+    remaining_url = await get_remaining(request, "url")
+    remaining_text = await get_remaining(request, "text")
+    return QuotaResponse(
+        remaining_url=remaining_url,
+        remaining_text=remaining_text,
+        limit_url=DAILY_LIMIT_URL,
+        limit_text=DAILY_LIMIT_TEXT,
     )
