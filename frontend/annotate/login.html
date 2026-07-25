@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 / 注册 - hui-skill.cn</title>
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 0 20px;
+}
+
+.card {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 40px 36px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(212, 168, 83, 0.12);
+}
+
+.platform-name {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #D4A853;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.platform-subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(224, 224, 224, 0.5);
+  margin-bottom: 28px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid rgba(212, 168, 83, 0.15);
+  margin-bottom: 28px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: rgba(224, 224, 224, 0.45);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s;
+  letter-spacing: 2px;
+}
+
+.tab-btn:hover {
+  color: rgba(224, 224, 224, 0.7);
+}
+
+.tab-btn.active {
+  color: #D4A853;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: #D4A853;
+  border-radius: 1px;
+}
+
+/* Forms */
+.form-panel {
+  display: none;
+}
+
+.form-panel.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: rgba(224, 224, 224, 0.7);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 11px 14px;
+  background: #1a1a2e;
+  border: 1px solid rgba(212, 168, 83, 0.18);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.input-wrapper input::placeholder {
+  color: rgba(224, 224, 224, 0.25);
+}
+
+.input-wrapper input:focus {
+  border-color: #D4A853;
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.input-wrapper input.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+/* Password toggle */
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(224, 224, 224, 0.4);
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.password-toggle:hover {
+  color: rgba(224, 224, 224, 0.7);
+}
+
+/* Validation hint */
+.validation-hint {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+  display: none;
+}
+
+.validation-hint.visible {
+  display: block;
+}
+
+/* Error box */
+.error-box {
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #e74c3c;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+
+.error-box.visible {
+  display: block;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #D4A853;
+  border: none;
+  border-radius: 8px;
+  color: #1a1a2e;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 4px;
+  transition: background 0.25s, opacity 0.25s;
+  margin-top: 6px;
+}
+
+.submit-btn:hover {
+  background: #e0b95e;
+}
+
+.submit-btn:active {
+  background: #c49a3e;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.submit-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top-color: #1a1a2e;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Footer links */
+.footer-links {
+  margin-top: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.back-home {
+  color: rgba(224, 224, 224, 0.45);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.back-home:hover {
+  color: #D4A853;
+}
+
+.magic-link {
+  color: rgba(224, 224, 224, 0.22);
+  font-size: 12px;
+  cursor: not-allowed;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Success message */
+.success-box {
+  background: rgba(39, 174, 96, 0.1);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #27ae60;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+
+.success-box.visible {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 460px) {
+  .card {
+    padding: 28px 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="platform-name">hui-skill.cn</div>
+    <div class="platform-subtitle">中国哲学概念标注平台</div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">登 录</button>
+      <button class="tab-btn" data-tab="register">注 册</button>
+    </div>
+
+    <!-- Error / Success messages -->
+    <div class="error-box" id="errorBox"></div>
+    <div class="success-box" id="successBox"></div>
+
+    <!-- Login Form -->
+    <div class="form-panel active" id="panel-login">
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="loginUsername">用户名</label>
+          <div class="input-wrapper">
+            <input type="text" id="loginUsername" placeholder="请输入用户名" autocomplete="username" maxlength="20">
+          </div>
+          <div class="validation-hint" id="hint-loginUsername"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">密码</label>
+          <div class="input-wrapper">
+            <input type="password" id="loginPassword" placeholder="请输入密码" autocomplete="current-password">
+            <button type="button" class="password-toggle" data-target="loginPassword" aria-label="切换密码可见性">&#x1F441;</button>
+          </div>
+          <div class="validation-hint" id="hint-loginPassword"></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="loginSubmit">登 录</button>
+      </form>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-panel" id="panel-register">
+      <form id="registerForm" novalidate>
+        <div class="form-group">
+          <label for="regUsername">用户名</label>
+          <div class="input-wrapper">
+            <input type="text" id="regUsername" placeholder="3-20个字符" autocomplete="username" maxlength="20">
+          </div>
+          <div class="validation-hint" id="hint-regUsername"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">邮箱</label>
+          <div class="input-wrapper">
+            <input type="email" id="regEmail" placeholder="请输入有效的邮箱地址" autocomplete="email">
+          </div>
+          <div class="validation-hint" id="hint-regEmail"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">密码</label>
+          <div class="input-wrapper">
+            <input type="password" id="regPassword" placeholder="至少6个字符" autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="regPassword" aria-label="切换密码可见性">&#x1F441;</button>
+          </div>
+          <div class="validation-hint" id="hint-regPassword"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="regConfirmPassword">确认密码</label>
+          <div class="input-wrapper">
+            <input type="password" id="regConfirmPassword" placeholder="请再次输入密码" autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="regConfirmPassword" aria-label="切换密码可见性">&#x1F441;</button>
+          </div>
+          <div class="validation-hint" id="hint-regConfirmPassword"></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="registerSubmit">注 册</button>
+      </form>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+      <a href="../index.html" class="back-home">返回首页</a>
+      <span class="magic-link">或者使用邮箱验证码登录</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ========== Redirect if already logged in ========== */
+  if (localStorage.getItem('auth_token')) {
+    window.location.replace('editor.html');
+    return;
+  }
+
+  /* ========== DOM refs ========== */
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var panels = {
+    login: document.getElementById('panel-login'),
+    register: document.getElementById('panel-register')
+  };
+  var errorBox = document.getElementById('errorBox');
+  var successBox = document.getElementById('successBox');
+
+  var loginForm = document.getElementById('loginForm');
+  var registerForm = document.getElementById('registerForm');
+
+  var loginSubmit = document.getElementById('loginSubmit');
+  var registerSubmit = document.getElementById('registerSubmit');
+
+  var inputs = {
+    loginUsername: document.getElementById('loginUsername'),
+    loginPassword: document.getElementById('loginPassword'),
+    regUsername: document.getElementById('regUsername'),
+    regEmail: document.getElementById('regEmail'),
+    regPassword: document.getElementById('regPassword'),
+    regConfirmPassword: document.getElementById('regConfirmPassword')
+  };
+
+  var hints = {
+    loginUsername: document.getElementById('hint-loginUsername'),
+    loginPassword: document.getElementById('hint-loginPassword'),
+    regUsername: document.getElementById('hint-regUsername'),
+    regEmail: document.getElementById('hint-regEmail'),
+    regPassword: document.getElementById('hint-regPassword'),
+    regConfirmPassword: document.getElementById('hint-regConfirmPassword')
+  };
+
+  /* ========== Tab switching ========== */
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var tab = this.getAttribute('data-tab');
+      tabBtns.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      Object.keys(panels).forEach(function (k) { panels[k].classList.remove('active'); });
+      panels[tab].classList.add('active');
+      clearMessages();
+      clearAllHints();
+    });
+  });
+
+  /* ========== Password visibility toggle ========== */
+  document.querySelectorAll('.password-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = this.getAttribute('data-target');
+      var input = document.getElementById(targetId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        this.innerHTML = '&#x1F440;&#xFE0F;';
+      } else {
+        input.type = 'password';
+        this.innerHTML = '&#x1F441;';
+      }
+    });
+  });
+
+  /* ========== Message helpers ========== */
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('visible');
+    successBox.classList.remove('visible');
+  }
+
+  function showSuccess(msg) {
+    successBox.textContent = msg;
+    successBox.classList.add('visible');
+    errorBox.classList.remove('visible');
+  }
+
+  function clearMessages() {
+    errorBox.classList.remove('visible');
+    successBox.classList.remove('visible');
+  }
+
+  function clearAllHints() {
+    Object.keys(hints).forEach(function (k) {
+      hints[k].textContent = '';
+      hints[k].classList.remove('visible');
+    });
+    Object.keys(inputs).forEach(function (k) {
+      inputs[k].classList.remove('error');
+    });
+  }
+
+  function showHint(field, msg) {
+    hints[field].textContent = msg;
+    hints[field].classList.add('visible');
+    if (inputs[field]) {
+      inputs[field].classList.add('error');
+    }
+  }
+
+  /* ========== Loading state helpers ========== */
+  function setLoading(btn, isLoading) {
+    if (isLoading) {
+      btn.disabled = true;
+      btn.classList.add('loading');
+      btn.textContent = '';
+    } else {
+      btn.disabled = false;
+      btn.classList.remove('loading');
+      btn.textContent = btn === loginSubmit ? '登 录' : '注 册';
+    }
+  }
+
+  /* ========== Validation ========== */
+  function validateLogin() {
+    clearAllHints();
+    var valid = true;
+
+    var username = inputs.loginUsername.value.trim();
+    if (!username) {
+      showHint('loginUsername', '请输入用户名');
+      valid = false;
+    }
+
+    var password = inputs.loginPassword.value;
+    if (!password) {
+      showHint('loginPassword', '请输入密码');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  function validateRegister() {
+    clearAllHints();
+    var valid = true;
+
+    var username = inputs.regUsername.value.trim();
+    if (!username) {
+      showHint('regUsername', '请输入用户名');
+      valid = false;
+    } else if (username.length < 3) {
+      showHint('regUsername', '用户名至少需要3个字符');
+      valid = false;
+    } else if (username.length > 20) {
+      showHint('regUsername', '用户名不能超过20个字符');
+      valid = false;
+    }
+
+    var email = inputs.regEmail.value.trim();
+    if (!email) {
+      showHint('regEmail', '请输入邮箱地址');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showHint('regEmail', '请输入有效的邮箱地址');
+      valid = false;
+    }
+
+    var password = inputs.regPassword.value;
+    if (!password) {
+      showHint('regPassword', '请输入密码');
+      valid = false;
+    } else if (password.length < 6) {
+      showHint('regPassword', '密码至少需要6个字符');
+      valid = false;
+    }
+
+    var confirmPassword = inputs.regConfirmPassword.value;
+    if (!confirmPassword) {
+      showHint('regConfirmPassword', '请确认密码');
+      valid = false;
+    } else if (password && confirmPassword !== password) {
+      showHint('regConfirmPassword', '两次输入的密码不一致');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  /* ========== API calls ========== */
+  function apiCall(url, body, btn) {
+    setLoading(btn, true);
+    clearMessages();
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    .then(function (res) {
+      return res.json().then(function (data) {
+        return { status: res.status, data: data };
+      });
+    })
+    .then(function (result) {
+      setLoading(btn, false);
+
+      if (result.status >= 200 && result.status < 300 && result.data.token) {
+        localStorage.setItem('auth_token', result.data.token);
+        showSuccess(result.data.message || '操作成功，正在跳转...');
+        setTimeout(function () {
+          window.location.replace('editor.html');
+        }, 800);
+      } else {
+        var errMsg = result.data.message || result.data.error || '操作失败，请稍后重试';
+        showError(errMsg);
+      }
+    })
+    .catch(function (err) {
+      setLoading(btn, false);
+      showError('网络错误，请检查网络连接后重试');
+      console.error('API error:', err);
+    });
+  }
+
+  /* ========== Form submit handlers ========== */
+  loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validateLogin()) return;
+
+    apiCall('/api/auth/login', {
+      username: inputs.loginUsername.value.trim(),
+      password: inputs.loginPassword.value
+    }, loginSubmit);
+  });
+
+  registerForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validateRegister()) return;
+
+    apiCall('/api/auth/register', {
+      username: inputs.regUsername.value.trim(),
+      email: inputs.regEmail.value.trim(),
+      password: inputs.regPassword.value
+    }, registerSubmit);
+  });
+
+  /* ========== Clear field hints on input ========== */
+  Object.keys(inputs).forEach(function (key) {
+    inputs[key].addEventListener('input', function () {
+      hints[key].textContent = '';
+      hints[key].classList.remove('visible');
+      inputs[key].classList.remove('error');
+      clearMessages();
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

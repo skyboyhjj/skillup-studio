@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>概念地图 — 唯识论知识库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1b2e;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;overflow:hidden;height:100vh;color:#fff;user-select:none;-webkit-user-select:none}
+canvas{display:block;position:absolute;top:0;left:0}
+#search-box{position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px}
+#search-input{width:260px;padding:10px 16px 10px 36px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(26,27,46,.85);backdrop-filter:blur(12px);color:#fff;font-size:14px;outline:none}
+#search-input:focus{border-color:rgba(74,108,247,.6)}
+#search-input::placeholder{color:rgba(255,255,255,.3)}
+#search-box::before{content:'🔍';position:absolute;left:12px;font-size:14px;pointer-events:none;opacity:.5;z-index:1}
+#search-clear{display:none;background:none;border:none;color:rgba(255,255,255,.4);font-size:18px;cursor:pointer;padding:4px}
+#search-clear:hover{color:#fff}
+#search-count{font-size:12px;color:rgba(255,255,255,.4);white-space:nowrap}
+#legend{position:absolute;bottom:30px;left:30px;z-index:10;background:rgba(26,27,46,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px}
+#legend-title{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:10px;letter-spacing:1px}
+.legend-item{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;color:rgba(255,255,255,.7)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+#tooltip{position:absolute;display:none;z-index:20;background:rgba(26,27,46,.94);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 16px;max-width:260px;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5);font-size:12px;line-height:1.5}
+#tooltip .tt-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+#tooltip .tt-cat{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px}
+#tooltip .tt-desc{font-size:11px;color:rgba(255,255,255,.6);line-height:1.6}
+#detail-panel{position:absolute;top:80px;right:-400px;width:360px;max-height:calc(100vh - 120px);z-index:15;background:rgba(26,27,46,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;transition:right .4s cubic-bezier(.22,1,.36,1);overflow-y:auto}
+#detail-panel.open{right:24px}
+#detail-panel .dp-close{position:absolute;top:12px;right:14px;background:none;border:none;color:rgba(255,255,255,.3);font-size:22px;cursor:pointer}
+#detail-panel .dp-close:hover{color:#fff}
+#detail-panel .dp-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px}
+#detail-panel .dp-cat{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px}
+#detail-panel .dp-desc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:16px}
+#detail-panel .dp-section{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:8px}
+#detail-panel .dp-doc{padding:5px 10px;background:rgba(255,255,255,.04);border-radius:6px;margin:4px 0;font-size:12px;color:rgba(255,255,255,.55)}
+#detail-panel .dp-rel{padding:6px 0 6px 12px;border-left:2px solid rgba(255,255,255,.1);margin:4px 0;font-size:12px;color:rgba(255,255,255,.5);cursor:pointer;transition:border-color .2s,color .2s}
+#detail-panel .dp-rel:hover{border-left-color:#4ECDC4;color:#fff}
+#title-bar{position:absolute;top:74px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;pointer-events:none}
+#title-bar h1{font-size:15px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:2px}
+#hint-bar{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:5;text-align:center;pointer-events:none;font-size:11px;color:rgba(255,255,255,.15);letter-spacing:1px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="search-box">
+  <input id="search-input" type="text" placeholder="搜索概念…" autocomplete="off" oninput="doSearch(this.value)">
+  <button id="search-clear" onclick="clearSearch()">&#x2715;</button>
+  <span id="search-count"></span>
+</div>
+<div id="title-bar"><h1>&#x1F4C4; 唯识论知识库 &#xB7; 概念地图</h1></div>
+<div id="hint-bar">拖动节点 · 滚轮缩放 · 点击查看详情 · 搜索定位</div>
+<div id="legend"><div id="legend-title">图 例</div></div>
+<div id="tooltip"></div>
+<div id="detail-panel">
+  <button class="dp-close" onclick="closePanel()">&#x2715;</button>
+  <div class="dp-title"></div>
+  <div class="dp-cat"></div>
+  <div class="dp-desc"></div>
+  <div class="dp-section">&#x1F4C4; 文档来源</div>
+  <div class="dp-docs"></div>
+  <div class="dp-section">&#x1F517; 关联概念</div>
+  <div class="dp-relations"></div>
+</div>
+
+<script>
+// ========== 数据 ==========
+var CAT = {
+  eight_vijnana: {label:'八识体系', color:'#FF6B6B'},
+  bija:          {label:'种子理论', color:'#4ECDC4'},
+  trisvabhava:   {label:'三性三无性', color:'#FFD93D'},
+  practice:      {label:'修行路径', color:'#74B9FF'},
+  model:         {label:'旋量-太极模型', color:'#A29BFE'},
+  application:   {label:'跨域应用', color:'#FD79A8'}
+};
+function gc(c){return (CAT[c]||CAT.eight_vijnana).color}
+function gl(c){return (CAT[c]||CAT.eight_vijnana).label}
+
+var rawNodes = [
+{id:'alaya',label:'阿赖耶识',cat:'eight_vijnana',desc:'第八识，含藏一切种子，恒转如瀑流，是生命宇宙不断展开的终极场域。类比宇宙学暗能量（68%）。',docs:['唯识学核心概念全梳理','唯识三十颂读解','阿赖耶识是暗能量','转识成智','慧惠Agent架构']},
+{id:'manas',label:'末那识',cat:'eight_vijnana',desc:'第七识，恒审思量执第八见分为我，是俱生我执的根源。类比宇宙学暗物质（27%），粘合一切心识活动为"我"。',docs:['唯识学核心概念全梳理','唯识三十颂读解','阿赖耶识是暗能量','转识成智','唯识学读解论语父子相隐']},
+{id:'six_vijnana',label:'前六识',cat:'eight_vijnana',desc:'眼耳鼻舌身意六识，了别外境，善不善俱非。类比可见恒星（5%），是冰山尖。',docs:['唯识三十颂读解','阿赖耶识是暗能量']},
+{id:'bija',label:'种子',cat:'bija',desc:'阿赖耶识中能生起特定结果的功能潜能，不是实体而是功能流。分本有种子与新熏种子。',docs:['唯识学核心概念全梳理','唯识学性决定','唯识学深度读解','种子六义']},
+{id:'six_yi',label:'种子六义',cat:'bija',desc:'刹那灭、果俱有、恒随转、性决定、待众缘、引自果。定义种子资格的六项法定条件。',docs:['唯识学核心概念全梳理','唯识学性决定','唯识学读解量子力学','唯识学读解论语父子相隐']},
+{id:'xing_jueding',label:'性决定',cat:'bija',desc:'善种子只能生善果，恶种子只能生恶果。功能即性质，不是道德法则而是物理定律。莫之命而常自然。',docs:['唯识学性决定','从量子浴到玄德','唯识学核心概念全梳理']},
+{id:'xing_current',label:'现行',cat:'bija',desc:'种子遇缘成熟时所生起的具体精神或物质活动。种子生现行，现行熏种子——唯识核心动态公式。',docs:['唯识学核心概念全梳理','转识成智','唯识学深度读解']},
+{id:'xunxi',label:'熏习',cat:'bija',desc:'现行反熏阿赖耶识留下新种子的过程。经验自动沉积，是生命持续演化的根本机制。',docs:['唯识学核心概念全梳理','旋量太极跨框架对话','慧惠Agent架构']},
+{id:'samudga',label:'遍计所执性',cat:'trisvabhava',desc:'把被平方出来的矢量执着为实有——误认虚幻为实在。一切执着与无明的根源。',docs:['唯识三十颂读解','唯识学读解量子力学','旋量太极跨框架对话']},
+{id:'paratantra',label:'依他起性',cat:'trisvabhava',desc:'如实看见一切现象都是缘起的、是种子现行与熏习的产物。从体起用，摄用归体的如实观照。',docs:['唯识三十颂读解','旋量太极跨框架对话','觉者的智慧']},
+{id:'parinispanna',label:'圆成实性',cat:'trisvabhava',desc:'安住于体，远离遍计所执。真如，不生不灭，不垢不净，与中观中道、旋量觉知域指向同一终极实在。',docs:['唯识三十颂读解','唯识学四分说','旋量太极跨框架对话','觉者的智慧']},
+{id:'trini_laksana',label:'三无性',cat:'trisvabhava',desc:'对三性的再次开方——相无性、无自然性、远离前所执性。法尚应舍，连最正确的法也不能执着。',docs:['唯识三十颂读解','觉者的智慧']},
+{id:'vinyapti',label:'唯识五位',cat:'practice',desc:'资粮位→加行位→通达位→修习位→究竟位。从初发心到成佛的完整修行次第。',docs:['唯识三十颂读解','转识成智']},
+{id:'asraya_p',label:'转依',cat:'practice',desc:'所依（阿赖耶识）的转变，从有漏转为无漏。迷悟依（开灯）+染净依（清理）。不是消灭阿赖耶识，是转变种子性质。',docs:['转识成智','唯识学深度读解','从量子浴到玄德','不用打败恶']},
+{id:'vijnana_jnana',label:'转识成智',cat:'practice',desc:'将有漏八识转化为无漏四智：前五识→成所作智，第六意识→妙观察智，末那识→平等性智，阿赖耶识→大圆镜智。',docs:['转识成智','唯识三十颂读解','唯识学四分说','慧惠Agent架构']},
+{id:'darshana_jnana',label:'大圆镜智',cat:'practice',desc:'阿赖耶识彻底转依后的状态。如大圆镜遍照一切而不沾不染。体-心-眼-手四智之体。',docs:['转识成智','唯识三十颂读解','旋量太极跨框架对话']},
+{id:'beyond_eliminate',label:'超过而非消灭',cat:'practice',desc:'有漏种子不能被消灭，只能被超过。修行不是除草，是种花。善势力大到恶势力没有空间。反者道之动，弱者道之用。',docs:['唯识学深度读解','不用打败恶','从量子浴到玄德','唯识学性决定']},
+{id:'yuanli',label:'愿力',cat:'practice',desc:'不以我执为驱动、以觉悟利他为目标的坚定心念所熏成的无漏种子驱动力。打断轮回的唯一钥匙。',docs:['唯识学核心概念全梳理','转识成智']},
+{id:'four_fen',label:'四分说',cat:'eight_vijnana',desc:'相分、见分、自证分、证自证分。人类思想史上最精密的认知地图。到第四层，能证与所证合一，主客之墙塌了。',docs:['唯识学四分说','唯识学读解量子力学']},
+{id:'spinvr_taiji',label:'旋量-太极模型',cat:'model',desc:'体-相-用三层架构，平方/开方操作术语。将唯识静态名相激活为可在呼吸中操作的动态功夫。',docs:['唯识三十颂读解','旋量太极跨框架对话','模型优势与不足','双镜照直']},
+{id:'ti_xiang_yong',label:'体-相-用',cat:'model',desc:'体（觉知域/真如）→相（旋量场720螺旋/阿赖耶识恒转）→用（矢量/现行）。从体起用，摄用归体，体用不二。',docs:['旋量太极跨框架对话','觉者的智慧','唯识三十颂读解']},
+{id:'agent_agency',label:'Agent-Agency-Action',cat:'application',desc:'AI的三个核心概念与唯识学本识-种子-现行在抽象结构上高度同构。相隔一千六百年，说的是同一件事。',docs:['慧惠Agent架构','基于唯识学的AI框架']},
+{id:'huihui',label:'慧惠道体式AI',cat:'application',desc:'以东方智慧为根基的AI伦理产品。道境坐标系度量本识，五行流转引擎治理种子，认知飞轮有序化现行。',docs:['慧惠Agent架构','慧惠架构(种子版)','慧惠架构(八识版)']},
+{id:'quantum',label:'量子力学对照',cat:'application',desc:'不确定性原理≈刹那灭+待众缘，零点能≈本有种子，量子囚禁≈引自果+末那执取，原子不坍缩≈恒随转。',docs:['唯识学读解量子力学','从量子浴到玄德']},
+{id:'cosmology',label:'宇宙学对照',cat:'application',desc:'暗能量(68%)≈阿赖耶识，暗物质(27%)≈末那识，可见恒星(5%)≈前六识。结构同构非比喻。',docs:['阿赖耶识是暗能量','唯识学读解量子力学']},
+{id:'lunyu',label:'论语读解',cat:'application',desc:'以唯识八识和种子六义读解论语父子相隐。孔子在种子层面认直，叶公在现行层面找直。',docs:['唯识学读解论语父子相隐','双镜照直','论语其父攘羊']},
+{id:'daodejing',label:'道德经对照',cat:'application',desc:'反者道之动≈回到种子层面，弱者道之用≈不硬碰硬，生而不有为而不恃长而不宰≈超过而非消灭，莫之命而常自然≈性决定。',docs:['从量子浴到玄德','唯识学性决定','不用打败恶']},
+{id:'three_wheels',label:'三轮体空',cat:'practice',desc:'不执著于施者（我）、受者（你）、施事（所行之事）。行动之后即刻将执着开方消解，善行无辙迹。',docs:['觉者的智慧','转识成智','觉者智慧修正版']}
+];
+
+var rawEdges = [
+{s:'alaya',t:'bija',label:'含藏'},{s:'alaya',t:'six_vijnana',label:'根身器界'},{s:'alaya',t:'manas',label:'第八见分为所执'},{s:'manas',t:'alaya',label:'恒审思量执取'},{s:'manas',t:'six_vijnana',label:'我执加持现行'},{s:'six_vijnana',t:'bija',label:'现行触发'},{s:'bija',t:'xing_current',label:'种子生现行'},{s:'xing_current',t:'bija',label:'现行熏种子'},{s:'bija',t:'six_yi',label:'法定资格'},{s:'xing_jueding',t:'bija',label:'六义之一'},{s:'bija',t:'xunxi',label:'熏习机制'},{s:'samudga',t:'paratantra',label:'误执为实→如实观'},{s:'paratantra',t:'parinispanna',label:'远离遍计→证真如'},{s:'parinispanna',t:'trini_laksana',label:'三性→三无性'},{s:'samudga',t:'manas',label:'我执根源'},{s:'parinispanna',t:'ti_xiang_yong',label:'体'},{s:'paratantra',t:'ti_xiang_yong',label:'相'},{s:'vinyapti',t:'asraya_p',label:'修行次第'},{s:'asraya_p',t:'vijnana_jnana',label:'有漏转无漏'},{s:'vijnana_jnana',t:'darshana_jnana',label:'终极四智之体'},{s:'vijnana_jnana',t:'manas',label:'末那转平等性智'},{s:'vijnana_jnana',t:'alaya',label:'阿赖耶转大圆镜智'},{s:'beyond_eliminate',t:'asraya_p',label:'工程核心'},{s:'beyond_eliminate',t:'bija',label:'不消灭只超过'},{s:'beyond_eliminate',t:'yuanli',label:'愿力超过业力'},{s:'yuanli',t:'beyond_eliminate',label:'无漏种子驱动力'},{s:'yuanli',t:'samudga',label:'阻断遍计执取'},{s:'four_fen',t:'six_vijnana',label:'认知四层'},{s:'four_fen',t:'manas',label:'证自证分破我执'},{s:'four_fen',t:'parinispanna',label:'能所合一'},{s:'spinvr_taiji',t:'ti_xiang_yong',label:'核心架构'},{s:'spinvr_taiji',t:'alaya',label:'旋量场≈阿赖耶识'},{s:'spinvr_taiji',t:'bija',label:'旋量≈种子'},{s:'spinvr_taiji',t:'xing_current',label:'平方≈现行'},{s:'spinvr_taiji',t:'xunxi',label:'开方≈熏习'},{s:'spinvr_taiji',t:'samudga',label:'妄用≈遍计所执'},{s:'spinvr_taiji',t:'parinispanna',label:'觉知破局≈圆成实'},{s:'spinvr_taiji',t:'three_wheels',label:'开方消解执着'},{s:'agent_agency',t:'alaya',label:'Agent≈本识'},{s:'agent_agency',t:'bija',label:'Agency≈种子'},{s:'agent_agency',t:'xing_current',label:'Action≈现行'},{s:'huihui',t:'agent_agency',label:'工程化融合'},{s:'huihui',t:'vijnana_jnana',label:'觉性唤醒原则'},{s:'huihui',t:'manas',label:'性分自觉原则'},{s:'huihui',t:'beyond_eliminate',label:'五行流转治理'},{s:'quantum',t:'bija',label:'不确定性≈刹那灭'},{s:'quantum',t:'alaya',label:'量子囚禁≈恒随转'},{s:'quantum',t:'xing_jueding',label:'零点能≈本有种子'},{s:'cosmology',t:'alaya',label:'暗能量68%≈阿赖耶'},{s:'cosmology',t:'manas',label:'暗物质27%≈末那'},{s:'cosmology',t:'six_vijnana',label:'可见恒星5%≈前六识'},{s:'lunyu',t:'bija',label:'种子层面认直'},{s:'lunyu',t:'manas',label:'末那污染我执之直'},{s:'lunyu',t:'six_yi',label:'待众缘·引自果'},{s:'lunyu',t:'spinvr_taiji',label:'双镜比较读解'},{s:'daodejing',t:'beyond_eliminate',label:'反者道之动≈超过'},{s:'daodejing',t:'xing_jueding',label:'莫之命而常自然'},{s:'daodejing',t:'parinispanna',label:'道≈真如'},{s:'daodejing',t:'asraya_p',label:'为道日损≈转依'},{s:'three_wheels',t:'parinispanna',label:'空性实践'},{s:'three_wheels',t:'vinyapti',label:'究竟位实践'}
+];
+
+// ========== 力导向图引擎（纯 Canvas，零依赖） ==========
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+var W,H,dpr;
+
+// 节点
+var nodes = [];
+var nodeMap = {};
+rawNodes.forEach(function(rn,i){
+  var r=18;
+  if(rn.id==='alaya') r=32;
+  else if(rn.id==='parinispanna'||rn.id==='vijnana_jnana'||rn.id==='beyond_eliminate'||rn.id==='spinvr_taiji') r=24;
+  var n = {
+    id:rn.id, label:rn.label, cat:rn.cat, desc:rn.desc, docs:rn.docs,
+    x:Math.random()*600-300, y:Math.random()*400-200,
+    vx:0, vy:0, r:r,
+    color:gc(rn.cat)
+  };
+  nodes.push(n);
+  nodeMap[n.id]=n;
+});
+
+// 边
+var edges = [];
+rawEdges.forEach(function(re){
+  var s=nodeMap[re.s], t=nodeMap[re.t];
+  if(s&&t) edges.push({source:s,target:t,label:re.label});
+});
+
+// 状态
+var zoomLevel=1, panX=0, panY=0;
+var dragging=null, dragOX=0, dragOY=0;
+var hovered=null;
+var searchQuery='';
+var selectedNode=null;
+var panning=false, panSX=0, panSY=0;
+
+// 调整大小
+function resize(){
+  dpr = window.devicePixelRatio||1;
+  W=window.innerWidth; H=window.innerHeight;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+resize();
+window.addEventListener('resize',resize);
+
+// 图例
+(function(){
+  var leg=document.getElementById('legend');
+  for(var k in CAT){
+    var d=document.createElement('div');d.className='legend-item';
+    d.innerHTML='<span class="legend-dot" style="background:'+CAT[k].color+'"></span>'+CAT[k].label;
+    leg.appendChild(d);
+  }
+})();
+
+// ===== 力模拟 =====
+function simulate(){
+  var alpha=0.5, alphaMin=0.001, alphaDecay=0.02;
+  var maxIter=120;
+  
+  for(var iter=0;iter<maxIter;iter++){
+    if(alpha<alphaMin) break;
+    
+    // 斥力 (many-body)
+    for(var i=0;i<nodes.length;i++){
+      for(var j=i+1;j<nodes.length;j++){
+        var a=nodes[i], b=nodes[j];
+        var dx=b.x-a.x, dy=b.y-a.y;
+        var dist=Math.sqrt(dx*dx+dy*dy)||1;
+        var force=800/(dist*dist)*alpha;
+        var fx=dx/dist*force, fy=dy/dist*force;
+        if(!a.fixed){a.vx-=fx;a.vy-=fy}
+        if(!b.fixed){b.vx+=fx;b.vy+=fy}
+      }
+    }
+    
+    // 引力 (links)
+    for(var i=0;i<edges.length;i++){
+      var e=edges[i], s=e.source, t=e.target;
+      var dx=t.x-s.x, dy=t.y-s.y;
+      var dist=Math.sqrt(dx*dx+dy*dy)||1;
+      var force=(dist-160)*0.01*alpha;
+      var fx=dx/dist*force, fy=dy/dist*force;
+      if(!s.fixed){s.vx+=fx;s.vy+=fy}
+      if(!t.fixed){t.vx-=fx;t.vy-=fy}
+    }
+    
+    // 中心引力
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      if(!n.fixed){
+        n.vx-=n.x*0.002*alpha;
+        n.vy-=n.y*0.002*alpha;
+      }
+    }
+    
+    // 碰撞
+    for(var i=0;i<nodes.length;i++){
+      for(var j=i+1;j<nodes.length;j++){
+        var a=nodes[i], b=nodes[j];
+        var dx=b.x-a.x, dy=b.y-a.y;
+        var dist=Math.sqrt(dx*dx+dy*dy)||1;
+        var minDist=a.r+b.r+8;
+        if(dist<minDist){
+          var force=(minDist-dist)*0.5;
+          var fx=dx/dist*force, fy=dy/dist*force;
+          if(!a.fixed){a.vx-=fx;a.vy-=fy}
+          if(!b.fixed){b.vx+=fx;b.vy+=fy}
+        }
+      }
+    }
+    
+    // 阻尼
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      if(!n.fixed){n.vx*=0.6;n.vy*=0.6}
+    }
+    
+    alpha*=1-alphaDecay;
+  }
+  
+  // 应用速度
+  for(var i=0;i<nodes.length;i++){
+    var n=nodes[i];
+    if(!n.fixed){
+      n.x+=n.vx; n.y+=n.vy;
+      n.x=Math.max(-800,Math.min(800,n.x));
+      n.y=Math.max(-600,Math.min(600,n.y));
+    }
+  }
+}
+
+// ===== 渲染 =====
+function toScreen(x,y){
+  return {x:(x+panX)*zoomLevel+W/2, y:(y+panY)*zoomLevel+H/2};
+}
+function fromScreen(sx,sy){
+  return {x:(sx-W/2)/zoomLevel-panX, y:(sy-H/2)/zoomLevel-panY};
+}
+
+var relatedSet=new Set();
+function updateRelated(hid){
+  relatedSet.clear();
+  if(!hid) return;
+  relatedSet.add(hid);
+  for(var i=0;i<edges.length;i++){
+    var e=edges[i];
+    if(e.source.id===hid) relatedSet.add(e.target.id);
+    if(e.target.id===hid) relatedSet.add(e.source.id);
+  }
+}
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+  
+  // 背景网格
+  ctx.strokeStyle='rgba(255,255,255,0.015)';
+  ctx.lineWidth=1;
+  var gs=40*zoomLevel;
+  var ox=(panX*zoomLevel+W/2)%gs, oy=(panY*zoomLevel+H/2)%gs;
+  for(var x=ox;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(var y=oy;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  
+  var searchSet=null;
+  if(searchQuery){
+    searchSet=new Set();
+    var q=searchQuery.toLowerCase();
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      if(n.id.toLowerCase().includes(q)||n.label.toLowerCase().includes(q)||n.desc.toLowerCase().includes(q))
+        searchSet.add(n.id);
+    }
+    document.getElementById('search-count').textContent=searchSet.size+'/'+nodes.length;
+  }
+  
+  // 连线
+  for(var i=0;i<edges.length;i++){
+    var e=edges[i];
+    var sp=toScreen(e.source.x,e.source.y);
+    var tp=toScreen(e.target.x,e.target.y);
+    
+    var alpha=0.35;
+    if(hovered&&(e.source.id===hovered.id||e.target.id===hovered.id)) alpha=0.7;
+    else if(hovered) alpha=0.06;
+    if(searchSet){
+      if(searchSet.has(e.source.id)&&searchSet.has(e.target.id)) alpha=0.5;
+      else alpha=0.03;
+    }
+    if(alpha<0.03) continue;
+    
+    ctx.strokeStyle=gc(e.source.cat);
+    ctx.globalAlpha=alpha;
+    ctx.lineWidth=1.2;
+    ctx.beginPath();ctx.moveTo(sp.x,sp.y);ctx.lineTo(tp.x,tp.y);ctx.stroke();
+    ctx.globalAlpha=1;
+    
+    // 标签
+    if(alpha>0.3){
+      var mx=(sp.x+tp.x)/2, my=(sp.y+tp.y)/2-6;
+      ctx.fillStyle='rgba(255,255,255,'+(alpha*0.6)+')';
+      ctx.font='9px sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText(e.label,mx,my);
+    }
+  }
+  
+  // 连线（搜索时的高亮）
+  if(hovered){
+    for(var i=0;i<edges.length;i++){
+      var e=edges[i];
+      if(e.source.id===hovered.id||e.target.id===hovered.id){
+        var sp=toScreen(e.source.x,e.source.y);
+        var tp=toScreen(e.target.x,e.target.y);
+        // glow
+        ctx.strokeStyle=hovered.color;
+        ctx.globalAlpha=0.1;
+        ctx.lineWidth=5;
+        ctx.beginPath();ctx.moveTo(sp.x,sp.y);ctx.lineTo(tp.x,tp.y);ctx.stroke();
+        ctx.globalAlpha=1;
+      }
+    }
+  }
+  
+  // 节点
+  for(var i=0;i<nodes.length;i++){
+    var n=nodes[i];
+    var p=toScreen(n.x,n.y);
+    
+    var alpha=1;
+    if(hovered){
+      if(relatedSet.has(n.id)) alpha=1;
+      else alpha=0.15;
+    }
+    if(searchSet){
+      if(searchSet.has(n.id)) alpha=1;
+      else alpha=0.08;
+    }
+    if(alpha<0.08) continue;
+    
+    // 光晕
+    if((hovered&&relatedSet.has(n.id))||(selectedNode&&selectedNode.id===n.id)){
+      ctx.shadowColor=n.color;
+      ctx.shadowBlur=18;
+    }
+    
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle=n.color;
+    ctx.beginPath();ctx.arc(p.x,p.y,n.r,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.2)';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+    ctx.shadowBlur=0;
+    
+    // 标签
+    var txt=n.label;
+    if(txt.length>8) txt=txt.slice(0,7)+'…';
+    ctx.fillStyle='rgba(255,255,255,'+(alpha*0.9)+')';
+    ctx.font=(n.id==='alaya'?'bold 12px':n.r>20?'bold 11px':'10px')+' sans-serif';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(txt,p.x,p.y);
+    ctx.globalAlpha=1;
+  }
+}
+
+// ===== 交互 =====
+function hitTest(sx,sy){
+  var wp=fromScreen(sx,sy);
+  for(var i=nodes.length-1;i>=0;i--){
+    var n=nodes[i];
+    var dx=wp.x-n.x, dy=wp.y-n.y;
+    if(Math.sqrt(dx*dx+dy*dy)<n.r+4) return n;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousedown',function(e){
+  var n=hitTest(e.clientX,e.clientY);
+  if(n){
+    dragging=n;
+    dragOX=n.x; dragOY=n.y;
+    n.fixed=true;
+    canvas.style.cursor='grabbing';
+  }else{
+    panning=true;
+    panSX=e.clientX; panSY=e.clientY;
+    canvas.style.cursor='move';
+  }
+});
+
+window.addEventListener('mousemove',function(e){
+  if(dragging){
+    var p=fromScreen(e.clientX,e.clientY);
+    dragging.x=p.x; dragging.y=p.y;
+  }else if(panning){
+    var dx=(e.clientX-panSX)/zoomLevel;
+    var dy=(e.clientY-panSY)/zoomLevel;
+    panX+=dx; panY+=dy;
+    panSX=e.clientX; panSY=e.clientY;
+  }else{
+    var n=hitTest(e.clientX,e.clientY);
+    if(n!==hovered){
+      hovered=n;
+      updateRelated(n?n.id:null);
+      canvas.style.cursor=n?'pointer':'default';
+      // tooltip
+      var tt=document.getElementById('tooltip');
+      if(n){
+        tt.style.display='block';
+        tt.style.left=(e.clientX+18)+'px';
+        tt.style.top=(e.clientY-10)+'px';
+        tt.innerHTML='<div class="tt-name">'+n.label+'</div><div class="tt-cat">'+gl(n.cat)+'</div><div class="tt-desc">'+n.desc+'</div>';
+      }else{
+        tt.style.display='none';
+      }
+    }
+  }
+});
+
+window.addEventListener('mouseup',function(){
+  if(dragging){
+    dragging.fixed=false;
+    dragging=null;
+    canvas.style.cursor=hovered?'pointer':'default';
+  }
+  panning=false;
+});
+
+canvas.addEventListener('click',function(e){
+  if(dragging) return; // was a drag
+  var n=hitTest(e.clientX,e.clientY);
+  if(n){
+    selectedNode=n;
+    showDetail(n);
+  }
+});
+
+canvas.addEventListener('wheel',function(e){
+  e.preventDefault();
+  var delta=e.deltaY>0?0.9:1.1;
+  var newZoom=Math.max(0.1,Math.min(4,zoomLevel*delta));
+  // zoom toward cursor
+  var mx=e.clientX, my=e.clientY;
+  var ratio=newZoom/zoomLevel;
+  panX=(panX+mx/zoomLevel)*ratio-mx/newZoom;
+  panY=(panY+my/zoomLevel)*ratio-my/newZoom;
+  zoomLevel=newZoom;
+},{passive:false});
+
+// Touch
+canvas.addEventListener('touchstart',function(e){
+  if(e.touches.length===1){
+    var t=e.touches[0];
+    var n=hitTest(t.clientX,t.clientY);
+    if(n){dragging=n;n.fixed=true;e.preventDefault();}
+    else{panning=true;panSX=t.clientX;panSY=t.clientY;}
+  }
+},{passive:false});
+canvas.addEventListener('touchmove',function(e){
+  if(dragging&&e.touches.length===1){
+    var p=fromScreen(e.touches[0].clientX,e.touches[0].clientY);
+    dragging.x=p.x;dragging.y=p.y;
+    e.preventDefault();
+  }else if(panning&&e.touches.length===1){
+    var dx=(e.touches[0].clientX-panSX)/zoomLevel;
+    var dy=(e.touches[0].clientY-panSY)/zoomLevel;
+    panX+=dx;panY+=dy;
+    panSX=e.touches[0].clientX;panSY=e.touches[0].clientY;
+  }
+},{passive:false});
+canvas.addEventListener('touchend',function(){
+  if(dragging){dragging.fixed=false;dragging=null;}
+  panning=false;
+});
+
+// ===== 详情面板 =====
+function showDetail(n){
+  var p=document.getElementById('detail-panel');
+  p.querySelector('.dp-title').textContent=n.label;
+  p.querySelector('.dp-cat').textContent=gl(n.cat);
+  p.querySelector('.dp-desc').textContent=n.desc;
+  var docDiv=p.querySelector('.dp-docs');docDiv.innerHTML='';
+  (n.docs||[]).forEach(function(d){
+    var el=document.createElement('div');el.className='dp-doc';
+    el.textContent='📄 '+d;docDiv.appendChild(el);
+  });
+  var relDiv=p.querySelector('.dp-relations');relDiv.innerHTML='';
+  for(var i=0;i<edges.length;i++){
+    var e=edges[i];
+    if(e.source.id===n.id||e.target.id===n.id){
+      var other=e.source.id===n.id?e.target:e.source;
+      var el=document.createElement('div');el.className='dp-rel';
+      el.textContent='→ '+other.label+'  ('+e.label+')';
+      el.onclick=function(node){return function(){showDetail(node);}}(other);
+      relDiv.appendChild(el);
+    }
+  }
+  p.classList.add('open');
+  document.getElementById('search-input').blur();
+}
+window.closePanel=function(){
+  document.getElementById('detail-panel').classList.remove('open');
+};
+
+// ===== 搜索 =====
+window.doSearch=function(val){
+  searchQuery=val;
+  var cl=document.getElementById('search-clear');
+  if(val){cl.style.display='inline';}else{cl.style.display='none';document.getElementById('search-count').textContent='';}
+};
+window.clearSearch=function(){
+  document.getElementById('search-input').value='';
+  searchQuery='';
+  document.getElementById('search-clear').style.display='none';
+  document.getElementById('search-count').textContent='';
+};
+
+// ===== 主循环 =====
+function loop(){
+  simulate();
+  render();
+  requestAnimationFrame(loop);
+}
+
+// 初始模拟多跑几轮让节点散开
+for(var i=0;i<300;i++) simulate();
+loop();
+
+console.log('🎯 唯识论知识库概念地图 — 纯 Canvas 引擎已就绪');
+</script>
+</body>
+</html>

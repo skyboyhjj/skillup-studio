@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hui-Skill | 标注工作台</title>
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-tertiary: #0f0f23;
+  --bg-card: #1e2a4a;
+  --bg-hover: #243356;
+  --accent: #D4A853;
+  --accent-hover: #e0b95f;
+  --accent-dim: rgba(212, 168, 83, 0.15);
+  --text-primary: #e8e6e3;
+  --text-secondary: #a0a0b8;
+  --text-muted: #6b6b80;
+  --border: #2a2a4a;
+  --border-light: #3a3a5a;
+  --danger: #e05555;
+  --danger-hover: #f06666;
+  --success: #4caf7d;
+  --warning: #d4a853;
+  --info: #5b9bd5;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+  --transition: 0.2s ease;
+  --sidebar-width: 240px;
+  --header-height: 56px;
+  --panel-width: 380px;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+/* ========== Layout Grid ========== */
+.app-container {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "sidebar main panel";
+  height: 100vh;
+  width: 100vw;
+  transition: grid-template-columns var(--transition);
+}
+
+.app-container.sidebar-collapsed {
+  grid-template-columns: 0 1fr auto;
+}
+
+.app-container.panel-hidden {
+  grid-template-columns: auto 1fr 0;
+}
+
+.app-container.sidebar-collapsed.panel-hidden {
+  grid-template-columns: 0 1fr 0;
+}
+
+/* ========== Header ========== */
+.header {
+  grid-area: header;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.header-logo span {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-size: 16px;
+}
+
+.sidebar-toggle:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-logout:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+/* ========== Sidebar ========== */
+.sidebar {
+  grid-area: sidebar;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width var(--transition);
+  width: var(--sidebar-width);
+}
+
+.app-container.sidebar-collapsed .sidebar {
+  width: 0;
+  border-right: none;
+}
+
+.sidebar-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sidebar-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.sidebar-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.sidebar-item.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sidebar-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.sidebar-item.active .sidebar-badge {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ========== Main Content ========== */
+.main-content {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* Toolbar */
+.toolbar {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.domain-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color var(--transition);
+}
+
+.domain-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+
+.search-box input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 8px 14px 8px 36px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: border-color var(--transition);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1a1a2e;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* Concept Table */
+.concept-table-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 20px;
+}
+
+.concept-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.concept-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
+  z-index: 5;
+}
+
+.concept-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.concept-table tr {
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.concept-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+.concept-table tr.selected td {
+  background: var(--accent-dim);
+}
+
+.concept-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.element-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.element-badge.wood { background: rgba(76, 175, 80, 0.2); color: #66bb6a; }
+.element-badge.fire { background: rgba(244, 67, 54, 0.2); color: #ef5350; }
+.element-badge.earth { background: rgba(212, 168, 83, 0.2); color: #d4a853; }
+.element-badge.metal { background: rgba(255, 255, 255, 0.15); color: #ccc; }
+.element-badge.water { background: rgba(33, 150, 243, 0.2); color: #42a5f5; }
+
+.layer-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(138, 43, 226, 0.15);
+  color: #ba68c8;
+}
+
+.weight-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weight-fill {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.weight-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.weight-value {
+  font-size: 12px;
+  color: var(--text-muted);
+  min-width: 36px;
+  text-align: right;
+}
+
+.action-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+
+.btn-icon:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.btn-icon.edit:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-icon.delete:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* ========== Right Panel ========== */
+.detail-panel {
+  grid-area: panel;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: var(--panel-width);
+  box-shadow: var(--shadow);
+  transition: width var(--transition);
+}
+
+.app-container.panel-hidden .detail-panel {
+  width: 0;
+  border-left: none;
+}
+
+.panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.panel-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.panel-close:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.form-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: border-color var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  appearance: auto;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-wrap input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--bg-secondary);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.slider-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 42px;
+  text-align: right;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 13px;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.checkbox-item:hover {
+  border-color: var(--accent);
+}
+
+.checkbox-item.checked {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.checkbox-item input[type="checkbox"] {
+  display: none;
+}
+
+.panel-actions {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.panel-actions .btn-primary,
+.panel-actions .btn-secondary {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ========== States ========== */
+.state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.state-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.state-desc {
+  font-size: 13px;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========== Toast ========== */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.3s ease, toastOut 0.3s ease forwards;
+  animation-delay: 0s, 2.7s;
+  pointer-events: auto;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.success { background: #2e7d52; }
+.toast.error { background: #c62828; }
+.toast.warning { background: #b8860b; }
+.toast.info { background: #1565c0; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(40px); }
+}
+
+/* ========== Modal ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.2s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.modal-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+  .app-container {
+    grid-template-columns: auto 1fr 0;
+  }
+  .app-container.panel-visible {
+    grid-template-columns: 0 0 1fr;
+  }
+  .detail-panel {
+    width: 100%;
+  }
+  .main-content {
+    overflow: hidden;
+  }
+  .toolbar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-container {
+    grid-template-columns: 0 1fr 0;
+  }
+  .sidebar {
+    display: none;
+  }
+  .app-container.mobile-sidebar .sidebar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    bottom: 0;
+    z-index: 200;
+    width: 260px;
+  }
+  .header-logo span {
+    display: none;
+  }
+  .user-name {
+    display: none;
+  }
+  .search-box {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== Toast Container ========== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ========== Modal Container ========== -->
+<div id="modalContainer"></div>
+
+<!-- ========== App Layout ========== -->
+<div class="app-container" id="appContainer">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="sidebar-toggle" id="sidebarToggle" title="切换侧边栏">&#9776;</button>
+      <div class="header-logo">
+        &#9670; Hui-Skill<span>| 标注工作台</span>
+      </div>
+    </div>
+    <div class="header-right" id="headerRight">
+      <div class="user-info" id="userInfo">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span class="user-name" id="userName">未登录</span>
+      </div>
+      <button class="btn-logout" id="btnLogout" title="退出登录">退出</button>
+    </div>
+  </header>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">领域分类</div>
+    </div>
+    <div class="sidebar-list" id="sidebarList">
+      <div class="sidebar-item active" data-domain="chinese_medicine">
+        <span class="sidebar-icon">&#127973;</span>
+        <span>中医</span>
+        <span class="sidebar-badge" id="badge-chinese_medicine">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="taoism">
+        <span class="sidebar-icon">&#9775;</span>
+        <span>道家</span>
+        <span class="sidebar-badge" id="badge-taoism">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="confucianism">
+        <span class="sidebar-icon">&#20154;</span>
+        <span>儒家</span>
+        <span class="sidebar-badge" id="badge-confucianism">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="buddhism">
+        <span class="sidebar-icon">&#9775;</span>
+        <span>佛学</span>
+        <span class="sidebar-badge" id="badge-buddhism">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="i_ching">
+        <span class="sidebar-icon">&#9775;</span>
+        <span>易经</span>
+        <span class="sidebar-badge" id="badge-i_ching">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="feng_shui">
+        <span class="sidebar-icon">&#9733;</span>
+        <span>风水</span>
+        <span class="sidebar-badge" id="badge-feng_shui">0</span>
+      </div>
+      <div class="sidebar-item" data-domain="qigong">
+        <span class="sidebar-icon">&#9775;</span>
+        <span>气功</span>
+        <span class="sidebar-badge" id="badge-qigong">0</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="toolbar">
+      <select class="domain-select" id="domainSelect">
+        <option value="chinese_medicine">中医</option>
+        <option value="taoism">道家</option>
+        <option value="confucianism">儒家</option>
+        <option value="buddhism">佛学</option>
+        <option value="i_ching">易经</option>
+        <option value="feng_shui">风水</option>
+        <option value="qigong">气功</option>
+      </select>
+      <div class="search-box">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="搜索概念名称...">
+      </div>
+      <button class="btn-primary" id="btnNewConcept">
+        &#65291; 新建概念
+      </button>
+    </div>
+
+    <div class="concept-table-wrap" id="conceptTableWrap">
+      <!-- Loading -->
+      <div class="state-box" id="stateLoading">
+        <div class="spinner"></div>
+        <div class="state-title">加载中...</div>
+        <div class="state-desc">正在获取概念数据</div>
+      </div>
+
+      <!-- Empty -->
+      <div class="state-box" id="stateEmpty" style="display:none;">
+        <div class="state-icon">&#128203;</div>
+        <div class="state-title">暂无概念数据</div>
+        <div class="state-desc">请点击"新建概念"按钮添加第一条标注数据</div>
+      </div>
+
+      <!-- Error -->
+      <div class="state-box" id="stateError" style="display:none;">
+        <div class="state-icon">&#9888;</div>
+        <div class="state-title">加载失败</div>
+        <div class="state-desc" id="stateErrorDesc">请检查网络连接后重试</div>
+        <button class="btn-secondary" style="margin-top:16px;" id="btnRetry">重试</button>
+      </div>
+
+      <!-- Table -->
+      <table class="concept-table" id="conceptTable" style="display:none;">
+        <thead>
+          <tr>
+            <th style="width:18%;">概念名称</th>
+            <th style="width:12%;">五行</th>
+            <th style="width:12%;">层次</th>
+            <th style="width:18%;">权重</th>
+            <th style="width:22%;">流变阶段</th>
+            <th style="width:18%;">操作</th>
+          </tr>
+        </thead>
+        <tbody id="conceptTbody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Right Detail Panel -->
+  <aside class="detail-panel" id="detailPanel">
+    <div class="panel-header">
+      <div class="panel-title" id="panelTitle">概念详情</div>
+      <button class="panel-close" id="panelClose" title="关闭面板">&times;</button>
+    </div>
+    <div class="panel-body" id="panelBody">
+      <!-- Empty state for panel -->
+      <div class="state-box" id="panelEmpty" style="padding:40px 20px;">
+        <div class="state-icon">&#128269;</div>
+        <div class="state-title">选择概念查看详情</div>
+        <div class="state-desc">点击概念列表中的条目以编辑标注信息</div>
+      </div>
+
+      <!-- Editor form (hidden by default) -->
+      <div id="panelForm" style="display:none;display:flex;flex-direction:column;gap:18px;">
+        <div class="form-group">
+          <label class="form-label">概念名称</label>
+          <input type="text" class="form-input" id="editName" placeholder="输入概念名称">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">五行 / 八卦</label>
+          <select class="form-select" id="editElement">
+            <option value="">-- 请选择 --</option>
+            <optgroup label="五行">
+              <option value="木">&#127795; 木</option>
+              <option value="火">&#128293; 火</option>
+              <option value="土">&#127760; 土</option>
+              <option value="金">&#11036; 金</option>
+              <option value="水">&#128167; 水</option>
+            </optgroup>
+            <optgroup label="八卦">
+              <option value="乾">&#9776; 乾 (天)</option>
+              <option value="坤">&#9783; 坤 (地)</option>
+              <option value="震">&#9779; 震 (雷)</option>
+              <option value="巽">&#9780; 巽 (风)</option>
+              <option value="坎">&#9781; 坎 (水)</option>
+              <option value="离">&#9778; 离 (火)</option>
+              <option value="艮">&#9782; 艮 (山)</option>
+              <option value="兑">&#9777; 兑 (泽)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">层次</label>
+          <select class="form-select" id="editLayer">
+            <option value="">-- 请选择 --</option>
+            <option value="外层">外层 (现象/表象)</option>
+            <option value="中层">中层 (功能/关系)</option>
+            <option value="内层">内层 (本质/核心)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">权重</label>
+          <div class="slider-wrap">
+            <input type="range" id="editWeight" min="0" max="1" step="0.01" value="0.5">
+            <span class="slider-value" id="weightDisplay">0.50</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">流变阶段 (可多选)</label>
+          <div class="checkbox-group" id="flowStages">
+            <label class="checkbox-item" data-value="生">
+              <input type="checkbox"> 生 (生成)
+            </label>
+            <label class="checkbox-item" data-value="长">
+              <input type="checkbox"> 长 (生长)
+            </label>
+            <label class="checkbox-item" data-value="化">
+              <input type="checkbox"> 化 (转化)
+            </label>
+            <label class="checkbox-item" data-value="收">
+              <input type="checkbox"> 收 (收敛)
+            </label>
+            <label class="checkbox-item" data-value="藏">
+              <input type="checkbox"> 藏 (收藏)
+            </label>
+            <label class="checkbox-item" data-value="克">
+              <input type="checkbox"> 克 (克制)
+            </label>
+            <label class="checkbox-item" data-value="侮">
+              <input type="checkbox"> 侮 (反侮)
+            </label>
+            <label class="checkbox-item" data-value="乘">
+              <input type="checkbox"> 乘 (相乘)
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-actions" id="panelActions" style="display:none;">
+      <button class="btn-secondary" id="btnCancel">取消</button>
+      <button class="btn-primary" id="btnSave">保存</button>
+    </div>
+  </aside>
+</div>
+
+<script>
+/* ========== Authentication ========== */
+const STORAGE_KEY_TOKEN = 'hui_skill_jwt';
+const STORAGE_KEY_USER = 'hui_skill_user';
+const API_BASE = '/api/rules';
+
+function getToken() {
+  return localStorage.getItem(STORAGE_KEY_TOKEN);
+}
+
+function getUserInfo() {
+  const raw = localStorage.getItem(STORAGE_KEY_USER);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+}
+
+function parseJWT(token) {
+  try {
+    const payload = token.split('.')[1];
+    const decoded = JSON.parse(atob(payload));
+    return decoded;
+  } catch {
+    return null;
+  }
+}
+
+function saveAuth(token, userInfo) {
+  localStorage.setItem(STORAGE_KEY_TOKEN, token);
+  if (userInfo) {
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(userInfo));
+  }
+}
+
+function clearAuth() {
+  localStorage.removeItem(STORAGE_KEY_TOKEN);
+  localStorage.removeItem(STORAGE_KEY_USER);
+}
+
+function redirectToLogin() {
+  window.location.href = 'login.html';
+}
+
+function checkAuth() {
+  const token = getToken();
+  if (!token) {
+    redirectToLogin();
+    return false;
+  }
+  // Try to parse JWT for user info
+  const decoded = parseJWT(token);
+  if (decoded && decoded.exp) {
+    if (Date.now() >= decoded.exp * 1000) {
+      clearAuth();
+      redirectToLogin();
+      return false;
+    }
+  }
+  return true;
+}
+
+async function apiFetch(path, options = {}) {
+  const token = getToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(options.headers || {})
+  };
+  if (token) {
+    headers['Authorization'] = 'Bearer ' + token;
+  }
+
+  const response = await fetch(API_BASE + path, {
+    ...options,
+    headers
+  });
+
+  if (response.status === 401) {
+    clearAuth();
+    redirectToLogin();
+    throw new Error('未授权，请重新登录');
+  }
+
+  if (!response.ok) {
+    const body = await response.text();
+    let msg = `请求失败 (${response.status})`;
+    try {
+      const err = JSON.parse(body);
+      msg = err.message || err.error || msg;
+    } catch {}
+    throw new Error(msg);
+  }
+
+  return response.json();
+}
+
+/* ========== State ========== */
+const state = {
+  currentDomain: 'chinese_medicine',
+  concepts: [],
+  selectedConcept: null,
+  editingConcept: null,
+  isNew: false,
+  loading: false,
+  searchQuery: '',
+};
+
+/* ========== DOM Refs ========== */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const appContainer = $('#appContainer');
+const sidebar = $('#sidebar');
+const sidebarList = $('#sidebarList');
+const sidebarToggle = $('#sidebarToggle');
+const domainSelect = $('#domainSelect');
+const searchInput = $('#searchInput');
+const btnNewConcept = $('#btnNewConcept');
+const conceptTable = $('#conceptTable');
+const conceptTbody = $('#conceptTbody');
+const conceptTableWrap = $('#conceptTableWrap');
+const stateLoading = $('#stateLoading');
+const stateEmpty = $('#stateEmpty');
+const stateError = $('#stateError');
+const stateErrorDesc = $('#stateErrorDesc');
+const btnRetry = $('#btnRetry');
+const detailPanel = $('#detailPanel');
+const panelTitle = $('#panelTitle');
+const panelBody = $('#panelBody');
+const panelEmpty = $('#panelEmpty');
+const panelForm = $('#panelForm');
+const panelActions = $('#panelActions');
+const panelClose = $('#panelClose');
+const editName = $('#editName');
+const editElement = $('#editElement');
+const editLayer = $('#editLayer');
+const editWeight = $('#editWeight');
+const weightDisplay = $('#weightDisplay');
+const flowStages = $('#flowStages');
+const btnCancel = $('#btnCancel');
+const btnSave = $('#btnSave');
+const userAvatar = $('#userAvatar');
+const userName = $('#userName');
+const btnLogout = $('#btnLogout');
+const toastContainer = $('#toastContainer');
+const modalContainer = $('#modalContainer');
+
+/* ========== Toast ========== */
+function showToast(message, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  const icons = { success: '&#10003;', error: '&#10007;', warning: '&#9888;', info: '&#8505;' };
+  toast.innerHTML = '<span>' + (icons[type] || icons.info) + '</span> ' + message;
+  toastContainer.appendChild(toast);
+  setTimeout(() => {
+    if (toast.parentNode) toast.remove();
+  }, 3100);
+}
+
+/* ========== Modal ========== */
+function showModal(title, body, onConfirm, onCancel) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal">
+        <div class="modal-title">${title}</div>
+        <div class="modal-body">${body}</div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="modalCancel">取消</button>
+          <button class="btn-danger" id="modalConfirm">确认删除</button>
+        </div>
+      </div>
+    `;
+    modalContainer.appendChild(overlay);
+
+    overlay.querySelector('#modalCancel').onclick = () => {
+      overlay.remove();
+      if (onCancel) onCancel();
+      resolve(false);
+    };
+    overlay.querySelector('#modalConfirm').onclick = () => {
+      overlay.remove();
+      if (onConfirm) onConfirm();
+      resolve(true);
+    };
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.remove();
+        if (onCancel) onCancel();
+        resolve(false);
+      }
+    });
+  });
+}
+
+/* ========== API Calls ========== */
+async function loadConcepts(domain) {
+  state.loading = true;
+  showLoading(true);
+  showEmpty(false);
+  showError(false);
+  conceptTable.style.display = 'none';
+
+  try {
+    const data = await apiFetch('/library?domain=' + domain);
+    // Normalize response: could be array directly or { data: [...] }
+    state.concepts = Array.isArray(data) ? data : (data.data || data.concepts || data.rules || []);
+    state.loading = false;
+    renderConceptTable();
+  } catch (err) {
+    state.loading = false;
+    state.concepts = [];
+    showLoading(false);
+    showError(true, err.message);
+  }
+}
+
+async function saveConcept(conceptData) {
+  const dslCommand = {
+    command: conceptData.id ? 'CORRECT' : 'MAP',
+    concept: conceptData.name,
+    element: conceptData.element,
+    layer: conceptData.layer,
+    weight: conceptData.weight,
+    flow_stages: conceptData.flow_stages,
+    ...(conceptData.id ? { id: conceptData.id } : {})
+  };
+
+  const result = await apiFetch('/dsl/execute', {
+    method: 'POST',
+    body: JSON.stringify(dslCommand)
+  });
+
+  return result;
+}
+
+async function deleteConceptAPI(concept) {
+  const dslCommand = {
+    command: 'DELETE',
+    concept: concept.name,
+    id: concept.id
+  };
+
+  return apiFetch('/dsl/execute', {
+    method: 'POST',
+    body: JSON.stringify(dslCommand)
+  });
+}
+
+/* ========== Render ========== */
+function showLoading(show) {
+  stateLoading.style.display = show ? 'flex' : 'none';
+}
+
+function showEmpty(show) {
+  stateEmpty.style.display = show ? 'flex' : 'none';
+}
+
+function showError(show, msg) {
+  stateError.style.display = show ? 'flex' : 'none';
+  if (msg) stateErrorDesc.textContent = msg;
+}
+
+function getFilteredConcepts() {
+  let list = state.concepts;
+  if (state.searchQuery.trim()) {
+    const q = state.searchQuery.trim().toLowerCase();
+    list = list.filter(c => (c.name || c.concept || '').toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function getConceptName(c) {
+  return c.name || c.concept || '';
+}
+
+function getConceptId(c) {
+  return c.id || c._id || getConceptName(c);
+}
+
+function getConceptElement(c) {
+  return c.element || c.wuxing || '';
+}
+
+function getConceptLayer(c) {
+  return c.layer || c.cengci || '';
+}
+
+function getConceptWeight(c) {
+  const w = parseFloat(c.weight);
+  return isNaN(w) ? 0 : Math.max(0, Math.min(1, w));
+}
+
+function getConceptFlowStages(c) {
+  if (Array.isArray(c.flow_stages)) return c.flow_stages;
+  if (Array.isArray(c.flowStages)) return c.flowStages;
+  return [];
+}
+
+function elementClass(element) {
+  const map = { '木': 'wood', '火': 'fire', '土': 'earth', '金': 'metal', '水': 'water' };
+  return map[element] || '';
+}
+
+function renderConceptTable() {
+  const filtered = getFilteredConcepts();
+
+  if (state.loading) {
+    showLoading(true);
+    showEmpty(false);
+    showError(false);
+    conceptTable.style.display = 'none';
+    return;
+  }
+
+  showLoading(false);
+  showError(false);
+
+  if (filtered.length === 0) {
+    showEmpty(true);
+    conceptTable.style.display = 'none';
+    updateSidebarBadges();
+    return;
+  }
+
+  showEmpty(false);
+  conceptTable.style.display = '';
+
+  conceptTbody.innerHTML = filtered.map(c => {
+    const name = getConceptName(c);
+    const element = getConceptElement(c);
+    const layer = getConceptLayer(c);
+    const weight = getConceptWeight(c);
+    const stages = getConceptFlowStages(c);
+    const id = getConceptId(c);
+    const isSelected = state.selectedConcept && getConceptId(state.selectedConcept) === id;
+    const cls = elementClass(element);
+
+    return `
+      <tr class="${isSelected ? 'selected' : ''}" data-id="${escapeHtml(id)}">
+        <td><span class="concept-name">${escapeHtml(name)}</span></td>
+        <td>${element ? '<span class="element-badge ' + cls + '">' + escapeHtml(element) + '</span>' : '<span style="color:var(--text-muted);">--</span>'}</td>
+        <td>${layer ? '<span class="layer-badge">' + escapeHtml(layer) + '</span>' : '<span style="color:var(--text-muted);">--</span>'}</td>
+        <td>
+          <div class="weight-bar">
+            <div class="weight-track"><div class="weight-fill" style="width:${(weight * 100).toFixed(0)}%;"></div></div>
+            <span class="weight-value">${weight.toFixed(2)}</span>
+          </div>
+        </td>
+        <td style="font-size:12px;color:var(--text-muted);">${stages.length ? stages.map(s => escapeHtml(s)).join('、') : '--'}</td>
+        <td>
+          <div class="action-btns">
+            <button class="btn-icon edit" data-action="edit" data-id="${escapeHtml(id)}" title="编辑">&#9998;</button>
+            <button class="btn-icon delete" data-action="delete" data-id="${escapeHtml(id)}" title="删除">&#128465;</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  updateSidebarBadges();
+}
+
+function updateSidebarBadges() {
+  // Count concepts per domain
+  const counts = {};
+  state.concepts.forEach(c => {
+    const domain = c.domain || state.currentDomain;
+    counts[domain] = (counts[domain] || 0) + 1;
+  });
+  // Update badges
+  $$('.sidebar-badge').forEach(badge => {
+    const domain = badge.id.replace('badge-', '');
+    badge.textContent = counts[domain] || 0;
+  });
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* ========== Panel ========== */
+function openPanel(concept, isNew) {
+  state.editingConcept = concept ? { ...concept } : {
+    name: '',
+    element: '',
+    layer: '',
+    weight: 0.5,
+    flow_stages: []
+  };
+  state.isNew = isNew;
+  state.selectedConcept = concept;
+
+  panelTitle.textContent = isNew ? '新建概念' : '编辑概念';
+  panelEmpty.style.display = 'none';
+  panelForm.style.display = 'flex';
+  panelActions.style.display = 'flex';
+
+  editName.value = state.editingConcept.name || '';
+  editElement.value = state.editingConcept.element || '';
+  editLayer.value = state.editingConcept.layer || '';
+  editWeight.value = state.editingConcept.weight;
+  weightDisplay.textContent = parseFloat(state.editingConcept.weight).toFixed(2);
+
+  // Flow stages
+  const stages = state.editingConcept.flow_stages || [];
+  $$('#flowStages .checkbox-item').forEach(item => {
+    const val = item.getAttribute('data-value');
+    if (stages.includes(val)) {
+      item.classList.add('checked');
+      item.querySelector('input').checked = true;
+    } else {
+      item.classList.remove('checked');
+      item.querySelector('input').checked = false;
+    }
+  });
+
+  appContainer.classList.add('panel-visible');
+  renderConceptTable();
+}
+
+function closePanel() {
+  state.editingConcept = null;
+  state.isNew = false;
+  state.selectedConcept = null;
+  panelEmpty.style.display = 'flex';
+  panelForm.style.display = 'none';
+  panelActions.style.display = 'none';
+  appContainer.classList.remove('panel-visible');
+  renderConceptTable();
+}
+
+function getPanelFormData() {
+  const stages = [];
+  $$('#flowStages .checkbox-item.checked').forEach(item => {
+    stages.push(item.getAttribute('data-value'));
+  });
+  return {
+    name: editName.value.trim(),
+    element: editElement.value,
+    layer: editLayer.value,
+    weight: parseFloat(editWeight.value),
+    flow_stages: stages
+  };
+}
+
+/* ========== Event Handlers ========== */
+async function handleSave() {
+  const data = getPanelFormData();
+  if (!data.name) {
+    showToast('请输入概念名称', 'warning');
+    return;
+  }
+
+  try {
+    const payload = {
+      ...data,
+      id: state.isNew ? null : (state.editingConcept.id || state.editingConcept._id),
+      domain: state.currentDomain
+    };
+
+    await saveConcept(payload);
+    showToast(state.isNew ? '概念创建成功' : '概念更新成功', 'success');
+    closePanel();
+    // Reload data
+    await loadConcepts(state.currentDomain);
+  } catch (err) {
+    showToast('保存失败: ' + err.message, 'error');
+  }
+}
+
+async function handleDelete(concept) {
+  const name = getConceptName(concept);
+  const confirmed = await showModal(
+    '确认删除',
+    '确定要删除概念 "<strong>' + escapeHtml(name) + '</strong>" 吗？此操作不可撤销。'
+  );
+  if (!confirmed) return;
+
+  try {
+    await deleteConceptAPI(concept);
+    showToast('概念已删除', 'success');
+    if (state.selectedConcept && getConceptId(state.selectedConcept) === getConceptId(concept)) {
+      closePanel();
+    }
+    await loadConcepts(state.currentDomain);
+  } catch (err) {
+    showToast('删除失败: ' + err.message, 'error');
+  }
+}
+
+/* ========== Event Bindings ========== */
+sidebarToggle.addEventListener('click', () => {
+  appContainer.classList.toggle('sidebar-collapsed');
+});
+
+sidebarList.addEventListener('click', (e) => {
+  const item = e.target.closest('.sidebar-item');
+  if (!item) return;
+  const domain = item.getAttribute('data-domain');
+  if (!domain) return;
+
+  // Update active state
+  $$('.sidebar-item').forEach(el => el.classList.remove('active'));
+  item.classList.add('active');
+
+  // Sync domain
+  state.currentDomain = domain;
+  domainSelect.value = domain;
+  state.selectedConcept = null;
+  closePanel();
+  loadConcepts(domain);
+});
+
+domainSelect.addEventListener('change', () => {
+  const domain = domainSelect.value;
+  state.currentDomain = domain;
+  state.selectedConcept = null;
+  closePanel();
+
+  // Sync sidebar
+  $$('.sidebar-item').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-domain') === domain);
+  });
+
+  loadConcepts(domain);
+});
+
+searchInput.addEventListener('input', () => {
+  state.searchQuery = searchInput.value;
+  renderConceptTable();
+});
+
+btnNewConcept.addEventListener('click', () => {
+  openPanel(null, true);
+});
+
+conceptTable.addEventListener('click', (e) => {
+  // Row click -> select concept
+  const row = e.target.closest('tr');
+  if (!row) return;
+
+  const actionBtn = e.target.closest('[data-action]');
+  if (actionBtn) {
+    const action = actionBtn.getAttribute('data-action');
+    const id = actionBtn.getAttribute('data-id');
+    const concept = state.concepts.find(c => getConceptId(c) === id);
+    if (!concept) return;
+    if (action === 'edit') {
+      openPanel(concept, false);
+    } else if (action === 'delete') {
+      handleDelete(concept);
+    }
+    return;
+  }
+
+  const id = row.getAttribute('data-id');
+  if (!id) return;
+  const concept = state.concepts.find(c => getConceptId(c) === id);
+  if (concept) {
+    openPanel(concept, false);
+  }
+});
+
+panelClose.addEventListener('click', closePanel);
+
+btnCancel.addEventListener('click', closePanel);
+
+btnSave.addEventListener('click', handleSave);
+
+editWeight.addEventListener('input', () => {
+  weightDisplay.textContent = parseFloat(editWeight.value).toFixed(2);
+});
+
+// Flow stages checkbox toggle
+flowStages.addEventListener('click', (e) => {
+  const item = e.target.closest('.checkbox-item');
+  if (!item) return;
+  item.classList.toggle('checked');
+  item.querySelector('input').checked = item.classList.contains('checked');
+});
+
+btnRetry.addEventListener('click', () => {
+  loadConcepts(state.currentDomain);
+});
+
+btnLogout.addEventListener('click', () => {
+  clearAuth();
+  redirectToLogin();
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closePanel();
+  }
+  if (e.ctrlKey && e.key === 's') {
+    e.preventDefault();
+    if (state.editingConcept) {
+      handleSave();
+    }
+  }
+});
+
+/* ========== Init ========== */
+function init() {
+  if (!checkAuth()) return;
+
+  // Set user info
+  const token = getToken();
+  const userInfo = getUserInfo();
+  const decoded = parseJWT(token);
+
+  if (userInfo && userInfo.name) {
+    userName.textContent = userInfo.name;
+    userAvatar.textContent = userInfo.name.charAt(0).toUpperCase();
+  } else if (decoded && decoded.sub) {
+    userName.textContent = decoded.sub;
+    userAvatar.textContent = (decoded.sub).charAt(0).toUpperCase();
+  } else if (decoded && decoded.name) {
+    userName.textContent = decoded.name;
+    userAvatar.textContent = decoded.name.charAt(0).toUpperCase();
+  } else {
+    userName.textContent = '用户';
+    userAvatar.textContent = 'U';
+  }
+
+  // Load initial data
+  loadConcepts(state.currentDomain);
+}
+
+// Start
+init();
+</script>
+
+</body>
+</html>

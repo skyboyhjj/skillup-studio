@@ -1,0 +1,97 @@
+{
+  "domain": "default",
+  "rings": [
+    {
+      "label": "Base 层·知识沉淀",
+      "concepts": [
+        {
+          "label": "沉淀智慧",
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "溯源原则",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "道德经81章",
+          "wuxing": "土",
+          "bagua": "☷坤"
+        },
+        {
+          "label": "概念网络",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "人机分工",
+          "wuxing": "金",
+          "bagua": "☰乾"
+        },
+        {
+          "label": "知识图谱",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "亲子元数据",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "镜鉴数据库",
+          "wuxing": "火",
+          "bagua": "☲离"
+        }
+      ]
+    },
+    {
+      "label": "View 层·认知视图",
+      "concepts": [
+        {
+          "label": "精准呈现",
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "L1·白话",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "L2·精读",
+          "wuxing": "木",
+          "bagua": "☴巽"
+        },
+        {
+          "label": "L3·应用",
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "L4·学术",
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "用户主权",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "善行无辙迹",
+          "wuxing": "土",
+          "bagua": "☶艮"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "passed": false,
+    "issues": [
+      "八卦覆盖不足：仅覆盖 5/8 卦"
+    ],
+    "adjustments": []
+  }
+}

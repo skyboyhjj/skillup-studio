@@ -1,0 +1,146 @@
+{
+  "version": "1.0",
+  "updated": "2026-07-25",
+  "domain": "mathematics",
+  "rings": [
+    {
+      "label": "学术轨迹",
+      "R": 200,
+      "w": 30,
+      "yOffset": 120,
+      "color": "#4ECDC4",
+      "concepts": [
+        {
+          "label": "北大数学本科",
+          "desc": "北京大学数学科学学院。中国数学新生代的起点。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "木",
+          "bagua": "☳震"
+        },
+        {
+          "label": "MIT博士·师从Guth",
+          "desc": "师从著名调和分析学家Larry Guth。延续MIT调和分析学派深厚传统。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "普林斯顿IAS博士后",
+          "desc": "在普林斯顿高等研究院完成博士后。调和分析与几何测度论的融汇之地。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "土",
+          "bagua": "☷坤"
+        },
+        {
+          "label": "纽约大学柯朗所副教授",
+          "desc": "柯朗数学科学研究所——应用数学的殿堂。调和分析领军青年学者。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "金",
+          "bagua": "☰乾"
+        }
+      ]
+    },
+    {
+      "label": "核心贡献",
+      "R": 150,
+      "w": 25,
+      "yOffset": 0,
+      "color": "#FF6B6B",
+      "concepts": [
+        {
+          "label": "三维挂谷猜想",
+          "desc": "与Zahl合作严格证明三维挂谷集的Minkowski与Hausdorff维数均为3。困扰百年，几何测度论最著名难题。",
+          "docs": [
+            "核心贡献"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "平面波局部平滑",
+          "desc": "将多尺度与解耦技术应用于波动方程，推动局部平滑猜想——理解波在粗糙介质中的传播。",
+          "docs": [
+            "核心贡献"
+          ],
+          "wuxing": "水",
+          "bagua": "☵坎"
+        },
+        {
+          "label": "傅里叶限制·距离集",
+          "desc": "在Fourier限制理论、Falconer距离集问题、平面Furstenberg集等方面取得重大进展。",
+          "docs": [
+            "核心贡献"
+          ],
+          "wuxing": "木",
+          "bagua": "☴巽"
+        },
+        {
+          "label": "多尺度分解·精巧解耦",
+          "desc": "标志性方法论。深刻的多尺度分解+精巧的解耦技术——持续攻克一系列长期悬而未决的核心猜想。",
+          "docs": [
+            "方法论"
+          ],
+          "wuxing": "金",
+          "bagua": "☱兑"
+        }
+      ]
+    },
+    {
+      "label": "突破意义",
+      "R": 100,
+      "w": 20,
+      "yOffset": -120,
+      "color": "#FFD93D",
+      "concepts": [
+        {
+          "label": "调和分析里程碑",
+          "desc": "挂谷猜想的证明是调和分析与几何测度论交叉领域的里程碑——百年难题终结。",
+          "docs": [
+            "意义"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "解耦方法新边界",
+          "desc": "极大扩展了解耦方法的应用边界——从Fourier限制到距离集到Furstenberg集。",
+          "docs": [
+            "意义"
+          ],
+          "wuxing": "木",
+          "bagua": "☳震"
+        },
+        {
+          "label": "中国女性数学之光",
+          "desc": "首位中国籍女性菲尔兹奖得主。为中国数学新生代树立了灯塔。",
+          "docs": [
+            "意义"
+          ],
+          "wuxing": "金",
+          "bagua": "☰乾"
+        }
+      ]
+    }
+  ],
+  "subtitle": "调和分析里程碑 · 首位中国籍女性菲尔兹奖得主",
+  "emptiness": {
+    "sunyata": true,
+    "mirror": true,
+    "breath": true,
+    "wane": true,
+    "ascend": true,
+    "mirrorRadius": 120,
+    "breathPeriod": 10000,
+    "breathAmplitude": 15,
+    "fadeTarget": 0.15,
+    "ascendRatio": 0.2
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "domain": "western_philosophy",
+  "description": "西方哲学知识体系：本体论、认识论、伦理学等",
+  "overrides": {
+    "wuxing": {
+      "木": {
+        "keywords": ["becoming", "process", "dialectic", "evolution", "development", "emergence", "creativity", "生成", "辩证", "演化"],
+        "weight": 1.1
+      },
+      "火": {
+        "keywords": ["consciousness", "reason", "enlightenment", "truth", "knowledge", "understanding", "理性", "启蒙", "真理", "认知"],
+        "weight": 1.1
+      },
+      "土": {
+        "keywords": ["being", "substance", "essence", "ontology", "foundation", "ground", "reality", "存在", "本体", "实体", "本质"],
+        "weight": 1.1
+      },
+      "金": {
+        "keywords": ["logic", "analysis", "critique", "definition", "boundary", "distinction", "category", "逻辑", "分析", "批判", "边界"],
+        "weight": 1.1
+      },
+      "水": {
+        "keywords": ["relation", "connection", "synthesis", "context", "perspective", "flux", "holism", "关系", "综合", "语境", "流变"],
+        "weight": 1.1
+      }
+    }
+  }
+}

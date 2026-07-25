@@ -1,0 +1,173 @@
+{
+  "version": "1.0",
+  "updated": "2026-07-25",
+  "domain": "mathematics",
+  "rings": [
+    {
+      "label": "种子层 · 百年猜想",
+      "R": 200,
+      "w": 30,
+      "yOffset": 120,
+      "color": "#4ECDC4",
+      "concepts": [
+        {
+          "label": "三维挂谷猜想",
+          "desc": "挂谷集(Minkowski/Hausdorff维数=3)困扰百年。王虹+Zahl严格证明。几何测度论里程碑。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "木",
+          "bagua": "☳震"
+        },
+        {
+          "label": "玻尔兹曼方程推导",
+          "desc": "从硬球动力学严格推导宏观方程——希尔伯特第六问题方向近百年的根本性突破。邓煜。",
+          "docs": [
+            "邓煜"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "格罗莫夫-维滕不变量",
+          "desc": "全纯曲线模空间紧化——辛几何长期基础性难题。Pardon的新框架解决。",
+          "docs": [
+            "Pardon"
+          ],
+          "wuxing": "金",
+          "bagua": "☰乾"
+        },
+        {
+          "label": "格里菲斯猜想",
+          "desc": "周期映射像闭包的代数性——结合o-极小性与Hodge理论。Tsimerman集大成。",
+          "docs": [
+            "Tsimerman"
+          ],
+          "wuxing": "土",
+          "bagua": "☷坤"
+        },
+        {
+          "label": "安德烈-奥特猜想",
+          "desc": "西格尔模簇中CM点的代数分布。丢番图几何宏伟目标。Tsimerman完成。",
+          "docs": [
+            "Tsimerman"
+          ],
+          "wuxing": "水",
+          "bagua": "☵坎"
+        }
+      ]
+    },
+    {
+      "label": "现行层 · 核心方法",
+      "R": 150,
+      "w": 25,
+      "yOffset": 0,
+      "color": "#FF6B6B",
+      "concepts": [
+        {
+          "label": "多尺度分解·解耦",
+          "desc": "王虹的标志性方法。深刻的多尺度分解+精巧的解耦技术，持续攻克核心猜想。",
+          "docs": [
+            "王虹"
+          ],
+          "wuxing": "木",
+          "bagua": "☴巽"
+        },
+        {
+          "label": "概率视角·随机分析",
+          "desc": "邓煜的开创性方法。概率视角+严密分析，革新对湍流和色散波热化的理解。",
+          "docs": [
+            "邓煜"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "虚拟基本闭链",
+          "desc": "Pardon的全新技术框架。处理全纯曲线模空间紧化，解决辛几何基础性难题。",
+          "docs": [
+            "Pardon"
+          ],
+          "wuxing": "金",
+          "bagua": "☱兑"
+        },
+        {
+          "label": "o-极小性理论",
+          "desc": "Tsimerman的方法论重构。将数理逻辑升华为算术几何基础语言，催生全新研究方向。",
+          "docs": [
+            "Tsimerman"
+          ],
+          "wuxing": "土",
+          "bagua": "☶艮"
+        },
+        {
+          "label": "跨领域交叉",
+          "desc": "四人共性：调和×几何·概率×PDE·辛×拓扑·模型论×算术。交叉处诞生突破。",
+          "docs": [
+            "四位共通"
+          ],
+          "wuxing": "水",
+          "bagua": "☵坎"
+        }
+      ]
+    },
+    {
+      "label": "超越层 · 成果与范式",
+      "R": 100,
+      "w": 20,
+      "yOffset": -120,
+      "color": "#FFD93D",
+      "concepts": [
+        {
+          "label": "微观→宏观桥梁",
+          "desc": "邓煜+王虹：从粒子/尺度约束的微观世界到宏观方程/维数——希尔伯特第六问题的现代解答。",
+          "docs": [
+            "共通主题"
+          ],
+          "wuxing": "水",
+          "bagua": "☵坎"
+        },
+        {
+          "label": "基础难题严格化",
+          "desc": "Pardon+Tsimerman：为辛几何、算术几何的核心不变量提供严格数学基础，终结长期的技术债务。",
+          "docs": [
+            "共通主题"
+          ],
+          "wuxing": "土",
+          "bagua": "☷坤"
+        },
+        {
+          "label": "新研究范式的确立",
+          "desc": "四位均开创了各自领域的新范式——不是修修补补，而是重新定义了问题可以怎样被解决。",
+          "docs": [
+            "共通主题"
+          ],
+          "wuxing": "火",
+          "bagua": "☲离"
+        },
+        {
+          "label": "中国数学历史性突破",
+          "desc": "王虹+邓煜：中国数学家首次在同一届菲尔兹奖斩获两枚。调和分析与PDE两翼齐飞。",
+          "docs": [
+            "中国数学"
+          ],
+          "wuxing": "木",
+          "bagua": "☳震"
+        }
+      ]
+    }
+  ],
+  "subtitle": "拖拽旋转莫比乌斯环，点击概念节点查看详情",
+  "emptiness": {
+    "sunyata": true,
+    "mirror": true,
+    "breath": true,
+    "wane": true,
+    "ascend": true,
+    "mirrorRadius": 120,
+    "breathPeriod": 10000,
+    "breathAmplitude": 15,
+    "fadeTarget": 0.15,
+    "ascendRatio": 0.2
+  }
+}

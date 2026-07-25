@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillUp Studio - 莫比乌斯环概念地图生成器</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1><span class="brand">SkillUp Studio</span> &middot; 莫比乌斯环概念地图生成器</h1>
+  <p class="subtitle">选择数据集，一键生成可交互的 3D 概念地图 HTML</p>
+</header>
+
+<div class="container">
+
+  <!-- 第一步：选择数据源 -->
+  <div class="section">
+    <h2 class="section-title"><span class="step-num">1</span>选择数据源</h2>
+
+    <!-- 热门推荐 -->
+    <div class="hot-section" id="hotSection">
+      <div class="hot-label">热门推荐</div>
+      <div class="preset-grid" id="hotGrid">
+        <div class="preset-card" data-file="./preset-data/AI概念图_21nodes.json" data-title="AI概念图" data-domain="science_technology" data-hot="true">
+          <span class="check-mark">&#10003;</span>
+          <span class="hot-badge">热门</span>
+          <div class="card-title">AI 概念图</div>
+          <div class="card-meta">21 节点 &middot; 3 层</div>
+          <div class="card-desc">神经网络、深度学习、Transformer、AGI... 基础/架构/前沿三阶</div>
+        </div>
+        <div class="preset-card" data-file="./preset-data/2026菲尔兹奖_14nodes.json" data-title="2026菲尔兹奖" data-domain="mathematics" data-hot="true">
+          <span class="check-mark">&#10003;</span>
+          <span class="hot-badge new-badge">新</span>
+          <div class="card-title">2026 菲尔兹奖</div>
+          <div class="card-meta">14 节点 &middot; 3 层</div>
+          <div class="card-desc">挂谷猜想、玻尔兹曼方程、格罗莫夫-维滕不变量... 四位获奖者共性核心概念</div>
+        </div>
+        <div class="preset-card" data-file="./preset-data/黄帝内经_23nodes.json" data-title="黄帝内经" data-domain="chinese_medicine" data-hot="true">
+          <span class="check-mark">&#10003;</span>
+          <span class="hot-badge">热门</span>
+          <div class="card-title">黄帝内经</div>
+          <div class="card-meta">23 节点 &middot; 3 层</div>
+          <div class="card-desc">阴阳、五行、脏腑、气血、经络... 阴阳/诊治/哲理三阶</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分类标签 -->
+    <div class="category-tabs" id="categoryTabs">
+      <button class="cat-tab active" data-cat="all">全部</button>
+      <button class="cat-tab" data-cat="confucianism">儒学</button>
+      <button class="cat-tab" data-cat="daojism">道学</button>
+      <button class="cat-tab" data-cat="chinese_medicine">中医</button>
+      <button class="cat-tab" data-cat="science_technology">科技</button>
+      <button class="cat-tab" data-cat="mathematics">数学</button>
+    </div>
+
+    <!-- 领域分组卡片 -->
+    <div class="preset-grid" id="presetGrid">
+      <div class="preset-card" data-file="./preset-data/儒家心学_21nodes.json" data-title="儒家心学" data-domain="confucianism" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">儒家心学</div>
+        <div class="card-meta">21 节点 &middot; 3 层</div>
+        <div class="card-desc">理、气、心、性、道、诚、仁、中庸... 本原/修证/境界三阶</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/黄帝内经_23nodes.json" data-title="黄帝内经" data-domain="chinese_medicine" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">黄帝内经</div>
+        <div class="card-meta">23 节点 &middot; 3 层</div>
+        <div class="card-desc">阴阳、五行、脏腑、气血、经络... 阴阳/诊治/哲理三阶</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/道德经_20nodes.json" data-title="道德经" data-domain="daojism" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">道德经</div>
+        <div class="card-meta">20 节点 &middot; 3 层</div>
+        <div class="card-desc">道、无、有、自然、反者道之动... 体道/相德/用玄三阶</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/五行养生_15nodes.json" data-title="五行养生" data-domain="chinese_medicine" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">五行养生</div>
+        <div class="card-meta">15 节点 &middot; 3 层</div>
+        <div class="card-desc">木火土金水、春肝怒青... 本质/五蕴/调养三阶</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/AI概念图_21nodes.json" data-title="AI概念图" data-domain="science_technology" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">AI 概念图</div>
+        <div class="card-meta">21 节点 &middot; 3 层</div>
+        <div class="card-desc">神经网络、深度学习、Transformer、AGI... 基础/架构/前沿三阶</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/2026菲尔兹奖_14nodes.json" data-title="2026菲尔兹奖" data-domain="mathematics" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">2026 菲尔兹奖</div>
+        <div class="card-meta">14 节点 &middot; 3 层</div>
+        <div class="card-desc">挂谷猜想、玻尔兹曼方程、格罗莫夫-维滕不变量... 四位获奖者共性核心概念</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/王虹_2026菲尔兹奖_11nodes.json" data-title="王虹 · 2026菲尔兹奖" data-domain="mathematics" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">王虹 · 菲尔兹奖</div>
+        <div class="card-meta">11 节点 &middot; 3 层</div>
+        <div class="card-desc">三维挂谷猜想、多尺度解耦... 调和分析里程碑 &middot; 首位中国籍女性获奖者</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/邓煜_2026菲尔兹奖_11nodes.json" data-title="邓煜 · 2026菲尔兹奖" data-domain="mathematics" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">邓煜 · 菲尔兹奖</div>
+        <div class="card-meta">11 节点 &middot; 3 层</div>
+        <div class="card-desc">玻尔兹曼方程推导、非线性色散波... 希尔伯特第六问题的数学曙光</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/JohnPardon_2026菲尔兹奖_10nodes.json" data-title="John Pardon · 2026菲尔兹奖" data-domain="mathematics" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">John Pardon</div>
+        <div class="card-meta">10 节点 &middot; 3 层</div>
+        <div class="card-desc">虚拟基本闭链、深泽范畴... 辛几何基础重建 &middot; 几何拓扑多面手</div>
+      </div>
+      <div class="preset-card" data-file="./preset-data/JacobTsimerman_2026菲尔兹奖_11nodes.json" data-title="Jacob Tsimerman · 2026菲尔兹奖" data-domain="mathematics" data-hot="false">
+        <span class="check-mark">&#10003;</span>
+        <div class="card-title">Jacob Tsimerman</div>
+        <div class="card-meta">11 节点 &middot; 3 层</div>
+        <div class="card-desc">格里菲斯猜想、安德烈-奥特猜想... o-极小性重构算术几何基础</div>
+      </div>
+    </div>
+
+    <div class="or-divider"><span class="or-text">或上传自己的 JSON 数据</span></div>
+
+    <div class="upload-area" id="uploadArea">
+      <div class="upload-icon">&#9729;</div>
+      <div class="upload-text">拖拽 JSON 文件到此处，或点击选择</div>
+      <div class="upload-hint">支持包含 rings 数组的 JSON 数据文件</div>
+      <input type="file" id="fileInput" accept=".json">
+    </div>
+  </div>
+
+  <!-- 第二步：配置 -->
+  <div class="section">
+    <h2 class="section-title"><span class="step-num">2</span>配置</h2>
+
+    <div class="config-panel">
+      <div class="config-row">
+        <label class="config-label">标题</label>
+        <input type="text" class="title-input" id="titleInput" placeholder="输入概念地图标题...">
+      </div>
+
+      <div class="config-row">
+        <label class="config-label">
+          五空动画
+          <button class="btn-toggle-all" id="btnToggleAll">全部关闭（纯骨架模式）</button>
+        </label>
+        <div class="emptiness-grid">
+          <div class="emptiness-item">
+            <input type="checkbox" id="chk_sunyata" checked>
+            <label for="chk_sunyata">三轮体空</label>
+          </div>
+          <div class="emptiness-item">
+            <input type="checkbox" id="chk_mirror" checked>
+            <label for="chk_mirror">大圆镜智</label>
+          </div>
+          <div class="emptiness-item">
+            <input type="checkbox" id="chk_breath" checked>
+            <label for="chk_breath">觉知域</label>
+          </div>
+          <div class="emptiness-item">
+            <input type="checkbox" id="chk_wane" checked>
+            <label for="chk_wane">为道日损</label>
+          </div>
+          <div class="emptiness-item">
+            <input type="checkbox" id="chk_ascend" checked>
+            <label for="chk_ascend">色空不二</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三步：生成 -->
+  <div class="section">
+    <h2 class="section-title"><span class="step-num">3</span>生成</h2>
+    <button class="btn-generate" id="btnGenerate" disabled>生成 HTML</button>
+  </div>
+
+  <!-- 结果区域 -->
+  <div class="result-area" id="resultArea">
+    <div class="result-card">
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-stats" id="resultStats"></div>
+      <div class="result-actions">
+        <button class="btn-preview" id="btnPreview">在线预览</button>
+        <button class="btn-download" id="btnDownload">下载 HTML</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+</div>
+
+<!-- Preview overlay -->
+<div class="preview-overlay" id="previewOverlay">
+  <div class="preview-bar">
+    <span class="preview-label" id="previewLabel">预览</span>
+    <button class="btn-close-preview" id="btnClosePreview">&times;</button>
+  </div>
+  <iframe class="preview-iframe" id="previewIframe"></iframe>
+</div>
+
+<footer class="site-footer">
+  <p>SkillUp Studio &middot; Mobius Concept Map Generator &middot; 2026</p>
+</footer>
+
+<script src="./build_mobius.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // State
+  var currentData = null;
+  var generatedHtml = null;
+  var allEmptinessOn = true;
+
+  // DOM refs
+  var presetGrid = document.getElementById('presetGrid');
+  var presetCards = presetGrid.querySelectorAll('.preset-card');
+  var hotGrid = document.getElementById('hotGrid');
+  var hotCards = hotGrid.querySelectorAll('.preset-card');
+  var allCards = document.querySelectorAll('#presetGrid .preset-card, #hotGrid .preset-card');
+  var uploadArea = document.getElementById('uploadArea');
+  var fileInput = document.getElementById('fileInput');
+  var titleInput = document.getElementById('titleInput');
+  var btnGenerate = document.getElementById('btnGenerate');
+  var btnToggleAll = document.getElementById('btnToggleAll');
+  var resultArea = document.getElementById('resultArea');
+  var resultTitle = document.getElementById('resultTitle');
+  var resultStats = document.getElementById('resultStats');
+  var btnDownload = document.getElementById('btnDownload');
+  var btnPreview = document.getElementById('btnPreview');
+  var previewOverlay = document.getElementById('previewOverlay');
+  var previewIframe = document.getElementById('previewIframe');
+  var previewLabel = document.getElementById('previewLabel');
+  var btnClosePreview = document.getElementById('btnClosePreview');
+  var errorMsg = document.getElementById('errorMsg');
+  var categoryTabs = document.getElementById('categoryTabs');
+  var currentCat = 'all';
+
+  // Emptiness checkboxes
+  var empChecks = {
+    sunyata: document.getElementById('chk_sunyata'),
+    mirror: document.getElementById('chk_mirror'),
+    breath: document.getElementById('chk_breath'),
+    wane: document.getElementById('chk_wane'),
+    ascend: document.getElementById('chk_ascend')
+  };
+
+  // ---- Category tab switching ----
+  var catTabs = categoryTabs.querySelectorAll('.cat-tab');
+  catTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      catTabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      currentCat = tab.getAttribute('data-cat');
+      filterCards(currentCat);
+    });
+  });
+
+  function filterCards(cat) {
+    presetCards.forEach(function (card) {
+      var domain = card.getAttribute('data-domain');
+      if (cat === 'all' || domain === cat) {
+        card.style.display = '';
+        card.classList.remove('card-hiding');
+        card.classList.add('card-showing');
+        card.addEventListener('animationend', function handler() {
+          card.removeEventListener('animationend', handler);
+          card.classList.remove('card-showing');
+        });
+      } else {
+        card.classList.add('card-hiding');
+        card.classList.remove('card-showing');
+        card.addEventListener('transitionend', function handler() {
+          card.removeEventListener('transitionend', handler);
+          if (card.classList.contains('card-hiding')) {
+            card.style.display = 'none';
+          }
+        });
+      }
+    });
+  }
+
+  // ---- Preset card selection ----
+  function selectCard(card) {
+    allCards.forEach(function (c) { c.classList.remove('selected'); });
+    card.classList.add('selected');
+    var file = card.getAttribute('data-file');
+    var title = card.getAttribute('data-title');
+    loadPreset(file, title);
+  }
+
+  allCards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      selectCard(card);
+    });
+  });
+
+  function loadPreset(url, title) {
+    titleInput.value = title;
+    resultArea.classList.remove('show');
+    errorMsg.classList.remove('show');
+    generatedHtml = null;
+
+    fetch(url)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        currentData = data;
+        btnGenerate.disabled = false;
+      })
+      .catch(function (e) {
+        showError('加载预设失败: ' + e.message);
+      });
+  }
+
+  // ---- Upload ----
+  uploadArea.addEventListener('click', function () { fileInput.click(); });
+
+  uploadArea.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    uploadArea.classList.add('drag-over');
+  });
+
+  uploadArea.addEventListener('dragleave', function () {
+    uploadArea.classList.remove('drag-over');
+  });
+
+  uploadArea.addEventListener('drop', function (e) {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    var file = e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files[0]) handleFile(fileInput.files[0]);
+  });
+
+  function handleFile(file) {
+    if (!file.name.endsWith('.json')) {
+      showError('请上传 .json 文件');
+      return;
+    }
+    presetCards.forEach(function (c) { c.classList.remove('selected'); });
+    hotCards.forEach(function (c) { c.classList.remove('selected'); });
+    resultArea.classList.remove('show');
+    errorMsg.classList.remove('show');
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        var data = JSON.parse(e.target.result);
+        if (!data.rings && !Array.isArray(data)) {
+          showError('JSON 文件必须包含 rings 数组');
+          return;
+        }
+        currentData = data;
+        // 用文件名（去掉 .json）作为默认标题
+        titleInput.value = file.name.replace(/\.json$/i, '');
+        btnGenerate.disabled = false;
+      } catch (err) {
+        showError('JSON 解析失败: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ---- Toggle all emptiness ----
+  btnToggleAll.addEventListener('click', function () {
+    allEmptinessOn = !allEmptinessOn;
+    var keys = Object.keys(empChecks);
+    for (var i = 0; i < keys.length; i++) {
+      empChecks[keys[i]].checked = allEmptinessOn;
+    }
+    btnToggleAll.textContent = allEmptinessOn ? '全部关闭（纯骨架模式）' : '全部开启';
+  });
+
+  // ---- Generate ----
+  btnGenerate.addEventListener('click', function () {
+    if (!currentData) {
+      showError('请先选择数据源');
+      return;
+    }
+
+    var title = titleInput.value.trim() || '概念地图';
+    btnGenerate.disabled = true;
+    btnGenerate.textContent = '正在生成...';
+    errorMsg.classList.remove('show');
+    resultArea.classList.remove('show');
+
+    // Build emptiness config
+    var empConfig = {};
+    var defEmp = MobiusBuilder.DEFAULT_EMPTINESS;
+    for (var k in defEmp) {
+      if (defEmp.hasOwnProperty(k)) {
+        empConfig[k] = defEmp[k];
+      }
+    }
+    // Override boolean switches from checkboxes
+    for (var ek in empChecks) {
+      if (empChecks.hasOwnProperty(ek)) {
+        empConfig[ek] = empChecks[ek].checked;
+      }
+    }
+
+    // Fetch template.html then build
+    fetch('./template.html')
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' - 无法加载 template.html');
+        return r.text();
+      })
+      .then(function (templateHtml) {
+        generatedHtml = MobiusBuilder.build(templateHtml, currentData, title, empConfig);
+
+        // Validate JS syntax
+        var match = generatedHtml.match(/<script>([\s\S]*?)<\/script>/);
+        if (match) {
+          try {
+            new Function(match[1]);
+          } catch (e) {
+            throw new Error('JS 语法验证失败: ' + e.message);
+          }
+        }
+
+        // Compute stats
+        var rings = currentData.rings || (Array.isArray(currentData) ? currentData : []);
+        var totalNodes = 0;
+        for (var i = 0; i < rings.length; i++) {
+          totalNodes += (rings[i].concepts || []).length;
+        }
+        var empNames = { sunyata: '三轮体空', mirror: '大圆镜智', breath: '觉知域', wane: '为道日损', ascend: '色空不二' };
+        var activeEmp = [];
+        for (var ek2 in empChecks) {
+          if (empChecks.hasOwnProperty(ek2) && empChecks[ek2].checked) {
+            activeEmp.push(empNames[ek2] || ek2);
+          }
+        }
+
+        // Show result
+        resultTitle.textContent = title;
+        resultStats.innerHTML =
+          '<span class="stat-item">节点: <span class="stat-val">' + totalNodes + '</span></span>' +
+          '<span class="stat-item">层数: <span class="stat-val">' + rings.length + '</span></span>' +
+          '<span class="stat-item">五空: <span class="stat-val">' + (activeEmp.length === 5 ? '全部开启' : activeEmp.join('/')) + '</span></span>';
+        resultArea.classList.add('show');
+      })
+      .catch(function (e) {
+        showError('生成失败: ' + e.message);
+      })
+      .finally(function () {
+        btnGenerate.disabled = false;
+        btnGenerate.textContent = '生成 HTML';
+      });
+  });
+
+  // ---- Preview (iframe overlay) ----
+  btnPreview.addEventListener('click', function () {
+    if (!generatedHtml) return;
+    var title = titleInput.value.trim() || '概念地图';
+    previewLabel.textContent = title;
+    // Use srcdoc to avoid Blob URL blocking in QQ Browser / WeChat WebView
+    previewIframe.removeAttribute('src');
+    previewIframe.srcdoc = generatedHtml;
+    previewOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closePreview() {
+    previewOverlay.classList.remove('show');
+    previewIframe.removeAttribute('srcdoc');
+    previewIframe.src = 'about:blank';
+    document.body.style.overflow = '';
+  }
+
+  btnClosePreview.addEventListener('click', closePreview);
+
+  // ESC to close
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && previewOverlay.classList.contains('show')) {
+      closePreview();
+    }
+  });
+
+  // ---- Download (share-first for mobile) ----
+  btnDownload.addEventListener('click', function () {
+    if (!generatedHtml) return;
+    var title = titleInput.value.trim() || '概念地图';
+    var today = new Date();
+    var dateStr = today.getFullYear() + '-' +
+      String(today.getMonth() + 1).padStart(2, '0') + '-' +
+      String(today.getDate()).padStart(2, '0');
+    var filename = title + '_莫比乌斯概念地图_' + dateStr + '.html';
+    var blob = new Blob([generatedHtml], { type: 'text/html;charset=utf-8' });
+
+    // Mobile-only: use Web Share API (desktop browsers also support it but UX is wrong)
+    var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    if (isMobile && navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: 'text/html' })] })) {
+      var file = new File([blob], filename, { type: 'text/html' });
+      navigator.share({ files: [file], title: title }).catch(function () {});
+      return;
+    }
+
+    // Fallback: Blob download
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  });
+
+  // ---- Helpers ----
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.add('show');
+  }
+
+})();
+</script>
+
+</body>
+</html>
