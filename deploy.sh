@@ -33,7 +33,8 @@ tar czf /tmp/meta-skill-deploy.tar.gz \
     frontend/ \
     deploy/ \
     wuxing_rules/rules/ \
-    wuxing_rules/wuxing_dsl.py
+    wuxing_rules/wuxing_dsl.py \
+    wuxing_rules/wuxing_engine.py
 
 echo "  打包完成: $(du -h /tmp/meta-skill-deploy.tar.gz | cut -f1)"
 

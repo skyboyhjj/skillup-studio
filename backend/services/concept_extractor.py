@@ -1,24 +1,41 @@
 """
 概念提取服务
 - 从文本中提取核心概念（DeepSeek API）
-- 从微信公众号文章 URL 提取正文内容（Playwright）
+- 从微信公众号文章 URL 提取正文内容（httpx + HTML 解析）
 - 五行八卦分类（wuxing_engine）
 """
+import importlib.util
 import json
 import re
 import sys
-import asyncio
 from pathlib import Path
-from typing import Optional
 
 import httpx
 
-# 添加 wuxing_rules 到路径
-WUXING_DIR = Path(__file__).resolve().parent.parent.parent / "wuxing_rules"
-if str(WUXING_DIR) not in sys.path:
-    sys.path.insert(0, str(WUXING_DIR))
+# 加载 wuxing_engine 模块（兼容本地开发和 Docker 部署）
+_BACKEND_DIR = Path(__file__).resolve().parent.parent
+_WX_CANDIDATES = [
+    _BACKEND_DIR / "wuxing_rules" / "wuxing_engine.py",       # Docker: /app/wuxing_rules/wuxing_engine.py
+    Path("/app/wuxing_rules/wuxing_engine.py"),                # Docker fallback
+    _BACKEND_DIR.parent / "wuxing_rules" / "wuxing_engine.py", # 本地: backend/../wuxing_rules/wuxing_engine.py
+]
+_wx_path = None
+for _cand in _WX_CANDIDATES:
+    if _cand.exists():
+        _wx_path = _cand
+        break
 
-from wuxing_engine import WuxingEngine
+if _wx_path is None:
+    raise FileNotFoundError("找不到 wuxing_engine.py，请检查 wuxing_rules 目录位置")
+
+# wuxing_rules 根目录（用于加载规则文件）
+WUXING_DIR = _wx_path.parent  # wuxing_engine.py 所在目录即 wuxing_rules/
+
+_wx_spec = importlib.util.spec_from_file_location("wuxing_engine", str(_wx_path))
+_wx_module = importlib.util.module_from_spec(_wx_spec)
+sys.modules["wuxing_engine"] = _wx_module
+_wx_spec.loader.exec_module(_wx_module)
+WuxingEngine = _wx_module.WuxingEngine
 
 # DeepSeek 配置
 from config import DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL
@@ -98,72 +115,66 @@ CONCEPT_EXTRACTION_SYSTEM = """你是一个专业的文本分析专家，擅长�
 - 确保 JSON 格式正确，可直接解析"""
 
 
-async def fetch_wechat_article(url: str, timeout_sec: int = 30) -> dict:
-    """使用 Playwright 获取微信公众号文章正文内容。
+async def fetch_wechat_article(url: str, timeout_sec: int = 15) -> dict:
+    """使用 httpx 获取微信公众号文章正文内容。
+
+    微信公众号文章是服务端渲染的，正文在 #js_content 元素中，
+    无需浏览器渲染即可获取文本内容。
 
     Returns:
         {"title": str, "content": str, "author": str}
     """
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/131.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+    }
+
     try:
-        from playwright.async_api import async_playwright
-    except ImportError:
-        return {"error": "playwright 未安装，请执行: pip install playwright && python -m playwright install chromium"}
+        async with httpx.AsyncClient(timeout=timeout_sec, follow_redirects=True) as client:
+            response = await client.get(url, headers=headers)
+            response.raise_for_status()
+            html = response.text
 
-    timeout_ms = timeout_sec * 1000
-
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(
-            headless=True,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-            ],
-        )
-        context = await browser.new_context(
-            viewport={"width": 1280, "height": 900},
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/131.0.0.0 Safari/537.36"
-            ),
-            locale="zh-CN",
-        )
-
-        try:
-            page = await context.new_page()
-            await page.goto(url, wait_until="networkidle", timeout=timeout_ms)
-
-            # 等待文章内容加载
-            try:
-                await page.wait_for_selector("#js_content", timeout=15000)
-            except Exception:
-                pass
-
-            # 提取文章标题
-            title = await page.evaluate("""
-                () => {
-                    const el = document.querySelector('#activity-name');
-                    return el ? el.textContent.trim() : '';
-                }
-            """) or await page.title()
+            # 提取标题
+            title = ""
+            title_match = re.search(r'<h1[^>]*class="[^"]*rich_media_title[^"]*"[^>]*>(.*?)</h1>', html, re.DOTALL)
+            if not title_match:
+                title_match = re.search(r'id="activity-name"[^>]*>(.*?)</', html, re.DOTALL)
+            if title_match:
+                title = re.sub(r'<[^>]+>', '', title_match.group(1)).strip()
 
             # 提取作者
-            author = await page.evaluate("""
-                () => {
-                    const el = document.querySelector('#js_name');
-                    return el ? el.textContent.trim() : '';
-                }
-            """)
+            author = ""
+            author_match = re.search(r'id="js_name"[^>]*>(.*?)</', html, re.DOTALL)
+            if author_match:
+                author = re.sub(r'<[^>]+>', '', author_match.group(1)).strip()
 
             # 提取正文内容
-            content = await page.evaluate("""
-                () => {
-                    const el = document.querySelector('#js_content');
-                    if (!el) return '';
-                    return el.innerText.trim();
-                }
-            """)
+            content = ""
+            content_match = re.search(r'id="js_content"[^>]*>(.*?)</div>\s*<script', html, re.DOTALL)
+            if not content_match:
+                # 尝试更宽松的匹配
+                content_match = re.search(r'id="js_content"[^>]*>([\s\S]*?)</div>\s*</div>\s*</div>', html, re.DOTALL)
+            if content_match:
+                raw = content_match.group(1)
+                # 去除 HTML 标签
+                content = re.sub(r'<[^>]+>', '', raw)
+                # 清理空白
+                content = re.sub(r'\n\s*\n', '\n\n', content)
+                content = re.sub(r'&nbsp;', ' ', content)
+                content = re.sub(r'&amp;', '&', content)
+                content = re.sub(r'&lt;', '<', content)
+                content = re.sub(r'&gt;', '>', content)
+                content = re.sub(r'&quot;', '"', content)
+                content = content.strip()
+
+            if not content:
+                return {"error": "无法提取文章正文内容，请确认链接是否正确"}
 
             return {
                 "title": title.strip(),
@@ -171,8 +182,12 @@ async def fetch_wechat_article(url: str, timeout_sec: int = 30) -> dict:
                 "author": author.strip(),
             }
 
-        finally:
-            await browser.close()
+    except httpx.TimeoutException:
+        return {"error": "获取文章超时，请检查网络或稍后重试"}
+    except httpx.HTTPStatusError as e:
+        return {"error": f"获取文章失败: HTTP {e.response.status_code}"}
+    except Exception as e:
+        return {"error": f"获取文章失败: {str(e)}"}
 
 
 async def extract_concepts_from_text(
@@ -198,7 +213,7 @@ async def extract_concepts_from_text(
     if not api_key:
         return {"success": False, "error": "DeepSeek API Key 未配置"}
 
-    user_prompt = f"请分析以下文本，提取核心概念并构建三层概念地图。\n\n"
+    user_prompt = "请分析以下文本，提取核心概念并构建三层概念地图。\n\n"
     if title:
         user_prompt += f"文章标题：{title}\n\n"
     user_prompt += f"文本内容：\n{text[:8000]}"  # 限制长度避免 token 超限
