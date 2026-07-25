@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from config import CORS_ORIGINS, LOG_LEVEL
 from models.database import init_db
 from middleware.domain_guard import DomainGuardMiddleware
-from routers import auth, rules, health
+from routers import auth, rules, health, studio
 
 
 @asynccontextmanager
@@ -39,6 +39,7 @@ app.add_middleware(DomainGuardMiddleware)
 # 路由注册
 app.include_router(auth.router)
 app.include_router(rules.router)
+app.include_router(studio.router)
 app.include_router(health.router)
 
 
