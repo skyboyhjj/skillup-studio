@@ -8,7 +8,7 @@ export async function onRequest(context) {
   // 构建后端目标 URL
   const targetUrl = 'http://121.41.215.36:8000' + url.pathname + url.search;
 
-  // 构建转发请求的 headers，移除原始 Host
+  // 构建转发请求的 headers
   const headers = new Headers(request.headers);
   headers.set('Host', '121.41.215.36:8000');
 
