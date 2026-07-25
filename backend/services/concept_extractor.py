@@ -227,7 +227,7 @@ async def extract_concepts_from_text(
                     "Content-Type": "application/json",
                 },
                 json={
-                    "model": "deepseek-chat",
+                    "model": "deepseek-v4-pro",
                     "messages": [
                         {"role": "system", "content": CONCEPT_EXTRACTION_SYSTEM},
                         {"role": "user", "content": user_prompt},

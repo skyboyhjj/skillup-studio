@@ -21,6 +21,11 @@ WRITE_REQUIRED_PREFIXES = (
     "/api/rules/library/export",
 )
 
+# demo 域名下允许的 POST 端点（只读操作，不需要写权限）
+DEMO_ALLOWED_POST_PREFIXES = (
+    "/api/studio/extract",
+)
+
 # 写操作需要的方法
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 
@@ -50,6 +55,11 @@ class DomainGuardMiddleware(BaseHTTPMiddleware):
         # GET / HEAD 始终允许
         if method in ("GET", "HEAD", "OPTIONS"):
             return False
+
+        # demo 域名下允许的只读 POST 端点
+        for prefix in DEMO_ALLOWED_POST_PREFIXES:
+            if path.startswith(prefix):
+                return False
 
         # 精确匹配写操作路径
         for prefix in WRITE_REQUIRED_PREFIXES:
