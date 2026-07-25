@@ -21,6 +21,7 @@ Thumbs.db
 
 # Trae internal
 .trae/
+.uploads/
 
 # Duplicate frontend copy
 meta-skill-org/
