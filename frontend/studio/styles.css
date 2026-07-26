@@ -820,18 +820,6 @@ body {
   flex: 1;
 }
 
-/* Quota inline hint */
-.quota-inline {
-  font-size: 11px;
-  font-weight: 400;
-  color: rgba(78, 205, 196, 0.6);
-  letter-spacing: 0.5px;
-}
-
-.quota-inline.exhausted {
-  color: #FF6B6B;
-}
-
 .btn-extract {
   flex-shrink: 0;
   padding: 10px 24px;
