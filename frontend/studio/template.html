@@ -10,7 +10,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; f
 canvas { display: block; width: 100vw; height: 100vh; cursor: grab; }
 canvas:active { cursor: grabbing; }
 #ui-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
-#title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.85); font-size: 20px; letter-spacing: 6px; text-shadow: 0 0 20px rgba(78,205,196,0.4); }
+#title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: #ffffff; font-size: 20px; letter-spacing: 6px; text-shadow: 0 0 20px rgba(78,205,196,0.6), 0 0 40px rgba(0,0,0,0.5); z-index: 11; }
 #legend { position: absolute; bottom: 20px; left: 20px; color: rgba(255,255,255,0.7); font-size: 13px; line-height: 2; }
 #legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 #phase-indicator { position: absolute; bottom: 64px; right: 20px; color: rgba(255,255,255,0.6); font-size: 13px; text-align: right; }
@@ -26,23 +26,45 @@ canvas:active { cursor: grabbing; }
 #detail-panel .dp-docs-title { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
 #detail-panel .dp-doc-item { font-size: 13px; color: rgba(255,255,255,0.65); padding: 6px 10px; margin-bottom: 4px; background: rgba(255,255,255,0.05); border-radius: 4px; }
 #phase-text { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); color: #FFD93D; font-size: 14px; letter-spacing: 4px; opacity: 0; transition: opacity 0.8s; text-shadow: 0 0 12px rgba(255,217,61,0.5); }
-/* 管理面板样式 */
-#btn-manage {
+/* 工具栏容器 */
+#toolbar {
   position: fixed; top: 20px; right: 20px; z-index: 40;
+  display: flex; align-items: flex-start; gap: 8px;
+  pointer-events: auto;
+}
+#toolbar button {
   background: rgba(10,10,26,0.8); border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.8); padding: 8px 14px; border-radius: 6px;
-  font-size: 13px; cursor: pointer; pointer-events: auto;
-  transition: all 0.3s; font-family: inherit;
-}
-#btn-manage:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
-#btn-record {
-  background: none; border: 1px solid rgba(255,255,255,0.25);
-  color: rgba(255,255,255,0.8); padding: 6px 12px; border-radius: 6px;
   font-size: 13px; cursor: pointer; font-family: inherit;
   transition: all 0.3s; white-space: nowrap;
 }
-#btn-record:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
-#btn-record.recording { border-color: #FF6B6B; color: #FF6B6B; animation: recordPulse 1s infinite; }
+#toolbar button:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
+#btn-screenshot {
+  border-color: rgba(78,205,196,0.3) !important; color: #4ECDC4 !important;
+}
+#btn-screenshot:hover { background: rgba(78,205,196,0.15) !important; border-color: #4ECDC4 !important; }
+#ratio-select {
+  background: rgba(10,10,26,0.8); border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8); padding: 7px 8px; border-radius: 6px;
+  font-size: 12px; cursor: pointer; font-family: inherit;
+  outline: none; transition: all 0.3s;
+  -webkit-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='rgba(255,255,255,0.5)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center;
+  padding-right: 24px;
+}
+#ratio-select:hover { background-color: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+#ratio-select option { background: #0a0a1a; color: #fff; }
+#screenshot-toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  z-index: 100; background: rgba(78,205,196,0.9); color: #0a0a1a;
+  padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  letter-spacing: 1px;
+}
+#screenshot-toast.show { opacity: 1; }
+#btn-record { padding: 8px 14px !important; }
+#btn-record.recording { border-color: #FF6B6B !important; color: #FF6B6B !important; animation: recordPulse 1s infinite; }
 @keyframes recordPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 #record-info {
   font-size: 11px; color: #FF6B6B; padding-top: 4px; white-space: nowrap;
@@ -50,8 +72,21 @@ canvas:active { cursor: grabbing; }
 }
 #record-info.visible { opacity: 1; }
 #record-area {
-  position: fixed; top: 20px; right: 100px; z-index: 40;
   display: flex; flex-direction: column; align-items: center;
+}
+
+/* 移动端工具栏适配 */
+@media (max-width: 600px) {
+  #toolbar { top: 10px; right: 10px; gap: 6px; }
+  #toolbar button { padding: 6px 10px; font-size: 12px; border-radius: 5px; }
+  #toolbar button .btn-full { display: none; }
+  #toolbar button .btn-short { display: inline; }
+  #ratio-select { padding: 5px 18px 5px 6px; font-size: 11px; background-position: right 4px center; }
+  #record-info { font-size: 10px; }
+}
+@media (min-width: 601px) {
+  #toolbar button .btn-full { display: inline; }
+  #toolbar button .btn-short { display: none; }
 }
 #audio-area {
   position: fixed; bottom: 20px; right: 20px; z-index: 40;
@@ -206,12 +241,22 @@ canvas:active { cursor: grabbing; }
   <div class="dp-docs-title">相关文档</div>
   <div id="dp-docs"></div>
 </div>
-<!-- 管理面板 -->
-<button id="btn-manage" title="概念管理">&#9881; 管理</button>
-<div id="record-area">
-  <button id="btn-record" title="录制动画">&#9655; 录制</button>
-  <div id="record-info"></div>
+<!-- 工具栏 -->
+<div id="toolbar">
+  <button id="btn-manage" title="概念管理"><span class="btn-full">&#9881; 管理</span><span class="btn-short">&#9881;</span></button>
+  <button id="btn-screenshot" title="截图保存"><span class="btn-full">&#128247; 截图</span><span class="btn-short">&#128247;</span></button>
+  <select id="ratio-select" title="截图比例">
+    <option value="1:1" selected>1:1</option>
+    <option value="auto">原始</option>
+    <option value="16:9">16:9</option>
+    <option value="4:3">4:3</option>
+  </select>
+  <div id="record-area">
+    <button id="btn-record" title="录制动画"><span class="btn-full">&#9655; 录制</span><span class="btn-short">&#9655;</span></button>
+    <div id="record-info"></div>
+  </div>
 </div>
+<div id="screenshot-toast"></div>
 <div id="audio-area">
   <button id="audio-btn" title="音频开关">&#x1f507;</button>
   <input type="range" id="audio-slider" min="0" max="100" value="60" title="音量">
@@ -1035,7 +1080,7 @@ canvas:active { cursor: grabbing; }
         if (recScale < 1 && copyLoop) clearInterval(copyLoop);
         if (recordedChunks.length === 0) {
           btnRecord.classList.remove('recording');
-          btnRecord.innerHTML = '&#9655; 录制';
+          btnRecord.innerHTML = '<span class="btn-full">&#9655; 录制</span><span class="btn-short">&#9655;</span>';
           hideRecordInfo();
           recorder = null;
           return;
@@ -1044,13 +1089,14 @@ canvas:active { cursor: grabbing; }
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = '莫比乌斯概念地图_' + new Date().toISOString().slice(0, 10) + '.' + ext;
+        var titleText = document.getElementById('title').textContent || '概念地图';
+        a.download = titleText + '_莫比乌斯概念地图_' + new Date().toISOString().slice(0, 10) + '.' + ext;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         btnRecord.classList.remove('recording');
-        btnRecord.innerHTML = '&#9655; 录制';
+        btnRecord.innerHTML = '<span class="btn-full">&#9655; 录制</span><span class="btn-short">&#9655;</span>';
         showRecordInfo('录制完成，已下载 (' + ext.toUpperCase() + ')', '#4ECDC4');
         if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
         setTimeout(hideRecordInfo, 4000);
@@ -1060,7 +1106,7 @@ canvas:active { cursor: grabbing; }
       recordStartTime = Date.now();
       recorder.start(100);
       btnRecord.classList.add('recording');
-      btnRecord.innerHTML = '&#9632; 停止';
+      btnRecord.innerHTML = '<span class="btn-full">&#9632; 停止</span><span class="btn-short">&#9632;</span>';
       showRecordInfo('录制中... 0% / ' + Math.round(durationMs/1000) + 's');
 
       progressTimer = setInterval(function() {
@@ -2047,6 +2093,131 @@ canvas:active { cursor: grabbing; }
   }
 
   render();
+
+  // === 截图功能 ===
+  var btnScreenshot = document.getElementById('btn-screenshot');
+  var screenshotToast = document.getElementById('screenshot-toast');
+
+  function showToast(msg, duration) {
+    screenshotToast.textContent = msg;
+    screenshotToast.classList.add('show');
+    clearTimeout(screenshotToast._timeout);
+    screenshotToast._timeout = setTimeout(function () {
+      screenshotToast.classList.remove('show');
+    }, duration || 2000);
+  }
+
+  function getCropDims(srcW, srcH, ratioValue) {
+    if (ratioValue === 'auto') return { w: srcW, h: srcH, sx: 0, sy: 0 };
+    // "1:1" 内部映射为 1.06:1，加上标题栏后整体接近 1:1
+    if (ratioValue === '1:1') ratioValue = '1.06:1';
+    var parts = ratioValue.split(':');
+    var targetRatio = parseFloat(parts[0]) / parseFloat(parts[1]);
+    var cropW, cropH;
+    if (srcW / srcH > targetRatio) {
+      // 源更宽 → 裁剪左右
+      cropH = srcH;
+      cropW = Math.round(srcH * targetRatio);
+    } else {
+      // 源更高 → 裁剪上下
+      cropW = srcW;
+      cropH = Math.round(srcW / targetRatio);
+    }
+    return { w: cropW, h: cropH, sx: Math.round((srcW - cropW) / 2), sy: Math.round((srcH - cropH) / 2) };
+  }
+
+  function captureScreenshot() {
+    try {
+      var titleText = document.getElementById('title').textContent || '概念地图';
+      var now = new Date();
+      var dateStr = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+      var filename = titleText + '_莫比乌斯概念地图_' + dateStr + '.png';
+
+      // 读取比例选择
+      var ratioSelect = document.getElementById('ratio-select');
+      var ratioValue = ratioSelect ? ratioSelect.value : '1:1';
+
+      // 计算裁剪区域
+      var crop = getCropDims(canvas.width, canvas.height, ratioValue);
+
+      // 标题栏高度按比例缩放（图片高度的 5%，最低 48px，最高 120px）
+      var titleBarHeight = Math.max(48, Math.min(120, Math.round(crop.h * 0.05)));
+      var titleFontSize = Math.round(titleBarHeight * 0.42);
+      var watermarkSize = Math.round(titleBarHeight * 0.25);
+      var watermarkPad = Math.round(titleBarHeight * 0.35);
+
+      // 创建离屏 canvas 合成标题 + 场景
+      var outCanvas = document.createElement('canvas');
+      outCanvas.width = crop.w;
+      outCanvas.height = crop.h + titleBarHeight;
+      var outCtx = outCanvas.getContext('2d');
+
+      // 标题栏背景
+      outCtx.fillStyle = '#0a0a1a';
+      outCtx.fillRect(0, 0, outCanvas.width, titleBarHeight);
+
+      // 绘制 3D 场景（裁剪区域）—— 先绘制场景
+      outCtx.drawImage(canvas, crop.sx, crop.sy, crop.w, crop.h, 0, titleBarHeight, crop.w, crop.h);
+
+      // "AI生成" 水印 — 左上角（绘制在场景之上）
+      outCtx.fillStyle = '#ffffff';
+      outCtx.font = watermarkSize + 'px "Microsoft YaHei","PingFang SC",sans-serif';
+      outCtx.textAlign = 'left';
+      outCtx.textBaseline = 'middle';
+      outCtx.fillText('AI生成', watermarkPad, titleBarHeight / 2);
+
+      // 标题文字 — 顶部居中，白色填充
+      var titleY = titleBarHeight / 2;
+      outCtx.font = titleFontSize + 'px "Microsoft YaHei","PingFang SC",sans-serif';
+      outCtx.textAlign = 'center';
+      outCtx.textBaseline = 'middle';
+      outCtx.fillStyle = '#ffffff';
+      outCtx.fillText(titleText, outCanvas.width / 2, titleY);
+
+      var dataUrl = outCanvas.toDataURL('image/png');
+
+      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      if (isMobile && navigator.canShare) {
+        var byteString = atob(dataUrl.split(',')[1]);
+        var mimeType = dataUrl.split(',')[0].split(':')[1].split(';')[0];
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        var blob = new Blob([ab], { type: mimeType });
+        var file = new File([blob], filename, { type: mimeType });
+        navigator.share({ files: [file], title: titleText }).then(function () {
+          showToast('分享成功！', 2000);
+        }).catch(function (e) {
+          if (e.name !== 'AbortError') {
+            downloadDataUrl(dataUrl, filename);
+          }
+        });
+        return;
+      }
+
+      downloadDataUrl(dataUrl, filename);
+    } catch (e) {
+      showToast('截图失败: ' + e.message, 3000);
+    }
+  }
+
+  function downloadDataUrl(dataUrl, filename) {
+    var a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+    }, 100);
+    showToast('截图已保存！', 2000);
+  }
+
+  btnScreenshot.addEventListener('click', captureScreenshot);
 
   console.log('🎯 莫比乌斯概念地图 v2.0 — 五空动画 · 种子·现行·三轮体空·为道日损');
 })();
