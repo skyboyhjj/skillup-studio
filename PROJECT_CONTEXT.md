@@ -79,6 +79,19 @@ hui-skill.cn 前端 -> 直连本机后端 (FastAPI)
 - meta-skill.org 仅保留文本输入，微信公众号提取功能迁移到 hui-skill.cn
 - 移除 HTML 中的 URL 输入区域和相关 JS 逻辑（freeUrlInput DOM 引用、事件监听、互斥逻辑、URL 提取分支）
 
+### 4. 按钮样式统一 + 字数上限 + 清理残留
+- **提取概念按钮** 样式统一为与"生成 HTML"一致：`width: 100%`、`padding: 16px`、`font-size: 17px`、`border-radius: 10px`、置中显示
+- 移除 `.url-input-row` 包裹层和 `.url-input` CSS 规则（URL 输入已废除后的残留）
+- 文本输入增加 `maxlength="5000"`，字数统计显示 `X / 5000 字` 格式
+- **文件**: `index.html`、`styles.css`
+
+## 版本控制约定
+
+每次提交代码前：
+1. 读取 `PROJECT_CONTEXT.md`，与本地实际状态比较
+2. 如有冲突（文件不存在、接口变更、架构调整等），提示用户处理
+3. 无冲突则提交，并在提交后更新 `PROJECT_CONTEXT.md` 的相关条目
+
 ## 待办事项
 
 （在此记录后续开发计划）
