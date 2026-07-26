@@ -6,12 +6,6 @@
 
 用户选择数据集或输入文本/微信公众号 URL，一键生成可交互的 3D 概念地图 HTML。
 
-## 项目路径
-
-```
-C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\frontend\studio\
-```
-
 ## 关键文件
 
 | 文件 | 用途 |
