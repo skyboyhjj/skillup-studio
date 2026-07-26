@@ -2,9 +2,12 @@
 
 ## 项目概述
 
-**SkillUp Studio** — 莫比乌斯环概念地图生成器，部署于 [meta-skill.org](https://meta-skill.org)。
+**SkillUp Studio** — 莫比乌斯环概念地图生成器。
 
-用户选择数据集或输入文本/微信公众号 URL，一键生成可交互的 3D 概念地图 HTML。
+- [meta-skill.org/studio/](https://meta-skill.org/studio/) — 公开 demo，仅支持文本输入提取概念
+- [hui-skill.cn](https://hui-skill.cn) — 全功能平台，支持文本 + 微信公众号 URL 提取
+
+用户选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML。
 
 ## 关键文件
 
@@ -42,6 +45,24 @@ npx wrangler pages deploy . --project-name=meta-skill-studio --branch=main --com
 
 部署后注意 CDN 缓存，可能需要加版本参数或手动清除缓存才能看到新效果。
 
+## 站点架构
+
+两个站点共享同一个后端 API（121.41.215.36 / hui-skill.cn），前端各自独立部署：
+
+| 站点 | 部署 | 文本输入 | 微信公众号 URL | 预设数据集 |
+|------|------|----------|----------------|------------|
+| meta-skill.org/studio/ | Cloudflare Pages | ✅ | ❌ | ✅ |
+| hui-skill.cn/studio/ | 121.41.215.36 (Nginx) | ✅ | ✅ | ✅ |
+
+## API 架构
+
+meta-skill.org 前端 -> Cloudflare Pages Function (`functions/api/[[path]].js`) -> hui-skill.cn 后端
+hui-skill.cn 前端 -> 直连本机后端 (FastAPI)
+
+- meta-skill 代理层添加 `X-Domain-Role: demo` 头
+- 文本提取接口: `POST /api/studio/extract`（body: `{ text: "..." }`）
+- CORS 已配置为 `*`
+
 ## 已修复的问题
 
 ### 1. Cloudflare Pages Function 请求体转发
@@ -54,13 +75,9 @@ npx wrangler pages deploy . --project-name=meta-skill-studio --branch=main --com
 - **修复**: 为文本输入和 URL 输入添加互斥逻辑（输入时清空对方字段），并在模式切换时调用 `resetFreeInputState()` 复位标题、生成按钮和提取结果
 - **文件**: `index.html`
 
-## API 架构
-
-前端 -> Cloudflare Pages Function (`functions/api/[[path]].js`) -> hui-skill.cn 后端
-
-- 代理层添加 `X-Domain-Role: demo` 头
-- 微信公众号提取接口: `POST /api/studio/extract`（body: `{ url: "..." }`）
-- CORS 已配置为 `*`
+### 3. meta-skill.org 移除微信公众号 URL 输入
+- meta-skill.org 仅保留文本输入，微信公众号提取功能迁移到 hui-skill.cn
+- 移除 HTML 中的 URL 输入区域和相关 JS 逻辑（freeUrlInput DOM 引用、事件监听、互斥逻辑、URL 提取分支）
 
 ## 待办事项
 
