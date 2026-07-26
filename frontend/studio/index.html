@@ -145,7 +145,7 @@
     <div class="mode-panel" id="freePanel" style="display:none">
 
       <div class="free-input-section">
-        <label class="free-input-label">粘贴文本内容 <span class="quota-inline" id="quotaTextLabel">（今日剩余 5 次）</span></label>
+        <label class="free-input-label">粘贴文本内容</label>
         <textarea class="free-textarea" id="freeTextInput" placeholder="在此粘贴文章或文本内容（至少 50 字），系统将自动提取核心概念..."></textarea>
         <div class="free-text-count" id="freeTextCount">0 字</div>
       </div>
@@ -153,7 +153,7 @@
       <div class="or-divider"><span class="or-text">或输入微信公众号文章链接</span></div>
 
       <div class="free-input-section">
-        <label class="free-input-label">微信公众号文章 URL <span class="quota-inline" id="quotaUrlLabel">（今日剩余 5 次）</span></label>
+        <label class="free-input-label">微信公众号文章 URL</label>
         <div class="url-input-row">
           <input type="url" class="title-input url-input" id="freeUrlInput" placeholder="https://mp.weixin.qq.com/s/...">
           <button class="btn-extract" id="btnExtract">
@@ -620,46 +620,6 @@
   var modeTabs = document.getElementById('modeTabs');
   var extractBtnText = document.querySelector('.btn-extract-text');
   var extractBtnLoading = document.querySelector('.btn-extract-loading');
-  var quotaUrlLabel = document.getElementById('quotaUrlLabel');
-  var quotaTextLabel = document.getElementById('quotaTextLabel');
-
-  // Quota management
-  function fetchQuota() {
-    fetch('/api/studio/quota')
-      .then(function (r) { return r.json(); })
-      .then(function (q) {
-        updateQuotaDisplay(q.remaining_url, q.remaining_text);
-      })
-      .catch(function () {
-        // 静默失败，不影响主流程
-      });
-  }
-
-  function updateQuotaDisplay(remainingUrl, remainingText) {
-    quotaUrlLabel.textContent = '（今日剩余 ' + remainingUrl + ' 次）';
-    quotaTextLabel.textContent = '（今日剩余 ' + remainingText + ' 次）';
-
-    if (remainingUrl <= 0) {
-      quotaUrlLabel.classList.add('exhausted');
-    } else {
-      quotaUrlLabel.classList.remove('exhausted');
-    }
-
-    if (remainingText <= 0) {
-      quotaTextLabel.classList.add('exhausted');
-    } else {
-      quotaTextLabel.classList.remove('exhausted');
-    }
-  }
-
-  function updateQuotaFromResponse(result) {
-    if (result.remaining_url !== undefined && result.remaining_text !== undefined) {
-      updateQuotaDisplay(result.remaining_url, result.remaining_text);
-    }
-  }
-
-  // 初始加载配额
-  fetchQuota();
 
   // Mode switching
   modeTabs.querySelectorAll('.mode-tab').forEach(function (tab) {
@@ -670,22 +630,56 @@
       if (mode === 'preset') {
         presetPanel.style.display = '';
         freePanel.style.display = 'none';
-        // Restore generate button if preset data is loaded
+        // 从自由输入切换回模板时，复位自由输入的全部状态
+        resetFreeInputState();
+        freeTextInput.value = '';
+        freeUrlInput.value = '';
+        freeTextCount.textContent = '0 字';
+        // 如果有预设数据选中，恢复生成按钮
         btnGenerate.disabled = !currentData;
       } else {
         presetPanel.style.display = 'none';
         freePanel.style.display = '';
-        // Enable generate if we have extracted data
-        btnGenerate.disabled = !currentData;
-        // 刷新配额
-        fetchQuota();
+        // 进入自由输入时，复位之前的所有状态（包括预设数据）
+        currentData = null;
+        generatedHtml = null;
+        titleInput.value = '';
+        resultArea.classList.remove('show');
+        errorMsg.classList.remove('show');
+        btnGenerate.disabled = true;
+        // 取消所有预设卡片的选中
+        allCards.forEach(function (c) { c.classList.remove('selected'); });
       }
     });
   });
 
-  // Text character count
+  // 重置自由输入的全部下游状态（标题、提取结果、生成结果等）
+  function resetFreeInputState() {
+    currentData = null;
+    generatedHtml = null;
+    titleInput.value = '';
+    extractResult.style.display = 'none';
+    extractProgress.style.display = 'none';
+    resultArea.classList.remove('show');
+    errorMsg.classList.remove('show');
+    btnGenerate.disabled = true;
+  }
+
+  // Text character count + 互斥清空 + 连带复位：输入文字时清空 URL 并复位下游状态
   freeTextInput.addEventListener('input', function () {
     freeTextCount.textContent = freeTextInput.value.length + ' 字';
+    if (freeTextInput.value.length > 0 && freeUrlInput.value) {
+      freeUrlInput.value = '';
+      resetFreeInputState();
+    }
+  });
+
+  freeUrlInput.addEventListener('input', function () {
+    if (freeUrlInput.value.length > 0 && freeTextInput.value) {
+      freeTextInput.value = '';
+      freeTextCount.textContent = '0 字';
+      resetFreeInputState();
+    }
   });
 
   // Extract button
@@ -749,10 +743,6 @@
                 msg = '服务端处理超时，请稍后重试（AI 模型响应较慢）';
               }
             }
-            // 429 限流时刷新配额显示
-            if (r.status === 429) {
-              fetchQuota();
-            }
             throw new Error(msg);
           });
         }
@@ -764,9 +754,6 @@
         clearInterval(progressInterval);
         progressFill.style.width = '100%';
         progressText.textContent = '提取完成！';
-
-        // 更新配额显示
-        updateQuotaFromResponse(result);
 
         if (!result.success || !result.data) {
           throw new Error(result.error || '概念提取失败');

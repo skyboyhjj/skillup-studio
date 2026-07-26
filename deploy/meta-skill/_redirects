@@ -1,5 +1,4 @@
 # Cloudflare Pages 路由规则
-# 静态文件直接服务，/api/* 由 Worker 代理
+# 静态文件直接服务，/api/* 由 Functions 代理
 
 /  /studio/  302
-/api/*  https://121.41.215.36/api/:splat  200
