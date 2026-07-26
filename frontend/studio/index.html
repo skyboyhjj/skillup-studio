@@ -494,7 +494,7 @@
     }
 
     // Fetch template.html then build
-    fetch('./template.html')
+    fetch('./template.html?v=' + Date.now())
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status + ' - 无法加载 template.html');
         return r.text();

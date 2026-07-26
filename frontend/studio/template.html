@@ -20,6 +20,9 @@ canvas:active { cursor: grabbing; }
 #tooltip .tt-docs { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 6px; }
 #detail-panel { position: fixed; top: 0; right: -360px; width: 340px; height: 100%; background: rgba(10,10,26,0.95); border-left: 1px solid rgba(255,255,255,0.1); z-index: 30; padding: 40px 24px; color: #fff; transition: right 0.4s ease; overflow-y: auto; pointer-events: auto; }
 #detail-panel.open { right: 0; }
+/* 详情面板打开时，工具栏和音频区隐藏 */
+#detail-panel.open ~ #toolbar { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+#detail-panel.open ~ #audio-area { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 #detail-panel .dp-close { position: absolute; top: 12px; right: 16px; cursor: pointer; font-size: 22px; color: rgba(255,255,255,0.5); }
 #detail-panel h2 { font-size: 22px; margin-bottom: 12px; }
 #detail-panel .dp-desc { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
