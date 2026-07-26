@@ -59,6 +59,13 @@ wuxing_rules/test_*.json
 wuxing_rules/test_*.html
 wuxing_rules/*_莫比乌斯环.html
 
+# User uploads (not for deployment)
+.uploads/
+
+# Old deploy configs (moved to deploy/hui-skill/)
+deploy/nginx/
+deploy/postgres/
+
 # Archive
 *.tar.gz
 deploy-log.txt

@@ -810,42 +810,31 @@ body {
   text-align: right;
 }
 
-.url-input-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.url-input {
-  flex: 1;
-}
-
 .btn-extract {
-  flex-shrink: 0;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #4ECDC4, #3DBDB5);
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #4ECDC4;
   color: #0a0a1a;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   font-family: inherit;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-  min-width: 120px;
-  line-height: 1.5;
+  transition: all 0.3s ease;
 }
 
 .btn-extract:hover:not(:disabled) {
-  background: linear-gradient(135deg, #5de0d7, #4ECDC4);
-  box-shadow: 0 2px 12px rgba(78, 205, 196, 0.3);
+  background: #5de0d7;
+  box-shadow: 0 4px 24px rgba(78, 205, 196, 0.3);
   transform: translateY(-1px);
 }
 
 .btn-extract:disabled {
-  opacity: 0.5;
+  background: rgba(78, 205, 196, 0.3);
+  color: rgba(10, 10, 26, 0.5);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -1019,10 +1008,4 @@ body {
   .container {
     padding: 20px 16px 48px;
   }
-  .url-input-row {
-    flex-direction: column;
   }
-  .btn-extract {
-    width: 100%;
-  }
-}

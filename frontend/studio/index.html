@@ -146,17 +146,14 @@
 
       <div class="free-input-section">
         <label class="free-input-label">粘贴文本内容</label>
-        <textarea class="free-textarea" id="freeTextInput" placeholder="在此粘贴文章或文本内容（至少 50 字），系统将自动提取核心概念..."></textarea>
-        <div class="free-text-count" id="freeTextCount">0 字</div>
-        <div class="url-input-row" style="margin-top: 12px;">
-          <span></span>
-          <button class="btn-extract" id="btnExtract">
-            <span class="btn-extract-text">提取概念</span>
-            <span class="btn-extract-loading" style="display:none">
-              <span class="spinner"></span> 分析中...
-            </span>
-          </button>
-        </div>
+        <textarea class="free-textarea" id="freeTextInput" maxlength="5000" placeholder="在此粘贴文章或文本内容（50~5000 字），系统将自动提取核心概念..."></textarea>
+        <div class="free-text-count" id="freeTextCount">0 / 5000 字</div>
+        <button class="btn-extract" id="btnExtract" style="margin-top: 16px;">
+          <span class="btn-extract-text">提取概念</span>
+          <span class="btn-extract-loading" style="display:none">
+            <span class="spinner"></span> 分析中...
+          </span>
+        </button>
       </div>
 
       <!-- 提取进度 -->
@@ -626,7 +623,7 @@
         // 从自由输入切换回模板时，复位自由输入的全部状态
         resetFreeInputState();
         freeTextInput.value = '';
-        freeTextCount.textContent = '0 字';
+        freeTextCount.textContent = '0 / 5000 字';
         // 如果有预设数据选中，恢复生成按钮
         btnGenerate.disabled = !currentData;
       } else {
@@ -659,7 +656,7 @@
 
   // Text character count
   freeTextInput.addEventListener('input', function () {
-    freeTextCount.textContent = freeTextInput.value.length + ' 字';
+    freeTextCount.textContent = freeTextInput.value.length + ' / 5000 字';
   });
 
   // Extract button
