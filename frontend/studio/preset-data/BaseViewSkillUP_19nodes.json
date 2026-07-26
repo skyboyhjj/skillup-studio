@@ -1,0 +1,178 @@
+{
+  "title": "Base-View-SkillUP：一个让你越学越少的工具",
+  "domain": "general",
+  "rings": [
+    {
+      "label": "基础层",
+      "R": 200,
+      "w": 30,
+      "yOffset": 120,
+      "color": "#3498DB",
+      "concepts": [
+        {
+          "label": "加法思维",
+          "desc": "主流工具推崇的"多即是好"模式，通过不断叠加内容、功能与推荐导致注意力分散与认知过载。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "减法思维",
+          "desc": "源于《道德经》"为道日损"的理念，强调去除冗余信息与干扰，只保留真正重要的知识与支撑。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "慧根系统",
+          "desc": "基于《道德经》的AI数字伴侣，提供81章白话解读、精读分析等结构化内容，由人类导师注入体悟，非自动生成。",
+          "wuxing": "金",
+          "bagua": "☰乾",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "《道德经》",
+          "desc": "春秋时期老子所著经典，主张道法自然、无为而治，第四十八章的"为学日益，为道日损"成为减法学习的哲学根基。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "结构化整理",
+          "desc": "AI对经典文本进行分层、分类与标注，形成可纵深探索的知识框架，而非零散空泛的新内容。",
+          "wuxing": "金",
+          "bagua": "☰乾",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "体悟注入",
+          "desc": "人类导师将个人修行体验融入知识组织过程，使Base层的内容具有生命力与温度，区别于纯数据生成。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        }
+      ]
+    },
+    {
+      "label": "核心层",
+      "R": 150,
+      "w": 25,
+      "yOffset": 0,
+      "color": "#2ECC71",
+      "concepts": [
+        {
+          "label": "Base层",
+          "desc": "知识的土壤，只组织不生产，像一本翻过无数次却每次只在你需要时恰好翻到最需要的那一页的旧书。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "View层",
+          "desc": "智慧的翻译官，提供L1白话、L2精读、L3应用、L4学术四种深度，由用户自主选择而非算法推荐。",
+          "wuxing": "火",
+          "bagua": "☲离",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "SkillUP层",
+          "desc": "最安静的陪伴层，不评价不鼓励不推荐，默默记录阅读路径，在恰当时刻给予轻如呼吸的回应。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "L1-L4深度模型",
+          "desc": "将同一章《道德经》按白话、精读、应用、学术分级展开，匹配从儿童到学者的多元认知需求。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "成长四阶段",
+          "desc": "慧根将用户成长分为水滴、溪流、江河、江海，只升不降，象征积累与自化，替代分数与等级。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "学习闭环",
+          "desc": "Base-View-SkillUP三层形成无缝循环，读-悟-行自然流转，实现"日用而不觉"的持续精进。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "SkillUP理念",
+          "desc": "强调能力成长而非等级数字，关注每日更清晰的内在感知，践行"为道日损"的修行减法。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "恰到好处的陪伴",
+          "desc": "SkillUP层的设计哲学，在用户读完一章时轻轻共鸣一句，沉默陪伴远比频繁激励更滋养深度成长。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        }
+      ]
+    },
+    {
+      "label": "前沿层",
+      "R": 100,
+      "w": 20,
+      "yOffset": -120,
+      "color": "#9B59B6",
+      "concepts": [
+        {
+          "label": "概念地图可视化",
+          "desc": "位于meta-skill.org的可视化工具，将抽象知识网络化，辅助学习者构建心智中的莫比乌斯环式认知结构。",
+          "wuxing": "金",
+          "bagua": "☰乾",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "开源与社区",
+          "desc": "在GitHub开源核心设计方案，邀请共建SkillUP代码与设计，推动减法工具持续演化并落地生根。",
+          "wuxing": "木",
+          "bagua": "☳震",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "TS爱心社",
+          "desc": "探索爱的真谛、让爱自由表达的公益组织，承载Base-View-SkillUP核心设计，推动道德经亲子体验营落地。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "公益体验营",
+          "desc": "基于hui-skill.org的道德经亲子体验营，将减法学习的理念带入家庭场景，实现代际共读与智慧传承。",
+          "wuxing": "火",
+          "bagua": "☲离",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        },
+        {
+          "label": "逆向设计思维",
+          "desc": "从用户最不想要的干扰出发反向构建产品，以"不做什么"来定义工具边界，颠覆主流加法逻辑的惯性思维。",
+          "wuxing": "土",
+          "bagua": "☷坤",
+          "docs": "Base-View-SkillUP：一个让你越学越少的工具"
+        }
+      ]
+    }
+  ],
+  "emptiness": {
+    "sunyata": true,
+    "mirror": true,
+    "breath": true,
+    "wane": true,
+    "ascend": true,
+    "mirrorRadius": 120,
+    "breathPeriod": 10000,
+    "breathAmplitude": 15,
+    "fadeTarget": 0.15,
+    "ascendRatio": 0.2
+  }
+}
