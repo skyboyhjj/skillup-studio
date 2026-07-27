@@ -69,3 +69,13 @@ deploy/postgres/
 # Archive
 *.tar.gz
 deploy-log.txt
+
+# Wrangler cache
+.wrangler/
+frontend/studio/.wrangler/
+deploy/meta-skill/.wrangler/
+
+# Temp files
+*.bak-*
+*.zip
+问题说明.md

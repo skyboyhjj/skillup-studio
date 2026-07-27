@@ -20,8 +20,6 @@
 | `frontend/studio/preset-data/*.json` | 预设数据集（11 个） |
 | `frontend/studio/_redirects` | Cloudflare Pages 路由规则 |
 | `frontend/studio/functions/api/[[path]].js` | ⚠️ 已废弃 — 被 `_worker.js` 替代，API 代理逻辑已迁移 |
-| `deploy/meta-skill/worker.js` | ⚠️ 已废弃 — 独立 Worker，无法连接自定义域名，已迁移到 `_worker.js` |
-| `deploy/meta-skill/wrangler.toml` | Worker 部署配置（两个环境：default + production） |
 
 ## 预设数据集
 

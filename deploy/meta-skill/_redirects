@@ -1,4 +1,0 @@
-# Cloudflare Pages 路由规则
-# 静态文件直接服务，/api/* 由 Functions 代理
-
-/  /studio/  302
