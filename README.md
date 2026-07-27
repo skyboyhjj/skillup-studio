@@ -4,7 +4,7 @@
 
 ## 在线体验
 
-**[meta-skill.org/studio/](https://meta-skill.org/studio)**
+**[meta-skill.org/studio](https://meta-skill.org/studio)**
 
 ## 功能
 
