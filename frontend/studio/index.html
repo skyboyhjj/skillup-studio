@@ -146,8 +146,8 @@
 
       <div class="free-input-section">
         <label class="free-input-label">粘贴文本内容</label>
-        <textarea class="free-textarea" id="freeTextInput" placeholder="在此粘贴文章或文本内容（至少 50 字），系统将自动提取核心概念..."></textarea>
-        <div class="free-text-count" id="freeTextCount">0 字</div>
+        <textarea class="free-textarea" id="freeTextInput" maxlength="5000" placeholder="在此粘贴文章或文本内容（50~5000 字），系统将自动提取核心概念..."></textarea>
+        <div class="free-text-count" id="freeTextCount">0 / 5000 字</div>
       </div>
 
       <div class="extract-btn-row">
@@ -756,7 +756,7 @@ function getCropDims(srcW, srcH, ratioValue) {
         // 从自由输入切换回模板时，复位自由输入的全部状态
         resetFreeInputState();
         freeTextInput.value = '';
-        freeTextCount.textContent = '0 字';
+        freeTextCount.textContent = '0 / 5000 字';
         // 如果有预设数据选中，恢复生成按钮
         btnGenerate.disabled = !currentData;
       } else {
@@ -789,7 +789,7 @@ function getCropDims(srcW, srcH, ratioValue) {
 
   // Text character count
   freeTextInput.addEventListener('input', function () {
-    freeTextCount.textContent = freeTextInput.value.length + ' 字';
+    freeTextCount.textContent = freeTextInput.value.length + ' / 5000 字';
   });
 
   // Extract button
