@@ -858,14 +858,10 @@ body {
   text-align: right;
 }
 
-.url-input-row {
+.extract-btn-row {
   display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.url-input {
-  flex: 1;
+  justify-content: flex-end;
+  margin-top: 12px;
 }
 
 .btn-extract {
@@ -1067,8 +1063,8 @@ body {
   .container {
     padding: 20px 16px 48px;
   }
-  .url-input-row {
-    flex-direction: column;
+  .extract-btn-row {
+    justify-content: stretch;
   }
   .btn-extract {
     width: 100%;

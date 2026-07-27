@@ -35,6 +35,34 @@ export default {
       }
     }
 
-    return env.ASSETS.fetch(request);
+    // 根路径重定向到 /studio/
+    if (pathname === '/') {
+      return Response.redirect('https://meta-skill.org/studio/', 302);
+    }
+
+    // 去掉 /studio 前缀再转发到 Pages 资产
+    // Pages 项目根目录 = frontend/studio，所以 /studio/xxx → /xxx
+    let assetPath = pathname;
+    if (assetPath.startsWith('/studio')) {
+      assetPath = assetPath.replace(/^\/studio\/?/, '/');
+    }
+
+    // 优先使用 env.ASSETS（Pages Functions 部署），否则从 Pages 部署 URL 获取
+    if (env.ASSETS) {
+      const assetUrl = new URL(assetPath + url.search, url.origin);
+      return env.ASSETS.fetch(new Request(assetUrl, request));
+    }
+
+    const pagesUrl = env.PAGES_URL || 'https://meta-skill-studio.pages.dev';
+    const assetUrl = new URL(assetPath + url.search, pagesUrl);
+    const assetResp = await fetch(new Request(assetUrl, request));
+    // 添加调试头确认 Worker 被调用
+    const newHeaders = new Headers(assetResp.headers);
+    newHeaders.set('X-Debug-Worker', 'v2-fixed');
+    newHeaders.set('X-Asset-Path', assetPath);
+    return new Response(assetResp.body, {
+      status: assetResp.status,
+      headers: newHeaders,
+    });
   },
 };
