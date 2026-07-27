@@ -4,7 +4,7 @@
 
 **SkillUp Studio** — 莫比乌斯环概念地图生成器。
 
-- [meta-skill.org/studio/](https://meta-skill.org/studio/) — 公开 demo
+- [meta-skill.org/studio](https://meta-skill.org/studio) — 公开 demo
 
 用户选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML。
 
