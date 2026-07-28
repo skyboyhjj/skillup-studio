@@ -69,3 +69,4 @@ deploy/postgres/
 # Archive
 *.tar.gz
 deploy-log.txt
+.wrangler/

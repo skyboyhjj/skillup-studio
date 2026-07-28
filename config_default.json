@@ -1,0 +1,50 @@
+{
+  "_description": "五行诊断器权重配置文件示例。所有字段均为可选，未提供时使用内置默认值。",
+  "_version": "1.0",
+
+  "depth_weights": {
+    "_description": "认知深度权重。L4 学术解读的概念在统计中贡献更大。",
+    "L1": 1.0,
+    "L2": 2.0,
+    "L3": 3.0,
+    "L4": 4.0
+  },
+
+  "layer_weights": {
+    "_description": "三层权重。种子层=根基、核心层=论证、超越层=归宿。默认等权。",
+    "种子层": 1.0,
+    "核心层": 1.0,
+    "超越层": 1.0
+  },
+
+  "wuxing_bias": {
+    "_description": "五行偏好系数。>1.0 表示该行在熵计算中更敏感，<1.0 表示弱化。用于模拟不同流派的解读偏好。",
+    "木": 1.0,
+    "火": 1.0,
+    "土": 1.0,
+    "金": 1.0,
+    "水": 1.0
+  },
+
+  "entropy_thresholds": {
+    "_description": "熵值分类阈值。high 以上为'高度多元'，low 以下为'单极聚焦'。",
+    "high": 0.85,
+    "low": 0.50
+  },
+
+  "path_sensitivity": {
+    "_description": "路径敏感度。sheng_multiplier: 相生对路径节奏的放大系数，ke_multiplier: 相克对路径节奏的放大系数。",
+    "sheng_multiplier": 1.0,
+    "ke_multiplier": 1.0
+  },
+
+  "dominance_threshold": {
+    "_description": "主导判定的阈值。某项五行超过此百分比才判定为'主导'。",
+    "pct": 30.0
+  },
+
+  "scarcity_threshold": {
+    "_description": "稀缺判定的阈值。某项五行低于此百分比才判定为'显著缺失'。",
+    "pct": 10.0
+  }
+}

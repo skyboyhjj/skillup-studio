@@ -1,0 +1,9 @@
+{
+  "_description": "学术考据视角：强调 L4 学术深度 + 金水理性思维。适合研究经典文本的版本差异和跨文化比较。",
+  "depth_weights": {"L1": 0.5, "L2": 1.0, "L3": 2.0, "L4": 4.0},
+  "wuxing_bias": {"木": 0.8, "火": 0.5, "土": 1.0, "金": 1.5, "水": 1.5},
+  "layer_weights": {"种子层": 1.0, "核心层": 1.0, "超越层": 1.0},
+  "entropy_thresholds": {"high": 0.80, "low": 0.45},
+  "dominance_threshold": 25.0,
+  "scarcity_threshold": 8.0
+}

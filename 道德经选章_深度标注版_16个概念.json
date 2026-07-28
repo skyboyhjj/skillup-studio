@@ -1,0 +1,173 @@
+[
+  {
+    "label": "种子层 · 道体玄理",
+    "R": 200,
+    "w": 30,
+    "yOffset": 120,
+    "color": "#4ECDC4",
+    "concepts": [
+      {
+        "label": "道可道非常道",
+        "desc": "可言说的道不是恒常之道。",
+        "wuxing": "水",
+        "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"},
+        "cognitive_depth": "L2",
+        "bagua": "☵坎",
+        "id": "c1_1"
+      },
+      {
+        "label": "名可名非常名",
+        "desc": "可命名的名不是恒常之名。",
+        "wuxing": "金",
+        "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L2",
+        "bagua": "☰乾",
+        "id": "c1_2"
+      },
+      {
+        "label": "无名天地之始",
+        "desc": "无命名状态是天地未分之际的原初混沌。",
+        "wuxing": "水",
+        "wuxing_depth": {"L1": "水", "L2": "水", "L3": "水", "L4": "木"},
+        "cognitive_depth": "L2",
+        "bagua": "☵坎",
+        "id": "c1_3"
+      },
+      {
+        "label": "有名万物之母",
+        "desc": "命名之后万物分化显现。",
+        "wuxing": "木",
+        "wuxing_depth": {"L1": "木", "L2": "木", "L3": "木", "L4": "土"},
+        "cognitive_depth": "L2",
+        "bagua": "☳震",
+        "id": "c1_4"
+      },
+      {
+        "label": "常无观妙常有观徼",
+        "desc": "常从无中体察道的幽微，常从有中观察道的端倪。",
+        "wuxing": "水",
+        "wuxing_depth": {"L1": "水", "L2": "水", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L3",
+        "bagua": "☵坎",
+        "id": "c1_5"
+      },
+      {
+        "label": "玄之又玄众妙之门",
+        "desc": "无与有同出而异名，玄深又玄深。",
+        "wuxing": "水",
+        "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"},
+        "cognitive_depth": "L2",
+        "bagua": "☵坎",
+        "id": "c1_6"
+      }
+    ]
+  },
+  {
+    "label": "核心层 · 辩证与治理",
+    "R": 150,
+    "w": 25,
+    "yOffset": 0,
+    "color": "#FF6B6B",
+    "concepts": [
+      {
+        "label": "有无相生难易相成",
+        "desc": "有与无互相生成，难与易互相成就。",
+        "wuxing": "火",
+        "wuxing_depth": {"L1": "火", "L2": "火", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L3",
+        "bagua": "☲离",
+        "id": "c2_1"
+      },
+      {
+        "label": "长短相形高下相倾",
+        "desc": "长与短通过比较呈现，高与低通过倾斜对照。",
+        "wuxing": "金",
+        "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L2",
+        "bagua": "☱兑",
+        "id": "c2_2"
+      },
+      {
+        "label": "处无为之事行不言之教",
+        "desc": "圣人以无为处事，以不言施教。",
+        "wuxing": "土",
+        "wuxing_depth": {"L1": "土", "L2": "土", "L3": "木", "L4": "土"},
+        "cognitive_depth": "L3",
+        "bagua": "☷坤",
+        "id": "c2_3"
+      },
+      {
+        "label": "功成弗居",
+        "desc": "事情做成了不占有功劳。",
+        "wuxing": "金",
+        "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L2",
+        "bagua": "☰乾",
+        "id": "c2_4"
+      },
+      {
+        "label": "不尚贤使民不争",
+        "desc": "不推崇贤能之名，人民就不会起争夺之心。",
+        "wuxing": "水",
+        "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"},
+        "cognitive_depth": "L3",
+        "bagua": "☵坎",
+        "id": "c3_1"
+      },
+      {
+        "label": "为无为则无不治",
+        "desc": "以无为的方式去作为，就没有治理不好的。",
+        "wuxing": "土",
+        "wuxing_depth": {"L1": "土", "L2": "土", "L3": "木", "L4": "土"},
+        "cognitive_depth": "L3",
+        "bagua": "☷坤",
+        "id": "c3_2"
+      }
+    ]
+  },
+  {
+    "label": "超越层 · 理想与智慧",
+    "R": 100,
+    "w": 20,
+    "yOffset": -120,
+    "color": "#FFD93D",
+    "concepts": [
+      {
+        "label": "小国寡民",
+        "desc": "理想社会：简单、自足、宁静。",
+        "wuxing": "土",
+        "wuxing_depth": {"L1": "土", "L2": "土", "L3": "土", "L4": "木"},
+        "cognitive_depth": "L2",
+        "bagua": "☷坤",
+        "id": "c80_1"
+      },
+      {
+        "label": "信言不美美言不信",
+        "desc": "真实的话不华美，华美的话不真实。",
+        "wuxing": "金",
+        "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"},
+        "cognitive_depth": "L2",
+        "bagua": "☰乾",
+        "id": "c81_1"
+      },
+      {
+        "label": "天之道利而不害",
+        "desc": "天道运行利益万物而不伤害。",
+        "wuxing": "土",
+        "wuxing_depth": {"L1": "土", "L2": "土", "L3": "水", "L4": "水"},
+        "cognitive_depth": "L3",
+        "bagua": "☷坤",
+        "id": "c81_2"
+      },
+      {
+        "label": "为而不争",
+        "desc": "圣人行事施为而不争夺。",
+        "wuxing": "木",
+        "wuxing_depth": {"L1": "木", "L2": "木", "L3": "木", "L4": "土"},
+        "cognitive_depth": "L3",
+        "bagua": "☴巽",
+        "id": "c81_3"
+      }
+    ]
+  }
+]

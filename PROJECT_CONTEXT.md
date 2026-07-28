@@ -55,17 +55,18 @@ npx wrangler pages deploy . --project-name=meta-skill-studio --branch=main --com
 
 部署后注意 CDN 缓存，可能需要加版本参数或手动清除缓存才能看到新效果。
 
-### hui-skill.cn (服务器 Nginx)
+### 本地开发 (localhost)
 
-```powershell
-# 仅部署前端
-.\deploy\hui-skill\deploy.ps1
+本地开发必须用 `wrangler pages dev` 启动，它会运行 `_worker.js` 代理 API 请求。普通静态服务器（如 `npx serve`）缺少 API 代理会导致跨域。
 
-# 完整部署（前端 + Nginx 配置）
-.\deploy\hui-skill\deploy.ps1 -full
+```bash
+cd frontend/studio
+npx wrangler pages dev . --port 10081
 ```
 
-前置: 已配置 SSH 密钥到 `root@121.41.215.36`（见 `deploy.ps1` 顶部注释）。
+访问地址: `http://127.0.0.1:10081/studio/`
+
+如需在本地其他目录独立运行，可将 `frontend/studio/` 下的文件拷贝到目标目录，配合 `npx serve` 等静态服务器使用（需额外处理 API 代理，不再推荐）。
 
 ## 站点架构
 

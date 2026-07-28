@@ -1,0 +1,9 @@
+{
+  "_description": "实践应用视角：强调 L3 应用深度 + 木火行动导向。适合将经典智慧转化为可操作的实践框架。",
+  "depth_weights": {"L1": 1.0, "L2": 1.5, "L3": 4.0, "L4": 1.0},
+  "wuxing_bias": {"木": 1.5, "火": 1.5, "土": 1.0, "金": 0.8, "水": 0.5},
+  "layer_weights": {"种子层": 0.6, "核心层": 1.5, "超越层": 1.0},
+  "entropy_thresholds": {"high": 0.85, "low": 0.50},
+  "dominance_threshold": 30.0,
+  "scarcity_threshold": 10.0
+}
