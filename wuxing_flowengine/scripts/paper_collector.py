@@ -29,6 +29,7 @@ ARXIV_CATEGORIES = [
     "cs.AI",    # 人工智能
     "cs.CL",    # 计算语言学 / NLP
     "cs.CV",    # 计算机视觉
+    "cs.HC",    # 人机交互
     "cs.LG",    # 机器学习
     "cs.RO",    # 机器人学
     "cs.CR",    # 密码学与安全
