@@ -2,10 +2,11 @@
 """
 边生成器：为知识树快照自动生成跨领域关系边。
 
-三层策略:
-  第一层 — 关键词重叠：计算任意两个领域间 L3 节点名的关键词重叠率
-  第二层 — 共享节点名：检测跨领域同名/近名节点，建立共享关系
-  第三层 — LLM 推理：调用 LLM 判断领域间是否存在方法依赖/应用关系（可选）
+四层策略:
+  第一层 — 节点级关键词倒排索引：对每个 L3 节点提取关键词，同一关键词跨越 ≥2 领域的节点间建立边
+  第二层 — 领域级关键词重叠：计算任意两个领域间的关键词 Jaccard 相似度，超阈值则建立 RELATES_TO 边
+  第三层 — 共享节点名：检测跨领域同名/近名节点，建立 SHARES_CONCEPT 边
+  第四层 — LLM 推理：调用 LLM 判断领域间是否存在方法依赖/应用关系（可选）
 
 目标: 将边密度从 0.99 提升至 ≥ 1.5。
 
@@ -124,6 +125,72 @@ def name_similarity(name_a, name_b):
     return SequenceMatcher(None, name_a, name_b).ratio()
 
 
+def generate_node_keyword_index_edges(domain_nodes, min_domains=2):
+    """
+    第一层：节点级关键词倒排索引边（主引擎）。
+    对每个 L3 节点提取关键词，构建倒排索引 keyword → [(node_id, domain)]。
+    同一关键词出现在 ≥2 个不同领域的节点中时，为这些节点建立跨域边。
+    一对节点只保留一条边（合并共享关键词列表）。
+    """
+    # 构建倒排索引
+    inverted = defaultdict(list)  # keyword → [(node_id, node_name, domain)]
+    for domain, nodes in domain_nodes.items():
+        for n in nodes:
+            kw_set = extract_keywords_from_node(n)
+            for kw in kw_set:
+                inverted[kw].append((n["id"], n["name"], domain))
+
+    # 为每个关键词，找到跨域节点对，建立边
+    pair_edges = defaultdict(lambda: {"shared_kw": set(), "nodes": set(), "domains": set()})
+    # pair_key = frozenset([node_id_a, node_id_b])
+
+    stats = []
+    for kw, entries in inverted.items():
+        # 检查是否跨域
+        domains_present = set(e[2] for e in entries)
+        if len(domains_present) < min_domains:
+            continue
+
+        # 为同一关键词下的所有跨域节点对建立边
+        for i, (nid_a, name_a, dom_a) in enumerate(entries):
+            for j in range(i + 1, len(entries)):
+                nid_b, name_b, dom_b = entries[j]
+                if dom_a == dom_b:
+                    continue  # 跳过同域内的边
+
+                pair_key = frozenset([nid_a, nid_b])
+                pair_edges[pair_key]["shared_kw"].add(kw)
+                pair_edges[pair_key]["nodes"].add((nid_a, name_a))
+                pair_edges[pair_key]["nodes"].add((nid_b, name_b))
+                pair_edges[pair_key]["domains"].add(dom_a)
+                pair_edges[pair_key]["domains"].add(dom_b)
+
+    # 组装边
+    edges = []
+    for pair_key, data in pair_edges.items():
+        nodes_list = list(data["nodes"])
+        if len(nodes_list) >= 2:
+            shared_kw = sorted(data["shared_kw"])
+            edges.append({
+                "source_id": nodes_list[0][0],
+                "target_id": nodes_list[1][0],
+                "relation": "RELATES_TO",
+                "source": "node_keyword_index",
+                "weight": round(len(shared_kw) / 10, 4),  # 归一化权重
+                "shared_keywords": shared_kw,
+                "shared_count": len(shared_kw),
+                "domains": sorted(data["domains"]),
+            })
+            stats.append({
+                "domains": " ↔ ".join(sorted(data["domains"])),
+                "nodes": " ↔ ".join(n[1] for n in nodes_list[:2]),
+                "shared_kw": len(shared_kw),
+                "top_kw": shared_kw[:5],
+            })
+
+    return edges, sorted(stats, key=lambda x: -x["shared_kw"])
+
+
 def generate_keyword_overlap_edges(domain_nodes, domain_level2, threshold=0.08):
     """
     第一层：关键词重叠边。
@@ -164,10 +231,10 @@ def generate_keyword_overlap_edges(domain_nodes, domain_level2, threshold=0.08):
     return edges, sorted(stats, key=lambda x: -x["similarity"])
 
 
-def generate_shared_concept_edges(domain_nodes, domain_level2, name_threshold=0.85):
+def generate_shared_concept_edges(domain_nodes, name_threshold=0.75):
     """
-    第二层：共享节点名边。
-    检测跨领域同名或近名节点，建立 SHARES_CONCEPT 边。
+    第三层：共享节点名边（L3 节点级）。
+    检测跨领域同名、近名或子串匹配节点，建立 SHARES_CONCEPT 边。
     """
     domain_names = sorted(domain_nodes.keys())
     edges = []
@@ -180,27 +247,34 @@ def generate_shared_concept_edges(domain_nodes, domain_level2, name_threshold=0.
 
             for na in nodes_a:
                 for nb in nodes_b:
+                    # 名称相似度
                     sim = name_similarity(na["name"], nb["name"])
-                    if sim >= name_threshold:
-                        src_id = domain_level2.get(da, {}).get("id", "")
-                        tgt_id = domain_level2.get(db, {}).get("id", "")
+                    # 子串匹配：一个名字包含另一个
+                    substr_match = (na["name"] in nb["name"] or nb["name"] in na["name"])
+                    # 词语级匹配：至少 2 个共享词（中文分词简化：按常见分隔符切分）
+                    words_a = set(re.split(r"[-—·/、，, ]+", na["name"]))
+                    words_b = set(re.split(r"[-—·/、，, ]+", nb["name"]))
+                    shared_words = words_a & words_b - {""}
+                    word_match = len(shared_words) >= 2
 
-                        if src_id and tgt_id:
-                            edges.append({
-                                "source_id": src_id,
-                                "target_id": tgt_id,
-                                "relation": "SHARES_CONCEPT",
-                                "source": "shared_concept",
-                                "concept_name": na["name"] if sim >= 0.95 else f"{na['name']} ~ {nb['name']}",
-                                "similarity": round(sim, 4),
-                                "node_a": na["name"],
-                                "node_b": nb["name"]
-                            })
-                            stats.append({
-                                "domains": f"{da} ↔ {db}",
-                                "concept": na["name"] if sim >= 0.95 else f"{na['name']} ≈ {nb['name']}",
-                                "similarity": round(sim, 4)
-                            })
+                    if sim >= name_threshold or substr_match or word_match:
+                        edges.append({
+                            "source_id": na["id"],
+                            "target_id": nb["id"],
+                            "relation": "SHARES_CONCEPT",
+                            "source": "shared_concept",
+                            "concept_name": na["name"] if sim >= 0.95 else f"{na['name']} ~ {nb['name']}",
+                            "similarity": round(max(sim, 0.95 if substr_match else 0.0), 4),
+                            "node_a": na["name"],
+                            "node_b": nb["name"],
+                            "match_type": "exact" if sim >= 0.95 else ("substring" if substr_match else "word_overlap"),
+                        })
+                        stats.append({
+                            "domains": f"{da} ↔ {db}",
+                            "concept": na["name"] if sim >= 0.95 else f"{na['name']} ≈ {nb['name']}",
+                            "similarity": round(sim, 4),
+                            "match_type": "exact" if sim >= 0.95 else ("substring" if substr_match else "word_overlap"),
+                        })
 
     return edges, stats
 
@@ -236,36 +310,49 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
     print(f"  节点: {len(nodes)} (领域: {len(domain_nodes)})")
     print(f"  现有边: {len(existing_edges)} (含 contains 层级边)")
 
-    # ── 第一层：关键词重叠 ──
+    # ── 第一层：节点级关键词倒排索引（主引擎）──
     print(f"\n{'─' * 50}")
-    print(f"  第一层：关键词重叠（Jaccard 相似度 ≥ 0.08）")
+    print(f"  第一层：节点级关键词倒排索引（跨域 ≥2 领域）")
+    print(f"{'─' * 50}")
+
+    index_edges, index_stats = generate_node_keyword_index_edges(domain_nodes)
+    print(f"  生成 {len(index_edges)} 条 RELATES_TO 边（节点级）")
+    for s in index_stats[:10]:
+        print(f"    {s['domains']:<45s} kw={s['shared_kw']}  top={s['top_kw']}")
+
+    if len(index_stats) > 10:
+        print(f"    ... 还有 {len(index_stats) - 10} 条")
+
+    # ── 第二层：领域级关键词重叠（补充）──
+    print(f"\n{'─' * 50}")
+    print(f"  第二层：领域级关键词重叠（Jaccard 相似度 ≥ 0.08）")
     print(f"{'─' * 50}")
 
     kw_edges, kw_stats = generate_keyword_overlap_edges(domain_nodes, domain_level2)
-    print(f"  生成 {len(kw_edges)} 条 RELATES_TO 边")
-    for s in kw_stats[:10]:
+    print(f"  生成 {len(kw_edges)} 条 RELATES_TO 边（领域级）")
+    for s in kw_stats[:5]:
         print(f"    {s['domains']:<30s} sim={s['similarity']:.4f}  shared={s['shared_kw']}  top={s['top_shared']}")
 
-    if len(kw_stats) > 10:
-        print(f"    ... 还有 {len(kw_stats) - 10} 对")
-
-    # ── 第二层：共享节点名 ──
+    # ── 第三层：共享节点名 ──
     print(f"\n{'─' * 50}")
-    print(f"  第二层：共享节点名（名称相似度 ≥ 0.85）")
+    print(f"  第三层：共享节点名（名称相似度 ≥ 0.75 / 子串 / 词语重叠）")
     print(f"{'─' * 50}")
 
-    sc_edges, sc_stats = generate_shared_concept_edges(domain_nodes, domain_level2)
+    sc_edges, sc_stats = generate_shared_concept_edges(domain_nodes)
     print(f"  生成 {len(sc_edges)} 条 SHARES_CONCEPT 边")
-    for s in sc_stats[:15]:
-        print(f"    {s['domains']:<30s} {s['concept']} (sim={s['similarity']:.4f})")
+    # 按 match_type 分组统计
+    match_types = Counter(s.get("match_type", "?") for s in sc_stats)
+    print(f"    精确匹配: {match_types.get('exact', 0)}  子串: {match_types.get('substring', 0)}  词语重叠: {match_types.get('word_overlap', 0)}")
+    for s in sc_stats[:10]:
+        print(f"    {s['domains']:<30s} {s['concept']} ({s.get('match_type', '?')})")
 
-    if len(sc_stats) > 15:
-        print(f"    ... 还有 {len(sc_stats) - 15} 条")
+    if len(sc_stats) > 10:
+        print(f"    ... 还有 {len(sc_stats) - 10} 条")
 
     # ── 合并 & 去重 ──
-    all_new_edges = kw_edges + sc_edges
+    all_new_edges = index_edges + kw_edges + sc_edges
 
-    # 去重：同一对 domain 只保留一条最高权重的边
+    # 去重：同一对节点只保留一条最高权重的边
     seen_pairs = set()
     deduped = []
     for e in sorted(all_new_edges, key=lambda x: -x.get("weight", 1.0)):
@@ -283,13 +370,14 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
     print(f"\n{'─' * 50}")
     print(f"  汇总")
     print(f"{'─' * 50}")
-    print(f"  关键词重叠边: {len(kw_edges)}")
-    print(f"  共享节点边:   {len(sc_edges)}")
-    print(f"  去重后新增:   {len(deduped)}")
-    print(f"  原有边:       {total_before}")
-    print(f"  合并后总边:   {total_after}")
-    print(f"  边密度:       {edge_ratio_before:.2f} → {edge_ratio_after:.2f}")
-    print(f"  min=1.5:      {'✅ 达标' if edge_ratio_after >= 1.5 else '⚠️ 未达标 (' + str(round(1.5 - edge_ratio_after, 2)) + ' 差距)'}")
+    print(f"  节点级关键词边: {len(index_edges)}")
+    print(f"  领域级关键词边: {len(kw_edges)}")
+    print(f"  共享节点边:     {len(sc_edges)}")
+    print(f"  去重后新增:     {len(deduped)}")
+    print(f"  原有边:         {total_before}")
+    print(f"  合并后总边:     {total_after}")
+    print(f"  边密度:         {edge_ratio_before:.2f} → {edge_ratio_after:.2f}")
+    print(f"  min=1.5:        {'✅ 达标' if edge_ratio_after >= 1.5 else '⚠️ 未达标 (' + str(round(1.5 - edge_ratio_after, 2)) + ' 差距)'}")
 
     if dry_run:
         print(f"\n  [DRY RUN] 未写入文件")
@@ -297,6 +385,7 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
             "status": "ok",
             "dry_run": True,
             "stats": {
+                "index_edges": len(index_edges),
                 "kw_edges": len(kw_edges),
                 "sc_edges": len(sc_edges),
                 "total_new": len(deduped),
@@ -307,6 +396,7 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
                 "meets_target": edge_ratio_after >= 1.5,
             },
             "new_edges": deduped,
+            "index_stats": index_stats,
             "kw_stats": kw_stats,
             "sc_stats": sc_stats,
         }
@@ -319,8 +409,9 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
     if isinstance(raw, dict):
         raw["edges"] = existing_edges + deduped
         raw["edge_generation"] = {
-            "method": "keyword_overlap + shared_concept",
+            "method": "node_keyword_index + domain_keyword_overlap + shared_concept",
             "generated_at": __import__("datetime").datetime.now().isoformat(),
+            "index_edges": len(index_edges),
             "kw_edges": len(kw_edges),
             "sc_edges": len(sc_edges),
             "total_new": len(deduped),
@@ -333,8 +424,9 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
             "nodes": raw,
             "edges": existing_edges + deduped,
             "edge_generation": {
-                "method": "keyword_overlap + shared_concept",
+                "method": "node_keyword_index + domain_keyword_overlap + shared_concept",
                 "generated_at": __import__("datetime").datetime.now().isoformat(),
+                "index_edges": len(index_edges),
                 "kw_edges": len(kw_edges),
                 "sc_edges": len(sc_edges),
                 "total_new": len(deduped),
@@ -352,6 +444,7 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
     return {
         "status": "ok",
         "stats": {
+            "index_edges": len(index_edges),
             "kw_edges": len(kw_edges),
             "sc_edges": len(sc_edges),
             "total_new": len(deduped),
@@ -362,6 +455,7 @@ def run(base_dir, snapshot_path=None, dry_run=False, output_path=None):
             "meets_target": edge_ratio_after >= 1.5,
         },
         "new_edges": deduped,
+        "index_stats": index_stats,
         "kw_stats": kw_stats,
         "sc_stats": sc_stats,
     }

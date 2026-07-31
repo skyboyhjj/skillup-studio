@@ -110,7 +110,34 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
                 break
     phases = {}
 
-    # ── Step 0: 数据验证 ──
+    # ── Step 0: 论文采集（arXiv API）──
+    if not skip_collection:
+        print("\n" + "-" * 60)
+        print("  [Step 0] 论文采集：arXiv API")
+        print("-" * 60)
+
+        from paper_collector import run as run_collector
+
+        collect_result = run_collector(
+            base_dir=base_dir,
+            month_label=month_label,
+            max_results=config.get("paper_collection", {}).get("max_results", 500),
+            dry_run=False
+        )
+        phases["paper_collection"] = {
+            "status": collect_result["status"],
+            "count": collect_result.get("count", 0),
+            "output_path": collect_result.get("output_path", "")
+        }
+
+        # 更新 paper_titles_path
+        if collect_result.get("output_path"):
+            paper_titles_path = collect_result["output_path"]
+    else:
+        print("\n  [Step 0] 论文采集: 跳过（--skip-collection）")
+        phases["paper_collection"] = {"status": "skipped"}
+
+    # ── Step 0.5: 数据验证 ──
     if not skip_validation:
         print("\n" + "-" * 60)
         print("  [Step 0] 数据质量验证")
@@ -149,9 +176,29 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
             print("  跳过验证，继续执行分析...")
             phases["validation"] = {"passed": False, "warning": "快照缺失"}
 
-    # ── Step 1: Phase 1 静态诊断 ──
+    # ── Step 1: 边生成（提升边密度至 ≥ 1.5）──
     print("\n" + "-" * 60)
-    print("  [Step 1] Phase 1: 静态诊断")
+    print("  [Step 1] 边生成：跨领域关键词倒排索引 + 共享节点名")
+    print("-" * 60)
+
+    from edge_generator import run as run_edge_gen
+
+    edge_result = run_edge_gen(
+        base_dir=base_dir,
+        snapshot_path=snapshot_path,
+        dry_run=False,
+        output_path=snapshot_path  # 原地更新快照
+    )
+    phases["edge_generation"] = {"status": edge_result["status"], "stats": edge_result["stats"]}
+
+    # 重新加载快照（边已更新）
+    if os.path.exists(snapshot_path):
+        with open(snapshot_path, "r", encoding="utf-8") as f:
+            snapshot = json.load(f)
+
+    # ── Step 2: Phase 1 静态诊断 ──
+    print("\n" + "-" * 60)
+    print("  [Step 2] Phase 1: 静态诊断")
     print("-" * 60)
 
     from phase1_pipeline import run as run_phase1
@@ -166,9 +213,9 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
     )
     phases["phase1"] = {"status": p1_result["status"], "outputs": p1_result["outputs"]}
 
-    # ── Step 2: Phase 2 双层标注 + 三轨 ──
+    # ── Step 3: Phase 2 双层标注 + 三轨 ──
     print("\n" + "-" * 60)
-    print("  [Step 2] Phase 2: 双层标注 + 三轨计算")
+    print("  [Step 3] Phase 2: 双层标注 + 三轨计算")
     print("-" * 60)
 
     from phase2_pipeline import run as run_phase2
@@ -182,9 +229,9 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
     )
     phases["phase2"] = {"status": p2_result["status"], "outputs": p2_result["outputs"]}
 
-    # ── Step 3: Phase 3+ 论文动态分析 ──
+    # ── Step 4: Phase 3+ 论文动态分析 ──
     print("\n" + "-" * 60)
-    print("  [Step 3] Phase 3+: 论文五行分类 + 结构-活跃度对比")
+    print("  [Step 4] Phase 3+: 论文五行分类 + 结构-活跃度对比")
     print("-" * 60)
 
     from phase3_plus_pipeline import run as run_phase3
@@ -199,13 +246,13 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
     )
     phases["phase3_plus"] = {"status": p3_result["status"], "outputs": p3_result["outputs"]}
 
-    # ── Step 4: 时间序列分析（如果有上月数据）──
+    # ── Step 5: 时间序列分析（如果有上月数据）──
     prev_label = get_previous_month_label(month_label)
     prev_papers = find_previous_paper_titles(base_dir, prev_label) if prev_label else None
 
     if prev_papers and p3_result["status"] == "ok":
         print("\n" + "-" * 60)
-        print(f"  [Step 4] 时间序列分析: {prev_label} → {month_label}")
+        print(f"  [Step 5] 时间序列分析: {prev_label} → {month_label}")
         print("-" * 60)
 
         from timeseries_analysis import run as run_timeseries
@@ -220,12 +267,12 @@ def run_pipeline(base_dir, month_label=None, skip_collection=False, skip_validat
         )
         phases["timeseries"] = {"status": ts_result["status"], "outputs": ts_result["outputs"]}
     else:
-        print(f"\n  [Step 4] 时间序列分析: 跳过（无上月数据: {prev_label}）")
+        print(f"\n  [Step 5] 时间序列分析: 跳过（无上月数据: {prev_label}）")
         phases["timeseries"] = {"status": "skipped", "reason": "no_previous_data"}
 
-    # ── Step 5: 生成汇总报告 ──
+    # ── Step 6: 生成汇总报告 ──
     print("\n" + "-" * 60)
-    print("  [Step 5] 生成月度汇总报告")
+    print("  [Step 6] 生成月度汇总报告")
     print("-" * 60)
 
     summary = build_summary(phases, month_label, prev_label)

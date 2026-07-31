@@ -4524,6 +4524,5402 @@
       "source_id": "node_131",
       "target_id": "node_302",
       "relation": "contains"
+    },
+    {
+      "source_id": "node_043",
+      "target_id": "node_116",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "机械臂运动学与动力学建模 ~ 机器人运动学与动力学建模",
+      "similarity": 0.8333,
+      "node_a": "机械臂运动学与动力学建模",
+      "node_b": "机器人运动学与动力学建模",
+      "match_type": "word_overlap"
+    },
+    {
+      "source_id": "node_046",
+      "target_id": "node_120",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "模仿学习与示教学习 ~ 模仿学习",
+      "similarity": 0.95,
+      "node_a": "模仿学习与示教学习",
+      "node_b": "模仿学习",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_038",
+      "target_id": "node_138",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "逆最优控制 ~ 逆最优控制与模仿学习",
+      "similarity": 0.95,
+      "node_a": "逆最优控制",
+      "node_b": "逆最优控制与模仿学习",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_060",
+      "target_id": "node_006",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "视觉语言模型参数高效微调 ~ 参数高效微调",
+      "similarity": 0.95,
+      "node_a": "视觉语言模型参数高效微调",
+      "node_b": "参数高效微调",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_060",
+      "target_id": "node_190",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "视觉语言模型参数高效微调 ~ 语言模型",
+      "similarity": 0.95,
+      "node_a": "视觉语言模型参数高效微调",
+      "node_b": "语言模型",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_018",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "跨模态检索增强生成 ~ 检索增强生成",
+      "similarity": 0.95,
+      "node_a": "跨模态检索增强生成",
+      "node_b": "检索增强生成",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_004",
+      "target_id": "node_133",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "人类反馈强化学习 ~ 强化学习",
+      "similarity": 0.95,
+      "node_a": "人类反馈强化学习",
+      "node_b": "强化学习",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_008",
+      "target_id": "node_182",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "混合专家模型架构 ~ 混合专家模型",
+      "similarity": 0.95,
+      "node_a": "混合专家模型架构",
+      "node_b": "混合专家模型",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_262",
+      "target_id": "node_190",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "冷启动推荐因果语言模型检索 ~ 语言模型",
+      "similarity": 0.95,
+      "node_a": "冷启动推荐因果语言模型检索",
+      "node_b": "语言模型",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_268",
+      "target_id": "node_190",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "大语言模型驱动的内容理解 ~ 语言模型",
+      "similarity": 0.95,
+      "node_a": "大语言模型驱动的内容理解",
+      "node_b": "语言模型",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_120",
+      "target_id": "node_138",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "模仿学习 ~ 逆最优控制与模仿学习",
+      "similarity": 0.95,
+      "node_a": "模仿学习",
+      "node_b": "逆最优控制与模仿学习",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_189",
+      "target_id": "node_122",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "扩散模型 ~ 扩散模型核心演进",
+      "similarity": 0.95,
+      "node_a": "扩散模型",
+      "node_b": "扩散模型核心演进",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_157",
+      "target_id": "node_224",
+      "relation": "SHARES_CONCEPT",
+      "source": "shared_concept",
+      "concept_name": "Transformer ~ 视觉Transformer加速",
+      "similarity": 0.95,
+      "node_a": "Transformer",
+      "node_b": "视觉Transformer加速",
+      "match_type": "substring"
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "图像",
+        "文本"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "文本",
+        "视频"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_066",
+      "target_id": "node_010",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "幻觉",
+        "幻觉检测"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_015",
+      "target_id": "node_066",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "幻觉",
+        "幻觉检测"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_267",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "检索",
+        "语义"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_271",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "检索",
+        "语义"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_271",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "检索",
+        "稠密检索"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "生成",
+        "视频"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_214",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "生成",
+        "生成式"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "安全可信与伦理",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_269",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "生成",
+        "生成式"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_269",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "生成",
+        "生成式"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "安全可信与伦理",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "语言",
+        "迁移"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_212",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "水印",
+        "溯源"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "安全可信与伦理",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_126",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "图像",
+        "图像编辑"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_145",
+      "target_id": "node_279",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.2,
+      "shared_keywords": [
+        "分布式",
+        "分布式训练"
+      ],
+      "shared_count": 2,
+      "domains": [
+        "AI系统与硬件",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_056",
+      "target_id": "node_002",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.14,
+      "shared_keywords": [
+        "幻觉",
+        "幻觉检测",
+        "微调",
+        "思维链",
+        "推理",
+        "文本",
+        "评估"
+      ],
+      "shared_count": 7
+    },
+    {
+      "source_id": "node_242",
+      "target_id": "node_257",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.1379,
+      "shared_keywords": [
+        "个性化",
+        "检索",
+        "系统",
+        "评估"
+      ],
+      "shared_count": 4
+    },
+    {
+      "source_id": "node_257",
+      "target_id": "node_017",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.1364,
+      "shared_keywords": [
+        "架构",
+        "检索",
+        "生成",
+        "稠密检索",
+        "语义",
+        "语言"
+      ],
+      "shared_count": 6
+    },
+    {
+      "source_id": "node_056",
+      "target_id": "node_017",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.1356,
+      "shared_keywords": [
+        "基准",
+        "文本",
+        "检索",
+        "检索增强生成",
+        "生成",
+        "自动化",
+        "语言",
+        "迁移"
+      ],
+      "shared_count": 8
+    },
+    {
+      "source_id": "node_056",
+      "target_id": "node_121",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.1277,
+      "shared_keywords": [
+        "图像",
+        "图像编辑",
+        "文本",
+        "生成",
+        "视频",
+        "迁移"
+      ],
+      "shared_count": 6
+    },
+    {
+      "source_id": "node_036",
+      "target_id": "node_089",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.1176,
+      "shared_keywords": [
+        "机器人",
+        "模仿学习"
+      ],
+      "shared_count": 2
+    },
+    {
+      "source_id": "node_003",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "微调"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_198",
+      "target_id": "node_003",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "微调"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_198",
+      "target_id": "node_006",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "微调"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_198",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "微调"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_135",
+      "target_id": "node_004",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_136",
+      "target_id": "node_004",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_004",
+      "target_id": "node_137",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_004",
+      "target_id": "node_199",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_004",
+      "target_id": "node_200",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_201",
+      "target_id": "node_004",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "强化学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_007",
+      "target_id": "node_245",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "量化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_008",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_140",
+      "target_id": "node_008",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_008",
+      "target_id": "node_203",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_008",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_008",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_012",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_140",
+      "target_id": "node_012",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_012",
+      "target_id": "node_203",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_012",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_012",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_140",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_203",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_273",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_029",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_140",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_140",
+      "target_id": "node_283",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_273",
+      "target_id": "node_203",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_203",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "架构"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_009",
+      "target_id": "node_030",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_009",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_009",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_009",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_009",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_009",
+      "target_id": "node_128",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_009",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_030",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_079",
+      "target_id": "node_030",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_030",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_128",
+      "target_id": "node_030",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_030",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_073",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_079",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_128",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_035",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_128",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_128",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_288",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_288",
+      "target_id": "node_128",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "文本"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_062",
+      "target_id": "node_012",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_012",
+      "target_id": "node_064",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_012",
+      "target_id": "node_081",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_062",
+      "target_id": "node_014",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_014",
+      "target_id": "node_064",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_014",
+      "target_id": "node_081",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "推理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_013",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "思维链"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_175",
+      "target_id": "node_014",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "逻辑"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_014",
+      "target_id": "node_176",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "逻辑"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_255",
+      "target_id": "node_014",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "逻辑"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_175",
+      "target_id": "node_255",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "逻辑"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_255",
+      "target_id": "node_176",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "逻辑"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_015",
+      "target_id": "node_086",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_015",
+      "target_id": "node_245",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "大语言模型"
+      ]
+    },
+    {
+      "source_id": "node_015",
+      "target_id": "node_264",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "大语言模型",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_245",
+      "target_id": "node_086",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_264",
+      "target_id": "node_086",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_264",
+      "target_id": "node_245",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "评估"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_079",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_243",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_018",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_283",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_079",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_243",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_262",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_021",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_267",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_022",
+      "target_id": "node_283",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_243",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_079",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_079",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_243",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_243",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "交叉领域智能应用"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_283",
+      "target_id": "node_267",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_283",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "检索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_018",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_018",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_018",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_269",
+      "target_id": "node_018",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_018",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "科学AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_033",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_123",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_033",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "科学AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_123",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_074",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "安全可信与伦理"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_074",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_183",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_214",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "安全可信与伦理"
+      ]
+    },
+    {
+      "source_id": "node_269",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_299",
+      "target_id": "node_076",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_123",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_080",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "安全可信与伦理"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_080",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_299",
+      "target_id": "node_183",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_299",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_269",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "生成"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "科学AI"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_091",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "智能体",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_221",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_270",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_020",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_221",
+      "target_id": "node_091",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "智能体",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_091",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_270",
+      "target_id": "node_091",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_091",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_091",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "智能体",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_221",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_270",
+      "target_id": "node_221",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_221",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_221",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "计算机视觉",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_270",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_271",
+      "target_id": "node_287",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语义"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "软件工程与编程"
+      ]
+    },
+    {
+      "source_id": "node_027",
+      "target_id": "node_222",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_027",
+      "target_id": "node_223",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_027",
+      "target_id": "node_239",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_031",
+      "target_id": "node_222",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_031",
+      "target_id": "node_223",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_031",
+      "target_id": "node_239",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "识别"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "自然语言处理",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_057",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_190",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_268",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_190",
+      "target_id": "node_057",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_057",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_268",
+      "target_id": "node_057",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_060",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_268",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_190",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_061",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_268",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_190",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_262",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_268",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "语言"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_054",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_127",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_032",
+      "target_id": "node_151",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_054",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_054",
+      "target_id": "node_127",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_054",
+      "target_id": "node_151",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_127",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_151",
+      "target_id": "node_061",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_151",
+      "target_id": "node_127",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "迁移"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_087",
+      "target_id": "node_033",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "自动化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_033",
+      "target_id": "node_152",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "自动化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_087",
+      "target_id": "node_034",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "自动化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_034",
+      "target_id": "node_152",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "自动化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_087",
+      "target_id": "node_152",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "自动化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_034",
+      "target_id": "node_086",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "基准"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "自然语言处理"
+      ]
+    },
+    {
+      "source_id": "node_042",
+      "target_id": "node_207",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "鲁棒"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "安全可信与伦理"
+      ]
+    },
+    {
+      "source_id": "node_042",
+      "target_id": "node_217",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "鲁棒"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "安全可信与伦理"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_094",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_095",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_097",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_099",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_107",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_108",
+      "target_id": "node_044",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_110",
+      "target_id": "node_044",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_111",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_112",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_113",
+      "target_id": "node_044",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_114",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_115",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_116",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_117",
+      "target_id": "node_044",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_044",
+      "target_id": "node_119",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_094",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_095",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_097",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_099",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_107",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_108",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_110",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_047",
+      "target_id": "node_111",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_047",
+      "target_id": "node_112",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_113",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_047",
+      "target_id": "node_114",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_047",
+      "target_id": "node_115",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_116",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_117",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_119",
+      "target_id": "node_047",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "机器人"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_046",
+      "target_id": "node_138",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "模仿学习"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_057",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_049",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_062",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_049",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_064",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_065",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_067",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_070",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_049",
+      "target_id": "node_071",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "多模态智能"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_049",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_049",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_057",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_057",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_230",
+      "target_id": "node_060",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_062",
+      "target_id": "node_224",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_062",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_230",
+      "target_id": "node_063",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_064",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_064",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_065",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_065",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_067",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_067",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_070",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_070",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_071",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_230",
+      "target_id": "node_071",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视觉"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_051",
+      "target_id": "node_230",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "SLAM"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "具身智能与机器人",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_066",
+      "target_id": "node_119",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_066",
+      "target_id": "node_263",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_066",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_066",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_119",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_263",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_075",
+      "target_id": "node_119",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_263",
+      "target_id": "node_075",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_075",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_075",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_263",
+      "target_id": "node_119",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_119",
+      "target_id": "node_269",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_119",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "多模态"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_068",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视频"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_077",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视频"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_078",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "视频"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_148",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "知识图谱"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_072",
+      "target_id": "node_252",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "知识图谱"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_148",
+      "target_id": "node_252",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "知识图谱"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_232",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_236",
+      "target_id": "node_073",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_232",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_124",
+      "target_id": "node_236",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_126",
+      "target_id": "node_232",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_236",
+      "target_id": "node_126",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "图像"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "生成式AI",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_084",
+      "target_id": "node_137",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "智能体"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_137",
+      "target_id": "node_086",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "智能体"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_137",
+      "target_id": "node_088",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "智能体"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "多模态智能",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_090",
+      "target_id": "node_210",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "隐私"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_104",
+      "target_id": "node_214",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "伦理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_104",
+      "target_id": "node_215",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "伦理"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_104",
+      "target_id": "node_208",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "安全"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_108",
+      "target_id": "node_208",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "安全"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "智能体"
+      ]
+    },
+    {
+      "source_id": "node_123",
+      "target_id": "node_206",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "对抗"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "生成式AI"
+      ]
+    },
+    {
+      "source_id": "node_224",
+      "target_id": "node_140",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "Transformer"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "机器学习基础",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_276",
+      "target_id": "node_145",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "分布式"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "AI系统与硬件",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_169",
+      "target_id": "node_272",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_273",
+      "target_id": "node_169",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_172",
+      "target_id": "node_272",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_172",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_173",
+      "target_id": "node_272",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_173",
+      "target_id": "node_273",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "搜索"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "机器学习基础"
+      ]
+    },
+    {
+      "source_id": "node_261",
+      "target_id": "node_213",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "公平"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "安全可信与伦理",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_227",
+      "target_id": "node_299",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "3D"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "科学AI",
+        "计算机视觉"
+      ]
+    },
+    {
+      "source_id": "node_261",
+      "target_id": "node_244",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "系统"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_267",
+      "target_id": "node_246",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "个性化"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "交叉领域智能应用",
+        "推荐系统与信息检索"
+      ]
+    },
+    {
+      "source_id": "node_256",
+      "target_id": "node_262",
+      "relation": "RELATES_TO",
+      "source": "node_keyword_index",
+      "weight": 0.1,
+      "shared_keywords": [
+        "因果"
+      ],
+      "shared_count": 1,
+      "domains": [
+        "推荐系统与信息检索",
+        "知识表示与逻辑推理"
+      ]
+    },
+    {
+      "source_id": "node_056",
+      "target_id": "node_132",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.0959,
+      "shared_keywords": [
+        "微调",
+        "智能体",
+        "生成",
+        "知识图谱",
+        "自动化",
+        "语言",
+        "迁移"
+      ],
+      "shared_count": 7
+    },
+    {
+      "source_id": "node_002",
+      "target_id": "node_132",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.0926,
+      "shared_keywords": [
+        "强化学习",
+        "微调",
+        "架构",
+        "混合专家模型",
+        "逻辑"
+      ],
+      "shared_count": 5
+    },
+    {
+      "source_id": "node_205",
+      "target_id": "node_089",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.0909,
+      "shared_keywords": [
+        "伦理",
+        "安全",
+        "隐私"
+      ],
+      "shared_count": 3
+    },
+    {
+      "source_id": "node_056",
+      "target_id": "node_257",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.0893,
+      "shared_keywords": [
+        "多模态",
+        "检索",
+        "生成",
+        "评估",
+        "语言"
+      ],
+      "shared_count": 5
+    },
+    {
+      "source_id": "node_257",
+      "target_id": "node_132",
+      "relation": "RELATES_TO",
+      "source": "keyword_overlap",
+      "weight": 0.0862,
+      "shared_keywords": [
+        "搜索",
+        "架构",
+        "生成",
+        "生成式",
+        "语言"
+      ],
+      "shared_count": 5
     }
   ],
   "stats": {
@@ -4533,5 +9929,15 @@
     "level3_count": 284,
     "edge_count": 300
   },
-  "classification_time": "2026-07-30T14:00:00+08:00"
+  "classification_time": "2026-07-30T14:00:00+08:00",
+  "edge_generation": {
+    "method": "node_keyword_index + domain_keyword_overlap + shared_concept",
+    "generated_at": "2026-07-31T17:11:44.977880",
+    "index_edges": 349,
+    "kw_edges": 11,
+    "sc_edges": 13,
+    "total_new": 362,
+    "total_edges": 662,
+    "edge_ratio": 2.19
+  }
 }
