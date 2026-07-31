@@ -1,35 +1,41 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
-dist/
-build/
+# ============================================================
+# 运行时编排文件（设计工具自动生成）
+# ============================================================
+runtime-dispatch-manifest.json
+runtime-orchestration-summary.json
+validation-report.json
+finish-readiness-report.json
 
-# Environment
-.env
+# ============================================================
+# 设计工具缓存
+# ============================================================
+.preflight/
+*.design.backup
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Trae internal
+# ============================================================
+# Trae 内部文件
+# ============================================================
 .trae/
 .uploads/
 
-# Duplicate frontend copy
-meta-skill-org/
+# ============================================================
+# 部署日志 & 临时文件
+# ============================================================
+deploy-log.txt
+*.tar.gz
+index_fixed.html
+template_fixed.html
 
-# Generated HTML output (root level)
+# ============================================================
+# 根级散落 HTML（仅保留 frontend/ 和 product-matrix 下）
+# ============================================================
 *.html
+!frontend/**/*.html
+!hui-skill-product-matrix/**/*.html
 
-# Duplicate data files (already in frontend/studio/preset-data/)
+# ============================================================
+# 重复数据文件（已在 frontend/studio/preset-data/）
+# ============================================================
 AI概念图_21nodes.json
 五行养生_15nodes.json
 儒家心学_21nodes.json
@@ -38,7 +44,9 @@ AI概念图_21nodes.json
 唯识论_23节点_五行八卦.json
 Base-View-SkillUP_23nodes.json
 
-# Diagnostic/debug scripts (root level)
+# ============================================================
+# 诊断/调试脚本（根级散落）
+# ============================================================
 chk.py
 diag.py
 diag2.py
@@ -54,18 +62,52 @@ survey.py
 survey2.py
 test_concept_check.py
 
-# Wuxing test output files
+# ============================================================
+# 五行测试输出
+# ============================================================
 wuxing_rules/test_*.json
 wuxing_rules/test_*.html
 wuxing_rules/*_莫比乌斯环.html
 
-# User uploads (not for deployment)
-.uploads/
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.egg
 
-# Old deploy configs (moved to deploy/hui-skill/)
-deploy/nginx/
+# ============================================================
+# Cloudflare / Wrangler
+# ============================================================
+.wrangler/
+
+# ============================================================
+# 旧版部署配置（已迁移至 deploy/）
+# ============================================================
 deploy/postgres/
+meta-skill-org/
 
-# Archive
-*.tar.gz
-deploy-log.txt
+# ============================================================
+# IDE
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+# 系统文件
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# 临时文件
+# ============================================================
+tmp/
+temp/
+*.log

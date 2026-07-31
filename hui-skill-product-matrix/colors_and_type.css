@@ -1,0 +1,53 @@
+/* ============================================================
+   hui-skill.cn — 产品矩阵品牌色系
+   道境空间 × 现代科技：墨色为主，朱砂为辅
+   ============================================================ */
+
+:root {
+  /* ── 品牌主色（朱砂红）── */
+  --brand-primary: #C94B3A;
+  --brand-primary-hover: #B33E2E;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: rgba(201, 75, 58, 0.08);
+  --brand-primary-medium: rgba(201, 75, 58, 0.15);
+
+  /* ── 中性色（墨色系）── */
+  --brand-background: #FAF8F5;
+  --brand-foreground: #1A1715;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1A1715;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1A1715;
+  --brand-muted: #F2EFEB;
+  --brand-muted-foreground: #6B6560;
+  --brand-border: #E5E0DA;
+  --brand-input: #E5E0DA;
+  --brand-ring: rgba(201, 75, 58, 0.35);
+
+  /* ── 半径 ── */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 12px;
+  --brand-radius-xl: 16px;
+
+  /* ── 语义状态色 ── */
+  --state-success: #2D8C4E;
+  --state-warning: #C97A2A;
+  --state-error: #C94B3A;
+  --state-info: #3A6BC9;
+}
+
+/* 暗色模式 */
+.dark {
+  --brand-background: #141210;
+  --brand-foreground: #EDE8E3;
+  --brand-card: #1C1A17;
+  --brand-card-foreground: #EDE8E3;
+  --brand-popover: #1C1A17;
+  --brand-popover-foreground: #EDE8E3;
+  --brand-muted: #252320;
+  --brand-muted-foreground: #9B948E;
+  --brand-border: #2E2B27;
+  --brand-input: #2E2B27;
+  --brand-ring: rgba(201, 75, 58, 0.45);
+}

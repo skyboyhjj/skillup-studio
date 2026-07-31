@@ -1,0 +1,640 @@
+{
+  "phase": 1.0,
+  "month_label": "2026-07",
+  "dual_label_count": 120,
+  "dual_label_applied": 115,
+  "layers": {
+    "seed": {
+      "count": 37,
+      "wuxing": {
+        "土": 34,
+        "火": 3
+      },
+      "dual_count": 6
+    },
+    "current": {
+      "count": 156,
+      "wuxing": {
+        "水": 37,
+        "金": 19,
+        "火": 46,
+        "土": 29,
+        "木": 25
+      },
+      "dual_count": 60
+    },
+    "transcend": {
+      "count": 109,
+      "wuxing": {
+        "水": 51,
+        "金": 19,
+        "火": 8,
+        "木": 26,
+        "土": 5
+      },
+      "dual_count": 49
+    }
+  },
+  "overall_wuxing": {
+    "土": 68,
+    "火": 57,
+    "水": 88,
+    "金": 38,
+    "木": 51
+  },
+  "four_dims": {
+    "O_t": 0.1752,
+    "E_u": 0.9055,
+    "C_k": 0.236,
+    "K_y": 0.1513
+  },
+  "tracks": {
+    "S_sum": 36.7,
+    "S_prod": 0.57,
+    "B": 8.02,
+    "C": 264.56,
+    "D": 0.964
+  },
+  "edge_quality": {
+    "edge_count": 300,
+    "node_count": 302,
+    "edge_ratio": 0.99,
+    "min_edge_ratio_ok": false,
+    "avg_degree": 1.99,
+    "max_degree": 73,
+    "graph_density_ratio": 0.0272,
+    "ky_mode": "graph_density"
+  },
+  "layer_completeness": {
+    "大语言模型": {
+      "node_count": 14,
+      "L1_count": 0,
+      "L2_count": 4,
+      "L3_count": 10,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "自然语言处理": {
+      "node_count": 18,
+      "L1_count": 0,
+      "L2_count": 13,
+      "L3_count": 5,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "具身智能与机器人": {
+      "node_count": 19,
+      "L1_count": 0,
+      "L2_count": 16,
+      "L3_count": 3,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "多模态智能": {
+      "node_count": 32,
+      "L1_count": 0,
+      "L2_count": 2,
+      "L3_count": 30,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "智能体": {
+      "node_count": 31,
+      "L1_count": 0,
+      "L2_count": 29,
+      "L3_count": 2,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "生成式AI": {
+      "node_count": 9,
+      "L1_count": 0,
+      "L2_count": 7,
+      "L3_count": 2,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "机器学习基础": {
+      "node_count": 72,
+      "L1_count": 37,
+      "L2_count": 10,
+      "L3_count": 25,
+      "has_seed": true,
+      "seed_share": "own",
+      "report_note": "该领域有独立种子层"
+    },
+    "安全可信与伦理": {
+      "node_count": 13,
+      "L1_count": 0,
+      "L2_count": 7,
+      "L3_count": 6,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "计算机视觉": {
+      "node_count": 22,
+      "L1_count": 0,
+      "L2_count": 14,
+      "L3_count": 8,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "交叉领域智能应用": {
+      "node_count": 8,
+      "L1_count": 0,
+      "L2_count": 8,
+      "L3_count": 0,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "知识表示与逻辑推理": {
+      "node_count": 5,
+      "L1_count": 0,
+      "L2_count": 0,
+      "L3_count": 5,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "推荐系统与信息检索": {
+      "node_count": 16,
+      "L1_count": 0,
+      "L2_count": 10,
+      "L3_count": 6,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "AI系统与硬件": {
+      "node_count": 9,
+      "L1_count": 0,
+      "L2_count": 9,
+      "L3_count": 0,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "软件工程与编程": {
+      "node_count": 4,
+      "L1_count": 0,
+      "L2_count": 4,
+      "L3_count": 0,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    },
+    "科学AI": {
+      "node_count": 12,
+      "L1_count": 0,
+      "L2_count": 11,
+      "L3_count": 1,
+      "has_seed": false,
+      "seed_share": "shared_global",
+      "report_note": "该领域无独立种子层，共享全局基础层（机器学习基础），按子旋量处理"
+    }
+  },
+  "conversion_efficiency": {
+    "seed_to_current": 0.505,
+    "current_to_transcend": 0.53
+  },
+  "scores": {
+    "seed": 9.12,
+    "current": 38.19,
+    "transcend": 39.76
+  },
+  "gradient": 39.08,
+  "accumulation": 6.77,
+  "domain_tracks": {
+    "AI系统与硬件": {
+      "A": 0.0,
+      "B": 18.0,
+      "C": 0.0,
+      "D": 1.0684,
+      "total": 9
+    },
+    "交叉领域智能应用": {
+      "A": 1.68,
+      "B": 16.0,
+      "C": 0.0,
+      "D": 0.9485,
+      "total": 8
+    },
+    "具身智能与机器人": {
+      "A": 0.39,
+      "B": 36.5,
+      "C": 1.78,
+      "D": 0.912,
+      "total": 19
+    },
+    "多模态智能": {
+      "A": 0.47,
+      "B": 49.0,
+      "C": 240.0,
+      "D": 0.9268,
+      "total": 32
+    },
+    "大语言模型": {
+      "A": 0.6,
+      "B": 33.5,
+      "C": 18.57,
+      "D": 0.8315,
+      "total": 20
+    },
+    "安全可信与伦理": {
+      "A": 0.11,
+      "B": 23.0,
+      "C": 5.57,
+      "D": 0.8641,
+      "total": 13
+    },
+    "推荐系统与信息检索": {
+      "A": 1.21,
+      "B": 29.0,
+      "C": 4.8,
+      "D": 1.0082,
+      "total": 16
+    },
+    "智能体": {
+      "A": 1.1,
+      "B": 61.0,
+      "C": 1.07,
+      "D": 0.9889,
+      "total": 31
+    },
+    "机器学习基础": {
+      "A": 1.81,
+      "B": 132.5,
+      "C": 263.69,
+      "D": 1.0544,
+      "total": 82
+    },
+    "生成式AI": {
+      "A": 0.45,
+      "B": 17.0,
+      "C": 1.29,
+      "D": 0.9075,
+      "total": 9
+    },
+    "知识表示与逻辑推理": {
+      "A": 0.38,
+      "B": 7.5,
+      "C": 12.5,
+      "D": 0.7454,
+      "total": 5
+    },
+    "科学AI": {
+      "A": 1.4,
+      "B": 23.5,
+      "C": 0.55,
+      "D": 1.0477,
+      "total": 12
+    },
+    "自然语言处理": {
+      "A": 1.51,
+      "B": 33.5,
+      "C": 3.46,
+      "D": 1.0033,
+      "total": 18
+    },
+    "计算机视觉": {
+      "A": 0.29,
+      "B": 40.0,
+      "C": 6.29,
+      "D": 0.7973,
+      "total": 22
+    },
+    "软件工程与编程": {
+      "A": 0.0,
+      "B": 8.0,
+      "C": 0.0,
+      "D": 1.1011,
+      "total": 4
+    }
+  },
+  "stage": "生（积累期）",
+  "diagnosis": {
+    "file": null,
+    "N": 302,
+    "N_raw": 302,
+    "depth": null,
+    "layer_names": [
+      "种子层",
+      "现行层",
+      "超越层"
+    ],
+    "depth_profile": {
+      "L1": {
+        "label": "白话 · 基本义",
+        "emoji": "👶",
+        "count": 37,
+        "pct": 12.3,
+        "weight": 1.0
+      },
+      "L2": {
+        "label": "精读 · 哲学义",
+        "emoji": "📚",
+        "count": 156,
+        "pct": 51.7,
+        "weight": 2.0
+      },
+      "L3": {
+        "label": "应用 · 实践义",
+        "emoji": "💼",
+        "count": 108,
+        "pct": 35.8,
+        "weight": 3.0
+      },
+      "L4": {
+        "label": "学术 · 考据义",
+        "emoji": "🔬",
+        "count": 1,
+        "pct": 0.3,
+        "weight": 4.0
+      }
+    },
+    "depth_wx_matrix": {
+      "L1": {
+        "种子层": {
+          "木": 0,
+          "火": 0,
+          "土": 1,
+          "金": 0,
+          "水": 0
+        },
+        "现行层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        },
+        "超越层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        }
+      },
+      "L2": {
+        "种子层": {
+          "木": 0,
+          "火": 0,
+          "土": 1,
+          "金": 0,
+          "水": 0
+        },
+        "现行层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        },
+        "超越层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        }
+      },
+      "L3": {
+        "种子层": {
+          "木": 0,
+          "火": 0,
+          "土": 1,
+          "金": 0,
+          "水": 0
+        },
+        "现行层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        },
+        "超越层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        }
+      },
+      "L4": {
+        "种子层": {
+          "木": 0,
+          "火": 0,
+          "土": 1,
+          "金": 0,
+          "水": 0
+        },
+        "现行层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        },
+        "超越层": {
+          "木": 0,
+          "火": 0,
+          "土": 0,
+          "金": 0,
+          "水": 1
+        }
+      }
+    },
+    "dim1_freq": {
+      "木": {
+        "count": 51,
+        "pct": 16.9
+      },
+      "火": {
+        "count": 57,
+        "pct": 18.9
+      },
+      "土": {
+        "count": 68,
+        "pct": 22.5
+      },
+      "金": {
+        "count": 38,
+        "pct": 12.6
+      },
+      "水": {
+        "count": 88,
+        "pct": 29.1
+      }
+    },
+    "dim1_interpretations": [
+      "五行接近均衡，综合性文章"
+    ],
+    "dim2_matrix": [
+      {
+        "layer": "种子层",
+        "total": 37,
+        "wuxing": {
+          "木": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "火": {
+            "count": 3,
+            "pct": 8.1
+          },
+          "土": {
+            "count": 34,
+            "pct": 91.9
+          },
+          "金": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "水": {
+            "count": 0,
+            "pct": 0.0
+          }
+        },
+        "dominant": "土"
+      },
+      {
+        "layer": "现行层",
+        "total": 156,
+        "wuxing": {
+          "木": {
+            "count": 25,
+            "pct": 16.0
+          },
+          "火": {
+            "count": 46,
+            "pct": 29.5
+          },
+          "土": {
+            "count": 29,
+            "pct": 18.6
+          },
+          "金": {
+            "count": 19,
+            "pct": 12.2
+          },
+          "水": {
+            "count": 37,
+            "pct": 23.7
+          }
+        },
+        "dominant": "火"
+      },
+      {
+        "layer": "超越层",
+        "total": 109,
+        "wuxing": {
+          "木": {
+            "count": 26,
+            "pct": 23.9
+          },
+          "火": {
+            "count": 8,
+            "pct": 7.3
+          },
+          "土": {
+            "count": 5,
+            "pct": 4.6
+          },
+          "金": {
+            "count": 19,
+            "pct": 17.4
+          },
+          "水": {
+            "count": 51,
+            "pct": 46.8
+          }
+        },
+        "dominant": "水"
+      }
+    ],
+    "dim2_interpretations": [
+      "种子层无木：不追新，从成熟问题出发"
+    ],
+    "dim3_path": [
+      "土",
+      "火",
+      "水"
+    ],
+    "dim3_edges": [
+      {
+        "from": "土",
+        "to": "火",
+        "relation": "中性",
+        "desc": "平稳过渡"
+      },
+      {
+        "from": "火",
+        "to": "水",
+        "relation": "中性",
+        "desc": "平稳过渡"
+      }
+    ],
+    "dim3_rhythm": "全程中性——平稳",
+    "dim3_profile": null,
+    "dim4_entropy": {
+      "H": 2.266,
+      "H_max": 2.322,
+      "ratio": 0.976,
+      "desc": "高度多元 · 跨学科综述风"
+    },
+    "dim5_compass": {
+      "cx": -0.043,
+      "cy": 0.103,
+      "desc": "重心居中 · 土德厚重 · 综合均衡"
+    },
+    "dim6_profile": [
+      {
+        "wuxing": "木",
+        "role": "开拓者",
+        "role_desc": "开拓新方向、催生新框架",
+        "count": 51,
+        "pct": 16.9
+      },
+      {
+        "wuxing": "火",
+        "role": "传播者",
+        "role_desc": "传播观点、引发讨论、行动号召",
+        "count": 57,
+        "pct": 18.9
+      },
+      {
+        "wuxing": "土",
+        "role": "承载者",
+        "role_desc": "综合前人成果、承载历史厚度",
+        "count": 68,
+        "pct": 22.5
+      },
+      {
+        "wuxing": "金",
+        "role": "批判者",
+        "role_desc": "精准实验、锐利批判、定论收敛",
+        "count": 38,
+        "pct": 12.6
+      },
+      {
+        "wuxing": "水",
+        "role": "探索者",
+        "role_desc": "探索开放、深层涌现、跨域连接",
+        "count": 88,
+        "pct": 29.1
+      }
+    ],
+    "dim7_summary": "「水领土辅」—— 探索开放、深层涌现、跨域连接为主，综合前人成果、承载历史厚度为辅 · 高度多元"
+  }
+}

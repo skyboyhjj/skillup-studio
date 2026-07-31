@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "hui-skill · 道境空间 × AI 知识引擎",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753977600000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-08286e4c",
+          "measuredAt": 1785499548063
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-annotate",
+      "title": "知识图谱标注平台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753978500000,
+      "canvasData": {
+        "x": 620,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-1fc29c77",
+          "measuredAt": 1785499446200
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/annotate.html",
+        "interactions": []
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "hui-skill 产品矩阵"
+  }
+}

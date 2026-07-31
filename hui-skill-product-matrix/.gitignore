@@ -1,0 +1,28 @@
+# 运行时编排文件（自动生成，不纳入版本控制）
+runtime-dispatch-manifest.json
+runtime-orchestration-summary.json
+validation-report.json
+
+# 预检模板
+.preflight/
+
+# 设计工具缓存
+*.design.backup
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 日志
+*.log
+
+# 临时文件
+tmp/
+temp/

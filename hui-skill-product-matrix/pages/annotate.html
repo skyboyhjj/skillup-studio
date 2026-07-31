@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hui-skill · 知识图谱标注平台</title>
+    <style id="theme-vars">
+/* ============================================================
+   hui-skill.cn — 产品矩阵品牌色系
+   道境空间 × 现代科技：墨色为主，朱砂为辅
+   ============================================================ */
+
+:root {
+  /* ── 品牌主色（朱砂红）── */
+  --brand-primary: #C94B3A;
+  --brand-primary-hover: #B33E2E;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: rgba(201, 75, 58, 0.08);
+  --brand-primary-medium: rgba(201, 75, 58, 0.15);
+
+  /* ── 中性色（墨色系）── */
+  --brand-background: #FAF8F5;
+  --brand-foreground: #1A1715;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1A1715;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1A1715;
+  --brand-muted: #F2EFEB;
+  --brand-muted-foreground: #6B6560;
+  --brand-border: #E5E0DA;
+  --brand-input: #E5E0DA;
+  --brand-ring: rgba(201, 75, 58, 0.35);
+
+  /* ── 半径 ── */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 12px;
+  --brand-radius-xl: 16px;
+
+  /* ── 语义状态色 ── */
+  --state-success: #2D8C4E;
+  --state-warning: #C97A2A;
+  --state-error: #C94B3A;
+  --state-info: #3A6BC9;
+}
+
+/* 暗色模式 */
+.dark {
+  --brand-background: #141210;
+  --brand-foreground: #EDE8E3;
+  --brand-card: #1C1A17;
+  --brand-card-foreground: #EDE8E3;
+  --brand-popover: #1C1A17;
+  --brand-popover-foreground: #EDE8E3;
+  --brand-muted: #252320;
+  --brand-muted-foreground: #9B948E;
+  --brand-border: #2E2B27;
+  --brand-input: #2E2B27;
+  --brand-ring: rgba(201, 75, 58, 0.45);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+    --radius-xl: var(--brand-radius-xl);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <div class="page-root min-h-screen flex flex-col">
+
+        <!-- ======== Top Navigation Bar ======== -->
+        <nav class="flex items-center justify-between h-14 px-4 border-b flex-shrink-0" style="background-color: var(--brand-card); border-color: var(--brand-border);">
+            <div class="flex items-center gap-3">
+                <a href="../pages/index.html" class="text-lg font-bold tracking-tight no-underline" style="color: var(--brand-foreground);">
+                    hui<span style="color: var(--brand-primary);">&#183;</span>skill
+                </a>
+                <span class="text-sm" style="color: var(--brand-muted-foreground);">/</span>
+                <span class="text-sm font-medium" style="color: var(--brand-foreground);">标注平台</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="annotate-permission-toggle" class="btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+                    <span id="permission-toggle-label">切换为游客模式</span>
+                </button>
+                <a href="../pages/index.html" class="flex items-center gap-1.5 text-sm no-underline transition-colors duration-200" style="color: var(--brand-muted-foreground);" onmouseover="this.style.color='var(--brand-primary)'" onmouseout="this.style.color='var(--brand-muted-foreground)'">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    返回矩阵
+                </a>
+            </div>
+        </nav>
+
+        <!-- ======== Main Layout: Two Columns ======== -->
+        <div class="annotate-layout flex-1">
+
+            <!-- LEFT COLUMN: Concept Hierarchy Tree -->
+            <aside id="annotate-tree-panel" class="tree-panel">
+                <div class="tree-panel-header">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-sm font-semibold" style="color: var(--brand-foreground);">概念层级树</h2>
+                        <div class="flex items-center gap-1">
+                            <button id="tree-expand-all" class="p-1 rounded transition-colors duration-150" style="color: var(--brand-muted-foreground);" onmouseover="this.style.backgroundColor='var(--brand-muted)'" onmouseout="this.style.backgroundColor='transparent'" title="全部展开">
+                                <i data-lucide="chevrons-down" class="w-4 h-4"></i>
+                            </button>
+                            <button id="tree-collapse-all" class="p-1 rounded transition-colors duration-150" style="color: var(--brand-muted-foreground);" onmouseover="this.style.backgroundColor='var(--brand-muted)'" onmouseout="this.style.backgroundColor='transparent'" title="全部折叠">
+                                <i data-lucide="chevrons-up" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Search Bar -->
+                    <div class="relative">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2" style="color: var(--brand-muted-foreground);"></i>
+                        <input id="annotate-search" type="text" placeholder="搜索概念节点..." class="form-input pl-8 text-sm" autocomplete="off">
+                    </div>
+                </div>
+                <div id="tree-container" class="tree-panel-body custom-scrollbar py-2">
+                    <!-- Tree nodes rendered by JS -->
+                </div>
+            </aside>
+
+            <!-- Resize Handle -->
+            <div id="resize-handle" class="resize-handle"></div>
+
+            <!-- Tree overlay for mobile -->
+            <div id="tree-overlay" class="tree-overlay"></div>
+
+            <!-- RIGHT COLUMN: Annotation Form -->
+            <main id="annotate-form-panel" class="form-panel custom-scrollbar">
+                <div class="p-8">
+
+                    <!-- Permission Badge + Mobile Toggle -->
+                    <div class="flex items-center justify-between mb-6">
+                        <button id="mobile-tree-toggle" class="md:hidden btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                            <i data-lucide="sidebar" class="w-3.5 h-3.5"></i>
+                            概念树
+                        </button>
+                        <div class="flex items-center gap-2 ml-auto">
+                            <span id="permission-badge" class="permission-badge registered">已登录 · 可编辑</span>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="annotate-empty-state" class="flex flex-col items-center justify-center py-24">
+                        <i data-lucide="mouse-pointer-click" class="w-12 h-12 mb-4" style="color: var(--brand-muted-foreground);"></i>
+                        <p class="text-base font-medium" style="color: var(--brand-muted-foreground);">请在左侧选择概念节点</p>
+                        <p class="text-sm mt-1" style="color: var(--brand-muted-foreground);">选择一个节点以查看或编辑其多维标注</p>
+                    </div>
+
+                    <!-- Annotation Form Content -->
+                    <div id="annotate-form-content" class="hidden">
+
+                        <!-- Selected Node Info -->
+                        <div id="selected-node-header" class="mb-6">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h2 id="selected-node-name" class="text-xl font-bold" style="color: var(--brand-foreground);"></h2>
+                                <span id="selected-node-level" class="badge-level"></span>
+                            </div>
+                            <p id="selected-node-path" class="text-sm" style="color: var(--brand-muted-foreground);"></p>
+                        </div>
+
+                        <!-- Demo Annotation Data Badge -->
+                        <div id="demo-data-badge" class="hidden mb-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium" style="background-color: rgba(45, 140, 78, 0.1); color: var(--state-success);">
+                            <i data-lucide="database" class="w-3.5 h-3.5"></i>
+                            <span>道德经标注数据</span>
+                        </div>
+
+                        <!-- Dimension Cards Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+
+                            <!-- 1. 五行 -->
+                            <div class="card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">五行</label>
+                                <div class="tooltip-wrapper">
+                                    <select id="annot-wuxing" class="form-select">
+                                        <option value="">-- 请选择 --</option>
+                                        <option value="金">金</option>
+                                        <option value="木">木</option>
+                                        <option value="水">水</option>
+                                        <option value="火">火</option>
+                                        <option value="土">土</option>
+                                    </select>
+                                    <span class="tooltip-text">注册后可编辑标注</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. 认知深度 -->
+                            <div class="card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">认知深度</label>
+                                <div class="tooltip-wrapper">
+                                    <select id="annot-cognitive-depth" class="form-select">
+                                        <option value="">-- 请选择 --</option>
+                                        <option value="L1">L1 · 表层认知</option>
+                                        <option value="L2">L2 · 关联认知</option>
+                                        <option value="L3">L3 · 结构认知</option>
+                                        <option value="L4">L4 · 元认知</option>
+                                    </select>
+                                    <span class="tooltip-text">注册后可编辑标注</span>
+                                </div>
+                            </div>
+
+                            <!-- 3. 八卦 -->
+                            <div class="card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">八卦</label>
+                                <div class="tooltip-wrapper">
+                                    <select id="annot-bagua" class="form-select">
+                                        <option value="">-- 请选择 --</option>
+                                        <option value="☰乾">☰ 乾 · 天</option>
+                                        <option value="☱兑">☱ 兑 · 泽</option>
+                                        <option value="☲离">☲ 离 · 火</option>
+                                        <option value="☳震">☳ 震 · 雷</option>
+                                        <option value="☴巽">☴ 巽 · 风</option>
+                                        <option value="☵坎">☵ 坎 · 水</option>
+                                        <option value="☶艮">☶ 艮 · 山</option>
+                                        <option value="☷坤">☷ 坤 · 地</option>
+                                    </select>
+                                    <span class="tooltip-text">注册后可编辑标注</span>
+                                </div>
+                            </div>
+
+                            <!-- 4. 来源出处 -->
+                            <div class="card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">来源出处</label>
+                                <div class="tooltip-wrapper">
+                                    <input id="annot-source" type="text" class="form-input" placeholder="例如：道德经·第一章">
+                                    <span class="tooltip-text">注册后可编辑标注</span>
+                                </div>
+                            </div>
+
+                            <!-- 5. 多层五行深度 (full width) -->
+                            <div class="md:col-span-2 card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">多层五行深度</label>
+                                <div class="grid grid-cols-4 gap-3">
+                                    <div class="tooltip-wrapper">
+                                        <label class="block text-xs mb-1" style="color: var(--brand-muted-foreground);">L1</label>
+                                        <select id="annot-wuxing-l1" class="form-select text-sm">
+                                            <option value="">--</option>
+                                            <option value="金">金</option><option value="木">木</option><option value="水">水</option><option value="火">火</option><option value="土">土</option>
+                                        </select>
+                                        <span class="tooltip-text">注册后可编辑标注</span>
+                                    </div>
+                                    <div class="tooltip-wrapper">
+                                        <label class="block text-xs mb-1" style="color: var(--brand-muted-foreground);">L2</label>
+                                        <select id="annot-wuxing-l2" class="form-select text-sm">
+                                            <option value="">--</option>
+                                            <option value="金">金</option><option value="木">木</option><option value="水">水</option><option value="火">火</option><option value="土">土</option>
+                                        </select>
+                                        <span class="tooltip-text">注册后可编辑标注</span>
+                                    </div>
+                                    <div class="tooltip-wrapper">
+                                        <label class="block text-xs mb-1" style="color: var(--brand-muted-foreground);">L3</label>
+                                        <select id="annot-wuxing-l3" class="form-select text-sm">
+                                            <option value="">--</option>
+                                            <option value="金">金</option><option value="木">木</option><option value="水">水</option><option value="火">火</option><option value="土">土</option>
+                                        </select>
+                                        <span class="tooltip-text">注册后可编辑标注</span>
+                                    </div>
+                                    <div class="tooltip-wrapper">
+                                        <label class="block text-xs mb-1" style="color: var(--brand-muted-foreground);">L4</label>
+                                        <select id="annot-wuxing-l4" class="form-select text-sm">
+                                            <option value="">--</option>
+                                            <option value="金">金</option><option value="木">木</option><option value="水">水</option><option value="火">火</option><option value="土">土</option>
+                                        </select>
+                                        <span class="tooltip-text">注册后可编辑标注</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 6. 概念描述 (full width) -->
+                            <div class="md:col-span-2 card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+                                <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">概念描述</label>
+                                <div class="tooltip-wrapper">
+                                    <textarea id="annot-desc" class="form-textarea" placeholder="请输入概念描述..." rows="3"></textarea>
+                                    <span class="tooltip-text">注册后可编辑标注</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="flex items-center gap-3 mb-10">
+                            <button id="annot-save-btn" class="btn-primary-brand flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium">
+                                <i data-lucide="save" class="w-4 h-4"></i>
+                                保存标注
+                            </button>
+                            <button id="annot-reset-btn" class="btn-outline-brand flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                重置
+                            </button>
+                        </div>
+
+                        <!-- ======== Rule Library Section ======== -->
+                        <div id="annotate-rule-library" class="mb-8">
+                            <div class="flex items-center gap-2 mb-4">
+                                <i data-lucide="book-open" class="w-5 h-5" style="color: var(--brand-primary);"></i>
+                                <h3 class="text-lg font-bold" style="color: var(--brand-foreground);">规则库</h3>
+                                <span class="text-xs" style="color: var(--brand-muted-foreground);">（标注推理规则）</span>
+                            </div>
+                            <div id="rule-cards-container" class="space-y-3">
+                                <!-- Rule cards rendered by JS -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- ======== Demo Data ======== -->
+    <script>
+    // ── Concept Tree Data (nodes.json sample) ──
+    const TREE_NODES = [
+      {"id": "node_001", "name": "知识图谱", "level": 1, "parent_id": null, "category": "root"},
+      {"id": "node_002", "name": "大语言模型", "level": 2, "parent_id": "node_001", "category": "大语言模型"},
+      {"id": "node_003", "name": "预训练策略与架构设计", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_004", "name": "指令微调技术", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_005", "name": "人类反馈强化学习", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_006", "name": "直接偏好优化", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_007", "name": "参数高效微调", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_008", "name": "模型量化与推断加速", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_009", "name": "混合专家模型架构", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_010", "name": "长文本上下文处理", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_011", "name": "幻觉检测与事实性增强", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_012", "name": "知识编辑与更新", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_013", "name": "隐式推理架构", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_014", "name": "思维链效率与路径优化", "level": 3, "parent_id": "node_002", "category": "大语言模型"},
+      {"id": "node_018", "name": "自然语言处理", "level": 2, "parent_id": "node_001", "category": "自然语言处理"},
+      {"id": "node_019", "name": "检索增强生成", "level": 3, "parent_id": "node_018", "category": "自然语言处理"},
+      {"id": "node_020", "name": "向量数据库与索引技术", "level": 3, "parent_id": "node_018", "category": "自然语言处理"},
+      {"id": "node_021", "name": "计算机视觉", "level": 2, "parent_id": "node_001", "category": "计算机视觉"},
+      {"id": "node_022", "name": "扩散模型与图像生成", "level": 3, "parent_id": "node_021", "category": "计算机视觉"},
+      {"id": "node_023", "name": "多模态对齐与融合", "level": 3, "parent_id": "node_021", "category": "计算机视觉"}
+    ];
+
+    // ── Annotation Demo Data (道德经选章_深度标注版_16个概念) ──
+    const DEMO_ANNOTATIONS = [
+      {"label": "道可道非常道", "desc": "可言说的道不是恒常之道。", "wuxing": "水", "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"}, "cognitive_depth": "L2", "bagua": "☵坎", "id": "c1_1", "layer": "种子层 · 道体玄理"},
+      {"label": "名可名非常名", "desc": "可命名的名不是恒常之名。", "wuxing": "金", "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"}, "cognitive_depth": "L2", "bagua": "☰乾", "id": "c1_2", "layer": "种子层 · 道体玄理"},
+      {"label": "无名天地之始", "desc": "无命名状态是天地未分之际的原初混沌。", "wuxing": "水", "wuxing_depth": {"L1": "水", "L2": "水", "L3": "水", "L4": "木"}, "cognitive_depth": "L2", "bagua": "☵坎", "id": "c1_3", "layer": "种子层 · 道体玄理"},
+      {"label": "有名万物之母", "desc": "命名之后万物分化显现。", "wuxing": "木", "wuxing_depth": {"L1": "木", "L2": "木", "L3": "木", "L4": "土"}, "cognitive_depth": "L2", "bagua": "☳震", "id": "c1_4", "layer": "种子层 · 道体玄理"},
+      {"label": "常无观妙常有观徼", "desc": "常从无中体察道的幽微，常从有中观察道的端倪。", "wuxing": "水", "wuxing_depth": {"L1": "水", "L2": "水", "L3": "金", "L4": "金"}, "cognitive_depth": "L3", "bagua": "☵坎", "id": "c1_5", "layer": "种子层 · 道体玄理"},
+      {"label": "玄之又玄众妙之门", "desc": "无与有同出而异名，玄深又玄深。", "wuxing": "水", "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"}, "cognitive_depth": "L2", "bagua": "☵坎", "id": "c1_6", "layer": "种子层 · 道体玄理"},
+      {"label": "有无相生难易相成", "desc": "有与无互相生成，难与易互相成就。", "wuxing": "火", "wuxing_depth": {"L1": "火", "L2": "火", "L3": "金", "L4": "金"}, "cognitive_depth": "L3", "bagua": "☲离", "id": "c2_1", "layer": "核心层 · 辩证与治理"},
+      {"label": "长短相形高下相倾", "desc": "长与短通过比较呈现，高与低通过倾斜对照。", "wuxing": "金", "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"}, "cognitive_depth": "L2", "bagua": "☱兑", "id": "c2_2", "layer": "核心层 · 辩证与治理"},
+      {"label": "处无为之事行不言之教", "desc": "圣人以无为处事，以不言施教。", "wuxing": "土", "wuxing_depth": {"L1": "土", "L2": "土", "L3": "木", "L4": "土"}, "cognitive_depth": "L3", "bagua": "☷坤", "id": "c2_3", "layer": "核心层 · 辩证与治理"},
+      {"label": "功成弗居", "desc": "事情做成了不占有功劳。", "wuxing": "金", "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"}, "cognitive_depth": "L2", "bagua": "☰乾", "id": "c2_4", "layer": "核心层 · 辩证与治理"},
+      {"label": "不尚贤使民不争", "desc": "不推崇贤能之名，人民就不会起争夺之心。", "wuxing": "水", "wuxing_depth": {"L1": "水", "L2": "水", "L3": "土", "L4": "水"}, "cognitive_depth": "L3", "bagua": "☵坎", "id": "c3_1", "layer": "核心层 · 辩证与治理"},
+      {"label": "为无为则无不治", "desc": "以无为的方式去作为，就没有治理不好的。", "wuxing": "土", "wuxing_depth": {"L1": "土", "L2": "土", "L3": "木", "L4": "土"}, "cognitive_depth": "L3", "bagua": "☷坤", "id": "c3_2", "layer": "核心层 · 辩证与治理"},
+      {"label": "小国寡民", "desc": "理想社会：简单、自足、宁静。", "wuxing": "土", "wuxing_depth": {"L1": "土", "L2": "土", "L3": "土", "L4": "木"}, "cognitive_depth": "L2", "bagua": "☷坤", "id": "c80_1", "layer": "超越层 · 理想与智慧"},
+      {"label": "信言不美美言不信", "desc": "真实的话不华美，华美的话不真实。", "wuxing": "金", "wuxing_depth": {"L1": "金", "L2": "金", "L3": "金", "L4": "金"}, "cognitive_depth": "L2", "bagua": "☰乾", "id": "c81_1", "layer": "超越层 · 理想与智慧"},
+      {"label": "天之道利而不害", "desc": "天道运行利益万物而不伤害。", "wuxing": "土", "wuxing_depth": {"L1": "土", "L2": "土", "L3": "水", "L4": "水"}, "cognitive_depth": "L3", "bagua": "☷坤", "id": "c81_2", "layer": "超越层 · 理想与智慧"},
+      {"label": "为而不争", "desc": "圣人行事施为而不争夺。", "wuxing": "木", "wuxing_depth": {"L1": "木", "L2": "木", "L3": "木", "L4": "土"}, "cognitive_depth": "L3", "bagua": "☴巽", "id": "c81_3", "layer": "超越层 · 理想与智慧"}
+    ];
+
+    // ── Annotation Rules ──
+    const ANNOTATION_RULES = [
+      {
+        id: "rule_001",
+        name: "五行归类规则",
+        description: "具有生长、升发、条达舒畅等作用或性质的事物，均归属于木。具有温热、升腾作用或性质的事物，均归属于火。具有承载、生化、受纳作用的事物，均归属于土。具有清洁、肃降、收敛作用的事物，均归属于金。具有寒凉、滋润、向下运行的事物，均归属于水。",
+        preview: "例：'道可道非常道'——道如水，无形无相，滋养万物而不争，故归水。"
+      },
+      {
+        id: "rule_002",
+        name: "八卦对应规则",
+        description: "根据概念的性质特征对应八卦：乾为天（刚健创造）、坤为地（柔顺包容）、震为雷（震动奋起）、巽为风（渗透入微）、坎为水（险陷深藏）、离为火（光明依附）、艮为山（静止安稳）、兑为泽（喜悦言说）。",
+        preview: "例：'无名天地之始'——混沌未分，深藏不露，对应坎卦。"
+      },
+      {
+        id: "rule_003",
+        name: "认知深度分层规则",
+        description: "L1 表层认知：概念的字面理解与基础定义；L2 关联认知：概念与其它概念的关系网络；L3 结构认知：概念在体系中的位置与功能；L4 元认知：对概念本身的反思与超越。",
+        preview: "例：'常无观妙常有观徼'——涉及对认知方式本身的思辨，归 L3。"
+      }
+    ];
+
+    // ── Annotation state storage (in-memory) ──
+    const annotationStore = {};
+    </script>
+
+    <!-- ======== Application Logic ======== -->
+    <script>
+    (function() {
+      // ── State ──
+      let isLoggedIn = true;
+      let selectedNodeId = null;
+      let expandedNodeIds = new Set(['node_001']);
+      let searchQuery = '';
+
+      // Populate expanded nodes with all level-1 and level-2 nodes initially
+      TREE_NODES.forEach(n => {
+        if (n.level <= 2) expandedNodeIds.add(n.id);
+      });
+
+      // Build demo annotation lookup
+      const demoAnnotationMap = {};
+      DEMO_ANNOTATIONS.forEach(a => { demoAnnotationMap[a.id] = a; });
+
+      // ── DOM refs ──
+      const treeContainer = document.getElementById('tree-container');
+      const searchInput = document.getElementById('annotate-search');
+      const formContent = document.getElementById('annotate-form-content');
+      const emptyState = document.getElementById('annotate-empty-state');
+      const permissionBadge = document.getElementById('permission-badge');
+      const permissionToggle = document.getElementById('annotate-permission-toggle');
+      const permissionToggleLabel = document.getElementById('permission-toggle-label');
+      const demoDataBadge = document.getElementById('demo-data-badge');
+      const treePanel = document.getElementById('annotate-tree-panel');
+      const treeOverlay = document.getElementById('tree-overlay');
+      const mobileTreeToggle = document.getElementById('mobile-tree-toggle');
+      const resizeHandle = document.getElementById('resize-handle');
+
+      // ── Tree Building ──
+      function buildTreeData() {
+        const nodeMap = {};
+        TREE_NODES.forEach(n => { nodeMap[n.id] = { ...n, children: [] }; });
+        const roots = [];
+        TREE_NODES.forEach(n => {
+          if (n.parent_id && nodeMap[n.parent_id]) {
+            nodeMap[n.parent_id].children.push(nodeMap[n.id]);
+          } else if (!n.parent_id) {
+            roots.push(nodeMap[n.id]);
+          }
+        });
+        return { roots, nodeMap };
+      }
+
+      const { roots, nodeMap } = buildTreeData();
+
+      function getNodePath(nodeId) {
+        const parts = [];
+        let current = nodeMap[nodeId];
+        while (current) {
+          parts.unshift(current.name);
+          current = current.parent_id ? nodeMap[current.parent_id] : null;
+        }
+        return parts.join(' > ');
+      }
+
+      function matchesSearch(node, query) {
+        if (!query) return true;
+        const q = query.toLowerCase();
+        return node.name.toLowerCase().includes(q) ||
+               (node.category && node.category.toLowerCase().includes(q));
+      }
+
+      function hasMatchingDescendant(nodeId, query) {
+        if (!query) return true;
+        const node = nodeMap[nodeId];
+        if (!node) return false;
+        if (matchesSearch(node, query)) return true;
+        return node.children.some(c => hasMatchingDescendant(c.id, query));
+      }
+
+      function renderTreeNode(node, depth) {
+        const isExpanded = expandedNodeIds.has(node.id);
+        const isSelected = node.id === selectedNodeId;
+        const hasChildren = node.children.length > 0;
+        const levelClass = 'badge-level-' + node.level;
+        const levelLabel = node.level === 1 ? '根' : node.level === 2 ? '类' : '项';
+
+        const hasAnnotation = !!annotationStore[node.id] || (node.id.startsWith('c') && demoAnnotationMap[node.id]);
+
+        // Determine visibility
+        const visible = matchesSearch(node, searchQuery) || hasMatchingDescendant(node.id, searchQuery);
+        if (!visible && searchQuery) return '';
+
+        const indent = depth * 16;
+
+        let html = '';
+        html += '<div class="tree-node ' + (isExpanded ? 'expanded' : '') + (isSelected ? ' selected' : '') + '" data-node-id="' + node.id + '" style="padding-left: ' + (indent + 8) + 'px; padding-right: 8px; padding-top: 6px; padding-bottom: 6px; display: flex; align-items: center; gap: 6px;">';
+        html += '<span class="chevron" style="width: 16px; height: 16px; flex-shrink: 0; color: ' + (hasChildren ? 'var(--brand-muted-foreground)' : 'transparent') + ';">';
+        if (hasChildren) {
+          html += '<i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>';
+        }
+        html += '</span>';
+        html += '<span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8125rem; color: var(--brand-foreground);">' + escapeHtml(node.name) + '</span>';
+        html += '<span class="badge-level ' + levelClass + '">' + levelLabel + '</span>';
+        html += '<span class="' + (hasAnnotation ? 'badge-annotated' : 'badge-pending') + '" style="font-size: 0.625rem; padding: 0.125rem 0.375rem; border-radius: 9999px; flex-shrink: 0;">' + (hasAnnotation ? '已标注' : '未标注') + '</span>';
+        html += '</div>';
+
+        if (isExpanded && hasChildren) {
+          html += '<div class="tree-children">';
+          node.children.forEach(child => {
+            html += renderTreeNode(child, depth + 1);
+          });
+          html += '</div>';
+        }
+
+        return html;
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function renderTree() {
+        let html = '';
+        roots.forEach(root => {
+          html += renderTreeNode(root, 0);
+        });
+        treeContainer.innerHTML = html;
+        lucide.createIcons();
+        bindTreeNodeEvents();
+      }
+
+      function bindTreeNodeEvents() {
+        treeContainer.querySelectorAll('.tree-node').forEach(el => {
+          el.addEventListener('click', function(e) {
+            const nodeId = this.dataset.nodeId;
+            // Ignore clicks on badge elements
+            if (e.target.classList.contains('badge-level') || e.target.classList.contains('badge-annotated') || e.target.classList.contains('badge-pending')) return;
+            selectNode(nodeId);
+          });
+          const chevron = el.querySelector('.chevron');
+          if (chevron && chevron.style.color !== 'transparent') {
+            chevron.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const nodeId = el.dataset.nodeId;
+              toggleExpand(nodeId);
+            });
+          }
+        });
+      }
+
+      function toggleExpand(nodeId) {
+        if (expandedNodeIds.has(nodeId)) {
+          expandedNodeIds.delete(nodeId);
+        } else {
+          expandedNodeIds.add(nodeId);
+        }
+        renderTree();
+      }
+
+      function selectNode(nodeId) {
+        selectedNodeId = nodeId;
+        renderTree();
+        loadAnnotationForm(nodeId);
+        // On mobile, close sidebar after selection
+        if (window.innerWidth <= 768) {
+          closeTreePanel();
+        }
+      }
+
+      // ── Annotation Form ──
+      function loadAnnotationForm(nodeId) {
+        const node = nodeMap[nodeId];
+        if (!node) return;
+
+        emptyState.classList.add('hidden');
+        formContent.classList.remove('hidden');
+
+        document.getElementById('selected-node-name').textContent = node.name;
+        const levelEl = document.getElementById('selected-node-level');
+        levelEl.textContent = node.level === 1 ? '根节点' : node.level === 2 ? '分类' : '子项';
+        levelEl.className = 'badge-level badge-level-' + node.level;
+
+        document.getElementById('selected-node-path').textContent = getNodePath(nodeId);
+
+        // Check for demo annotation data
+        const demoAnno = DEMO_ANNOTATIONS.find(a => a.label === node.name);
+        if (demoAnno) {
+          demoDataBadge.classList.remove('hidden');
+          populateFormFromDemo(demoAnno);
+        } else {
+          demoDataBadge.classList.add('hidden');
+          // Load from annotation store or clear
+          const stored = annotationStore[nodeId];
+          if (stored) {
+            populateForm(stored);
+          } else {
+            clearForm();
+          }
+        }
+
+        updateFormDisabledState();
+      }
+
+      function populateFormFromDemo(demo) {
+        document.getElementById('annot-wuxing').value = demo.wuxing || '';
+        document.getElementById('annot-cognitive-depth').value = demo.cognitive_depth || '';
+        document.getElementById('annot-bagua').value = demo.bagua || '';
+        document.getElementById('annot-desc').value = demo.desc || '';
+        document.getElementById('annot-source').value = '道德经';
+        if (demo.wuxing_depth) {
+          document.getElementById('annot-wuxing-l1').value = demo.wuxing_depth.L1 || '';
+          document.getElementById('annot-wuxing-l2').value = demo.wuxing_depth.L2 || '';
+          document.getElementById('annot-wuxing-l3').value = demo.wuxing_depth.L3 || '';
+          document.getElementById('annot-wuxing-l4').value = demo.wuxing_depth.L4 || '';
+        }
+      }
+
+      function populateForm(data) {
+        document.getElementById('annot-wuxing').value = data.wuxing || '';
+        document.getElementById('annot-cognitive-depth').value = data.cognitive_depth || '';
+        document.getElementById('annot-bagua').value = data.bagua || '';
+        document.getElementById('annot-desc').value = data.desc || '';
+        document.getElementById('annot-source').value = data.source || '';
+        if (data.wuxing_depth) {
+          document.getElementById('annot-wuxing-l1').value = data.wuxing_depth.L1 || '';
+          document.getElementById('annot-wuxing-l2').value = data.wuxing_depth.L2 || '';
+          document.getElementById('annot-wuxing-l3').value = data.wuxing_depth.L3 || '';
+          document.getElementById('annot-wuxing-l4').value = data.wuxing_depth.L4 || '';
+        }
+      }
+
+      function clearForm() {
+        document.getElementById('annot-wuxing').value = '';
+        document.getElementById('annot-cognitive-depth').value = '';
+        document.getElementById('annot-bagua').value = '';
+        document.getElementById('annot-desc').value = '';
+        document.getElementById('annot-source').value = '';
+        document.getElementById('annot-wuxing-l1').value = '';
+        document.getElementById('annot-wuxing-l2').value = '';
+        document.getElementById('annot-wuxing-l3').value = '';
+        document.getElementById('annot-wuxing-l4').value = '';
+      }
+
+      function collectFormData() {
+        return {
+          wuxing: document.getElementById('annot-wuxing').value,
+          cognitive_depth: document.getElementById('annot-cognitive-depth').value,
+          bagua: document.getElementById('annot-bagua').value,
+          desc: document.getElementById('annot-desc').value,
+          source: document.getElementById('annot-source').value,
+          wuxing_depth: {
+            L1: document.getElementById('annot-wuxing-l1').value,
+            L2: document.getElementById('annot-wuxing-l2').value,
+            L3: document.getElementById('annot-wuxing-l3').value,
+            L4: document.getElementById('annot-wuxing-l4').value
+          }
+        };
+      }
+
+      function updateFormDisabledState() {
+        const disabled = !isLoggedIn;
+        const formIds = ['annot-wuxing', 'annot-cognitive-depth', 'annot-bagua', 'annot-desc', 'annot-source',
+                          'annot-wuxing-l1', 'annot-wuxing-l2', 'annot-wuxing-l3', 'annot-wuxing-l4'];
+        formIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.disabled = disabled;
+        });
+        const saveBtn = document.getElementById('annot-save-btn');
+        const resetBtn = document.getElementById('annot-reset-btn');
+        if (saveBtn) saveBtn.disabled = disabled;
+        if (resetBtn) resetBtn.disabled = disabled;
+      }
+
+      function setPermissionUI() {
+        updateFormDisabledState();
+        if (isLoggedIn) {
+          permissionBadge.textContent = '已登录 · 可编辑';
+          permissionBadge.className = 'permission-badge registered';
+          permissionToggleLabel.textContent = '切换为游客模式';
+        } else {
+          permissionBadge.textContent = '游客 · 仅浏览';
+          permissionBadge.className = 'permission-badge guest';
+          permissionToggleLabel.textContent = '切换为登录模式';
+        }
+      }
+
+      // ── Rule Library ──
+      function renderRuleLibrary() {
+        const container = document.getElementById('rule-cards-container');
+        let html = '';
+        ANNOTATION_RULES.forEach(rule => {
+          html += '<div class="rule-card" data-rule-id="' + rule.id + '">';
+          html += '<div class="rule-card-header flex items-center justify-between" onclick="window.toggleRuleCard(\'' + rule.id + '\')">';
+          html += '<div class="flex items-center gap-2">';
+          html += '<i data-lucide="chevron-right" class="w-4 h-4 rule-chevron transition-transform duration-200" style="color: var(--brand-muted-foreground);"></i>';
+          html += '<span class="text-sm font-semibold" style="color: var(--brand-foreground);">' + escapeHtml(rule.name) + '</span>';
+          html += '</div>';
+          html += '<span class="text-xs" style="color: var(--brand-muted-foreground);">点击展开</span>';
+          html += '</div>';
+          html += '<div class="rule-card-body hidden">';
+          html += '<p class="text-sm leading-relaxed mb-3" style="color: var(--brand-foreground);">' + escapeHtml(rule.description) + '</p>';
+          html += '<div class="mb-3 p-3 rounded-lg" style="background-color: var(--brand-muted);">';
+          html += '<p class="text-xs leading-relaxed" style="color: var(--brand-muted-foreground);">' + escapeHtml(rule.preview) + '</p>';
+          html += '</div>';
+          html += '<div class="flex items-center gap-2">';
+          html += '<input type="text" class="form-input text-sm flex-1" placeholder="自然语言修改规则..." data-rule-id="' + rule.id + '">';
+          html += '<button class="btn-primary-brand px-3 py-1.5 rounded-lg text-xs font-medium" onclick="window.applyRuleModification(\'' + rule.id + '\')">应用</button>';
+          html += '</div>';
+          html += '</div>';
+          html += '</div>';
+        });
+        container.innerHTML = html;
+        lucide.createIcons({ target: container });
+      }
+
+      window.toggleRuleCard = function(ruleId) {
+        const card = document.querySelector('.rule-card[data-rule-id="' + ruleId + '"]');
+        const body = card.querySelector('.rule-card-body');
+        const chevron = card.querySelector('.rule-chevron');
+        if (body.classList.contains('hidden')) {
+          body.classList.remove('hidden');
+          chevron.style.transform = 'rotate(90deg)';
+        } else {
+          body.classList.add('hidden');
+          chevron.style.transform = 'rotate(0deg)';
+        }
+      };
+
+      window.applyRuleModification = function(ruleId) {
+        const input = document.querySelector('input[data-rule-id="' + ruleId + '"]');
+        const value = input.value.trim();
+        if (value) {
+          alert('规则 "' + ruleId + '" 已应用修改：' + value);
+          input.value = '';
+        }
+      };
+
+      // ── Permission Toggle ──
+      permissionToggle.addEventListener('click', function() {
+        isLoggedIn = !isLoggedIn;
+        setPermissionUI();
+      });
+
+      // ── Save & Reset ──
+      document.getElementById('annot-save-btn').addEventListener('click', function() {
+        if (!isLoggedIn) return;
+        if (!selectedNodeId) return;
+        const data = collectFormData();
+        annotationStore[selectedNodeId] = data;
+        renderTree();
+        // Show brief feedback
+        const btn = this;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> 已保存';
+        btn.style.backgroundColor = 'var(--state-success)';
+        lucide.createIcons({ target: btn });
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.backgroundColor = '';
+          lucide.createIcons({ target: btn });
+        }, 1500);
+      });
+
+      document.getElementById('annot-reset-btn').addEventListener(function() {
+        if (!isLoggedIn) return;
+        if (!selectedNodeId) return;
+        const node = nodeMap[selectedNodeId];
+        const demoAnno = DEMO_ANNOTATIONS.find(a => a.label === node.name);
+        if (demoAnno) {
+          populateFormFromDemo(demoAnno);
+        } else {
+          clearForm();
+        }
+      });
+
+      // ── Search ──
+      searchInput.addEventListener('input', function() {
+        searchQuery = this.value.trim();
+        // Auto-expand all when searching
+        if (searchQuery) {
+          TREE_NODES.forEach(n => expandedNodeIds.add(n.id));
+        }
+        renderTree();
+      });
+
+      // ── Expand/Collapse All ──
+      document.getElementById('tree-expand-all').addEventListener('click', function() {
+        TREE_NODES.forEach(n => expandedNodeIds.add(n.id));
+        renderTree();
+      });
+      document.getElementById('tree-collapse-all').addEventListener('click', function() {
+        expandedNodeIds.clear();
+        TREE_NODES.forEach(n => {
+          if (n.level <= 1) expandedNodeIds.add(n.id);
+        });
+        renderTree();
+      });
+
+      // ── Mobile Tree Panel ──
+      function openTreePanel() {
+        treePanel.classList.add('open');
+        treeOverlay.classList.add('open');
+      }
+      function closeTreePanel() {
+        treePanel.classList.remove('open');
+        treeOverlay.classList.remove('open');
+      }
+      mobileTreeToggle.addEventListener('click', openTreePanel);
+      treeOverlay.addEventListener('click', closeTreePanel);
+
+      // ── Resize Handler ──
+      let isResizing = false;
+      resizeHandle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        resizeHandle.classList.add('active');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+        const newWidth = e.clientX;
+        if (newWidth >= 280 && newWidth <= 480) {
+          treePanel.style.width = newWidth + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isResizing) {
+          isResizing = false;
+          resizeHandle.classList.remove('active');
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+        }
+      });
+
+      // ── Window resize handler ──
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeTreePanel();
+        }
+      });
+
+      // ── Init ──
+      renderTree();
+      renderRuleLibrary();
+      setPermissionUI();
+      lucide.createIcons();
+    })();
+    </script>
+
+    <style>
+      /* ============================================================
+         标注平台页面 — 浅色主题，左侧树 + 右侧表单
+         ============================================================ */
+      .page-root {
+        background-color: var(--brand-background);
+        color: var(--brand-foreground);
+      }
+
+      /* 卡片交互 */
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      /* 按钮 */
+      .btn-primary-brand {
+        background-color: var(--brand-primary);
+        color: var(--brand-primary-foreground);
+        transition: background-color 0.2s ease;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary-brand:hover {
+        background-color: var(--brand-primary-hover);
+      }
+      .btn-primary-brand:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .btn-outline-brand {
+        background-color: transparent;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary);
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      .btn-outline-brand:hover {
+        background-color: var(--brand-primary-light);
+      }
+
+      /* 自定义滚动条 */
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background-color: var(--brand-border); border-radius: 3px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: var(--brand-muted-foreground); }
+
+      /* 树节点 */
+      .tree-node {
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+        border-left: 3px solid transparent;
+      }
+      .tree-node:hover {
+        background-color: var(--brand-muted);
+      }
+      .tree-node.selected {
+        background-color: var(--brand-primary-light);
+        border-left-color: var(--brand-primary);
+      }
+      .tree-node .chevron {
+        transition: transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tree-node.expanded .chevron {
+        transform: rotate(90deg);
+      }
+
+      /* 表单控件 */
+      .form-input {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-md);
+        background-color: var(--brand-card);
+        color: var(--brand-foreground);
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+      }
+      .form-input:focus {
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px var(--brand-ring);
+      }
+      .form-input:disabled {
+        background-color: var(--brand-muted);
+        color: var(--brand-muted-foreground);
+        cursor: not-allowed;
+      }
+      .form-select {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-md);
+        background-color: var(--brand-card);
+        color: var(--brand-foreground);
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1rem;
+        padding-right: 2.25rem;
+      }
+      .form-select:focus {
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px var(--brand-ring);
+      }
+      .form-select:disabled {
+        background-color: var(--brand-muted);
+        color: var(--brand-muted-foreground);
+        cursor: not-allowed;
+      }
+      .form-textarea {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-md);
+        background-color: var(--brand-card);
+        color: var(--brand-foreground);
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      .form-textarea:focus {
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px var(--brand-ring);
+      }
+      .form-textarea:disabled {
+        background-color: var(--brand-muted);
+        color: var(--brand-muted-foreground);
+        cursor: not-allowed;
+      }
+
+      /* 标注状态徽章 */
+      .badge-annotated {
+        background-color: var(--state-success);
+        color: #FFFFFF;
+      }
+      .badge-pending {
+        background-color: var(--brand-muted);
+        color: var(--brand-muted-foreground);
+      }
+
+      /* 等级徽章 */
+      .badge-level {
+        font-size: 0.625rem;
+        padding: 0.125rem 0.375rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .badge-level-1 {
+        background-color: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+      .badge-level-2 {
+        background-color: rgba(201, 122, 42, 0.12);
+        color: var(--state-warning);
+      }
+      .badge-level-3 {
+        background-color: rgba(58, 107, 201, 0.12);
+        color: var(--state-info);
+      }
+
+      /* 权限徽章 */
+      .permission-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 500;
+      }
+      .permission-badge.guest {
+        background-color: var(--brand-muted);
+        color: var(--brand-muted-foreground);
+      }
+      .permission-badge.registered {
+        background-color: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+
+      /* 规则库卡片 */
+      .rule-card {
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-lg);
+        background-color: var(--brand-card);
+        transition: border-color 0.2s ease;
+      }
+      .rule-card:hover {
+        border-color: var(--brand-primary);
+      }
+      .rule-card-header {
+        cursor: pointer;
+        padding: 0.75rem 1rem;
+      }
+      .rule-card-body {
+        border-top: 1px solid var(--brand-border);
+        padding: 0.75rem 1rem;
+      }
+
+      /* 面板容器 */
+      .annotate-layout {
+        display: flex;
+        height: calc(100vh - 56px);
+        overflow: hidden;
+      }
+      .tree-panel {
+        width: 320px;
+        min-width: 280px;
+        max-width: 480px;
+        border-right: 1px solid var(--brand-border);
+        background-color: var(--brand-card);
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+      }
+      .form-panel {
+        flex: 1;
+        overflow-y: auto;
+        background-color: var(--brand-background);
+      }
+      .tree-panel-header {
+        padding: 1rem;
+        border-bottom: 1px solid var(--brand-border);
+        flex-shrink: 0;
+      }
+      .tree-panel-body {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      /* 拖拽分隔条 */
+      .resize-handle {
+        width: 4px;
+        background-color: var(--brand-border);
+        cursor: col-resize;
+        flex-shrink: 0;
+        transition: background-color 0.2s ease;
+      }
+      .resize-handle:hover,
+      .resize-handle.active {
+        background-color: var(--brand-primary);
+      }
+
+      /* 响应式 */
+      @media (max-width: 768px) {
+        .annotate-layout {
+          position: relative;
+        }
+        .tree-panel {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 40;
+          width: 300px;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+        }
+        .tree-panel.open {
+          transform: translateX(0);
+        }
+        .resize-handle {
+          display: none;
+        }
+        .tree-overlay {
+          display: none;
+          position: absolute;
+          inset: 0;
+          z-index: 35;
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+        .tree-overlay.open {
+          display: block;
+        }
+      }
+
+      /* 降低动画偏好 */
+      @media (prefers-reduced-motion: reduce) {
+        .card-hover,
+        .card-hover:hover,
+        .btn-primary-brand,
+        .btn-primary-brand:hover,
+        .btn-outline-brand,
+        .btn-outline-brand:hover,
+        .tree-node,
+        .tree-node .chevron,
+        .tree-panel {
+          transition-duration: 0.01ms !important;
+        }
+        .card-hover:hover {
+          transform: none;
+        }
+      }
+
+      /* 工具提示 */
+      .tooltip-wrapper {
+        position: relative;
+      }
+      .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--brand-foreground);
+        color: var(--brand-background);
+        font-size: 0.75rem;
+        padding: 0.375rem 0.625rem;
+        border-radius: var(--brand-radius-sm);
+        white-space: nowrap;
+        z-index: 50;
+        transition: opacity 0.15s ease;
+        pointer-events: none;
+      }
+      .tooltip-wrapper:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+</body>
+</html>

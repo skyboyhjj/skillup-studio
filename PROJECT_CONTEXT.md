@@ -21,6 +21,12 @@
 | `frontend/studio/_redirects` | Cloudflare Pages 路由规则 |
 | `deploy/hui-skill/nginx-hui-skill.conf` | hui-skill.cn Nginx 配置 |
 | `deploy/hui-skill/deploy.ps1` | hui-skill.cn 部署脚本 |
+| `frontend/product-matrix/pages/index.html` | 产品矩阵首页（非对称布局，4 产品卡片） |
+| `frontend/product-matrix/pages/annotate.html` | 知识图谱标注平台（左侧层级树 + 右侧 6 维标注表单） |
+| `frontend/product-matrix/colors_and_type.css` | 品牌 Design Token 定义（墨色+朱砂红+宣纸白） |
+| `frontend/product-matrix/hui-skill-product-matrix.design` | 设计画布元数据 |
+| `docs/network-monitoring.md` | 带宽监控方案 + 实际流量分析（2026-07-24 ~ 07-31） |
+| `deploy/nginx/hui-skill.cn.conf` | Nginx 站点配置（含限流规则） |
 
 ## 部署命令
 
@@ -76,6 +82,38 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **修复**: `max_tokens: 4096 → 16384`，输入文本截断 `text[:8000] → text[:5000]`（为输出留出更多空间）
 - **部署**: 修改源码后 `docker compose build api && docker compose up -d api` 重建容器
 - **文件**: `/opt/meta-skill/backend/services/concept_extractor.py`（服务器端，不在 Git 仓库中）
+
+### 2. 产品矩阵首页设计与实现
+- 创建产品矩阵首页 `frontend/product-matrix/pages/index.html`，非对称 7:5 / 5:7 交错卡片布局
+- 展示四个产品：标注平台、莫比乌斯概念地图、知识树追踪引擎、论文采集器
+- 区分游客/注册用户权限展示
+- 品牌色系：墨色底（#141210）+ 朱砂红（#C94B3A）+ 宣纸白卡片（#F5F0E8）
+- 技术栈：纯静态 HTML + Tailwind CSS v4.3.1 (CDN) + Lucide Icons v1.8.0 (CDN)
+
+### 3. 知识图谱标注平台页面
+- 创建 `frontend/product-matrix/pages/annotate.html`（1257 行）
+- 左侧 320px 可拖拽概念层级树（搜索 + 展开/折叠 + 选中高亮 + 标注状态徽章）
+- 右侧 6 维标注表单：五行、多层五行深度 L1-L4、认知深度、八卦、概念描述、来源出处
+- 权限切换（游客只读 / 注册用户可编辑）+ 规则库（可展开卡片 + 自然语言修改）
+- 内嵌 20 个概念树节点 + 16 条道德经标注数据
+
+### 4. 品牌统一改名：中国哲学 → 道境空间
+- 全局替换 6 个文件 12 处「中国哲学」→「道境空间」
+- 涉及：`pages/index.html`、`pages/annotate.html`、`colors_and_type.css`、`.design`、编排文件
+
+### 5. 服务器带宽监控方案 & 实际流量分析
+- 服务器 21.41.215.36，按使用流量计费，50 Mbps 峰值带宽
+- 分析 7/24-7/31 阿里云 OMS 流量数据（738 条小时级记录）
+- 结果：7 天总流出 99.19 MB，峰值带宽 15.78 kbps（利用率 0.03%），带宽远未触及上限
+- 文档：`docs/network-monitoring.md`（含 vnstat / Nginx 日志分析 / GoAccess / 限流四种方案）
+- Nginx 配置：`deploy/nginx/hui-skill.cn.conf`（含限流规则 + API 反向代理 + 安全加固）
+
+### 6. GitHub 仓库结构规划
+- 规划 `frontend/` / `backend/` / `deploy/` 三层分离结构
+- 创建根级 `README.md`、`.gitignore`
+- 创建 `frontend/product-matrix/README.md`
+- 排除运行时编排文件、预检模板、缓存、临时文件
+- 保留 `PROJECT_CONTEXT.md` 作为跨分支共享任务参考文档
 
 ---
 

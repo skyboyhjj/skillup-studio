@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hui-skill · 道境空间 × AI 知识引擎</title>
+    <style id="theme-vars">
+/* ============================================================
+   hui-skill.cn — 产品矩阵品牌色系
+   道境空间 × 现代科技：墨色为主，朱砂为辅
+   ============================================================ */
+
+:root {
+  /* ── 品牌主色（朱砂红）── */
+  --brand-primary: #C94B3A;
+  --brand-primary-hover: #B33E2E;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: rgba(201, 75, 58, 0.08);
+  --brand-primary-medium: rgba(201, 75, 58, 0.15);
+
+  /* ── 中性色（墨色系）── */
+  --brand-background: #FAF8F5;
+  --brand-foreground: #1A1715;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1A1715;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1A1715;
+  --brand-muted: #F2EFEB;
+  --brand-muted-foreground: #6B6560;
+  --brand-border: #E5E0DA;
+  --brand-input: #E5E0DA;
+  --brand-ring: rgba(201, 75, 58, 0.35);
+
+  /* ── 半径 ── */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 12px;
+  --brand-radius-xl: 16px;
+
+  /* ── 语义状态色 ── */
+  --state-success: #2D8C4E;
+  --state-warning: #C97A2A;
+  --state-error: #C94B3A;
+  --state-info: #3A6BC9;
+}
+
+/* 暗色模式 */
+.dark {
+  --brand-background: #141210;
+  --brand-foreground: #EDE8E3;
+  --brand-card: #1C1A17;
+  --brand-card-foreground: #EDE8E3;
+  --brand-popover: #1C1A17;
+  --brand-popover-foreground: #EDE8E3;
+  --brand-muted: #252320;
+  --brand-muted-foreground: #9B948E;
+  --brand-border: #2E2B27;
+  --brand-input: #2E2B27;
+  --brand-ring: rgba(201, 75, 58, 0.45);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+    --radius-xl: var(--brand-radius-xl);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <style>
+            /* ============================================================
+               页面作用域暗色主题 — 墨色底 + 朱砂红 + 宣纸白卡片
+               ============================================================ */
+            .page-root {
+                --brand-background: #141210;
+                --brand-foreground: #EDE8E3;
+                --brand-card: #F5F0E8;
+                --brand-card-foreground: #1A1715;
+                --brand-card-muted: #6B6560;
+                --brand-muted: #252320;
+                --brand-muted-foreground: #9B948E;
+                --brand-border: #2E2B27;
+                --brand-ring: rgba(201, 75, 58, 0.45);
+                background-color: var(--brand-background);
+                color: var(--brand-foreground);
+            }
+
+            /* 卡片交互 */
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            }
+
+            /* CTA 按钮 */
+            .btn-primary-brand {
+                background-color: var(--brand-primary);
+                color: var(--brand-primary-foreground);
+                transition: background-color 0.2s ease;
+            }
+            .btn-primary-brand:hover {
+                background-color: var(--brand-primary-hover);
+            }
+
+            /* 敬请期待徽章 */
+            .badge-coming-soon {
+                background-color: var(--brand-muted);
+                color: var(--brand-muted-foreground);
+            }
+
+            /* 降低动画偏好 */
+            @media (prefers-reduced-motion: reduce) {
+                .card-hover,
+                .card-hover:hover,
+                .btn-primary-brand,
+                .btn-primary-brand:hover {
+                    transition-duration: 0.01ms !important;
+                }
+                .card-hover:hover {
+                    transform: none;
+                }
+            }
+        </style>
+
+        <div class="page-root min-h-screen flex flex-col">
+
+            <!-- ======== Hero / Header ======== -->
+            <header class="relative pt-24 pb-12 md:pt-32 md:pb-16">
+                <div class="max-w-4xl mx-auto px-6 text-center">
+                    <h1 id="hero-title" class="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+                        hui<span class="text-primary">&#183;</span>skill
+                    </h1>
+                    <p class="mt-4 text-xl md:text-2xl text-muted-foreground tracking-wide">
+                        道境空间 &#215; AI 知识引擎
+                    </p>
+                    <p class="mt-6 max-w-xl mx-auto text-base leading-relaxed text-muted-foreground">
+                        以道境空间为底色，以 AI 技术为引擎，面向知识工作者构建新一代智能研究平台。
+                    </p>
+                    <div class="mt-10 flex flex-col items-center gap-2 text-muted-foreground">
+                        <span class="text-sm">探索产品矩阵</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ======== Permission Indicator ======== -->
+            <section id="permission-badge" class="py-6">
+                <div class="max-w-6xl mx-auto px-6">
+                    <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full inline-block shrink-0" style="background-color: var(--brand-muted-foreground);"></span>
+                            <span class="text-muted-foreground">游客 &#8212; 无需注册，即刻体验核心功能</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full inline-block shrink-0" style="background-color: var(--brand-primary);"></span>
+                            <span class="text-primary font-medium">注册用户 &#8212; 解锁完整功能与数据管理</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======== Product Cards ======== -->
+            <section class="flex-1 py-8 pb-24">
+                <div class="max-w-6xl mx-auto px-6">
+
+                    <!-- Row 1: Hero Products — 标注平台 + 概念地图 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
+
+                        <!-- Product 1: 知识图谱标注平台 -->
+                        <div id="product-annotate" class="md:col-span-7 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">
+                            <div class="mb-4">
+                                <i data-lucide="layers" class="w-9 h-9 text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight">知识图谱标注平台</h3>
+                            <p class="mt-1 text-sm" style="color: var(--brand-card-muted);">五行八卦 &#183; 中医经络 &#183; 阴阳学说</p>
+                            <p class="mt-3 text-sm leading-relaxed" style="color: var(--brand-card-muted);">
+                                专为道境空间概念设计的智能标注工作台，支持多维标注、规则推理、数据交换。
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-3 text-xs font-medium">
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">128,560 概念</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">1,248 规则</span>
+                            </div>
+                            <hr class="my-5" style="border-color: rgba(0,0,0,0.06);">
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0" style="color: var(--brand-card-muted);">游客</span>
+                                    <span style="color: var(--brand-card-muted);">浏览公开数据集</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0 text-primary">注册用户</span>
+                                    <span class="text-primary">完整标注 &#183; 规则库管理 &#183; 数据交换 &#183; 协同标注</span>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-1">
+                                <a href="/annotate/" class="btn-primary-brand inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium no-underline">
+                                    进入平台
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Product 2: 莫比乌斯概念地图 -->
+                        <div id="product-studio" class="md:col-span-5 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">
+                            <div class="mb-4">
+                                <i data-lucide="orbit" class="w-9 h-9 text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight">莫比乌斯概念地图</h3>
+                            <p class="mt-1 text-sm" style="color: var(--brand-card-muted);">3D 交互式知识可视化</p>
+                            <p class="mt-3 text-sm leading-relaxed" style="color: var(--brand-card-muted);">
+                                一键生成可交互的莫比乌斯环概念地图，支持文本提取与预设数据集。
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-3 text-xs font-medium">
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">11 组预设</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">3D 交互</span>
+                            </div>
+                            <hr class="my-5" style="border-color: rgba(0,0,0,0.06);">
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0" style="color: var(--brand-card-muted);">游客</span>
+                                    <span style="color: var(--brand-card-muted);">预设数据集生成</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0 text-primary">注册用户</span>
+                                    <span class="text-primary">自由文本输入 &#183; 自定义导出 &#183; 数据集管理</span>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-1">
+                                <a href="/studio/" class="btn-primary-brand inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium no-underline">
+                                    进入平台
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Coming Soon Products — 追踪引擎 + 论文采集器 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+                        <!-- Product 3: 知识树追踪引擎 -->
+                        <div id="product-flowengine" class="md:col-span-5 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">
+                            <div class="mb-4 flex items-center justify-between">
+                                <i data-lucide="activity" class="w-9 h-9 text-primary"></i>
+                                <span class="badge-coming-soon px-3 py-1 rounded-full text-xs font-medium">敬请期待</span>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight">知识树追踪引擎</h3>
+                            <p class="mt-1 text-sm" style="color: var(--brand-card-muted);">五行诊断 &#183; 月度追踪 &#183; 领域图谱</p>
+                            <p class="mt-3 text-sm leading-relaxed" style="color: var(--brand-card-muted);">
+                                基于五行理论的 AI 知识领域动态追踪，月度论文采集、结构诊断与趋势分析。
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-3 text-xs font-medium">
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">15 领域</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">2.19 边密度</span>
+                            </div>
+                            <hr class="my-5" style="border-color: rgba(0,0,0,0.06);">
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0" style="color: var(--brand-card-muted);">游客</span>
+                                    <span style="color: var(--brand-card-muted);">公开诊断报告</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0 text-primary">注册用户</span>
+                                    <span class="text-primary">完整追踪 &#183; 论文采集 &#183; 时间序列分析 &#183; API 访问</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4: 论文采集器 -->
+                        <div id="product-paper" class="md:col-span-7 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">
+                            <div class="mb-4 flex items-center justify-between">
+                                <i data-lucide="file-text" class="w-9 h-9 text-primary"></i>
+                                <span class="badge-coming-soon px-3 py-1 rounded-full text-xs font-medium">敬请期待</span>
+                            </div>
+                            <h3 class="text-xl font-bold tracking-tight">论文采集器</h3>
+                            <p class="mt-1 text-sm" style="color: var(--brand-card-muted);">arXiv 自动化月度采集</p>
+                            <p class="mt-3 text-sm leading-relaxed" style="color: var(--brand-card-muted);">
+                                覆盖 11 个 AI 子领域的论文自动采集，支持标题、摘要、分类结构化输出。
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-3 text-xs font-medium">
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">11 分类</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">500+ 篇/月</span>
+                            </div>
+                            <hr class="my-5" style="border-color: rgba(0,0,0,0.06);">
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0" style="color: var(--brand-card-muted);">游客</span>
+                                    <span style="color: var(--brand-card-muted);">公开论文列表</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <span class="font-medium shrink-0 text-primary">注册用户</span>
+                                    <span class="text-primary">完整采集 &#183; 分类筛选 &#183; 批量导出</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ======== Footer ======== -->
+            <footer class="py-12" style="border-top: 1px solid var(--brand-border);">
+                <div class="max-w-6xl mx-auto px-6 text-center">
+                    <p class="text-sm text-muted-foreground">&copy; 2026 hui-skill.cn</p>
+                    <div class="mt-3 flex justify-center gap-6 text-sm text-muted-foreground">
+                        <a href="#" class="hover:text-primary transition-colors duration-200">关于我们</a>
+                        <a href="#" class="hover:text-primary transition-colors duration-200">联系方式</a>
+                        <a href="#" class="hover:text-primary transition-colors duration-200">使用条款</a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
