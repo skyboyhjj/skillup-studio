@@ -1,0 +1,2730 @@
+{
+  "phase": "3+",
+  "month_label": "2026-07",
+  "timestamp": "2026-07",
+  "data_sources": {
+    "snapshot": "2026-07-30_snapshot.json",
+    "paper_titles": "phase3_paper_titles.json",
+    "phase2": "phase2_diagnosis_2026-07.json"
+  },
+  "domains": {
+    "大语言模型": {
+      "node_count": 14,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 0,
+        "火": 0,
+        "土": 1,
+        "金": 5,
+        "水": 8
+      },
+      "paper_wx": {
+        "火": 2,
+        "木": 6,
+        "水": 9,
+        "土": 13
+      },
+      "comparison": {
+        "木": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 6,
+          "paper_pct": 20.0,
+          "diff": 20.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 6.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 1,
+          "node_pct": 7.1,
+          "paper": 13,
+          "paper_pct": 43.3,
+          "diff": 36.2,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 5,
+          "node_pct": 35.7,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": -35.7,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "水": {
+          "node": 8,
+          "node_pct": 57.1,
+          "paper": 9,
+          "paper_pct": 30.0,
+          "diff": -27.1,
+          "reading": "↓ 论文活跃度低于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          0.3571,
+          0.5714
+        ],
+        "paper": [
+          -0.2,
+          0.2333
+        ],
+        "drift": [
+          -0.5571,
+          -0.3381
+        ],
+        "magnitude": 0.6517,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 0.99,
+      "S_D": 0.8315,
+      "paper_details": [
+        {
+          "title": "SPIRAL: Learning to Search and Aggregate",
+          "wuxing": "火"
+        },
+        {
+          "title": "VIMPO: Value-Implicit Policy Optimization for LLMs",
+          "wuxing": "木"
+        },
+        {
+          "title": "Beyond Uniform Token-Level Trust Region in LLM Reinforcement Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training",
+          "wuxing": "土"
+        },
+        {
+          "title": "DOPD: Dual On-policy Distillation",
+          "wuxing": "木"
+        },
+        {
+          "title": "SAGE-OPD: Selective Agent-Guided Intervention for Multi-Turn On-Policy Distillation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Tapered Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Dynamic Short Convolutions Improve Transformers",
+          "wuxing": "土"
+        },
+        {
+          "title": "Depth-Attention: Cross-Layer Value Mixing for Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "MiniMax Sparse Attention",
+          "wuxing": "土"
+        },
+        {
+          "title": "You Only Index Once: Cross-Layer Sparse Attention with Shared Routing",
+          "wuxing": "土"
+        },
+        {
+          "title": "JetSpec: Breaking the Scaling Ceiling of Speculative Decoding with Parallel Tree Drafting",
+          "wuxing": "土"
+        },
+        {
+          "title": "Self-Harness: Harnesses That Improve Themselves",
+          "wuxing": "水"
+        },
+        {
+          "title": "Decentralized Multi-Agent Systems with Shared Context",
+          "wuxing": "火"
+        },
+        {
+          "title": "Connect the Dots: Training LLMs for Long-Lifecycle Agents with Cross-Domain Generalization Via Reinforcement Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "Explaining Attention with Program Synthesis",
+          "wuxing": "木"
+        },
+        {
+          "title": "ReasoningFlow: Discourse Structures for Understanding LLM Reasoning Traces",
+          "wuxing": "水"
+        },
+        {
+          "title": "Anatomy of Post-Training: Using Interpretability to Characterize Data and Shape the Learning Signal",
+          "wuxing": "土"
+        },
+        {
+          "title": "Smooth Scaling Laws Hide Stepwise Token Learning",
+          "wuxing": "土"
+        },
+        {
+          "title": "Internal Data Repetition Harm in LLM Pre-training",
+          "wuxing": "土"
+        },
+        {
+          "title": "q0: Ultra-Efficient Population-Based Pretraining",
+          "wuxing": "土"
+        },
+        {
+          "title": "SoftQ: Soft Q-Scaling Laws for LLM Training",
+          "wuxing": "土"
+        },
+        {
+          "title": "Muon Spectral Scaling Laws for LLM Optimization",
+          "wuxing": "土"
+        },
+        {
+          "title": "CPPO: Cumulative Prefix Divergence Policy Optimization",
+          "wuxing": "木"
+        },
+        {
+          "title": "Bebop: Rejection Sampling with Multi-Step Prediction for RLVR Acceleration",
+          "wuxing": "水"
+        },
+        {
+          "title": "DRPO: Divergence-Regularized Policy Optimization",
+          "wuxing": "木"
+        },
+        {
+          "title": "HydraHead: Head-Level Hybrid Attention for LLMs",
+          "wuxing": "水"
+        },
+        {
+          "title": "MPI: Manifold Power Iteration Router for MoE",
+          "wuxing": "土"
+        },
+        {
+          "title": "LoRA-Muon: Spectral Steepest Descent for Low-Rank Adaptation",
+          "wuxing": "水"
+        },
+        {
+          "title": "LCLMs: End-to-End Context Compression for Long-Context LMs",
+          "wuxing": "土"
+        }
+      ]
+    },
+    "具身智能与机器人": {
+      "node_count": 19,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 12,
+        "火": 0,
+        "土": 0,
+        "金": 1,
+        "水": 6
+      },
+      "paper_wx": {
+        "木": 24,
+        "土": 2,
+        "金": 2,
+        "水": 2
+      },
+      "comparison": {
+        "木": {
+          "node": 12,
+          "node_pct": 63.2,
+          "paper": 24,
+          "paper_pct": 80.0,
+          "diff": 16.8,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 6.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 1,
+          "node_pct": 5.3,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 1.4,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 6,
+          "node_pct": 31.6,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": -24.9,
+          "reading": "↓ 论文活跃度低于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.5789,
+          0.3158
+        ],
+        "paper": [
+          -0.7333,
+          0.0667
+        ],
+        "drift": [
+          -0.1544,
+          -0.2491
+        ],
+        "magnitude": 0.2931,
+        "reading": "轻度漂移——研究方向与知识结构基本一致"
+      },
+      "theta_critical": 0.52,
+      "S_D": 0.912,
+      "paper_details": [
+        {
+          "title": "Looped World Models",
+          "wuxing": "木"
+        },
+        {
+          "title": "WEAVER, Better, Faster, Longer: An Effective World Model for Robotic Manipulation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Kairos: A Native World Model Stack for Physical AI",
+          "wuxing": "木"
+        },
+        {
+          "title": "PointAction: 3D Points as Universal Action Representations for Robot Control",
+          "wuxing": "木"
+        },
+        {
+          "title": "ThinkingVLA: Interleaved Vision and Language Reasoning for Robotic Manipulation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Human Universal Grasping",
+          "wuxing": "木"
+        },
+        {
+          "title": "MoonSplat: Monocular Online Gaussian Splatting with Sim(3) Global Optimization",
+          "wuxing": "木"
+        },
+        {
+          "title": "Pocket-SLAM: Rendering-Area-Aware Pruning for Memory-Efficient 3DGS-SLAM",
+          "wuxing": "土"
+        },
+        {
+          "title": "SG2Loc: Sequential Visual Localization on 3D Scene Graphs",
+          "wuxing": "木"
+        },
+        {
+          "title": "FACTR 2: Learning External Force Sensing for Commodity Robot Arms Improves Policy Learning",
+          "wuxing": "木"
+        },
+        {
+          "title": "HapTile: A Haptic-Informed Vision-Tactile-Language-Action Dataset for Contact-Rich Imitation Learning",
+          "wuxing": "木"
+        },
+        {
+          "title": "ART-Glove: Articulated Tactile Glove for Contact-Grounded Dexterous Interaction Capture",
+          "wuxing": "木"
+        },
+        {
+          "title": "GRAIL: Generating Humanoid Loco-Manipulation from 3D Assets and Video Priors",
+          "wuxing": "木"
+        },
+        {
+          "title": "Wh0: Generative World Models as Scalable Sources of Egocentric Human Hand Manipulation Data",
+          "wuxing": "木"
+        },
+        {
+          "title": "EgoInfinity: A Web-Scale 4D Hand-Object Interaction Data Engine for Any-View Robot Retargeting and Video-to-Action Robot Learning",
+          "wuxing": "木"
+        },
+        {
+          "title": "Neuro-Symbolic Learning for Long-Horizon Task Planning Under Complex Logical Constraints",
+          "wuxing": "金"
+        },
+        {
+          "title": "Brick-Composer: Using MLLMs for Assembly with Diverse Bricks",
+          "wuxing": "水"
+        },
+        {
+          "title": "CoStream: Composing Simple Behaviors for Generalizable Complex Manipulation",
+          "wuxing": "木"
+        },
+        {
+          "title": "World Engine: Towards the Era of Post-Training for Autonomous Driving",
+          "wuxing": "土"
+        },
+        {
+          "title": "NVIDIA OmniDreams: Real-Time Generative World Model for Closed-Loop Autonomous Vehicle Simulation",
+          "wuxing": "木"
+        },
+        {
+          "title": "SkyJEPA: Learning Long-Horizon World Models for Zero-Shot Sim-to-Real Control of Quadrotors",
+          "wuxing": "木"
+        },
+        {
+          "title": "Ambient Diffusion Policy: Imitation Learning from Suboptimal Data in Robotics",
+          "wuxing": "木"
+        },
+        {
+          "title": "Reinforcement Learning for Flow-Matching Policies with Density Transport",
+          "wuxing": "水"
+        },
+        {
+          "title": "GenPO++: Generative Policy Optimization with Jacobian-free Likelihood Ratios",
+          "wuxing": "木"
+        },
+        {
+          "title": "CHORUS: Decentralized Multi-Embodiment Collaboration with One VLA Policy",
+          "wuxing": "木"
+        },
+        {
+          "title": "Transferring Contact, Not Just Motion: Compliant Grasping Across Dexterous Hands",
+          "wuxing": "木"
+        },
+        {
+          "title": "LUCID: Learning Embodiment-Agnostic Intent Models from Unstructured Human Videos for Scalable Dexterous Robot Skill Acquisition",
+          "wuxing": "木"
+        },
+        {
+          "title": "BadWorld: Adversarial Attacks on World Models",
+          "wuxing": "金"
+        },
+        {
+          "title": "Hallucination in World Models is Predictable and Preventable",
+          "wuxing": "木"
+        },
+        {
+          "title": "SC3-Eval: Evaluating Robot Foundation Models via Self-Consistent Video Generation",
+          "wuxing": "木"
+        }
+      ]
+    },
+    "多模态智能": {
+      "node_count": 32,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 19,
+        "火": 6,
+        "土": 0,
+        "金": 0,
+        "水": 7
+      },
+      "paper_wx": {
+        "火": 6,
+        "水": 9,
+        "金": 1,
+        "木": 9,
+        "土": 5
+      },
+      "comparison": {
+        "木": {
+          "node": 19,
+          "node_pct": 59.4,
+          "paper": 9,
+          "paper_pct": 30.0,
+          "diff": -29.4,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "火": {
+          "node": 6,
+          "node_pct": 18.8,
+          "paper": 6,
+          "paper_pct": 20.0,
+          "diff": 1.2,
+          "reading": "≈ 基本一致"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": 16.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 1,
+          "paper_pct": 3.3,
+          "diff": 3.3,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 7,
+          "node_pct": 21.9,
+          "paper": 9,
+          "paper_pct": 30.0,
+          "diff": 8.1,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.5938,
+          0.0312
+        ],
+        "paper": [
+          -0.2667,
+          0.1
+        ],
+        "drift": [
+          0.3271,
+          0.0688
+        ],
+        "magnitude": 0.3342,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 0.43,
+      "S_D": 0.9268,
+      "paper_details": [
+        {
+          "title": "Audio Interaction Model",
+          "wuxing": "火"
+        },
+        {
+          "title": "Is Text All You Need? Text as a Universal Information Bottleneck for Speech LLMs",
+          "wuxing": "水"
+        },
+        {
+          "title": "EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement",
+          "wuxing": "火"
+        },
+        {
+          "title": "Disentangling Hallucinations: Orthogonal Semantic Projection for Robust Interpretability",
+          "wuxing": "金"
+        },
+        {
+          "title": "Gaze Heads: How VLMs Look at What They Describe",
+          "wuxing": "水"
+        },
+        {
+          "title": "Imaginative Perception Tokens Enhance Spatial Reasoning in Multimodal Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "MUNI: Multimodal Unified Latent Diffusion for Coherent Any-to-Any Generation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models",
+          "wuxing": "土"
+        },
+        {
+          "title": "PermaVid: Consistent Video Generation Across Edits via Disentangled Context Memory",
+          "wuxing": "水"
+        },
+        {
+          "title": "HapTile: A Haptic-Informed Vision-Tactile-Language-Action Dataset for Contact-Rich Imitation Learning",
+          "wuxing": "木"
+        },
+        {
+          "title": "Motion-Focused Latent Action Enables Cross-Embodiment VLA Training from Human EgoVideos",
+          "wuxing": "木"
+        },
+        {
+          "title": "MuseVLA: An Adaptive Multimodal Sensing Vision-Language-Action Model for Robotic Manipulation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Argus-Retriever: Vision-LLM Late-Interaction Retrieval with Region-Aware Query-Conditioned MoE for Visual Document Retrieval",
+          "wuxing": "火"
+        },
+        {
+          "title": "MM-Matryoshka: Towards Budget-Elastic Visual Document Retrieval via a 2D Multimodal Matryoshka Training Framework",
+          "wuxing": "土"
+        },
+        {
+          "title": "Closing the Indexing-Decoding Gap in Multimodal Generative Retrieval via Prefix Retention Optimization",
+          "wuxing": "木"
+        },
+        {
+          "title": "WorldBench: A Challenging and Visually Diverse Multimodal Reasoning Benchmark",
+          "wuxing": "木"
+        },
+        {
+          "title": "MVEB: Massive Video Embedding Benchmark",
+          "wuxing": "木"
+        },
+        {
+          "title": "Sci-Rho: A Multilingual Visually-Grounded Symbolic Benchmark for STEM Problems",
+          "wuxing": "火"
+        },
+        {
+          "title": "MJEPA: A Simple and Scalable Joint-Embedding Predictive Architecture for Audio-Visual Learning",
+          "wuxing": "土"
+        },
+        {
+          "title": "P-JEPA: Procedural Video Representation Learning via Joint Embedding Predictive Architecture",
+          "wuxing": "土"
+        },
+        {
+          "title": "Continual Visual and Verbal Learning Through a Child's Egocentric Input",
+          "wuxing": "水"
+        },
+        {
+          "title": "BioMatrix: Towards a Comprehensive Biological Foundation Model Spanning the Modality Matrix of Sequences, Structures, and Language",
+          "wuxing": "土"
+        },
+        {
+          "title": "Baichuan-M4: A Clinical-Grade Medical Agent System for Continuous Care",
+          "wuxing": "火"
+        },
+        {
+          "title": "Retrieval-Based Brain Decoding by Alignment, not Complexity",
+          "wuxing": "火"
+        },
+        {
+          "title": "Modality Forcing for Scalable Spatial Generation",
+          "wuxing": "木"
+        },
+        {
+          "title": "SG2Loc: Sequential Visual Localization on 3D Scene Graphs",
+          "wuxing": "木"
+        },
+        {
+          "title": "Thinking in Blender: Staged Executable Inverse Graphics with Vision-Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "SpeechJBB: Probing Safety Alignment and Comprehension in Large Audio Language Models under Code-Switched Speech",
+          "wuxing": "水"
+        },
+        {
+          "title": "Entity Binding Failures in Speech LLM Reasoning: Diagnosis and Chain-of-Thought Intervention",
+          "wuxing": "水"
+        },
+        {
+          "title": "Mirage Probes: How Vision Models Fake Visual Understanding",
+          "wuxing": "水"
+        }
+      ]
+    },
+    "智能体": {
+      "node_count": 31,
+      "paper_count": 29,
+      "node_wx": {
+        "木": 15,
+        "火": 7,
+        "土": 1,
+        "金": 2,
+        "水": 6
+      },
+      "paper_wx": {
+        "水": 2,
+        "火": 23,
+        "金": 1,
+        "土": 2,
+        "木": 1
+      },
+      "comparison": {
+        "木": {
+          "node": 15,
+          "node_pct": 48.4,
+          "paper": 1,
+          "paper_pct": 3.4,
+          "diff": -44.9,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "火": {
+          "node": 7,
+          "node_pct": 22.6,
+          "paper": 23,
+          "paper_pct": 79.3,
+          "diff": 56.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 1,
+          "node_pct": 3.2,
+          "paper": 2,
+          "paper_pct": 6.9,
+          "diff": 3.7,
+          "reading": "≈ 基本一致"
+        },
+        "金": {
+          "node": 2,
+          "node_pct": 6.5,
+          "paper": 1,
+          "paper_pct": 3.4,
+          "diff": -3.0,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 6,
+          "node_pct": 19.4,
+          "paper": 2,
+          "paper_pct": 6.9,
+          "diff": -12.5,
+          "reading": "↓ 论文活跃度低于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.4194,
+          -0.0323
+        ],
+        "paper": [
+          0.0,
+          -0.7241
+        ],
+        "drift": [
+          0.4194,
+          -0.6919
+        ],
+        "magnitude": 0.809,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 0,
+      "S_D": 0.9889,
+      "paper_details": [
+        {
+          "title": "Connect the Dots: Training LLMs for Long-Lifecycle Agents with Cross-Domain Generalization Via Reinforcement Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "Self-Harness: Harnesses That Improve Themselves",
+          "wuxing": "水"
+        },
+        {
+          "title": "Q-Evolve: Self-evolving LLM agents with in-distribution Optimization",
+          "wuxing": "火"
+        },
+        {
+          "title": "Agentic Software: How AI Agents Are Restructuring the Software Paradigm",
+          "wuxing": "火"
+        },
+        {
+          "title": "SWE-Explore: Benchmarking How Coding Agents Explore Repositories",
+          "wuxing": "火"
+        },
+        {
+          "title": "Decentralized Multi-Agent Systems with Shared Context",
+          "wuxing": "火"
+        },
+        {
+          "title": "AI Agents Enable Adaptive Computer Worms",
+          "wuxing": "火"
+        },
+        {
+          "title": "SkillHarm: Lifecycle-Aware Skill-Based Attacks via Automated Construction",
+          "wuxing": "金"
+        },
+        {
+          "title": "AutoSpec: Safety Rule Evolution for LLM Agents via Inductive Logic Programming",
+          "wuxing": "火"
+        },
+        {
+          "title": "Agents' Last Exam",
+          "wuxing": "火"
+        },
+        {
+          "title": "CEO-Bench: Can Agents Play the Long Game?",
+          "wuxing": "火"
+        },
+        {
+          "title": "Where Do Deep-Research Agents Go Wrong? Span-Level Error Localization in Agent Trajectories",
+          "wuxing": "火"
+        },
+        {
+          "title": "Toward Generalist Autonomous Research via Hypothesis-Tree Refinement",
+          "wuxing": "火"
+        },
+        {
+          "title": "Harnessing the Collective Intelligence of AI Agents in the Wild for New Discoveries",
+          "wuxing": "火"
+        },
+        {
+          "title": "LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks",
+          "wuxing": "火"
+        },
+        {
+          "title": "Harness-1: Reinforcement Learning for Search Agents with State-Externalizing Harnesses",
+          "wuxing": "火"
+        },
+        {
+          "title": "EvoEmbedding: Evolvable Representations for Long-Context Retrieval and Agentic Memory",
+          "wuxing": "火"
+        },
+        {
+          "title": "Are We Ready For An Agent-Native Memory System?",
+          "wuxing": "土"
+        },
+        {
+          "title": "Economy of Minds: Emerging Multi-Agent Intelligence with Economic Interactions",
+          "wuxing": "火"
+        },
+        {
+          "title": "Multi-Agent Transactive Memory",
+          "wuxing": "火"
+        },
+        {
+          "title": "S-Agent: Spatial Tool-Use Elicits Reasoning for Spatial Intelligence",
+          "wuxing": "火"
+        },
+        {
+          "title": "Playful Agentic Robot Learning",
+          "wuxing": "木"
+        },
+        {
+          "title": "Fara-1.5: Scalable Learning Environments for Computer Use Agents",
+          "wuxing": "火"
+        },
+        {
+          "title": "TreeSeeker: Tree-Structured Trial, Error, and Return in Deep Search",
+          "wuxing": "火"
+        },
+        {
+          "title": "Towards Retrieving Interaction Spaces for Agentic Search",
+          "wuxing": "火"
+        },
+        {
+          "title": "SlimSearcher: Training Efficiency-Aware Web Agents via Adaptive Reward Gating",
+          "wuxing": "火"
+        },
+        {
+          "title": "Critique of Agent Model",
+          "wuxing": "火"
+        },
+        {
+          "title": "Nemotron 3 Ultra: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
+          "wuxing": "土"
+        },
+        {
+          "title": "OpenThoughts-Agent: Data Recipes for Agentic Models",
+          "wuxing": "火"
+        }
+      ]
+    },
+    "生成式 AI": {
+      "node_count": 9,
+      "paper_count": 29,
+      "node_wx": {
+        "木": 8,
+        "火": 0,
+        "土": 0,
+        "金": 0,
+        "水": 1
+      },
+      "paper_wx": {
+        "木": 20,
+        "水": 7,
+        "土": 2
+      },
+      "comparison": {
+        "木": {
+          "node": 8,
+          "node_pct": 88.9,
+          "paper": 20,
+          "paper_pct": 69.0,
+          "diff": -19.9,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.9,
+          "diff": 6.9,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 1,
+          "node_pct": 11.1,
+          "paper": 7,
+          "paper_pct": 24.1,
+          "diff": 13.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.8889,
+          0.1111
+        ],
+        "paper": [
+          -0.6897,
+          0.2414
+        ],
+        "drift": [
+          0.1992,
+          0.1303
+        ],
+        "magnitude": 0.238,
+        "reading": "轻度漂移——研究方向与知识结构基本一致"
+      },
+      "theta_critical": 0,
+      "S_D": 0.9075,
+      "paper_details": [
+        {
+          "title": "Sarashina2.2-TTS: Tackling Kanji Polyphony in Japanese Speech Generation via Data Scaling and Targeted Data Synthesis",
+          "wuxing": "木"
+        },
+        {
+          "title": "VoxCPM2 Technical Report",
+          "wuxing": "水"
+        },
+        {
+          "title": "BareWave: Waveform-Native Flow-Matching Text-to-Speech",
+          "wuxing": "水"
+        },
+        {
+          "title": "Qwen-Image-2.0-RL Technical Report",
+          "wuxing": "木"
+        },
+        {
+          "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+          "wuxing": "木"
+        },
+        {
+          "title": "i1: A Simple and Fully Open Recipe for Strong Text-to-Image Models",
+          "wuxing": "木"
+        },
+        {
+          "title": "MeshFlow: Mesh Generation with Equivariant Flow Matching",
+          "wuxing": "木"
+        },
+        {
+          "title": "World Tracing: Generative Pixel-Aligned Geometry Beyond the Visible",
+          "wuxing": "木"
+        },
+        {
+          "title": "FiCA: Feed-forward instant Gaussian Codec Avatars from a Single Portrait Image",
+          "wuxing": "木"
+        },
+        {
+          "title": "Temporal Difference Learning for Diffusion Models",
+          "wuxing": "木"
+        },
+        {
+          "title": "Optimal Transport Flow Matching by Design",
+          "wuxing": "木"
+        },
+        {
+          "title": "On the Redundancy of Timestep Embeddings in Diffusion Models",
+          "wuxing": "木"
+        },
+        {
+          "title": "DiPOD: Diffusion Policy Optimization without Drifting Apart",
+          "wuxing": "木"
+        },
+        {
+          "title": "NoiseTilt: Noise-Tilted Reverse Kernels for Diffusion Reward Alignment",
+          "wuxing": "木"
+        },
+        {
+          "title": "Ambient Diffusion Policy: Imitation Learning from Suboptimal Data in Robotics",
+          "wuxing": "木"
+        },
+        {
+          "title": "MMDiff: Extending Diffusion Transformers for Multi-Modal Generation",
+          "wuxing": "木"
+        },
+        {
+          "title": "LLM can Read Spectrogram: Encoder-free Speech-Language Modeling",
+          "wuxing": "水"
+        },
+        {
+          "title": "XRDiff: Crystal Structure Prediction from Powder X-Ray Diffraction Data Using Diffusion Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Autoregressive Boltzmann Generators",
+          "wuxing": "水"
+        },
+        {
+          "title": "Generative Molecular Morphing for Flexible-Size Design via Unbalanced Optimal Transport",
+          "wuxing": "木"
+        },
+        {
+          "title": "HyperQuant: A Rate-Distortion-Optimal Quantization Pipeline for Large Language and Diffusion Models",
+          "wuxing": "木"
+        },
+        {
+          "title": "Elastic Time: Dynamic Frame Rate Bottlenecks for Neural Audio Coding",
+          "wuxing": "水"
+        },
+        {
+          "title": "Accelerating Speculative Diffusions via Block Verification",
+          "wuxing": "木"
+        },
+        {
+          "title": "DiffusionBench: On Holistic Evaluation of Diffusion Transformers",
+          "wuxing": "木"
+        },
+        {
+          "title": "Diffusing in the Right Space: A Systematic Study of Latent Diffusability",
+          "wuxing": "土"
+        },
+        {
+          "title": "Evaluating the Representation Space of Diffusion Models via Self-Supervised Principles",
+          "wuxing": "土"
+        },
+        {
+          "title": "Diffusion Models for Adaptive Sequential Data Generation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Spatiotemporal Imputation with Graph-Informed Flow Matching",
+          "wuxing": "水"
+        },
+        {
+          "title": "Diffusion-Driven State Space Models",
+          "wuxing": "木"
+        }
+      ]
+    },
+    "机器学习基础": {
+      "node_count": 72,
+      "paper_count": 29,
+      "node_wx": {
+        "木": 2,
+        "火": 4,
+        "土": 55,
+        "金": 0,
+        "水": 11
+      },
+      "paper_wx": {
+        "木": 6,
+        "水": 8,
+        "火": 4,
+        "土": 10,
+        "金": 1
+      },
+      "comparison": {
+        "木": {
+          "node": 2,
+          "node_pct": 2.8,
+          "paper": 6,
+          "paper_pct": 20.7,
+          "diff": 17.9,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "火": {
+          "node": 4,
+          "node_pct": 5.6,
+          "paper": 4,
+          "paper_pct": 13.8,
+          "diff": 8.2,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 55,
+          "node_pct": 76.4,
+          "paper": 10,
+          "paper_pct": 34.5,
+          "diff": -41.9,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 1,
+          "paper_pct": 3.4,
+          "diff": 3.4,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 11,
+          "node_pct": 15.3,
+          "paper": 8,
+          "paper_pct": 27.6,
+          "diff": 12.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.0278,
+          0.0972
+        ],
+        "paper": [
+          -0.1724,
+          0.1379
+        ],
+        "drift": [
+          -0.1446,
+          0.0407
+        ],
+        "magnitude": 0.1503,
+        "reading": "轻度漂移——研究方向与知识结构基本一致"
+      },
+      "theta_critical": 0,
+      "S_D": 1.0544,
+      "paper_details": [
+        {
+          "title": "VIMPO: Value-Implicit Policy Optimization for LLMs",
+          "wuxing": "木"
+        },
+        {
+          "title": "Beyond Uniform Token-Level Trust Region in LLM Reinforcement Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "SPIRAL: Learning to Search and Aggregate",
+          "wuxing": "火"
+        },
+        {
+          "title": "On the Geometry of On-Policy Distillation",
+          "wuxing": "木"
+        },
+        {
+          "title": "RLCSD: Reinforcement Learning with Contrastive On-Policy Self-Distillation",
+          "wuxing": "土"
+        },
+        {
+          "title": "SAGE-OPD: Selective Agent-Guided Intervention for Multi-Turn On-Policy Distillation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Improving Neural Network Training by Decoupling the Magnitude and Direction of Weight Vectors",
+          "wuxing": "土"
+        },
+        {
+          "title": "Spectral Scaling Laws of Muon",
+          "wuxing": "土"
+        },
+        {
+          "title": "LoRA-Muon: Spectral Steepest Descent on the Low-Rank Manifold",
+          "wuxing": "水"
+        },
+        {
+          "title": "Depth-Attention: Cross-Layer Value Mixing for Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Variable-Width Transformers",
+          "wuxing": "土"
+        },
+        {
+          "title": "Do Transformers Need Three Projections? Systematic Study of QKV Variants",
+          "wuxing": "土"
+        },
+        {
+          "title": "Trajectory Geometry of Transformer Representations Across Layers",
+          "wuxing": "土"
+        },
+        {
+          "title": "A Geometric View for Understanding Concept Learning and Neuron Interpretation in Sparse Autoencoders",
+          "wuxing": "火"
+        },
+        {
+          "title": "Riemannian Metric Matching for Scalable Geometric Modeling of Distributions",
+          "wuxing": "水"
+        },
+        {
+          "title": "The Invisible Hand of Physics: When Video Diffusion Models Know More Than They Show",
+          "wuxing": "木"
+        },
+        {
+          "title": "Hallucination in World Models is Predictable and Preventable",
+          "wuxing": "木"
+        },
+        {
+          "title": "WALL-WM: Carving World Action Modeling at the Event Joints",
+          "wuxing": "水"
+        },
+        {
+          "title": "Toward Generalist Autonomous Research via Hypothesis-Tree Refinement",
+          "wuxing": "火"
+        },
+        {
+          "title": "MLEvolve: A Self-Evolving Framework for Automated Machine Learning Algorithm Discovery",
+          "wuxing": "土"
+        },
+        {
+          "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+          "wuxing": "火"
+        },
+        {
+          "title": "A Unifying View of Attention Sinks: Two Algorithms, Two Solutions",
+          "wuxing": "水"
+        },
+        {
+          "title": "The Value Axis: Language Models Encode Whether They're on the Right Track",
+          "wuxing": "水"
+        },
+        {
+          "title": "The Standard Interpretable Model: A general theory of interpretable machine learning to deductively design interpretable methods using Lagrangian mechanics",
+          "wuxing": "木"
+        },
+        {
+          "title": "The Hidden Power of Scaling Factor in LoRA Optimization",
+          "wuxing": "土"
+        },
+        {
+          "title": "High-Dimensional Theory of LoRA Fine-Tuning in a Solvable Attention Model",
+          "wuxing": "土"
+        },
+        {
+          "title": "Neural Scaling Universality: If Exponents Are Fixed, Time to Understand Coefficients",
+          "wuxing": "土"
+        },
+        {
+          "title": "The Generalization Spectrum: A Chromatographic Approach to Evaluating Learning Algorithms",
+          "wuxing": "水"
+        },
+        {
+          "title": "Provable Benefits of RLVR over SFT for Reasoning Models: Learning to Backtrack Efficiently",
+          "wuxing": "金"
+        }
+      ]
+    },
+    "安全、可信与伦理": {
+      "node_count": 13,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 1,
+        "火": 0,
+        "土": 0,
+        "金": 12,
+        "水": 0
+      },
+      "paper_wx": {
+        "水": 12,
+        "火": 5,
+        "土": 4,
+        "金": 7,
+        "木": 2
+      },
+      "comparison": {
+        "木": {
+          "node": 1,
+          "node_pct": 7.7,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": -1.0,
+          "reading": "≈ 基本一致"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": 16.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 4,
+          "paper_pct": 13.3,
+          "diff": 13.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 12,
+          "node_pct": 92.3,
+          "paper": 7,
+          "paper_pct": 23.3,
+          "diff": -69.0,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "水": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 12,
+          "paper_pct": 40.0,
+          "diff": 40.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          0.8462,
+          0.0
+        ],
+        "paper": [
+          0.1667,
+          0.2333
+        ],
+        "drift": [
+          -0.6795,
+          0.2333
+        ],
+        "magnitude": 0.7184,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 0.8,
+      "S_D": 0.8641,
+      "paper_details": [
+        {
+          "title": "Greed Is Learned: Visible Incentives as Reward-Hacking Triggers",
+          "wuxing": "水"
+        },
+        {
+          "title": "PolicyAlign: Direct Policy-Based Safety Alignment for Large Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Consistency Training Can Entrench Misalignment",
+          "wuxing": "火"
+        },
+        {
+          "title": "Subspace-Aware Sparse Autoencoders for Effective Mechanistic Interpretability",
+          "wuxing": "火"
+        },
+        {
+          "title": "How Quantization Changes Interpretable Features: A Sparse Autoencoder Analysis of Language Models",
+          "wuxing": "土"
+        },
+        {
+          "title": "Disentangling Hallucinations: Orthogonal Semantic Projection for Robust Interpretability",
+          "wuxing": "金"
+        },
+        {
+          "title": "BadWorld: Adversarial Attacks on World Models",
+          "wuxing": "金"
+        },
+        {
+          "title": "TooBad: Backdoor Diffusion Models with Ultra-Low Poison Rate and Imperceptible Trigger",
+          "wuxing": "木"
+        },
+        {
+          "title": "Your 'Pro' LLM Subscription May Actually Be 'Free': Exposing Fingerprint Spoofing Risks in LLM Inference Services",
+          "wuxing": "水"
+        },
+        {
+          "title": "Securing LLM-Agent Long-Term Memory Against Poisoning: Non-Malleable, Origin-Bound Authority with Machine-Checked Guarantees",
+          "wuxing": "金"
+        },
+        {
+          "title": "PhantomSkill: Malicious Code Injection in Agent Skill Ecosystems",
+          "wuxing": "火"
+        },
+        {
+          "title": "FragFuse: Bypassing Access Control of Large Language Model Agents via Memory-Based Query Fragmentation and Fusion",
+          "wuxing": "水"
+        },
+        {
+          "title": "Leaking Circuit Secrets: Gradient Leakage Attacks on Graph Neural Networks",
+          "wuxing": "金"
+        },
+        {
+          "title": "DP-MacAdam: Differentially Private Mechanism with Adaptive Clipping and Adaptive Momentum",
+          "wuxing": "水"
+        },
+        {
+          "title": "Loss Landscape Poisoning: Targeted Extraction of Unseen Training Data from LLMs",
+          "wuxing": "土"
+        },
+        {
+          "title": "Gender Bias in LLM Hiring Decisions: Evidence from a Japanese Context and Evaluation of Mitigation Strategies",
+          "wuxing": "火"
+        },
+        {
+          "title": "The Culture Funnel: You Can't Align What isn't in the Data",
+          "wuxing": "土"
+        },
+        {
+          "title": "Optimal Deterministic Multicalibration and Omniprediction",
+          "wuxing": "水"
+        },
+        {
+          "title": "Argument Collapse: LLMs Flatten Long-Form Public Debate",
+          "wuxing": "水"
+        },
+        {
+          "title": "Online Safety Regulation Increases Privacy Risk: Evidence from the UK Online Safety Act",
+          "wuxing": "金"
+        },
+        {
+          "title": "Market Design for AI: Beyond the Copyright Binary",
+          "wuxing": "木"
+        },
+        {
+          "title": "Perplexity Can Miss SAE Feature Damage Under Quantization",
+          "wuxing": "土"
+        },
+        {
+          "title": "Cheap Reward Hacking Detection",
+          "wuxing": "金"
+        },
+        {
+          "title": "Which Models Are Our Models Built On? Auditing Invisible Dependencies in Modern LLMs",
+          "wuxing": "金"
+        },
+        {
+          "title": "AI Agents Enable Adaptive Computer Worms",
+          "wuxing": "火"
+        },
+        {
+          "title": "The Emergence of Autonomous Penetration Capabilities in Large Language Model-Powered AI Systems",
+          "wuxing": "水"
+        },
+        {
+          "title": "Synthetic APTs: the Collapse of TTP-Based Attribution",
+          "wuxing": "水"
+        },
+        {
+          "title": "Can AI Refute Economic Theory? Evidence from Beyond the Knowledge Cutoff",
+          "wuxing": "水"
+        },
+        {
+          "title": "Think Fast: Estimating No-CoT Task-Completion Time Horizons of Frontier AI Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Contemporary AI lacks the imagination to diverge or negate in science",
+          "wuxing": "水"
+        }
+      ]
+    },
+    "计算机视觉": {
+      "node_count": 22,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 2,
+        "火": 0,
+        "土": 0,
+        "金": 0,
+        "水": 20
+      },
+      "paper_wx": {
+        "水": 5,
+        "木": 19,
+        "土": 4,
+        "金": 2
+      },
+      "comparison": {
+        "木": {
+          "node": 2,
+          "node_pct": 9.1,
+          "paper": 19,
+          "paper_pct": 63.3,
+          "diff": 54.2,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 4,
+          "paper_pct": 13.3,
+          "diff": 13.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 6.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "水": {
+          "node": 20,
+          "node_pct": 90.9,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": -74.2,
+          "reading": "↓ 论文活跃度低于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.0909,
+          0.9091
+        ],
+        "paper": [
+          -0.5667,
+          0.1667
+        ],
+        "drift": [
+          -0.4758,
+          -0.7424
+        ],
+        "magnitude": 0.8818,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 1.2,
+      "S_D": 0.7973,
+      "paper_details": [
+        {
+          "title": "Modeling Depth Ambiguity: A Mixture-Density Representation for Flying-Point-Free Depth Estimation",
+          "wuxing": "水"
+        },
+        {
+          "title": "ZipSplat: Fewer Gaussians, Better Splats",
+          "wuxing": "木"
+        },
+        {
+          "title": "KC-3DGS: Kurtosis-Constrained Gaussian Splatting for High-Fidelity View Synthesis",
+          "wuxing": "木"
+        },
+        {
+          "title": "Visual Geometry Transformer in the Wild: Distractor-Free 3D Reconstruction",
+          "wuxing": "木"
+        },
+        {
+          "title": "StructSplat: Generalizable 3D Gaussian Splatting from Uncalibrated Sparse Views",
+          "wuxing": "木"
+        },
+        {
+          "title": "Empowering Feed-Forward Reconstruction Models with Metric Scale via Satellite Images",
+          "wuxing": "木"
+        },
+        {
+          "title": "FlowObject: Flow Steering for Bridging Generative Priors and Reconstruction Fidelity",
+          "wuxing": "木"
+        },
+        {
+          "title": "CoTIR: Universal Image Restoration via Internalized Chain-of-Thought Reasoning",
+          "wuxing": "木"
+        },
+        {
+          "title": "Modality Forcing for Scalable Spatial Generation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Future Dynamic 3D Reconstruction: A 3D World Model with Disentangled Ego-Motion",
+          "wuxing": "木"
+        },
+        {
+          "title": "Multi4D: High-Fidelity Dynamic Gaussian Splatting via Multi-Level Competitive Allocation",
+          "wuxing": "木"
+        },
+        {
+          "title": "Flex4DHuman: Flexible Multi-view Video Diffusion for 4D Human Reconstruction",
+          "wuxing": "木"
+        },
+        {
+          "title": "You Don't Need Strong Assumptions: Visual Representation Learning via Temporal Differences",
+          "wuxing": "水"
+        },
+        {
+          "title": "RATS! Patches Talk Through Registers: Emergent Parts in Register Attention Transformers",
+          "wuxing": "土"
+        },
+        {
+          "title": "Who Needs Labels? Adapting Vision Foundation Models With the Metadata You Already Have",
+          "wuxing": "土"
+        },
+        {
+          "title": "Extracting Neural Materials from Multi-view Images",
+          "wuxing": "木"
+        },
+        {
+          "title": "Path-Traced Inverse Rendering with Global Illumination in 3D Gaussian Fields",
+          "wuxing": "木"
+        },
+        {
+          "title": "Spectrum Aware Illumination Estimation Using Multispectral Image",
+          "wuxing": "木"
+        },
+        {
+          "title": "FiCA: Feed-forward instant Gaussian Codec Avatars from a Single Portrait Image",
+          "wuxing": "木"
+        },
+        {
+          "title": "PRIMA: Boosting Animal Mesh Recovery with Biological Priors and Test-Time Adaptation",
+          "wuxing": "金"
+        },
+        {
+          "title": "OmniFaceRig: Fully Automatic Inner-Mouth-Aware Face Rigging Across Diverse 3D Character Topologies",
+          "wuxing": "木"
+        },
+        {
+          "title": "SG2Loc: Sequential Visual Localization on 3D Scene Graphs",
+          "wuxing": "木"
+        },
+        {
+          "title": "SAMatcher: Co-Visibility Modeling with Segment Anything for Robust Feature Matching",
+          "wuxing": "金"
+        },
+        {
+          "title": "Scene-Centric Unsupervised Video Panoptic Segmentation",
+          "wuxing": "土"
+        },
+        {
+          "title": "Quality-Guided Semi-Supervised Learning for Medical Image Segmentation",
+          "wuxing": "水"
+        },
+        {
+          "title": "Learning Multi-Scale Hypergraph for High-Order Brain Connectivity Analysis",
+          "wuxing": "水"
+        },
+        {
+          "title": "Scaling Generative Foundation Models for Chest Radiography with Rectified Flow Transformers",
+          "wuxing": "土"
+        },
+        {
+          "title": "GASE: Gaussian Splatting-Based Automated System for Reconstructing Embodied-Simulation Environments",
+          "wuxing": "木"
+        },
+        {
+          "title": "EgoPhys: Learning Generalizable Physics Models of Deformable Objects from Egocentric Video",
+          "wuxing": "水"
+        },
+        {
+          "title": "Scene-Level Heterogeneous Physics Simulation with 3D Gaussian Splats",
+          "wuxing": "木"
+        }
+      ]
+    },
+    "交叉领域智能应用": {
+      "node_count": 8,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 0,
+        "火": 7,
+        "土": 1,
+        "金": 0,
+        "水": 0
+      },
+      "paper_wx": {
+        "火": 7,
+        "土": 10,
+        "水": 8,
+        "木": 2,
+        "金": 3
+      },
+      "comparison": {
+        "木": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 6.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "火": {
+          "node": 7,
+          "node_pct": 87.5,
+          "paper": 7,
+          "paper_pct": 23.3,
+          "diff": -64.2,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "土": {
+          "node": 1,
+          "node_pct": 12.5,
+          "paper": 10,
+          "paper_pct": 33.3,
+          "diff": 20.8,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 3,
+          "paper_pct": 10.0,
+          "diff": 10.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "水": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 8,
+          "paper_pct": 26.7,
+          "diff": 26.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          0.0,
+          -0.875
+        ],
+        "paper": [
+          0.0333,
+          0.0333
+        ],
+        "drift": [
+          0.0333,
+          0.9083
+        ],
+        "magnitude": 0.9089,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": 0.3,
+      "S_D": 0.9485,
+      "paper_details": [
+        {
+          "title": "FinStressTS: A Parametric Synthetic Benchmark for Time-Series Forecasting in Finance",
+          "wuxing": "火"
+        },
+        {
+          "title": "Hedge-Bench: Benchmarking Agents on Hard, Realistic Tasks Pertaining to Financial Reasoning",
+          "wuxing": "火"
+        },
+        {
+          "title": "Polymarket-v1 Database",
+          "wuxing": "土"
+        },
+        {
+          "title": "Language-Based Digital Twins for Elderly Cognitive Assistance",
+          "wuxing": "水"
+        },
+        {
+          "title": "Routine laboratory trajectories encode the onset of organ-level complications in cancer",
+          "wuxing": "木"
+        },
+        {
+          "title": "ChronoSurv: A Clinical Pathway-Guided Graph Framework for Multimodal Survival Analysis",
+          "wuxing": "木"
+        },
+        {
+          "title": "The Effortless Trap: Productive Struggle, AI, and the Illusion of Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "Test-Driven, AI-Assisted Learning: Replacing Lectures with Weekly Closed-Book Tests",
+          "wuxing": "水"
+        },
+        {
+          "title": "LLM-as-Judge in Education: A Curriculum-Grounded Marking Pipeline",
+          "wuxing": "水"
+        },
+        {
+          "title": "Scaling Laws for Task-Specific LLM Distillation",
+          "wuxing": "土"
+        },
+        {
+          "title": "Agents' Last Exam",
+          "wuxing": "火"
+        },
+        {
+          "title": "Domain-Adapted Small Language Models with Hybrid Post-Processing: Achieving Cost-Efficient, Low-Latency Multi-Label Structured Prediction via LoRA Fine-Tuning on Scarce Data",
+          "wuxing": "土"
+        },
+        {
+          "title": "TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning",
+          "wuxing": "土"
+        },
+        {
+          "title": "Filtered Conformal Ellipsoids for Graph-Native Time Series",
+          "wuxing": "金"
+        },
+        {
+          "title": "Once-for-All: Scalable Simultaneous Forecasting via Equilibrium State Estimation",
+          "wuxing": "水"
+        },
+        {
+          "title": "Forecasting what Matters: Decision-Focused RL for Controlled EV Charging with Unknown Departure Times",
+          "wuxing": "火"
+        },
+        {
+          "title": "Maximising the Set-Piece Return: Optimising Football Corner Tactics with Graph Reinforcement Learning",
+          "wuxing": "水"
+        },
+        {
+          "title": "PandaAI: A Practical Agent CQ2 for Neuro-symbolic Data Analysis And Integrated Decision-Making in Quantitative Finance",
+          "wuxing": "火"
+        },
+        {
+          "title": "The Economics of Proof-of-Useful-Work",
+          "wuxing": "金"
+        },
+        {
+          "title": "Polymarket-v1 Database",
+          "wuxing": "土"
+        },
+        {
+          "title": "Proof of Source of Funds: Efficient On-chain Provenance of Cryptoassets",
+          "wuxing": "土"
+        },
+        {
+          "title": "Reimagining Open Source and Openness in AI: Co-Creating Responsible Technological Futures",
+          "wuxing": "金"
+        },
+        {
+          "title": "War in the Abstract: The Rise and Consequences of Militarized Language in Scientific Communication",
+          "wuxing": "水"
+        },
+        {
+          "title": "AI Exposure Scores: what they measure, what they miss, and what comes next",
+          "wuxing": "水"
+        },
+        {
+          "title": "AI+CAD Data Representation Architecture: From DeepCAD Solid Modeling to WHUCAD Industrial-Level Parametric Feature Modeling",
+          "wuxing": "土"
+        },
+        {
+          "title": "Learning the Geometry of Data: A Mathematical Review of Shape Space Analysis",
+          "wuxing": "土"
+        },
+        {
+          "title": "Generating Special Triangulations with Transformers",
+          "wuxing": "土"
+        },
+        {
+          "title": "Orange Lab: Lowering Barriers to Data Mining through Embedded Interactive Workflows",
+          "wuxing": "火"
+        },
+        {
+          "title": "Econstellar: An Open-Source AI-Augmented Research Engine for Computational Financial Econometrics",
+          "wuxing": "火"
+        },
+        {
+          "title": "Towards Unified and Data-Efficient Prognostics and Health Management with Tabular Foundation Models",
+          "wuxing": "土"
+        }
+      ]
+    },
+    "推荐系统与信息检索": {
+      "node_count": 16,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 2,
+        "火": 13,
+        "土": 0,
+        "金": 0,
+        "水": 1
+      },
+      "paper_wx": {
+        "水": 5,
+        "木": 3,
+        "土": 7,
+        "火": 14,
+        "金": 1
+      },
+      "comparison": {
+        "木": {
+          "node": 2,
+          "node_pct": 12.5,
+          "paper": 3,
+          "paper_pct": 10.0,
+          "diff": -2.5,
+          "reading": "≈ 基本一致"
+        },
+        "火": {
+          "node": 13,
+          "node_pct": 81.2,
+          "paper": 14,
+          "paper_pct": 46.7,
+          "diff": -34.6,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 7,
+          "paper_pct": 23.3,
+          "diff": 23.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 1,
+          "paper_pct": 3.3,
+          "diff": 3.3,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 1,
+          "node_pct": 6.2,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": 10.4,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.125,
+          -0.75
+        ],
+        "paper": [
+          -0.0667,
+          -0.3
+        ],
+        "drift": [
+          0.0583,
+          0.45
+        ],
+        "magnitude": 0.4538,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": -0.05,
+      "S_D": 1.0082,
+      "paper_details": [
+        {
+          "title": "Gryphon: A Unified Architecture for Semantic-ID Generation and Item-Level Scoring in Industrial Recommendations",
+          "wuxing": "水"
+        },
+        {
+          "title": "Implicit Reasoning for Large Language Model-based Generative Recommendation",
+          "wuxing": "水"
+        },
+        {
+          "title": "OneRetrieval: Unifying Multi-Branch E-commerce Retrieval with an Editable Generative Model",
+          "wuxing": "木"
+        },
+        {
+          "title": "Multi-Vector Embeddings are Provably More Expressive than Single Vector Embeddings",
+          "wuxing": "土"
+        },
+        {
+          "title": "What Limits Does Quantization Place on Dense Top-k Retrieval? A Theoretical Study",
+          "wuxing": "火"
+        },
+        {
+          "title": "Compact Geometric Representations of Hierarchies",
+          "wuxing": "水"
+        },
+        {
+          "title": "ColBERTSaR: Sparsified ColBERT Index via Product Quantization",
+          "wuxing": "土"
+        },
+        {
+          "title": "GPUSparse: GPU-Accelerated Learned Sparse Retrieval with Parallel Inverted Indices",
+          "wuxing": "土"
+        },
+        {
+          "title": "TileMaxSim: IO-Aware GPU MaxSim Scoring with Dimension Tiling and Fused Product Quantization",
+          "wuxing": "土"
+        },
+        {
+          "title": "ADORE: Iterative Query Expansion with Retrieval-Grounded Relevance Feedback",
+          "wuxing": "火"
+        },
+        {
+          "title": "STORM: Stepwise Token Optimization with Reward-Guided Beam Search",
+          "wuxing": "火"
+        },
+        {
+          "title": "KaLM-Reranker-V1: Fast but Not Late Interaction for Compressed Document Reranking",
+          "wuxing": "火"
+        },
+        {
+          "title": "Stellar: Scalable Multimodal Document Retrieval for Natural Language Queries",
+          "wuxing": "木"
+        },
+        {
+          "title": "MM-Matryoshka: Towards Budget-Elastic Visual Document Retrieval via a 2D Multimodal Matryoshka Training Framework",
+          "wuxing": "土"
+        },
+        {
+          "title": "LightSTAR: Efficient Visual Document Retrieval via Lightweight Selection with Vision-Adaptive Refinement",
+          "wuxing": "火"
+        },
+        {
+          "title": "OneRank: Unified Transformer-Native Ranking Architecture for Multi-Task Recommendation",
+          "wuxing": "火"
+        },
+        {
+          "title": "UniFormer: Efficient and Unified Model-Centric Scaling for Industrial Recommendation",
+          "wuxing": "土"
+        },
+        {
+          "title": "Token Factory: Efficiently Integrating Diverse Signals into Large Recommendation Models",
+          "wuxing": "火"
+        },
+        {
+          "title": "Denoising Implicit Feedback for Cold-start Recommendation",
+          "wuxing": "火"
+        },
+        {
+          "title": "DREAM: Dynamic Refinement of Early Assignment Mappings",
+          "wuxing": "水"
+        },
+        {
+          "title": "Bridging the Semantic-Collaborative Gap: An Asymmetric Graph Architecture for Cold-Start Item Recommendation",
+          "wuxing": "火"
+        },
+        {
+          "title": "ANN Search: Recall What Matters",
+          "wuxing": "火"
+        },
+        {
+          "title": "HAKARI-Bench: A Lightweight Benchmark for Comparing Retrieval Architectures and Efficiency Settings under Unified Conditions",
+          "wuxing": "火"
+        },
+        {
+          "title": "Understanding and Debugging Failures in N-Gram-Based Generative Retrieval",
+          "wuxing": "水"
+        },
+        {
+          "title": "Temporal Preference Optimization for Unsupervised Retrieval",
+          "wuxing": "土"
+        },
+        {
+          "title": "CausalPOI: Spatio-Temporal Graph-Based Causal Modeling for Cold-Start POI Check-in Forecasting",
+          "wuxing": "金"
+        },
+        {
+          "title": "Time-Aware Diffusion based on Preference Disentanglement for Generative Recommendation",
+          "wuxing": "木"
+        },
+        {
+          "title": "RL-Index: Reinforcement Learning for Retrieval Index Reasoning",
+          "wuxing": "火"
+        },
+        {
+          "title": "AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems",
+          "wuxing": "火"
+        },
+        {
+          "title": "Towards Retrieving Interaction Spaces for Agentic Search",
+          "wuxing": "火"
+        }
+      ]
+    },
+    "AI 系统与硬件": {
+      "node_count": 9,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 0,
+        "火": 0,
+        "土": 9,
+        "金": 0,
+        "水": 0
+      },
+      "paper_wx": {
+        "土": 24,
+        "水": 2,
+        "火": 3,
+        "木": 1
+      },
+      "comparison": {
+        "木": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 1,
+          "paper_pct": 3.3,
+          "diff": 3.3,
+          "reading": "≈ 基本一致"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 3,
+          "paper_pct": 10.0,
+          "diff": 10.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 9,
+          "node_pct": 100.0,
+          "paper": 24,
+          "paper_pct": 80.0,
+          "diff": -20.0,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 2,
+          "paper_pct": 6.7,
+          "diff": 6.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          0.0,
+          0.0
+        ],
+        "paper": [
+          -0.0333,
+          -0.0333
+        ],
+        "drift": [
+          -0.0333,
+          -0.0333
+        ],
+        "magnitude": 0.0471,
+        "reading": "几乎无漂移——研究方向与知识结构高度吻合"
+      },
+      "theta_critical": -0.4,
+      "S_D": 1.0684,
+      "paper_details": [
+        {
+          "title": "MiniMax Sparse Attention",
+          "wuxing": "土"
+        },
+        {
+          "title": "Epiphany-Aware KV Cache Eviction Without the Attention Matrix",
+          "wuxing": "水"
+        },
+        {
+          "title": "SAC: Disaggregated KV Cache System for Sparse Attention LLMs with CXL",
+          "wuxing": "土"
+        },
+        {
+          "title": "The Benchmark Illusion: Pruned LLMs Can Pass Multiple Choice but Fail to Answer",
+          "wuxing": "火"
+        },
+        {
+          "title": "Ternary Mamba: Grouped Quantization-Aware Training of W1.58A16 State Space Models",
+          "wuxing": "土"
+        },
+        {
+          "title": "Distill on a Diet: Efficient Knowledge Distillation via Learnable Data Pruning",
+          "wuxing": "土"
+        },
+        {
+          "title": "daVinci-kernel: Co-Evolving Skill Selection, Summarization, and Utilization via RL for GPU Kernel Optimization",
+          "wuxing": "土"
+        },
+        {
+          "title": "TileMaxSim: IO-Aware GPU MaxSim Scoring with Dimension Tiling and Fused Product Quantization",
+          "wuxing": "土"
+        },
+        {
+          "title": "EmuGEMM: Fused Tensor Core Kernels for Precision Emulation in Matrix Multiplication",
+          "wuxing": "土"
+        },
+        {
+          "title": "Piper: A Programmable Distributed Training System",
+          "wuxing": "土"
+        },
+        {
+          "title": "UltraEP: Unleash MoE Training and Inference on Rack-Scale Nodes with Near-Optimal Load Balancing",
+          "wuxing": "土"
+        },
+        {
+          "title": "FoMoE: Breaking the Full-Replica Barrier with a Federation of MoEs",
+          "wuxing": "土"
+        },
+        {
+          "title": "Programmable Probabilistic Computer with 1,000,000 p-bits",
+          "wuxing": "水"
+        },
+        {
+          "title": "Clutch: High Performance Vector-Scalar Comparison using DRAM via Chunked Temporal Coding",
+          "wuxing": "土"
+        },
+        {
+          "title": "Optimizing Energy-based Neural Network Training with Coherent Ising Machine",
+          "wuxing": "土"
+        },
+        {
+          "title": "ScaleDisturb: Exploiting Temporal Asymmetry to Amplify Read Disturbance in Modern DRAM Chips",
+          "wuxing": "土"
+        },
+        {
+          "title": "ColumnKeeper: Efficient Solutions to the ColumnDisturb Vulnerability in DRAM-based Systems",
+          "wuxing": "土"
+        },
+        {
+          "title": "In-DRAM Signature Generation Using Simultaneous Multiple-Row Activation: An Experimental Study of Off-The-Shelf DRAM Chips",
+          "wuxing": "木"
+        },
+        {
+          "title": "Efficient On-Device Diffusion LLM Inference with Mobile NPU",
+          "wuxing": "土"
+        },
+        {
+          "title": "From Compression to Deployment: Real-Time and Energy-Efficient FastGRNN on Ultra-Constrained Microcontrollers",
+          "wuxing": "土"
+        },
+        {
+          "title": "CITRAS-FM: Tiny Time Series Foundation Model for Covariate-Informed Zero-Shot Forecasting",
+          "wuxing": "土"
+        },
+        {
+          "title": "GPUSparse: GPU-Accelerated Learned Sparse Retrieval with Parallel Inverted Indices",
+          "wuxing": "土"
+        },
+        {
+          "title": "Slipstream: Locality-Aware Graph Index Construction for Streaming Approximate Nearest Neighbor Search",
+          "wuxing": "火"
+        },
+        {
+          "title": "RISE: A Rust Library for Inverted Index Search Engines",
+          "wuxing": "火"
+        },
+        {
+          "title": "ARGUS: Production-Scale Tracing and Performance Diagnosis for over 10,000-GPU Clusters",
+          "wuxing": "土"
+        },
+        {
+          "title": "BatchGen: An Architecture for Scalable and Efficient Batch Inference",
+          "wuxing": "土"
+        },
+        {
+          "title": "ASTRA-sim 3.0: Next-Level Distributed Machine Learning Simulations via High-Fidelity GPU and Infrastructure Modeling",
+          "wuxing": "土"
+        },
+        {
+          "title": "Do Transformers Need Three Projections? Systematic Study of QKV Variants",
+          "wuxing": "土"
+        },
+        {
+          "title": "Reversible Foundations: Training a 120B Sparse MoE through State-Preserving Scaling",
+          "wuxing": "土"
+        },
+        {
+          "title": "USAD 2.0: Scaling Representation Distillation for Universal Audio Understanding",
+          "wuxing": "土"
+        }
+      ]
+    },
+    "软件工程与编程": {
+      "node_count": 4,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 0,
+        "火": 0,
+        "土": 4,
+        "金": 0,
+        "水": 0
+      },
+      "paper_wx": {
+        "火": 19,
+        "金": 5,
+        "水": 5,
+        "土": 1
+      },
+      "comparison": {
+        "木": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 0,
+          "paper_pct": 0.0,
+          "diff": 0.0,
+          "reading": "≈ 基本一致"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 19,
+          "paper_pct": 63.3,
+          "diff": 63.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 4,
+          "node_pct": 100.0,
+          "paper": 1,
+          "paper_pct": 3.3,
+          "diff": -96.7,
+          "reading": "↓ 论文活跃度低于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": 16.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "水": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 5,
+          "paper_pct": 16.7,
+          "diff": 16.7,
+          "reading": "↑ 论文活跃度高于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          0.0,
+          0.0
+        ],
+        "paper": [
+          0.1667,
+          -0.4667
+        ],
+        "drift": [
+          0.1667,
+          -0.4667
+        ],
+        "magnitude": 0.4955,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": -0.6,
+      "S_D": 1.1011,
+      "paper_details": [
+        {
+          "title": "Agentic Very Much! Adoption of Coding Agent in New GitHub Projects",
+          "wuxing": "火"
+        },
+        {
+          "title": "Before the Pull Request: Mining Multi-Agent Coordination",
+          "wuxing": "火"
+        },
+        {
+          "title": "A Deterministic Control Plane for LLM Coding Agents",
+          "wuxing": "火"
+        },
+        {
+          "title": "Multi-LCB: Extending LiveCodeBench to Multiple Programming Languages",
+          "wuxing": "火"
+        },
+        {
+          "title": "SWE-Marathon: Can Agents Autonomously Complete Ultra-Long-Horizon Software Work?",
+          "wuxing": "火"
+        },
+        {
+          "title": "Evaluating LLMs on Real-World Software Performance Optimization",
+          "wuxing": "火"
+        },
+        {
+          "title": "OpenAnt: LLM-Powered Vulnerability Discovery Through Code Decomposition, Adversarial Verification, and Dynamic Testing",
+          "wuxing": "金"
+        },
+        {
+          "title": "Context-Based Adversarial Attacks on AI Code Generators: Vulnerability Analysis and Implications",
+          "wuxing": "金"
+        },
+        {
+          "title": "Beyond Takedown: Measuring Malicious Go Module Persistence in the Wild",
+          "wuxing": "金"
+        },
+        {
+          "title": "Code2LoRA: Hypernetwork-Generated Adapters for Code Language Models under Software Evolution",
+          "wuxing": "水"
+        },
+        {
+          "title": "How Much Static Structure Do Code Agents Need? A Study of Deterministic Anchoring",
+          "wuxing": "火"
+        },
+        {
+          "title": "FastContext: Training Efficient Repository Explorer for Coding Agents",
+          "wuxing": "火"
+        },
+        {
+          "title": "All Smoke, No Alarm: Oracle Signals in Agent-Authored Test Code",
+          "wuxing": "火"
+        },
+        {
+          "title": "LLM-Assisted Model-Based GUI Testing for Vue.js Web Applications",
+          "wuxing": "水"
+        },
+        {
+          "title": "LLM vs. Human Unit Tests: Fault Detection on Real Python Bugs",
+          "wuxing": "火"
+        },
+        {
+          "title": "Faster Code, Deeper Debt? A Multivocal Literature Review on Technical Debt and Its Early Signs in LLM-Assisted Software Development",
+          "wuxing": "火"
+        },
+        {
+          "title": "Are LLMs Ready for Anti-Pattern Detection in Microservice Architectures?",
+          "wuxing": "土"
+        },
+        {
+          "title": "Configuration Smells in AGENTS.md Files: Common Mistakes in Configuring Coding Agents",
+          "wuxing": "火"
+        },
+        {
+          "title": "Proof-Refactor: Refactoring Generated Formal Proofs into Modular Artifacts",
+          "wuxing": "金"
+        },
+        {
+          "title": "Formal-Method-Guided Vibe Coding: Closing the Verification Loop on AI-Generated Safety-Critical Software Through Model-Driven Engineering",
+          "wuxing": "金"
+        },
+        {
+          "title": "EconCSLib: AI-Assisted Lean Formalization for Economics & Computation research",
+          "wuxing": "火"
+        },
+        {
+          "title": "Rule Taxonomy and Evolution in AI IDEs: A Mining and Survey Study",
+          "wuxing": "水"
+        },
+        {
+          "title": "Same Scrutiny, More Time: Eye Tracking Insights into Reviewing LLM-Labelled Code",
+          "wuxing": "火"
+        },
+        {
+          "title": "How Software Engineering Students Use LLMs to Write Research Papers: An Experience Report",
+          "wuxing": "火"
+        },
+        {
+          "title": "GameCraft-Bench: Can Agents Build Playable Games End-to-End in a Real Game Engine?",
+          "wuxing": "火"
+        },
+        {
+          "title": "LLM4RTL: Tool-Assisted LLM for RTL Generation",
+          "wuxing": "水"
+        },
+        {
+          "title": "TeleSWEBench: A Commit-Driven Benchmark for Evaluating LLM-Powered Software Engineering in Telecommunications",
+          "wuxing": "火"
+        },
+        {
+          "title": "Natural Language-Focused Software Engineering via Code-Documentation Equivalence",
+          "wuxing": "火"
+        },
+        {
+          "title": "LLM-Based Discovery of Latent Requirements from Stakeholder Conversations: Preliminary Results from Industry",
+          "wuxing": "水"
+        },
+        {
+          "title": "The Spec Growth Engine: Spec-Anchored, Code-Coupled, Drift-Enforced Architecture for AI-Assisted Software Development",
+          "wuxing": "火"
+        }
+      ]
+    },
+    "科学 AI": {
+      "node_count": 12,
+      "paper_count": 30,
+      "node_wx": {
+        "木": 2,
+        "火": 0,
+        "土": 0,
+        "金": 0,
+        "水": 10
+      },
+      "paper_wx": {
+        "木": 6,
+        "水": 13,
+        "金": 1,
+        "火": 6,
+        "土": 4
+      },
+      "comparison": {
+        "木": {
+          "node": 2,
+          "node_pct": 16.7,
+          "paper": 6,
+          "paper_pct": 20.0,
+          "diff": 3.3,
+          "reading": "≈ 基本一致"
+        },
+        "火": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 6,
+          "paper_pct": 20.0,
+          "diff": 20.0,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "土": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 4,
+          "paper_pct": 13.3,
+          "diff": 13.3,
+          "reading": "↑ 论文活跃度高于节点占比"
+        },
+        "金": {
+          "node": 0,
+          "node_pct": 0.0,
+          "paper": 1,
+          "paper_pct": 3.3,
+          "diff": 3.3,
+          "reading": "≈ 基本一致"
+        },
+        "水": {
+          "node": 10,
+          "node_pct": 83.3,
+          "paper": 13,
+          "paper_pct": 43.3,
+          "diff": -40.0,
+          "reading": "↓ 论文活跃度低于节点占比"
+        }
+      },
+      "centroid_drift": {
+        "node": [
+          -0.1667,
+          0.8333
+        ],
+        "paper": [
+          -0.1667,
+          0.2333
+        ],
+        "drift": [
+          0.0,
+          -0.6
+        ],
+        "magnitude": 0.6,
+        "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+      },
+      "theta_critical": -0.28,
+      "S_D": 1.0477,
+      "paper_details": [
+        {
+          "title": "AlloGen: Conformation-Selective Binder Generation with Differential State Scoring",
+          "wuxing": "木"
+        },
+        {
+          "title": "Few-step Cofolding with All-Atom Flow Maps",
+          "wuxing": "水"
+        },
+        {
+          "title": "AgentPLM: Agentic Protein Language Models with Reasoning-Augmented Decoding for Protein Sequence Design",
+          "wuxing": "木"
+        },
+        {
+          "title": "Topological Neural Operators",
+          "wuxing": "金"
+        },
+        {
+          "title": "Factorized Neural Operators Decompose Dynamic and Persistent Responses",
+          "wuxing": "水"
+        },
+        {
+          "title": "Effective Dimensionality as an Operator Invariant for Physics-Preserving Constraint Adaptation in Physics-Informed Neural Networks",
+          "wuxing": "水"
+        },
+        {
+          "title": "XRDiff: Crystal Structure Prediction from Powder X-Ray Diffraction Data Using Diffusion Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Fast Organic Crystal Structure Prediction with Unit Cell Flow Matching",
+          "wuxing": "水"
+        },
+        {
+          "title": "Autonomous heterogeneous catalyst discovery with a self-evolving multi-agent digital twin",
+          "wuxing": "火"
+        },
+        {
+          "title": "Scalable On-Hardware Training of Quantum Neural Networks and Application to Clinical Data Imputation",
+          "wuxing": "土"
+        },
+        {
+          "title": "Efficient foundation decoders for fault-tolerant quantum computing",
+          "wuxing": "土"
+        },
+        {
+          "title": "Quantum-classical physics-informed Kolmogorov-Arnold networks for PDEs",
+          "wuxing": "水"
+        },
+        {
+          "title": "Harnessing the Collective Intelligence of AI Agents in the Wild for New Discoveries",
+          "wuxing": "火"
+        },
+        {
+          "title": "EurekAgent: Agent Environment Engineering is All You Need For Autonomous Scientific Discovery",
+          "wuxing": "火"
+        },
+        {
+          "title": "SciAgentArena: Benchmarking AI Agents for Addressing Scientific Challenges Across Scales",
+          "wuxing": "火"
+        },
+        {
+          "title": "ThousandWorlds: A benchmark for climate emulation of potentially habitable exoplanets",
+          "wuxing": "火"
+        },
+        {
+          "title": "Time series Foundation Models based on Physics-Informed Synthetic Histories for Cold-Start Photovoltaic Forecasting",
+          "wuxing": "水"
+        },
+        {
+          "title": "Scalable Uncertainty Quantification for Extreme Weather Forecasting via Empirical Neural Tangent Kernels",
+          "wuxing": "水"
+        },
+        {
+          "title": "What Does a Chemical Language Model Know About Molecules?",
+          "wuxing": "水"
+        },
+        {
+          "title": "Circuit Tracing in Autoregressive Protein Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Viral Proteins Reveal Geometry of Protein Language Models",
+          "wuxing": "水"
+        },
+        {
+          "title": "Speculative Sampling For Faster Molecular Dynamics",
+          "wuxing": "水"
+        },
+        {
+          "title": "Autoregressive Boltzmann Generators",
+          "wuxing": "水"
+        },
+        {
+          "title": "Scene-Level Heterogeneous Physics Simulation with 3D Gaussian Splats",
+          "wuxing": "木"
+        },
+        {
+          "title": "Data-driven discovery of governing differential equations across physical systems",
+          "wuxing": "土"
+        },
+        {
+          "title": "Discovering Multiscale Deep Formulas in Complex Systems via Neural-Guided Lambda Calculus",
+          "wuxing": "土"
+        },
+        {
+          "title": "Agentic Symbolic Search: Characterizing PDEs Beyond Hand-crafted Expressions, Meshes, and Neural Networks",
+          "wuxing": "火"
+        },
+        {
+          "title": "Curvature-Informed Potential Energy Surface for Protein-Ligand Binding Affinity Prediction",
+          "wuxing": "木"
+        },
+        {
+          "title": "Curvature-Guided Geometric Representation for Protein-Ligand Binding Affinity Prediction",
+          "wuxing": "木"
+        },
+        {
+          "title": "Topo-Omni: Discovering Functionally Selective Brain Regions with a Deep Topographic Multimodal Model",
+          "wuxing": "木"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "domains_analyzed": 13,
+    "total_nodes": 261,
+    "total_papers": 387,
+    "total_node_wx": {
+      "木": 63,
+      "火": 37,
+      "土": 71,
+      "金": 20,
+      "水": 70
+    },
+    "total_paper_wx": {
+      "木": 99,
+      "火": 89,
+      "土": 88,
+      "金": 24,
+      "水": 87
+    },
+    "mean_drift_magnitude": 0.5063,
+    "max_drift_domain": "交叉领域智能应用",
+    "max_drift_magnitude": 0.9089,
+    "all_drift_magnitudes": [
+      0.6517,
+      0.2931,
+      0.3342,
+      0.809,
+      0.238,
+      0.1503,
+      0.7184,
+      0.8818,
+      0.9089,
+      0.4538,
+      0.0471,
+      0.4955,
+      0.6
+    ],
+    "SAM": {
+      "大语言模型": {
+        "node_pct": 5.36,
+        "paper_pct": 7.75,
+        "SAM": 2.39,
+        "reading": "新兴热点（显著上行）"
+      },
+      "具身智能与机器人": {
+        "node_pct": 7.28,
+        "paper_pct": 7.75,
+        "SAM": 0.47,
+        "reading": "新兴热点（显著上行）"
+      },
+      "多模态智能": {
+        "node_pct": 12.26,
+        "paper_pct": 7.75,
+        "SAM": -4.51,
+        "reading": "基础设施（结构主导）"
+      },
+      "智能体": {
+        "node_pct": 11.88,
+        "paper_pct": 7.49,
+        "SAM": -4.38,
+        "reading": "基础设施（结构主导）"
+      },
+      "生成式 AI": {
+        "node_pct": 3.45,
+        "paper_pct": 7.49,
+        "SAM": 4.05,
+        "reading": "新兴热点（显著上行）"
+      },
+      "机器学习基础": {
+        "node_pct": 27.59,
+        "paper_pct": 7.49,
+        "SAM": -20.09,
+        "reading": "基础设施（结构主导）"
+      },
+      "安全、可信与伦理": {
+        "node_pct": 4.98,
+        "paper_pct": 7.75,
+        "SAM": 2.77,
+        "reading": "新兴热点（显著上行）"
+      },
+      "计算机视觉": {
+        "node_pct": 8.43,
+        "paper_pct": 7.75,
+        "SAM": -0.68,
+        "reading": "结构超前（潜力待释放）"
+      },
+      "交叉领域智能应用": {
+        "node_pct": 3.07,
+        "paper_pct": 7.75,
+        "SAM": 4.69,
+        "reading": "新兴热点（显著上行）"
+      },
+      "推荐系统与信息检索": {
+        "node_pct": 6.13,
+        "paper_pct": 7.75,
+        "SAM": 1.62,
+        "reading": "新兴热点（显著上行）"
+      },
+      "AI 系统与硬件": {
+        "node_pct": 3.45,
+        "paper_pct": 7.75,
+        "SAM": 4.3,
+        "reading": "新兴热点（显著上行）"
+      },
+      "软件工程与编程": {
+        "node_pct": 1.53,
+        "paper_pct": 7.75,
+        "SAM": 6.22,
+        "reading": "新兴热点（显著上行）"
+      },
+      "科学 AI": {
+        "node_pct": 4.6,
+        "paper_pct": 7.75,
+        "SAM": 3.15,
+        "reading": "新兴热点（显著上行）"
+      }
+    },
+    "SAM_summary": {
+      "hotspots": [
+        "大语言模型",
+        "具身智能与机器人",
+        "生成式 AI",
+        "安全、可信与伦理",
+        "交叉领域智能应用",
+        "推荐系统与信息检索",
+        "AI 系统与硬件",
+        "软件工程与编程",
+        "科学 AI"
+      ],
+      "matched": [],
+      "lagging": [
+        "多模态智能",
+        "智能体",
+        "机器学习基础",
+        "计算机视觉"
+      ]
+    }
+  }
+}

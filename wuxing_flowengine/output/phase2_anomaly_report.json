@@ -1,0 +1,291 @@
+{
+  "anomaly_report": [
+    {
+      "domain": "AI系统与硬件",
+      "total": 9,
+      "n_seed": 0,
+      "n_curr": 9,
+      "n_tran": 0,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 0.0,
+      "C_full": 0,
+      "zero_cause": "超越层=0"
+    },
+    {
+      "domain": "交叉领域智能应用",
+      "total": 8,
+      "n_seed": 0,
+      "n_curr": 8,
+      "n_tran": 0,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 0.0,
+      "C_full": 0,
+      "zero_cause": "超越层=0"
+    },
+    {
+      "domain": "具身智能与机器人",
+      "total": 19,
+      "n_seed": 0,
+      "n_curr": 16,
+      "n_tran": 3,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 1.78,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "多模态智能",
+      "total": 32,
+      "n_seed": 0,
+      "n_curr": 2,
+      "n_tran": 30,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 240.0,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "大语言模型",
+      "total": 20,
+      "n_seed": 0,
+      "n_curr": 7,
+      "n_tran": 13,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 18.57,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "安全可信与伦理",
+      "total": 13,
+      "n_seed": 0,
+      "n_curr": 7,
+      "n_tran": 6,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 5.57,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "推荐系统与信息检索",
+      "total": 16,
+      "n_seed": 0,
+      "n_curr": 10,
+      "n_tran": 6,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 4.8,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "智能体",
+      "total": 31,
+      "n_seed": 0,
+      "n_curr": 29,
+      "n_tran": 2,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 1.07,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "机器学习基础",
+      "total": 82,
+      "n_seed": 37,
+      "n_curr": 19,
+      "n_tran": 26,
+      "phase": 1.5,
+      "gradient": 32.6982,
+      "accumulation": 15.4,
+      "C_simpl": 263.69,
+      "C_full": 755.33,
+      "zero_cause": ""
+    },
+    {
+      "domain": "生成式AI",
+      "total": 9,
+      "n_seed": 0,
+      "n_curr": 7,
+      "n_tran": 2,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 1.29,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "知识表示与逻辑推理",
+      "total": 5,
+      "n_seed": 0,
+      "n_curr": 0,
+      "n_tran": 5,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 12.5,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "科学AI",
+      "total": 12,
+      "n_seed": 0,
+      "n_curr": 11,
+      "n_tran": 1,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 0.55,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "自然语言处理",
+      "total": 18,
+      "n_seed": 0,
+      "n_curr": 13,
+      "n_tran": 5,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 3.46,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "计算机视觉",
+      "total": 22,
+      "n_seed": 0,
+      "n_curr": 14,
+      "n_tran": 8,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 6.29,
+      "C_full": 0,
+      "zero_cause": ""
+    },
+    {
+      "domain": "软件工程与编程",
+      "total": 4,
+      "n_seed": 0,
+      "n_curr": 4,
+      "n_tran": 0,
+      "phase": 0,
+      "gradient": 0,
+      "accumulation": 0,
+      "C_simpl": 0.0,
+      "C_full": 0,
+      "zero_cause": "超越层=0"
+    }
+  ],
+  "percentile_ranking": [
+    {
+      "domain": "机器学习基础",
+      "C_full": 755.3293578300447,
+      "C_simpl": 263.69473684210527,
+      "percentile": 93.3
+    },
+    {
+      "domain": "AI系统与硬件",
+      "C_full": 0,
+      "C_simpl": 0.0,
+      "percentile": 86.7
+    },
+    {
+      "domain": "交叉领域智能应用",
+      "C_full": 0,
+      "C_simpl": 0.0,
+      "percentile": 80.0
+    },
+    {
+      "domain": "具身智能与机器人",
+      "C_full": 0,
+      "C_simpl": 1.78125,
+      "percentile": 73.3
+    },
+    {
+      "domain": "多模态智能",
+      "C_full": 0,
+      "C_simpl": 240.0,
+      "percentile": 66.7
+    },
+    {
+      "domain": "大语言模型",
+      "C_full": 0,
+      "C_simpl": 18.571428571428573,
+      "percentile": 60.0
+    },
+    {
+      "domain": "安全可信与伦理",
+      "C_full": 0,
+      "C_simpl": 5.571428571428571,
+      "percentile": 53.3
+    },
+    {
+      "domain": "推荐系统与信息检索",
+      "C_full": 0,
+      "C_simpl": 4.8,
+      "percentile": 46.7
+    },
+    {
+      "domain": "智能体",
+      "C_full": 0,
+      "C_simpl": 1.0689655172413792,
+      "percentile": 40.0
+    },
+    {
+      "domain": "生成式AI",
+      "C_full": 0,
+      "C_simpl": 1.2857142857142856,
+      "percentile": 33.3
+    },
+    {
+      "domain": "知识表示与逻辑推理",
+      "C_full": 0,
+      "C_simpl": 12.5,
+      "percentile": 26.7
+    },
+    {
+      "domain": "科学AI",
+      "C_full": 0,
+      "C_simpl": 0.5454545454545454,
+      "percentile": 20.0
+    },
+    {
+      "domain": "自然语言处理",
+      "C_full": 0,
+      "C_simpl": 3.4615384615384617,
+      "percentile": 13.3
+    },
+    {
+      "domain": "计算机视觉",
+      "C_full": 0,
+      "C_simpl": 6.285714285714286,
+      "percentile": 6.7
+    },
+    {
+      "domain": "软件工程与编程",
+      "C_full": 0,
+      "C_simpl": 0.0,
+      "percentile": 0.0
+    }
+  ]
+}

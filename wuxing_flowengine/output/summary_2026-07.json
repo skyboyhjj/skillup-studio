@@ -1,0 +1,22 @@
+{
+  "month": "2026-07",
+  "previous_month": "2026-06",
+  "generated_at": "2026-07-31T16:29:00.511525",
+  "phases": {
+    "validation": {
+      "status": "unknown"
+    },
+    "phase1": {
+      "status": "ok"
+    },
+    "phase2": {
+      "status": "ok"
+    },
+    "phase3_plus": {
+      "status": "ok"
+    },
+    "timeseries": {
+      "status": "ok"
+    }
+  }
+}

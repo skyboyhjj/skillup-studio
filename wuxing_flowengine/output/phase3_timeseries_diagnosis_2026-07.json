@@ -1,0 +1,579 @@
+{
+  "phase": "3+_timeseries",
+  "current_label": "2026-07",
+  "prev_label": "2026-06",
+  "timestamp": "2026-07",
+  "data_sources": {
+    "current_diagnosis": "phase3_plus_diagnosis_2026-07.json",
+    "prev_papers": "phase3_paper_titles.json"
+  },
+  "time_series": {
+    "大语言模型": {
+      "prev_centroid": [
+        -0.2,
+        0.2333
+      ],
+      "current_centroid": [
+        -0.2,
+        0.2333
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "火": 2,
+        "木": 6,
+        "水": 9,
+        "土": 13
+      },
+      "current_paper_wx": {
+        "火": 2,
+        "木": 6,
+        "水": 9,
+        "土": 13
+      },
+      "prev_structure_drift": [
+        -0.5571,
+        -0.3381
+      ],
+      "prev_structure_drift_magnitude": 0.6517,
+      "current_structure_drift_magnitude": 0.6517,
+      "drift_magnitude_change": 0.0
+    },
+    "具身智能与机器人": {
+      "prev_centroid": [
+        -0.7333,
+        0.0667
+      ],
+      "current_centroid": [
+        -0.7333,
+        0.0667
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "木": 24,
+        "土": 2,
+        "金": 2,
+        "水": 2
+      },
+      "current_paper_wx": {
+        "木": 24,
+        "土": 2,
+        "金": 2,
+        "水": 2
+      },
+      "prev_structure_drift": [
+        -0.1544,
+        -0.2491
+      ],
+      "prev_structure_drift_magnitude": 0.2931,
+      "current_structure_drift_magnitude": 0.2931,
+      "drift_magnitude_change": 0.0
+    },
+    "多模态智能": {
+      "prev_centroid": [
+        -0.2667,
+        0.1
+      ],
+      "current_centroid": [
+        -0.2667,
+        0.1
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "火": 6,
+        "水": 9,
+        "金": 1,
+        "木": 9,
+        "土": 5
+      },
+      "current_paper_wx": {
+        "火": 6,
+        "水": 9,
+        "金": 1,
+        "木": 9,
+        "土": 5
+      },
+      "prev_structure_drift": [
+        0.3271,
+        0.0688
+      ],
+      "prev_structure_drift_magnitude": 0.3343,
+      "current_structure_drift_magnitude": 0.3342,
+      "drift_magnitude_change": -0.0001
+    },
+    "智能体": {
+      "prev_centroid": [
+        0.0,
+        -0.7241
+      ],
+      "current_centroid": [
+        0.0,
+        -0.7241
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 29,
+      "current_paper_count": 29,
+      "prev_paper_wx": {
+        "水": 2,
+        "火": 23,
+        "金": 1,
+        "土": 2,
+        "木": 1
+      },
+      "current_paper_wx": {
+        "水": 2,
+        "火": 23,
+        "金": 1,
+        "土": 2,
+        "木": 1
+      },
+      "prev_structure_drift": [
+        0.4194,
+        -0.6918
+      ],
+      "prev_structure_drift_magnitude": 0.809,
+      "current_structure_drift_magnitude": 0.809,
+      "drift_magnitude_change": -0.0
+    },
+    "生成式 AI": {
+      "prev_centroid": [
+        -0.6897,
+        0.2414
+      ],
+      "current_centroid": [
+        -0.6897,
+        0.2414
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 29,
+      "current_paper_count": 29,
+      "prev_paper_wx": {
+        "木": 20,
+        "水": 7,
+        "土": 2
+      },
+      "current_paper_wx": {
+        "木": 20,
+        "水": 7,
+        "土": 2
+      },
+      "prev_structure_drift": [
+        0.1992,
+        0.1303
+      ],
+      "prev_structure_drift_magnitude": 0.238,
+      "current_structure_drift_magnitude": 0.238,
+      "drift_magnitude_change": -0.0
+    },
+    "机器学习基础": {
+      "prev_centroid": [
+        -0.1724,
+        0.1379
+      ],
+      "current_centroid": [
+        -0.1724,
+        0.1379
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 29,
+      "current_paper_count": 29,
+      "prev_paper_wx": {
+        "木": 6,
+        "水": 8,
+        "火": 4,
+        "土": 10,
+        "金": 1
+      },
+      "current_paper_wx": {
+        "木": 6,
+        "水": 8,
+        "火": 4,
+        "土": 10,
+        "金": 1
+      },
+      "prev_structure_drift": [
+        -0.1446,
+        0.0407
+      ],
+      "prev_structure_drift_magnitude": 0.1502,
+      "current_structure_drift_magnitude": 0.1503,
+      "drift_magnitude_change": 0.0001
+    },
+    "安全、可信与伦理": {
+      "prev_centroid": [
+        0.1667,
+        0.2333
+      ],
+      "current_centroid": [
+        0.1667,
+        0.2333
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "水": 12,
+        "火": 5,
+        "土": 4,
+        "金": 7,
+        "木": 2
+      },
+      "current_paper_wx": {
+        "水": 12,
+        "火": 5,
+        "土": 4,
+        "金": 7,
+        "木": 2
+      },
+      "prev_structure_drift": [
+        -0.6795,
+        0.2333
+      ],
+      "prev_structure_drift_magnitude": 0.7184,
+      "current_structure_drift_magnitude": 0.7184,
+      "drift_magnitude_change": -0.0
+    },
+    "计算机视觉": {
+      "prev_centroid": [
+        -0.5667,
+        0.1667
+      ],
+      "current_centroid": [
+        -0.5667,
+        0.1667
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "水": 5,
+        "木": 19,
+        "土": 4,
+        "金": 2
+      },
+      "current_paper_wx": {
+        "水": 5,
+        "木": 19,
+        "土": 4,
+        "金": 2
+      },
+      "prev_structure_drift": [
+        -0.4758,
+        -0.7424
+      ],
+      "prev_structure_drift_magnitude": 0.8818,
+      "current_structure_drift_magnitude": 0.8818,
+      "drift_magnitude_change": 0.0
+    },
+    "交叉领域智能应用": {
+      "prev_centroid": [
+        0.0333,
+        0.0333
+      ],
+      "current_centroid": [
+        0.0333,
+        0.0333
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "火": 7,
+        "土": 10,
+        "水": 8,
+        "木": 2,
+        "金": 3
+      },
+      "current_paper_wx": {
+        "火": 7,
+        "土": 10,
+        "水": 8,
+        "木": 2,
+        "金": 3
+      },
+      "prev_structure_drift": [
+        0.0333,
+        0.9083
+      ],
+      "prev_structure_drift_magnitude": 0.9089,
+      "current_structure_drift_magnitude": 0.9089,
+      "drift_magnitude_change": -0.0
+    },
+    "推荐系统与信息检索": {
+      "prev_centroid": [
+        -0.0667,
+        -0.3
+      ],
+      "current_centroid": [
+        -0.0667,
+        -0.3
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "水": 5,
+        "木": 3,
+        "土": 7,
+        "火": 14,
+        "金": 1
+      },
+      "current_paper_wx": {
+        "水": 5,
+        "木": 3,
+        "土": 7,
+        "火": 14,
+        "金": 1
+      },
+      "prev_structure_drift": [
+        0.0583,
+        0.45
+      ],
+      "prev_structure_drift_magnitude": 0.4538,
+      "current_structure_drift_magnitude": 0.4538,
+      "drift_magnitude_change": 0.0
+    },
+    "AI 系统与硬件": {
+      "prev_centroid": [
+        -0.0333,
+        -0.0333
+      ],
+      "current_centroid": [
+        -0.0333,
+        -0.0333
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "土": 24,
+        "水": 2,
+        "火": 3,
+        "木": 1
+      },
+      "current_paper_wx": {
+        "土": 24,
+        "水": 2,
+        "火": 3,
+        "木": 1
+      },
+      "prev_structure_drift": [
+        -0.0333,
+        -0.0333
+      ],
+      "prev_structure_drift_magnitude": 0.0471,
+      "current_structure_drift_magnitude": 0.0471,
+      "drift_magnitude_change": 0.0
+    },
+    "软件工程与编程": {
+      "prev_centroid": [
+        0.1667,
+        -0.4667
+      ],
+      "current_centroid": [
+        0.1667,
+        -0.4667
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "火": 19,
+        "金": 5,
+        "水": 5,
+        "土": 1
+      },
+      "current_paper_wx": {
+        "火": 19,
+        "金": 5,
+        "水": 5,
+        "土": 1
+      },
+      "prev_structure_drift": [
+        0.1667,
+        -0.4667
+      ],
+      "prev_structure_drift_magnitude": 0.4956,
+      "current_structure_drift_magnitude": 0.4955,
+      "drift_magnitude_change": -0.0001
+    },
+    "科学 AI": {
+      "prev_centroid": [
+        -0.1667,
+        0.2333
+      ],
+      "current_centroid": [
+        -0.1667,
+        0.2333
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.0,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "prev_paper_count": 30,
+      "current_paper_count": 30,
+      "prev_paper_wx": {
+        "木": 6,
+        "水": 13,
+        "金": 1,
+        "火": 6,
+        "土": 4
+      },
+      "current_paper_wx": {
+        "木": 6,
+        "水": 13,
+        "金": 1,
+        "火": 6,
+        "土": 4
+      },
+      "prev_structure_drift": [
+        0.0,
+        -0.6
+      ],
+      "prev_structure_drift_magnitude": 0.6,
+      "current_structure_drift_magnitude": 0.6,
+      "drift_magnitude_change": -0.0
+    }
+  },
+  "summary": {
+    "domains_analyzed": 13,
+    "mean_monthly_drift": 0.0,
+    "max_monthly_drift_domain": "大语言模型",
+    "max_monthly_drift": 0.0,
+    "drift_trends": [
+      {
+        "domain": "多模态智能",
+        "change": -0.0001,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "机器学习基础",
+        "change": 0.0001,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "软件工程与编程",
+        "change": -0.0001,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "大语言模型",
+        "change": 0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "具身智能与机器人",
+        "change": 0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "智能体",
+        "change": -0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "生成式 AI",
+        "change": -0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "安全、可信与伦理",
+        "change": -0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "计算机视觉",
+        "change": 0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "交叉领域智能应用",
+        "change": -0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "推荐系统与信息检索",
+        "change": 0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "AI 系统与硬件",
+        "change": 0.0,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "科学 AI",
+        "change": -0.0,
+        "trend": "→ 基本稳定"
+      }
+    ],
+    "mean_drift_change": -0.0
+  }
+}

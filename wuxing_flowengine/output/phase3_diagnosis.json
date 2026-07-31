@@ -1,0 +1,316 @@
+{
+  "phase": 3,
+  "data_sources": {
+    "reports_graph_api": "15 domains, 2026-06",
+    "paper_titles": "30 papers from 大语言模型"
+  },
+  "paper_classification": {
+    "total": 30,
+    "wuxing": {
+      "火": 4,
+      "土": 8,
+      "水": 14,
+      "木": 3,
+      "金": 1
+    },
+    "details": [
+      {
+        "title": "SPIRAL: Learning to Search and Aggregate",
+        "wuxing": "火"
+      },
+      {
+        "title": "VIMPO: Value-Implicit Policy Optimization for LLMs",
+        "wuxing": "土"
+      },
+      {
+        "title": "Beyond Uniform Token-Level Trust Region in LLM Reinforcement Learning",
+        "wuxing": "水"
+      },
+      {
+        "title": "MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training",
+        "wuxing": "土"
+      },
+      {
+        "title": "DOPD: Dual On-policy Distillation",
+        "wuxing": "水"
+      },
+      {
+        "title": "SAGE-OPD: Selective Agent-Guided Intervention for Multi-Turn On-Policy Distillation",
+        "wuxing": "火"
+      },
+      {
+        "title": "Tapered Language Models",
+        "wuxing": "水"
+      },
+      {
+        "title": "Dynamic Short Convolutions Improve Transformers",
+        "wuxing": "土"
+      },
+      {
+        "title": "Depth-Attention: Cross-Layer Value Mixing for Language Models",
+        "wuxing": "水"
+      },
+      {
+        "title": "MiniMax Sparse Attention",
+        "wuxing": "水"
+      },
+      {
+        "title": "You Only Index Once: Cross-Layer Sparse Attention with Shared Routing",
+        "wuxing": "水"
+      },
+      {
+        "title": "JetSpec: Breaking the Scaling Ceiling of Speculative Decoding with Parallel Tree Drafting",
+        "wuxing": "土"
+      },
+      {
+        "title": "Self-Harness: Harnesses That Improve Themselves",
+        "wuxing": "水"
+      },
+      {
+        "title": "Decentralized Multi-Agent Systems with Shared Context",
+        "wuxing": "火"
+      },
+      {
+        "title": "Connect the Dots: Training LLMs for Long-Lifecycle Agents with Cross-Domain Generalization Via Reinforcement Learning",
+        "wuxing": "水"
+      },
+      {
+        "title": "Explaining Attention with Program Synthesis",
+        "wuxing": "木"
+      },
+      {
+        "title": "ReasoningFlow: Discourse Structures for Understanding LLM Reasoning Traces",
+        "wuxing": "水"
+      },
+      {
+        "title": "Anatomy of Post-Training: Using Interpretability to Characterize Data and Shape the Learning Signal",
+        "wuxing": "土"
+      },
+      {
+        "title": "Smooth Scaling Laws Hide Stepwise Token Learning",
+        "wuxing": "土"
+      },
+      {
+        "title": "Internal Data Repetition Destroys Language Models",
+        "wuxing": "水"
+      },
+      {
+        "title": "q0: Primitives for Hyper-Epoch Pretraining",
+        "wuxing": "土"
+      },
+      {
+        "title": "Large Language Models Hack Rewards, and Society",
+        "wuxing": "水"
+      },
+      {
+        "title": "A Red-Team Study of Anthropic Fable 5 & Opus 4.8 Models",
+        "wuxing": "水"
+      },
+      {
+        "title": "Gender Bias in LLM Hiring Decisions: Evidence from a Japanese Context and Evaluation of Mitigation Strategies",
+        "wuxing": "水"
+      },
+      {
+        "title": "Unlimited OCR Works",
+        "wuxing": "水"
+      },
+      {
+        "title": "Sarashina2.2-TTS: Tackling Kanji Polyphony in Japanese Speech Generation via Data Scaling and Targeted Data Synthesis",
+        "wuxing": "木"
+      },
+      {
+        "title": "LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks",
+        "wuxing": "火"
+      },
+      {
+        "title": "Masked Language Flow Models",
+        "wuxing": "木"
+      },
+      {
+        "title": "Latent Reasoning with Normalizing Flows",
+        "wuxing": "金"
+      },
+      {
+        "title": "Fixed-Point Reasoners: Stable and Adaptive Deep Looped Transformers",
+        "wuxing": "土"
+      }
+    ]
+  },
+  "structure_vs_activity": {
+    "domain": "大语言模型",
+    "node_wx": {
+      "木": 0,
+      "火": 0,
+      "土": 1,
+      "金": 5,
+      "水": 8
+    },
+    "paper_wx": {
+      "火": 4,
+      "土": 8,
+      "水": 14,
+      "木": 3,
+      "金": 1
+    },
+    "comparison": {
+      "木": {
+        "node": 0,
+        "node_pct": 0.0,
+        "paper": 3,
+        "paper_pct": 10.0,
+        "diff": 10.0,
+        "reading": "↑ 论文活跃度高于节点占比"
+      },
+      "火": {
+        "node": 0,
+        "node_pct": 0.0,
+        "paper": 4,
+        "paper_pct": 13.3,
+        "diff": 13.3,
+        "reading": "↑ 论文活跃度高于节点占比"
+      },
+      "土": {
+        "node": 1,
+        "node_pct": 7.1,
+        "paper": 8,
+        "paper_pct": 26.7,
+        "diff": 19.5,
+        "reading": "↑ 论文活跃度高于节点占比"
+      },
+      "金": {
+        "node": 5,
+        "node_pct": 35.7,
+        "paper": 1,
+        "paper_pct": 3.3,
+        "diff": -32.4,
+        "reading": "↓ 论文活跃度低于节点占比"
+      },
+      "水": {
+        "node": 8,
+        "node_pct": 57.1,
+        "paper": 14,
+        "paper_pct": 46.7,
+        "diff": -10.5,
+        "reading": "↓ 论文活跃度低于节点占比"
+      }
+    },
+    "centroid_drift": {
+      "node": [
+        0.3571,
+        0.5714
+      ],
+      "paper": [
+        -0.0667,
+        0.3333
+      ],
+      "drift": [
+        -0.4238,
+        -0.2381
+      ],
+      "magnitude": 0.4861,
+      "reading": "显著漂移——研究方向与知识结构存在结构性偏移"
+    }
+  },
+  "trend_summary": {
+    "text": "大语言模型研究正围绕推理能力规模化与系统效率双线深入。强化学习（RLVR）超越监督微调成为推理增强的核心范式；模型架构从均匀层宽转向锥形、动态卷积与跨层注意力混合；稀疏注意力与推测解码使长上下文推理加速取得突破；智能体系统从固定流水线走向自进化、去中心化协作与持续环境学习；预训练数据重复与缩放定律的研究更加精细；安全性、可解释性与领域专用化（OCR、语音、形式化数学）持续纵深；扩散/流模型等新型生成范式也开始挑战推理任务。",
+    "wuxing": "水"
+  },
+  "theta_critical": {
+    "formula": "论文流量(千篇) × (1 - S_D)",
+    "threshold": 1.0,
+    "llm_value": 0.99,
+    "reading": "未进入失衡区"
+  },
+  "domain_activity": [
+    {
+      "domain": "大语言模型",
+      "node_count": 14,
+      "sd": 0.8315,
+      "papers_6月": 5900
+    },
+    {
+      "domain": "自然语言处理",
+      "node_count": 18,
+      "sd": 1.0033,
+      "papers_6月": null
+    },
+    {
+      "domain": "具身智能与机器人",
+      "node_count": 19,
+      "sd": 0.912,
+      "papers_6月": null
+    },
+    {
+      "domain": "多模态智能",
+      "node_count": 32,
+      "sd": 0.9268,
+      "papers_6月": null
+    },
+    {
+      "domain": "智能体",
+      "node_count": 31,
+      "sd": 0.9889,
+      "papers_6月": null
+    },
+    {
+      "domain": "生成式 AI",
+      "node_count": 0,
+      "sd": 0,
+      "papers_6月": null
+    },
+    {
+      "domain": "机器学习基础",
+      "node_count": 72,
+      "sd": 1.0544,
+      "papers_6月": null
+    },
+    {
+      "domain": "安全、可信与伦理",
+      "node_count": 0,
+      "sd": 0,
+      "papers_6月": null
+    },
+    {
+      "domain": "计算机视觉",
+      "node_count": 22,
+      "sd": 0.7973,
+      "papers_6月": null
+    },
+    {
+      "domain": "交叉领域智能应用",
+      "node_count": 8,
+      "sd": 0.9485,
+      "papers_6月": null
+    },
+    {
+      "domain": "知识表示与逻辑推理",
+      "node_count": 5,
+      "sd": 0.7454,
+      "papers_6月": null
+    },
+    {
+      "domain": "推荐系统与信息检索",
+      "node_count": 16,
+      "sd": 1.0082,
+      "papers_6月": null
+    },
+    {
+      "domain": "AI 系统与硬件",
+      "node_count": 0,
+      "sd": 0,
+      "papers_6月": null
+    },
+    {
+      "domain": "软件工程与编程",
+      "node_count": 4,
+      "sd": 1.1011,
+      "papers_6月": null
+    },
+    {
+      "domain": "科学 AI",
+      "node_count": 0,
+      "sd": 0,
+      "papers_6月": null
+    }
+  ]
+}

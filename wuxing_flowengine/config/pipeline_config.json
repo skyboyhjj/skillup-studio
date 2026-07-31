@@ -1,0 +1,58 @@
+{
+  "base_dir": "C:\\Users\\hejij\\AppData\\Roaming\\TRAE SOLO CN\\ModularData\\ai-agent\\work-mode-projects\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
+  "data_sources": {
+    "knowledge_tree_url": "https://hub.baai.ac.cn/knowledge-tree/graph",
+    "reports_graph_api": "https://hub-notion.baai.ac.cn/api_v2/api/reports_graph",
+    "reports_detail_api": "https://hub-notion.baai.ac.cn/api_v2/api/reports_detail"
+  },
+  "domains": [
+    "大语言模型",
+    "具身智能与机器人",
+    "多模态智能",
+    "智能体",
+    "生成式 AI",
+    "机器学习基础",
+    "安全、可信与伦理",
+    "计算机视觉",
+    "交叉领域智能应用",
+    "推荐系统与信息检索",
+    "AI 系统与硬件",
+    "软件工程与编程",
+    "科学 AI"
+  ],
+  "domains_without_reports": [
+    "自然语言处理",
+    "知识表示与逻辑推理"
+  ],
+  "paper_to_snap_domain": {
+    "大语言模型": "大语言模型",
+    "具身智能与机器人": "具身智能与机器人",
+    "多模态智能": "多模态智能",
+    "智能体": "智能体",
+    "生成式 AI": "生成式AI",
+    "机器学习基础": "机器学习基础",
+    "安全、可信与伦理": "安全可信与伦理",
+    "计算机视觉": "计算机视觉",
+    "交叉领域智能应用": "交叉领域智能应用",
+    "推荐系统与信息检索": "推荐系统与信息检索",
+    "AI 系统与硬件": "AI系统与硬件",
+    "软件工程与编程": "软件工程与编程",
+    "科学 AI": "科学AI"
+  },
+  "thresholds": {
+    "min_nodes": 290,
+    "max_nodes": 350,
+    "min_paper_english_ratio": 0.8,
+    "max_missing_domains": 2,
+    "max_paper_duplicate_ratio": 0.05
+  },
+  "retry": {
+    "max_attempts": 3,
+    "backoff_factor": 2.0,
+    "initial_delay_seconds": 2
+  },
+  "notification": {
+    "enabled": false,
+    "webhook_url": ""
+  }
+}

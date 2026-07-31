@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "month": "2026-07",
+  "snapshot": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "node_count",
+        "status": "OK",
+        "detail": "302 个节点"
+      },
+      {
+        "check": "level_distribution",
+        "status": "OK",
+        "detail": "Level 1: 2, 2: 16, 3: 284"
+      }
+    ],
+    "warnings": [
+      {
+        "check": "edge_count",
+        "status": "WARN",
+        "detail": "边数量 300 偏低",
+        "level": "WARNING"
+      }
+    ]
+  },
+  "papers": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "domain_coverage",
+        "status": "OK",
+        "detail": "13/13 领域有数据"
+      },
+      {
+        "check": "total_papers",
+        "status": "OK",
+        "detail": "387 篇论文"
+      },
+      {
+        "check": "overall_english_ratio",
+        "status": "OK",
+        "detail": "总体英文率 100.0%"
+      }
+    ],
+    "warnings": [],
+    "details": {
+      "total_domains": 13,
+      "total_papers": 387,
+      "empty_domains": 0,
+      "overall_english_ratio": 1.0,
+      "domain_details": [
+        {
+          "domain": "大语言模型",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "具身智能与机器人",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "多模态智能",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "智能体",
+          "count": 29,
+          "english_count": 29,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "生成式 AI",
+          "count": 29,
+          "english_count": 29,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "机器学习基础",
+          "count": 29,
+          "english_count": 29,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "安全、可信与伦理",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "计算机视觉",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "交叉领域智能应用",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.033,
+          "status": "OK"
+        },
+        {
+          "domain": "推荐系统与信息检索",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "AI 系统与硬件",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "软件工程与编程",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        },
+        {
+          "domain": "科学 AI",
+          "count": 30,
+          "english_count": 30,
+          "english_ratio": 1.0,
+          "duplicate_ratio": 0.0,
+          "status": "OK"
+        }
+      ]
+    }
+  }
+}

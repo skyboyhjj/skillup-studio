@@ -1,0 +1,534 @@
+{
+  "phase": "3+_timeseries",
+  "timestamp": "2026-07-31",
+  "data_sources": {
+    "june_diagnosis": "phase3_plus_diagnosis.json",
+    "may_papers": "phase3_may_paper_titles.json"
+  },
+  "time_series": {
+    "大语言模型": {
+      "may_centroid": [
+        0.1333,
+        0.1333
+      ],
+      "june_centroid": [
+        -0.2,
+        0.2333
+      ],
+      "monthly_drift": [
+        -0.3333,
+        0.1
+      ],
+      "monthly_drift_magnitude": 0.348,
+      "reading": "显著月际漂移——研究方向明显变化",
+      "may_paper_count": 15,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "金": 2,
+        "火": 3,
+        "土": 5,
+        "水": 5
+      },
+      "june_paper_wx": {
+        "火": 2,
+        "木": 6,
+        "水": 9,
+        "土": 13
+      },
+      "may_structure_drift": [
+        -0.2238,
+        -0.4381
+      ],
+      "may_structure_drift_magnitude": 0.492,
+      "june_structure_drift_magnitude": 0.6517,
+      "drift_magnitude_change": 0.1597
+    },
+    "具身智能与机器人": {
+      "may_centroid": [
+        -0.5,
+        0.2
+      ],
+      "june_centroid": [
+        -0.7333,
+        0.0667
+      ],
+      "monthly_drift": [
+        -0.2333,
+        -0.1333
+      ],
+      "monthly_drift_magnitude": 0.2687,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "水": 8,
+        "金": 2,
+        "木": 17,
+        "火": 2,
+        "土": 1
+      },
+      "june_paper_wx": {
+        "木": 24,
+        "土": 2,
+        "金": 2,
+        "水": 2
+      },
+      "may_structure_drift": [
+        0.0789,
+        -0.1158
+      ],
+      "may_structure_drift_magnitude": 0.1401,
+      "june_structure_drift_magnitude": 0.2931,
+      "drift_magnitude_change": 0.153
+    },
+    "多模态智能": {
+      "may_centroid": [
+        -0.3667,
+        0.2
+      ],
+      "june_centroid": [
+        -0.2667,
+        0.1
+      ],
+      "monthly_drift": [
+        0.1,
+        -0.1
+      ],
+      "monthly_drift_magnitude": 0.1414,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "木": 13,
+        "水": 10,
+        "土": 1,
+        "火": 4,
+        "金": 2
+      },
+      "june_paper_wx": {
+        "火": 6,
+        "水": 9,
+        "金": 1,
+        "木": 9,
+        "土": 5
+      },
+      "may_structure_drift": [
+        0.2271,
+        0.1688
+      ],
+      "may_structure_drift_magnitude": 0.283,
+      "june_structure_drift_magnitude": 0.3342,
+      "drift_magnitude_change": 0.0512
+    },
+    "智能体": {
+      "may_centroid": [
+        0.0333,
+        -0.4333
+      ],
+      "june_centroid": [
+        0.0,
+        -0.7241
+      ],
+      "monthly_drift": [
+        -0.0333,
+        -0.2908
+      ],
+      "monthly_drift_magnitude": 0.2927,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 29,
+      "may_paper_wx": {
+        "火": 19,
+        "水": 6,
+        "木": 2,
+        "金": 3
+      },
+      "june_paper_wx": {
+        "水": 2,
+        "火": 23,
+        "金": 1,
+        "土": 2,
+        "木": 1
+      },
+      "may_structure_drift": [
+        0.4527,
+        -0.401
+      ],
+      "may_structure_drift_magnitude": 0.6048,
+      "june_structure_drift_magnitude": 0.809,
+      "drift_magnitude_change": 0.2042
+    },
+    "生成式 AI": {
+      "may_centroid": [
+        -0.7333,
+        0.1667
+      ],
+      "june_centroid": [
+        -0.6897,
+        0.2414
+      ],
+      "monthly_drift": [
+        0.0436,
+        0.0747
+      ],
+      "monthly_drift_magnitude": 0.0865,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "may_paper_count": 30,
+      "june_paper_count": 29,
+      "may_paper_wx": {
+        "水": 6,
+        "木": 22,
+        "土": 1,
+        "火": 1
+      },
+      "june_paper_wx": {
+        "木": 20,
+        "水": 7,
+        "土": 2
+      },
+      "may_structure_drift": [
+        0.1556,
+        0.0556
+      ],
+      "may_structure_drift_magnitude": 0.1652,
+      "june_structure_drift_magnitude": 0.238,
+      "drift_magnitude_change": 0.0728
+    },
+    "机器学习基础": {
+      "may_centroid": [
+        -0.0667,
+        0.2
+      ],
+      "june_centroid": [
+        -0.1724,
+        0.1379
+      ],
+      "monthly_drift": [
+        -0.1057,
+        -0.0621
+      ],
+      "monthly_drift_magnitude": 0.1226,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 29,
+      "may_paper_wx": {
+        "水": 11,
+        "火": 5,
+        "土": 10,
+        "金": 1,
+        "木": 3
+      },
+      "june_paper_wx": {
+        "木": 6,
+        "水": 8,
+        "火": 4,
+        "土": 10,
+        "金": 1
+      },
+      "may_structure_drift": [
+        -0.0389,
+        0.1028
+      ],
+      "may_structure_drift_magnitude": 0.1099,
+      "june_structure_drift_magnitude": 0.1503,
+      "drift_magnitude_change": 0.0404
+    },
+    "安全、可信与伦理": {
+      "may_centroid": [
+        0.1333,
+        -0.1
+      ],
+      "june_centroid": [
+        0.1667,
+        0.2333
+      ],
+      "monthly_drift": [
+        0.0334,
+        0.3333
+      ],
+      "monthly_drift_magnitude": 0.335,
+      "reading": "显著月际漂移——研究方向明显变化",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "金": 4,
+        "土": 5,
+        "水": 9,
+        "火": 12
+      },
+      "june_paper_wx": {
+        "水": 12,
+        "火": 5,
+        "土": 4,
+        "金": 7,
+        "木": 2
+      },
+      "may_structure_drift": [
+        -0.7129,
+        -0.1
+      ],
+      "may_structure_drift_magnitude": 0.7199,
+      "june_structure_drift_magnitude": 0.7184,
+      "drift_magnitude_change": -0.0015
+    },
+    "计算机视觉": {
+      "may_centroid": [
+        -0.5667,
+        0.1333
+      ],
+      "june_centroid": [
+        -0.5667,
+        0.1667
+      ],
+      "monthly_drift": [
+        0.0,
+        0.0334
+      ],
+      "monthly_drift_magnitude": 0.0334,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "木": 18,
+        "水": 4,
+        "土": 7,
+        "金": 1
+      },
+      "june_paper_wx": {
+        "水": 5,
+        "木": 19,
+        "土": 4,
+        "金": 2
+      },
+      "may_structure_drift": [
+        -0.4758,
+        -0.7758
+      ],
+      "may_structure_drift_magnitude": 0.9101,
+      "june_structure_drift_magnitude": 0.8818,
+      "drift_magnitude_change": -0.0283
+    },
+    "交叉领域智能应用": {
+      "may_centroid": [
+        -0.0333,
+        0.1
+      ],
+      "june_centroid": [
+        0.0333,
+        0.0333
+      ],
+      "monthly_drift": [
+        0.0666,
+        -0.0667
+      ],
+      "monthly_drift_magnitude": 0.0943,
+      "reading": "几乎无月际变化——研究方向稳定",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "水": 12,
+        "木": 2,
+        "土": 6,
+        "火": 9,
+        "金": 1
+      },
+      "june_paper_wx": {
+        "火": 7,
+        "土": 10,
+        "水": 8,
+        "木": 2,
+        "金": 3
+      },
+      "may_structure_drift": [
+        -0.0333,
+        0.975
+      ],
+      "may_structure_drift_magnitude": 0.9756,
+      "june_structure_drift_magnitude": 0.9089,
+      "drift_magnitude_change": -0.0667
+    },
+    "推荐系统与信息检索": {
+      "may_centroid": [
+        -0.2333,
+        -0.3
+      ],
+      "june_centroid": [
+        -0.0667,
+        -0.3
+      ],
+      "monthly_drift": [
+        0.1666,
+        0.0
+      ],
+      "monthly_drift_magnitude": 0.1666,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "火": 14,
+        "土": 4,
+        "水": 5,
+        "木": 7
+      },
+      "june_paper_wx": {
+        "水": 5,
+        "木": 3,
+        "土": 7,
+        "火": 14,
+        "金": 1
+      },
+      "may_structure_drift": [
+        -0.1083,
+        0.45
+      ],
+      "may_structure_drift_magnitude": 0.4628,
+      "june_structure_drift_magnitude": 0.4538,
+      "drift_magnitude_change": -0.009
+    },
+    "软件工程与编程": {
+      "may_centroid": [
+        -0.0667,
+        -0.3333
+      ],
+      "june_centroid": [
+        0.1667,
+        -0.4667
+      ],
+      "monthly_drift": [
+        0.2334,
+        -0.1334
+      ],
+      "monthly_drift_magnitude": 0.2688,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "火": 15,
+        "木": 6,
+        "金": 4,
+        "水": 5
+      },
+      "june_paper_wx": {
+        "火": 19,
+        "金": 5,
+        "水": 5,
+        "土": 1
+      },
+      "may_structure_drift": [
+        -0.0667,
+        -0.3333
+      ],
+      "may_structure_drift_magnitude": 0.3399,
+      "june_structure_drift_magnitude": 0.4955,
+      "drift_magnitude_change": 0.1556
+    },
+    "科学 AI": {
+      "may_centroid": [
+        -0.2667,
+        0.3667
+      ],
+      "june_centroid": [
+        -0.1667,
+        0.2333
+      ],
+      "monthly_drift": [
+        0.1,
+        -0.1334
+      ],
+      "monthly_drift_magnitude": 0.1667,
+      "reading": "轻度月际漂移——研究方向微调",
+      "may_paper_count": 30,
+      "june_paper_count": 30,
+      "may_paper_wx": {
+        "土": 5,
+        "木": 9,
+        "水": 13,
+        "金": 1,
+        "火": 2
+      },
+      "june_paper_wx": {
+        "木": 6,
+        "水": 13,
+        "金": 1,
+        "火": 6,
+        "土": 4
+      },
+      "may_structure_drift": [
+        -0.1,
+        -0.4666
+      ],
+      "may_structure_drift_magnitude": 0.4772,
+      "june_structure_drift_magnitude": 0.6,
+      "drift_magnitude_change": 0.1228
+    }
+  },
+  "summary": {
+    "domains_analyzed": 12,
+    "mean_monthly_drift": 0.1937,
+    "max_monthly_drift_domain": "大语言模型",
+    "max_monthly_drift": 0.348,
+    "drift_trends": [
+      {
+        "domain": "智能体",
+        "change": 0.2042,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "大语言模型",
+        "change": 0.1597,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "软件工程与编程",
+        "change": 0.1556,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "具身智能与机器人",
+        "change": 0.153,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "科学 AI",
+        "change": 0.1228,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "生成式 AI",
+        "change": 0.0728,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "交叉领域智能应用",
+        "change": -0.0667,
+        "trend": "↓ 结构-活跃度差距缩小"
+      },
+      {
+        "domain": "多模态智能",
+        "change": 0.0512,
+        "trend": "↑ 结构-活跃度差距扩大"
+      },
+      {
+        "domain": "机器学习基础",
+        "change": 0.0404,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "计算机视觉",
+        "change": -0.0283,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "推荐系统与信息检索",
+        "change": -0.009,
+        "trend": "→ 基本稳定"
+      },
+      {
+        "domain": "安全、可信与伦理",
+        "change": -0.0015,
+        "trend": "→ 基本稳定"
+      }
+    ],
+    "mean_drift_change": 0.0712
+  }
+}
