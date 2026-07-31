@@ -146,4 +146,4 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 ## 新对话快速启动
 
 在新对话中引用此文件即可继续开发：
-> "参考 PROJECT_CONTEXT.md 继续开发 SkillUp Studio"
+> "参考 PROJECT_CONTEXT.md 继续开发道境空间"
