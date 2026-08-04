@@ -15,6 +15,7 @@
 | 莫比乌斯环概念地图 | ✅ 已上线 | 选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML |
 | 知识树追踪引擎 | 🔜 即将上线 | 概念演化路径追踪与可视化 |
 | 论文采集器 | 🟡 预览版 | arXiv 月度采集（100 篇样本），分类筛选/搜索/导出 |
+| 五行道境引擎 | 🟡 开发中 | 知识树五行诊断 + 道境四维映射 + 月度流水线 + 论文采集合成 |
 
 ## 关键文件
 
@@ -37,6 +38,16 @@
 | `frontend/product-matrix/hui-skill-product-matrix.design` | 设计画布元数据 |
 | `docs/network-monitoring.md` | 带宽监控方案 + 实际流量分析（2026-07-24 ~ 07-31） |
 | `deploy/nginx/hui-skill.cn.conf` | Nginx 站点配置（含限流规则） |
+| `wuxing_flowengine/diagnose/wuxing_diagnose_v2.py` | 五行诊断引擎（七维指标体系 + 层间路径分析） |
+| `wuxing_flowengine/scripts/phase1_pipeline.py` | Phase 1 流水线（认知深度→五行映射→三层构建→四维计算） |
+| `wuxing_flowengine/scripts/dao_realm_engine.py` | 道境融合诊断引擎（Ch5 五步算法） |
+| `wuxing_flowengine/scripts/stage_engine.py` | 生克化通变五阶段判定引擎（Ch4） |
+| `wuxing_flowengine/scripts/guidance.py` | 导航建议生成器 |
+| `wuxing_flowengine/scripts/k_y_enhancer.py` | K_y 缘位增强器（Phase 4 自适应混合 E_relation） |
+| `wuxing_flowengine/scripts/baai_scraper.py` | BAAI Hub 论文采集（reports_graph/reports_detail API + Tiptap JSON 解析） |
+| `wuxing_flowengine/scripts/data_validator.py` | 数据验证模块（五检查点：语言/数量/覆盖/重复/一致性） |
+| `wuxing_flowengine/scripts/monthly_pipeline.py` | 月度编排器（Phase 1→2→3+→B→C + 时间序列 + 验证） |
+| `wuxing_flowengine/docs/` | 设计文档（融合设计方案 V1.2 + 数据采集经验总结） |
 
 ## 部署命令
 
@@ -134,6 +145,35 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - 更新 `index.html` 论文采集器卡片：「敬请期待」→「预览版」徽章 + 「进入预览」按钮
 - 本地预览：`cd frontend/product-matrix && python -m http.server 8088` → http://localhost:8088/pages/papers.html
 - 浏览器自动化测试通过：初始加载、统计数值、摘要展开、权限切换、重置、加载更多、导航均正常，无 JS 报错
+
+### 8. 五行道境引擎 V1.2 设计与实现
+- 基于《五行诊断与道境坐标系：融合设计方案 V1.2》实现完整流水线
+- **Phase 1**: 认知深度估算（L1-L4 关键词匹配）→ 五行映射（16 领域 + 关键词回退）→ 三层构建（种子/现行/超越）→ 四维计算（O_t/E_u/C_k/K_y）→ 存在度 S
+- **Phase 2**: 双层标注（概念名 + 五行标签）+ Spinor 层构建 + 领域追踪
+- **Phase 3+**: 论文五行分类 + 领域漂移分析（余弦距离）
+- **Phase B** (`dao_realm_engine.py`): 道境诊断引擎 — 五步算法（诊断→四维映射→S 计算→阶段判定→导航建议）
+- **Phase C2** (`k_y_enhancer.py`): K_y 缘位增强 — 自适应混合 E_relation（ke_density × β + graph_cohesion × (1-β)）
+- **Phase C1** (`domain_calibration.py`): 领域基准校准
+- 四个月度快照（2026-05/06/07/08）+ 时间序列 delta 链
+- 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/phase1_pipeline.py`、`scripts/phase2_pipeline.py`、`scripts/phase3_plus_pipeline.py`、`scripts/dao_realm_engine.py`、`scripts/stage_engine.py`、`scripts/guidance.py`、`scripts/k_y_enhancer.py`、`scripts/domain_calibration.py`、`scripts/monthly_pipeline.py`、`scripts/timeseries_analysis.py`、`scripts/wuxing_dsl.py`、`docs/`
+
+### 9. P0/P1 修复：层间路径分析 + 通阶段画像匹配
+- **P0**: `_edge_paths()` 从全量桩代码（恒返回 10 条）重写为实际层间主导行分析
+  - 逐对检查种子→现行、现行→超越的层间主导行是否构成相生/相克
+  - `ke_edge_count` 从恒为 5 变为实际值 0-2，K_y 不再饱和，S 值恢复合理区间
+- **P1-1**: 通阶段补全"路径匹配画像"条件
+  - 新增 `dim3_profile` 输出（层主导行/路径串/画像匹配）
+  - `matches_profile = 至少一条相生边 + 无相克边`
+  - `stage_engine.py` 通阶段判定改为 `matches_profile AND 0.50 < H_ratio < 0.85`
+- 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/stage_engine.py`
+
+### 10. 数据采集经验总结 + 验证模块
+- 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
+  - API 优先、格式不假设、逐领域验证、语言检测、弹窗处理、URL 编码、历史回溯
+- 采集脚本增强：新增 `reports_graph` API 兜底 + 跨月格式一致性检查 + 逐领域验证
+- 独立验证模块 `data_validator.py`：封装五个检查点（语言/数量/覆盖/重复/一致性）+ `ValidationReport` 类
+- 现有 05/06/07 三个月数据（315+400+403 篇）全部通过验证
+- 文件：`wuxing_flowengine/scripts/baai_scraper.py`、`scripts/data_validator.py`、`docs/网站数据采集经验总结.md`
 
 ---
 

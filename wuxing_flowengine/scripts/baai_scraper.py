@@ -69,9 +69,22 @@ def fetch_json(url):
 
 
 def get_reports(domain):
-    """获取某领域的历史报告列表"""
+    """获取某领域的历史报告列表 (reports_list API)"""
     encoded = urllib.parse.quote(domain)
     url = f"{API_BASE}/reports_list?title={encoded}"
+    data = fetch_json(url)
+    if not data or 'list' not in data:
+        return []
+    return data['list']
+
+
+def fetch_reports_graph():
+    """
+    获取所有领域最新月报摘要 (reports_graph API)
+    文档 §2.1: 返回所有领域最新月报摘要 (id, title, docId, createdAt)
+    用作 reports_list 的补充——当 reports_list 返回空时，用此兜底
+    """
+    url = f"{API_BASE}/reports_graph"
     data = fetch_json(url)
     if not data or 'list' not in data:
         return []
@@ -337,17 +350,107 @@ def validate_and_dedup(papers, label):
     return unique, dupes, cn_count
 
 
+def check_cross_month_consistency(all_data):
+    """
+    文档 §5 检查点 5: 同领域不同月份格式一致性检查
+
+    同一领域的不同月份报告，论文标题的语言/格式应该一致。
+    不一致 → 可能是模板切换或数据异常（如软件工程与编程 5 月的中文摘要问题）。
+
+    Args:
+        all_data: {month_key: [{title, domain, is_english}, ...]}
+
+    Returns:
+        list of (domain, issue) tuples for domains with cross-month inconsistencies
+    """
+    issues = []
+    # 收集每个领域各月份的英文占比
+    domain_monthly = defaultdict(lambda: defaultdict(list))
+    for month, papers in all_data.items():
+        for p in papers:
+            domain_monthly[p['domain']][month].append(p['is_english'])
+
+    for domain, months in domain_monthly.items():
+        ratios = {}
+        for month, flags in months.items():
+            if flags:
+                ratios[month] = sum(flags) / len(flags)
+
+        if len(ratios) >= 2:
+            values = list(ratios.values())
+            # 某个月的英文占比与其它月差异超过 50%
+            for month, ratio in ratios.items():
+                other_ratios = [v for m, v in ratios.items() if m != month]
+                if other_ratios:
+                    avg_other = sum(other_ratios) / len(other_ratios)
+                    if abs(ratio - avg_other) > 0.5:
+                        issues.append({
+                            'domain': domain,
+                            'month': month,
+                            'ratio': round(ratio, 3),
+                            'other_avg': round(avg_other, 3),
+                            'issue': f'{domain} {month}月 英文占比 {ratio:.1%} vs 其他月份 {avg_other:.1%}，差异显著'
+                        })
+
+    return issues
+
+
+def validate_papers_batch(papers):
+    """
+    文档 §7.1: 可复用的论文验证模板
+
+    对一批论文标题执行完整验证：
+    - 语言检测 (英文占比)
+    - 数量统计
+    - 标记需要人工复核的批次
+
+    Returns:
+        dict with total, english_titles, english_ratio, needs_review
+    """
+    total = len(papers)
+    if total == 0:
+        return {'total': 0, 'english_titles': 0, 'english_ratio': 0.0, 'needs_review': True}
+
+    english = sum(1 for t in papers if any(c.isascii() and c.isalpha() for c in t[:20]))
+    ratio = english / total
+    return {
+        'total': total,
+        'english_titles': english,
+        'english_ratio': round(ratio, 4),
+        'needs_review': ratio < 0.8
+    }
+
+
 def main():
     targets = sys.argv[1:] if len(sys.argv) > 1 else ['05', '06', '07']
     print("=" * 70)
     print(f"BAAI Hub 论文采集 V2 (2026-{', '.join(targets)})")
     print("=" * 70)
 
+    # ── 文档 §2.1: 先用 reports_graph 获取所有领域最新摘要 ──
+    print("\n[0] 获取全局报告摘要 (reports_graph)")
+    graph_reports = fetch_reports_graph()
+    print(f"  最新报告: {len(graph_reports)} 个领域")
+    graph_by_domain = {}
+    if graph_reports:
+        for r in graph_reports:
+            d = r.get('title', '')
+            if d:
+                graph_by_domain[d] = r
+        print(f"  领域索引: {len(graph_by_domain)} 个")
+
     all_data = {t: [] for t in targets}
 
     for domain in DOMAINS:
         print(f"\n[{domain}]")
         reports = get_reports(domain)
+
+        # 文档 §2.2: reports_list 返回空时，用 reports_graph 兜底
+        if not reports and domain in graph_by_domain:
+            fallback = graph_by_domain[domain]
+            print(f"  reports_list 为空，使用 reports_graph 兜底: {fallback.get('id', '')[:20]}...")
+            reports = [fallback]
+
         print(f"  历史报告: {len(reports)} 个")
 
         for r in reports:
@@ -360,6 +463,12 @@ def main():
                     print(f"  → 获取 {month_key}: {rid[:20]}...")
                     papers = fetch_papers_for_report(domain, rid)
                     print(f"    论文: {len(papers)} 篇")
+
+                    # 文档 §7.1: 逐领域验证
+                    batch_check = validate_papers_batch(papers)
+                    if batch_check['needs_review']:
+                        print(f"    ⚠ 需复核: 英文占比 {batch_check['english_ratio']:.1%}")
+
                     for p in papers[:3]:
                         lang = "EN" if is_english_title(p) else "CN"
                         print(f"      [{lang}] {p[:80]}")
@@ -376,7 +485,7 @@ def main():
 
         time.sleep(0.3)
 
-    # 教训 7: 数据验证
+    # ── 文档 §5: 数据验证流水线 ──
     print("\n" + "=" * 70)
     print("数据验证 & 去重")
     print("=" * 70)
@@ -385,6 +494,17 @@ def main():
     for t in targets:
         label = f"2026-{t}"
         valid[t], _, _ = validate_and_dedup(all_data[t], label)
+
+    # ── 文档 §5 检查点 5: 跨月格式一致性 ──
+    print("\n" + "=" * 70)
+    print("跨月格式一致性检查")
+    print("=" * 70)
+    consistency_issues = check_cross_month_consistency(all_data)
+    if consistency_issues:
+        for issue in consistency_issues:
+            print(f"  ⚠ {issue['issue']}")
+    else:
+        print("  ✓ 所有领域跨月格式一致")
 
     # 保存
     for t in targets:
@@ -408,8 +528,12 @@ def main():
             json.dump(output_data, f, ensure_ascii=False, indent=2)
         print(f"\n已保存: {output_path} ({len(output_data)} 篇)")
 
+    # 汇总
     print("\n" + "=" * 70)
     print("采集完成")
+    total_papers = sum(len(valid[t]) for t in targets)
+    print(f"  总计: {total_papers} 篇论文 ({len(targets)} 个月)")
+    print(f"  跨月一致性: {'✓ 通过' if not consistency_issues else f'⚠ {len(consistency_issues)} 个问题'}")
     print("=" * 70)
 
 
