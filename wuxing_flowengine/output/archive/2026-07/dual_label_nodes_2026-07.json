@@ -33,7 +33,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多智能体强化学习",
@@ -51,7 +51,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "扩散模型",
@@ -60,7 +60,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "扩散模型核心演进",
@@ -87,7 +87,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "语言模型",
@@ -96,7 +96,7 @@
       "current": "水",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "对比学习",
@@ -105,7 +105,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "模仿学习",
@@ -114,7 +114,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "模仿学习与示教学习",
@@ -123,7 +123,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "逆最优控制",
@@ -132,7 +132,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "逆最优控制与模仿学习",
@@ -141,7 +141,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "视觉Transformer加速",
@@ -150,7 +150,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "图神经网络",
@@ -168,7 +168,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "知识图谱嵌入",
@@ -177,7 +177,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "混合专家模型",
@@ -195,7 +195,7 @@
       "current": "水",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自动化机器学习",
@@ -231,7 +231,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "人机协作与对齐",
@@ -240,7 +240,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多智能体协作与社会模拟",
@@ -249,7 +249,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "社会模拟",
@@ -258,122 +258,122 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多模态大模型在机器人领域的应用",
     "projections": {
       "seed": "木",
-      "current": "水",
-      "transcend": "火"
+      "current": "火",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自动驾驶端到端感知-决策模型",
     "projections": {
       "seed": "木",
       "current": "水",
-      "transcend": "金"
+      "transcend": "火"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自动驾驶决策安全与伦理",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "金"
+      "seed": "木",
+      "current": "金",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "车路协同技术",
     "projections": {
-      "seed": "土",
+      "seed": "木",
       "current": "火",
-      "transcend": "木"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "隐私保护音频监测",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "金"
+      "seed": "木",
+      "current": "金",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "语义地图构建",
     "projections": {
-      "seed": "土",
-      "current": "水",
-      "transcend": "木"
+      "seed": "木",
+      "current": "土",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "主动感知与探索",
     "projections": {
       "seed": "木",
-      "current": "水",
+      "current": "火",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "状态估计与滤波算法",
     "projections": {
-      "seed": "土",
-      "current": "金",
-      "transcend": "水"
+      "seed": "木",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "大模型作为评估者",
     "projections": {
-      "seed": "金",
-      "current": "火",
-      "transcend": "水"
+      "seed": "火",
+      "current": "水",
+      "transcend": "金"
     },
     "matched": true
   },
   {
     "name": "大语言模型驱动的内容理解",
     "projections": {
-      "seed": "水",
-      "current": "火",
-      "transcend": "水"
+      "seed": "火",
+      "current": "水",
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多模态生成式推荐",
     "projections": {
-      "seed": "木",
-      "current": "火",
+      "seed": "火",
+      "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "语义ID学习",
     "projections": {
-      "seed": "土",
-      "current": "火",
+      "seed": "火",
+      "current": "土",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "协同过滤与LLM对齐",
     "projections": {
-      "seed": "土",
-      "current": "火",
-      "transcend": "金"
+      "seed": "火",
+      "current": "金",
+      "transcend": "水"
     },
     "matched": true
   },
@@ -382,52 +382,52 @@
     "projections": {
       "seed": "金",
       "current": "火",
-      "transcend": "金"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "伦理与价值观对齐",
     "projections": {
       "seed": "金",
       "current": "火",
-      "transcend": "金"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "AI数据中心能效管理",
     "projections": {
       "seed": "土",
-      "current": "金",
-      "transcend": "水"
+      "current": "水",
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "支持结构优化的3D打印生成",
     "projections": {
-      "seed": "木",
-      "current": "土",
+      "seed": "土",
+      "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "变分量子算法优化",
     "projections": {
       "seed": "金",
       "current": "水",
-      "transcend": "水"
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "量子神经网络",
     "projections": {
       "seed": "金",
       "current": "水",
-      "transcend": "水"
+      "transcend": "木"
     },
     "matched": true
   },
@@ -438,7 +438,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "进化算法",
@@ -447,25 +447,25 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "蒙特卡洛树搜索",
     "projections": {
       "seed": "土",
-      "current": "金",
+      "current": "火",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "文本引导的图像编辑",
     "projections": {
       "seed": "木",
-      "current": "火",
-      "transcend": "水"
+      "current": "水",
+      "transcend": "火"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "视觉引导的音频分离",
@@ -474,25 +474,25 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "触觉-视觉跨模态感知",
     "projections": {
       "seed": "木",
-      "current": "水",
-      "transcend": "金"
+      "current": "火",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多模态知识图谱构建",
     "projections": {
-      "seed": "金",
-      "current": "木",
-      "transcend": "水"
+      "seed": "木",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "跨模态检索增强生成",
@@ -501,16 +501,16 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多模态实体链接",
     "projections": {
-      "seed": "金",
-      "current": "木",
+      "seed": "木",
+      "current": "土",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "常识知识表示与提取",
@@ -519,14 +519,14 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "因果发现与因果推断",
     "projections": {
       "seed": "金",
       "current": "水",
-      "transcend": "水"
+      "transcend": "木"
     },
     "matched": true
   },
@@ -534,17 +534,17 @@
     "name": "数学定理证明与逻辑演绎",
     "projections": {
       "seed": "金",
-      "current": "金",
-      "transcend": "水"
+      "current": "水",
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "神经符号AI",
     "projections": {
       "seed": "金",
       "current": "水",
-      "transcend": "水"
+      "transcend": "木"
     },
     "matched": true
   },
@@ -564,7 +564,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "基因序列建模与表达预测",
@@ -573,113 +573,113 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "Transformer架构变体研究",
     "projections": {
-      "seed": "土",
-      "current": "水",
-      "transcend": "木"
+      "seed": "水",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "神经网络泛化理论与边界",
     "projections": {
-      "seed": "土",
-      "current": "金",
-      "transcend": "水"
+      "seed": "水",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "拓扑序态发现与流形学习",
     "projections": {
-      "seed": "土",
-      "current": "水",
-      "transcend": "水"
+      "seed": "水",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "元学习与跨任务适应",
     "projections": {
-      "seed": "土",
-      "current": "木",
-      "transcend": "水"
+      "seed": "水",
+      "current": "土",
+      "transcend": "木"
     },
     "matched": true
   },
   {
     "name": "迁移学习与领域自适应",
     "projections": {
-      "seed": "土",
-      "current": "木",
-      "transcend": "水"
+      "seed": "水",
+      "current": "土",
+      "transcend": "木"
     },
     "matched": true
   },
   {
     "name": "知识编辑与更新",
     "projections": {
-      "seed": "金",
-      "current": "水",
+      "seed": "水",
+      "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "知识编辑与事实一致性维护",
     "projections": {
-      "seed": "金",
-      "current": "水",
+      "seed": "水",
+      "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "隐式推理架构",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "水"
+      "seed": "水",
+      "current": "金",
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "思维链效率与路径优化",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "火"
+      "seed": "水",
+      "current": "火",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "逻辑与数值联合推理",
     "projections": {
-      "seed": "金",
+      "seed": "水",
       "current": "金",
-      "transcend": "水"
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "幻觉检测与事实性增强",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "金"
+      "seed": "水",
+      "current": "金",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "幻觉检测与置信度评估",
     "projections": {
-      "seed": "金",
-      "current": "水",
-      "transcend": "金"
+      "seed": "水",
+      "current": "金",
+      "transcend": "水"
     },
     "matched": true
   },
@@ -688,7 +688,7 @@
     "projections": {
       "seed": "水",
       "current": "火",
-      "transcend": "水"
+      "transcend": "金"
     },
     "matched": true
   },
@@ -697,7 +697,7 @@
     "projections": {
       "seed": "水",
       "current": "火",
-      "transcend": "水"
+      "transcend": "金"
     },
     "matched": true
   },
@@ -713,9 +713,9 @@
   {
     "name": "状态空间模型",
     "projections": {
-      "seed": "土",
-      "current": "水",
-      "transcend": "木"
+      "seed": "水",
+      "current": "土",
+      "transcend": "金"
     },
     "matched": true
   },
@@ -724,9 +724,9 @@
     "projections": {
       "seed": "水",
       "current": "火",
-      "transcend": "金"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "零碳电力交易博弈机制",
@@ -735,76 +735,76 @@
       "current": "火",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "气象预报与极端天气模拟",
     "projections": {
       "seed": "水",
       "current": "土",
-      "transcend": "金"
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "科学计算神经网络",
     "projections": {
       "seed": "水",
       "current": "土",
-      "transcend": "水"
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "智能材料建模与性能预测",
     "projections": {
       "seed": "水",
       "current": "木",
-      "transcend": "金"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "基于模型的强化学习",
     "projections": {
       "seed": "金",
       "current": "火",
-      "transcend": "木"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "基于策略的强化学习",
     "projections": {
       "seed": "金",
       "current": "火",
-      "transcend": "木"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "基于价值的强化学习",
     "projections": {
       "seed": "金",
       "current": "火",
-      "transcend": "木"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "任务规划与推理决策",
     "projections": {
-      "seed": "金",
-      "current": "火",
-      "transcend": "水"
+      "seed": "火",
+      "current": "水",
+      "transcend": "金"
     },
     "matched": true
   },
   {
     "name": "工具调用与API交互",
     "projections": {
-      "seed": "土",
-      "current": "火",
+      "seed": "火",
+      "current": "土",
       "transcend": "水"
     },
     "matched": true
@@ -812,62 +812,62 @@
   {
     "name": "长短期记忆与知识获取",
     "projections": {
-      "seed": "土",
+      "seed": "火",
       "current": "水",
-      "transcend": "火"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自主工作流与自动化",
     "projections": {
-      "seed": "土",
-      "current": "火",
-      "transcend": "木"
+      "seed": "火",
+      "current": "木",
+      "transcend": "水"
     },
     "matched": true
   },
   {
     "name": "智能体评估与基准测试",
     "projections": {
-      "seed": "金",
-      "current": "火",
-      "transcend": "金"
+      "seed": "火",
+      "current": "金",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "人格化与情感对话模拟",
     "projections": {
-      "seed": "水",
-      "current": "火",
+      "seed": "火",
+      "current": "水",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "意图识别与槽位填充",
     "projections": {
-      "seed": "水",
-      "current": "火",
+      "seed": "火",
+      "current": "水",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "跨语言知识迁移与对齐",
     "projections": {
-      "seed": "水",
-      "current": "木",
-      "transcend": "金"
+      "seed": "火",
+      "current": "水",
+      "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "临床法律金融领域文本生成",
     "projections": {
-      "seed": "水",
-      "current": "火",
+      "seed": "火",
+      "current": "水",
       "transcend": "金"
     },
     "matched": false
@@ -877,33 +877,33 @@
     "projections": {
       "seed": "金",
       "current": "水",
-      "transcend": "金"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自动化评测基准",
     "projections": {
-      "seed": "金",
-      "current": "火",
-      "transcend": "金"
+      "seed": "火",
+      "current": "金",
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "自动化提示词生成与优化",
     "projections": {
-      "seed": "水",
-      "current": "火",
-      "transcend": "木"
+      "seed": "火",
+      "current": "水",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "Sim-to-Real跨域迁移",
     "projections": {
       "seed": "木",
-      "current": "金",
+      "current": "火",
       "transcend": "水"
     },
     "matched": true
@@ -920,74 +920,74 @@
   {
     "name": "动态SLAM",
     "projections": {
-      "seed": "土",
+      "seed": "木",
       "current": "水",
-      "transcend": "木"
+      "transcend": "火"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多传感器融合定位",
     "projections": {
-      "seed": "土",
-      "current": "水",
-      "transcend": "金"
+      "seed": "木",
+      "current": "土",
+      "transcend": "水"
     },
     "matched": true
   },
   {
     "name": "机器人运动学与动力学建模",
     "projections": {
-      "seed": "土",
-      "current": "金",
-      "transcend": "木"
+      "seed": "木",
+      "current": "土",
+      "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "机器人控制与规划",
     "projections": {
-      "seed": "土",
-      "current": "木",
+      "seed": "木",
+      "current": "火",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "仿真平台介绍",
     "projections": {
-      "seed": "土",
-      "current": "火",
+      "seed": "木",
+      "current": "土",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "康复机器人安全",
     "projections": {
       "seed": "木",
       "current": "金",
-      "transcend": "火"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "社会辅助机器人",
     "projections": {
       "seed": "木",
       "current": "火",
-      "transcend": "金"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "农业智能决策与采摘",
     "projections": {
       "seed": "木",
       "current": "火",
-      "transcend": "金"
+      "transcend": "土"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "空间机器人与微重力操作",
@@ -996,16 +996,16 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "手术机器人与远程医疗",
     "projections": {
       "seed": "木",
       "current": "金",
-      "transcend": "火"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "水下机器人与海洋探测",
@@ -1014,16 +1014,16 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "搜救机器人",
     "projections": {
       "seed": "木",
       "current": "火",
-      "transcend": "金"
+      "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "机器人感知单元",
@@ -1032,7 +1032,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "机器人本体类别",
@@ -1041,25 +1041,25 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "情感驱动的语音合成",
     "projections": {
-      "seed": "水",
-      "current": "火",
-      "transcend": "木"
+      "seed": "木",
+      "current": "水",
+      "transcend": "火"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "AI音乐理解旋律与合成",
     "projections": {
-      "seed": "水",
-      "current": "火",
-      "transcend": "木"
+      "seed": "木",
+      "current": "水",
+      "transcend": "火"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "神经风格迁移与属性编辑",
@@ -1067,15 +1067,6 @@
       "seed": "木",
       "current": "水",
       "transcend": "金"
-    },
-    "matched": true
-  },
-  {
-    "name": "空间机器人与微重力",
-    "projections": {
-      "seed": "木",
-      "current": "金",
-      "transcend": "水"
     },
     "matched": false
   }
