@@ -45,6 +45,29 @@
         "htmlSrc": "pages/annotate.html",
         "interactions": []
       }
+    },
+    {
+      "id": "page-papers",
+      "title": "论文采集器",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753977600000,
+      "canvasData": {
+        "x": 1240,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-papers",
+          "measuredAt": 1753977600000
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/papers.html",
+        "interactions": []
+      }
     }
   ],
   "config": {
