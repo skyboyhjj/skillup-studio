@@ -1,0 +1,13 @@
+{
+  "pipeline": "wuxing_monthly",
+  "month": "2026-08",
+  "executed_at": "2026-08-04T12:44:53.208846",
+  "base_dir": "C:\\Users\\hejij\\AppData\\Roaming\\TRAE SOLO CN\\ModularData\\ai-agent\\work-mode-projects\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
+  "phases": {
+    "phase1": "✓",
+    "phase2": "✓",
+    "phase3": "✓",
+    "timeseries": "✓",
+    "validation": "✓"
+  }
+}

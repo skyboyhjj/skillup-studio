@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hui-skill · 论文采集器</title>
+    <style id="theme-vars">
+/* ============================================================
+   hui-skill.cn — 产品矩阵品牌色系
+   道境空间 × 现代科技：墨色为主，朱砂为辅
+   ============================================================ */
+
+:root {
+  /* ── 品牌主色（朱砂红）── */
+  --brand-primary: #C94B3A;
+  --brand-primary-hover: #B33E2E;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: rgba(201, 75, 58, 0.08);
+  --brand-primary-medium: rgba(201, 75, 58, 0.15);
+
+  /* ── 中性色（墨色系）── */
+  --brand-background: #FAF8F5;
+  --brand-foreground: #1A1715;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1A1715;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1A1715;
+  --brand-muted: #F2EFEB;
+  --brand-muted-foreground: #6B6560;
+  --brand-border: #E5E0DA;
+  --brand-input: #E5E0DA;
+  --brand-ring: rgba(201, 75, 58, 0.35);
+
+  /* ── 半径 ── */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 12px;
+  --brand-radius-xl: 16px;
+
+  /* ── 语义状态色 ── */
+  --state-success: #2D8C4E;
+  --state-warning: #C97A2A;
+  --state-error: #C94B3A;
+  --state-info: #3A6BC9;
+}
+
+/* 暗色模式 */
+.dark {
+  --brand-background: #141210;
+  --brand-foreground: #EDE8E3;
+  --brand-card: #1C1A17;
+  --brand-card-foreground: #EDE8E3;
+  --brand-popover: #1C1A17;
+  --brand-popover-foreground: #EDE8E3;
+  --brand-muted: #252320;
+  --brand-muted-foreground: #9B948E;
+  --brand-border: #2E2B27;
+  --brand-input: #2E2B27;
+  --brand-ring: rgba(201, 75, 58, 0.45);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+    --radius-xl: var(--brand-radius-xl);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <div class="page-root min-h-screen flex flex-col">
+
+        <!-- ======== Top Navigation Bar ======== -->
+        <nav class="flex items-center justify-between h-14 px-4 border-b flex-shrink-0" style="background-color: var(--brand-card); border-color: var(--brand-border);">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-lg font-bold tracking-tight no-underline" style="color: var(--brand-foreground);">
+                    hui<span style="color: var(--brand-primary);">&#183;</span>skill
+                </a>
+                <span class="text-sm" style="color: var(--brand-muted-foreground);">/</span>
+                <span class="text-sm font-medium" style="color: var(--brand-foreground);">论文采集器</span>
+                <span id="preview-badge" class="ml-2 px-2 py-0.5 rounded-full text-xs font-medium" style="background-color: rgba(201, 122, 42, 0.12); color: var(--state-warning);">预览版</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="permission-toggle" class="btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+                    <span id="permission-toggle-label">切换为游客模式</span>
+                </button>
+                <a href="index.html" class="flex items-center gap-1.5 text-sm no-underline transition-colors duration-200" style="color: var(--brand-muted-foreground);" onmouseover="this.style.color='var(--brand-primary)'" onmouseout="this.style.color='var(--brand-muted-foreground)'">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    返回矩阵
+                </a>
+            </div>
+        </nav>
+
+        <!-- ======== Hero Band ======== -->
+        <section class="border-b" style="background-color: var(--brand-card); border-color: var(--brand-border);">
+            <div class="max-w-7xl mx-auto px-6 py-10">
+                <div class="flex items-start gap-4 mb-3">
+                    <i data-lucide="file-text" class="w-9 h-9 text-primary mt-1"></i>
+                    <div>
+                        <h1 class="text-3xl font-bold tracking-tight" style="color: var(--brand-foreground);">论文采集器</h1>
+                        <p class="mt-1 text-sm" style="color: var(--brand-muted-foreground);">arXiv 自动化月度采集 &#183; 11 个 AI 子领域覆盖</p>
+                    </div>
+                </div>
+                <p class="max-w-3xl text-sm leading-relaxed" style="color: var(--brand-muted-foreground);">
+                    面向 AI 研究者的论文智能采集与结构化工具。自动抓取 arXiv 月度新论文，提取标题、摘要、作者与分类，支持多维度筛选、关键词检索与批量导出，为知识树追踪引擎提供原料。
+                </p>
+                <!-- Dataset metadata pills -->
+                <div id="dataset-meta" class="mt-5 flex flex-wrap gap-2 text-xs">
+                    <!-- filled by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== Stats Overview ======== -->
+        <section class="max-w-7xl mx-auto w-full px-6 pt-8">
+            <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+        <!-- ======== Main Layout: Filter Sidebar + Paper List ======== -->
+        <section class="max-w-7xl mx-auto w-full px-6 py-8 flex-1">
+            <div class="papers-layout">
+
+                <!-- LEFT: Filter Sidebar -->
+                <aside id="filter-panel" class="filter-panel">
+                    <div class="filter-panel-inner custom-scrollbar">
+
+                        <!-- Search -->
+                        <div class="mb-5">
+                            <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">关键词搜索</label>
+                            <div class="relative">
+                                <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2" style="color: var(--brand-muted-foreground);"></i>
+                                <input id="paper-search" type="text" placeholder="标题 / 作者 / 摘要 / arXiv ID" class="form-input pl-8 text-sm" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <!-- Sort -->
+                        <div class="mb-5">
+                            <label class="block text-xs font-semibold mb-2" style="color: var(--brand-muted-foreground);">排序</label>
+                            <select id="paper-sort" class="form-select text-sm">
+                                <option value="date_desc">发布日期 &#183; 新→旧</option>
+                                <option value="date_asc">发布日期 &#183; 旧→新</option>
+                                <option value="title_asc">标题 &#183; A→Z</option>
+                                <option value="authors_desc">作者数 &#183; 多→少</option>
+                            </select>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="mb-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-xs font-semibold" style="color: var(--brand-muted-foreground);">主分类筛选</label>
+                                <button id="filter-reset" class="text-xs transition-colors duration-150" style="color: var(--brand-primary);" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">重置</button>
+                            </div>
+                            <div id="category-filter" class="category-filter-list custom-scrollbar">
+                                <!-- filled by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Mobile close hint -->
+                        <div class="md:hidden mt-6 pt-4 border-t" style="border-color: var(--brand-border);">
+                            <button id="filter-close-mobile" class="btn-outline-brand w-full px-3 py-2 rounded-lg text-xs font-medium">应用筛选</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Mobile filter backdrop -->
+                <div id="filter-overlay" class="filter-overlay"></div>
+
+                <!-- RIGHT: Paper List -->
+                <main class="form-panel custom-scrollbar">
+
+                    <!-- Toolbar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                        <div class="flex items-center gap-3">
+                            <button id="mobile-filter-toggle" class="md:hidden btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                                <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+                                筛选
+                            </button>
+                            <span id="result-count" class="text-sm" style="color: var(--brand-muted-foreground);">加载中…</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="tooltip-wrapper">
+                                <button id="export-csv-btn" class="btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium" disabled>
+                                    <i data-lucide="file-down" class="w-3.5 h-3.5"></i>
+                                    CSV
+                                </button>
+                                <span class="tooltip-text">注册后可导出</span>
+                            </div>
+                            <div class="tooltip-wrapper">
+                                <button id="export-json-btn" class="btn-outline-brand flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium" disabled>
+                                    <i data-lucide="braces" class="w-3.5 h-3.5"></i>
+                                    JSON
+                                </button>
+                                <span class="tooltip-text">注册后可导出</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loading-state" class="flex flex-col items-center justify-center py-24">
+                        <i data-lucide="loader-2" class="w-8 h-8 mb-3 animate-spin" style="color: var(--brand-muted-foreground);"></i>
+                        <p class="text-sm" style="color: var(--brand-muted-foreground);">正在加载论文数据…</p>
+                    </div>
+
+                    <!-- Error State -->
+                    <div id="error-state" class="hidden flex flex-col items-center justify-center py-24">
+                        <i data-lucide="cloud-off" class="w-10 h-10 mb-3" style="color: var(--state-error);"></i>
+                        <p class="text-base font-medium" style="color: var(--brand-foreground);">数据加载失败</p>
+                        <p id="error-detail" class="text-sm mt-1 text-center max-w-md" style="color: var(--brand-muted-foreground);"></p>
+                        <p class="text-xs mt-3" style="color: var(--brand-muted-foreground);">提示：本地预览请使用 <code style="background-color: var(--brand-muted); padding: 1px 5px; border-radius: 3px;">python -m http.server</code> 访问，直接打开 file:// 无法 fetch 数据。</p>
+                    </div>
+
+                    <!-- Empty State (no results) -->
+                    <div id="empty-state" class="hidden flex flex-col items-center justify-center py-24">
+                        <i data-lucide="search-x" class="w-10 h-10 mb-3" style="color: var(--brand-muted-foreground);"></i>
+                        <p class="text-base font-medium" style="color: var(--brand-muted-foreground);">没有匹配的论文</p>
+                        <p class="text-sm mt-1" style="color: var(--brand-muted-foreground);">尝试调整筛选条件或关键词</p>
+                    </div>
+
+                    <!-- Paper List -->
+                    <div id="paper-list" class="space-y-3"></div>
+
+                    <!-- Load More -->
+                    <div id="load-more-wrap" class="hidden mt-6 text-center">
+                        <button id="load-more-btn" class="btn-outline-brand px-5 py-2 rounded-lg text-sm font-medium">
+                            加载更多
+                            <span id="load-more-count" class="ml-1" style="opacity: 0.7;"></span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </section>
+
+        <!-- ======== Footer ======== -->
+        <footer class="py-8 mt-4" style="border-top: 1px solid var(--brand-border);">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <p class="text-sm text-muted-foreground">&copy; 2026 hui-skill.cn &#183; 道境空间</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ======== Application Logic ======== -->
+    <script>
+    (function() {
+      // ── arXiv 主分类 → 可读名映射 ──
+      const CAT_LABELS = {
+        "cs.AI": "Artificial Intelligence",
+        "cs.CL": "Computation & Language",
+        "cs.CV": "Computer Vision",
+        "cs.LG": "Machine Learning",
+        "cs.MA": "Multi-Agent Systems",
+        "cs.RO": "Robotics",
+        "cs.CR": "Cryptography & Security",
+        "cs.DB": "Databases",
+        "cs.DC": "Distributed Computing",
+        "cs.DS": "Data Structures",
+        "cs.GR": "Graphics",
+        "cs.GT": "Computer Science & Game Theory",
+        "cs.HC": "Human-Computer Interaction",
+        "cs.IR": "Information Retrieval",
+        "cs.IT": "Information Theory",
+        "cs.LO": "Logic in Computer Science",
+        "cs.NE": "Neural & Evolutionary Computing",
+        "cs.SE": "Software Engineering",
+        "cs.SD": "Sound",
+        "cs.CY": "Computers & Society",
+        "cs.CE": "Computational Engineering",
+        "cs.CG": "Computational Geometry",
+        "cs.MM": "Multimedia",
+        "stat.ML": "Statistics - Machine Learning",
+        "stat.ME": "Methodology",
+        "stat.TH": "Theory",
+        "math.ST": "Statistics Theory",
+        "math.PR": "Probability",
+        "math.OC": "Optimization & Control",
+        "math.DS": "Dynamical Systems",
+        "math.CT": "Category Theory",
+        "eess.SP": "Signal Processing",
+        "eess.SY": "Systems & Control",
+        "eess.AS": "Audio & Speech Processing",
+        "eess.IV": "Image & Video Processing",
+        "physics.ins-det": "Instrumentation",
+        "astro-ph.IM": "Instrumentation & Methods",
+        "astro-ph.HE": "High Energy Astrophysics",
+        "cond-mat.dis-nn": "Disordered Systems",
+        "hep-th": "High Energy Physics - Theory",
+        "q-bio.QM": "Quantitative Methods"
+      };
+
+      function catLabel(code) {
+        return CAT_LABELS[code] || code;
+      }
+
+      // ── State ──
+      let isLoggedIn = true;
+      let allPapers = [];
+      let filteredPapers = [];
+      let activeCategories = new Set();  // empty = all
+      let searchQuery = '';
+      let sortMode = 'date_desc';
+      const PAGE_SIZE = 20;
+      let visibleCount = PAGE_SIZE;
+
+      // ── DOM refs ──
+      const searchInput = document.getElementById('paper-search');
+      const sortSelect = document.getElementById('paper-sort');
+      const categoryFilter = document.getElementById('category-filter');
+      const filterReset = document.getElementById('filter-reset');
+      const resultCount = document.getElementById('result-count');
+      const paperList = document.getElementById('paper-list');
+      const loadingState = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const errorDetail = document.getElementById('error-detail');
+      const emptyState = document.getElementById('empty-state');
+      const loadMoreWrap = document.getElementById('load-more-wrap');
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      const loadMoreCount = document.getElementById('load-more-count');
+      const statsGrid = document.getElementById('stats-grid');
+      const datasetMeta = document.getElementById('dataset-meta');
+      const permissionToggle = document.getElementById('permission-toggle');
+      const permissionToggleLabel = document.getElementById('permission-toggle-label');
+      const exportCsvBtn = document.getElementById('export-csv-btn');
+      const exportJsonBtn = document.getElementById('export-json-btn');
+      const filterPanel = document.getElementById('filter-panel');
+      const filterOverlay = document.getElementById('filter-overlay');
+      const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+      const filterCloseMobile = document.getElementById('filter-close-mobile');
+
+      // ── Utilities ──
+      function escapeHtml(str) {
+        if (str == null) return '';
+        const div = document.createElement('div');
+        div.textContent = String(str);
+        return div.innerHTML;
+      }
+
+      function escapeCsv(str) {
+        if (str == null) return '';
+        const s = String(str);
+        if (/[",\n\r]/.test(s)) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }
+
+      function formatDate(d) {
+        if (!d) return '';
+        return d;  // already YYYY-MM-DD
+      }
+
+      function truncate(str, n) {
+        if (!str) return '';
+        return str.length > n ? str.slice(0, n) + '…' : str;
+      }
+
+      // ── Stats ──
+      function renderStats() {
+        const total = allPapers.length;
+        const primaryCats = new Set(allPapers.map(p => p.categories && p.categories[0]).filter(Boolean));
+        const authorCounts = allPapers.map(p => (p.authors || []).length);
+        const avgAuthors = authorCounts.length ? (authorCounts.reduce((a, b) => a + b, 0) / authorCounts.length).toFixed(1) : 0;
+        const dates = allPapers.map(p => p.published).filter(Boolean).sort();
+        const dateRange = dates.length ? (dates[0] === dates[dates.length - 1] ? dates[0] : dates[0] + ' ~ ' + dates[dates.length - 1]) : '—';
+
+        const stats = [
+          { icon: 'file-text', label: '论文总数', value: total, sub: '本月采集' },
+          { icon: 'layers', label: '主分类数', value: primaryCats.size, sub: 'arXiv 类别' },
+          { icon: 'users', label: '平均作者', value: avgAuthors, sub: '人/篇' },
+          { icon: 'calendar', label: '采集日期', value: dates.length ? dates[dates.length - 1] : '—', sub: '发布日' }
+        ];
+
+        statsGrid.innerHTML = stats.map(s => `
+          <div class="card-hover rounded-xl p-5" style="background-color: var(--brand-card); border: 1px solid var(--brand-border);">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold" style="color: var(--brand-muted-foreground);">${s.label}</span>
+              <i data-lucide="${s.icon}" class="w-4 h-4" style="color: var(--brand-primary);"></i>
+            </div>
+            <div class="text-2xl font-bold" style="color: var(--brand-foreground);">${escapeHtml(s.value)}</div>
+            <div class="text-xs mt-1" style="color: var(--brand-muted-foreground);">${escapeHtml(s.sub)}</div>
+          </div>
+        `).join('');
+
+        // Dataset metadata pills
+        datasetMeta.innerHTML = `
+          <span class="px-2.5 py-1 rounded-full" style="background-color: var(--brand-primary-light); color: var(--brand-primary);">${total} 篇论文</span>
+          <span class="px-2.5 py-1 rounded-full" style="background-color: var(--brand-primary-light); color: var(--brand-primary);">${primaryCats.size} 个主分类</span>
+          <span class="px-2.5 py-1 rounded-full" style="background-color: var(--brand-primary-light); color: var(--brand-primary);">采集日 ${escapeHtml(dateRange)}</span>
+        `;
+
+        lucide.createIcons({ target: statsGrid });
+        lucide.createIcons({ target: datasetMeta });
+      }
+
+      // ── Category Filter ──
+      function renderCategoryFilter() {
+        const counts = {};
+        allPapers.forEach(p => {
+          const c = p.categories && p.categories[0];
+          if (c) counts[c] = (counts[c] || 0) + 1;
+        });
+        const entries = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+        categoryFilter.innerHTML = entries.map(([code, n]) => {
+          const checked = activeCategories.has(code) ? 'checked' : '';
+          return `
+            <label class="cat-filter-item" data-cat="${escapeHtml(code)}">
+              <input type="checkbox" class="cat-checkbox" value="${escapeHtml(code)}" ${checked}>
+              <span class="cat-code" style="color: var(--brand-foreground);">${escapeHtml(code)}</span>
+              <span class="cat-label" style="color: var(--brand-muted-foreground);">${escapeHtml(catLabel(code))}</span>
+              <span class="cat-count" style="color: var(--brand-muted-foreground);">${n}</span>
+            </label>
+          `;
+        }).join('');
+
+        categoryFilter.querySelectorAll('.cat-checkbox').forEach(cb => {
+          cb.addEventListener('change', function() {
+            if (this.checked) activeCategories.add(this.value);
+            else activeCategories.delete(this.value);
+            visibleCount = PAGE_SIZE;
+            applyFilters();
+          });
+        });
+      }
+
+      // ── Filter + Sort ──
+      function applyFilters() {
+        const q = searchQuery.toLowerCase().trim();
+        filteredPapers = allPapers.filter(p => {
+          // Category filter
+          if (activeCategories.size > 0) {
+            const c = p.categories && p.categories[0];
+            if (!c || !activeCategories.has(c)) return false;
+          }
+          // Search filter
+          if (q) {
+            const title = (p.title || '').toLowerCase();
+            const summary = (p.summary || '').toLowerCase();
+            const arxiv = (p.arxiv_id || '').toLowerCase();
+            const authors = (p.authors || []).join(' ').toLowerCase();
+            const cats = (p.categories || []).join(' ').toLowerCase();
+            if (!title.includes(q) && !summary.includes(q) && !arxiv.includes(q) && !authors.includes(q) && !cats.includes(q)) return false;
+          }
+          return true;
+        });
+
+        // Sort
+        filteredPapers.sort((a, b) => {
+          switch (sortMode) {
+            case 'date_desc': return (b.published || '').localeCompare(a.published || '') || (a.title || '').localeCompare(b.title || '');
+            case 'date_asc': return (a.published || '').localeCompare(b.published || '') || (a.title || '').localeCompare(b.title || '');
+            case 'title_asc': return (a.title || '').localeCompare(b.title || '');
+            case 'authors_desc': return (b.authors || []).length - (a.authors || []).length || (a.title || '').localeCompare(b.title || '');
+            default: return 0;
+          }
+        });
+
+        renderPaperList();
+      }
+
+      // ── Paper List Render ──
+      function renderPaperList() {
+        const total = filteredPapers.length;
+
+        if (total === 0) {
+          paperList.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          loadingState.classList.add('hidden');
+          loadMoreWrap.classList.add('hidden');
+          resultCount.textContent = '0 篇';
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+        loadingState.classList.add('hidden');
+
+        const shown = Math.min(visibleCount, total);
+        const slice = filteredPapers.slice(0, shown);
+
+        paperList.innerHTML = slice.map((p, idx) => renderPaperCard(p, idx)).join('');
+
+        // Load more visibility
+        if (shown < total) {
+          loadMoreWrap.classList.remove('hidden');
+          loadMoreCount.textContent = `（剩余 ${total - shown} 篇）`;
+        } else {
+          loadMoreWrap.classList.add('hidden');
+        }
+
+        resultCount.textContent = `${total} 篇${activeCategories.size > 0 || searchQuery ? ' · 已筛选' : ''}`;
+
+        lucide.createIcons({ target: paperList });
+        bindPaperCardEvents();
+      }
+
+      function renderPaperCard(p, idx) {
+        const arxivId = escapeHtml(p.arxiv_id || '');
+        const title = escapeHtml(p.title || '无标题');
+        const published = escapeHtml(formatDate(p.published));
+        const summary = p.summary || '';
+        const authors = p.authors || [];
+        const cats = p.categories || [];
+        const link = escapeHtml(p.link || '');
+
+        const authorStr = authors.length === 0 ? '未知作者'
+          : authors.length <= 3 ? authors.map(escapeHtml).join(', ')
+          : escapeHtml(authors.slice(0, 3).join(', ')) + ` <span style="color: var(--brand-muted-foreground);">+${authors.length - 3}</span>`;
+
+        const catBadges = cats.map((c, i) => {
+          const isPrimary = i === 0;
+          const style = isPrimary
+            ? 'background-color: var(--brand-primary-light); color: var(--brand-primary);'
+            : 'background-color: var(--brand-muted); color: var(--brand-muted-foreground);';
+          return `<span class="cat-badge" style="${style}" title="${escapeHtml(catLabel(c))}">${escapeHtml(c)}</span>`;
+        }).join('');
+
+        const summaryPreview = escapeHtml(truncate(summary, 220));
+        const summaryFull = escapeHtml(summary);
+        const hasMore = summary.length > 220;
+
+        return `
+          <article class="paper-card card-hover" data-idx="${idx}">
+            <div class="paper-card-header">
+              <div class="paper-card-meta">
+                <span class="arxiv-id" style="color: var(--brand-muted-foreground);">arXiv:${arxivId}</span>
+                <span style="color: var(--brand-muted-foreground);">·</span>
+                <span style="color: var(--brand-muted-foreground);">${published}</span>
+              </div>
+              <a href="${link}" target="_blank" rel="noopener" class="paper-link" title="在 arXiv 打开">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+            <h3 class="paper-title">${title}</h3>
+            <div class="paper-authors">
+              <i data-lucide="users" class="w-3.5 h-3.5" style="color: var(--brand-muted-foreground);"></i>
+              <span>${authorStr}</span>
+            </div>
+            <div class="paper-cats">${catBadges}</div>
+            <p class="paper-summary" data-preview="${summaryPreview}" data-full="${summaryFull}" data-expanded="0">${summaryPreview}</p>
+            ${hasMore ? `<button class="summary-toggle" data-action="toggle-summary">展开摘要</button>` : ''}
+          </article>
+        `;
+      }
+
+      function bindPaperCardEvents() {
+        paperList.querySelectorAll('.summary-toggle').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const card = this.closest('.paper-card');
+            const summaryEl = card.querySelector('.paper-summary');
+            const expanded = summaryEl.dataset.expanded === '1';
+            if (expanded) {
+              summaryEl.textContent = summaryEl.dataset.preview;
+              summaryEl.dataset.expanded = '0';
+              this.textContent = '展开摘要';
+            } else {
+              summaryEl.textContent = summaryEl.dataset.full;
+              summaryEl.dataset.expanded = '1';
+              this.textContent = '收起摘要';
+            }
+          });
+        });
+      }
+
+      // ── Export ──
+      function exportCSV() {
+        if (!isLoggedIn) return;
+        const headers = ['arxiv_id', 'title', 'published', 'categories', 'authors', 'link', 'summary'];
+        const rows = filteredPapers.map(p => [
+          p.arxiv_id || '',
+          p.title || '',
+          p.published || '',
+          (p.categories || []).join('; '),
+          (p.authors || []).join('; '),
+          p.link || '',
+          (p.summary || '').replace(/\n/g, ' ')
+        ].map(escapeCsv).join(','));
+        const csv = '\uFEFF' + headers.join(',') + '\n' + rows.join('\n');  // BOM for Excel
+        downloadFile(csv, 'papers-2026-06.csv', 'text/csv;charset=utf-8');
+      }
+
+      function exportJSON() {
+        if (!isLoggedIn) return;
+        const json = JSON.stringify(filteredPapers, null, 2);
+        downloadFile(json, 'papers-2026-06.json', 'application/json;charset=utf-8');
+      }
+
+      function downloadFile(content, filename, mime) {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      // ── Permission ──
+      function setPermissionUI() {
+        if (isLoggedIn) {
+          permissionToggleLabel.textContent = '切换为游客模式';
+          exportCsvBtn.disabled = false;
+          exportJsonBtn.disabled = false;
+        } else {
+          permissionToggleLabel.textContent = '切换为注册用户';
+          exportCsvBtn.disabled = true;
+          exportJsonBtn.disabled = true;
+        }
+      }
+
+      // ── Mobile filter panel ──
+      function openFilterPanel() {
+        filterPanel.classList.add('open');
+        filterOverlay.classList.add('open');
+      }
+      function closeFilterPanel() {
+        filterPanel.classList.remove('open');
+        filterOverlay.classList.remove('open');
+      }
+
+      // ── Event Bindings ──
+      searchInput.addEventListener('input', function() {
+        searchQuery = this.value;
+        visibleCount = PAGE_SIZE;
+        applyFilters();
+      });
+
+      sortSelect.addEventListener('change', function() {
+        sortMode = this.value;
+        applyFilters();
+      });
+
+      filterReset.addEventListener('click', function() {
+        activeCategories.clear();
+        searchQuery = '';
+        searchInput.value = '';
+        sortMode = 'date_desc';
+        sortSelect.value = 'date_desc';
+        visibleCount = PAGE_SIZE;
+        renderCategoryFilter();
+        applyFilters();
+      });
+
+      loadMoreBtn.addEventListener('click', function() {
+        visibleCount += PAGE_SIZE;
+        renderPaperList();
+      });
+
+      permissionToggle.addEventListener('click', function() {
+        isLoggedIn = !isLoggedIn;
+        setPermissionUI();
+      });
+
+      exportCsvBtn.addEventListener('click', exportCSV);
+      exportJsonBtn.addEventListener('click', exportJSON);
+
+      mobileFilterToggle.addEventListener('click', openFilterPanel);
+      filterCloseMobile.addEventListener('click', closeFilterPanel);
+      filterOverlay.addEventListener('click', closeFilterPanel);
+
+      // ── Data Loading ──
+      async function loadData() {
+        try {
+          const res = await fetch('../data/papers-2026-06.json');
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const data = await res.json();
+          if (!Array.isArray(data)) throw new Error('数据格式错误：期望数组');
+          allPapers = data;
+          loadingState.classList.add('hidden');
+          renderStats();
+          renderCategoryFilter();
+          applyFilters();
+        } catch (err) {
+          loadingState.classList.add('hidden');
+          errorState.classList.remove('hidden');
+          errorDetail.textContent = err && err.message ? err.message : String(err);
+        }
+      }
+
+      // ── Init ──
+      setPermissionUI();
+      lucide.createIcons();
+      loadData();
+    })();
+    </script>
+
+    <style>
+      /* ============================================================
+         论文采集器页面 — 浅色主题，左侧筛选 + 右侧论文列表
+         ============================================================ */
+      .page-root {
+        background-color: var(--brand-background);
+        color: var(--brand-foreground);
+      }
+
+      /* 卡片交互 */
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.2s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      }
+
+      /* 按钮 */
+      .btn-primary-brand {
+        background-color: var(--brand-primary);
+        color: var(--brand-primary-foreground);
+        transition: background-color 0.2s ease;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary-brand:hover { background-color: var(--brand-primary-hover); }
+      .btn-primary-brand:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      .btn-outline-brand {
+        background-color: transparent;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary);
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      .btn-outline-brand:hover:not(:disabled) { background-color: var(--brand-primary-light); }
+      .btn-outline-brand:disabled { opacity: 0.45; cursor: not-allowed; border-color: var(--brand-border); color: var(--brand-muted-foreground); }
+
+      /* 自定义滚动条 */
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background-color: var(--brand-border); border-radius: 3px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: var(--brand-muted-foreground); }
+
+      /* 表单控件 */
+      .form-input {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-md);
+        background-color: var(--brand-card);
+        color: var(--brand-foreground);
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+      }
+      .form-input:focus { border-color: var(--brand-primary); box-shadow: 0 0 0 3px var(--brand-ring); }
+      .form-input:disabled { background-color: var(--brand-muted); color: var(--brand-muted-foreground); cursor: not-allowed; }
+      .form-select {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-md);
+        background-color: var(--brand-card);
+        color: var(--brand-foreground);
+        font-size: 0.875rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1rem;
+        padding-right: 2.25rem;
+      }
+      .form-select:focus { border-color: var(--brand-primary); box-shadow: 0 0 0 3px var(--brand-ring); }
+
+      /* 主布局 */
+      .papers-layout {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+      .filter-panel {
+        width: 260px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1rem;
+      }
+      .filter-panel-inner {
+        background-color: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-lg);
+        padding: 1.25rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+      }
+      .form-panel {
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* 分类筛选列表 */
+      .category-filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        max-height: 320px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .cat-filter-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        border-radius: var(--brand-radius-sm);
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+        font-size: 0.8125rem;
+      }
+      .cat-filter-item:hover { background-color: var(--brand-muted); }
+      .cat-checkbox {
+        width: 14px;
+        height: 14px;
+        accent-color: var(--brand-primary);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .cat-code { font-weight: 600; font-size: 0.75rem; flex-shrink: 0; }
+      .cat-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.75rem; }
+      .cat-count { font-size: 0.6875rem; font-weight: 600; flex-shrink: 0; padding: 0 0.375rem; border-radius: 9999px; background-color: var(--brand-muted); }
+
+      /* 论文卡片 */
+      .paper-card {
+        background-color: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--brand-radius-lg);
+        padding: 1.25rem;
+      }
+      .paper-card:hover { border-color: var(--brand-primary); }
+      .paper-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+      .paper-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.6875rem;
+      }
+      .arxiv-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .paper-link {
+        color: var(--brand-muted-foreground);
+        transition: color 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+      }
+      .paper-link:hover { color: var(--brand-primary); }
+      .paper-title {
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--brand-foreground);
+        margin-bottom: 0.5rem;
+      }
+      .paper-authors {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.75rem;
+        color: var(--brand-muted-foreground);
+        margin-bottom: 0.625rem;
+      }
+      .paper-cats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        margin-bottom: 0.625rem;
+      }
+      .cat-badge {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        padding: 0.125rem 0.5rem;
+        border-radius: 9999px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .paper-summary {
+        font-size: 0.8125rem;
+        line-height: 1.6;
+        color: var(--brand-muted-foreground);
+      }
+      .summary-toggle {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--brand-primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: opacity 0.15s ease;
+      }
+      .summary-toggle:hover { opacity: 0.7; }
+
+      /* 权限徽章 */
+      .permission-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 500;
+      }
+
+      /* 工具提示 */
+      .tooltip-wrapper { position: relative; display: inline-block; }
+      .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--brand-foreground);
+        color: var(--brand-background);
+        font-size: 0.6875rem;
+        padding: 0.375rem 0.625rem;
+        border-radius: var(--brand-radius-sm);
+        white-space: nowrap;
+        z-index: 50;
+        transition: opacity 0.15s ease;
+        pointer-events: none;
+      }
+      .tooltip-wrapper:hover .tooltip-text { visibility: visible; opacity: 1; }
+      /* 当按钮启用时（已登录）隐藏 tooltip */
+      .tooltip-wrapper:has(button:not(:disabled)) .tooltip-text { display: none; }
+
+      /* 移动端筛选遮罩 */
+      .filter-overlay { display: none; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+      /* 响应式 */
+      @media (max-width: 768px) {
+        .papers-layout { position: relative; }
+        .filter-panel {
+          position: fixed;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 280px;
+          max-width: 85vw;
+          z-index: 50;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          padding: 1rem;
+          background-color: var(--brand-background);
+          overflow-y: auto;
+        }
+        .filter-panel.open { transform: translateX(0); }
+        .filter-panel-inner {
+          border: none;
+          padding: 0;
+          max-height: none;
+        }
+        .filter-overlay.open {
+          display: block;
+          position: fixed;
+          inset: 0;
+          z-index: 45;
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      /* 降低动画偏好 */
+      @media (prefers-reduced-motion: reduce) {
+        .card-hover, .card-hover:hover,
+        .btn-primary-brand, .btn-primary-brand:hover,
+        .btn-outline-brand, .btn-outline-brand:hover,
+        .filter-panel { transition-duration: 0.01ms !important; }
+        .card-hover:hover { transform: none; }
+      }
+    </style>
+</body>
+</html>

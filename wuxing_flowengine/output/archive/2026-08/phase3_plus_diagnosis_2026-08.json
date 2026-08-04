@@ -1,0 +1,13 @@
+{
+  "phase": "3+",
+  "month_label": "2026-08",
+  "timestamp": "2026-08",
+  "data_sources": {
+    "snapshot": "2026-08_snapshot.json",
+    "paper_titles": "papers_2026-08.json",
+    "phase2": "phase2_diagnosis_2026-08.json"
+  },
+  "domains": {},
+  "paper_domain_distribution": {},
+  "total_papers": 0
+}
