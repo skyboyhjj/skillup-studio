@@ -325,6 +325,9 @@ def run(base_dir, phase1_path=None, output_dir=None, month_label=None):
     O_t = w.get('土', 0) * 0.6 + w.get('金', 0) * 0.3 + 0.1
     E_u = 1 - 0.5 * abs(w.get('木', 0) - 0.25) - 0.5 * abs(w.get('水', 0) - 0.25) - 0.3
     C_k = w.get('水', 0) * 0.5 + w.get('火', 0) * 0.3 + w.get('木', 0) * 0.2
+    # K_y: 缘位（因果纠缠度）— Phase 2 简化版
+    # 无路径边数据，E_relation 用默认值 0.3（中等关系强度）
+    # 完整版见 phase1_pipeline.py: K_y = w_火×0.4 + w_土×0.3 + E_relation×0.3
     K_y = w.get('火', 0) * 0.4 + w.get('土', 0) * 0.3 + 0.3
 
     O_t = max(0, min(1, O_t))

@@ -1,5 +1,5 @@
 {
-  "_comment": "五行道境配置 (Phase 1 诊断参数)",
+  "_comment": "五行道境配置 (Phase 1 诊断参数 + V1.2 导航扩展)",
   "wuxing": {
     "木": {"pct": 0.20},
     "火": {"pct": 0.20},
@@ -15,5 +15,31 @@
   },
   "layer_labels": ["种子层", "现行层", "超越层"],
   "edge_ratio_min": 0.5,
-  "graph_density_ok": 0.01
+  "graph_density_ok": 0.01,
+
+  "_v1.2_navigation": "V1.2 道境导航层配置 (Ch4/Ch7, 融合设计方案 V1.2)",
+  "diagnosis_mode": "static",
+  "_diagnosis_mode_help": "static=单次快照判定(生/克/化/通), dynamic=多次快照判定(含ΔH陡降+重心位移+深度突变)",
+
+  "theta_critical": {
+    "base": 60,
+    "_comment": "临界阈值 θ_critical = θ_base × f(认知深度) × g(案例类型)",
+    "depth_multiplier": {
+      "L1": 1.0,
+      "L2": 1.5,
+      "L3": 2.0,
+      "L4": 3.0
+    },
+    "case_type_multiplier": {
+      "smooth": 1.0,
+      "_smooth_help": "顺境·全域跃迁",
+      "adverse": 0.6,
+      "_adverse_help": "逆境·成核生长"
+    }
+  },
+
+  "_domain_calibration": "领域基准校准 (Ch6: 跨领域 S 值不可比，需建立领域基准)",
+  "domain_calibration": null,
+
+  "_K_y_spec": "K_y = w_火×0.4 + w_土×0.3 + E_relation×0.3; E_relation = ke_count/2 (有相克边) | graph_density_ratio (无相克边, Phase 4 增强)"
 }

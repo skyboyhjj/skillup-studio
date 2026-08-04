@@ -398,13 +398,17 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     # C_k: 认知耦合度
     C_k = w['水'] * 0.5 + w['火'] * 0.3 + w['木'] * 0.2
 
-    # K_y: 相克路径压力
+    # K_y: 缘位（因果纠缠度）
+    # K_y = w_火×0.4 + w_土×0.3 + E_relation×0.3
+    # E_relation = ke_count/2 (有相克边时用冲突性关系度量)
+    #            = graph_density_ratio (无相克边时用结构性关系度量)
+    # spec: Ch3.3, 融合设计方案 V1.2 + Phase 4 增强
     ke_count = sum(1 for p in path if p['type'] == '相克')
     if ke_count > 0:
-        K_y = (w['火'] * 0.4 + w['土'] * 0.3
-               + (ke_count / max(len(path), 1)) * 0.3)
+        E_relation = ke_count / 2  # 三层路径最多2条边
     else:
-        K_y = w['火'] * 0.4 + w['土'] * 0.3 + graph_density_ratio * 0.3
+        E_relation = graph_density_ratio  # 图连接密度占比回退
+    K_y = w['火'] * 0.4 + w['土'] * 0.3 + E_relation * 0.3
 
     # 裁剪到 [0, 1]
     O_t = max(0, min(1, O_t))
