@@ -9,7 +9,7 @@
 | 知识图谱标注平台 | 已上线 | 专为道境空间概念设计的智能标注工作台，支持多维标注、规则推理、数据交换 |
 | 莫比乌斯概念地图 | 已上线 | 3D 交互式知识可视化，一键生成可交互的莫比乌斯环概念地图 |
 | 知识树追踪引擎 | 即将上线 | 基于五行理论的 AI 知识领域动态追踪，月度论文采集、结构诊断与趋势分析 |
-| 论文采集器 | 即将上线 | arXiv 自动化月度采集，覆盖 11 个 AI 子领域 |
+| 论文采集器 | 预览版 | arXiv 自动化月度采集，覆盖 11 个 AI 子领域；100 篇样本可筛选/搜索/导出 |
 
 ## 技术栈
 
@@ -24,7 +24,10 @@
 hui-skill-product-matrix/
 ├── pages/
 │   ├── index.html          # 产品矩阵首页
-│   └── annotate.html       # 知识图谱标注平台
+│   ├── annotate.html       # 知识图谱标注平台
+│   └── papers.html         # 论文采集器（预览版）
+├── data/
+│   └── papers-2026-06.json # 论文数据集（100 篇 arXiv）
 ├── colors_and_type.css      # 品牌 Design Token 定义
 ├── hui-skill-product-matrix.design  # 设计画布元数据
 ├── ARCHITECTURE.md          # 架构设计文档

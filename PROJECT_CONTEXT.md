@@ -14,7 +14,7 @@
 | 知识图谱标注平台 | ✅ 已上线 | 6 维标注（五行、多层五行深度、认知深度、八卦等），规则库驱动 |
 | 莫比乌斯环概念地图 | ✅ 已上线 | 选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML |
 | 知识树追踪引擎 | 🔜 即将上线 | 概念演化路径追踪与可视化 |
-| 论文采集器 | 🔜 即将上线 | 学术论文智能采集与知识提取 |
+| 论文采集器 | 🟡 预览版 | arXiv 月度采集（100 篇样本），分类筛选/搜索/导出 |
 
 ## 关键文件
 
@@ -31,6 +31,8 @@
 | `deploy/hui-skill/deploy.ps1` | hui-skill.cn 部署脚本 |
 | `frontend/product-matrix/pages/index.html` | 产品矩阵首页（非对称布局，4 产品卡片） |
 | `frontend/product-matrix/pages/annotate.html` | 知识图谱标注平台（左侧层级树 + 右侧 6 维标注表单） |
+| `frontend/product-matrix/pages/papers.html` | 论文采集器（统计概览 + 筛选侧栏 + 论文列表 + CSV/JSON 导出） |
+| `frontend/product-matrix/data/papers-2026-06.json` | 论文采集器数据集（100 篇 arXiv 论文，2026-06-30 采集） |
 | `frontend/product-matrix/colors_and_type.css` | 品牌 Design Token 定义（墨色+朱砂红+宣纸白） |
 | `frontend/product-matrix/hui-skill-product-matrix.design` | 设计画布元数据 |
 | `docs/network-monitoring.md` | 带宽监控方案 + 实际流量分析（2026-07-24 ~ 07-31） |
@@ -122,6 +124,16 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - 创建 `frontend/product-matrix/README.md`
 - 排除运行时编排文件、预检模板、缓存、临时文件
 - 保留 `PROJECT_CONTEXT.md` 作为跨分支共享任务参考文档
+
+### 7. 论文采集器页面（预览版）
+- 创建 `frontend/product-matrix/pages/papers.html`，亮色主题，复用品牌 Token 体系（墨色+朱砂红+宣纸白）
+- 布局：顶部导航 + Hero 区 + 4 统计卡片（论文总数/主分类数/平均作者/采集日期）+ 左侧筛选栏（260px sticky）+ 右侧论文列表
+- 数据：从 `wuxing_flowengine/output/papers_2026-06.json` 复制至 `frontend/product-matrix/data/papers-2026-06.json`（100 篇 arXiv 论文，2026-06-30 采集），页面通过 `fetch('../data/papers-2026-06.json')` 加载
+- 交互：主分类多选筛选（20 个 arXiv 类别带计数）、关键词搜索（标题/作者/摘要/arXiv ID）、4 种排序、摘要展开收起、分页加载（20 篇/页）、权限切换（游客禁用导出）、CSV/JSON 导出（注册用户）、移动端筛选抽屉
+- 数据画像：100 篇 / 20 主分类 / 平均 4.5 作者；主分类 Top5 为 cs.CV(25)、cs.LG(23)、cs.CL(14)、cs.RO(11)、cs.AI(7)
+- 更新 `index.html` 论文采集器卡片：「敬请期待」→「预览版」徽章 + 「进入预览」按钮
+- 本地预览：`cd frontend/product-matrix && python -m http.server 8088` → http://localhost:8088/pages/papers.html
+- 浏览器自动化测试通过：初始加载、统计数值、摘要展开、权限切换、重置、加载更多、导航均正常，无 JS 报错
 
 ---
 
