@@ -6,22 +6,26 @@ import json
 import os
 import math
 from collections import Counter, defaultdict
+from datetime import datetime
 
 # 论文五行关键词
 PAPER_WUXING_KEYWORDS = {
     '大语言模型': {'kw': ['语言模型', 'LLM', 'GPT', '大模型', '预训练', '微调', 'RLHF', 'DPO', '对齐', '幻觉', 'MoE', '长文本', '推理', '思维链', '检索增强', 'RAG', '知识编辑', '提示词', 'Transformer']},
+    '自然语言处理': {'kw': ['语言', '文本', '翻译', '摘要', '命名实体', '语义', '句法', '词法', '语料', '多语言', '机器翻译', '情感', '对话', '问答', '阅读理解', '信息抽取', '关系抽取', '事件抽取', '指代消解', '文本分类', '文本聚类', '文本生成', '摘要生成', '复述', '文本蕴含', '共指消解']},
     '具身智能与机器人': {'kw': ['机器人', '具身', '机械臂', '自动驾驶', 'SLAM', '运动规划', '控制', 'Sim-to-Real', '抓取', '导航', '操作', '仿生', '外骨骼', '人形']},
     '多模态智能': {'kw': ['多模态', '视觉语言', '跨模态', '视频理解', '图像生成', '文本到图像', '视觉问答', 'VQA', '音视频', '融合', '对齐', '视觉']},
     '智能体': {'kw': ['智能体', 'Agent', '多智能体', '协作', '规划', '工具调用', '自主', '工作流', '自动化', 'ReAct', 'Tool Use']},
-    '生成式AI': {'kw': ['生成', '扩散模型', 'GAN', '变分自编码器', 'VAE', '生成式', '图像生成', '视频生成', '文本生成', '合成', '神经辐射场', 'NeRF', '3D生成']},
+    '生成式 AI': {'kw': ['生成', '扩散模型', 'GAN', '变分自编码器', 'VAE', '生成式', '图像生成', '视频生成', '文本生成', '合成', '神经辐射场', 'NeRF', '3D生成']},
     '机器学习基础': {'kw': ['机器学习', '深度学习', '神经网络', '优化', '损失函数', '正则化', '梯度', '分类', '回归', '聚类', '降维', '特征工程', '集成学习', '元学习', '迁移学习', '自监督', '对比学习', '图神经网络', 'GNN']},
-    '安全可信与伦理': {'kw': ['安全', '隐私', '公平', '伦理', '可解释', '鲁棒', '对抗', '攻击', '后门', '水印', '审计', '透明', '偏见', '联邦学习', '差分隐私', '因果', '逻辑', '符号', '知识图谱']},
+    '安全、可信与伦理': {'kw': ['安全', '隐私', '公平', '伦理', '可解释', '鲁棒', '对抗', '攻击', '后门', '水印', '审计', '透明', '偏见', '联邦学习', '差分隐私', '信任', '可靠性']},
     '计算机视觉': {'kw': ['视觉', '图像', '视频', '目标检测', '分割', '识别', '深度估计', 'OCR', '人脸', '姿态', '目标跟踪', '超分辨率', '去噪', '增强', '复原', '医学图像']},
-    '交叉领域智能应用': {'kw': ['法律', '金融', '医疗', '教育', '交通', '农业', '制造', '能源', '科学', '生物', '化学', '物理', '数学', '气象', '材料', '量子', '药物', '基因', '蛋白质']},
+    '交叉领域智能应用': {'kw': ['法律', '金融', '医疗', '教育', '交通', '农业', '制造', '能源', '数学', '物理', '化学', '生物', '药物', '基因', '蛋白质', '气象', '材料', '量子']},
     '推荐系统与信息检索': {'kw': ['推荐', '检索', '搜索', '排序', '点击率', '广告', '信息', '个性化', '协同过滤', '内容过滤', '语义搜索', '向量检索']},
-    'AI系统与硬件': {'kw': ['分布式', '训练', '推理', '加速', '编译器', 'GPU', 'TPU', 'NPU', '量化', '剪枝', '蒸馏', '部署', '边缘', '硬件', '芯片', '数据中心']},
+    'AI 系统与硬件': {'kw': ['分布式', '训练', '推理', '加速', '编译器', 'GPU', 'TPU', 'NPU', '量化', '剪枝', '蒸馏', '部署', '边缘', '硬件', '芯片', '数据中心']},
     '软件工程与编程': {'kw': ['代码', '编程', '软件', '工程', '调试', '测试', '重构', '补全', '生成', '漏洞', '修复', '语义', '克隆', '文档', 'API']},
-    '科学AI': {'kw': ['科学', '物理', '化学', '生物', '医学', '药物', '蛋白质', '基因', '气象', '气候', '天文', '地理', '材料', '量子', '数学', '定理']},
+    '科学 AI': {'kw': ['科学', '物理', '化学', '生物', '医学', '药物', '蛋白质', '基因', '气象', '气候', '天文', '地理', '材料', '量子', '数学', '定理']},
+    '知识表示与逻辑推理': {'kw': ['知识', '逻辑', '推理', '因果', '符号', '神经符号', '知识图谱', '本体', '语义网', '规则', '演绎', '归纳', '溯因', '常识', '定理证明', '形式化']},
+    '其他AI领域': {'kw': []},
 }
 
 # 五元坐标
@@ -55,17 +59,29 @@ DOMAIN_ORDER = [
 ]
 
 
-def classify_paper(title, summary):
-    """论文五行分类"""
+def classify_paper(paper):
+    """
+    论文领域分类
+    优先使用 BAAI Hub 采集时分配的 domain 字段
+    回退到关键词匹配
+    """
+    # 优先使用内置 domain 字段
+    domain = paper.get('domain', '')
+    if domain and domain in PAPER_WUXING_KEYWORDS:
+        return domain
+
+    # 回退：关键词匹配
+    title = paper.get('title', '')
+    summary = paper.get('summary', '')
     text = (title + ' ' + summary).lower()
     scores = Counter()
-    for domain, cfg in PAPER_WUXING_KEYWORDS.items():
+    for dom, cfg in PAPER_WUXING_KEYWORDS.items():
         for kw in cfg['kw']:
             if kw.lower() in text:
-                scores[domain] += 1
+                scores[dom] += 1
 
     if not scores:
-        return '计算机视觉'  # 默认
+        return '其他AI领域'
 
     return scores.most_common(1)[0][0]
 
@@ -119,38 +135,66 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
 
     # 论文分类
     paper_domains = Counter()
-    paper_wx = defaultdict(Counter)
     for p in papers:
-        domain = classify_paper(p.get('title', ''), p.get('summary', ''))
+        domain = classify_paper(p)
         paper_domains[domain] += 1
 
     print(f'[2] 论文领域分布:')
-    for domain in DOMAIN_ORDER:
-        if domain in paper_domains:
-            print(f'  {domain}: {paper_domains[domain]} 篇')
+    for domain in sorted(paper_domains.keys()):
+        print(f'  {domain}: {paper_domains[domain]} 篇')
 
-    # 领域对比
+    # 领域对比：使用 Phase 2 的 domain_tracks 节点数据
     domains = {}
-    node_layers = node_data.get('layers', {})
-    overall_wx = node_data.get('overall_wuxing', {})
+    domain_tracks = node_data.get('domain_tracks', {})
 
-    for domain in DOMAIN_ORDER:
-        if domain in paper_domains:
-            node_wx = {}
-            # 从节点数据中提取该领域的五行分布
-            for layer_name, layer_data in node_layers.items():
-                pass  # 简化处理
+    for domain in sorted(set(list(domain_tracks.keys()) + list(paper_domains.keys()))):
+        domain_node = domain_tracks.get(domain, {})
+        node_wx = domain_node.get('wuxing', {})
+        node_count = domain_node.get('node_count', 0)
+        paper_count = paper_domains.get(domain, 0)
 
-            domains[domain] = {
-                'node_count': 0,
-                'paper_count': paper_domains.get(domain, 0),
-                'node_wx': {},
-                'paper_wx': {},
-                'comparison': {}
+        # 计算论文五行分布（基于论文标题关键词）
+        domain_papers = [p for p in papers if classify_paper(p) == domain]
+        paper_wx_dist = Counter()
+        for p in domain_papers:
+            title = p.get('title', '').lower()
+            for wx, cfg in {'木': ['生成', '具身', '机器人', '多模态', '跨模态', '迁移', '扩散', 'GAN', 'NeRF', '3D'],
+                            '火': ['推荐', '检索', '智能体', 'Agent', '协作', '交互', '对话', '搜索', '排序'],
+                            '土': ['基础', '架构', '系统', '硬件', '工程', '编译器', '分布式', '训练', '优化'],
+                            '金': ['安全', '可信', '伦理', '公平', '隐私', '对抗', '可解释', '鲁棒', '逻辑', '推理', '因果'],
+                            '水': ['语言', '文本', '翻译', '视觉', '图像', '视频', '目标检测', '分割', '识别', '预训练', '微调', 'LLM']}.items():
+                for kw in cfg:
+                    if kw.lower() in title:
+                        paper_wx_dist[wx] += 1
+
+        # 归一化
+        total_node = sum(node_wx.values()) or 1
+        total_paper = sum(paper_wx_dist.values()) or 1
+        node_wx_pct = {wx: round(node_wx.get(wx, 0) / total_node, 4) for wx in ['木', '火', '土', '金', '水']}
+        paper_wx_pct = {wx: round(paper_wx_dist.get(wx, 0) / total_paper, 4) for wx in ['木', '火', '土', '金', '水']}
+
+        # 漂移幅度：节点与论文五行分布的余弦距离
+        dot = sum(node_wx_pct[wx] * paper_wx_pct[wx] for wx in ['木', '火', '土', '金', '水'])
+        norm_n = math.sqrt(sum(v**2 for v in node_wx_pct.values()))
+        norm_p = math.sqrt(sum(v**2 for v in paper_wx_pct.values()))
+        drift = round(1 - dot / (norm_n * norm_p + 1e-10), 4)
+
+        domains[domain] = {
+            'node_count': node_count,
+            'paper_count': paper_count,
+            'node_wx': node_wx_pct,
+            'paper_wx': paper_wx_pct,
+            'comparison': {
+                'drift': drift,
+                'direction': '显著漂移' if drift > 0.4 else ('轻度漂移' if drift > 0.15 else '基本一致')
             }
+        }
 
     # 构建输出
     output = {
+        'report_type': 'phase3_plus_diagnosis',
+        'version': 'V1.2',
+        'generated_at': datetime.now().isoformat(),
         'phase': '3+',
         'month_label': month_label or '',
         'timestamp': month_label or '',

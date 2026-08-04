@@ -8,6 +8,7 @@ import os
 import sys
 import math
 from collections import Counter, defaultdict
+from datetime import datetime
 
 # ============================================================
 # 双层标注节点 — 概念在不同层级有不同的五行映射
@@ -353,6 +354,9 @@ def run(base_dir, phase1_path=None, output_dir=None, month_label=None):
 
     # 构建输出
     output = {
+        'report_type': 'phase2_diagnosis',
+        'version': 'V1.2',
+        'generated_at': datetime.now().isoformat(),
         'phase': 1.0,
         'month_label': month_label or '',
         'dual_label_count': dual_label_count,

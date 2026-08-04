@@ -15,6 +15,7 @@ import json
 import urllib.request
 import urllib.parse
 import os
+import sys
 import time
 import re
 from collections import Counter
@@ -123,26 +124,47 @@ def extract_papers_from_list_item(item):
 def extract_papers_from_tiptap(content):
     """
     教训 1+2: 从 Tiptap 富文本 JSON 中递归提取论文标题
-    兼容两种格式：
+    兼容三种格式：
 
     格式A (嵌套列表): bullet_list -> list_item("代表性论文") -> 嵌套 bullet_list -> 论文
-      用于: 大语言模型、具身智能与机器人、安全可信等多数领域
+      用于: 大语言模型(05/06月)、具身智能与机器人、安全可信等多数领域
 
     格式B (平铺段落): paragraph("代表性论文") -> 紧随的 bullet_list -> 论文
       用于: 自然语言处理、机器学习基础
+
+    格式C (兄弟列表项): bullet_list -> list_item("代表性论文") -> 后续兄弟 list_item -> 论文
+      用于: 大语言模型(07月)
     """
     papers = []
 
-    # 格式A: 递归遍历，查找嵌套列表中的 "代表性论文"
+    # 格式A+格式C: 递归遍历，查找包含 "代表性论文" 的 list_item
     def walk_for_nested(node):
         if isinstance(node, dict):
             t = node.get('type', '')
             if t in ('bullet_list', 'ordered_list'):
-                for item in node.get('content', []):
+                items = node.get('content', [])
+                for idx, item in enumerate(items):
                     if item.get('type') == 'list_item':
                         all_text = ''.join(find_texts(item))
                         if '代表性论文' in all_text:
-                            papers.extend(extract_papers_from_list_item(item))
+                            # 格式A: 先尝试嵌套列表中的论文
+                            nested = extract_papers_from_list_item(item)
+                            papers.extend(nested)
+
+                            # 格式C: 如果嵌套列表无结果，检查后续兄弟 list_item
+                            if not nested:
+                                for j in range(idx + 1, len(items)):
+                                    sibling = items[j]
+                                    if sibling.get('type') == 'list_item':
+                                        sibling_text = ''.join(find_texts(sibling)).strip()
+                                        # 检查是否还是论文标题（非 section header）
+                                        if sibling_text and not is_section_header(sibling_text):
+                                            # 如果遇到下一个 section header，停止
+                                            if '关键问题' in sibling_text or '关键方法' in sibling_text or '核心亮点' in sibling_text:
+                                                break
+                                            papers.append(sibling_text)
+                                    else:
+                                        break  # 遇到非 list_item 停止
             if 'content' in node:
                 for child in node['content']:
                     walk_for_nested(child)
@@ -316,12 +338,12 @@ def validate_and_dedup(papers, label):
 
 
 def main():
+    targets = sys.argv[1:] if len(sys.argv) > 1 else ['05', '06', '07']
     print("=" * 70)
-    print("BAAI Hub 论文采集 V2 (2026-05 & 2026-06)")
+    print(f"BAAI Hub 论文采集 V2 (2026-{', '.join(targets)})")
     print("=" * 70)
 
-    all_05 = []
-    all_06 = []
+    all_data = {t: [] for t in targets}
 
     for domain in DOMAINS:
         print(f"\n[{domain}]")
@@ -332,39 +354,25 @@ def main():
             title = r.get('title', '')
             rid = r.get('id', '')
 
-            if '05月报' in title:
-                print(f"  → 获取 05月报: {rid[:20]}...")
-                papers = fetch_papers_for_report(domain, rid)
-                print(f"    论文: {len(papers)} 篇")
-                for p in papers[:3]:
-                    lang = "EN" if is_english_title(p) else "CN"
-                    print(f"      [{lang}] {p[:80]}")
-                if len(papers) > 3:
-                    print(f"      ... 共 {len(papers)} 篇")
+            for t in targets:
+                month_key = f'{t}月报'
+                if month_key in title:
+                    print(f"  → 获取 {month_key}: {rid[:20]}...")
+                    papers = fetch_papers_for_report(domain, rid)
+                    print(f"    论文: {len(papers)} 篇")
+                    for p in papers[:3]:
+                        lang = "EN" if is_english_title(p) else "CN"
+                        print(f"      [{lang}] {p[:80]}")
+                    if len(papers) > 3:
+                        print(f"      ... 共 {len(papers)} 篇")
 
-                for p in papers:
-                    all_05.append({
-                        'title': p,
-                        'domain': domain,
-                        'is_english': is_english_title(p)
-                    })
-
-            elif '06月报' in title:
-                print(f"  → 获取 06月报: {rid[:20]}...")
-                papers = fetch_papers_for_report(domain, rid)
-                print(f"    论文: {len(papers)} 篇")
-                for p in papers[:3]:
-                    lang = "EN" if is_english_title(p) else "CN"
-                    print(f"      [{lang}] {p[:80]}")
-                if len(papers) > 3:
-                    print(f"      ... 共 {len(papers)} 篇")
-
-                for p in papers:
-                    all_06.append({
-                        'title': p,
-                        'domain': domain,
-                        'is_english': is_english_title(p)
-                    })
+                    for p in papers:
+                        all_data[t].append({
+                            'title': p,
+                            'domain': domain,
+                            'is_english': is_english_title(p)
+                        })
+                    break  # 已匹配，跳出内层循环
 
         time.sleep(0.3)
 
@@ -373,11 +381,15 @@ def main():
     print("数据验证 & 去重")
     print("=" * 70)
 
-    valid_05, dupes_05, cn_05 = validate_and_dedup(all_05, "2026-05")
-    valid_06, dupes_06, cn_06 = validate_and_dedup(all_06, "2026-06")
+    valid = {}
+    for t in targets:
+        label = f"2026-{t}"
+        valid[t], _, _ = validate_and_dedup(all_data[t], label)
 
     # 保存
-    for label, papers in [("2026-05", valid_05), ("2026-06", valid_06)]:
+    for t in targets:
+        label = f"2026-{t}"
+        papers = valid[t]
         output_path = os.path.join(OUTPUT_DIR, f"papers_{label}.json")
         output_data = []
         for i, p in enumerate(papers):

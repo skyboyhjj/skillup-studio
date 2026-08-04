@@ -31,27 +31,41 @@ def compare_months(archive_dirs):
 
 
 def compute_trends(timeline):
-    """计算趋势"""
+    """计算全月对比趋势，含逐月 delta 链"""
     if len(timeline) < 2:
         return {'status': 'insufficient_data', 'message': '需要至少两个月数据'}
 
-    trends = {}
-    prev = timeline[-2]
-    curr = timeline[-1]
-
+    # 首尾对比 (最新 vs 最早)
+    first = timeline[0]
+    last = timeline[-1]
+    overall = {}
     for dim in ['O_t', 'E_u', 'C_k', 'K_y']:
-        prev_val = prev['four_dims'].get(dim, 0)
-        curr_val = curr['four_dims'].get(dim, 0)
-        delta = curr_val - prev_val
-
-        trends[dim] = {
-            'previous': round(prev_val, 4),
-            'current': round(curr_val, 4),
+        first_val = first['four_dims'].get(dim, 0)
+        last_val = last['four_dims'].get(dim, 0)
+        delta = last_val - first_val
+        overall[dim] = {
+            'first': round(first_val, 4),
+            'last': round(last_val, 4),
             'delta': round(delta, 4),
             'direction': '↑' if delta > 0 else '↓' if delta < 0 else '→'
         }
 
-    return trends
+    # 逐月 delta 链
+    chain = []
+    for i in range(1, len(timeline)):
+        prev = timeline[i - 1]
+        curr = timeline[i]
+        step = {'from': prev['month'], 'to': curr['month'], 'deltas': {}}
+        for dim in ['O_t', 'E_u', 'C_k', 'K_y']:
+            pv = prev['four_dims'].get(dim, 0)
+            cv = curr['four_dims'].get(dim, 0)
+            step['deltas'][dim] = round(cv - pv, 4)
+        chain.append(step)
+
+    return {
+        'overall': overall,
+        'chain': chain
+    }
 
 
 def run(base_dir, output_dir=None, month_label=None):
@@ -95,10 +109,17 @@ def run(base_dir, output_dir=None, month_label=None):
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f'\n时间序列分析完成: {ts_path}')
-    if trends:
-        print('\n趋势摘要:')
-        for dim, t in trends.items():
-            print(f'  {dim}: {t["previous"]:.4f} → {t["current"]:.4f} ({t["direction"]}{abs(t["delta"]):.4f})')
+    if trends and 'overall' in trends:
+        print('\n首尾趋势:')
+        for dim, t in trends['overall'].items():
+            print(f'  {dim}: {t["first"]:.4f} → {t["last"]:.4f} ({t["direction"]}{abs(t["delta"]):.4f})')
+        if trends.get('chain'):
+            print('\n逐月 delta 链:')
+            for step in trends['chain']:
+                parts = ', '.join(
+                    f'{dim}: {v:+.4f}' for dim, v in step['deltas'].items()
+                )
+                print(f'  {step["from"]} → {step["to"]}: {parts}')
 
     return output
 

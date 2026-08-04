@@ -8,6 +8,7 @@ import os
 import sys
 import math
 from collections import Counter
+from datetime import datetime
 
 # ============================================================
 # 认知深度关键词 (L1=种子, L2=现行, L3=方法, L4=超越)
@@ -255,12 +256,20 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     # 自动选择节点文件
     if nodes_path is None:
         snap_dir = os.path.join(base_dir, 'data', 'snapshots')
-        snap_files = sorted(
+        all_snaps = sorted(
             [f for f in os.listdir(snap_dir) if f.endswith('_snapshot.json')],
             reverse=True
         )
-        if snap_files:
-            nodes_path = os.path.join(snap_dir, snap_files[0])
+        if all_snaps:
+            # 优先匹配 month_label 前缀的快照
+            if month_label:
+                matched = [f for f in all_snaps if f.startswith(month_label)]
+                if matched:
+                    nodes_path = os.path.join(snap_dir, matched[0])
+                else:
+                    nodes_path = os.path.join(snap_dir, all_snaps[0])
+            else:
+                nodes_path = os.path.join(snap_dir, all_snaps[0])
         else:
             nodes_path = os.path.join(snap_dir, 'nodes.json')
 
@@ -385,7 +394,7 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     path = result['dim3_edges']
 
     # 四维计算
-    w = {wx: freq[wx]['pct'] / 100.0 for wx in ['木', '火', '土', '金', '水']}
+    w = {wx: freq[wx]['pct'] for wx in ['木', '火', '土', '金', '水']}
 
     # O_t: 本体稳定性
     O_t = w['土'] * 0.6 + w['金'] * 0.3 + (1 - ent['ratio']) * 0.1
@@ -440,6 +449,9 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     }
 
     phase1_result = {
+        'report_type': 'phase1_diagnosis',
+        'version': 'V1.2',
+        'generated_at': datetime.now().isoformat(),
         'collect_time': month_label or '',
         'stats': stats,
         'depth_dist': depth_dist,
