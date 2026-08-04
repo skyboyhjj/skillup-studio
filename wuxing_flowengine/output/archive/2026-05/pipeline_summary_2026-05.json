@@ -1,7 +1,7 @@
 {
   "pipeline": "wuxing_monthly_v1.2",
-  "month": "2026-07",
-  "executed_at": "2026-08-04T19:52:13.820568",
+  "month": "2026-05",
+  "executed_at": "2026-08-04T19:52:00.816488",
   "base_dir": "C:\\Users\\hejij\\AppData\\Roaming\\TRAE SOLO CN\\ModularData\\ai-agent\\work-mode-projects\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
   "phases": {
     "phase1": "✓",
@@ -19,8 +19,8 @@
     "guidance": "层间张力显现，需正视冲突而非回避。"
   },
   "ky_enhancement": {
-    "K_y_original": 0.8887,
-    "K_y_enhanced": 0.2974,
-    "delta_K_y": -0.5913
+    "K_y_original": 0.8867,
+    "K_y_enhanced": 0.2738,
+    "delta_K_y": -0.6129
   }
 }

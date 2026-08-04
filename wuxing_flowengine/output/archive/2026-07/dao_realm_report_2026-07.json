@@ -1,0 +1,291 @@
+{
+  "report_type": "dao_realm_diagnosis",
+  "version": "V1.2",
+  "generated_at": "2026-08-04T19:52:13.725803",
+  "engine": "dao_realm_engine",
+  "diagnosis_mode": "static",
+  "month_label": "2026-07",
+  "wuxing_diagnosis": {
+    "dim1_freq": {
+      "木": {
+        "count": 68,
+        "pct": 0.2252
+      },
+      "火": {
+        "count": 47,
+        "pct": 0.1556
+      },
+      "土": {
+        "count": 77,
+        "pct": 0.255
+      },
+      "金": {
+        "count": 32,
+        "pct": 0.106
+      },
+      "水": {
+        "count": 78,
+        "pct": 0.2583
+      }
+    },
+    "dim2_layers": {
+      "种子层": {
+        "count": 37,
+        "wuxing": {
+          "土": 34,
+          "火": 3
+        }
+      },
+      "现行层": {
+        "count": 157,
+        "wuxing": {
+          "水": 42,
+          "金": 15,
+          "土": 31,
+          "火": 32,
+          "木": 37
+        }
+      },
+      "超越层": {
+        "count": 108,
+        "wuxing": {
+          "水": 36,
+          "金": 17,
+          "土": 12,
+          "木": 31,
+          "火": 12
+        }
+      }
+    },
+    "dim3_edges": [
+      {
+        "source": "木",
+        "target": "火",
+        "type": "相生",
+        "count": 0
+      },
+      {
+        "source": "火",
+        "target": "土",
+        "type": "相生",
+        "count": 0
+      },
+      {
+        "source": "土",
+        "target": "金",
+        "type": "相生",
+        "count": 0
+      },
+      {
+        "source": "金",
+        "target": "水",
+        "type": "相生",
+        "count": 0
+      },
+      {
+        "source": "水",
+        "target": "木",
+        "type": "相生",
+        "count": 0
+      },
+      {
+        "source": "木",
+        "target": "土",
+        "type": "相克",
+        "count": 0
+      },
+      {
+        "source": "土",
+        "target": "水",
+        "type": "相克",
+        "count": 0
+      },
+      {
+        "source": "水",
+        "target": "火",
+        "type": "相克",
+        "count": 0
+      },
+      {
+        "source": "火",
+        "target": "金",
+        "type": "相克",
+        "count": 0
+      },
+      {
+        "source": "金",
+        "target": "木",
+        "type": "相克",
+        "count": 0
+      }
+    ],
+    "dim4_entropy": {
+      "ratio": 0.1402,
+      "details": [
+        0.0,
+        0.116,
+        0.3251,
+        0.0,
+        0.0,
+        0.2588,
+        0.1438,
+        0.1422,
+        0.1189,
+        0.2968
+      ]
+    },
+    "dim5_compass": {
+      "cx": 0.0611,
+      "cy": -0.01,
+      "magnitude": 0.0619
+    }
+  },
+  "dao_realm_readings": {
+    "O_t": 0.2708,
+    "E_u": 0.9649,
+    "C_k": 0.2209,
+    "K_y": 0.8887,
+    "S": 5.1
+  },
+  "stage": "克",
+  "stage_details": {
+    "reason": "层间冲突 (路径含5条相克边)",
+    "ke_count": 5,
+    "ke_pairs": [
+      "木→土",
+      "土→水",
+      "水→火",
+      "火→金",
+      "金→木"
+    ],
+    "trigger": "ke_edge_count=5 >= 1"
+  },
+  "nested_stages": [
+    {
+      "layer": "种子层",
+      "sub_stage": "生的萌芽",
+      "dominant_wx": "土",
+      "detail": "种子层主导行: 土"
+    },
+    {
+      "layer": "现行层",
+      "sub_stage": "生的萌芽",
+      "dominant_wx": "水",
+      "detail": "现行层主导行: 水"
+    },
+    {
+      "layer": "超越层",
+      "sub_stage": "生的萌芽",
+      "dominant_wx": "水",
+      "detail": "超越层主导行: 水"
+    },
+    {
+      "sub_stage": "克的启动",
+      "ke_count": 5,
+      "detail": "路径含5条相克边"
+    }
+  ],
+  "guidance": {
+    "stage": "克",
+    "stage_title": "冲突期",
+    "summary": "层间张力显现，需正视冲突而非回避。",
+    "direction": "以通为贵，在冲突中寻找突破点。",
+    "caution": "避免长期僵持导致结构僵化。",
+    "next_step": "关注\"化\"的微光——局部突破往往是全面跃迁的前奏。",
+    "four_dims_interpretation": {
+      "O_t": "时位有序度偏低 (节律紊乱，需重建时间基底)",
+      "E_u": "宇位均衡度偏高 (能量过度分散，需聚焦)",
+      "C_k": "识位清晰度偏低 (觉知模糊，需深化探索)",
+      "K_y": "缘位纠缠度偏高 (关系过密，需简化因果)",
+      "S": "存在度偏高 (存在感强烈)"
+    },
+    "wuxing_bias": [
+      {
+        "wx": "木",
+        "status": "balance",
+        "pct": 22.5,
+        "advice": "木气均衡，生长有序"
+      },
+      {
+        "wx": "火",
+        "status": "balance",
+        "pct": 15.6,
+        "advice": "火气均衡，传播有序"
+      },
+      {
+        "wx": "土",
+        "status": "balance",
+        "pct": 25.5,
+        "advice": "土气均衡，承载稳定"
+      },
+      {
+        "wx": "金",
+        "status": "deficit",
+        "pct": 10.6,
+        "advice": "金气不足，宜以土生金（夯实系统/架构基础以支撑逻辑推理）"
+      },
+      {
+        "wx": "水",
+        "status": "balance",
+        "pct": 25.8,
+        "advice": "水气均衡，流动不息"
+      }
+    ],
+    "adjustment": [
+      "【金不足】金气不足，宜以土生金（夯实系统/架构基础以支撑逻辑推理）"
+    ],
+    "classical_refs": [
+      {
+        "text": "反者道之动，弱者道之用。",
+        "source": "道德经·第四十章"
+      },
+      {
+        "text": "将欲歙之，必固张之；将欲弱之，必固强之。",
+        "source": "道德经·第三十六章"
+      }
+    ],
+    "stage_details": {
+      "reason": "层间冲突 (路径含5条相克边)",
+      "ke_count": 5,
+      "ke_pairs": [
+        "木→土",
+        "土→水",
+        "水→火",
+        "火→金",
+        "金→木"
+      ],
+      "trigger": "ke_edge_count=5 >= 1"
+    }
+  },
+  "phase1_summary": {
+    "four_dims": {
+      "O_t": 0.2708,
+      "E_u": 0.9649,
+      "C_k": 0.2209,
+      "K_y": 0.8887
+    },
+    "tracks": {
+      "S_sum": 58.63,
+      "S_prod": 5.13,
+      "B": 58.63,
+      "C": 10.48,
+      "D": 1.02
+    },
+    "stats": {
+      "total": 302,
+      "seed": 37,
+      "current": 157,
+      "transcend": 108
+    },
+    "edge_quality": {
+      "edge_count": 662,
+      "node_count": 302,
+      "edge_ratio": 2.19,
+      "min_edge_ratio_ok": true,
+      "avg_degree": 4.38,
+      "max_degree": 76,
+      "graph_density_ratio": 0.0577,
+      "ky_mode": "ke_edge_count"
+    }
+  }
+}

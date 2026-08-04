@@ -1,50 +1,54 @@
 {
+  "report_type": "phase1_diagnosis",
+  "version": "V1.2",
+  "generated_at": "2026-08-04T20:58:55.904308",
   "collect_time": "2026-08",
   "stats": {
-    "total": 100,
-    "seed": 0,
-    "current": 55,
-    "transcend": 45
+    "total": 311,
+    "seed": 40,
+    "current": 161,
+    "transcend": 110
   },
   "depth_dist": {
-    "L3": 43,
-    "L2": 55,
-    "L4": 2
+    "L3": 109,
+    "L2": 161,
+    "L4": 1,
+    "L1": 40
   },
   "wuxing_dist": {
-    "水": 32,
-    "土": 17,
-    "金": 16,
-    "木": 21,
-    "火": 14
+    "水": 80,
+    "金": 32,
+    "土": 82,
+    "木": 69,
+    "火": 48
   },
   "four_dims": {
-    "O_t": 0.0922,
-    "E_u": 0.6969,
-    "C_k": 0.0024,
-    "K_y": 0.7511
+    "O_t": 0.2751,
+    "E_u": 0.9666,
+    "C_k": 0.2193,
+    "K_y": 0.2908
   },
   "tracks": {
-    "S_sum": 38.56,
-    "S_prod": 0.01,
-    "B": 38.56,
+    "S_sum": 43.79,
+    "S_prod": 1.7,
+    "B": 43.79,
     "C": 10.48,
     "D": 1.02
   },
   "edge_quality": {
-    "edge_count": 87,
-    "node_count": 100,
-    "edge_ratio": 0.87,
+    "edge_count": 687,
+    "node_count": 311,
+    "edge_ratio": 2.21,
     "min_edge_ratio_ok": true,
-    "avg_degree": 1.74,
-    "max_degree": 6,
-    "graph_density_ratio": 0.29,
+    "avg_degree": 4.42,
+    "max_degree": 77,
+    "graph_density_ratio": 0.0574,
     "ky_mode": "ke_edge_count"
   },
   "diagnosis": {
-    "file": "nodes.json",
-    "N": 100,
-    "N_raw": 100,
+    "file": "2026-08-30_snapshot.json",
+    "N": 311,
+    "N_raw": 311,
     "depth": null,
     "layer_names": [
       "种子层",
@@ -54,7 +58,208 @@
     "rings": [
       {
         "label": "种子层",
-        "concepts": []
+        "concepts": [
+          {
+            "name": "归一化方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "正则化方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "残差网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "循环神经网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "卷积神经网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "多层感知机",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "图同构网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "图注意力网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "图卷积网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "消息传递图神经网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "贝叶斯方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "近似推断",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "期望最大化",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "搜索算法",
+            "wuxing": "火",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "约束满足问题",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "进化算法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "蒙特卡洛树搜索",
+            "wuxing": "火",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "启发式搜索",
+            "wuxing": "火",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "概率图模型",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "概率软逻辑",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "马尔科夫逻辑网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "条件随机场",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "隐马尔科夫模型",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "因子图模型",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "无向图模型",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "贝叶斯网络",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "无监督学习",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "自监督学习",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "降维方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "聚类算法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "半监督学习",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "基于图结构的半监督学习方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "协同训练方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "一致性正则化方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "伪标签学习方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "监督学习",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "传统监督学习方法",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "隐马尔科夫模型 (新)",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "消息传递图神经网络 (新)",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "图卷积网络 (新)",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          }
+        ]
       },
       {
         "label": "现行层",
@@ -80,13 +285,318 @@
             "cognitive_depth": "L2"
           },
           {
+            "name": "自然语言处理",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "向量数据库与索引技术",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "语义检索与重排序",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "稠密检索与重排序优化",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "多轮对话状态追踪",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "意图识别与槽位填充",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "增强对话式代码风格控制",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "神经机器翻译架构",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "文本摘要与信息压缩",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "命名实体识别与关系抽取",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "跨语言知识迁移与对齐",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自动化提示词生成与优化",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自动化评测基准",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "文本水印与版权溯源",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "具身智能与机器人",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "分层稳定控制",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "运动规划",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "动态调参",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "密度驱动覆盖控制",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "鲁棒模型预测控制",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机械臂运动学与动力学建模",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "足式机器人步态优化",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "非线性控制与李雅普诺夫稳定性",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "多机器人协同路径规划",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "避障算法与实时导航",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "视觉伺服控制",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "接触力控制与阻抗控制",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "多传感器融合定位",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "触觉感知与力反馈",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "Sim-to-Real跨域迁移",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
             "name": "多模态智能",
             "wuxing": "木",
             "cognitive_depth": "L2"
           },
           {
-            "name": "视频理解与生成",
+            "name": "文本引导的图像编辑",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "其他智能体子领域",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "智能体",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "隐私保护音频监测",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "语义地图构建",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "主动感知与探索",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "状态估计与滤波算法",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "软体与可变形机器人",
             "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "连续体机器人控制",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "仿生线性驱动器设计",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机器人末端执行器与灵巧手",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "外骨骼控制与扰动估计",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "人形机器人硬件设计",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "柔性电子皮肤",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自动驾驶端到端感知-决策模型",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "混合交通控制",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "无人机交通管理",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自动驾驶决策安全与伦理",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "复杂场景行为预测",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "车路协同技术",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "社会辅助机器人",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "康复机器人安全",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "农业智能决策与采摘",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "空间机器人与微重力操作",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "手术机器人与远程医疗",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "水下机器人与海洋探测",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "搜救机器人",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机器人感知单元",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机器人本体类别",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机器人控制与规划",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "仿真平台介绍",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "模仿学习",
+            "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
@@ -105,122 +615,67 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "文本驱动图像生成",
+            "name": "图像编辑与局部重绘",
             "wuxing": "木",
             "cognitive_depth": "L2"
           },
           {
-            "name": "神经风格迁移",
+            "name": "神经风格迁移与属性编辑",
             "wuxing": "木",
             "cognitive_depth": "L2"
           },
           {
-            "name": "文本转语音合成",
+            "name": "文本转语音与音色定制",
             "wuxing": "木",
             "cognitive_depth": "L2"
           },
           {
-            "name": "计算机视觉",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "目标检测",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "语义分割",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "实例分割",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "图像超分辨率",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "医学图像自动分割",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "人脸识别与表情分析",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "视觉SLAM",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "具身智能与机器人",
+            "name": "AI音乐理解旋律与合成",
             "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "自动驾驶端到端感知-决策",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "机械臂运动学",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "Sim-to-Real跨域迁移",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "多机器人协同",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "人形机器人硬件",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "多传感器融合定位",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "智能体",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "序列化推荐",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "协同过滤与LLM对齐",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "稠密检索与重排序",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "跨域推荐",
-            "wuxing": "火",
             "cognitive_depth": "L2"
           },
           {
             "name": "机器学习基础",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "机器学习基础",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自适应学习率算法",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "大规模分布式训练优化器",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "损失函数设计与动态正则化",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "全监督微调对齐优化方法",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "基于模型的强化学习",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "基于策略的强化学习",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "基于价值的强化学习",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
@@ -230,7 +685,27 @@
             "cognitive_depth": "L2"
           },
           {
+            "name": "架构方法",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "回放方法",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
             "name": "安全可信与伦理",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "提示注入与对抗攻击防护",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "模型后门检测与安全过滤",
             "wuxing": "金",
             "cognitive_depth": "L2"
           },
@@ -240,18 +715,198 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "差分隐私保护与脱敏",
+            "name": "差分隐私保护与脱敏技术",
             "wuxing": "金",
             "cognitive_depth": "L2"
           },
           {
-            "name": "模型可解释性",
+            "name": "模型可解释性分析",
             "wuxing": "金",
             "cognitive_depth": "L2"
           },
           {
-            "name": "对抗攻击防护",
+            "name": "数字水印与AIGC溯源",
             "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "红线行为预警",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "计算机视觉",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "目标检测与边界框回归优化",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "语义实例全景分割技术",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "视觉SLAM与环境重建",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "神经频率响应场",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "图像超分辨率与去噪",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "低光照增强技术",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "金融文档字段提取与OCR增强",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "多阶段扫描文档预处理",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "医学图像自动分割",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "病灶检测与计算机辅助诊断",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "医学模态转化",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "人脸识别与表情分析",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "人体姿态估计与网格重建",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "人脸伪造检测",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "交叉领域智能应用",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "判例检索与法律条文匹配",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "合规问答系统与监管AI",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "风险评估与量化交易",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "个性化学习路径与轨迹建模",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "自动批改与智能辅导",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "数字人文与书目数据增强",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "预测性维护与缺陷检测",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "交通流预测与资源调度",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "点击率预估与精排模型",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "序列化推荐与长期兴趣建模",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "跨域推荐与冷启动问题解决",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "冷启动推荐因果语言模型检索",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "工业级广告推荐模型空间重构",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "协同过滤与LLM对齐",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "语义检索与个性化",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "语义ID学习",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "稠密检索与语义对齐",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "神经搜索",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "多模态搜索引擎架构",
+            "wuxing": "木",
             "cognitive_depth": "L2"
           },
           {
@@ -260,7 +915,12 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "分布式训练",
+            "name": "算子级并行与流水线并行",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "分布式显存优化",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
@@ -270,17 +930,57 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "边缘设备推断",
+            "name": "模型压缩裁剪与知识蒸馏",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
           {
-            "name": "向量数据库",
+            "name": "分布式训练并行策略",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
           {
-            "name": "算子级并行",
+            "name": "定制化加速器设计",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "端侧边缘设备推断优化",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "AI数据中心能效管理",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "向量数据库与检索架构设计",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "软件工程与编程",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "代码自动补全与重构建议",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "程序漏洞检测与自动修复",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "代码语义理解与克隆检测",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "文本转代码",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
@@ -295,43 +995,78 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "药物小分子筛选",
+            "name": "药物小分子筛选与设计",
             "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
-            "name": "基因序列建模",
+            "name": "基因序列建模与表达预测",
             "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
-            "name": "气象预报与极端天气",
+            "name": "病理步态肌肉力分配模拟",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "虚拟电厂优化与调度",
             "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
-            "name": "智能材料建模",
+            "name": "零碳电力交易博弈机制",
             "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
-            "name": "软件工程与编程",
+            "name": "气象预报与极端天气模拟",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "科学计算神经网络",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "智能材料建模与性能预测",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "支持结构优化的3D打印生成",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "变分量子算法优化",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "其他AI领域",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "零碳电力交易博弈机制 (新)",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "金融文档字段提取与OCR增强 (新)",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "基于策略的强化学习 (新)",
             "wuxing": "土",
             "cognitive_depth": "L2"
           },
           {
-            "name": "代码自动补全",
-            "wuxing": "土",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "程序漏洞检测",
-            "wuxing": "土",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "代码语义理解",
-            "wuxing": "土",
+            "name": "搜救机器人 (新)",
+            "wuxing": "木",
             "cognitive_depth": "L2"
           }
         ]
@@ -345,12 +1080,7 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "Transformer架构变体",
-            "wuxing": "土",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "混合专家模型",
+            "name": "大语言模型",
             "wuxing": "水",
             "cognitive_depth": "L3"
           },
@@ -360,8 +1090,38 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "长文本上下文",
+            "name": "混合专家模型架构",
             "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "长文本上下文处理",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "幻觉检测与事实性增强",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "知识编辑与更新",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "隐式推理架构",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "思维链效率与路径优化",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "逻辑与数值联合推理",
+            "wuxing": "金",
             "cognitive_depth": "L3"
           },
           {
@@ -370,13 +1130,8 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "知识编辑与事实一致性",
+            "name": "知识编辑与事实一致性维护",
             "wuxing": "金",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "隐式推理与思维链",
-            "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
@@ -390,48 +1145,153 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "视觉-语言预训练",
+            "name": "噪声抗干扰与证据选择",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "动态知识更新与版本一致性",
             "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
-            "name": "跨模态对齐",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "视觉语言模型",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "视觉问答",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "音视频同步",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "触觉-视觉跨模态",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "多模态知识图谱",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "3D高斯泼溅",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "多智能体协作",
+            "name": "人格化与情感对话模拟",
             "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "逆最优控制",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "模仿学习与示教学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "动态SLAM",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "世界模型建模",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉-语言预训练对齐",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "细粒度跨模态对齐",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "模态缺失下的完整性融合",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉语言模型参数高效微调",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "跨语言-跨模态迁移",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉问答与推理",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉语言思维链",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "零样本视觉推理",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉定位与指称理解",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多模态幻觉检测",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉丰富的文档理解",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "音视频同步与事件定位",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "语音驱动的面部动画",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉引导的音频分离",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "触觉-视觉跨模态感知",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多模态知识图谱构建",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "跨模态检索增强生成",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多模态实体链接",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视频描述生成",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "长视频时序理解",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视频问答",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视频-文本检索",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "动态场景图生成",
+            "wuxing": "木",
             "cognitive_depth": "L3"
           },
           {
@@ -445,37 +1305,122 @@
             "cognitive_depth": "L3"
           },
           {
+            "name": "长短期记忆与知识获取",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多智能体协作与社会模拟",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "人机协作与对齐",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "智能体评估与基准测试",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
             "name": "自主工作流与自动化",
             "wuxing": "火",
             "cognitive_depth": "L3"
           },
           {
-            "name": "社会模拟",
-            "wuxing": "火",
+            "name": "机器人运动学与动力学建模",
+            "wuxing": "木",
             "cognitive_depth": "L3"
           },
           {
-            "name": "大模型作为评估者",
-            "wuxing": "火",
+            "name": "多模态大模型在机器人领域的应用",
+            "wuxing": "木",
             "cognitive_depth": "L3"
           },
           {
-            "name": "推荐系统与信息检索",
-            "wuxing": "火",
+            "name": "文本驱动的图像视频生成",
+            "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
-            "name": "图神经网络",
+            "name": "时空一致性控制与编辑",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "情感驱动的语音合成",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "强化学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "策略梯度与PPO优化",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "离线强化学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "逆强化学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多智能体强化学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "逆最优控制与模仿学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "可微分奖励演化与建模",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "Transformer架构变体研究",
             "wuxing": "土",
             "cognitive_depth": "L3"
           },
           {
-            "name": "神经网络泛化理论",
+            "name": "状态空间模型",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "神经网络泛化理论与边界",
             "wuxing": "水",
             "cognitive_depth": "L4"
           },
           {
-            "name": "自监督对比学习表征",
+            "name": "自监督对比学习表征优化",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "图神经网络与消息传递",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "知识图谱嵌入",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "拓扑序态发现与流形学习",
             "wuxing": "土",
             "cognitive_depth": "L3"
           },
@@ -495,32 +1440,47 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "强化学习",
+            "name": "神经网络参数优化算法",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "Transformer",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "图神经网络",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "混合专家模型",
             "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
-            "name": "策略梯度与PPO优化",
+            "name": "生成式模型",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "对比学习",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "扩散模型",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "语言模型",
             "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
-            "name": "离线强化学习",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "多智能体强化学习",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "状态空间模型",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "AI价值观对齐",
+            "name": "AI价值观对齐与鲁棒性",
             "wuxing": "金",
             "cognitive_depth": "L3"
           },
@@ -530,7 +1490,77 @@
             "cognitive_depth": "L3"
           },
           {
+            "name": "生成式内容的伦理边界研究",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "伦理与价值观对齐",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "透明与可解释",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "鲁棒与抗攻击",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "动作识别与时空动力学建模",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "零样本少样本对象识别",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "视觉Transformer加速",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "特征提取与骨干网络",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "神经辐射场建模",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "3D高斯泼溅与实时渲染",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "点云处理与几何深度学习",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "单目双目深度估计与遮挡处理",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
             "name": "知识表示与逻辑推理",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "大规模知识图谱自动构建",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "常识知识表示与提取",
             "wuxing": "金",
             "cognitive_depth": "L3"
           },
@@ -540,28 +1570,58 @@
             "cognitive_depth": "L3"
           },
           {
+            "name": "数学定理证明与逻辑演绎",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
             "name": "因果发现与因果推断",
             "wuxing": "金",
             "cognitive_depth": "L3"
           },
           {
-            "name": "数学定理证明",
-            "wuxing": "金",
-            "cognitive_depth": "L4"
-          },
-          {
-            "name": "大规模知识图谱",
-            "wuxing": "金",
+            "name": "推荐系统与信息检索",
+            "wuxing": "火",
             "cognitive_depth": "L3"
           },
           {
-            "name": "常识知识表示",
-            "wuxing": "金",
+            "name": "推荐系统的公平性与多样性",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多模态推荐与数据增强",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "大模型作为评估者",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "大语言模型驱动的内容理解",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "多模态生成式推荐",
+            "wuxing": "木",
             "cognitive_depth": "L3"
           },
           {
             "name": "量子神经网络",
             "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "Transformer架构变体研究 (新)",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "自动化机器学习 (新)",
+            "wuxing": "火",
             "cognitive_depth": "L3"
           }
         ]

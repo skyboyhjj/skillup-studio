@@ -1,0 +1,22 @@
+{
+  "_source": "道德经选章_深度标注版_16个概念",
+  "_description": "道德经核心概念的五行动态映射，用于测试三层 Spinor 结构",
+  "concepts": [
+    {"name": "道", "wuxing": "水", "cognitive_depth": "L4", "seed_layer": "水", "current_layer": "水", "transcend_layer": "土", "_note": "道生万物，如水之渊深"},
+    {"name": "德", "wuxing": "土", "cognitive_depth": "L3", "seed_layer": "土", "current_layer": "土", "transcend_layer": "金", "_note": "德者得也，承载万物"},
+    {"name": "无", "wuxing": "水", "cognitive_depth": "L4", "seed_layer": "水", "current_layer": "金", "transcend_layer": "水", "_note": "无中生有，无形无象"},
+    {"name": "有", "wuxing": "木", "cognitive_depth": "L2", "seed_layer": "木", "current_layer": "木", "transcend_layer": "火", "_note": "有生于无，万物生长"},
+    {"name": "自然", "wuxing": "木", "cognitive_depth": "L3", "seed_layer": "木", "current_layer": "水", "transcend_layer": "土", "_note": "道法自然，生生不息"},
+    {"name": "无为", "wuxing": "金", "cognitive_depth": "L4", "seed_layer": "金", "current_layer": "水", "transcend_layer": "水", "_note": "无为而无不为，收敛之极"},
+    {"name": "虚", "wuxing": "水", "cognitive_depth": "L4", "seed_layer": "水", "current_layer": "金", "transcend_layer": "木", "_note": "致虚极，守静笃"},
+    {"name": "静", "wuxing": "金", "cognitive_depth": "L3", "seed_layer": "金", "current_layer": "土", "transcend_layer": "水", "_note": "静为躁君，收敛归寂"},
+    {"name": "柔", "wuxing": "水", "cognitive_depth": "L3", "seed_layer": "水", "current_layer": "木", "transcend_layer": "金", "_note": "柔弱者生之徒"},
+    {"name": "刚", "wuxing": "金", "cognitive_depth": "L2", "seed_layer": "金", "current_layer": "金", "transcend_layer": "火", "_note": "刚强者死之徒"},
+    {"name": "朴", "wuxing": "土", "cognitive_depth": "L4", "seed_layer": "土", "current_layer": "木", "transcend_layer": "水", "_note": "见素抱朴，少私寡欲"},
+    {"name": "玄", "wuxing": "水", "cognitive_depth": "L4", "seed_layer": "水", "current_layer": "火", "transcend_layer": "水", "_note": "玄之又玄，众妙之门"},
+    {"name": "和", "wuxing": "土", "cognitive_depth": "L3", "seed_layer": "土", "current_layer": "火", "transcend_layer": "木", "_note": "和其光，同其尘"},
+    {"name": "常", "wuxing": "土", "cognitive_depth": "L3", "seed_layer": "土", "current_layer": "金", "transcend_layer": "水", "_note": "知常曰明，不知常妄作"},
+    {"name": "明", "wuxing": "火", "cognitive_depth": "L3", "seed_layer": "火", "current_layer": "水", "transcend_layer": "金", "_note": "自知者明，自胜者强"},
+    {"name": "谷", "wuxing": "水", "cognitive_depth": "L4", "seed_layer": "水", "current_layer": "土", "transcend_layer": "金", "_note": "谷神不死，是谓玄牝"}
+  ]
+}

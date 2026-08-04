@@ -1,0 +1,39 @@
+{
+  "_case": "小禾案例 — 基于 spec 第六章模拟数据 (Ch6.3 案例应用)",
+  "_description": "一个初级研究者的认知树，处于积累阶段，五行以木/土为主",
+  "nodes": [
+    {"id": "xh001", "name": "卷积神经网络", "wuxing": "土", "cognitive_depth": "L1", "category": "机器学习基础"},
+    {"id": "xh002", "name": "残差网络", "wuxing": "土", "cognitive_depth": "L1", "category": "机器学习基础"},
+    {"id": "xh003", "name": "目标检测", "wuxing": "水", "cognitive_depth": "L2", "category": "计算机视觉"},
+    {"id": "xh004", "name": "语义分割", "wuxing": "水", "cognitive_depth": "L2", "category": "计算机视觉"},
+    {"id": "xh005", "name": "图像分类", "wuxing": "水", "cognitive_depth": "L2", "category": "计算机视觉"},
+    {"id": "xh006", "name": "数据增强", "wuxing": "木", "cognitive_depth": "L2", "category": "机器学习基础"},
+    {"id": "xh007", "name": "迁移学习", "wuxing": "土", "cognitive_depth": "L2", "category": "机器学习基础"},
+    {"id": "xh008", "name": "生成对抗网络", "wuxing": "木", "cognitive_depth": "L2", "category": "生成式AI"},
+    {"id": "xh009", "name": "神经风格迁移", "wuxing": "木", "cognitive_depth": "L3", "category": "生成式AI"},
+    {"id": "xh010", "name": "注意力机制", "wuxing": "土", "cognitive_depth": "L3", "category": "机器学习基础"},
+    {"id": "xh011", "name": "Transformer基础", "wuxing": "水", "cognitive_depth": "L3", "category": "大语言模型"},
+    {"id": "xh012", "name": "视觉Transformer", "wuxing": "水", "cognitive_depth": "L3", "category": "计算机视觉"}
+  ],
+  "edges": [
+    {"source_id": "xh001", "target_id": "xh002", "relation": "related"},
+    {"source_id": "xh001", "target_id": "xh003", "relation": "related"},
+    {"source_id": "xh002", "target_id": "xh004", "relation": "related"},
+    {"source_id": "xh003", "target_id": "xh005", "relation": "related"},
+    {"source_id": "xh006", "target_id": "xh008", "relation": "related"},
+    {"source_id": "xh008", "target_id": "xh009", "relation": "related"},
+    {"source_id": "xh010", "target_id": "xh011", "relation": "related"},
+    {"source_id": "xh011", "target_id": "xh012", "relation": "related"}
+  ],
+  "_expected": {
+    "stage": "生",
+    "reason": "单极主导·积累期 (水: 41.7%)",
+    "dominant_wx": "水",
+    "H_ratio_range": [0.0, 0.50],
+    "S_range": [0, 50],
+    "O_t_range": [0.0, 0.5],
+    "E_u_range": [0.3, 0.8],
+    "C_k_range": [0.0, 0.3],
+    "guidance_keywords": ["积累", "主导行", "深耕", "根基"]
+  }
+}

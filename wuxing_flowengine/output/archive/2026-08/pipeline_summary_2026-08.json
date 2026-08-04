@@ -1,13 +1,26 @@
 {
-  "pipeline": "wuxing_monthly",
+  "pipeline": "wuxing_monthly_v1.2",
   "month": "2026-08",
-  "executed_at": "2026-08-04T16:08:36.893653",
+  "executed_at": "2026-08-04T20:58:55.985233",
   "base_dir": "C:\\Users\\hejij\\AppData\\Roaming\\TRAE SOLO CN\\ModularData\\ai-agent\\work-mode-projects\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
   "phases": {
     "phase1": "✓",
-    "phase2": "✓",
-    "phase3": "✓",
-    "timeseries": "✓",
+    "phase2": "✗",
+    "phase3": "✗",
+    "phaseB": "✓",
+    "phaseC2": "✓",
+    "phaseC1": "✗",
+    "timeseries": "✗",
     "validation": "✓"
+  },
+  "dao_realm": {
+    "stage": "克",
+    "S": 1.7,
+    "guidance": "层间张力显现，需正视冲突而非回避。"
+  },
+  "ky_enhancement": {
+    "K_y_original": 0.2908,
+    "K_y_enhanced": 0.2071,
+    "delta_K_y": -0.0837
   }
 }

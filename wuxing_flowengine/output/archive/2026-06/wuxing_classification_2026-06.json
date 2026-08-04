@@ -9,14 +9,6 @@
   },
   {
     "id": "node_002",
-    "name": "大语言模型",
-    "level": 2,
-    "category": "大语言模型",
-    "wuxing": "水",
-    "cognitive_depth": "L3"
-  },
-  {
-    "id": "node_003",
     "name": "指令微调技术",
     "level": 3,
     "category": "大语言模型",
@@ -24,7 +16,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_004",
+    "id": "node_003",
     "name": "人类反馈强化学习",
     "level": 3,
     "category": "大语言模型",
@@ -32,7 +24,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_005",
+    "id": "node_004",
     "name": "直接偏好优化",
     "level": 3,
     "category": "大语言模型",
@@ -40,15 +32,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_006",
-    "name": "参数高效微调",
-    "level": 3,
-    "category": "大语言模型",
-    "wuxing": "金",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_007",
+    "id": "node_005",
     "name": "模型量化与推断加速",
     "level": 3,
     "category": "大语言模型",
@@ -56,7 +40,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_008",
+    "id": "node_006",
     "name": "混合专家模型架构",
     "level": 3,
     "category": "大语言模型",
@@ -64,7 +48,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_009",
+    "id": "node_007",
     "name": "长文本上下文处理",
     "level": 3,
     "category": "大语言模型",
@@ -72,7 +56,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_010",
+    "id": "node_008",
     "name": "幻觉检测与事实性增强",
     "level": 3,
     "category": "大语言模型",
@@ -80,7 +64,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_011",
+    "id": "node_009",
     "name": "知识编辑与更新",
     "level": 3,
     "category": "大语言模型",
@@ -88,7 +72,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_012",
+    "id": "node_010",
     "name": "隐式推理架构",
     "level": 3,
     "category": "大语言模型",
@@ -96,7 +80,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_013",
+    "id": "node_011",
     "name": "思维链效率与路径优化",
     "level": 3,
     "category": "大语言模型",
@@ -104,7 +88,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_014",
+    "id": "node_012",
     "name": "逻辑与数值联合推理",
     "level": 3,
     "category": "大语言模型",
@@ -112,7 +96,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_015",
+    "id": "node_013",
     "name": "幻觉检测与置信度评估",
     "level": 3,
     "category": "大语言模型",
@@ -120,7 +104,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_016",
+    "id": "node_014",
     "name": "知识编辑与事实一致性维护",
     "level": 3,
     "category": "大语言模型",
@@ -128,7 +112,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_017",
+    "id": "node_015",
     "name": "自然语言处理",
     "level": 2,
     "category": "大语言模型",
@@ -136,7 +120,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_018",
+    "id": "node_016",
     "name": "检索增强生成",
     "level": 3,
     "category": "自然语言处理",
@@ -144,7 +128,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_019",
+    "id": "node_017",
     "name": "向量数据库与索引技术",
     "level": 3,
     "category": "自然语言处理",
@@ -152,7 +136,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_020",
+    "id": "node_018",
     "name": "语义检索与重排序",
     "level": 3,
     "category": "自然语言处理",
@@ -160,7 +144,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_021",
+    "id": "node_019",
     "name": "动态上下文检索策略",
     "level": 3,
     "category": "自然语言处理",
@@ -168,7 +152,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_022",
+    "id": "node_020",
     "name": "稠密检索与重排序优化",
     "level": 3,
     "category": "自然语言处理",
@@ -176,7 +160,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_023",
+    "id": "node_021",
     "name": "噪声抗干扰与证据选择",
     "level": 3,
     "category": "自然语言处理",
@@ -184,7 +168,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_024",
+    "id": "node_022",
     "name": "动态知识更新与版本一致性",
     "level": 3,
     "category": "自然语言处理",
@@ -192,7 +176,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_025",
+    "id": "node_023",
     "name": "多轮对话状态追踪",
     "level": 3,
     "category": "自然语言处理",
@@ -200,7 +184,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_026",
+    "id": "node_024",
     "name": "人格化与情感对话模拟",
     "level": 3,
     "category": "自然语言处理",
@@ -208,7 +192,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_027",
+    "id": "node_025",
     "name": "意图识别与槽位填充",
     "level": 3,
     "category": "自然语言处理",
@@ -216,7 +200,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_028",
+    "id": "node_026",
     "name": "增强对话式代码风格控制",
     "level": 3,
     "category": "自然语言处理",
@@ -224,7 +208,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_029",
+    "id": "node_027",
     "name": "神经机器翻译架构",
     "level": 3,
     "category": "自然语言处理",
@@ -232,15 +216,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_030",
-    "name": "文本摘要与信息压缩",
-    "level": 3,
-    "category": "自然语言处理",
-    "wuxing": "土",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_031",
+    "id": "node_028",
     "name": "命名实体识别与关系抽取",
     "level": 3,
     "category": "自然语言处理",
@@ -248,7 +224,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_032",
+    "id": "node_029",
     "name": "跨语言知识迁移与对齐",
     "level": 3,
     "category": "自然语言处理",
@@ -256,7 +232,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_033",
+    "id": "node_030",
     "name": "自动化提示词生成与优化",
     "level": 3,
     "category": "自然语言处理",
@@ -264,7 +240,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_034",
+    "id": "node_031",
     "name": "自动化评测基准",
     "level": 3,
     "category": "自然语言处理",
@@ -272,7 +248,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_035",
+    "id": "node_032",
     "name": "文本水印与版权溯源",
     "level": 3,
     "category": "自然语言处理",
@@ -280,15 +256,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_036",
-    "name": "具身智能与机器人",
-    "level": 2,
-    "category": "大语言模型",
-    "wuxing": "木",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_037",
+    "id": "node_033",
     "name": "分层稳定控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -296,7 +264,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_038",
+    "id": "node_034",
     "name": "逆最优控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -304,7 +272,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_039",
+    "id": "node_035",
     "name": "运动规划",
     "level": 3,
     "category": "具身智能与机器人",
@@ -312,7 +280,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_040",
+    "id": "node_036",
     "name": "动态调参",
     "level": 3,
     "category": "具身智能与机器人",
@@ -320,7 +288,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_041",
+    "id": "node_037",
     "name": "密度驱动覆盖控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -328,7 +296,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_042",
+    "id": "node_038",
     "name": "鲁棒模型预测控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -336,7 +304,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_043",
+    "id": "node_039",
     "name": "机械臂运动学与动力学建模",
     "level": 3,
     "category": "具身智能与机器人",
@@ -344,7 +312,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_044",
+    "id": "node_040",
     "name": "足式机器人步态优化",
     "level": 3,
     "category": "具身智能与机器人",
@@ -352,7 +320,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_045",
+    "id": "node_041",
     "name": "非线性控制与李雅普诺夫稳定性",
     "level": 3,
     "category": "具身智能与机器人",
@@ -360,7 +328,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_046",
+    "id": "node_042",
     "name": "模仿学习与示教学习",
     "level": 3,
     "category": "具身智能与机器人",
@@ -368,7 +336,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_047",
+    "id": "node_043",
     "name": "多机器人协同路径规划",
     "level": 3,
     "category": "具身智能与机器人",
@@ -376,7 +344,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_048",
+    "id": "node_044",
     "name": "避障算法与实时导航",
     "level": 3,
     "category": "具身智能与机器人",
@@ -384,7 +352,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_049",
+    "id": "node_045",
     "name": "视觉伺服控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -392,7 +360,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_050",
+    "id": "node_046",
     "name": "接触力控制与阻抗控制",
     "level": 3,
     "category": "具身智能与机器人",
@@ -400,7 +368,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_051",
+    "id": "node_047",
     "name": "动态SLAM",
     "level": 3,
     "category": "具身智能与机器人",
@@ -408,15 +376,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_052",
-    "name": "多传感器融合定位",
-    "level": 3,
-    "category": "具身智能与机器人",
-    "wuxing": "水",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_053",
+    "id": "node_048",
     "name": "触觉感知与力反馈",
     "level": 3,
     "category": "具身智能与机器人",
@@ -424,7 +384,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_054",
+    "id": "node_049",
     "name": "Sim-to-Real跨域迁移",
     "level": 3,
     "category": "具身智能与机器人",
@@ -432,7 +392,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_055",
+    "id": "node_050",
     "name": "世界模型建模",
     "level": 3,
     "category": "具身智能与机器人",
@@ -440,7 +400,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_056",
+    "id": "node_051",
     "name": "多模态智能",
     "level": 2,
     "category": "大语言模型",
@@ -448,7 +408,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_057",
+    "id": "node_052",
     "name": "视觉-语言预训练对齐",
     "level": 3,
     "category": "多模态智能",
@@ -456,7 +416,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_058",
+    "id": "node_053",
     "name": "细粒度跨模态对齐",
     "level": 3,
     "category": "多模态智能",
@@ -464,7 +424,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_059",
+    "id": "node_054",
     "name": "模态缺失下的完整性融合",
     "level": 3,
     "category": "多模态智能",
@@ -472,15 +432,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_060",
-    "name": "视觉语言模型参数高效微调",
-    "level": 3,
-    "category": "多模态智能",
-    "wuxing": "水",
-    "cognitive_depth": "L3"
-  },
-  {
-    "id": "node_061",
+    "id": "node_055",
     "name": "跨语言-跨模态迁移",
     "level": 3,
     "category": "多模态智能",
@@ -488,7 +440,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_062",
+    "id": "node_056",
     "name": "视觉问答与推理",
     "level": 3,
     "category": "多模态智能",
@@ -496,7 +448,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_063",
+    "id": "node_057",
     "name": "视觉语言思维链",
     "level": 3,
     "category": "多模态智能",
@@ -504,7 +456,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_064",
+    "id": "node_058",
     "name": "零样本视觉推理",
     "level": 3,
     "category": "多模态智能",
@@ -512,7 +464,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_065",
+    "id": "node_059",
     "name": "视觉定位与指称理解",
     "level": 3,
     "category": "多模态智能",
@@ -520,15 +472,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_066",
-    "name": "多模态幻觉检测",
-    "level": 3,
-    "category": "多模态智能",
-    "wuxing": "木",
-    "cognitive_depth": "L3"
-  },
-  {
-    "id": "node_067",
+    "id": "node_060",
     "name": "视觉丰富的文档理解",
     "level": 3,
     "category": "多模态智能",
@@ -536,7 +480,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_068",
+    "id": "node_061",
     "name": "音视频同步与事件定位",
     "level": 3,
     "category": "多模态智能",
@@ -544,7 +488,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_069",
+    "id": "node_062",
     "name": "语音驱动的面部动画",
     "level": 3,
     "category": "多模态智能",
@@ -552,7 +496,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_070",
+    "id": "node_063",
     "name": "视觉引导的音频分离",
     "level": 3,
     "category": "多模态智能",
@@ -560,7 +504,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_071",
+    "id": "node_064",
     "name": "触觉-视觉跨模态感知",
     "level": 3,
     "category": "多模态智能",
@@ -568,7 +512,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_072",
+    "id": "node_065",
     "name": "多模态知识图谱构建",
     "level": 3,
     "category": "多模态智能",
@@ -576,7 +520,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_073",
+    "id": "node_066",
     "name": "文本引导的图像编辑",
     "level": 3,
     "category": "多模态智能",
@@ -584,7 +528,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_074",
+    "id": "node_067",
     "name": "跨模态检索增强生成",
     "level": 3,
     "category": "多模态智能",
@@ -592,7 +536,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_075",
+    "id": "node_068",
     "name": "多模态实体链接",
     "level": 3,
     "category": "多模态智能",
@@ -600,7 +544,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_076",
+    "id": "node_069",
     "name": "视频描述生成",
     "level": 3,
     "category": "多模态智能",
@@ -608,7 +552,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_077",
+    "id": "node_070",
     "name": "长视频时序理解",
     "level": 3,
     "category": "多模态智能",
@@ -616,7 +560,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_078",
+    "id": "node_071",
     "name": "视频问答",
     "level": 3,
     "category": "多模态智能",
@@ -624,7 +568,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_079",
+    "id": "node_072",
     "name": "视频-文本检索",
     "level": 3,
     "category": "多模态智能",
@@ -632,7 +576,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_080",
+    "id": "node_073",
     "name": "动态场景图生成",
     "level": 3,
     "category": "多模态智能",
@@ -640,7 +584,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_081",
+    "id": "node_074",
     "name": "任务规划与推理决策",
     "level": 3,
     "category": "多模态智能",
@@ -648,7 +592,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_082",
+    "id": "node_075",
     "name": "工具调用与API交互",
     "level": 3,
     "category": "多模态智能",
@@ -656,7 +600,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_083",
+    "id": "node_076",
     "name": "长短期记忆与知识获取",
     "level": 3,
     "category": "多模态智能",
@@ -664,7 +608,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_084",
+    "id": "node_077",
     "name": "多智能体协作与社会模拟",
     "level": 3,
     "category": "多模态智能",
@@ -672,7 +616,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_085",
+    "id": "node_078",
     "name": "人机协作与对齐",
     "level": 3,
     "category": "多模态智能",
@@ -680,7 +624,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_086",
+    "id": "node_079",
     "name": "智能体评估与基准测试",
     "level": 3,
     "category": "多模态智能",
@@ -688,7 +632,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_087",
+    "id": "node_080",
     "name": "自主工作流与自动化",
     "level": 3,
     "category": "多模态智能",
@@ -696,7 +640,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_088",
+    "id": "node_081",
     "name": "其他智能体子领域",
     "level": 3,
     "category": "多模态智能",
@@ -704,15 +648,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_089",
-    "name": "智能体",
-    "level": 2,
-    "category": "大语言模型",
-    "wuxing": "火",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_090",
+    "id": "node_082",
     "name": "隐私保护音频监测",
     "level": 3,
     "category": "智能体",
@@ -720,7 +656,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_091",
+    "id": "node_083",
     "name": "语义地图构建",
     "level": 3,
     "category": "智能体",
@@ -728,7 +664,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_092",
+    "id": "node_084",
     "name": "主动感知与探索",
     "level": 3,
     "category": "智能体",
@@ -736,7 +672,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_093",
+    "id": "node_085",
     "name": "状态估计与滤波算法",
     "level": 3,
     "category": "智能体",
@@ -744,7 +680,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_094",
+    "id": "node_086",
     "name": "软体与可变形机器人",
     "level": 3,
     "category": "智能体",
@@ -752,7 +688,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_095",
+    "id": "node_087",
     "name": "连续体机器人控制",
     "level": 3,
     "category": "智能体",
@@ -760,7 +696,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_096",
+    "id": "node_088",
     "name": "仿生线性驱动器设计",
     "level": 3,
     "category": "智能体",
@@ -768,7 +704,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_097",
+    "id": "node_089",
     "name": "机器人末端执行器与灵巧手",
     "level": 3,
     "category": "智能体",
@@ -776,7 +712,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_098",
+    "id": "node_090",
     "name": "外骨骼控制与扰动估计",
     "level": 3,
     "category": "智能体",
@@ -784,7 +720,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_099",
+    "id": "node_091",
     "name": "人形机器人硬件设计",
     "level": 3,
     "category": "智能体",
@@ -792,7 +728,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_100",
+    "id": "node_092",
     "name": "柔性电子皮肤",
     "level": 3,
     "category": "智能体",
@@ -800,7 +736,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_101",
+    "id": "node_093",
     "name": "自动驾驶端到端感知-决策模型",
     "level": 3,
     "category": "智能体",
@@ -808,7 +744,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_102",
+    "id": "node_094",
     "name": "混合交通控制",
     "level": 3,
     "category": "智能体",
@@ -816,7 +752,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_103",
+    "id": "node_095",
     "name": "无人机交通管理",
     "level": 3,
     "category": "智能体",
@@ -824,7 +760,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_104",
+    "id": "node_096",
     "name": "自动驾驶决策安全与伦理",
     "level": 3,
     "category": "智能体",
@@ -832,7 +768,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_105",
+    "id": "node_097",
     "name": "复杂场景行为预测",
     "level": 3,
     "category": "智能体",
@@ -840,7 +776,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_106",
+    "id": "node_098",
     "name": "车路协同技术",
     "level": 3,
     "category": "智能体",
@@ -848,7 +784,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_107",
+    "id": "node_099",
     "name": "社会辅助机器人",
     "level": 3,
     "category": "智能体",
@@ -856,7 +792,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_108",
+    "id": "node_100",
     "name": "康复机器人安全",
     "level": 3,
     "category": "智能体",
@@ -864,7 +800,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_109",
+    "id": "node_101",
     "name": "农业智能决策与采摘",
     "level": 3,
     "category": "智能体",
@@ -872,7 +808,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_110",
+    "id": "node_102",
     "name": "空间机器人与微重力操作",
     "level": 3,
     "category": "智能体",
@@ -880,7 +816,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_111",
+    "id": "node_103",
     "name": "手术机器人与远程医疗",
     "level": 3,
     "category": "智能体",
@@ -888,7 +824,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_112",
+    "id": "node_104",
     "name": "水下机器人与海洋探测",
     "level": 3,
     "category": "智能体",
@@ -896,7 +832,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_113",
+    "id": "node_105",
     "name": "搜救机器人",
     "level": 3,
     "category": "智能体",
@@ -904,7 +840,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_114",
+    "id": "node_106",
     "name": "机器人感知单元",
     "level": 3,
     "category": "智能体",
@@ -912,7 +848,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_115",
+    "id": "node_107",
     "name": "机器人本体类别",
     "level": 3,
     "category": "智能体",
@@ -920,7 +856,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_116",
+    "id": "node_108",
     "name": "机器人运动学与动力学建模",
     "level": 3,
     "category": "智能体",
@@ -928,7 +864,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_117",
+    "id": "node_109",
     "name": "机器人控制与规划",
     "level": 3,
     "category": "智能体",
@@ -936,7 +872,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_118",
+    "id": "node_110",
     "name": "仿真平台介绍",
     "level": 3,
     "category": "智能体",
@@ -944,7 +880,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_119",
+    "id": "node_111",
     "name": "多模态大模型在机器人领域的应用",
     "level": 3,
     "category": "智能体",
@@ -952,7 +888,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_120",
+    "id": "node_112",
     "name": "模仿学习",
     "level": 3,
     "category": "智能体",
@@ -960,7 +896,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_121",
+    "id": "node_113",
     "name": "生成式AI",
     "level": 2,
     "category": "大语言模型",
@@ -968,7 +904,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_122",
+    "id": "node_114",
     "name": "扩散模型核心演进",
     "level": 3,
     "category": "生成式AI",
@@ -976,7 +912,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_123",
+    "id": "node_115",
     "name": "生成对抗网络",
     "level": 3,
     "category": "生成式AI",
@@ -984,7 +920,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_124",
+    "id": "node_116",
     "name": "文本驱动的图像视频生成",
     "level": 3,
     "category": "生成式AI",
@@ -992,7 +928,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_125",
+    "id": "node_117",
     "name": "时空一致性控制与编辑",
     "level": 3,
     "category": "生成式AI",
@@ -1000,7 +936,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_126",
+    "id": "node_118",
     "name": "图像编辑与局部重绘",
     "level": 3,
     "category": "生成式AI",
@@ -1008,7 +944,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_127",
+    "id": "node_119",
     "name": "神经风格迁移与属性编辑",
     "level": 3,
     "category": "生成式AI",
@@ -1016,7 +952,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_128",
+    "id": "node_120",
     "name": "文本转语音与音色定制",
     "level": 3,
     "category": "生成式AI",
@@ -1024,7 +960,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_129",
+    "id": "node_121",
     "name": "AI音乐理解旋律与合成",
     "level": 3,
     "category": "生成式AI",
@@ -1032,7 +968,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_130",
+    "id": "node_122",
     "name": "情感驱动的语音合成",
     "level": 3,
     "category": "生成式AI",
@@ -1040,15 +976,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_131",
-    "name": "机器学习基础",
-    "level": 1,
-    "category": "root",
-    "wuxing": "土",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_132",
+    "id": "node_123",
     "name": "机器学习基础",
     "level": 2,
     "category": "机器学习基础",
@@ -1056,7 +984,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_133",
+    "id": "node_124",
     "name": "强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1064,7 +992,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_134",
+    "id": "node_125",
     "name": "策略梯度与PPO优化",
     "level": 3,
     "category": "机器学习基础",
@@ -1072,7 +1000,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_135",
+    "id": "node_126",
     "name": "离线强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1080,7 +1008,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_136",
+    "id": "node_127",
     "name": "逆强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1088,7 +1016,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_137",
+    "id": "node_128",
     "name": "多智能体强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1096,7 +1024,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_138",
+    "id": "node_129",
     "name": "逆最优控制与模仿学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1104,7 +1032,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_139",
+    "id": "node_130",
     "name": "可微分奖励演化与建模",
     "level": 3,
     "category": "机器学习基础",
@@ -1112,7 +1040,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_140",
+    "id": "node_131",
     "name": "Transformer架构变体研究",
     "level": 3,
     "category": "机器学习基础",
@@ -1120,7 +1048,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_141",
+    "id": "node_132",
     "name": "状态空间模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1128,7 +1056,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_142",
+    "id": "node_133",
     "name": "神经网络泛化理论与边界",
     "level": 3,
     "category": "机器学习基础",
@@ -1136,7 +1064,7 @@
     "cognitive_depth": "L4"
   },
   {
-    "id": "node_143",
+    "id": "node_134",
     "name": "自监督对比学习表征优化",
     "level": 3,
     "category": "机器学习基础",
@@ -1144,7 +1072,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_144",
+    "id": "node_135",
     "name": "自适应学习率算法",
     "level": 3,
     "category": "机器学习基础",
@@ -1152,7 +1080,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_145",
+    "id": "node_136",
     "name": "大规模分布式训练优化器",
     "level": 3,
     "category": "机器学习基础",
@@ -1160,7 +1088,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_146",
+    "id": "node_137",
     "name": "损失函数设计与动态正则化",
     "level": 3,
     "category": "机器学习基础",
@@ -1168,7 +1096,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_147",
+    "id": "node_138",
     "name": "图神经网络与消息传递",
     "level": 3,
     "category": "机器学习基础",
@@ -1176,7 +1104,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_148",
+    "id": "node_139",
     "name": "知识图谱嵌入",
     "level": 3,
     "category": "机器学习基础",
@@ -1184,7 +1112,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_149",
+    "id": "node_140",
     "name": "拓扑序态发现与流形学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1192,7 +1120,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_150",
+    "id": "node_141",
     "name": "元学习与跨任务适应",
     "level": 3,
     "category": "机器学习基础",
@@ -1200,7 +1128,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_151",
+    "id": "node_142",
     "name": "迁移学习与领域自适应",
     "level": 3,
     "category": "机器学习基础",
@@ -1208,7 +1136,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_152",
+    "id": "node_143",
     "name": "自动化机器学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1216,7 +1144,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_153",
+    "id": "node_144",
     "name": "神经网络参数优化算法",
     "level": 3,
     "category": "机器学习基础",
@@ -1224,7 +1152,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_154",
+    "id": "node_145",
     "name": "归一化方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1232,7 +1160,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_155",
+    "id": "node_146",
     "name": "正则化方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1240,7 +1168,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_156",
+    "id": "node_147",
     "name": "残差网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1248,7 +1176,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_157",
+    "id": "node_148",
     "name": "Transformer",
     "level": 3,
     "category": "机器学习基础",
@@ -1256,7 +1184,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_158",
+    "id": "node_149",
     "name": "循环神经网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1264,7 +1192,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_159",
+    "id": "node_150",
     "name": "卷积神经网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1272,15 +1200,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_160",
-    "name": "多层感知机",
-    "level": 3,
-    "category": "机器学习基础",
-    "wuxing": "土",
-    "cognitive_depth": "L1"
-  },
-  {
-    "id": "node_161",
+    "id": "node_151",
     "name": "图神经网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1288,7 +1208,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_162",
+    "id": "node_152",
     "name": "图同构网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1296,7 +1216,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_163",
+    "id": "node_153",
     "name": "图注意力网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1304,7 +1224,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_164",
+    "id": "node_154",
     "name": "图卷积网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1312,7 +1232,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_165",
+    "id": "node_155",
     "name": "消息传递图神经网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1320,7 +1240,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_166",
+    "id": "node_156",
     "name": "贝叶斯方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1328,7 +1248,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_167",
+    "id": "node_157",
     "name": "近似推断",
     "level": 3,
     "category": "机器学习基础",
@@ -1336,7 +1256,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_168",
+    "id": "node_158",
     "name": "期望最大化",
     "level": 3,
     "category": "机器学习基础",
@@ -1344,7 +1264,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_169",
+    "id": "node_159",
     "name": "搜索算法",
     "level": 3,
     "category": "机器学习基础",
@@ -1352,7 +1272,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_170",
+    "id": "node_160",
     "name": "约束满足问题",
     "level": 3,
     "category": "机器学习基础",
@@ -1360,7 +1280,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_171",
+    "id": "node_161",
     "name": "进化算法",
     "level": 3,
     "category": "机器学习基础",
@@ -1368,7 +1288,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_172",
+    "id": "node_162",
     "name": "蒙特卡洛树搜索",
     "level": 3,
     "category": "机器学习基础",
@@ -1376,7 +1296,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_173",
+    "id": "node_163",
     "name": "启发式搜索",
     "level": 3,
     "category": "机器学习基础",
@@ -1384,7 +1304,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_174",
+    "id": "node_164",
     "name": "概率图模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1392,7 +1312,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_175",
+    "id": "node_165",
     "name": "概率软逻辑",
     "level": 3,
     "category": "机器学习基础",
@@ -1400,7 +1320,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_176",
+    "id": "node_166",
     "name": "马尔科夫逻辑网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1408,7 +1328,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_177",
+    "id": "node_167",
     "name": "条件随机场",
     "level": 3,
     "category": "机器学习基础",
@@ -1416,7 +1336,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_178",
+    "id": "node_168",
     "name": "隐马尔科夫模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1424,7 +1344,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_179",
+    "id": "node_169",
     "name": "因子图模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1432,7 +1352,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_180",
+    "id": "node_170",
     "name": "无向图模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1440,7 +1360,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_181",
+    "id": "node_171",
     "name": "贝叶斯网络",
     "level": 3,
     "category": "机器学习基础",
@@ -1448,7 +1368,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_182",
+    "id": "node_172",
     "name": "混合专家模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1456,7 +1376,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_183",
+    "id": "node_173",
     "name": "生成式模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1464,7 +1384,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_184",
+    "id": "node_174",
     "name": "对比学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1472,7 +1392,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_185",
+    "id": "node_175",
     "name": "无监督学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1480,15 +1400,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_186",
-    "name": "自监督学习",
-    "level": 3,
-    "category": "机器学习基础",
-    "wuxing": "土",
-    "cognitive_depth": "L1"
-  },
-  {
-    "id": "node_187",
+    "id": "node_176",
     "name": "降维方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1496,7 +1408,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_188",
+    "id": "node_177",
     "name": "聚类算法",
     "level": 3,
     "category": "机器学习基础",
@@ -1504,7 +1416,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_189",
+    "id": "node_178",
     "name": "扩散模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1512,7 +1424,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_190",
+    "id": "node_179",
     "name": "语言模型",
     "level": 3,
     "category": "机器学习基础",
@@ -1520,7 +1432,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_191",
+    "id": "node_180",
     "name": "半监督学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1528,7 +1440,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_192",
+    "id": "node_181",
     "name": "基于图结构的半监督学习方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1536,7 +1448,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_193",
+    "id": "node_182",
     "name": "协同训练方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1544,7 +1456,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_194",
+    "id": "node_183",
     "name": "一致性正则化方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1552,7 +1464,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_195",
+    "id": "node_184",
     "name": "伪标签学习方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1560,7 +1472,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_196",
+    "id": "node_185",
     "name": "监督学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1568,7 +1480,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_197",
+    "id": "node_186",
     "name": "传统监督学习方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1576,7 +1488,7 @@
     "cognitive_depth": "L1"
   },
   {
-    "id": "node_198",
+    "id": "node_187",
     "name": "全监督微调对齐优化方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1584,7 +1496,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_199",
+    "id": "node_188",
     "name": "基于模型的强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1592,7 +1504,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_200",
+    "id": "node_189",
     "name": "基于策略的强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1600,7 +1512,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_201",
+    "id": "node_190",
     "name": "基于价值的强化学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1608,7 +1520,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_202",
+    "id": "node_191",
     "name": "持续学习",
     "level": 3,
     "category": "机器学习基础",
@@ -1616,7 +1528,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_203",
+    "id": "node_192",
     "name": "架构方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1624,7 +1536,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_204",
+    "id": "node_193",
     "name": "回放方法",
     "level": 3,
     "category": "机器学习基础",
@@ -1632,7 +1544,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_205",
+    "id": "node_194",
     "name": "安全可信与伦理",
     "level": 2,
     "category": "机器学习基础",
@@ -1640,7 +1552,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_206",
+    "id": "node_195",
     "name": "提示注入与对抗攻击防护",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1648,7 +1560,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_207",
+    "id": "node_196",
     "name": "AI价值观对齐与鲁棒性",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1656,7 +1568,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_208",
+    "id": "node_197",
     "name": "模型后门检测与安全过滤",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1664,7 +1576,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_209",
+    "id": "node_198",
     "name": "联邦学习与加密计算",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1672,7 +1584,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_210",
+    "id": "node_199",
     "name": "差分隐私保护与脱敏技术",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1680,7 +1592,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_211",
+    "id": "node_200",
     "name": "模型可解释性分析",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1688,7 +1600,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_212",
+    "id": "node_201",
     "name": "数字水印与AIGC溯源",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1696,7 +1608,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_213",
+    "id": "node_202",
     "name": "AI公平性与偏见检测",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1704,7 +1616,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_214",
+    "id": "node_203",
     "name": "生成式内容的伦理边界研究",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1712,7 +1624,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_215",
+    "id": "node_204",
     "name": "伦理与价值观对齐",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1720,7 +1632,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_216",
+    "id": "node_205",
     "name": "透明与可解释",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1728,7 +1640,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_217",
+    "id": "node_206",
     "name": "鲁棒与抗攻击",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1736,7 +1648,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_218",
+    "id": "node_207",
     "name": "红线行为预警",
     "level": 3,
     "category": "安全可信与伦理",
@@ -1744,7 +1656,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_219",
+    "id": "node_208",
     "name": "计算机视觉",
     "level": 2,
     "category": "机器学习基础",
@@ -1752,7 +1664,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_220",
+    "id": "node_209",
     "name": "目标检测与边界框回归优化",
     "level": 3,
     "category": "计算机视觉",
@@ -1760,7 +1672,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_221",
+    "id": "node_210",
     "name": "语义实例全景分割技术",
     "level": 3,
     "category": "计算机视觉",
@@ -1768,7 +1680,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_222",
+    "id": "node_211",
     "name": "动作识别与时空动力学建模",
     "level": 3,
     "category": "计算机视觉",
@@ -1776,7 +1688,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_223",
+    "id": "node_212",
     "name": "零样本少样本对象识别",
     "level": 3,
     "category": "计算机视觉",
@@ -1784,7 +1696,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_224",
+    "id": "node_213",
     "name": "视觉Transformer加速",
     "level": 3,
     "category": "计算机视觉",
@@ -1792,7 +1704,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_225",
+    "id": "node_214",
     "name": "特征提取与骨干网络",
     "level": 3,
     "category": "计算机视觉",
@@ -1800,7 +1712,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_226",
+    "id": "node_215",
     "name": "神经辐射场建模",
     "level": 3,
     "category": "计算机视觉",
@@ -1808,7 +1720,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_227",
+    "id": "node_216",
     "name": "3D高斯泼溅与实时渲染",
     "level": 3,
     "category": "计算机视觉",
@@ -1816,7 +1728,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_228",
+    "id": "node_217",
     "name": "点云处理与几何深度学习",
     "level": 3,
     "category": "计算机视觉",
@@ -1824,7 +1736,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_229",
+    "id": "node_218",
     "name": "单目双目深度估计与遮挡处理",
     "level": 3,
     "category": "计算机视觉",
@@ -1832,7 +1744,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_230",
+    "id": "node_219",
     "name": "视觉SLAM与环境重建",
     "level": 3,
     "category": "计算机视觉",
@@ -1840,7 +1752,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_231",
+    "id": "node_220",
     "name": "神经频率响应场",
     "level": 3,
     "category": "计算机视觉",
@@ -1848,7 +1760,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_232",
+    "id": "node_221",
     "name": "图像超分辨率与去噪",
     "level": 3,
     "category": "计算机视觉",
@@ -1856,7 +1768,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_233",
+    "id": "node_222",
     "name": "低光照增强技术",
     "level": 3,
     "category": "计算机视觉",
@@ -1864,7 +1776,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_234",
+    "id": "node_223",
     "name": "金融文档字段提取与OCR增强",
     "level": 3,
     "category": "计算机视觉",
@@ -1872,7 +1784,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_235",
+    "id": "node_224",
     "name": "多阶段扫描文档预处理",
     "level": 3,
     "category": "计算机视觉",
@@ -1880,7 +1792,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_236",
+    "id": "node_225",
     "name": "医学图像自动分割",
     "level": 3,
     "category": "计算机视觉",
@@ -1888,7 +1800,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_237",
+    "id": "node_226",
     "name": "病灶检测与计算机辅助诊断",
     "level": 3,
     "category": "计算机视觉",
@@ -1896,7 +1808,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_238",
+    "id": "node_227",
     "name": "医学模态转化",
     "level": 3,
     "category": "计算机视觉",
@@ -1904,7 +1816,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_239",
+    "id": "node_228",
     "name": "人脸识别与表情分析",
     "level": 3,
     "category": "计算机视觉",
@@ -1912,7 +1824,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_240",
+    "id": "node_229",
     "name": "人体姿态估计与网格重建",
     "level": 3,
     "category": "计算机视觉",
@@ -1920,7 +1832,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_241",
+    "id": "node_230",
     "name": "人脸伪造检测",
     "level": 3,
     "category": "计算机视觉",
@@ -1928,7 +1840,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_242",
+    "id": "node_231",
     "name": "交叉领域智能应用",
     "level": 2,
     "category": "机器学习基础",
@@ -1936,7 +1848,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_243",
+    "id": "node_232",
     "name": "判例检索与法律条文匹配",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1944,7 +1856,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_244",
+    "id": "node_233",
     "name": "合规问答系统与监管AI",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1952,7 +1864,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_245",
+    "id": "node_234",
     "name": "风险评估与量化交易",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1960,7 +1872,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_246",
+    "id": "node_235",
     "name": "个性化学习路径与轨迹建模",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1968,7 +1880,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_247",
+    "id": "node_236",
     "name": "自动批改与智能辅导",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1976,7 +1888,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_248",
+    "id": "node_237",
     "name": "数字人文与书目数据增强",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1984,7 +1896,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_249",
+    "id": "node_238",
     "name": "预测性维护与缺陷检测",
     "level": 3,
     "category": "交叉领域智能应用",
@@ -1992,15 +1904,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_250",
-    "name": "交通流预测与资源调度",
-    "level": 3,
-    "category": "交叉领域智能应用",
-    "wuxing": "火",
-    "cognitive_depth": "L2"
-  },
-  {
-    "id": "node_251",
+    "id": "node_239",
     "name": "知识表示与逻辑推理",
     "level": 2,
     "category": "机器学习基础",
@@ -2008,7 +1912,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_252",
+    "id": "node_240",
     "name": "大规模知识图谱自动构建",
     "level": 3,
     "category": "知识表示与逻辑推理",
@@ -2016,7 +1920,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_253",
+    "id": "node_241",
     "name": "常识知识表示与提取",
     "level": 3,
     "category": "知识表示与逻辑推理",
@@ -2024,7 +1928,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_254",
+    "id": "node_242",
     "name": "神经符号AI",
     "level": 3,
     "category": "知识表示与逻辑推理",
@@ -2032,7 +1936,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_255",
+    "id": "node_243",
     "name": "数学定理证明与逻辑演绎",
     "level": 3,
     "category": "知识表示与逻辑推理",
@@ -2040,7 +1944,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_256",
+    "id": "node_244",
     "name": "因果发现与因果推断",
     "level": 3,
     "category": "知识表示与逻辑推理",
@@ -2048,7 +1952,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_257",
+    "id": "node_245",
     "name": "推荐系统与信息检索",
     "level": 2,
     "category": "机器学习基础",
@@ -2056,7 +1960,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_258",
+    "id": "node_246",
     "name": "点击率预估与精排模型",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2064,7 +1968,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_259",
+    "id": "node_247",
     "name": "序列化推荐与长期兴趣建模",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2072,7 +1976,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_260",
+    "id": "node_248",
     "name": "跨域推荐与冷启动问题解决",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2080,7 +1984,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_261",
+    "id": "node_249",
     "name": "推荐系统的公平性与多样性",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2088,7 +1992,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_262",
+    "id": "node_250",
     "name": "冷启动推荐因果语言模型检索",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2096,7 +2000,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_263",
+    "id": "node_251",
     "name": "多模态推荐与数据增强",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2104,7 +2008,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_264",
+    "id": "node_252",
     "name": "大模型作为评估者",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2112,7 +2016,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_265",
+    "id": "node_253",
     "name": "工业级广告推荐模型空间重构",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2120,7 +2024,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_266",
+    "id": "node_254",
     "name": "协同过滤与LLM对齐",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2128,7 +2032,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_267",
+    "id": "node_255",
     "name": "语义检索与个性化",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2136,7 +2040,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_268",
+    "id": "node_256",
     "name": "大语言模型驱动的内容理解",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2144,7 +2048,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_269",
+    "id": "node_257",
     "name": "多模态生成式推荐",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2152,7 +2056,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_270",
+    "id": "node_258",
     "name": "语义ID学习",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2160,7 +2064,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_271",
+    "id": "node_259",
     "name": "稠密检索与语义对齐",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2168,7 +2072,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_272",
+    "id": "node_260",
     "name": "神经搜索",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2176,7 +2080,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_273",
+    "id": "node_261",
     "name": "多模态搜索引擎架构",
     "level": 3,
     "category": "推荐系统与信息检索",
@@ -2184,7 +2088,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_274",
+    "id": "node_262",
     "name": "AI系统与硬件",
     "level": 2,
     "category": "机器学习基础",
@@ -2192,7 +2096,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_275",
+    "id": "node_263",
     "name": "算子级并行与流水线并行",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2200,7 +2104,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_276",
+    "id": "node_264",
     "name": "分布式显存优化",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2208,7 +2112,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_277",
+    "id": "node_265",
     "name": "深度学习编译器",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2216,7 +2120,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_278",
+    "id": "node_266",
     "name": "模型压缩裁剪与知识蒸馏",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2224,7 +2128,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_279",
+    "id": "node_267",
     "name": "分布式训练并行策略",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2232,7 +2136,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_280",
+    "id": "node_268",
     "name": "定制化加速器设计",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2240,7 +2144,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_281",
+    "id": "node_269",
     "name": "端侧边缘设备推断优化",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2248,7 +2152,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_282",
+    "id": "node_270",
     "name": "AI数据中心能效管理",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2256,7 +2160,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_283",
+    "id": "node_271",
     "name": "向量数据库与检索架构设计",
     "level": 3,
     "category": "AI系统与硬件",
@@ -2264,7 +2168,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_284",
+    "id": "node_272",
     "name": "软件工程与编程",
     "level": 2,
     "category": "机器学习基础",
@@ -2272,7 +2176,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_285",
+    "id": "node_273",
     "name": "代码自动补全与重构建议",
     "level": 3,
     "category": "软件工程与编程",
@@ -2280,7 +2184,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_286",
+    "id": "node_274",
     "name": "程序漏洞检测与自动修复",
     "level": 3,
     "category": "软件工程与编程",
@@ -2288,7 +2192,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_287",
+    "id": "node_275",
     "name": "代码语义理解与克隆检测",
     "level": 3,
     "category": "软件工程与编程",
@@ -2296,7 +2200,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_288",
+    "id": "node_276",
     "name": "文本转代码",
     "level": 3,
     "category": "软件工程与编程",
@@ -2304,7 +2208,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_289",
+    "id": "node_277",
     "name": "科学AI",
     "level": 2,
     "category": "机器学习基础",
@@ -2312,7 +2216,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_290",
+    "id": "node_278",
     "name": "蛋白质结构预测",
     "level": 3,
     "category": "科学AI",
@@ -2320,7 +2224,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_291",
+    "id": "node_279",
     "name": "药物小分子筛选与设计",
     "level": 3,
     "category": "科学AI",
@@ -2328,7 +2232,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_292",
+    "id": "node_280",
     "name": "基因序列建模与表达预测",
     "level": 3,
     "category": "科学AI",
@@ -2336,7 +2240,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_293",
+    "id": "node_281",
     "name": "病理步态肌肉力分配模拟",
     "level": 3,
     "category": "科学AI",
@@ -2344,7 +2248,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_294",
+    "id": "node_282",
     "name": "虚拟电厂优化与调度",
     "level": 3,
     "category": "科学AI",
@@ -2352,7 +2256,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_295",
+    "id": "node_283",
     "name": "零碳电力交易博弈机制",
     "level": 3,
     "category": "科学AI",
@@ -2360,7 +2264,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_296",
+    "id": "node_284",
     "name": "气象预报与极端天气模拟",
     "level": 3,
     "category": "科学AI",
@@ -2368,7 +2272,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_297",
+    "id": "node_285",
     "name": "科学计算神经网络",
     "level": 3,
     "category": "科学AI",
@@ -2376,7 +2280,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_298",
+    "id": "node_286",
     "name": "智能材料建模与性能预测",
     "level": 3,
     "category": "科学AI",
@@ -2384,7 +2288,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_299",
+    "id": "node_287",
     "name": "支持结构优化的3D打印生成",
     "level": 3,
     "category": "科学AI",
@@ -2392,7 +2296,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_300",
+    "id": "node_288",
     "name": "量子神经网络",
     "level": 3,
     "category": "科学AI",
@@ -2400,7 +2304,7 @@
     "cognitive_depth": "L3"
   },
   {
-    "id": "node_301",
+    "id": "node_289",
     "name": "变分量子算法优化",
     "level": 3,
     "category": "科学AI",
@@ -2408,7 +2312,7 @@
     "cognitive_depth": "L2"
   },
   {
-    "id": "node_302",
+    "id": "node_290",
     "name": "其他AI领域",
     "level": 2,
     "category": "机器学习基础",

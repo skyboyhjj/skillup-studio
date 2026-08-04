@@ -33,7 +33,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多智能体强化学习",
@@ -51,7 +51,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "扩散模型",
@@ -60,7 +60,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "扩散模型核心演进",
@@ -87,7 +87,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "语言模型",
@@ -96,7 +96,7 @@
       "current": "水",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "对比学习",
@@ -105,7 +105,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "模仿学习",
@@ -114,7 +114,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "模仿学习与示教学习",
@@ -123,7 +123,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "逆最优控制",
@@ -132,7 +132,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "逆最优控制与模仿学习",
@@ -141,7 +141,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "视觉Transformer加速",
@@ -150,7 +150,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "图神经网络",
@@ -168,7 +168,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "知识图谱嵌入",
@@ -177,7 +177,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "混合专家模型",
@@ -195,7 +195,7 @@
       "current": "水",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自动化机器学习",
@@ -231,7 +231,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "人机协作与对齐",
@@ -240,7 +240,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多智能体协作与社会模拟",
@@ -249,7 +249,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "社会模拟",
@@ -258,7 +258,7 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "多模态大模型在机器人领域的应用",
@@ -267,7 +267,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自动驾驶端到端感知-决策模型",
@@ -276,7 +276,7 @@
       "current": "水",
       "transcend": "火"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自动驾驶决策安全与伦理",
@@ -285,7 +285,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "车路协同技术",
@@ -294,7 +294,7 @@
       "current": "火",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "隐私保护音频监测",
@@ -303,7 +303,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "语义地图构建",
@@ -312,7 +312,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "主动感知与探索",
@@ -321,7 +321,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "状态估计与滤波算法",
@@ -330,7 +330,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "大模型作为评估者",
@@ -348,7 +348,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多模态生成式推荐",
@@ -357,7 +357,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "语义ID学习",
@@ -366,7 +366,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "协同过滤与LLM对齐",
@@ -384,7 +384,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "伦理与价值观对齐",
@@ -393,7 +393,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "AI数据中心能效管理",
@@ -402,7 +402,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "支持结构优化的3D打印生成",
@@ -411,7 +411,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "变分量子算法优化",
@@ -420,7 +420,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "量子神经网络",
@@ -438,7 +438,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "进化算法",
@@ -447,7 +447,7 @@
       "current": "木",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "蒙特卡洛树搜索",
@@ -456,7 +456,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "文本引导的图像编辑",
@@ -465,7 +465,7 @@
       "current": "水",
       "transcend": "火"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "视觉引导的音频分离",
@@ -474,7 +474,7 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "触觉-视觉跨模态感知",
@@ -483,7 +483,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多模态知识图谱构建",
@@ -492,7 +492,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "跨模态检索增强生成",
@@ -501,7 +501,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多模态实体链接",
@@ -510,7 +510,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "常识知识表示与提取",
@@ -519,7 +519,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "因果发现与因果推断",
@@ -537,7 +537,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "神经符号AI",
@@ -564,7 +564,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "基因序列建模与表达预测",
@@ -573,7 +573,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "Transformer架构变体研究",
@@ -582,7 +582,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "神经网络泛化理论与边界",
@@ -591,7 +591,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "拓扑序态发现与流形学习",
@@ -600,7 +600,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "元学习与跨任务适应",
@@ -627,7 +627,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "知识编辑与事实一致性维护",
@@ -636,7 +636,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "隐式推理架构",
@@ -645,7 +645,7 @@
       "current": "金",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "思维链效率与路径优化",
@@ -654,7 +654,7 @@
       "current": "火",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "逻辑与数值联合推理",
@@ -663,7 +663,7 @@
       "current": "金",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "幻觉检测与事实性增强",
@@ -672,7 +672,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "幻觉检测与置信度评估",
@@ -726,7 +726,7 @@
       "current": "火",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "零碳电力交易博弈机制",
@@ -735,7 +735,7 @@
       "current": "火",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "气象预报与极端天气模拟",
@@ -744,7 +744,7 @@
       "current": "土",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "科学计算神经网络",
@@ -753,7 +753,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "智能材料建模与性能预测",
@@ -762,7 +762,7 @@
       "current": "木",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "基于模型的强化学习",
@@ -771,7 +771,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "基于策略的强化学习",
@@ -780,7 +780,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "基于价值的强化学习",
@@ -789,7 +789,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "任务规划与推理决策",
@@ -816,7 +816,7 @@
       "current": "水",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自主工作流与自动化",
@@ -834,7 +834,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "人格化与情感对话模拟",
@@ -843,7 +843,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "意图识别与槽位填充",
@@ -852,7 +852,7 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "跨语言知识迁移与对齐",
@@ -861,7 +861,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "临床法律金融领域文本生成",
@@ -879,7 +879,7 @@
       "current": "水",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自动化评测基准",
@@ -888,7 +888,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "自动化提示词生成与优化",
@@ -897,7 +897,7 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "Sim-to-Real跨域迁移",
@@ -924,7 +924,7 @@
       "current": "水",
       "transcend": "火"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "多传感器融合定位",
@@ -942,7 +942,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "机器人控制与规划",
@@ -951,7 +951,7 @@
       "current": "火",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "仿真平台介绍",
@@ -960,7 +960,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "康复机器人安全",
@@ -969,7 +969,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "社会辅助机器人",
@@ -978,7 +978,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "农业智能决策与采摘",
@@ -987,7 +987,7 @@
       "current": "火",
       "transcend": "土"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "空间机器人与微重力操作",
@@ -996,7 +996,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "手术机器人与远程医疗",
@@ -1005,7 +1005,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "水下机器人与海洋探测",
@@ -1014,7 +1014,7 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "搜救机器人",
@@ -1023,7 +1023,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "机器人感知单元",
@@ -1032,7 +1032,7 @@
       "current": "土",
       "transcend": "水"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "机器人本体类别",
@@ -1041,7 +1041,7 @@
       "current": "土",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "情感驱动的语音合成",
@@ -1050,7 +1050,7 @@
       "current": "水",
       "transcend": "火"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "AI音乐理解旋律与合成",
@@ -1059,7 +1059,7 @@
       "current": "水",
       "transcend": "火"
     },
-    "matched": false
+    "matched": true
   },
   {
     "name": "神经风格迁移与属性编辑",
@@ -1068,6 +1068,6 @@
       "current": "水",
       "transcend": "金"
     },
-    "matched": false
+    "matched": true
   }
 ]

@@ -6,7 +6,7 @@
       "current": "火",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "策略梯度与PPO优化",
@@ -96,7 +96,7 @@
       "current": "水",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "对比学习",
@@ -231,7 +231,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "人机协作与对齐",
@@ -438,7 +438,7 @@
       "current": "金",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "进化算法",
@@ -573,7 +573,7 @@
       "current": "木",
       "transcend": "金"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "Transformer架构变体研究",
@@ -771,7 +771,7 @@
       "current": "火",
       "transcend": "水"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "基于策略的强化学习",
@@ -861,7 +861,7 @@
       "current": "水",
       "transcend": "木"
     },
-    "matched": true
+    "matched": false
   },
   {
     "name": "临床法律金融领域文本生成",

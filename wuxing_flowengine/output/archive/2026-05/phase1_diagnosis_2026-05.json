@@ -1,54 +1,54 @@
 {
   "report_type": "phase1_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-04T19:52:13.618478",
-  "collect_time": "2026-07",
+  "generated_at": "2026-08-04T19:52:00.634458",
+  "collect_time": "2026-05",
   "stats": {
-    "total": 302,
-    "seed": 37,
-    "current": 157,
-    "transcend": 108
+    "total": 278,
+    "seed": 34,
+    "current": 143,
+    "transcend": 101
   },
   "depth_dist": {
-    "L3": 107,
-    "L2": 157,
+    "L3": 100,
+    "L2": 143,
     "L4": 1,
-    "L1": 37
+    "L1": 34
   },
   "wuxing_dist": {
-    "水": 78,
-    "金": 32,
-    "土": 77,
-    "木": 68,
-    "火": 47
+    "水": 72,
+    "金": 28,
+    "土": 72,
+    "木": 65,
+    "火": 41
   },
   "four_dims": {
-    "O_t": 0.2708,
-    "E_u": 0.9649,
-    "C_k": 0.2209,
-    "K_y": 0.8887
+    "O_t": 0.2717,
+    "E_u": 0.9665,
+    "C_k": 0.2205,
+    "K_y": 0.8867
   },
   "tracks": {
-    "S_sum": 58.63,
-    "S_prod": 5.13,
-    "B": 58.63,
+    "S_sum": 58.64,
+    "S_prod": 5.14,
+    "B": 58.64,
     "C": 10.48,
     "D": 1.02
   },
   "edge_quality": {
-    "edge_count": 662,
-    "node_count": 302,
-    "edge_ratio": 2.19,
+    "edge_count": 476,
+    "node_count": 278,
+    "edge_ratio": 1.71,
     "min_edge_ratio_ok": true,
-    "avg_degree": 4.38,
-    "max_degree": 76,
-    "graph_density_ratio": 0.0577,
+    "avg_degree": 3.42,
+    "max_degree": 59,
+    "graph_density_ratio": 0.058,
     "ky_mode": "ke_edge_count"
   },
   "diagnosis": {
-    "file": "2026-07-30_snapshot.json",
-    "N": 302,
-    "N_raw": 302,
+    "file": "2026-05-30_snapshot.json",
+    "N": 278,
+    "N_raw": 278,
     "depth": null,
     "layer_names": [
       "种子层",
@@ -105,11 +105,6 @@
             "cognitive_depth": "L1"
           },
           {
-            "name": "消息传递图神经网络",
-            "wuxing": "土",
-            "cognitive_depth": "L1"
-          },
-          {
             "name": "贝叶斯方法",
             "wuxing": "土",
             "cognitive_depth": "L1"
@@ -122,11 +117,6 @@
           {
             "name": "期望最大化",
             "wuxing": "土",
-            "cognitive_depth": "L1"
-          },
-          {
-            "name": "搜索算法",
-            "wuxing": "火",
             "cognitive_depth": "L1"
           },
           {
@@ -220,11 +210,6 @@
             "cognitive_depth": "L1"
           },
           {
-            "name": "协同训练方法",
-            "wuxing": "土",
-            "cognitive_depth": "L1"
-          },
-          {
             "name": "一致性正则化方法",
             "wuxing": "土",
             "cognitive_depth": "L1"
@@ -280,11 +265,6 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "语义检索与重排序",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "稠密检索与重排序优化",
             "wuxing": "火",
             "cognitive_depth": "L2"
@@ -310,18 +290,8 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "文本摘要与信息压缩",
-            "wuxing": "土",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "命名实体识别与关系抽取",
             "wuxing": "金",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "跨语言知识迁移与对齐",
-            "wuxing": "水",
             "cognitive_depth": "L2"
           },
           {
@@ -430,16 +400,6 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "其他智能体子领域",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "智能体",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "隐私保护音频监测",
             "wuxing": "金",
             "cognitive_depth": "L2"
@@ -461,11 +421,6 @@
           },
           {
             "name": "软体与可变形机器人",
-            "wuxing": "木",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "连续体机器人控制",
             "wuxing": "木",
             "cognitive_depth": "L2"
           },
@@ -650,11 +605,6 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "基于模型的强化学习",
-            "wuxing": "土",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "基于策略的强化学习",
             "wuxing": "土",
             "cognitive_depth": "L2"
@@ -685,22 +635,12 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "提示注入与对抗攻击防护",
-            "wuxing": "金",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "模型后门检测与安全过滤",
             "wuxing": "金",
             "cognitive_depth": "L2"
           },
           {
             "name": "联邦学习与加密计算",
-            "wuxing": "金",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "差分隐私保护与脱敏技术",
             "wuxing": "金",
             "cognitive_depth": "L2"
           },
@@ -736,11 +676,6 @@
           },
           {
             "name": "视觉SLAM与环境重建",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "神经频率响应场",
             "wuxing": "水",
             "cognitive_depth": "L2"
           },
@@ -795,16 +730,6 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "交叉领域智能应用",
-            "wuxing": "土",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "判例检索与法律条文匹配",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "合规问答系统与监管AI",
             "wuxing": "火",
             "cognitive_depth": "L2"
@@ -846,11 +771,6 @@
           },
           {
             "name": "序列化推荐与长期兴趣建模",
-            "wuxing": "火",
-            "cognitive_depth": "L2"
-          },
-          {
-            "name": "跨域推荐与冷启动问题解决",
             "wuxing": "火",
             "cognitive_depth": "L2"
           },
@@ -985,11 +905,6 @@
             "cognitive_depth": "L2"
           },
           {
-            "name": "基因序列建模与表达预测",
-            "wuxing": "水",
-            "cognitive_depth": "L2"
-          },
-          {
             "name": "病理步态肌肉力分配模拟",
             "wuxing": "木",
             "cognitive_depth": "L2"
@@ -1039,11 +954,6 @@
       {
         "label": "超越层",
         "concepts": [
-          {
-            "name": "大语言模型",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
           {
             "name": "大语言模型",
             "wuxing": "水",
@@ -1200,11 +1110,6 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "音视频同步与事件定位",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
             "name": "语音驱动的面部动画",
             "wuxing": "木",
             "cognitive_depth": "L3"
@@ -1231,11 +1136,6 @@
           },
           {
             "name": "多模态实体链接",
-            "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "视频描述生成",
             "wuxing": "木",
             "cognitive_depth": "L3"
           },
@@ -1317,11 +1217,6 @@
           {
             "name": "情感驱动的语音合成",
             "wuxing": "木",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "强化学习",
-            "wuxing": "水",
             "cognitive_depth": "L3"
           },
           {
@@ -1440,11 +1335,6 @@
             "cognitive_depth": "L3"
           },
           {
-            "name": "语言模型",
-            "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
             "name": "AI价值观对齐与鲁棒性",
             "wuxing": "金",
             "cognitive_depth": "L3"
@@ -1512,16 +1402,6 @@
           {
             "name": "单目双目深度估计与遮挡处理",
             "wuxing": "水",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "知识表示与逻辑推理",
-            "wuxing": "金",
-            "cognitive_depth": "L3"
-          },
-          {
-            "name": "大规模知识图谱自动构建",
-            "wuxing": "金",
             "cognitive_depth": "L3"
           },
           {
