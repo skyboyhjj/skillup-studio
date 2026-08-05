@@ -46,8 +46,14 @@
 | `wuxing_flowengine/scripts/k_y_enhancer.py` | K_y 缘位增强器（Phase 4 自适应混合 E_relation） |
 | `wuxing_flowengine/scripts/baai_scraper.py` | BAAI Hub 论文采集（reports_graph/reports_detail API + Tiptap JSON 解析） |
 | `wuxing_flowengine/scripts/data_validator.py` | 数据验证模块（五检查点：语言/数量/覆盖/重复/一致性） |
-| `wuxing_flowengine/scripts/monthly_pipeline.py` | 月度编排器（Phase 1→2→3+→B→C + 时间序列 + 验证） |
+| `wuxing_flowengine/scripts/monthly_pipeline.py` | 月度编排器（Phase 1→2→3+ + 时间序列 + 验证） |
+| `wuxing_flowengine/scripts/phase3_plus_pipeline.py` | Phase 3+ 流水线（论文五行分类 + 领域漂移分析 + 领域名规范化） |
+| `wuxing_flowengine/scripts/domain_calibration.py` | 领域基准校准 |
+| `wuxing_flowengine/scripts/timeseries_analysis.py` | 时间序列分析（多月份 delta 链） |
+| `wuxing_flowengine/scripts/wuxing_dsl.py` | 五行 DSL 引擎（WRL 规则语言 + 画像库） |
 | `wuxing_flowengine/docs/` | 设计文档（融合设计方案 V1.2 + 数据采集经验总结） |
+| `wuxing_flowengine/output/validation_report_2026-08.md` | 2026.08.05 验证批次报告（含 P0/P1/P2 修复 + 漂移分析） |
+| `wuxing_flowengine/output/archive/` | 4 个月度归档（2026-05/06/07/08） |
 
 ## 部署命令
 
@@ -154,21 +160,43 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **Phase B** (`dao_realm_engine.py`): 道境诊断引擎 — 五步算法（诊断→四维映射→S 计算→阶段判定→导航建议）
 - **Phase C2** (`k_y_enhancer.py`): K_y 缘位增强 — 自适应混合 E_relation（ke_density × β + graph_cohesion × (1-β)）
 - **Phase C1** (`domain_calibration.py`): 领域基准校准
-- 四个月度快照（2026-05/06/07/08）+ 时间序列 delta 链
+- 四个月度快照（2026-05/06/07/08）+ 时间序列 delta 链 + 验证报告（`output/validation_report_2026-08.md`）
 - 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/phase1_pipeline.py`、`scripts/phase2_pipeline.py`、`scripts/phase3_plus_pipeline.py`、`scripts/dao_realm_engine.py`、`scripts/stage_engine.py`、`scripts/guidance.py`、`scripts/k_y_enhancer.py`、`scripts/domain_calibration.py`、`scripts/monthly_pipeline.py`、`scripts/timeseries_analysis.py`、`scripts/wuxing_dsl.py`、`docs/`
 
-### 9. P0/P1 修复：层间路径分析 + 通阶段画像匹配
+### 9. P0/P1/P2 修复：层间路径分析 + 通阶段画像匹配 + 领域名规范化
 - **P0**: `_edge_paths()` 从全量桩代码（恒返回 10 条）重写为实际层间主导行分析
   - 逐对检查种子→现行、现行→超越的层间主导行是否构成相生/相克
-  - `ke_edge_count` 从恒为 5 变为实际值 0-2，K_y 不再饱和，S 值恢复合理区间
-- **P1-1**: 通阶段补全"路径匹配画像"条件
+  - `ke_edge_count` 从恒为 5 变为实际值 0-2，K_y 从 0.89→0.29，S 从 5.1→1.7
+- **P1**: 通阶段补全"路径匹配画像"条件
   - 新增 `dim3_profile` 输出（层主导行/路径串/画像匹配）
   - `matches_profile = 至少一条相生边 + 无相克边`
   - `stage_engine.py` 通阶段判定改为 `matches_profile AND 0.50 < H_ratio < 0.85`
-- 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/stage_engine.py`
+- **P2**: 领域名规范化 — 论文 domain（"生成式 AI"）与节点 domain（"生成式AI"）命名不一致 → 新增 `normalize_domain()` 统一去除空格和中文标点差异，消除 drift=1.0 伪影
+- 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/stage_engine.py`、`scripts/phase3_plus_pipeline.py`
+
+### 11. V1.2 设计文档验证批次更新 + P2 领域名规范化修复
+- **V1.2 设计文档** (`五行诊断与道境坐标系：融合设计方案 V1.2.md`) 新增 2026.08.05 验证批次内容：
+  - 9.2.1 Bug 修复记录：P0（`_edge_paths()` 恒返回 10 条边）、P1（通阶段画像匹配）、P2（领域名规范化）、P3（ke_edge_count 分母修正）
+  - 9.3.1 Phase 3+ 流水线验证结果：四维指标跨月对比、阶段判定、论文-节点漂移分析、数据质量验证、对 9.3 遗留问题的逐条验证结论
+  - 9.4 下一步行动：基于验证结果重新排序为 P0/P1/P2 三级
+- **P2 Bug 修复**：论文 domain（"生成式 AI"）与节点 domain（"生成式AI"）命名不一致 → 新增 `normalize_domain()` 统一去除空格和中文标点差异，消除 drift=1.0 伪影
+- 修复后 4 个月度流水线重跑，四维指标稳定（O_t: 0.27~0.28, E_u: 0.96, C_k: 0.22, K_y: 0.29），阶段一致判"克"（S≈1.7 << θ_critical=90）
+- 实证确认 S 上限问题不可通过调参解决，需公式结构级变更（9.3 P0#1）
+- 文件：`wuxing_flowengine/docs/五行诊断与道境坐标系：融合设计方案 V1.2.md`、`wuxing_flowengine/scripts/phase3_plus_pipeline.py`、`wuxing_flowengine/output/validation_report_2026-08.md`
+
+### 12. 分支对比分析：master vs hui-skill-cn 的 wuxing_flowengine
+- 对两个分支下 `wuxing_flowengine/` 做完整 diff 对比（116 文件，+63,086 / -21,497 行）
+- **关键差异**：
+  - `docs/`：master 含 10 份文档（含 ima/ 参考），hui-skill-cn 精简为 2 份核心文档
+  - `scripts/`：删除 13 个临时/一次性脚本，新增 9 个核心模块（baai_scraper, wuxing_dsl, stage_engine, domain_calibration, data_validator, k_y_enhancer, guidance, dao_realm_engine, gen_monthly_snapshots）
+  - `output/`：从扁平散落改为 `archive/{month}/` 结构化归档，覆盖 05/06/07/08 四个月
+  - `config/`：从 4 个配置文件简化为 1 个（config_default.json）
+  - `data/`：从 1 个真实快照扩展为 4 个月快照（1 真实 + 3 模拟）
+  - 新增 `tests/` 目录（4 个测试文件）和 `README.md`
+- **结论**：hui-skill-cn 是 master 的生产化演进版本，从"诊断工具"升级为"月度流水线平台"
 
 ### 10. 数据采集经验总结 + 验证模块
-- 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
+  - 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
   - API 优先、格式不假设、逐领域验证、语言检测、弹窗处理、URL 编码、历史回溯
 - 采集脚本增强：新增 `reports_graph` API 兜底 + 跨月格式一致性检查 + 逐领域验证
 - 独立验证模块 `data_validator.py`：封装五个检查点（语言/数量/覆盖/重复/一致性）+ `ValidationReport` 类
