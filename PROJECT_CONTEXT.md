@@ -183,6 +183,14 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **P2**: 领域名规范化 — 论文 domain（"生成式 AI"）与节点 domain（"生成式AI"）命名不一致 → 新增 `normalize_domain()` 统一去除空格和中文标点差异，消除 drift=1.0 伪影
 - 文件：`wuxing_flowengine/diagnose/wuxing_diagnose_v2.py`、`scripts/stage_engine.py`、`scripts/phase3_plus_pipeline.py`
 
+### 10. 数据采集经验总结 + 验证模块
+  - 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
+  - API 优先、格式不假设、逐领域验证、语言检测、弹窗处理、URL 编码、历史回溯
+- 采集脚本增强：新增 `reports_graph` API 兜底 + 跨月格式一致性检查 + 逐领域验证
+- 独立验证模块 `data_validator.py`：封装五个检查点（语言/数量/覆盖/重复/一致性）+ `ValidationReport` 类
+- 现有 05/06/07 三个月数据（315+400+403 篇）全部通过验证
+- 文件：`wuxing_flowengine/scripts/baai_scraper.py`、`scripts/data_validator.py`、`docs/网站数据采集经验总结.md`
+
 ### 11. V1.2 设计文档验证批次更新 + P2 领域名规范化修复
 - **V1.2 设计文档** (`五行诊断与道境坐标系：融合设计方案 V1.2.md`) 新增 2026.08.05 验证批次内容：
   - 9.2.1 Bug 修复记录：P0（`_edge_paths()` 恒返回 10 条边）、P1（通阶段画像匹配）、P2（领域名规范化）、P3（ke_edge_count 分母修正）
@@ -213,14 +221,6 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - 宽恕阈值采用相对为主（>10%）、绝对为辅（>5）的双判据，避免均衡数据时绝对差误报
 - P忠恕版 S 卡格式：S 值旁标注恕度标签，自动附加"最弱维度 + 最强补足路径"的恕语
 - 文件：`wuxing_flowengine/scripts/validate_p_zhongshu.py`、`docs/五行诊断与道境坐标系：融合设计方案 V1.2.md`（9.5 节）、`README.md`（诊断结果表同步更新 S_p 列）
-
-### 10. 数据采集经验总结 + 验证模块
-  - 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
-  - API 优先、格式不假设、逐领域验证、语言检测、弹窗处理、URL 编码、历史回溯
-- 采集脚本增强：新增 `reports_graph` API 兜底 + 跨月格式一致性检查 + 逐领域验证
-- 独立验证模块 `data_validator.py`：封装五个检查点（语言/数量/覆盖/重复/一致性）+ `ValidationReport` 类
-- 现有 05/06/07 三个月数据（315+400+403 篇）全部通过验证
-- 文件：`wuxing_flowengine/scripts/baai_scraper.py`、`scripts/data_validator.py`、`docs/网站数据采集经验总结.md`
 
 ### 14. P0#1 公式结构级变更：S_p 广义平均集成到生产引擎
 - **背景**: 设计文档 9.4 P0#1 确认 S=1.7 << θ_critical=90，穷举 S 上限 1.47 与实测吻合，旧乘积公式量纲不可达
