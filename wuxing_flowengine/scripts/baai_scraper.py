@@ -18,7 +18,7 @@ import os
 import sys
 import time
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 
 # 16 个领域
 DOMAINS = [

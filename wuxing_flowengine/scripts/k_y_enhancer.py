@@ -13,6 +13,7 @@ K_y 缘位增强器 — Phase 4 图密度增强 (V1.2 融合设计方案)
 """
 
 import math
+from dao_math import compute_S_p, compute_S_old, S_P_DEFAULT
 
 
 def compute_E_relation(edge_quality, path_edges, nodes=None):
@@ -149,14 +150,14 @@ def enhance_four_dims(four_dims, edge_quality, path_edges, wuxing_freq, nodes=No
         'K_y_original': four_dims.get('K_y', 0),
         'K_y_enhanced': enhanced['K_y'],
         'K_y_enhancement': enhanced,
-        'S_original': round(
-            four_dims.get('O_t', 0) * four_dims.get('E_u', 0) *
-            four_dims.get('C_k', 0) * four_dims.get('K_y', 0) * 100, 1
-        ),
-        'S_enhanced': round(
-            four_dims.get('O_t', 0) * four_dims.get('E_u', 0) *
-            four_dims.get('C_k', 0) * enhanced['K_y'] * 100, 1
-        )
+        'S_original': round(compute_S_p([
+            four_dims.get('O_t', 0), four_dims.get('E_u', 0),
+            four_dims.get('C_k', 0), four_dims.get('K_y', 0)
+        ], p=S_P_DEFAULT), 1),
+        'S_enhanced': round(compute_S_p([
+            four_dims.get('O_t', 0), four_dims.get('E_u', 0),
+            four_dims.get('C_k', 0), enhanced['K_y']
+        ], p=S_P_DEFAULT), 1)
     }
 
 
@@ -199,8 +200,10 @@ def compare_ky_methods(phase1_result):
     return {
         'original': {
             'K_y': four_dims.get('K_y', 0),
-            'S': round(four_dims.get('O_t', 0) * four_dims.get('E_u', 0) *
-                       four_dims.get('C_k', 0) * four_dims.get('K_y', 0) * 100, 1)
+            'S': round(compute_S_p([
+                four_dims.get('O_t', 0), four_dims.get('E_u', 0),
+                four_dims.get('C_k', 0), four_dims.get('K_y', 0)
+            ], p=S_P_DEFAULT), 1)
         },
         'enhanced': {
             'K_y': enhanced['K_y_enhanced'],
@@ -217,7 +220,7 @@ if __name__ == '__main__':
     import os
     import sys
 
-    BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     sys.path.insert(0, BASE)
     sys.path.insert(0, os.path.join(BASE, 'diagnose'))
 

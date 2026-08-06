@@ -111,3 +111,17 @@ desktop.ini
 tmp/
 temp/
 *.log
+
+# ============================================================
+# 调试/诊断脚本（根级散落）
+# ============================================================
+check_llm*.py
+wuxing_flowengine/check_state.py
+wuxing_flowengine/scripts/check_data.py
+wuxing_flowengine/scripts/check_prev.py
+wuxing_flowengine/scripts/debug_format.py
+
+# ============================================================
+# 大型数据文件
+# ============================================================
+wuxing_flowengine/output/papers_*.json

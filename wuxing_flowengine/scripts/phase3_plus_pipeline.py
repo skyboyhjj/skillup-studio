@@ -58,6 +58,25 @@ DOMAIN_ORDER = [
     '软件工程与编程', '科学AI'
 ]
 
+# 领域名规范化：论文 domain（BAAI 采集格式）→ 节点 domain（Phase 2 格式）
+DOMAIN_NORMALIZE = {
+    '生成式 AI': '生成式AI',
+    '安全、可信与伦理': '安全可信与伦理',
+    'AI 系统与硬件': 'AI系统与硬件',
+    '科学 AI': '科学AI',
+    '自然语言处理': '自然语言处理',
+    '其他AI领域': '其他AI领域',
+}
+
+
+def normalize_domain(domain):
+    """将论文领域名规范化为节点领域名（去除空格和中文标点差异）"""
+    if domain in DOMAIN_NORMALIZE:
+        return DOMAIN_NORMALIZE[domain]
+    # 通用回退：移除所有空格，统一中文标点
+    normalized = domain.replace(' ', '').replace('\u3000', '')
+    return normalized
+
 
 def classify_paper(paper):
     """
@@ -133,10 +152,10 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
         with open(phase2_path, 'r', encoding='utf-8') as f:
             node_data = json.load(f)
 
-    # 论文分类
+    # 论文分类（规范化领域名）
     paper_domains = Counter()
     for p in papers:
-        domain = classify_paper(p)
+        domain = normalize_domain(classify_paper(p))
         paper_domains[domain] += 1
 
     print(f'[2] 论文领域分布:')
@@ -153,8 +172,8 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
         node_count = domain_node.get('node_count', 0)
         paper_count = paper_domains.get(domain, 0)
 
-        # 计算论文五行分布（基于论文标题关键词）
-        domain_papers = [p for p in papers if classify_paper(p) == domain]
+        # 计算论文五行分布（基于论文标题关键词，使用规范化领域名）
+        domain_papers = [p for p in papers if normalize_domain(classify_paper(p)) == domain]
         paper_wx_dist = Counter()
         for p in domain_papers:
             title = p.get('title', '').lower()
@@ -221,5 +240,5 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
 
 
 if __name__ == '__main__':
-    DEFAULT_BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    DEFAULT_BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     run(DEFAULT_BASE, month_label='2026-07')

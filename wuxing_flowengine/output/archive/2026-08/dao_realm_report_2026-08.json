@@ -1,7 +1,7 @@
 {
   "report_type": "dao_realm_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-04T20:58:55.960758",
+  "generated_at": "2026-08-06T10:33:54.297779",
   "engine": "dao_realm_engine",
   "diagnosis_mode": "static",
   "month_label": "2026-08",
@@ -103,7 +103,12 @@
     "E_u": 0.9666,
     "C_k": 0.2193,
     "K_y": 0.2908,
-    "S": 1.7
+    "S": 39.5,
+    "S_formula": "power_mean",
+    "S_p": 39.5,
+    "p": 0.5,
+    "p_label": "P忠恕中道",
+    "S_old": 1.7
   },
   "stage": "克",
   "stage_details": {
@@ -217,6 +222,10 @@
     "tracks": {
       "S_sum": 43.79,
       "S_prod": 1.7,
+      "S_p": 39.5,
+      "S_formula": "power_mean",
+      "p": 0.5,
+      "p_label": "P忠恕中道",
       "B": 43.79,
       "C": 10.48,
       "D": 1.02

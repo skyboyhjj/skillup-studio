@@ -3,7 +3,7 @@
   "description": "领域基准校准表 (Ch6)",
   "baseline": {
     "AI系统与硬件": {
-      "mean_S": 0.0,
+      "mean_S": 8.5891,
       "std_S": 0.0,
       "node_count_avg": 9.0,
       "wuxing_profile": {
@@ -11,26 +11,26 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.0,
-        0.0
+        8.5891,
+        8.5891
       ]
     },
     "交叉领域智能应用": {
-      "mean_S": 0.0,
-      "std_S": 0.0,
+      "mean_S": 8.9985,
+      "std_S": 0.2501,
       "node_count_avg": 7.5,
       "wuxing_profile": {
         "火": 7.5
       },
       "sample_count": 4,
       "S_range": [
-        0.0,
-        0.0
+        8.7484,
+        9.2486
       ]
     },
     "具身智能与机器人": {
-      "mean_S": 1.0119,
-      "std_S": 0.0763,
+      "mean_S": 35.9047,
+      "std_S": 0.7835,
       "node_count_avg": 18.8,
       "wuxing_profile": {
         "木": 12.0,
@@ -39,13 +39,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.8798,
-        1.0559
+        34.5477,
+        36.3571
       ]
     },
     "多模态智能": {
-      "mean_S": 4.758,
-      "std_S": 0.0771,
+      "mean_S": 51.2707,
+      "std_S": 0.1798,
       "node_count_avg": 30.8,
       "wuxing_profile": {
         "水": 6.8,
@@ -54,13 +54,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        4.6383,
-        4.8538
+        50.9619,
+        51.4124
       ]
     },
     "大语言模型": {
-      "mean_S": 3.0105,
-      "std_S": 0.726,
+      "mean_S": 46.721,
+      "std_S": 2.8873,
       "node_count_avg": 18.8,
       "wuxing_profile": {
         "水": 8.8,
@@ -71,13 +71,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        2.06,
-        3.7154
+        42.5757,
+        49.4216
       ]
     },
     "安全可信与伦理": {
-      "mean_S": 0.0521,
-      "std_S": 0.0027,
+      "mean_S": 16.915,
+      "std_S": 0.0357,
       "node_count_avg": 12.5,
       "wuxing_profile": {
         "金": 11.5,
@@ -85,13 +85,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.0505,
-        0.0568
+        16.8532,
+        16.9356
       ]
     },
     "推荐系统与信息检索": {
-      "mean_S": 2.2828,
-      "std_S": 0.0203,
+      "mean_S": 39.5567,
+      "std_S": 0.0054,
       "node_count_avg": 15.8,
       "wuxing_profile": {
         "火": 11.8,
@@ -100,13 +100,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        2.2711,
-        2.3179
+        39.5536,
+        39.5661
       ]
     },
     "智能体": {
-      "mean_S": 7.352,
-      "std_S": 0.3239,
+      "mean_S": 57.5965,
+      "std_S": 0.5708,
       "node_count_avg": 31.0,
       "wuxing_profile": {
         "金": 2.0,
@@ -117,13 +117,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        6.9043,
-        7.8201
+        56.7977,
+        58.4119
       ]
     },
     "机器学习基础": {
-      "mean_S": 4.9644,
-      "std_S": 0.3306,
+      "mean_S": 50.329,
+      "std_S": 0.7477,
       "node_count_avg": 81.0,
       "wuxing_profile": {
         "土": 58.8,
@@ -134,12 +134,12 @@
       },
       "sample_count": 4,
       "S_range": [
-        4.4252,
-        5.3104
+        49.1,
+        51.0913
       ]
     },
     "生成式AI": {
-      "mean_S": 0.065,
+      "mean_S": 16.9458,
       "std_S": 0.0,
       "node_count_avg": 9.0,
       "wuxing_profile": {
@@ -148,26 +148,26 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.065,
-        0.065
+        16.9458,
+        16.9458
       ]
     },
     "知识表示与逻辑推理": {
-      "mean_S": 0.0,
-      "std_S": 0.0,
+      "mean_S": 3.0432,
+      "std_S": 0.1602,
       "node_count_avg": 4.8,
       "wuxing_profile": {
         "金": 4.8
       },
       "sample_count": 4,
       "S_range": [
-        0.0,
-        0.0
+        2.7657,
+        3.1357
       ]
     },
     "科学AI": {
-      "mean_S": 0.1682,
-      "std_S": 0.0059,
+      "mean_S": 21.8633,
+      "std_S": 0.0649,
       "node_count_avg": 12.0,
       "wuxing_profile": {
         "水": 10.0,
@@ -175,13 +175,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.1601,
-        0.1768
+        21.7854,
+        21.9657
       ]
     },
     "自然语言处理": {
-      "mean_S": 8.1336,
-      "std_S": 0.926,
+      "mean_S": 55.3136,
+      "std_S": 1.6377,
       "node_count_avg": 17.0,
       "wuxing_profile": {
         "木": 2.0,
@@ -192,13 +192,13 @@
       },
       "sample_count": 4,
       "S_range": [
-        6.859,
-        9.0174
+        53.0424,
+        56.8718
       ]
     },
     "计算机视觉": {
-      "mean_S": 0.2714,
-      "std_S": 0.0061,
+      "mean_S": 26.9046,
+      "std_S": 0.0433,
       "node_count_avg": 22.0,
       "wuxing_profile": {
         "水": 19.0,
@@ -207,12 +207,12 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.263,
-        0.2802
+        26.8475,
+        26.9694
       ]
     },
     "软件工程与编程": {
-      "mean_S": 0.0,
+      "mean_S": 6.1221,
       "std_S": 0.0,
       "node_count_avg": 4.0,
       "wuxing_profile": {
@@ -220,47 +220,47 @@
       },
       "sample_count": 4,
       "S_range": [
-        0.0,
-        0.0
+        6.1221,
+        6.1221
       ]
     }
   },
   "calibration_table": [
     {
       "domain": "大语言模型",
-      "mean_S": 3.0105,
-      "std_S": 0.726,
+      "mean_S": 46.721,
+      "std_S": 2.8873,
       "sample_count": 4,
       "node_count_avg": 18.8,
       "dominant_wx": "水"
     },
     {
       "domain": "具身智能与机器人",
-      "mean_S": 1.0119,
-      "std_S": 0.0763,
+      "mean_S": 35.9047,
+      "std_S": 0.7835,
       "sample_count": 4,
       "node_count_avg": 18.8,
       "dominant_wx": "木"
     },
     {
       "domain": "多模态智能",
-      "mean_S": 4.758,
-      "std_S": 0.0771,
+      "mean_S": 51.2707,
+      "std_S": 0.1798,
       "sample_count": 4,
       "node_count_avg": 30.8,
       "dominant_wx": "木"
     },
     {
       "domain": "智能体",
-      "mean_S": 7.352,
-      "std_S": 0.3239,
+      "mean_S": 57.5965,
+      "std_S": 0.5708,
       "sample_count": 4,
       "node_count_avg": 31.0,
       "dominant_wx": "木"
     },
     {
       "domain": "生成式AI",
-      "mean_S": 0.065,
+      "mean_S": 16.9458,
       "std_S": 0.0,
       "sample_count": 4,
       "node_count_avg": 9.0,
@@ -268,47 +268,47 @@
     },
     {
       "domain": "机器学习基础",
-      "mean_S": 4.9644,
-      "std_S": 0.3306,
+      "mean_S": 50.329,
+      "std_S": 0.7477,
       "sample_count": 4,
       "node_count_avg": 81.0,
       "dominant_wx": "土"
     },
     {
       "domain": "安全可信与伦理",
-      "mean_S": 0.0521,
-      "std_S": 0.0027,
+      "mean_S": 16.915,
+      "std_S": 0.0357,
       "sample_count": 4,
       "node_count_avg": 12.5,
       "dominant_wx": "金"
     },
     {
       "domain": "计算机视觉",
-      "mean_S": 0.2714,
-      "std_S": 0.0061,
+      "mean_S": 26.9046,
+      "std_S": 0.0433,
       "sample_count": 4,
       "node_count_avg": 22.0,
       "dominant_wx": "水"
     },
     {
       "domain": "交叉领域智能应用",
-      "mean_S": 0.0,
-      "std_S": 0.0,
+      "mean_S": 8.9985,
+      "std_S": 0.2501,
       "sample_count": 4,
       "node_count_avg": 7.5,
       "dominant_wx": "火"
     },
     {
       "domain": "推荐系统与信息检索",
-      "mean_S": 2.2828,
-      "std_S": 0.0203,
+      "mean_S": 39.5567,
+      "std_S": 0.0054,
       "sample_count": 4,
       "node_count_avg": 15.8,
       "dominant_wx": "火"
     },
     {
       "domain": "AI系统与硬件",
-      "mean_S": 0.0,
+      "mean_S": 8.5891,
       "std_S": 0.0,
       "sample_count": 4,
       "node_count_avg": 9.0,
@@ -316,7 +316,7 @@
     },
     {
       "domain": "软件工程与编程",
-      "mean_S": 0.0,
+      "mean_S": 6.1221,
       "std_S": 0.0,
       "sample_count": 4,
       "node_count_avg": 4.0,
@@ -324,16 +324,16 @@
     },
     {
       "domain": "科学AI",
-      "mean_S": 0.1682,
-      "std_S": 0.0059,
+      "mean_S": 21.8633,
+      "std_S": 0.0649,
       "sample_count": 4,
       "node_count_avg": 12.0,
       "dominant_wx": "水"
     },
     {
       "domain": "知识表示与逻辑推理",
-      "mean_S": 0.0,
-      "std_S": 0.0,
+      "mean_S": 3.0432,
+      "std_S": 0.1602,
       "sample_count": 4,
       "node_count_avg": 4.8,
       "dominant_wx": "金"

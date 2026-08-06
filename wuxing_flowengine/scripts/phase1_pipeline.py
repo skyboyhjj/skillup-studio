@@ -8,6 +8,7 @@ import os
 import sys
 import math
 from collections import Counter
+from dao_math import compute_S_p, compute_S_old, S_P_DEFAULT, p_label
 from datetime import datetime
 
 # ============================================================
@@ -427,7 +428,8 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
 
     # 追踪指标
     S_sum = (O_t + E_u + C_k + K_y) * 25
-    S_prod = (O_t * E_u * C_k * K_y) * 100
+    S_prod = compute_S_old(O_t, E_u, C_k, K_y)  # 旧乘积
+    S_p = compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT)  # 广义平均
 
     # 保存结果
     stats = {
@@ -465,6 +467,10 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
         'tracks': {
             'S_sum': round(S_sum, 2),
             'S_prod': round(S_prod, 2),
+            'S_p': round(S_p, 1),
+            'S_formula': 'power_mean',
+            'p': S_P_DEFAULT,
+            'p_label': p_label(S_P_DEFAULT),
             'B': round(S_sum, 2),
             'C': round(10.48, 2),
             'D': round(1.0218, 2)
@@ -515,11 +521,11 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     print(f'  诊断: {diag_path}')
     print(f'  分类: {cls_path}')
     print(f'\n  四维: O_t={O_t:.4f} E_u={E_u:.4f} C_k={C_k:.4f} K_y={K_y:.4f}')
-    print(f'  追踪: S_sum={S_sum:.2f} S_prod={S_prod:.2f}')
+    print(f'  追踪: S_sum={S_sum:.2f} S_prod={S_prod:.2f} S_p={S_p:.1f}')
 
     return phase1_result
 
 
 if __name__ == '__main__':
-    DEFAULT_BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    DEFAULT_BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     run(DEFAULT_BASE)

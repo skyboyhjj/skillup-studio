@@ -51,9 +51,17 @@
 | `wuxing_flowengine/scripts/domain_calibration.py` | 领域基准校准 |
 | `wuxing_flowengine/scripts/timeseries_analysis.py` | 时间序列分析（多月份 delta 链） |
 | `wuxing_flowengine/scripts/wuxing_dsl.py` | 五行 DSL 引擎（WRL 规则语言 + 画像库） |
+| `wuxing_flowengine/rules/` | WRL 规则文件（经典/形式/启发式/领域 四类 32 条规则） |
 | `wuxing_flowengine/docs/` | 设计文档（融合设计方案 V1.2 + 数据采集经验总结） |
 | `wuxing_flowengine/output/validation_report_2026-08.md` | 2026.08.05 验证批次报告（含 P0/P1/P2 修复 + 漂移分析） |
 | `wuxing_flowengine/output/archive/` | 4 个月度归档（2026-05/06/07/08） |
+| `wuxing_flowengine/scripts/homomorphism_types.py` | 同态映射引擎 — 核心数据类型（概念节点/关系边/候选映射/验证结果/偏差记录） |
+| `wuxing_flowengine/scripts/structure_extractor.py` | 同态映射引擎 Step 1 — 结构提取器（从 Base 层提取概念-关系图） |
+| `wuxing_flowengine/scripts/homomorphism_matcher.py` | 同态映射引擎 Step 2 — 同态匹配器（五行/结构/LLM 三策略 + 信度出口） |
+| `wuxing_flowengine/scripts/transfer_validator.py` | 同态映射引擎 Step 3 — 迁移验证器（场景生成/验证/固化/SAD 镜鉴） |
+| `wuxing_flowengine/scripts/homomorphism_engine.py` | 同态映射引擎 — 土·通集成（三步协议 + 五行流转 + P忠恕伦理 + 旋量形式化） |
+| `wuxing_flowengine/scripts/zhongshu_ethics.py` | P忠恕伦理模块 — 忠恕双向校验（忠度/恕度/忠恕综合 + 伦理约束注入） |
+| `wuxing_flowengine/scripts/spinor_formalism.py` | 旋量-太极形式化 — 反者道之动数学精确化（旋量相位/道旋量状态/桥接器） |
 
 ## 部署命令
 
@@ -154,7 +162,8 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 
 ### 8. 五行道境引擎 V1.2 设计与实现
 - 基于《五行诊断与道境坐标系：融合设计方案 V1.2》实现完整流水线
-- **Phase 1**: 认知深度估算（L1-L4 关键词匹配）→ 五行映射（16 领域 + 关键词回退）→ 三层构建（种子/现行/超越）→ 四维计算（O_t/E_u/C_k/K_y）→ 存在度 S
+- **Phase 1**: 认知深度估算（L1-L4 关键词匹配）→ 五行映射（16 领域 + 关键词回退）→ 三层构建（种子/现行/超越）→ 四维计算（O_t/E_u/C_k/K_y）→ 存在度 S_p（广义平均，p=0.5 P忠恕中道，S_p ∈ [0,100]）
+- **全局阶段判定**（`stage_engine.py`）：优先级链 `生 → 克（ke_edge_count ≥ 1）→ 化（S_p > θ_critical）→ 通 → 变`。S_p 仅作为"化"判定的单一输入条件，不替代全局阶段
 - **Phase 2**: 双层标注（概念名 + 五行标签）+ Spinor 层构建 + 领域追踪
 - **Phase 3+**: 论文五行分类 + 领域漂移分析（余弦距离）
 - **Phase B** (`dao_realm_engine.py`): 道境诊断引擎 — 五步算法（诊断→四维映射→S 计算→阶段判定→导航建议）
@@ -195,6 +204,16 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
   - 新增 `tests/` 目录（4 个测试文件）和 `README.md`
 - **结论**：hui-skill-cn 是 master 的生产化演进版本，从"诊断工具"升级为"月度流水线平台"
 
+### 13. p-P忠恕验证：S_p 广义平均公式的伦理落地
+- 将 Power Mean 参数 p 与慧惠宪法 P忠恕原则结合，p 成为"恕度"参数
+- **p 的伦理语义**：p=1.0（恕之极致/加性）、p=0.8（宽恕）、p=0.5（P忠恕中道/默认）、p=0.3（严格）、p=0.0（几何）、p=-1.0（苛/调和）
+- **S_p 与全局阶段判定的关系**：S_p 仅作为"化"判定的单一输入条件（S_p > θ_critical 触发），不替代全局阶段判定。全局阶段优先级链：生 → 克（ke_edge_count ≥ 1）→ 化（S_p > θ_critical）→ 通 → 变
+- 旧乘积 S 恒为 1.7（量纲不可达），S_p 重算后四个月度在 39.3~39.5（中位数 39.4，θ_base=50），量纲问题解决
+- 三项验证通过：p 平滑性（Δ∈[3.9, 5.2]）、宽恕有效性（Δ_rel=12.0% > 10%）、排名稳定性（8 案例一致）、量纲对齐（中位数 ∈ [20,80]）
+- 宽恕阈值采用相对为主（>10%）、绝对为辅（>5）的双判据，避免均衡数据时绝对差误报
+- P忠恕版 S 卡格式：S 值旁标注恕度标签，自动附加"最弱维度 + 最强补足路径"的恕语
+- 文件：`wuxing_flowengine/scripts/validate_p_zhongshu.py`、`docs/五行诊断与道境坐标系：融合设计方案 V1.2.md`（9.5 节）、`README.md`（诊断结果表同步更新 S_p 列）
+
 ### 10. 数据采集经验总结 + 验证模块
   - 总结智源社区（hub.baai.ac.cn）知识树 + 科研月报采集的七条核心教训
   - API 优先、格式不假设、逐领域验证、语言检测、弹窗处理、URL 编码、历史回溯
@@ -202,6 +221,93 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - 独立验证模块 `data_validator.py`：封装五个检查点（语言/数量/覆盖/重复/一致性）+ `ValidationReport` 类
 - 现有 05/06/07 三个月数据（315+400+403 篇）全部通过验证
 - 文件：`wuxing_flowengine/scripts/baai_scraper.py`、`scripts/data_validator.py`、`docs/网站数据采集经验总结.md`
+
+### 14. P0#1 公式结构级变更：S_p 广义平均集成到生产引擎
+- **背景**: 设计文档 9.4 P0#1 确认 S=1.7 << θ_critical=90，穷举 S 上限 1.47 与实测吻合，旧乘积公式量纲不可达
+- **方案**: 采用已验证的 S_p（Power Mean/广义平均）替代旧乘积 S = O_t × E_u × C_k × K_y × 100
+- **核心公式**: `S_p = M_p × 100`, `M_p = [ (O_t^p + E_u^p + C_k^p + K_y^p) / 4 ]^(1/p)`, p=0.5（P忠恕中道）
+- **创建** `scripts/dao_math.py`：共享数学工具模块（compute_S_p, compute_S_p_weighted, compute_S_old, p_label）
+- **更新 8 个文件**：
+  - `dao_realm_engine.py`：S 计算改用 S_p，输出增加 S_formula/S_p/p/p_label/S_old 字段
+  - `stage_engine.py`：θ_base 60→50（适配 S_p 量纲），S 参数文档更新
+  - `config_default.json`：theta_critical.base 60→50
+  - `phase1_pipeline.py`：tracks 增加 S_p/S_formula/p/p_label
+  - `phase2_pipeline.py`：同上
+  - `guidance.py`：四维解读 S 改用 S_p
+  - `domain_calibration.py`：领域 S 改用 S_p
+  - `k_y_enhancer.py`：原始/增强 S 改用 S_p
+- **全局路径迁移**：所有脚本 DEFAULT_BASE 从 AppData 路径迁移到 E:\ 工作区路径（15 处）
+- **验证结果**：
+  - 月度流水线 8 阶段全部通过
+  - S_p(2026-08)=39.5，旧 S=1.7，阶段判定"克"（S_p=39.5 < θ_critical=75）
+  - Phase C2 K_y 增强 S 从 1.7→36.9（量纲正确）
+  - Phase C1 领域校准 mean_S 在 16.9~57.6 范围（量纲合理）
+  - p-P忠恕验证 5 项检查全部通过
+- **文件**: `scripts/dao_math.py`（新增）, `scripts/dao_realm_engine.py`, `scripts/stage_engine.py`, `config/config_default.json`, `scripts/phase1_pipeline.py`, `scripts/phase2_pipeline.py`, `scripts/guidance.py`, `scripts/domain_calibration.py`, `scripts/k_y_enhancer.py`, `scripts/monthly_pipeline.py` 等 15 个文件
+
+### 15. README.md S_p 公式文档完善
+- **新增** `## 存在度 S_p 公式（V1.2 公式结构变更）` 章节，包含：
+  - 为什么需要 S_p：旧乘积公式量纲不可达的根因说明
+  - 核心公式：`S_p = M_p × 100`, `M_p = [ (O_t^p + E_u^p + C_k^p + K_y^p) / 4 ]^(1/p)`
+  - p 的伦理语义表（1.0/0.8/0.5/0.3/0.0/-1.0 六档恕度标签 + 适用场景）
+  - S_p 与全局阶段判定的关系：仅作为"化"判定输入，不替代全局阶段
+  - P忠恕版 S 卡格式示例
+  - 集成点表：8 个模块的 S_p 使用方式
+- **文件**: `wuxing_flowengine/README.md`
+
+### 16. WRL DSL Phase 1：规则清单 + 元数据标注
+- 创建 `wuxing_flowengine/rules/` 目录，按设计文档 10.2 节四分类创建 `.wrl` 规则文件
+- **32 条规则，4 个文件**：
+  - `classical_rules.wrl`（4 条）：C-SHENG, C-KE, C-WX-COORD, C-WX-ROLES — 经典文献规则，不可修改
+  - `formal_rules.wrl`（8 条）：F-ENTROPY, F-CENTROID, F-O_T, F-E_U, F-C_K, F-K_Y, F-S_P, F-THETA — 数学定义，可校准
+  - `heuristic_rules.wrl`（16 条）：阶段判定链（6 子规则）+ H-DOMINANCE, H-SCARCITY, H-ENTROPY-CLASS, H-PATH-PROFILES, H-FREQ-INTERPRETATION, H-DEPTH-WEIGHTS, H-STAGE-GUIDANCE, H-WUXING-ADJUSTMENT, H-CLASSICAL-REFERENCES, H-FOUR-DIMS-INTERPRETATION — 经验判断，可校准
+  - `domain_rules.wrl`（4 条）：D-SCHOLARLY, D-PRACTICAL, D-EDUCATIONAL, D-DEFAULT — 领域预设，可配置
+- 每条规则携带完整元数据：rule_id, category, source（type/reference/quote）, mutability, calibration_status, affects, depends_on, validation, code_location
+- 覆盖度：经典规则 4/4 (100%), 形式规则 8/8 (100%), 启发式规则 16/16 (100%), 领域规则 4/4 (100%)
+- 此阶段为纯文档化（Phase 1），不影响现有代码运行。后续 Phase 2 将创建 WRL 解析器 + 规则注册表，Phase 3 逐步替换硬编码逻辑
+- **文件**: `wuxing_flowengine/rules/classical_rules.wrl`, `formal_rules.wrl`, `heuristic_rules.wrl`, `domain_rules.wrl`
+
+### 17. P0#2 案例数据真实化：设计文档第六章案例 S_p 重算
+- 用 `validate_p_zhongshu.py` 的 S_p 公式（p=0.5）重算设计文档第六章全部案例数据
+- **6.1 小禾案例**：S_p=31.1（旧 S=0.5），θ_critical=75，阶段判定逻辑完整追迹（ke=0 + H_ratio=0.93 > 0.85 → fallback "生"）
+- **6.2 小石案例**：S_p=25.3（旧 S=0.2），θ_critical=30，增补宽恕版 S_p(p=0.8)=27.8
+- **6.3 孔子案例**：六阶段 S_p 重算，S_p ∈ [29.7, 37.7]，呈"∧"形轨迹（峰值在"不惑"37.7，非"从心所欲"），旧 S 列（12/48/72/85/92/98）标注为叙事性占位
+- **8.2 历史轨迹**：以孔子六阶段为原型重写，5 个时间点全部公式验证，S_p 不是单调递增
+- 同步更新：3.4 节（S_p 公式）、4.5 节（θ_base 60→50）、7.1 节（theta_base 60→50）、8.1 节（示例数字）、9.3.1 节（S_p 列 + 判定说明）、9.3 验证结论（P0#1/P0#3/P1#5/P1#10 标记已解决）、9.4 下一步行动（P0 全部解决）
+- **文件**: `wuxing_flowengine/docs/五行诊断与道境坐标系：融合设计方案 V1.2.md`
+
+### 18. P1#6 系数校准：v1.0_initial 首次校准实验
+- 创建 `scripts/calibrate_coefficients.py` 校准实验脚本，对 12 个映射系数完成四大实验
+- **实验 1 — 灵敏度分析**：每系数 ±30% 扰动，测量 8 案例 S_p 平均变化。仅 O_t.土 为"中"灵敏度（ΔS_p≈1.2），其余 11 个为"低"灵敏度（<1.0）。E_u 三维系数灵敏度最低（<0.22），因 Power Mean 平滑效应
+- **实验 2 — 可辨识性分类**：结构锁定 6 个（五行经典约束）、可辨识 3 个（K_y.土/火、C_k.火）、经验依赖 3 个（O_t.entropy、K_y.ke、E_u.centroid_modulus）
+- **实验 3 — 约束边界探测**：所有系数安全区间充裕（79.5x~590.7x），无紧约束。C_k.水 安全倍数最小（79.5x），因在案例中接近上界
+- **实验 4 — 优化建议**：P0 锁定 6 个结构系数，P1 建议 3 个可辨识系数用真实数据做网格搜索，P2 维持 3 个经验系数
+- **结论**：v1.0_initial 系数整体稳定，当前无需调整任何系数。待真实时间序列接入后对 P1 系数做数据驱动校准，生成 v1.1_calibrated 版本
+- 设计文档新增 9.6 节（系数校准实验），更新 9.3.1 遗留问题表（P1#6 标记已解决）、9.4 下一步行动（第 5 项标记已完成）
+- **文件**: `wuxing_flowengine/scripts/calibrate_coefficients.py`（新增）, `wuxing_flowengine/docs/五行诊断与道境坐标系：融合设计方案 V1.2.md`, `PROJECT_CONTEXT.md`
+
+### 19. Phase 5: P忠恕伦理 + 旋量形式化 + 同态映射引擎集成
+- 基于《反者道之动_矛盾迭代引擎_五轮对话深度复盘_完善版》共振三和共振六，实现同态映射的伦理维度与数学形式化
+- **P忠恕伦理模块** (`zhongshu_ethics.py`)：
+  - 忠度 (Zhong): 源域结构保持度 — 四维评估（节点覆盖率 30% + 关系保持度 35% + 五行忠实度 20% + 层级忠实度 15%）
+  - 恕度 (Shu): 目标域相容度 — 三维评估（完整度 30% + 冲突检测 40% + 相容度 30%）
+  - 忠恕综合 (ZS): 调和平均（偏向短板），四等级分类（忠恕兼备/偏忠/偏恕/忠恕不足）
+  - 伦理约束注入：`inject_to_candidate()` 将忠恕评估注入候选映射 metadata
+  - 经典引用：每等级附带儒家经典原文
+- **旋量形式化模块** (`spinor_formalism.py`)：
+  - 旋量相位模型：θ=0°（正题）→ 180°（反）→ 360°（道之动，-1 相位翻转）→ 720°（完全回归，+1）
+  - 关键洞见：360° 旋量语义下携带 -1 相位翻转（非 +1），"升华"是相位积累而非修辞
+  - 道旋量状态 (`DaoSpinorState`): 跟踪同态映射的螺旋演化，每次迭代 = 一次否定之否定
+  - 旋量-同态桥接 (`SpinorHomomorphismBridge`): 将旋量形式化注入同态映射引擎，自动跟踪每次 transfer
+- **同态映射引擎集成** (`homomorphism_engine.py` 更新)：
+  - `__init__` 新增 `enable_zhongshu` 和 `enable_spinor` 开关
+  - `transfer()` 在 Step 2 后自动执行忠恕伦理校验，在 Step 3 后自动执行旋量形式化跟踪
+  - `format_report()` 新增 P忠恕伦理和旋量-太极形式化两个展示段
+  - `get_stats()` 新增 zhongshu_stats（平均忠恕综合分、高/低忠恕计数）
+  - 新增 `get_dao_summary()` 和 `get_all_dao_states()` 查询旋量演化状态
+  - `earth_flow_transfer()` 五行流转解读增强忠恕综合标注
+- **验证结果**：大语言模型→自然语言处理 忠恕兼备 (ZS=0.78)，大语言模型→生成式AI 忠恕不足 (ZS=0.66)
+- **文件**: `wuxing_flowengine/scripts/zhongshu_ethics.py`（新增）, `wuxing_flowengine/scripts/spinor_formalism.py`（新增）, `wuxing_flowengine/scripts/homomorphism_engine.py`（更新）
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "report_type": "phase2_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-04T19:52:30.620874",
+  "generated_at": "2026-08-06T10:33:54.262683",
   "phase": 1.0,
   "month_label": "2026-08",
   "dual_label_count": 119,
@@ -54,6 +54,10 @@
   "tracks": {
     "S_sum": 40.79,
     "S_prod": 1.91,
+    "S_p": 38.9,
+    "S_formula": "power_mean",
+    "p": 0.5,
+    "p_label": "P忠恕中道",
     "B": 40.79,
     "C": 10.48,
     "D": 1.0218

@@ -65,5 +65,5 @@ def run(base_dir, nodes_path=None, output_dir=None, month_label=None):
 
 
 if __name__ == '__main__':
-    DEFAULT_BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    DEFAULT_BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     run(DEFAULT_BASE)

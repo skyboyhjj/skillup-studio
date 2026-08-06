@@ -1,0 +1,234 @@
+@meta {
+  file: "formal_rules.wrl",
+  version: "1.0",
+  description: "形式规则 —— 数学定义、统计公式，可修改但需数学验证",
+  calibration_status: "v1.0_initial",
+  date: "2026-08-06"
+}
+
+# ═══════════════════════════════════════════════
+# 形式规则 (F): 数学定义，可修改（需数学证明）
+# 修改权限: 开发者 + 数学验证
+# ═══════════════════════════════════════════════
+
+@rule F-ENTROPY {
+  category: "F",
+  name: "Shannon 熵计算",
+  source: {
+    type: "mathematical_definition",
+    reference: "Shannon, C.E. (1948). A Mathematical Theory of Communication."
+  },
+  mutability: "immutable",
+  formula: "H = -sum(p_i * log2(p_i)) for i in WX_ORDER",
+  H_max: "log2(5) = 2.322",
+  H_ratio: "H / H_max",
+  output: ["H", "H_max", "H_ratio"],
+  range: {"H": [0.0, 2.322], "H_ratio": [0.0, 1.0]},
+  affects: ["dim4_entropy", "O_t", "stage_sheng"],
+  depends_on: ["C-WX-ROLES"],
+  validation: {
+    rule: "0 <= H <= H_max",
+    rationale: "熵值必须落在 [0, log2(5)] 区间"
+  },
+  code_location: "stage_engine.py:22-39 (compute_entropy)"
+}
+
+@rule F-CENTROID {
+  category: "F",
+  name: "五行质心坐标计算",
+  source: {
+    type: "mathematical_definition",
+    reference: "加权质心公式: cx = sum(w_i * cos(θ_i)) / sum(w_i)"
+  },
+  mutability: "immutable",
+  formula: "cx = sum(freq_i * cos(radians(angle_i))) / total; cy = sum(freq_i * sin(radians(angle_i))) / total",
+  output: ["cx", "cy", "magnitude"],
+  range: {"cx": [-1.0, 1.0], "cy": [-1.0, 1.0], "magnitude": [0.0, 1.0]},
+  affects: ["dim5_compass", "E_u"],
+  depends_on: ["C-WX-COORD"],
+  validation: {
+    rule: "sqrt(cx^2 + cy^2) <= 1.0",
+    rationale: "质心模长不得超过单位圆半径"
+  },
+  code_location: "wuxing_diagnose_v2.py:79-107 (_compass_centroid)"
+}
+
+@rule F-O_T {
+  category: "F",
+  name: "时位 O_t 映射公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §3.3"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "O_t = w_土 * 0.6 + w_金 * 0.3 + (1 - H/H_max) * 0.1",
+  coefficients: {
+    "土": 0.6, "_comment": "承载提供时间基底",
+    "金": 0.3, "_comment": "收敛防止熵增",
+    "entropy": 0.1, "_comment": "低熵=有序，高熵=多元"
+  },
+  output: "O_t",
+  range: [0.0, 1.0],
+  theoretical_max: 0.70,
+  affects: ["dao_realm_readings", "S", "S_p"],
+  depends_on: ["C-WX-ROLES", "F-ENTROPY"],
+  validation: {
+    rule: "0 <= O_t <= 1",
+    rationale: "时位有序度归一化到 [0,1] 区间"
+  },
+  note: "熵项 (1-H/H_max) 隐含'低熵=有序'假设。高熵=多元广博，低熵=单一聚焦。如需分析广博场景，可改为 H/H_max * 0.1",
+  code_location: "validate_p_zhongshu.py:18 (compute_dao_realm)"
+}
+
+@rule F-E_U {
+  category: "F",
+  name: "宇位 E_u 映射公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §3.3 (V1.1 修正版)"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "E_u = 1 - 0.5 * |w_木 - 0.25| - 0.5 * |w_水 - 0.25| - 0.3 * sqrt(cx^2 + cy^2)",
+  coefficients: {
+    "木_deviation": 0.5, "_comment": "木行偏离均衡(0.25)的惩罚",
+    "水_deviation": 0.5, "_comment": "水行偏离均衡(0.25)的惩罚",
+    "centroid_modulus": 0.3, "_comment": "质心偏离原点的惩罚"
+  },
+  output: "E_u",
+  range: [0.0, 1.0],
+  theoretical_max: 0.95,
+  affects: ["dao_realm_readings", "S", "S_p"],
+  depends_on: ["C-WX-ROLES", "F-CENTROID"],
+  validation: {
+    rule: "0 <= E_u <= 1",
+    rationale: "V1.1 修正后确保 E_u ∈ [0, 1]（原公式可能出负数）"
+  },
+  note: "V1.1 修正: 引入系数 0.5/0.5/0.3 + 用重心模长 √(cx²+cy²) 替代两个独立绝对值",
+  code_location: "validate_p_zhongshu.py:19 (compute_dao_realm)"
+}
+
+@rule F-C_K {
+  category: "F",
+  name: "识位 C_k 映射公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §3.3"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "C_k = w_水 * 0.5 + w_火 * 0.3 + w_木 * 0.2",
+  coefficients: {
+    "水": 0.5, "_comment": "水的深层涌现是觉知的内容",
+    "火": 0.3, "_comment": "火的照亮是觉知的形式",
+    "木": 0.2, "_comment": "木的生长提供觉知的新素材"
+  },
+  output: "C_k",
+  range: [0.0, 1.0],
+  theoretical_max: 0.50,
+  affects: ["dao_realm_readings", "S", "S_p"],
+  depends_on: ["C-WX-ROLES"],
+  validation: {
+    rule: "0 <= C_k <= 1",
+    rationale: "识位清晰度归一化到 [0,1] 区间"
+  },
+  code_location: "validate_p_zhongshu.py:20 (compute_dao_realm)"
+}
+
+@rule F-K_Y {
+  category: "F",
+  name: "缘位 K_y 映射公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §3.3 (V1.1 修正版)"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "K_y = w_火 * 0.4 + w_土 * 0.3 + ke_edge_count / 2 * 0.3",
+  coefficients: {
+    "火": 0.4, "_comment": "火的传播建立关系",
+    "土": 0.3, "_comment": "土的承载让关系稳定",
+    "ke_edge_ratio": 0.3, "_comment": "相克边数/2 归一化（三层路径最多2条边）"
+  },
+  output: "K_y",
+  range: [0.0, 1.0],
+  theoretical_max: 0.55,
+  affects: ["dao_realm_readings", "S", "S_p"],
+  depends_on: ["C-KE", "C-SHENG"],
+  validation: {
+    rule: "0 <= K_y <= 1",
+    rationale: "V1.1 修正: 三项均为非负，K_y ∈ [0, 1]。负值需 Phase 3 引入惩罚项后重新设计"
+  },
+  note: "ke_edge_count ∈ {0, 1, 2}，分母 /2 而非 /3（三层路径最多 2 条边）",
+  code_location: "validate_p_zhongshu.py:21 (compute_dao_realm)"
+}
+
+@rule F-S_P {
+  category: "F",
+  name: "存在度 S_p 广义平均公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §9.5 (公式结构变更)"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "S_p = M_p * 100, M_p = [ (O_t^p + E_u^p + C_k^p + K_y^p) / 4 ]^(1/p)",
+  p_default: 0.5,
+  p_label_default: "P忠恕中道",
+  p_candidates: [1.0, 0.8, 0.5, 0.3, 0.0, -1.0],
+  p_labels: {
+    "1.0": "恕之极致（加性）",
+    "0.8": "宽恕",
+    "0.5": "P忠恕中道（默认）",
+    "0.3": "严格",
+    "0.0": "均衡（几何）",
+    "-1.0": "苛（调和）"
+  },
+  scale: 100,
+  output: "S_p",
+  range: [0.0, 100.0],
+  affects: ["dao_realm_readings", "stage_hua", "guidance"],
+  depends_on: ["F-O_T", "F-E_U", "F-C_K", "F-K_Y"],
+  validation: {
+    rule: "0 <= S_p <= 100",
+    rationale: "S_p 经过 scale=100 缩放，范围 [0, 100]"
+  },
+  note: "替代旧乘积 S = O_t * E_u * C_k * K_y * 100（量纲不可达，理论 S 上限仅 1.47）",
+  code_location: "dao_math.py:29-48 (compute_S_p)"
+}
+
+@rule F-THETA {
+  category: "F",
+  name: "临界阈值 θ_critical 计算公式",
+  source: {
+    type: "mathematical_definition",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §4.5"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  formula: "θ_critical = θ_base * f(depth) * g(case_type)",
+  theta_base: 50,
+  theta_base_note: "V1.2 S_p 公式适配: 60→50",
+  depth_multiplier: {
+    "L1": 1.0,
+    "L2": 1.5,
+    "L3": 2.0,
+    "L4": 3.0
+  },
+  case_type_multiplier: {
+    "smooth": 1.0,
+    "smooth_help": "顺境·全域跃迁",
+    "adverse": 0.6,
+    "adverse_help": "逆境·成核生长"
+  },
+  output: "theta_critical",
+  range: [30.0, 150.0],
+  affects: ["stage_hua"],
+  depends_on: ["F-S_P"],
+  validation: {
+    rule: "theta_critical >= 0",
+    rationale: "临界阈值必须为非负数"
+  },
+  code_location: "stage_engine.py:69-98 (compute_theta_critical)"
+}

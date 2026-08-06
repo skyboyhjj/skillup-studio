@@ -1,0 +1,452 @@
+@meta {
+  file: "heuristic_rules.wrl",
+  version: "1.0",
+  description: "启发式规则 —— 经验判断、专家知识、校准结果，可修改但需数据支撑",
+  calibration_status: "v1.0_initial",
+  date: "2026-08-06"
+}
+
+# ═══════════════════════════════════════════════
+# 启发式规则 (H): 经验判断，可修改（需数据支撑）
+# 修改权限: 领域专家 + 数据校准
+# ═══════════════════════════════════════════════
+
+# ── 阈值类 ──
+
+@rule H-DOMINANCE {
+  category: "H",
+  name: "主导判定阈值",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0 §三.维度一"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  value: 30.0,
+  type: "float",
+  range: [10.0, 50.0],
+  unit: "percent",
+  affects: ["dim1_interpretations", "stage_sheng"],
+  depends_on: [],
+  validation: {
+    rule: "10 <= value <= 50",
+    rationale: "低于 10% 所有行都主导，高于 50% 无行可主导"
+  },
+  code_location: "config_default.json: dominance_threshold, guidance.py:120 (analyze_wuxing_bias)"
+}
+
+@rule H-SCARCITY {
+  category: "H",
+  name: "稀缺判定阈值",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0 §三.维度一"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  value: 12.0,
+  type: "float",
+  range: [5.0, 20.0],
+  unit: "percent",
+  affects: ["dim1_interpretations"],
+  depends_on: [],
+  validation: {
+    rule: "5 <= value <= 20",
+    rationale: "低于 5% 几乎所有行都稀缺，高于 20% 几乎无行可判稀缺"
+  },
+  note: "代码中使用 12% 作为 deficit 阈值 (guidance.py:127: pct < 12)",
+  code_location: "guidance.py:127 (analyze_wuxing_bias, pct < 12)"
+}
+
+@rule H-ENTROPY-CLASS {
+  category: "H",
+  name: "熵值分类阈值",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  value: {
+    "high": 0.80,
+    "low": 0.45
+  },
+  type: "object",
+  affects: ["dim4_entropy_desc", "stage_sheng", "stage_tong"],
+  depends_on: ["F-ENTROPY"],
+  validation: {
+    rule: "0 < low < high < 1",
+    rationale: "低阈值和高阈值必须在 (0,1) 区间且低<高"
+  },
+  code_location: "config_default.json: entropy_thresholds"
+}
+
+# ── 阶段判定链 ──
+
+@rulechain stage_determination {
+  name: "生克化通变阶段判定链",
+  description: "按优先级依次判定，首个匹配即返回全局阶段",
+  diagnosis_mode: "static",
+
+  @rule H-STAGE-SHENG {
+    priority: 1,
+    category: "H",
+    name: "生阶段判定",
+    condition: "any(wx.pct > 30) for wx in WX_ORDER and H_ratio < 0.50",
+    action: "return_stage",
+    stage: "生",
+    reason_template: "单极主导·积累期: {dominant_wx} 主导 ({pct}%)",
+    mode: "static",
+    depends_on: ["H-DOMINANCE", "H-ENTROPY-CLASS"],
+    affects: ["stage", "guidance"],
+    code_location: "stage_engine.py:143-152"
+  }
+
+  @rule H-STAGE-KE {
+    priority: 2,
+    category: "H",
+    name: "克阶段判定",
+    condition: "ke_edge_count >= 1",
+    action: "return_stage",
+    stage: "克",
+    reason_template: "路径含{ke_edge_count}条相克边",
+    mode: "static",
+    depends_on: ["C-KE", "C-SHENG"],
+    affects: ["stage", "guidance", "K_y"],
+    code_location: "stage_engine.py:154-164"
+  }
+
+  @rule H-STAGE-HUA {
+    priority: 3,
+    category: "H",
+    name: "化阶段判定",
+    condition: "static: S_p > theta_critical; dynamic: delta_H > 0.3 and centroid_disp > 0.3",
+    action: "return_stage",
+    stage: "化",
+    reason_template: "四维跃迁: S_p={S_p} > θ_critical={theta}",
+    mode: ["static", "dynamic"],
+    depends_on: ["F-S_P", "F-THETA"],
+    affects: ["stage", "guidance"],
+    code_location: "stage_engine.py:166-215"
+  }
+
+  @rule H-STAGE-TONG {
+    priority: 4,
+    category: "H",
+    name: "通阶段判定",
+    condition: "matches_profile == true and 0.50 < H_ratio < 0.85",
+    action: "return_stage",
+    stage: "通",
+    reason_template: "路径匹配画像: {path_str}",
+    mode: "static",
+    depends_on: ["H-PATH-PROFILES", "H-ENTROPY-CLASS"],
+    affects: ["stage", "guidance"],
+    note: "V1.2 P1 修复: 补全 dim3_profile + matches_profile 条件",
+    code_location: "stage_engine.py:217-232"
+  }
+
+  @rule H-STAGE-BIAN {
+    priority: 5,
+    category: "H",
+    name: "变阶段判定",
+    condition: "dynamic: depth_shift >= 1 (L2→L4 等)",
+    action: "return_stage",
+    stage: "变",
+    reason_template: "深度范式转换: {prev_depth}→{curr_depth}",
+    mode: "dynamic",
+    depends_on: ["H-DEPTH-WEIGHTS"],
+    affects: ["stage", "guidance"],
+    note: "仅动态模式可用，需时间序列数据",
+    code_location: "stage_engine.py:166-195"
+  }
+
+  @rule H-STAGE-DEFAULT {
+    priority: 6,
+    category: "H",
+    name: "默认回退阶段",
+    condition: "always (fallback)",
+    action: "return_stage",
+    stage: "生",
+    reason_template: "未满足其他阶段条件，回归积累",
+    mode: "any",
+    depends_on: [],
+    affects: ["stage"],
+    code_location: "stage_engine.py:230-232"
+  }
+}
+
+# ── 画像库 ──
+
+@rule H-PATH-PROFILES {
+  category: "H",
+  name: "路径画像库",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0, 附录 A"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  profiles: [
+    {
+      "id": 1,
+      "path": ["木", "火", "土"],
+      "name": "趋势→热议→沉淀",
+      "description": "新技术报道型：创新→传播→积累",
+      "classic_case": "科技媒体文章"
+    },
+    {
+      "id": 2,
+      "path": ["火", "水", "金"],
+      "name": "热点→深挖→定论",
+      "description": "深度调查型：传播→探索→批判",
+      "classic_case": "调查报道"
+    },
+    {
+      "id": 3,
+      "path": ["土", "金", "水"],
+      "name": "综述→批判→开放",
+      "description": "学术评论型：承载→批判→探索",
+      "classic_case": "学术论文"
+    },
+    {
+      "id": 4,
+      "path": ["水", "木", "火"],
+      "name": "迷茫→破局→号召",
+      "description": "思想启蒙型：探索→创新→传播",
+      "classic_case": "启蒙文献"
+    },
+    {
+      "id": 5,
+      "path": ["土", "水", "金"],
+      "name": "传统→颠覆→精炼",
+      "description": "范式翻转型：承载→探索→批判",
+      "classic_case": "库恩《科学革命的结构》"
+    },
+    {
+      "id": 6,
+      "path": ["木", "火", "金"],
+      "name": "创新→传播→定论",
+      "description": "科普型：创新→传播→批判收敛",
+      "classic_case": "科普文章"
+    },
+    {
+      "id": 7,
+      "path": ["金", "水", "木"],
+      "name": "证据→探索→新方向",
+      "description": "实证探索型：批判→探索→创新",
+      "classic_case": "实证研究论文"
+    }
+  ],
+  match_rule: "路径前3个主导行 == 画像模式",
+  match_priority: "精确匹配 > 子序列匹配",
+  tolerance: "允许路径长度 ≠ 3（取前3个主导行进行匹配）",
+  coverage: "7/25 种可能路径模式 (28%)",
+  affects: ["stage_tong", "dim3_profile"],
+  depends_on: [],
+  validation: {
+    rule: "all profiles have unique paths",
+    rationale: "每个画像的路径模式必须唯一"
+  },
+  note: "Phase 3 计划扩展至 12+ 画像（回归践履型、螺旋上升型、五行均衡型、逆境突围型、天人合一型）",
+  code_location: "wuxing_diagnose_v2.py:163-196 (_path_profile)"
+}
+
+# ── 解读模板 ──
+
+@rule H-FREQ-INTERPRETATION {
+  category: "H",
+  name: "频次分布解读规则",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  templates: {
+    "dominance": "{wx}性主导（{pct}%），文章核心发力点",
+    "scarcity": "{wx}性薄弱（{pct}%），需关注此方向",
+    "balance": "五行分布相对均衡",
+    "combo": "{wx1}-{wx2}双核驱动，{wx1}性提供{role1}，{wx2}性提供{role2}"
+  },
+  affects: ["dim1_interpretations"],
+  depends_on: ["H-DOMINANCE", "H-SCARCITY", "C-WX-ROLES"],
+  code_location: "wuxing_diagnose_v2.py (dim1_interpretations generation)"
+}
+
+@rule H-DEPTH-WEIGHTS {
+  category: "H",
+  name: "认知深度权重",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  value: {
+    "L1": 0.5,
+    "L2": 1.0,
+    "L3": 2.0,
+    "L4": 4.0
+  },
+  affects: ["dim2_layers", "depth_profile", "theta_critical"],
+  depends_on: [],
+  validation: {
+    rule: "L1 < L2 < L3 < L4",
+    rationale: "深度越深权重越大，L4 权重是 L1 的 8 倍"
+  },
+  code_location: "config_default.json: depth_weights"
+}
+
+# ── 导航建议模板 ──
+
+@rule H-STAGE-GUIDANCE {
+  category: "H",
+  name: "阶段导航建议模板",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §5.3"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  templates: {
+    "生": {
+      "title": "积累期",
+      "advice": "当前处于积累阶段，宜深耕主导行，巩固根基。",
+      "direction": "顺势而为，勿急于求成。",
+      "caution": "注意单极偏向可能导致的视野窄化。",
+      "next_step": "观察是否有其他行的萌芽出现，为"克"冲突做好准备。"
+    },
+    "克": {
+      "title": "冲突期",
+      "advice": "层间张力显现，需正视冲突而非回避。",
+      "direction": "以通为贵，在冲突中寻找突破点。",
+      "caution": "避免长期僵持导致结构僵化。",
+      "next_step": "关注"化"的微光——局部突破往往是全面跃迁的前奏。"
+    },
+    "化": {
+      "title": "跃迁期",
+      "advice": "临界突破，四维同时跃迁。",
+      "direction": "把握窗口期，大胆推进范式转换。",
+      "caution": "跃迁后需重新校准，避免"化"后失序。",
+      "next_step": "进入"通"阶段，将新范式迁移到更广泛的领域。"
+    },
+    "通": {
+      "title": "贯通期",
+      "advice": "时空直觉从源域迁移到目标域，找到节奏。",
+      "direction": "保持熵适中，在多元与聚焦之间找到平衡。",
+      "caution": "避免过早固化，保持通道的开放性。",
+      "next_step": "持续积累深度经验，为"变"的范式升维做准备。"
+    },
+    "变": {
+      "title": "升维期",
+      "advice": "坐标系本身发生范式升维，深度画像跃迁。",
+      "direction": "拥抱不确定性，在更高维度重新组织认知结构。",
+      "caution": "范式转换期间可能出现暂时性认知失序。",
+      "next_step": "在新范式中重新进入"生"阶段，开启新的螺旋上升。"
+    }
+  },
+  affects: ["guidance"],
+  depends_on: ["H-STAGE-SHENG", "H-STAGE-KE", "H-STAGE-HUA", "H-STAGE-TONG", "H-STAGE-BIAN"],
+  code_location: "guidance.py:12-48 (STAGE_GUIDANCE)"
+}
+
+@rule H-WUXING-ADJUSTMENT {
+  category: "H",
+  name: "五行偏态调节建议",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行生克理论 + 现代 AI 领域诠释"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  templates: {
+    "木": {
+      "excess": "木气过盛，宜以金克木（引入逻辑/安全/对抗性思考）或以火泄木（转向传播/协作/智能体方向）",
+      "deficit": "木气不足，宜以水生木（强化语言/视觉/科学多模态基础）",
+      "balance": "木气均衡，生长有序"
+    },
+    "火": {
+      "excess": "火气过盛，宜以水克火（深化探索/认知深度）或以土泄火（夯实系统/架构基础）",
+      "deficit": "火气不足，宜以木生火（加强生成/具身/多模态推动传播与协作）",
+      "balance": "火气均衡，传播有序"
+    },
+    "土": {
+      "excess": "土气过盛，宜以木克土（引入生成/具身创新打破固化）或以金泄土（转向逻辑/推理精炼）",
+      "deficit": "土气不足，宜以火生土（通过传播/协作建立系统基础）",
+      "balance": "土气均衡，承载稳定"
+    },
+    "金": {
+      "excess": "金气过盛，宜以火克金（引入传播/协作化解刚性）或以水泄金（深化探索/认知深度）",
+      "deficit": "金气不足，宜以土生金（夯实系统/架构基础以支撑逻辑推理）",
+      "balance": "金气均衡，收敛有度"
+    },
+    "水": {
+      "excess": "水气过盛，宜以土克水（建立系统/架构约束）或以木泄水（将深层涌现转化为生成/具身创新）",
+      "deficit": "水气不足，宜以金生水（强化逻辑/推理/安全以激发深层探索）",
+      "balance": "水气均衡，流动不息"
+    }
+  },
+  excess_threshold: 30.0,
+  deficit_threshold: 12.0,
+  affects: ["guidance.wuxing_bias"],
+  depends_on: ["C-SHENG", "C-KE", "H-DOMINANCE", "H-SCARCITY"],
+  code_location: "guidance.py:51-77 (WUXING_ADJUSTMENT)"
+}
+
+@rule H-CLASSICAL-REFERENCES {
+  category: "H",
+  name: "经典文本引用库",
+  source: {
+    type: "expert_heuristic",
+    reference: "《道德经》选段"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  references: {
+    "生": [
+      {"text": "道生一，一生二，二生三，三生万物。", "source": "道德经·第四十二章"},
+      {"text": "万物并作，吾以观复。", "source": "道德经·第十六章"}
+    ],
+    "克": [
+      {"text": "反者道之动，弱者道之用。", "source": "道德经·第四十章"},
+      {"text": "将欲歙之，必固张之；将欲弱之，必固强之。", "source": "道德经·第三十六章"}
+    ],
+    "化": [
+      {"text": "大曰逝，逝曰远，远曰反。", "source": "道德经·第二十五章"},
+      {"text": "玄之又玄，众妙之门。", "source": "道德经·第一章"}
+    ],
+    "通": [
+      {"text": "不出户，知天下；不窥牖，见天道。", "source": "道德经·第四十七章"},
+      {"text": "为学日益，为道日损。", "source": "道德经·第四十八章"}
+    ],
+    "变": [
+      {"text": "天地不仁，以万物为刍狗。", "source": "道德经·第五章"},
+      {"text": "致虚极，守静笃。万物并作，吾以观复。", "source": "道德经·第十六章"}
+    ]
+  },
+  affects: ["guidance.classical_reference"],
+  depends_on: [],
+  code_location: "guidance.py:80-101 (CLASSICAL_REFERENCES)"
+}
+
+@rule H-FOUR-DIMS-INTERPRETATION {
+  category: "H",
+  name: "四维读数解读模板",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §8.1"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  threshold_low: 0.30,
+  threshold_high: 0.70,
+  templates: {
+    "O_t": {"low": "时位有序度偏低 (节律紊乱，需重建时间基底)", "high": "时位有序度偏高 (过度结构化，需引入灵活性)", "mid": "时位有序度适中"},
+    "E_u": {"low": "宇位均衡度偏低 (能量分布壅塞，需拓宽空间)", "high": "宇位均衡度偏高 (能量过度分散，需聚焦)", "mid": "宇位均衡度适中"},
+    "C_k": {"low": "识位清晰度偏低 (觉知模糊，需深化探索)", "high": "识位清晰度偏高 (觉知清晰，可转向实践)", "mid": "识位清晰度适中"},
+    "K_y": {"low": "缘位纠缠度偏低 (关系稀疏，需建立连接)", "high": "缘位纠缠度偏高 (关系过密，需简化因果)", "mid": "缘位纠缠度适中"}
+  },
+  affects: ["guidance.four_dims"],
+  depends_on: ["F-O_T", "F-E_U", "F-C_K", "F-K_Y"],
+  code_location: "guidance.py:145-168 (four_dims_interpretation)"
+}

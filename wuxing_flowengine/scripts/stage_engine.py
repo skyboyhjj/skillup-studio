@@ -79,7 +79,7 @@ def compute_theta_critical(depth_profile, config=None):
     Returns:
         float: 临界阈值
     """
-    theta_base = 60
+    theta_base = 50  # V1.2 S_p 公式适配：从 60 调整为 50
     depth_mult = {'L1': 1.0, 'L2': 1.5, 'L3': 2.0, 'L4': 3.0}
     case_mult = {'smooth': 1.0, 'adverse': 0.6}
 
@@ -122,7 +122,7 @@ def determine_stage(wuxing_result, S, config=None, mode='static'):
 
     Args:
         wuxing_result: wuxing_diagnose_v2.diagnose() 输出
-        S: 存在度 (O_t × E_u × C_k × K_y × 100)
+        S: 存在度 S_p (广义平均, p=0.5, scale=100)
         config: 配置字典
         mode: 'static' | 'dynamic'
 

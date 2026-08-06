@@ -19,6 +19,7 @@ import json
 import os
 import math
 from collections import defaultdict, Counter
+from dao_math import compute_S_p, S_P_DEFAULT
 
 WX_ORDER = ['木', '火', '土', '金', '水']
 DOMAIN_ORDER = [
@@ -64,7 +65,7 @@ class DomainCalibrator:
         """
         为每个领域计算独立的 S 值
 
-        S_domain = O_t_domain × E_u_domain × C_k_domain × K_y_domain × 100
+        S_domain = compute_S_p([O_t_domain, E_u_domain, C_k_domain, K_y_domain], p=S_P_DEFAULT)
         其中各维度基于该领域内的节点计算
         """
         # 按领域分组节点
@@ -105,7 +106,7 @@ class DomainCalibrator:
             # 领域 K_y: 简化版，基于五行交互
             K_y_d = w.get('火', 0) * 0.4 + w.get('土', 0) * 0.3 + 0.3 * 0.3
 
-            S_d = O_t_d * E_u_d * C_k_d * K_y_d * 100
+            S_d = compute_S_p([O_t_d, E_u_d, C_k_d, K_y_d], p=S_P_DEFAULT)
             domain_S[domain] = {
                 'S': round(S_d, 4),
                 'node_count': total,
@@ -313,5 +314,5 @@ def run(base_dir, output_dir=None):
 
 
 if __name__ == '__main__':
-    DEFAULT_BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    DEFAULT_BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     cal = run(DEFAULT_BASE)

@@ -1,0 +1,112 @@
+@meta {
+  file: "classical_rules.wrl",
+  version: "1.0",
+  description: "五行经典规则 —— 源自《黄帝内经》《淮南子》等经典文献，不可修改",
+  calibration_status: "v1.0_initial",
+  date: "2026-08-06"
+}
+
+# ═══════════════════════════════════════════════
+# 经典规则 (C): 引用即锁定，不可修改
+# 修改权限: 仅领域专家 + 版本发布
+# ═══════════════════════════════════════════════
+
+@rule C-SHENG {
+  category: "C",
+  name: "五行相生关系",
+  source: {
+    type: "classical_text",
+    reference: "《黄帝内经·素问·阴阳应象大论》",
+    quote: "木生火，火生土，土生金，金生水，水生木"
+  },
+  mutability: "immutable",
+  value: {
+    "木": "火", "火": "土", "土": "金", "金": "水", "水": "木"
+  },
+  pairs: [
+    ["木", "火"], ["火", "土"], ["土", "金"], ["金", "水"], ["水", "木"]
+  ],
+  affects: ["dim3_edges", "dim3_profile", "K_y", "wuxing_bias"],
+  depends_on: [],
+  validation: {
+    rule: "len(pairs) == 5 and all unique",
+    rationale: "五行相生必须构成完整闭环，五对缺一不可"
+  },
+  code_location: "wuxing_diagnose_v2.py:19-21 (SHENG_PAIRS)"
+}
+
+@rule C-KE {
+  category: "C",
+  name: "五行相克关系",
+  source: {
+    type: "classical_text",
+    reference: "《黄帝内经·素问·宝命全形论》",
+    quote: "木得金而伐，火得水而灭，土得木而达，金得火而缺，水得土而绝"
+  },
+  mutability: "immutable",
+  value: {
+    "木": "土", "土": "水", "水": "火", "火": "金", "金": "木"
+  },
+  pairs: [
+    ["木", "土"], ["土", "水"], ["水", "火"], ["火", "金"], ["金", "木"]
+  ],
+  affects: ["dim3_edges", "dim3_profile", "K_y", "stage_ke", "wuxing_bias"],
+  depends_on: [],
+  validation: {
+    rule: "len(pairs) == 5 and all unique",
+    rationale: "五行相克必须构成完整闭环，五对缺一不可"
+  },
+  code_location: "wuxing_diagnose_v2.py:23-25 (KE_PAIRS)"
+}
+
+@rule C-WX-COORD {
+  category: "C",
+  name: "五行方位坐标映射",
+  source: {
+    type: "classical_text",
+    reference: "《淮南子·天文训》",
+    quote: "东方木也，南方火也，中央土也，西方金也，北方水也"
+  },
+  mutability: "immutable",
+  value: {
+    "木": 0,    # 东
+    "火": 72,   # 东南
+    "土": 144,  # 中
+    "金": 216,  # 西
+    "水": 288   # 北
+  },
+  unit: "degrees",
+  affects: ["dim5_compass", "E_u"],
+  depends_on: [],
+  validation: {
+    rule: "all angles in [0, 360) and equally spaced at 72° intervals",
+    rationale: "五行方位必须均匀分布在圆周上，间距 72°"
+  },
+  code_location: "wuxing_diagnose_v2.py:82-88 (angles dict)"
+}
+
+@rule C-WX-ROLES {
+  category: "C",
+  name: "五行角色定义",
+  source: {
+    type: "classical_text",
+    reference: "中医辨证理论 + 现代诠释",
+    quote: "木曰曲直，火曰炎上，土爰稼穑，金曰从革，水曰润下 ——《尚书·洪范》"
+  },
+  mutability: "immutable",
+  value: {
+    "木": {"role": "生成、生长", "direction": "东", "season": "春"},
+    "火": {"role": "交互、协作", "direction": "南", "season": "夏"},
+    "土": {"role": "基础、承载", "direction": "中", "season": "长夏"},
+    "金": {"role": "安全、逻辑", "direction": "西", "season": "秋"},
+    "水": {"role": "流动、知识", "direction": "北", "season": "冬"}
+  },
+  order: ["木", "火", "土", "金", "水"],
+  affects: ["dim1_freq", "dim2_layers", "wuxing_mapping"],
+  depends_on: [],
+  validation: {
+    rule: "len(order) == 5",
+    rationale: "五行体系必须完整包含五种元素"
+  },
+  code_location: "wuxing_diagnose_v2.py:16 (WX_ORDER)"
+}

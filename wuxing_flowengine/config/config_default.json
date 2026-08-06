@@ -22,8 +22,8 @@
   "_diagnosis_mode_help": "static=单次快照判定(生/克/化/通), dynamic=多次快照判定(含ΔH陡降+重心位移+深度突变)",
 
   "theta_critical": {
-    "base": 60,
-    "_comment": "临界阈值 θ_critical = θ_base × f(认知深度) × g(案例类型)",
+    "base": 50,
+    "_comment": "临界阈值 θ_critical = θ_base × f(认知深度) × g(案例类型). V1.2 S_p 公式适配: 60→50",
     "depth_multiplier": {
       "L1": 1.0,
       "L2": 1.5,

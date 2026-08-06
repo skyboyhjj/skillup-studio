@@ -6,6 +6,8 @@
     guidance = generate_guidance(stage, wuxing_freq, O_t, E_u, C_k, K_y)
 """
 
+from dao_math import compute_S_p, S_P_DEFAULT
+
 # ── 阶段→建议映射 ──
 STAGE_GUIDANCE = {
     '生': {
@@ -162,7 +164,7 @@ def four_dims_interpretation(O_t, E_u, C_k, K_y):
         'E_u': interpret(E_u, '宇位均衡度', '能量分布壅塞，需拓宽空间', '能量过度分散，需聚焦'),
         'C_k': interpret(C_k, '识位清晰度', '觉知模糊，需深化探索', '觉知清晰，可转向实践'),
         'K_y': interpret(K_y, '缘位纠缠度', '关系稀疏，需建立连接', '关系过密，需简化因果'),
-        'S': interpret(O_t * E_u * C_k * K_y * 100, '存在度', '存在感薄弱', '存在感强烈')
+        'S': interpret(compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT), '存在度', '存在感薄弱', '存在感强烈')
     }
 
 

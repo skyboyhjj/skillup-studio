@@ -1,7 +1,7 @@
 {
   "report_type": "dao_realm_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-04T19:52:12.962372",
+  "generated_at": "2026-08-05T19:16:21.116322",
   "engine": "dao_realm_engine",
   "diagnosis_mode": "static",
   "month_label": "2026-06",
@@ -59,66 +59,24 @@
     },
     "dim3_edges": [
       {
-        "source": "木",
-        "target": "火",
-        "type": "相生",
-        "count": 0
-      },
-      {
-        "source": "火",
-        "target": "土",
-        "type": "相生",
-        "count": 0
-      },
-      {
-        "source": "土",
-        "target": "金",
-        "type": "相生",
-        "count": 0
-      },
-      {
-        "source": "金",
-        "target": "水",
-        "type": "相生",
-        "count": 0
-      },
-      {
-        "source": "水",
-        "target": "木",
-        "type": "相生",
-        "count": 0
-      },
-      {
-        "source": "木",
-        "target": "土",
-        "type": "相克",
-        "count": 0
-      },
-      {
         "source": "土",
         "target": "水",
         "type": "相克",
-        "count": 0
-      },
-      {
-        "source": "水",
-        "target": "火",
-        "type": "相克",
-        "count": 0
-      },
-      {
-        "source": "火",
-        "target": "金",
-        "type": "相克",
-        "count": 0
-      },
-      {
-        "source": "金",
-        "target": "木",
-        "type": "相克",
-        "count": 0
+        "layer_transition": "种子层→现行层",
+        "count": 1
       }
     ],
+    "dim3_profile": {
+      "layer_dominants": {
+        "种子层": "土",
+        "现行层": "水",
+        "超越层": "水"
+      },
+      "path": "土→水→水",
+      "sheng_count": 0,
+      "ke_count": 1,
+      "matches_profile": false
+    },
     "dim4_entropy": {
       "ratio": 0.1404,
       "details": [
@@ -144,21 +102,17 @@
     "O_t": 0.2691,
     "E_u": 0.9645,
     "C_k": 0.2214,
-    "K_y": 0.8876,
-    "S": 5.1
+    "K_y": 0.2876,
+    "S": 1.7
   },
   "stage": "克",
   "stage_details": {
-    "reason": "层间冲突 (路径含5条相克边)",
-    "ke_count": 5,
+    "reason": "层间冲突 (路径含1条相克边)",
+    "ke_count": 1,
     "ke_pairs": [
-      "木→土",
-      "土→水",
-      "水→火",
-      "火→金",
-      "金→木"
+      "土→水"
     ],
-    "trigger": "ke_edge_count=5 >= 1"
+    "trigger": "ke_edge_count=1 >= 1"
   },
   "nested_stages": [
     {
@@ -181,8 +135,8 @@
     },
     {
       "sub_stage": "克的启动",
-      "ke_count": 5,
-      "detail": "路径含5条相克边"
+      "ke_count": 1,
+      "detail": "路径含1条相克边"
     }
   ],
   "guidance": {
@@ -196,7 +150,7 @@
       "O_t": "时位有序度偏低 (节律紊乱，需重建时间基底)",
       "E_u": "宇位均衡度偏高 (能量过度分散，需聚焦)",
       "C_k": "识位清晰度偏低 (觉知模糊，需深化探索)",
-      "K_y": "缘位纠缠度偏高 (关系过密，需简化因果)",
+      "K_y": "缘位纠缠度偏低 (关系稀疏，需建立连接)",
       "S": "存在度偏高 (存在感强烈)"
     },
     "wuxing_bias": [
@@ -245,16 +199,12 @@
       }
     ],
     "stage_details": {
-      "reason": "层间冲突 (路径含5条相克边)",
-      "ke_count": 5,
+      "reason": "层间冲突 (路径含1条相克边)",
+      "ke_count": 1,
       "ke_pairs": [
-        "木→土",
-        "土→水",
-        "水→火",
-        "火→金",
-        "金→木"
+        "土→水"
       ],
-      "trigger": "ke_edge_count=5 >= 1"
+      "trigger": "ke_edge_count=1 >= 1"
     }
   },
   "phase1_summary": {
@@ -262,12 +212,12 @@
       "O_t": 0.2691,
       "E_u": 0.9645,
       "C_k": 0.2214,
-      "K_y": 0.8876
+      "K_y": 0.2876
     },
     "tracks": {
-      "S_sum": 58.56,
-      "S_prod": 5.1,
-      "B": 58.56,
+      "S_sum": 43.56,
+      "S_prod": 1.65,
+      "B": 43.56,
       "C": 10.48,
       "D": 1.02
     },

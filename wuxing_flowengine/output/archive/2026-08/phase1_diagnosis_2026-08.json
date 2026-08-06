@@ -1,7 +1,7 @@
 {
   "report_type": "phase1_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-04T20:58:55.904308",
+  "generated_at": "2026-08-06T10:33:54.231262",
   "collect_time": "2026-08",
   "stats": {
     "total": 311,
@@ -31,6 +31,10 @@
   "tracks": {
     "S_sum": 43.79,
     "S_prod": 1.7,
+    "S_p": 39.5,
+    "S_formula": "power_mean",
+    "p": 0.5,
+    "p_label": "P忠恕中道",
     "B": 43.79,
     "C": 10.48,
     "D": 1.02

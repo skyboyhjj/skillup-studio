@@ -487,7 +487,7 @@ if __name__ == '__main__':
     import sys
     import os
 
-    BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     sys.path.insert(0, BASE)
     sys.path.insert(0, os.path.join(BASE, 'diagnose'))
 

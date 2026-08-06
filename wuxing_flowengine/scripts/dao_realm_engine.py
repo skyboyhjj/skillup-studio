@@ -18,6 +18,7 @@ import os
 import sys
 import math
 from datetime import datetime
+from dao_math import compute_S_p, compute_S_old, S_P_DEFAULT, p_label
 
 
 def diagnose_dao_realm(base_dir, phase1_result=None, month_label=None,
@@ -102,7 +103,8 @@ def diagnose_dao_realm(base_dir, phase1_result=None, month_label=None,
     K_y = four_dims.get('K_y', 0)
 
     # ── 步骤 3: 存在度 S 计算 ──
-    S = O_t * E_u * C_k * K_y * 100
+    # 使用广义平均 S_p (p=0.5, P忠恕中道)，替代旧乘积公式
+    S = compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT)
 
     # ── 步骤 4: 阶段判定 ──
     from stage_engine import determine_stage, detect_nested_stage
@@ -134,7 +136,12 @@ def diagnose_dao_realm(base_dir, phase1_result=None, month_label=None,
             'E_u': round(E_u, 4),
             'C_k': round(C_k, 4),
             'K_y': round(K_y, 4),
-            'S': round(S, 1)
+            'S': round(S, 1),
+            'S_formula': 'power_mean',
+            'S_p': round(S, 1),
+            'p': S_P_DEFAULT,
+            'p_label': p_label(S_P_DEFAULT),
+            'S_old': round(compute_S_old(O_t, E_u, C_k, K_y), 1)
         },
         'stage': stage,
         'stage_details': stage_details,
@@ -187,7 +194,8 @@ def diagnose_and_save(base_dir, month_label=None, output_dir=None):
 
     print(f'\n道境诊断报告已保存: {report_path}')
     print(f'  阶段: {report["stage"]}')
-    print(f'  存在度 S: {report["dao_realm_readings"]["S"]:.1f}')
+    print(f'  存在度 S_p(p={S_P_DEFAULT}): {report["dao_realm_readings"]["S"]:.1f}')
+    print(f'  旧乘积 S: {report["dao_realm_readings"]["S_old"]:.1f}')
     print(f'  四维: O_t={report["dao_realm_readings"]["O_t"]:.4f} '
           f'E_u={report["dao_realm_readings"]["E_u"]:.4f} '
           f'C_k={report["dao_realm_readings"]["C_k"]:.4f} '
@@ -197,6 +205,6 @@ def diagnose_and_save(base_dir, month_label=None, output_dir=None):
 
 
 if __name__ == '__main__':
-    DEFAULT_BASE = r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+    DEFAULT_BASE = r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     report, path = diagnose_and_save(DEFAULT_BASE, month_label='2026-08')
     print(f'\n导航建议: {report["guidance"]["summary"]}')

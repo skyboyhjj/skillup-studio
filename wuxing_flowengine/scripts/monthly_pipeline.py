@@ -26,7 +26,7 @@ def get_default_base():
     """获取默认项目根目录"""
     return os.environ.get(
         'WUXING_BASE_DIR',
-        r'C:\Users\hejij\AppData\Roaming\TRAE SOLO CN\ModularData\ai-agent\work-mode-projects\6a59e217b55e181ea97f0df3\wuxing_flowengine'
+        r'E:\00-TRAEWK\6a59e217b55e181ea97f0df3\wuxing_flowengine'
     )
 
 
