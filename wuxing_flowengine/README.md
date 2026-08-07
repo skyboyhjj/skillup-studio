@@ -24,6 +24,11 @@ wuxing_flowengine/
 │       └── 2026-08-30_snapshot.json # 8月 (311 节点, 687 边)
 ├── diagnose/                        # 诊断模块
 │   └── wuxing_diagnose_v2.py        # 五行诊断引擎（环分析、熵、罗盘）
+├── rules/                           # WRL 规则文件（P1#4 可审计性）
+│   ├── classical_rules.wrl          # 经典规则 (C, 4条, immutable)
+│   ├── formal_rules.wrl             # 形式规则 (F, 8条, calibratable)
+│   ├── heuristic_rules.wrl          # 启发式规则 (H, 19条, calibratable)
+│   └── domain_rules.wrl             # 领域规则 (D, 4条, configurable)
 ├── scripts/                         # 核心脚本
 │   ├── monthly_pipeline.py          # 月度编排器入口（主入口）
 │   ├── phase1_pipeline.py           # Phase 1: 认知深度估算 + 五行映射 + 道境诊断
@@ -40,6 +45,11 @@ wuxing_flowengine/
 │   ├── data_validator.py            # 数据质量验证（五检查点）
 │   ├── validate_p_zhongshu.py       # p-P忠恕验证（S_p 广义平均 + 恕度五项检查）
 │   ├── baai_scraper.py              # BAAI Hub 论文采集
+│   ├── wrl_loader.py                # WRL 规则加载器（解析/验证/注册表）
+│   ├── update_wrl_rules.py          # WRL 规则批量更新工具
+│   ├── drift_report.py              # 领域漂移报告生成器 (P1#3)
+│   ├── drift_visualization.py       # 领域漂移可视化 (P1#3)
+│   ├── confidence_interval.py       # 信度区间计算（Wilson 区间等）
 │   ├── build_snapshot.py            # 快照构建器
 │   ├── gen_monthly_snapshots.py     # 月度快照模拟生成
 │   └── validator.py                 # 输出合法性验证
@@ -80,11 +90,16 @@ python scripts/monthly_pipeline.py --month 2026-08
 
 | 阶段 | 说明 | 输出 |
 |------|------|------|
+| Phase 0 | WRL 规则加载与验证（8步校验，35条规则） | `wrl_loader_report_{month}.md/json` |
 | Phase 1 | 认知深度估算 + 五行映射 + 三层构建 + 道境四维诊断 | `phase1_diagnosis_{month}.json` |
 | Phase 2 | 双层标注 + Spinor 层构建 + 领域追踪 | `phase2_diagnosis_{month}.json` |
 | Phase 3+ | 论文五行分类 + 领域漂移分析（余弦距离） | `phase3_plus_diagnosis_{month}.json` |
+| Phase B | 道境诊断引擎（阶段判定 + 嵌套阶段 + 导航建议） | `dao_realm_report_{month}.json` |
+| Phase C2 | K_y 缘位增强（图密度混合 E_relation） | 控制台输出 |
+| Phase C1 | 领域基准校准（跨领域 S 值归一化） | `domain_calibration_baseline.json` |
+| Phase D | 领域漂移可视化与报告 | `{month}_drift_*.png` + `{month}_drift_report.md` |
 | 时间序列 | 多月份趋势对比分析 | `phase3_timeseries_diagnosis_{month}.json` |
-| 验证 | 数据质量五检查点（语言/数量/覆盖/重复/一致性） | 控制台输出 + `validation_report_*.md` |
+| 验证 | 数据质量五检查点（语言/数量/覆盖/重复/一致性） | 控制台输出 |
 
 ### 跳过特定阶段
 
@@ -205,21 +220,21 @@ S_p 仅作为**"化"判定的单一输入条件**，不替代全局阶段判定�
 | 2026-05 | 克 | 0.2717 | 0.9665 | 0.2205 | 0.2867 | 1.7 | **39.4** | 278 | 476 |
 | 2026-06 | 克 | 0.2691 | 0.9645 | 0.2214 | 0.2876 | 1.7 | **39.3** | 290 | 525 |
 | 2026-07 | 克 | 0.2708 | 0.9649 | 0.2209 | 0.2887 | 1.7 | **39.4** | 302 | 662 |
-| 2026-08 | 克 | 0.2751 | 0.9666 | 0.2193 | 0.2908 | 1.7 | **39.5** | 311 | 687 |
+| 2026-08 | 克 | 0.2756 | 0.9596 | 0.2209 | 0.2883 | 1.7 | **39.4** | 311 | 687 |
 
-> 验证日期：2026-08-05 · V1.2 流水线 + p-P忠恕验证 · 四个月度独立快照
+> 验证日期：2026-08-07 · V1.2 流水线 + P1#4 WRL 规则审计 + p-P忠恕验证 · 05-07月真实API数据 + 08月快照
 > S_p 采用广义平均公式（p=0.5, P忠恕中道），解决旧乘积 S 恒为 1.7 的"量纲不可达"问题。详见设计文档 9.5 节。
 
 ### 时间序列趋势 (2026-05 → 2026-08)
 
 | 维度 | 趋势 | 说明 |
 |------|------|------|
-| O_t | +0.0034 ↑ | 时位有序度稳步上升 |
-| E_u | +0.0001 → | 宇位均衡度基本稳定 |
-| C_k | -0.0012 ↓ | 识位耦合度轻度松弛 |
-| K_y | +0.0041 ↑ | 缘位关系密度持续增长 |
+| O_t | +0.0039 ↑ | 时位有序度稳步上升 |
+| E_u | -0.0069 ↓ | 宇位均衡度轻度下降 |
+| C_k | +0.0004 → | 识位耦合度基本稳定 |
+| K_y | +0.0016 ↑ | 缘位关系密度持续增长 |
 
-> ⚠️ **数据边界**：仅 2026-07 为真实 API 快照（hub.baai.ac.cn），其余 3 个月为模拟演化数据。四维指标的"趋势"（如 K_y +0.0041 上升）反映模拟参数的一致性，真实月度变化幅度待接入真实 API 后验证。完整验证结果见 `output/validation_report_2026-08.md`。
+> ⚠️ **数据边界**：05-07月为真实 API 数据（hub.baai.ac.cn），08月为知识树快照。四维指标趋势反映真实月度变化。完整验证结果见 `output/validation_report_2026-08.md`。
 
 ## License
 

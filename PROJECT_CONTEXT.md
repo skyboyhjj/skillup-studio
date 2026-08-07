@@ -13,7 +13,7 @@
 |------|:---:|------|
 | 知识图谱标注平台 | ✅ 已上线 | 6 维标注（五行、多层五行深度、认知深度、八卦等），规则库驱动 |
 | 莫比乌斯环概念地图 | ✅ 已上线 | 选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML |
-| 知识树追踪引擎 | 🔜 即将上线 | 概念演化路径追踪与可视化 |
+| 知识树追踪引擎 | 🔜 预览版 | 概念演化路径追踪与可视化 + 月度论文采集 + 五行诊断 + 领域漂移分析 |
 | 论文采集器 | 🟡 预览版 | arXiv 月度采集（100 篇样本），分类筛选/搜索/导出 |
 | 五行道境引擎 | 🟡 开发中 | 知识树五行诊断 + 道境四维映射 + 月度流水线 + 论文采集合成 |
 
@@ -51,7 +51,14 @@
 | `wuxing_flowengine/scripts/domain_calibration.py` | 领域基准校准 |
 | `wuxing_flowengine/scripts/timeseries_analysis.py` | 时间序列分析（多月份 delta 链） |
 | `wuxing_flowengine/scripts/wuxing_dsl.py` | 五行 DSL 引擎（WRL 规则语言 + 画像库） |
-| `wuxing_flowengine/rules/` | WRL 规则文件（经典/形式/启发式/领域 四类 32 条规则） |
+| `wuxing_flowengine/rules/` | WRL 规则文件（经典/形式/启发式/领域 四类 35 条规则，含 change_log + validation） |
+| `wuxing_flowengine/scripts/wrl_loader.py` | WRL 规则加载器（解析/验证/注册表，8步验证流程） |
+| `wuxing_flowengine/scripts/update_wrl_rules.py` | WRL 规则批量更新工具（change_log 添加 + 审计报告生成） |
+| `wuxing_flowengine/scripts/drift_report.py` | 领域漂移报告生成器 (P1#3) |
+| `wuxing_flowengine/scripts/drift_visualization.py` | 领域漂移可视化 — 柱状图/散点图/雷达图 (P1#3) |
+| `wuxing_flowengine/scripts/confidence_interval.py` | 信度区间计算（Wilson 区间 + drift_confidence） |
+| `wuxing_flowengine/scripts/build_language_tree.py` | 语言谱系树数据集构建 |
+| `wuxing_flowengine/scripts/analyze_language_tree.py` | 语系级五行诊断深度分析 |
 | `wuxing_flowengine/docs/` | 设计文档（融合设计方案 V1.2 + 数据采集经验总结） |
 | `wuxing_flowengine/output/validation_report_2026-08.md` | 2026.08.05 验证批次报告（含 P0/P1/P2 修复 + 漂移分析） |
 | `wuxing_flowengine/output/archive/` | 4 个月度归档（2026-05/06/07/08） |
@@ -257,15 +264,13 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 
 ### 16. WRL DSL Phase 1：规则清单 + 元数据标注
 - 创建 `wuxing_flowengine/rules/` 目录，按设计文档 10.2 节四分类创建 `.wrl` 规则文件
-- **32 条规则，4 个文件**：
+- **35 条规则，4 个文件**（P1#4 更新：32→35）：
   - `classical_rules.wrl`（4 条）：C-SHENG, C-KE, C-WX-COORD, C-WX-ROLES — 经典文献规则，不可修改
   - `formal_rules.wrl`（8 条）：F-ENTROPY, F-CENTROID, F-O_T, F-E_U, F-C_K, F-K_Y, F-S_P, F-THETA — 数学定义，可校准
-  - `heuristic_rules.wrl`（16 条）：阶段判定链（6 子规则）+ H-DOMINANCE, H-SCARCITY, H-ENTROPY-CLASS, H-PATH-PROFILES, H-FREQ-INTERPRETATION, H-DEPTH-WEIGHTS, H-STAGE-GUIDANCE, H-WUXING-ADJUSTMENT, H-CLASSICAL-REFERENCES, H-FOUR-DIMS-INTERPRETATION — 经验判断，可校准
+  - `heuristic_rules.wrl`（19 条，原 16 条）：阶段判定链（6 子规则）+ H-DOMINANCE, H-SCARCITY, H-ENTROPY-CLASS, H-PATH-PROFILES, H-FREQ-INTERPRETATION, H-DEPTH-WEIGHTS, H-STAGE-GUIDANCE, H-WUXING-ADJUSTMENT, H-CLASSICAL-REFERENCES, H-FOUR-DIMS-INTERPRETATION, H-MATRIX-INTERP, H-SUMMARY-TEMPLATE, H-STAGE-THRESHOLDS — 经验判断，可校准
   - `domain_rules.wrl`（4 条）：D-SCHOLARLY, D-PRACTICAL, D-EDUCATIONAL, D-DEFAULT — 领域预设，可配置
-- 每条规则携带完整元数据：rule_id, category, source（type/reference/quote）, mutability, calibration_status, affects, depends_on, validation, code_location
-- 覆盖度：经典规则 4/4 (100%), 形式规则 8/8 (100%), 启发式规则 16/16 (100%), 领域规则 4/4 (100%)
-- 此阶段为纯文档化（Phase 1），不影响现有代码运行。后续 Phase 2 将创建 WRL 解析器 + 规则注册表，Phase 3 逐步替换硬编码逻辑
-- **文件**: `wuxing_flowengine/rules/classical_rules.wrl`, `formal_rules.wrl`, `heuristic_rules.wrl`, `domain_rules.wrl`
+- 每条规则携带完整元数据：rule_id, category, source（type/reference/quote）, mutability, calibration_status, affects, depends_on, validation, code_location, change_log
+- 覆盖度：4 分类 35 条规则，100% 覆盖
 
 ### 17. P0#2 案例数据真实化：设计文档第六章案例 S_p 重算
 - 用 `validate_p_zhongshu.py` 的 S_p 公式（p=0.5）重算设计文档第六章全部案例数据
@@ -308,6 +313,37 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
   - `earth_flow_transfer()` 五行流转解读增强忠恕综合标注
 - **验证结果**：大语言模型→自然语言处理 忠恕兼备 (ZS=0.78)，大语言模型→生成式AI 忠恕不足 (ZS=0.66)
 - **文件**: `wuxing_flowengine/scripts/zhongshu_ethics.py`（新增）, `wuxing_flowengine/scripts/spinor_formalism.py`（新增）, `wuxing_flowengine/scripts/homomorphism_engine.py`（更新）
+
+### 20. P1#4：WRL 规则可审计性基础设施（加载器 + 流水线集成）
+- 创建 `wuxing_flowengine/scripts/wrl_loader.py`：WRL 规则加载器
+  - `WrlParser`：栈式花括号匹配，支持任意嵌套深度解析
+  - `RuleValidator`：8 步验证流程（语法/唯一性/依赖完整性/affects有效性/分类一致性/变更日志/校验规则/rulechain优先级）
+  - `RuleRegistry`：集中式规则注册表，依赖图 + 查询接口
+  - `load_wrl_rules()` / `generate_loading_report()`：主加载函数 + Markdown 报告生成
+- 创建 `wuxing_flowengine/scripts/update_wrl_rules.py`：规则批量更新工具（change_log 添加 + 审计报告生成）
+- 4 个 `.wrl` 文件更新：35 条规则全部补全 `change_log` + `validation` 字段
+  - 新增 3 条启发式规则（H-MATRIX-INTERP, H-SUMMARY-TEMPLATE, H-STAGE-THRESHOLDS）
+  - 修复 6 个 rulechain 子规则缺少 `mutability` 字段
+- `config_default.json` 新增 `wrl` 配置段：四分类 C/F/H/D 标准、文件列表、验证开关、报告输出路径
+- `monthly_pipeline.py` 新增 Phase 0（WRL 规则加载与验证），流水线启动时自动加载 35 条规则并执行 8 步验证
+- **验证结果**：35 条规则（4C+8F+19H+4D），0 错误，0 警告，75 总依赖，56 总 affects
+- **文件**: `wuxing_flowengine/scripts/wrl_loader.py`（新增）, `wuxing_flowengine/scripts/update_wrl_rules.py`（新增）, `wuxing_flowengine/rules/*.wrl`（更新）, `wuxing_flowengine/config/config_default.json`, `wuxing_flowengine/scripts/monthly_pipeline.py`
+
+### 21. P1#1-3：真实时间序列数据接入 + 领域漂移分析 + 语言谱系树
+- **P1#1 真实数据接入**：
+  - 采集 05-07 月真实论文数据（315+400+403 篇），08 月知识树快照（323 节点/791 边）
+  - `phase1_pipeline.py`：预赋值尊重机制（当输入含 wuxing/cognitive_depth 时保留原始值）
+  - `phase3_plus_pipeline.py`：root 伪领域过滤（17→16 个有效领域）
+- **P1#2-3 领域漂移与信度**：
+  - `drift_report.py`：领域漂移报告生成器（Markdown 格式，含信度等级标注）
+  - `drift_visualization.py`：漂移可视化（柱状图/散点图/雷达图，matplotlib）
+  - `confidence_interval.py`：扩展 drift_confidence / Wilson 区间 / drift_reliability
+- **语言谱系树数据集**：
+  - `build_language_tree.py`：构建语言谱系树数据集（语系→语族→语言三级结构）
+  - `analyze_language_tree.py`：语系级五行诊断深度分析（四维指标 + S_p 道境指数）
+  - 验证跨域可比性：突厥语系 S_p=44.4（最高），南岛语系 S_p=36.6（最低），与 AI 知识树 S_p=39.4 同处 35-44 区间
+  - 分析文档：`docs/读解_语言谱系树_同态映射的天然教科书.md`
+- **文件**: `wuxing_flowengine/scripts/drift_report.py`（新增）, `wuxing_flowengine/scripts/drift_visualization.py`（新增）, `wuxing_flowengine/scripts/build_language_tree.py`（新增）, `wuxing_flowengine/scripts/analyze_language_tree.py`（新增）, `wuxing_flowengine/scripts/phase1_pipeline.py`, `wuxing_flowengine/scripts/phase3_plus_pipeline.py`, `wuxing_flowengine/scripts/confidence_interval.py`, `wuxing_flowengine/data/snapshots/2026-08-07_snapshot.json`（新增）, `wuxing_flowengine/data/language_tree/`（新增）, `docs/读解_语言谱系树_同态映射的天然教科书.md`（新增）
 
 ---
 
