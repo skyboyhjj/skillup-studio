@@ -38,6 +38,7 @@
     "H-ENTROPY-CLASS": {
       "high": 0.80,
       "low": 0.45
+  change_log: []
     }
   },
 
@@ -102,6 +103,7 @@
     "H-ENTROPY-CLASS": {
       "high": 0.85,
       "low": 0.50
+  change_log: []
     }
   },
 
@@ -163,6 +165,7 @@
     "H-ENTROPY-CLASS": {
       "high": 0.80,
       "low": 0.45
+  change_log: []
     }
   },
 
@@ -224,6 +227,7 @@
     "H-ENTROPY-CLASS": {
       "high": 0.80,
       "low": 0.45
+  change_log: []
     }
   },
 

@@ -33,6 +33,7 @@
     rationale: "低于 10% 所有行都主导，高于 50% 无行可主导"
   },
   code_location: "config_default.json: dominance_threshold, guidance.py:120 (analyze_wuxing_bias)"
+  change_log: []
 }
 
 @rule H-SCARCITY {
@@ -56,6 +57,7 @@
   },
   note: "代码中使用 12% 作为 deficit 阈值 (guidance.py:127: pct < 12)",
   code_location: "guidance.py:127 (analyze_wuxing_bias, pct < 12)"
+  change_log: []
 }
 
 @rule H-ENTROPY-CLASS {
@@ -79,6 +81,7 @@
     rationale: "低阈值和高阈值必须在 (0,1) 区间且低<高"
   },
   code_location: "config_default.json: entropy_thresholds"
+  change_log: []
 }
 
 # ── 阶段判定链 ──
@@ -91,6 +94,7 @@
   @rule H-STAGE-SHENG {
     priority: 1,
     category: "H",
+    mutability: "calibratable",
     name: "生阶段判定",
     condition: "any(wx.pct > 30) for wx in WX_ORDER and H_ratio < 0.50",
     action: "return_stage",
@@ -99,12 +103,18 @@
     mode: "static",
     depends_on: ["H-DOMINANCE", "H-ENTROPY-CLASS"],
     affects: ["stage", "guidance"],
-    code_location: "stage_engine.py:143-152"
+    code_location: "stage_engine.py:143-152",
+    validation: {
+      rule: "all wx in WX_ORDER",
+      rationale: "主导判定依赖五行数组完整"
+    }
+  change_log: []
   }
 
   @rule H-STAGE-KE {
     priority: 2,
     category: "H",
+    mutability: "calibratable",
     name: "克阶段判定",
     condition: "ke_edge_count >= 1",
     action: "return_stage",
@@ -113,12 +123,18 @@
     mode: "static",
     depends_on: ["C-KE", "C-SHENG"],
     affects: ["stage", "guidance", "K_y"],
-    code_location: "stage_engine.py:154-164"
+    code_location: "stage_engine.py:154-164",
+    validation: {
+      rule: "ke_edge_count >= 0",
+      rationale: "相克边数必须为非负整数"
+    }
+  change_log: []
   }
 
   @rule H-STAGE-HUA {
     priority: 3,
     category: "H",
+    mutability: "calibratable",
     name: "化阶段判定",
     condition: "static: S_p > theta_critical; dynamic: delta_H > 0.3 and centroid_disp > 0.3",
     action: "return_stage",
@@ -127,12 +143,18 @@
     mode: ["static", "dynamic"],
     depends_on: ["F-S_P", "F-THETA"],
     affects: ["stage", "guidance"],
-    code_location: "stage_engine.py:166-215"
+    code_location: "stage_engine.py:166-215",
+    validation: {
+      rule: "S_p >= 0 and theta_critical >= 0",
+      rationale: "S_p 和临界阈值必须为非负数"
+    }
+  change_log: []
   }
 
   @rule H-STAGE-TONG {
     priority: 4,
     category: "H",
+    mutability: "calibratable",
     name: "通阶段判定",
     condition: "matches_profile == true and 0.50 < H_ratio < 0.85",
     action: "return_stage",
@@ -142,12 +164,18 @@
     depends_on: ["H-PATH-PROFILES", "H-ENTROPY-CLASS"],
     affects: ["stage", "guidance"],
     note: "V1.2 P1 修复: 补全 dim3_profile + matches_profile 条件",
-    code_location: "stage_engine.py:217-232"
+    code_location: "stage_engine.py:217-232",
+    validation: {
+      rule: "H_ratio in [0, 1]",
+      rationale: "熵比必须在 [0, 1] 区间"
+    }
+  change_log: []
   }
 
   @rule H-STAGE-BIAN {
     priority: 5,
     category: "H",
+    mutability: "calibratable",
     name: "变阶段判定",
     condition: "dynamic: depth_shift >= 1 (L2→L4 等)",
     action: "return_stage",
@@ -157,12 +185,18 @@
     depends_on: ["H-DEPTH-WEIGHTS"],
     affects: ["stage", "guidance"],
     note: "仅动态模式可用，需时间序列数据",
-    code_location: "stage_engine.py:166-195"
+    code_location: "stage_engine.py:166-195",
+    validation: {
+      rule: "depth_shift >= 0",
+      rationale: "深度变化必须为非负整数"
+    }
+  change_log: []
   }
 
   @rule H-STAGE-DEFAULT {
     priority: 6,
     category: "H",
+    mutability: "calibratable",
     name: "默认回退阶段",
     condition: "always (fallback)",
     action: "return_stage",
@@ -171,7 +205,12 @@
     mode: "any",
     depends_on: [],
     affects: ["stage"],
-    code_location: "stage_engine.py:230-232"
+    code_location: "stage_engine.py:230-232",
+    validation: {
+      rule: "always true",
+      rationale: "默认回退规则无条件触发，保证判定链完整性"
+    }
+  change_log: []
   }
 }
 
@@ -235,6 +274,7 @@
       "name": "证据→探索→新方向",
       "description": "实证探索型：批判→探索→创新",
       "classic_case": "实证研究论文"
+  change_log: []
     }
   ],
   match_rule: "路径前3个主导行 == 画像模式",
@@ -270,7 +310,12 @@
   },
   affects: ["dim1_interpretations"],
   depends_on: ["H-DOMINANCE", "H-SCARCITY", "C-WX-ROLES"],
-  code_location: "wuxing_diagnose_v2.py (dim1_interpretations generation)"
+  code_location: "wuxing_diagnose_v2.py (dim1_interpretations generation)",
+  validation: {
+    rule: "templates contain all four keys: dominance, scarcity, balance, combo",
+    rationale: "频次解读必须覆盖四种基本模式"
+  }
+  change_log: []
 }
 
 @rule H-DEPTH-WEIGHTS {
@@ -295,6 +340,7 @@
     rationale: "深度越深权重越大，L4 权重是 L1 的 8 倍"
   },
   code_location: "config_default.json: depth_weights"
+  change_log: []
 }
 
 # ── 导航建议模板 ──
@@ -343,11 +389,16 @@
       "direction": "拥抱不确定性，在更高维度重新组织认知结构。",
       "caution": "范式转换期间可能出现暂时性认知失序。",
       "next_step": "在新范式中重新进入"生"阶段，开启新的螺旋上升。"
+  change_log: []
     }
   },
   affects: ["guidance"],
   depends_on: ["H-STAGE-SHENG", "H-STAGE-KE", "H-STAGE-HUA", "H-STAGE-TONG", "H-STAGE-BIAN"],
-  code_location: "guidance.py:12-48 (STAGE_GUIDANCE)"
+  code_location: "guidance.py:12-48 (STAGE_GUIDANCE)",
+  validation: {
+    rule: "templates contain all five stages: 生, 克, 化, 通, 变",
+    rationale: "阶段导航建议必须覆盖全部五种阶段"
+  }
 }
 
 @rule H-WUXING-ADJUSTMENT {
@@ -384,13 +435,18 @@
       "excess": "水气过盛，宜以土克水（建立系统/架构约束）或以木泄水（将深层涌现转化为生成/具身创新）",
       "deficit": "水气不足，宜以金生水（强化逻辑/推理/安全以激发深层探索）",
       "balance": "水气均衡，流动不息"
+  change_log: []
     }
   },
   excess_threshold: 30.0,
   deficit_threshold: 12.0,
   affects: ["guidance.wuxing_bias"],
   depends_on: ["C-SHENG", "C-KE", "H-DOMINANCE", "H-SCARCITY"],
-  code_location: "guidance.py:51-77 (WUXING_ADJUSTMENT)"
+  code_location: "guidance.py:51-77 (WUXING_ADJUSTMENT)",
+  validation: {
+    rule: "templates contain all five wx: 木, 火, 土, 金, 水",
+    rationale: "五行偏态调节建议必须覆盖全部五行"
+  }
 }
 
 @rule H-CLASSICAL-REFERENCES {
@@ -426,7 +482,12 @@
   },
   affects: ["guidance.classical_reference"],
   depends_on: [],
-  code_location: "guidance.py:80-101 (CLASSICAL_REFERENCES)"
+  code_location: "guidance.py:80-101 (CLASSICAL_REFERENCES)",
+  validation: {
+    rule: "references contain all five stages: 生, 克, 化, 通, 变",
+    rationale: "经典文本引用必须覆盖全部五种阶段"
+  }
+  change_log: []
 }
 
 @rule H-FOUR-DIMS-INTERPRETATION {
@@ -448,5 +509,103 @@
   },
   affects: ["guidance.four_dims"],
   depends_on: ["F-O_T", "F-E_U", "F-C_K", "F-K_Y"],
-  code_location: "guidance.py:145-168 (four_dims_interpretation)"
+  code_location: "guidance.py:145-168 (four_dims_interpretation)",
+  validation: {
+    rule: "templates contain all four dims: O_t, E_u, C_k, K_y",
+    rationale: "四维解读必须覆盖全部四个维度"
+  }
+  change_log: []
+}
+
+# ── 补充规则 (P1#4 新增) ──
+
+@rule H-MATRIX-INTERP {
+  category: "H",
+  name: "交叉矩阵解读规则",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断框架设计方案 v1.0 §三.维度交叉"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  description: "四维指标交叉解读：当两维同时偏高/偏低时，生成组合判语",
+  templates: {
+    "O_t_high_C_k_low": "结构有余而觉知不足，宜以水润金（深化探索以激活觉知）",
+    "O_t_low_E_u_high": "根基未稳却涉猎广泛，宜以土固木（夯实基础再求广博）",
+    "C_k_high_K_y_low": "觉知清晰但因果未通，宜以火生土（传播协作以建立关系）",
+    "E_u_low_K_y_high": "能量壅塞却关系过密，宜以金克木（引入逻辑批判以破局）",
+    "default": "四维未见显著交叉偏态，整体均衡"
+  },
+  threshold_high: 0.60,
+  threshold_low: 0.30,
+  affects: ["guidance.matrix", "dim_cross"],
+  depends_on: ["F-O_T", "F-E_U", "F-C_K", "F-K_Y"],
+  validation: {
+    rule: "templates cover all 4 choose 2 = 6 cross-dimension combinations",
+    rationale: "交叉矩阵必须覆盖所有可能的两维组合"
+  },
+  code_location: "guidance.py (cross_matrix interpretation)",
+  change_log: []
+}
+
+@rule H-SUMMARY-TEMPLATE {
+  category: "H",
+  name: "判语生成模板",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §9.5.5"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  description: "诊断报告摘要判语模板，遵循'先如实，后宽恕'原则",
+  template_sections: ["四维读数", "最弱维度", "最强补足路径", "阶段观察", "恕语"],
+  design_principles: [
+    "先如实（指出最弱维度）→ 后宽恕（给出最强维度的补足路径）",
+    "阶段判定后用'观察'而非'判决'措辞",
+    "永远附加恕语，不因短板否定整体"
+  ],
+  affects: ["guidance.summary", "report"],
+  depends_on: ["F-S_P", "F-O_T", "F-E_U", "F-C_K", "F-K_Y", "F-THETA"],
+  validation: {
+    rule: "template_sections contains all five required sections",
+    rationale: "判语模板必须包含全部五个必要部分"
+  },
+  code_location: "guidance.py:208 (summary), dao_realm_engine.py:185 (phase1_summary)",
+  change_log: []
+}
+
+@rule H-STAGE-THRESHOLDS {
+  category: "H",
+  name: "阶段判定阈值集",
+  source: {
+    type: "expert_heuristic",
+    reference: "五行诊断与道境坐标系融合设计方案 V1.2 §5.3"
+  },
+  mutability: "calibratable",
+  calibration_status: "v1.0_initial",
+  description: "阶段判定所需的所有阈值参数，集中管理以支持跨领域配置",
+  value: {
+    "dominance_threshold": 30.0,
+    "dominance_note": "某项五行超过此百分比即判定为'主导'",
+    "scarcity_threshold": 12.0,
+    "scarcity_note": "某项五行低于此百分比即判定为'稀缺'",
+    "entropy_high": 0.80,
+    "entropy_high_note": "H_ratio 高于此值判定为高熵",
+    "entropy_low": 0.45,
+    "entropy_low_note": "H_ratio 低于此值判定为低熵",
+    "ke_edge_trigger": 1,
+    "ke_edge_note": "相克边数 >= 此值触发'克'阶段",
+    "theta_base": 50,
+    "theta_note": "S_p 超过 θ_critical 触发'化'阶段的基础阈值",
+    "depth_shift_trigger": 1,
+    "depth_shift_note": "认知深度变化 >= 此值触发'变'阶段（仅动态模式）"
+  },
+  affects: ["stage", "dim1_interpretations", "dim4_entropy_desc"],
+  depends_on: ["H-DOMINANCE", "H-SCARCITY", "H-ENTROPY-CLASS", "F-THETA", "H-DEPTH-WEIGHTS"],
+  validation: {
+    rule: "dominance > scarcity and entropy_high > entropy_low",
+    rationale: "主导阈值必须高于稀缺阈值，高熵阈值必须高于低熵阈值"
+  },
+  code_location: "config_default.json, stage_engine.py",
+  change_log: []
 }

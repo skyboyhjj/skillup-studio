@@ -33,6 +33,7 @@
     rationale: "五行相生必须构成完整闭环，五对缺一不可"
   },
   code_location: "wuxing_diagnose_v2.py:19-21 (SHENG_PAIRS)"
+  change_log: []
 }
 
 @rule C-KE {
@@ -57,6 +58,7 @@
     rationale: "五行相克必须构成完整闭环，五对缺一不可"
   },
   code_location: "wuxing_diagnose_v2.py:23-25 (KE_PAIRS)"
+  change_log: []
 }
 
 @rule C-WX-COORD {
@@ -83,6 +85,7 @@
     rationale: "五行方位必须均匀分布在圆周上，间距 72°"
   },
   code_location: "wuxing_diagnose_v2.py:82-88 (angles dict)"
+  change_log: []
 }
 
 @rule C-WX-ROLES {
@@ -109,4 +112,5 @@
     rationale: "五行体系必须完整包含五种元素"
   },
   code_location: "wuxing_diagnose_v2.py:16 (WX_ORDER)"
+  change_log: []
 }

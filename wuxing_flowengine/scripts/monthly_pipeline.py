@@ -20,6 +20,7 @@ import os
 import sys
 import argparse
 from datetime import datetime
+from wrl_loader import load_wrl_rules, generate_loading_report
 
 
 def get_default_base():
@@ -72,6 +73,68 @@ def run_pipeline(base_dir, month_label=None, skip_phases=None):
     papers_path = os.path.join(output_dir, f'papers_{month_label}.json')
 
     results = {}
+
+    # ============================================================
+    # Phase 0: WRL 规则加载与验证 (P1#4)
+    # ============================================================
+    if 'phase0' not in skip_phases:
+        print(f'\n{"─" * 60}')
+        print(f'  Phase 0: WRL 规则加载与验证 (P1#4)')
+        print(f'{"─" * 60}')
+        try:
+            # 加载配置获取 rules_dir
+            config_path = os.path.join(base_dir, 'config', 'config_default.json')
+            wrl_config = {}
+            if os.path.exists(config_path):
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                wrl_config = config.get('wrl', {})
+
+            rules_dir = os.path.join(base_dir, wrl_config.get('rules_dir', 'rules'))
+            validate_on_load = wrl_config.get('validate_on_load', True)
+
+            registry, report = load_wrl_rules(rules_dir, validate=validate_on_load)
+
+            # 生成并保存报告
+            md_report = generate_loading_report(registry, report)
+            report_dir = os.path.join(output_dir, wrl_config.get('report_output', 'reports').strip('/'))
+            os.makedirs(report_dir, exist_ok=True)
+            report_path = os.path.join(report_dir, f'wrl_loader_report_{month_label}.md')
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write(md_report)
+
+            # 保存 JSON 报告
+            json_path = os.path.join(report_dir, f'wrl_loader_report_{month_label}.json')
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(report, f, ensure_ascii=False, indent=2)
+
+            results['phase0'] = {
+                'loaded': registry.rule_count,
+                'category_counts': registry.category_counts,
+                'validation_passed': report['passed'] if report else None,
+                'report_md': report_path,
+                'report_json': json_path
+            }
+
+            # 打印摘要
+            if report and report['passed']:
+                print(f'  ✓ Phase 0 完成: {registry.rule_count} 条规则全部通过验证')
+                for cat, count in sorted(registry.category_counts.items()):
+                    print(f'    {cat}: {count} 条')
+            else:
+                errors = report.get('errors', []) if report else []
+                warnings = report.get('warnings', []) if report else []
+                print(f'  ⚠ Phase 0 完成: {len(errors)} 错误, {len(warnings)} 警告')
+                if errors:
+                    for err in errors[:3]:
+                        print(f'    ❌ {err}')
+                    if len(errors) > 3:
+                        print(f'    ... 共 {len(errors)} 个错误')
+        except Exception as e:
+            print(f'  ✗ Phase 0 失败: {e}')
+            import traceback
+            traceback.print_exc()
+            results['phase0'] = None
 
     # ============================================================
     # Phase 1
@@ -303,6 +366,60 @@ def run_pipeline(base_dir, month_label=None, skip_phases=None):
         results['validation'] = {'passed': False, 'issues': [str(e)]}
 
     # ============================================================
+    # Phase D: 领域漂移可视化与报告 (P1#3)
+    # ============================================================
+    if 'phaseD' not in skip_phases:
+        print(f'\n{"─" * 60}')
+        print(f'  Phase D: 领域漂移可视化 & 报告 (P1#3)')
+        print(f'{"─" * 60}')
+        try:
+            from drift_visualization import generate_all_charts
+            from drift_report import generate_drift_report
+
+            phase3_result = results.get('phase3')
+
+            # 如果 Phase 3+ 被跳过，尝试从磁盘加载
+            if phase3_result is None:
+                phase3_path = os.path.join(
+                    archive_dir, f'phase3_plus_diagnosis_{month_label}.json'
+                )
+                if os.path.exists(phase3_path):
+                    with open(phase3_path, 'r', encoding='utf-8') as f:
+                        phase3_result = json.load(f)
+                    print(f'  从磁盘加载 Phase 3+ 结果')
+
+            if phase3_result and phase3_result.get('domains'):
+                chart_dir = os.path.join(output_dir, 'charts')
+                report_dir = os.path.join(output_dir, 'reports')
+
+                # 生成图表
+                chart_paths = generate_all_charts(
+                    phase3_result, chart_dir, month_label=month_label
+                )
+
+                # 生成报告
+                report_path = generate_drift_report(
+                    phase3_result, report_dir, month_label=month_label,
+                    chart_paths=chart_paths
+                )
+
+                results['phaseD'] = {
+                    'charts': chart_paths,
+                    'report': report_path,
+                    'chart_count': len(chart_paths)
+                }
+
+                print(f'  ✓ Phase D 完成 ({len(chart_paths)} 张图表 + 1 份报告)')
+            else:
+                print(f'  ⚠ Phase D 跳过: Phase 3+ 无领域数据')
+                results['phaseD'] = None
+        except Exception as e:
+            print(f'  ✗ Phase D 失败: {e}')
+            import traceback
+            traceback.print_exc()
+            results['phaseD'] = None
+
+    # ============================================================
     # 汇总
     # ============================================================
     print(f'\n{"=" * 70}')
@@ -310,11 +427,12 @@ def run_pipeline(base_dir, month_label=None, skip_phases=None):
     print(f'{"=" * 70}')
 
     summary = {
-        'pipeline': 'wuxing_monthly_v1.2',
+        'pipeline': 'wuxing_monthly_v1.3',
         'month': month_label,
         'executed_at': datetime.now().isoformat(),
         'base_dir': base_dir,
         'phases': {
+            'phase0': '✓' if results.get('phase0') else '✗',
             'phase1': '✓' if results.get('phase1') else '✗',
             'phase2': '✓' if results.get('phase2') else '✗',
             'phase3': '✓' if results.get('phase3') else '✗',
@@ -322,6 +440,7 @@ def run_pipeline(base_dir, month_label=None, skip_phases=None):
             'phaseC2': '✓' if results.get('phaseC2') else '✗',
             'phaseC1': '✓' if results.get('phaseC1') else '✗',
             'timeseries': '✓' if results.get('timeseries') else '✗',
+            'phaseD': '✓' if results.get('phaseD') else '✗',
             'validation': '✓' if results.get('validation', {}).get('passed') else '✗'
         }
     }

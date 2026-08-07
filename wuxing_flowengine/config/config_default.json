@@ -41,5 +41,24 @@
   "_domain_calibration": "领域基准校准 (Ch6: 跨领域 S 值不可比，需建立领域基准)",
   "domain_calibration": null,
 
-  "_K_y_spec": "K_y = w_火×0.4 + w_土×0.3 + E_relation×0.3; E_relation = ke_count/2 (有相克边) | graph_density_ratio (无相克边, Phase 4 增强)"
+  "_K_y_spec": "K_y = w_火×0.4 + w_土×0.3 + E_relation×0.3; E_relation = ke_count/2 (有相克边) | graph_density_ratio (无相克边, Phase 4 增强)",
+
+  "_wrl": "P1#4 WRL 规则系统配置 (设计文档 10.3-10.5 节)",
+  "wrl": {
+    "rules_dir": "rules/",
+    "files": [
+      "classical_rules.wrl",
+      "formal_rules.wrl",
+      "heuristic_rules.wrl",
+      "domain_rules.wrl"
+    ],
+    "validate_on_load": true,
+    "report_output": "reports/",
+    "classification": {
+      "C": "经典规则 (immutable) - 源自《黄帝内经》《淮南子》等经典文献",
+      "F": "形式规则 (immutable) - 数学定义与公式",
+      "H": "启发式规则 (calibratable) - 经验判断与专家知识，需数据校准",
+      "D": "领域规则 (configurable) - 领域特定预设，可按需配置"
+    }
+  }
 }

@@ -31,6 +31,7 @@
     rationale: "熵值必须落在 [0, log2(5)] 区间"
   },
   code_location: "stage_engine.py:22-39 (compute_entropy)"
+  change_log: []
 }
 
 @rule F-CENTROID {
@@ -51,6 +52,7 @@
     rationale: "质心模长不得超过单位圆半径"
   },
   code_location: "wuxing_diagnose_v2.py:79-107 (_compass_centroid)"
+  change_log: []
 }
 
 @rule F-O_T {
@@ -79,6 +81,7 @@
   },
   note: "熵项 (1-H/H_max) 隐含'低熵=有序'假设。高熵=多元广博，低熵=单一聚焦。如需分析广博场景，可改为 H/H_max * 0.1",
   code_location: "validate_p_zhongshu.py:18 (compute_dao_realm)"
+  change_log: []
 }
 
 @rule F-E_U {
@@ -107,6 +110,7 @@
   },
   note: "V1.1 修正: 引入系数 0.5/0.5/0.3 + 用重心模长 √(cx²+cy²) 替代两个独立绝对值",
   code_location: "validate_p_zhongshu.py:19 (compute_dao_realm)"
+  change_log: []
 }
 
 @rule F-C_K {
@@ -134,6 +138,7 @@
     rationale: "识位清晰度归一化到 [0,1] 区间"
   },
   code_location: "validate_p_zhongshu.py:20 (compute_dao_realm)"
+  change_log: []
 }
 
 @rule F-K_Y {
@@ -162,6 +167,7 @@
   },
   note: "ke_edge_count ∈ {0, 1, 2}，分母 /2 而非 /3（三层路径最多 2 条边）",
   code_location: "validate_p_zhongshu.py:21 (compute_dao_realm)"
+  change_log: []
 }
 
 @rule F-S_P {
@@ -196,6 +202,7 @@
   },
   note: "替代旧乘积 S = O_t * E_u * C_k * K_y * 100（量纲不可达，理论 S 上限仅 1.47）",
   code_location: "dao_math.py:29-48 (compute_S_p)"
+  change_log: []
 }
 
 @rule F-THETA {
@@ -231,4 +238,5 @@
     rationale: "临界阈值必须为非负数"
   },
   code_location: "stage_engine.py:69-98 (compute_theta_critical)"
+  change_log: []
 }
