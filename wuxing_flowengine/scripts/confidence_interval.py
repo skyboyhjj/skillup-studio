@@ -238,6 +238,236 @@ def drift_confidence(drift_value, node_count, paper_count):
 
 
 # ============================================================
+# 漂移信度增强（P1#2：小样本领域漂移处理）
+# ============================================================
+
+def drift_confidence_interval(drift_value, node_count, paper_count, z=Z_95):
+    """
+    漂移值的信度区间估计。
+    
+    核心思路：漂移值本身也有不确定性，小样本下应该给出区间而非点估计。
+    使用有效样本量 n_eff = min(node_count, paper_count) 来估计漂移的
+    不确定性范围。
+    
+    公式（基于 Wilson 的启发式扩展）：
+        margin = z * sqrt(drift * (1-drift) / n_eff)
+        ci = [drift - margin, drift + margin]
+    
+    当 n_eff=0 时返回 [0, 1]（完全不确定）。
+    
+    Args:
+        drift_value: 余弦距离漂移值，∈ [0, 1]
+        node_count: 领域节点数
+        paper_count: 领域论文数
+        z: 置信水平 z 值，默认 1.96
+    
+    Returns:
+        {
+            "drift": 点估计,
+            "ci_low": 下界,
+            "ci_high": 上界,
+            "ci_width": 区间宽度,
+            "effective_sample": 有效样本量,
+            "is_reliable": 是否可依赖
+        }
+    """
+    n_eff = min(node_count, paper_count)
+    
+    if n_eff <= 0:
+        return {
+            "drift": round(drift_value, 4),
+            "ci_low": 0.0,
+            "ci_high": 1.0,
+            "ci_width": 1.0,
+            "effective_sample": 0,
+            "is_reliable": False,
+            "warning": "有效样本量为0，漂移值不可用"
+        }
+    
+    # 漂移的标准误估计
+    drift = max(0.0, min(1.0, drift_value))
+    se = math.sqrt(drift * (1 - drift) / n_eff) if drift > 0 and drift < 1 else 0.0
+    margin = z * se
+    
+    ci_low = max(0.0, drift - margin)
+    ci_high = min(1.0, drift + margin)
+    ci_width = ci_high - ci_low
+    
+    # 可靠性判定：区间宽度 < 0.5 且 有效样本 >= 10
+    is_reliable = (ci_width < 0.5) and (n_eff >= 10)
+    
+    result = {
+        "drift": round(drift, 4),
+        "ci_low": round(ci_low, 4),
+        "ci_high": round(ci_high, 4),
+        "ci_width": round(ci_width, 4),
+        "effective_sample": n_eff,
+        "is_reliable": is_reliable
+    }
+    
+    if not is_reliable:
+        if n_eff < 10:
+            result["warning"] = f"有效样本量仅{n_eff}，漂移区间宽度{ci_width:.2f}，数据不足以支撑可靠判定"
+        else:
+            result["warning"] = f"漂移区间宽度{ci_width:.2f}过大，建议补充数据后再判定"
+    
+    return result
+
+
+def drift_direction_guarded(drift_value, node_count, paper_count):
+    """
+    带信度守卫的漂移方向判定。
+    
+    与简单阈值判定不同，此函数在置信度低时自动降低判定级别，
+    避免小样本领域的"假阳性"漂移警报。
+    
+    规则：
+    - 有效样本量为0 → "数据不足"
+    - 置信度为"低" → "数据不足"（不强做判定）
+    - 置信度为"中" + drift > 0.4 → "可能漂移（置信度中）"
+    - 置信度为"中" + drift > 0.15 → "轻微漂移（置信度中）"
+    - 置信度为"高" + drift > 0.4 → "显著漂移"
+    - 置信度为"高" + drift > 0.15 → "轻度漂移"
+    - 否则 → "基本一致"
+    
+    Args:
+        drift_value: 漂移值
+        node_count: 领域节点数
+        paper_count: 领域论文数
+    
+    Returns:
+        {
+            "direction": 方向标签,
+            "confidence_level": 判定置信度,
+            "is_guarded": 是否被信度守卫降级
+        }
+    """
+    n_eff = min(node_count, paper_count)
+    
+    # 无数据
+    if n_eff <= 0:
+        return {
+            "direction": "数据不足",
+            "confidence_level": "无",
+            "is_guarded": True,
+            "reason": "有效样本量为0，无法计算漂移"
+        }
+    
+    conf = drift_confidence(drift_value, node_count, paper_count)
+    level = conf["confidence"]
+    
+    # 低置信度 → 不强做判定
+    if level == "低":
+        return {
+            "direction": "数据不足",
+            "confidence_level": "低",
+            "is_guarded": True,
+            "reason": f"置信度不足（节点{node_count}/论文{paper_count}），不强做判定"
+        }
+    
+    # 中置信度 → 降低判定级别
+    if level == "中":
+        if drift_value > 0.4:
+            return {
+                "direction": "可能漂移（置信度中）",
+                "confidence_level": "中",
+                "is_guarded": True,
+                "reason": "置信度中等，漂移幅度较大但需谨慎解读"
+            }
+        elif drift_value > 0.15:
+            return {
+                "direction": "轻微漂移（置信度中）",
+                "confidence_level": "中",
+                "is_guarded": True,
+                "reason": "置信度中等，漂移幅度较小"
+            }
+        else:
+            return {
+                "direction": "基本一致",
+                "confidence_level": "中",
+                "is_guarded": False
+            }
+    
+    # 高置信度 → 正常判定
+    if drift_value > 0.4:
+        return {
+            "direction": "显著漂移",
+            "confidence_level": "高",
+            "is_guarded": False
+        }
+    elif drift_value > 0.15:
+        return {
+            "direction": "轻度漂移",
+            "confidence_level": "高",
+            "is_guarded": False
+        }
+    else:
+        return {
+            "direction": "基本一致",
+            "confidence_level": "高",
+            "is_guarded": False
+        }
+
+
+def drift_reliability(node_count, paper_count):
+    """
+    领域漂移分析的可靠性综合评估。
+    
+    从三个维度评估：
+    1. 节点覆盖度：领域节点数是否足够代表知识树结构
+    2. 论文覆盖度：论文数是否足够反映研究热点
+    3. 综合可靠性：两者结合的可信度
+    
+    Args:
+        node_count: 领域节点数
+        paper_count: 领域论文数
+    
+    Returns:
+        {
+            "level": "高/中/低/不可用",
+            "score": 0.0-1.0,
+            "node_coverage": 节点覆盖度评估,
+            "paper_coverage": 论文覆盖度评估,
+            "can_compare": 是否可以进行有意义的对比
+        }
+    """
+    n_eff = min(node_count, paper_count)
+    
+    # 节点覆盖度
+    node_conf = sample_confidence_level(node_count)
+    # 论文覆盖度
+    paper_conf = sample_confidence_level(paper_count)
+    
+    # 综合评分：取两者中较低者
+    combined_score = min(node_conf["score"], paper_conf["score"])
+    
+    # 任一方为0 → 不可用
+    if node_count <= 0 or paper_count <= 0:
+        level = "不可用"
+        can_compare = False
+    elif combined_score < 0.3:
+        level = "低"
+        can_compare = False
+    elif combined_score < 0.8:
+        level = "中"
+        can_compare = True
+    else:
+        level = "高"
+        can_compare = True
+    
+    return {
+        "level": level,
+        "score": round(combined_score, 2),
+        "effective_sample": n_eff,
+        "node_count": node_count,
+        "paper_count": paper_count,
+        "node_coverage": node_conf,
+        "paper_coverage": paper_conf,
+        "can_compare": can_compare
+    }
+
+
+# ============================================================
 # 四维信度加权
 # ============================================================
 

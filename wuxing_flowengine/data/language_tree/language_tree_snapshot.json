@@ -1,0 +1,1720 @@
+{
+  "collect_time": "2026-08-07T16:47:12+08:00",
+  "source": "language_family_tree",
+  "schema": "compatible_with_baai_snapshot",
+  "method": "manual_curation",
+  "nodes": [
+    {
+      "id": "lang_0001",
+      "name": "人类语言",
+      "level": 0,
+      "parent_id": null,
+      "category": "root",
+      "wuxing": "土",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "全球语言谱系树根节点"
+    },
+    {
+      "id": "lang_0002",
+      "name": "印欧语系",
+      "level": 1,
+      "parent_id": "lang_0001",
+      "category": "root",
+      "wuxing": "土",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "语系"
+    },
+    {
+      "id": "lang_0003",
+      "name": "日耳曼语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "金",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 日耳曼语族"
+    },
+    {
+      "id": "lang_0004",
+      "name": "英语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "诺曼征服后分层吸收，词汇双源，语法简化"
+    },
+    {
+      "id": "lang_0005",
+      "name": "德语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "格系统保持，强/弱动词规则清晰"
+    },
+    {
+      "id": "lang_0006",
+      "name": "荷兰语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "词尾辅音清化，创新性语音变化"
+    },
+    {
+      "id": "lang_0007",
+      "name": "瑞典语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "格系统简化，声调创新"
+    },
+    {
+      "id": "lang_0008",
+      "name": "挪威语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "两种书面标准，适应性分化"
+    },
+    {
+      "id": "lang_0009",
+      "name": "丹麦语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "喉塞音创新，声门化特征"
+    },
+    {
+      "id": "lang_0010",
+      "name": "冰岛语",
+      "level": 3,
+      "parent_id": "lang_0003",
+      "category": "日耳曼语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "古诺尔斯语直系，语法极度保守"
+    },
+    {
+      "id": "lang_0011",
+      "name": "罗曼语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "火",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 罗曼语族"
+    },
+    {
+      "id": "lang_0012",
+      "name": "法语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "广泛借用、文化输出强、语音大幅简化"
+    },
+    {
+      "id": "lang_0013",
+      "name": "西班牙语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "全球扩散、借词丰富、殖民融合"
+    },
+    {
+      "id": "lang_0014",
+      "name": "意大利语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "文艺复兴输出、方言连续体"
+    },
+    {
+      "id": "lang_0015",
+      "name": "葡萄牙语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "全球扩散、巴西变体、借词丰富"
+    },
+    {
+      "id": "lang_0016",
+      "name": "罗马尼亚语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "巴尔干语言联盟、格系统残留"
+    },
+    {
+      "id": "lang_0017",
+      "name": "加泰罗尼亚语",
+      "level": 3,
+      "parent_id": "lang_0011",
+      "category": "罗曼语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "区域扩张、语言复兴运动"
+    },
+    {
+      "id": "lang_0018",
+      "name": "斯拉夫语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 斯拉夫语族"
+    },
+    {
+      "id": "lang_0019",
+      "name": "俄语",
+      "level": 3,
+      "parent_id": "lang_0018",
+      "category": "斯拉夫语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "格系统完整（6格），语法保守"
+    },
+    {
+      "id": "lang_0020",
+      "name": "波兰语",
+      "level": 3,
+      "parent_id": "lang_0018",
+      "category": "斯拉夫语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "7格系统，鼻元音保持"
+    },
+    {
+      "id": "lang_0021",
+      "name": "捷克语",
+      "level": 3,
+      "parent_id": "lang_0018",
+      "category": "斯拉夫语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "长/短元音对立，形态规则"
+    },
+    {
+      "id": "lang_0022",
+      "name": "乌克兰语",
+      "level": 3,
+      "parent_id": "lang_0018",
+      "category": "斯拉夫语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "呼格保持，词汇保守"
+    },
+    {
+      "id": "lang_0023",
+      "name": "塞尔维亚-克罗地亚语",
+      "level": 3,
+      "parent_id": "lang_0018",
+      "category": "斯拉夫语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "双字母系统（西里尔/拉丁），融合性强"
+    },
+    {
+      "id": "lang_0024",
+      "name": "印度-伊朗语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 印度-伊朗语族"
+    },
+    {
+      "id": "lang_0025",
+      "name": "印地语",
+      "level": 3,
+      "parent_id": "lang_0024",
+      "category": "印度-伊朗语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "分支扩散，天城体文字"
+    },
+    {
+      "id": "lang_0026",
+      "name": "波斯语",
+      "level": 3,
+      "parent_id": "lang_0024",
+      "category": "印度-伊朗语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "丝绸之路借词，阿拉伯语影响"
+    },
+    {
+      "id": "lang_0027",
+      "name": "梵语",
+      "level": 3,
+      "parent_id": "lang_0024",
+      "category": "印度-伊朗语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "精密语法规则，八格系统"
+    },
+    {
+      "id": "lang_0028",
+      "name": "孟加拉语",
+      "level": 3,
+      "parent_id": "lang_0024",
+      "category": "印度-伊朗语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "东部分支，语音创新"
+    },
+    {
+      "id": "lang_0029",
+      "name": "普什图语",
+      "level": 3,
+      "parent_id": "lang_0024",
+      "category": "印度-伊朗语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "复杂格系统，形态丰富"
+    },
+    {
+      "id": "lang_0030",
+      "name": "凯尔特语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 凯尔特语族"
+    },
+    {
+      "id": "lang_0031",
+      "name": "爱尔兰语",
+      "level": 3,
+      "parent_id": "lang_0030",
+      "category": "凯尔特语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "最古老白话文学，语法保守"
+    },
+    {
+      "id": "lang_0032",
+      "name": "威尔士语",
+      "level": 3,
+      "parent_id": "lang_0030",
+      "category": "凯尔特语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "语言复兴运动，分支创新"
+    },
+    {
+      "id": "lang_0033",
+      "name": "苏格兰盖尔语",
+      "level": 3,
+      "parent_id": "lang_0030",
+      "category": "凯尔特语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "区域扩张，濒危保护"
+    },
+    {
+      "id": "lang_0034",
+      "name": "布列塔尼语",
+      "level": 3,
+      "parent_id": "lang_0030",
+      "category": "凯尔特语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "大陆凯尔特残留，法语接触"
+    },
+    {
+      "id": "lang_0035",
+      "name": "希腊语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 希腊语族"
+    },
+    {
+      "id": "lang_0036",
+      "name": "希腊语",
+      "level": 3,
+      "parent_id": "lang_0035",
+      "category": "希腊语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "3000年连续书写，语法极度保守"
+    },
+    {
+      "id": "lang_0037",
+      "name": "波罗的语族",
+      "level": 2,
+      "parent_id": "lang_0002",
+      "category": "印欧语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "印欧语系 → 波罗的语族"
+    },
+    {
+      "id": "lang_0038",
+      "name": "立陶宛语",
+      "level": 3,
+      "parent_id": "lang_0037",
+      "category": "波罗的语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "最接近原始印欧语，格系统保守"
+    },
+    {
+      "id": "lang_0039",
+      "name": "拉脱维亚语",
+      "level": 3,
+      "parent_id": "lang_0037",
+      "category": "波罗的语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "芬兰-乌戈尔语接触，声调创新"
+    },
+    {
+      "id": "lang_0040",
+      "name": "汉藏语系",
+      "level": 1,
+      "parent_id": "lang_0001",
+      "category": "root",
+      "wuxing": "土",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "语系"
+    },
+    {
+      "id": "lang_0041",
+      "name": "汉语族",
+      "level": 2,
+      "parent_id": "lang_0040",
+      "category": "汉藏语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "汉藏语系 → 汉语族"
+    },
+    {
+      "id": "lang_0042",
+      "name": "官话",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "声调简化至4声，适应性最强，通用语"
+    },
+    {
+      "id": "lang_0043",
+      "name": "粤语",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "入声保持，9声调，古汉语特征保守"
+    },
+    {
+      "id": "lang_0044",
+      "name": "闽语",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "上古汉语分支，白读/文读双层"
+    },
+    {
+      "id": "lang_0045",
+      "name": "吴语",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "浊音保持，连续变调复杂"
+    },
+    {
+      "id": "lang_0046",
+      "name": "客家话",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "迁徙保守，中古汉语特征保持"
+    },
+    {
+      "id": "lang_0047",
+      "name": "赣语",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "过渡方言，南北特征混合"
+    },
+    {
+      "id": "lang_0048",
+      "name": "湘语",
+      "level": 3,
+      "parent_id": "lang_0041",
+      "category": "汉语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "古楚语底层，区域性创新"
+    },
+    {
+      "id": "lang_0049",
+      "name": "藏缅语族",
+      "level": 2,
+      "parent_id": "lang_0040",
+      "category": "汉藏语系",
+      "wuxing": "金",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "汉藏语系 → 藏缅语族"
+    },
+    {
+      "id": "lang_0050",
+      "name": "藏语",
+      "level": 3,
+      "parent_id": "lang_0049",
+      "category": "藏缅语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "书面语千年不变，语法规则清晰"
+    },
+    {
+      "id": "lang_0051",
+      "name": "缅甸语",
+      "level": 3,
+      "parent_id": "lang_0049",
+      "category": "藏缅语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "巴利语借词，南传佛教文化圈"
+    },
+    {
+      "id": "lang_0052",
+      "name": "彝语",
+      "level": 3,
+      "parent_id": "lang_0049",
+      "category": "藏缅语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "独立音节文字，六大分支扩散"
+    },
+    {
+      "id": "lang_0053",
+      "name": "克伦语",
+      "level": 3,
+      "parent_id": "lang_0049",
+      "category": "藏缅语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "SVO语序创新，偏离藏缅主流"
+    },
+    {
+      "id": "lang_0054",
+      "name": "南岛语系",
+      "level": 1,
+      "parent_id": "lang_0001",
+      "category": "root",
+      "wuxing": "木",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "语系"
+    },
+    {
+      "id": "lang_0055",
+      "name": "马来-波利尼西亚语族",
+      "level": 2,
+      "parent_id": "lang_0054",
+      "category": "南岛语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "南岛语系 → 马来-波利尼西亚语族"
+    },
+    {
+      "id": "lang_0056",
+      "name": "马来语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "贸易通用语，借词丰富（梵/阿/英/荷）"
+    },
+    {
+      "id": "lang_0057",
+      "name": "印尼语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "标准化马来语变体，融合性强"
+    },
+    {
+      "id": "lang_0058",
+      "name": "他加禄语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "焦点系统创新，动词形态复杂"
+    },
+    {
+      "id": "lang_0059",
+      "name": "毛利语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "波利尼西亚分支，语音简化"
+    },
+    {
+      "id": "lang_0060",
+      "name": "夏威夷语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "极小音位系统（13个），极端简化"
+    },
+    {
+      "id": "lang_0061",
+      "name": "马达加斯加语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "最远扩散，跨印度洋到达非洲"
+    },
+    {
+      "id": "lang_0062",
+      "name": "斐济语",
+      "level": 3,
+      "parent_id": "lang_0055",
+      "category": "马来-波利尼西亚语族",
+      "wuxing": "水",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "美拉尼西亚接触，语音适应"
+    },
+    {
+      "id": "lang_0063",
+      "name": "台湾南岛语族",
+      "level": 2,
+      "parent_id": "lang_0054",
+      "category": "南岛语系",
+      "wuxing": "水",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "南岛语系 → 台湾南岛语族"
+    },
+    {
+      "id": "lang_0064",
+      "name": "阿美语",
+      "level": 3,
+      "parent_id": "lang_0063",
+      "category": "台湾南岛语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "台湾最大南岛民族，分支扩散"
+    },
+    {
+      "id": "lang_0065",
+      "name": "泰雅语",
+      "level": 3,
+      "parent_id": "lang_0063",
+      "category": "台湾南岛语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "古南岛语特征保持"
+    },
+    {
+      "id": "lang_0066",
+      "name": "排湾语",
+      "level": 3,
+      "parent_id": "lang_0063",
+      "category": "台湾南岛语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "贵族语体分层，形态规则"
+    },
+    {
+      "id": "lang_0067",
+      "name": "突厥语系",
+      "level": 1,
+      "parent_id": "lang_0001",
+      "category": "root",
+      "wuxing": "火",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "语系"
+    },
+    {
+      "id": "lang_0068",
+      "name": "乌古斯语族",
+      "level": 2,
+      "parent_id": "lang_0067",
+      "category": "突厥语系",
+      "wuxing": "火",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "突厥语系 → 乌古斯语族"
+    },
+    {
+      "id": "lang_0069",
+      "name": "土耳其语",
+      "level": 3,
+      "parent_id": "lang_0068",
+      "category": "乌古斯语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "拉丁化改革，借词替换，融合创新"
+    },
+    {
+      "id": "lang_0070",
+      "name": "阿塞拜疆语",
+      "level": 3,
+      "parent_id": "lang_0068",
+      "category": "乌古斯语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "波斯/俄语接触，多重借词层"
+    },
+    {
+      "id": "lang_0071",
+      "name": "土库曼语",
+      "level": 3,
+      "parent_id": "lang_0068",
+      "category": "乌古斯语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "元音和谐严格，语法保守"
+    },
+    {
+      "id": "lang_0072",
+      "name": "葛逻禄语族",
+      "level": 2,
+      "parent_id": "lang_0067",
+      "category": "突厥语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "突厥语系 → 葛逻禄语族"
+    },
+    {
+      "id": "lang_0073",
+      "name": "乌兹别克语",
+      "level": 3,
+      "parent_id": "lang_0072",
+      "category": "葛逻禄语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "无元音和谐简化，阿拉伯字母→拉丁→西里尔"
+    },
+    {
+      "id": "lang_0074",
+      "name": "维吾尔语",
+      "level": 3,
+      "parent_id": "lang_0072",
+      "category": "葛逻禄语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "丝绸之路借词，多元文化接触"
+    },
+    {
+      "id": "lang_0075",
+      "name": "钦察语族",
+      "level": 2,
+      "parent_id": "lang_0067",
+      "category": "突厥语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "突厥语系 → 钦察语族"
+    },
+    {
+      "id": "lang_0076",
+      "name": "哈萨克语",
+      "level": 3,
+      "parent_id": "lang_0075",
+      "category": "钦察语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "草原扩散，从西里尔→拉丁转型"
+    },
+    {
+      "id": "lang_0077",
+      "name": "吉尔吉斯语",
+      "level": 3,
+      "parent_id": "lang_0075",
+      "category": "钦察语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "长元音保持，语法保守"
+    },
+    {
+      "id": "lang_0078",
+      "name": "鞑靼语",
+      "level": 3,
+      "parent_id": "lang_0075",
+      "category": "钦察语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "俄语深度接触，借词层叠"
+    },
+    {
+      "id": "lang_0079",
+      "name": "亚非语系",
+      "level": 1,
+      "parent_id": "lang_0001",
+      "category": "root",
+      "wuxing": "金",
+      "cognitive_depth": "L1",
+      "position": null,
+      "note": "语系"
+    },
+    {
+      "id": "lang_0080",
+      "name": "闪米特语族",
+      "level": 2,
+      "parent_id": "lang_0079",
+      "category": "亚非语系",
+      "wuxing": "金",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "亚非语系 → 闪米特语族"
+    },
+    {
+      "id": "lang_0081",
+      "name": "阿拉伯语",
+      "level": 3,
+      "parent_id": "lang_0080",
+      "category": "闪米特语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "古兰经标准语，方言连续体，借词输出"
+    },
+    {
+      "id": "lang_0082",
+      "name": "希伯来语",
+      "level": 3,
+      "parent_id": "lang_0080",
+      "category": "闪米特语族",
+      "wuxing": "金",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "唯一成功复兴的古典语言"
+    },
+    {
+      "id": "lang_0083",
+      "name": "阿姆哈拉语",
+      "level": 3,
+      "parent_id": "lang_0080",
+      "category": "闪米特语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "埃塞俄比亚官方语，吉兹字母保持"
+    },
+    {
+      "id": "lang_0084",
+      "name": "阿拉姆语",
+      "level": 3,
+      "parent_id": "lang_0080",
+      "category": "闪米特语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "近东通用语3000年，今仅存小社区"
+    },
+    {
+      "id": "lang_0085",
+      "name": "柏柏尔语族",
+      "level": 2,
+      "parent_id": "lang_0079",
+      "category": "亚非语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "亚非语系 → 柏柏尔语族"
+    },
+    {
+      "id": "lang_0086",
+      "name": "塔马齐格特语",
+      "level": 3,
+      "parent_id": "lang_0085",
+      "category": "柏柏尔语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "北非原住民语言，提非纳字母复活"
+    },
+    {
+      "id": "lang_0087",
+      "name": "卡比尔语",
+      "level": 3,
+      "parent_id": "lang_0085",
+      "category": "柏柏尔语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "阿尔及利亚最大柏柏尔语，法语接触"
+    },
+    {
+      "id": "lang_0088",
+      "name": "埃及语族",
+      "level": 2,
+      "parent_id": "lang_0079",
+      "category": "亚非语系",
+      "wuxing": "土",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "亚非语系 → 埃及语族"
+    },
+    {
+      "id": "lang_0089",
+      "name": "科普特语",
+      "level": 3,
+      "parent_id": "lang_0088",
+      "category": "埃及语族",
+      "wuxing": "土",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "古埃及语最后阶段，礼仪语存活"
+    },
+    {
+      "id": "lang_0090",
+      "name": "库施特语族",
+      "level": 2,
+      "parent_id": "lang_0079",
+      "category": "亚非语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "亚非语系 → 库施特语族"
+    },
+    {
+      "id": "lang_0091",
+      "name": "索马里语",
+      "level": 3,
+      "parent_id": "lang_0090",
+      "category": "库施特语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "非洲之角扩散，声调创新"
+    },
+    {
+      "id": "lang_0092",
+      "name": "奥罗莫语",
+      "level": 3,
+      "parent_id": "lang_0090",
+      "category": "库施特语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "埃塞俄比亚最多人口母语，分支扩张"
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "lang_0001",
+      "target_id": "lang_0002",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0003",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0004",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0005",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0006",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0007",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0008",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0009",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0003",
+      "target_id": "lang_0010",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0011",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0012",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0013",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0014",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0015",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0016",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0011",
+      "target_id": "lang_0017",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0018",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0018",
+      "target_id": "lang_0019",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0018",
+      "target_id": "lang_0020",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0018",
+      "target_id": "lang_0021",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0018",
+      "target_id": "lang_0022",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0018",
+      "target_id": "lang_0023",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0024",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0024",
+      "target_id": "lang_0025",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0024",
+      "target_id": "lang_0026",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0024",
+      "target_id": "lang_0027",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0024",
+      "target_id": "lang_0028",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0024",
+      "target_id": "lang_0029",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0030",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0030",
+      "target_id": "lang_0031",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0030",
+      "target_id": "lang_0032",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0030",
+      "target_id": "lang_0033",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0030",
+      "target_id": "lang_0034",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0035",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0035",
+      "target_id": "lang_0036",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0002",
+      "target_id": "lang_0037",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0037",
+      "target_id": "lang_0038",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0037",
+      "target_id": "lang_0039",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0001",
+      "target_id": "lang_0040",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0040",
+      "target_id": "lang_0041",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0042",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0043",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0044",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0045",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0046",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0047",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0041",
+      "target_id": "lang_0048",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0040",
+      "target_id": "lang_0049",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0049",
+      "target_id": "lang_0050",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0049",
+      "target_id": "lang_0051",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0049",
+      "target_id": "lang_0052",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0049",
+      "target_id": "lang_0053",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0001",
+      "target_id": "lang_0054",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0054",
+      "target_id": "lang_0055",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0056",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0057",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0058",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0059",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0060",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0061",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0055",
+      "target_id": "lang_0062",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0054",
+      "target_id": "lang_0063",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0063",
+      "target_id": "lang_0064",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0063",
+      "target_id": "lang_0065",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0063",
+      "target_id": "lang_0066",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0001",
+      "target_id": "lang_0067",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0067",
+      "target_id": "lang_0068",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0068",
+      "target_id": "lang_0069",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0068",
+      "target_id": "lang_0070",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0068",
+      "target_id": "lang_0071",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0067",
+      "target_id": "lang_0072",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0072",
+      "target_id": "lang_0073",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0072",
+      "target_id": "lang_0074",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0067",
+      "target_id": "lang_0075",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0075",
+      "target_id": "lang_0076",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0075",
+      "target_id": "lang_0077",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0075",
+      "target_id": "lang_0078",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0001",
+      "target_id": "lang_0079",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0079",
+      "target_id": "lang_0080",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0080",
+      "target_id": "lang_0081",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0080",
+      "target_id": "lang_0082",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0080",
+      "target_id": "lang_0083",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0080",
+      "target_id": "lang_0084",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0079",
+      "target_id": "lang_0085",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0085",
+      "target_id": "lang_0086",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0085",
+      "target_id": "lang_0087",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0079",
+      "target_id": "lang_0088",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0088",
+      "target_id": "lang_0089",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0079",
+      "target_id": "lang_0090",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0090",
+      "target_id": "lang_0091",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0090",
+      "target_id": "lang_0092",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0004",
+      "target_id": "lang_0012",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0026",
+      "target_id": "lang_0081",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0069",
+      "target_id": "lang_0081",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0069",
+      "target_id": "lang_0026",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0056",
+      "target_id": "lang_0027",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0057",
+      "target_id": "lang_0027",
+      "relation": "borrows_from"
+    },
+    {
+      "source_id": "lang_0004",
+      "target_id": "lang_0005",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0004",
+      "target_id": "lang_0006",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0005",
+      "target_id": "lang_0006",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0007",
+      "target_id": "lang_0008",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0007",
+      "target_id": "lang_0009",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0007",
+      "target_id": "lang_0010",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0008",
+      "target_id": "lang_0009",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0008",
+      "target_id": "lang_0010",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0009",
+      "target_id": "lang_0010",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0012",
+      "target_id": "lang_0013",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0012",
+      "target_id": "lang_0014",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0012",
+      "target_id": "lang_0015",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0013",
+      "target_id": "lang_0014",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0013",
+      "target_id": "lang_0015",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0014",
+      "target_id": "lang_0015",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0019",
+      "target_id": "lang_0022",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0019",
+      "target_id": "lang_0020",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0019",
+      "target_id": "lang_0021",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0022",
+      "target_id": "lang_0020",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0022",
+      "target_id": "lang_0021",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0020",
+      "target_id": "lang_0021",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0025",
+      "target_id": "lang_0028",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0025",
+      "target_id": "lang_0027",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0028",
+      "target_id": "lang_0027",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0069",
+      "target_id": "lang_0070",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0069",
+      "target_id": "lang_0071",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0070",
+      "target_id": "lang_0071",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0081",
+      "target_id": "lang_0082",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0081",
+      "target_id": "lang_0084",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0082",
+      "target_id": "lang_0084",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0042",
+      "target_id": "lang_0043",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0042",
+      "target_id": "lang_0044",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0042",
+      "target_id": "lang_0045",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0042",
+      "target_id": "lang_0046",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0043",
+      "target_id": "lang_0044",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0043",
+      "target_id": "lang_0045",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0043",
+      "target_id": "lang_0046",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0044",
+      "target_id": "lang_0045",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0044",
+      "target_id": "lang_0046",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0045",
+      "target_id": "lang_0046",
+      "relation": "cognate_with"
+    }
+  ],
+  "metadata": {
+    "total_families": 5,
+    "total_subfamilies": 18,
+    "total_languages": 68,
+    "family_names": [
+      "印欧语系",
+      "汉藏语系",
+      "南岛语系",
+      "突厥语系",
+      "亚非语系"
+    ],
+    "wuxing_mapping": "语言领域特化：木=扩张/分支/创新，火=交互/融合/借词，土=稳定/保守/连续，金=规则/形态/边界，水=适应/变体/吸收"
+  }
+}

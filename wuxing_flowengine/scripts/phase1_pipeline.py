@@ -305,26 +305,41 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
 
     print(f'\n[1] 加载 {len(nodes)} 个节点, {len(edges)} 条边')
 
-    # [2] 认知深度估算
+    # [2] 认知深度估算（尊重预赋值：已有 cognitive_depth 的节点跳过）
     print('\n[2] 认知深度估算...')
     dc = Counter()
+    pre_assigned_depth = 0
     for n in nodes:
-        d = est_depth(n['name'])
-        n['cognitive_depth'] = d
-        dc[d] += 1
+        if n.get('cognitive_depth') and n['cognitive_depth'] in ('L1', 'L2', 'L3', 'L4'):
+            dc[n['cognitive_depth']] += 1
+            pre_assigned_depth += 1
+        else:
+            d = est_depth(n['name'])
+            n['cognitive_depth'] = d
+            dc[d] += 1
     for d in ['L1', 'L2', 'L3', 'L4']:
         print(f'  {d}: {dc.get(d, 0)}')
+    if pre_assigned_depth > 0:
+        print(f'  (其中 {pre_assigned_depth} 个节点保留预赋值)')
 
-    # [3] 五行映射
+    # [3] 五行映射（尊重预赋值：已有五行属性的节点跳过）
     print('\n[3] 五行映射...')
     wc = Counter()
+    pre_assigned_wx = 0
+    VALID_WUXING = {'木', '火', '土', '金', '水'}
     for n in nodes:
-        wx = classify_wx(n['name'], n.get('category', ''))
-        n['wuxing'] = wx
-        wc[wx] += 1
+        if n.get('wuxing') and n['wuxing'] in VALID_WUXING:
+            wc[n['wuxing']] += 1
+            pre_assigned_wx += 1
+        else:
+            wx = classify_wx(n['name'], n.get('category', ''))
+            n['wuxing'] = wx
+            wc[wx] += 1
     for wx in ['木', '火', '土', '金', '水']:
         cnt = wc.get(wx, 0)
         print(f'  {wx}: {cnt} ({cnt/len(nodes)*100:.1f}%)')
+    if pre_assigned_wx > 0:
+        print(f'  (其中 {pre_assigned_wx} 个节点保留预赋值)')
 
     # [4] 三层构建
     print('\n[4] 独立三层构建...')

@@ -7,7 +7,10 @@ import os
 import math
 from collections import Counter, defaultdict
 from datetime import datetime
-from confidence_interval import drift_confidence
+from confidence_interval import (
+    drift_confidence, drift_confidence_interval,
+    drift_direction_guarded, drift_reliability
+)
 
 # 论文五行关键词
 PAPER_WUXING_KEYWORDS = {
@@ -166,12 +169,20 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
     # 领域对比：使用 Phase 2 的 domain_tracks 节点数据
     domains = {}
     domain_tracks = node_data.get('domain_tracks', {})
+    unreliable_domains = []  # 收集不可靠领域
 
     for domain in sorted(set(list(domain_tracks.keys()) + list(paper_domains.keys()))):
+        # 跳过根节点伪领域
+        if domain == 'root':
+            continue
+
         domain_node = domain_tracks.get(domain, {})
         node_wx = domain_node.get('wuxing', {})
         node_count = domain_node.get('node_count', 0)
         paper_count = paper_domains.get(domain, 0)
+
+        # 可靠性评估
+        reliability = drift_reliability(node_count, paper_count)
 
         # 计算论文五行分布（基于论文标题关键词，使用规范化领域名）
         domain_papers = [p for p in papers if normalize_domain(classify_paper(p)) == domain]
@@ -193,11 +204,56 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
         node_wx_pct = {wx: round(node_wx.get(wx, 0) / total_node, 4) for wx in ['木', '火', '土', '金', '水']}
         paper_wx_pct = {wx: round(paper_wx_dist.get(wx, 0) / total_paper, 4) for wx in ['木', '火', '土', '金', '水']}
 
-        # 漂移幅度：节点与论文五行分布的余弦距离
-        dot = sum(node_wx_pct[wx] * paper_wx_pct[wx] for wx in ['木', '火', '土', '金', '水'])
-        norm_n = math.sqrt(sum(v**2 for v in node_wx_pct.values()))
-        norm_p = math.sqrt(sum(v**2 for v in paper_wx_pct.values()))
-        drift = round(1 - dot / (norm_n * norm_p + 1e-10), 4)
+        # P1#2: 小样本领域漂移处理
+        # 当任一方样本量为0时，漂移无意义，标记为"不可比较"
+        if not reliability["can_compare"]:
+            drift = 1.0  # 占位值
+            direction_info = {
+                "direction": "数据不足",
+                "confidence_level": reliability["level"],
+                "is_guarded": True,
+                "reason": f"节点数({node_count})或论文数({paper_count})不足，无法进行有意义的漂移分析"
+            }
+            drift_ci = {
+                "drift": 1.0,
+                "ci_low": 0.0,
+                "ci_high": 1.0,
+                "ci_width": 1.0,
+                "effective_sample": 0,
+                "is_reliable": False,
+                "warning": "不可比较：任一方数据为零"
+            }
+            unreliable_domains.append({
+                "domain": domain,
+                "node_count": node_count,
+                "paper_count": paper_count,
+                "reason": "数据不足",
+                "reliability": reliability
+            })
+        else:
+            # 漂移幅度：节点与论文五行分布的余弦距离
+            dot = sum(node_wx_pct[wx] * paper_wx_pct[wx] for wx in ['木', '火', '土', '金', '水'])
+            norm_n = math.sqrt(sum(v**2 for v in node_wx_pct.values()))
+            norm_p = math.sqrt(sum(v**2 for v in paper_wx_pct.values()))
+            drift = round(1 - dot / (norm_n * norm_p + 1e-10), 4)
+
+            # 使用带信度守卫的方向判定
+            direction_info = drift_direction_guarded(drift, node_count, paper_count)
+
+            # 漂移信度区间
+            drift_ci = drift_confidence_interval(drift, node_count, paper_count)
+
+            # 小样本警告收集
+            if direction_info.get("is_guarded"):
+                unreliable_domains.append({
+                    "domain": domain,
+                    "node_count": node_count,
+                    "paper_count": paper_count,
+                    "reason": direction_info.get("reason", "信度守卫触发"),
+                    "direction": direction_info["direction"],
+                    "drift": drift,
+                    "reliability": reliability
+                })
 
         domains[domain] = {
             'node_count': node_count,
@@ -206,15 +262,19 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
             'paper_wx': paper_wx_pct,
             'comparison': {
                 'drift': drift,
-                'direction': '显著漂移' if drift > 0.4 else ('轻度漂移' if drift > 0.15 else '基本一致')
+                'direction': direction_info["direction"],
+                'is_guarded': direction_info.get("is_guarded", False),
+                'confidence_level': direction_info.get("confidence_level", "未知")
             },
-            'drift_confidence': drift_confidence(drift, node_count, paper_count)
+            'drift_confidence': drift_confidence(drift, node_count, paper_count),
+            'drift_confidence_interval': drift_ci,
+            'reliability': reliability
         }
 
     # 构建输出
     output = {
         'report_type': 'phase3_plus_diagnosis',
-        'version': 'V1.2',
+        'version': 'V1.3',
         'generated_at': datetime.now().isoformat(),
         'phase': '3+',
         'month_label': month_label or '',
@@ -226,7 +286,14 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
         },
         'domains': domains,
         'paper_domain_distribution': dict(paper_domains),
-        'total_papers': len(papers)
+        'total_papers': len(papers),
+        # P1#2: 小样本/不可靠领域摘要
+        'drift_quality': {
+            'total_domains': len(domains),
+            'unreliable_count': len(unreliable_domains),
+            'unreliable_domains': unreliable_domains,
+            'summary': f'{len(unreliable_domains)}/{len(domains)} 个领域漂移分析不可靠'
+        }
     }
 
     # 保存
@@ -237,6 +304,12 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
     print(f'\n[3] 输出已保存: {diag_path}')
     print(f'  总论文: {len(papers)}')
     print(f'  涉及领域: {len(paper_domains)}')
+
+    # P1#2: 不可靠领域警告
+    if unreliable_domains:
+        print(f'\n  ⚠ 漂移分析质量警告: {len(unreliable_domains)}/{len(domains)} 个领域不可靠')
+        for ud in unreliable_domains:
+            print(f'    - {ud["domain"]}: {ud["reason"]} (节点{ud["node_count"]}/论文{ud["paper_count"]})')
 
     return output
 
