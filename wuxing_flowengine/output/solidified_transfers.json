@@ -3241,5 +3241,4329 @@
       "mapping_count": 22,
       "coverage": 1.0
     }
+  },
+  {
+    "mapping_id": "map_39584fa8",
+    "source_domain": "大语言模型",
+    "target_domain": "计算机视觉",
+    "scenarios_tested": 5,
+    "scenario_results": [
+      {
+        "scenario_description": "场景 1: 在目标域 '计算机视觉' 中，验证映射后的 '大语言模型' 与 '大语言模型' 之间是否保持 '层级' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 2: 在目标域 '计算机视觉' 中，验证映射后的 '人类反馈强化学习' 与 '大语言模型驱动的内容理解' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 3: 在目标域 '计算机视觉' 中，验证映射后的 '知识编辑与更新' 与 '幻觉检测与事实性增强' 之间是否保持 '相生' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 4: 在目标域 '计算机视觉' 中，验证映射后的 '逻辑与数值联合推理' 与 '智能体' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 5: 在目标域 '计算机视觉' 中，验证映射后的 '自然语言处理' 与 '多模态智能' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      }
+    ],
+    "overall_pass": true,
+    "verified_mappings": [
+      {
+        "source_node_id": "node_121",
+        "source_node_name": "生成式AI",
+        "target_node_id": "node_0309",
+        "target_node_name": "金融文档字段提取与OCR增强 (新)",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'水'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_036",
+        "source_node_name": "具身智能与机器人",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'金'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_056",
+        "source_node_name": "多模态智能",
+        "target_node_id": "node_228",
+        "target_node_name": "点云处理与几何深度学习",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'木'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_001",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.45,
+        "rationale": "结构相似度: 0.45 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_002",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.54,
+        "rationale": "结构相似度: 0.54 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_003",
+        "source_node_name": "指令微调技术",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_004",
+        "source_node_name": "人类反馈强化学习",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_005",
+        "source_node_name": "直接偏好优化",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_006",
+        "source_node_name": "参数高效微调",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_007",
+        "source_node_name": "模型量化与推断加速",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_008",
+        "source_node_name": "混合专家模型架构",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_009",
+        "source_node_name": "长文本上下文处理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_010",
+        "source_node_name": "幻觉检测与事实性增强",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_011",
+        "source_node_name": "知识编辑与更新",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_012",
+        "source_node_name": "隐式推理架构",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_013",
+        "source_node_name": "思维链效率与路径优化",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_014",
+        "source_node_name": "逻辑与数值联合推理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_015",
+        "source_node_name": "幻觉检测与置信度评估",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_016",
+        "source_node_name": "知识编辑与事实一致性维护",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_017",
+        "source_node_name": "自然语言处理",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_089",
+        "source_node_name": "智能体",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_268",
+        "source_node_name": "大语言模型驱动的内容理解",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.41,
+        "rationale": "结构相似度: 0.41 (度/入度/出度/关系类型分布)"
+      }
+    ],
+    "failed_mappings": [],
+    "relation_preservation_rate": 0.8652,
+    "pass_rate": 1.0,
+    "metadata": {
+      "candidate_confidence": 0.4944,
+      "candidate_confidence_level": "medium",
+      "mapping_count": 22,
+      "coverage": 1.0
+    }
+  },
+  {
+    "mapping_id": "map_53431885",
+    "source_domain": "大语言模型",
+    "target_domain": "计算机视觉",
+    "scenarios_tested": 5,
+    "scenario_results": [
+      {
+        "scenario_description": "场景 1: 在目标域 '计算机视觉' 中，验证映射后的 '大语言模型' 与 '大语言模型' 之间是否保持 '层级' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 2: 在目标域 '计算机视觉' 中，验证映射后的 '人类反馈强化学习' 与 '大语言模型驱动的内容理解' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 3: 在目标域 '计算机视觉' 中，验证映射后的 '知识编辑与更新' 与 '幻觉检测与事实性增强' 之间是否保持 '相生' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 4: 在目标域 '计算机视觉' 中，验证映射后的 '逻辑与数值联合推理' 与 '智能体' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 5: 在目标域 '计算机视觉' 中，验证映射后的 '自然语言处理' 与 '多模态智能' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      }
+    ],
+    "overall_pass": true,
+    "verified_mappings": [
+      {
+        "source_node_id": "node_121",
+        "source_node_name": "生成式AI",
+        "target_node_id": "node_0309",
+        "target_node_name": "金融文档字段提取与OCR增强 (新)",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'水'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_036",
+        "source_node_name": "具身智能与机器人",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'金'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_056",
+        "source_node_name": "多模态智能",
+        "target_node_id": "node_228",
+        "target_node_name": "点云处理与几何深度学习",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'木'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_001",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.45,
+        "rationale": "结构相似度: 0.45 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_002",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.54,
+        "rationale": "结构相似度: 0.54 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_003",
+        "source_node_name": "指令微调技术",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_004",
+        "source_node_name": "人类反馈强化学习",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_005",
+        "source_node_name": "直接偏好优化",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_006",
+        "source_node_name": "参数高效微调",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_007",
+        "source_node_name": "模型量化与推断加速",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_008",
+        "source_node_name": "混合专家模型架构",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_009",
+        "source_node_name": "长文本上下文处理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_010",
+        "source_node_name": "幻觉检测与事实性增强",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_011",
+        "source_node_name": "知识编辑与更新",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_012",
+        "source_node_name": "隐式推理架构",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_013",
+        "source_node_name": "思维链效率与路径优化",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_014",
+        "source_node_name": "逻辑与数值联合推理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_015",
+        "source_node_name": "幻觉检测与置信度评估",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_016",
+        "source_node_name": "知识编辑与事实一致性维护",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_017",
+        "source_node_name": "自然语言处理",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_089",
+        "source_node_name": "智能体",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_268",
+        "source_node_name": "大语言模型驱动的内容理解",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.41,
+        "rationale": "结构相似度: 0.41 (度/入度/出度/关系类型分布)"
+      }
+    ],
+    "failed_mappings": [],
+    "relation_preservation_rate": 0.8652,
+    "pass_rate": 1.0,
+    "metadata": {
+      "candidate_confidence": 0.4944,
+      "candidate_confidence_level": "medium",
+      "mapping_count": 22,
+      "coverage": 1.0
+    }
+  },
+  {
+    "mapping_id": "map_0fd0bc6c",
+    "source_domain": "大语言模型",
+    "target_domain": "计算机视觉",
+    "scenarios_tested": 5,
+    "scenario_results": [
+      {
+        "scenario_description": "场景 1: 在目标域 '计算机视觉' 中，验证映射后的 '大语言模型' 与 '大语言模型' 之间是否保持 '层级' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 2: 在目标域 '计算机视觉' 中，验证映射后的 '人类反馈强化学习' 与 '大语言模型驱动的内容理解' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 3: 在目标域 '计算机视觉' 中，验证映射后的 '知识编辑与更新' 与 '幻觉检测与事实性增强' 之间是否保持 '相生' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 4: 在目标域 '计算机视觉' 中，验证映射后的 '逻辑与数值联合推理' 与 '智能体' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 5: 在目标域 '计算机视觉' 中，验证映射后的 '自然语言处理' 与 '多模态智能' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      }
+    ],
+    "overall_pass": true,
+    "verified_mappings": [
+      {
+        "source_node_id": "node_121",
+        "source_node_name": "生成式AI",
+        "target_node_id": "node_0309",
+        "target_node_name": "金融文档字段提取与OCR增强 (新)",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'水'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_036",
+        "source_node_name": "具身智能与机器人",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'金'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_056",
+        "source_node_name": "多模态智能",
+        "target_node_id": "node_228",
+        "target_node_name": "点云处理与几何深度学习",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'木'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_001",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.45,
+        "rationale": "结构相似度: 0.45 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_002",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.54,
+        "rationale": "结构相似度: 0.54 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_003",
+        "source_node_name": "指令微调技术",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_004",
+        "source_node_name": "人类反馈强化学习",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_005",
+        "source_node_name": "直接偏好优化",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_006",
+        "source_node_name": "参数高效微调",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_007",
+        "source_node_name": "模型量化与推断加速",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_008",
+        "source_node_name": "混合专家模型架构",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_009",
+        "source_node_name": "长文本上下文处理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_010",
+        "source_node_name": "幻觉检测与事实性增强",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_011",
+        "source_node_name": "知识编辑与更新",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_012",
+        "source_node_name": "隐式推理架构",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_013",
+        "source_node_name": "思维链效率与路径优化",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_014",
+        "source_node_name": "逻辑与数值联合推理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_015",
+        "source_node_name": "幻觉检测与置信度评估",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_016",
+        "source_node_name": "知识编辑与事实一致性维护",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_017",
+        "source_node_name": "自然语言处理",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_089",
+        "source_node_name": "智能体",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_268",
+        "source_node_name": "大语言模型驱动的内容理解",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.41,
+        "rationale": "结构相似度: 0.41 (度/入度/出度/关系类型分布)"
+      }
+    ],
+    "failed_mappings": [],
+    "relation_preservation_rate": 0.8652,
+    "pass_rate": 1.0,
+    "metadata": {
+      "candidate_confidence": 0.4944,
+      "candidate_confidence_level": "medium",
+      "mapping_count": 22,
+      "coverage": 1.0
+    }
+  },
+  {
+    "mapping_id": "map_c3ce5f75",
+    "source_domain": "大语言模型",
+    "target_domain": "计算机视觉",
+    "scenarios_tested": 5,
+    "scenario_results": [
+      {
+        "scenario_description": "场景 1: 在目标域 '计算机视觉' 中，验证映射后的 '大语言模型' 与 '大语言模型' 之间是否保持 '层级' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 2: 在目标域 '计算机视觉' 中，验证映射后的 '人类反馈强化学习' 与 '大语言模型驱动的内容理解' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 3: 在目标域 '计算机视觉' 中，验证映射后的 '知识编辑与更新' 与 '幻觉检测与事实性增强' 之间是否保持 '相生' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 4: 在目标域 '计算机视觉' 中，验证映射后的 '逻辑与数值联合推理' 与 '智能体' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      },
+      {
+        "scenario_description": "场景 5: 在目标域 '计算机视觉' 中，验证映射后的 '自然语言处理' 与 '多模态智能' 之间是否保持 '相克' 关系",
+        "relations_held": 154,
+        "total_relations": 178,
+        "passed": true,
+        "failed_relations": [
+          {
+            "source_edge": "大语言模型 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 指令微调技术",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 人类反馈强化学习",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 直接偏好优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 参数高效微调",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 模型量化与推断加速",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 混合专家模型架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 长文本上下文处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与事实性增强",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与更新",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 隐式推理架构",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 思维链效率与路径优化",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 逻辑与数值联合推理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_220",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 幻觉检测与置信度评估",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 知识编辑与事实一致性维护",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 具身智能与机器人",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 多模态智能",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_228",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "大语言模型 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 大语言模型",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 自然语言处理",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "多模态智能 → 生成式AI",
+            "relation_type": "层级",
+            "mapped_src": "node_228",
+            "mapped_tgt": "node_0309",
+            "reason": "目标域中未找到对应的 层级 关系"
+          },
+          {
+            "source_edge": "具身智能与机器人 → 智能体",
+            "relation_type": "层级",
+            "mapped_src": "node_219",
+            "mapped_tgt": "node_219",
+            "reason": "目标域中未找到对应的 层级 关系"
+          }
+        ],
+        "notes": "关系保持率: 154/178 = 86.5%"
+      }
+    ],
+    "overall_pass": true,
+    "verified_mappings": [
+      {
+        "source_node_id": "node_121",
+        "source_node_name": "生成式AI",
+        "target_node_id": "node_0309",
+        "target_node_name": "金融文档字段提取与OCR增强 (新)",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'水'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_036",
+        "source_node_name": "具身智能与机器人",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'金'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_056",
+        "source_node_name": "多模态智能",
+        "target_node_id": "node_228",
+        "target_node_name": "点云处理与几何深度学习",
+        "confidence": 1.0,
+        "rationale": "五行属性匹配: 均为'木'，经典规则约束"
+      },
+      {
+        "source_node_id": "node_001",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.45,
+        "rationale": "结构相似度: 0.45 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_002",
+        "source_node_name": "大语言模型",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.54,
+        "rationale": "结构相似度: 0.54 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_003",
+        "source_node_name": "指令微调技术",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_004",
+        "source_node_name": "人类反馈强化学习",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_005",
+        "source_node_name": "直接偏好优化",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_006",
+        "source_node_name": "参数高效微调",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_007",
+        "source_node_name": "模型量化与推断加速",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_008",
+        "source_node_name": "混合专家模型架构",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_009",
+        "source_node_name": "长文本上下文处理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_010",
+        "source_node_name": "幻觉检测与事实性增强",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_011",
+        "source_node_name": "知识编辑与更新",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_012",
+        "source_node_name": "隐式推理架构",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_013",
+        "source_node_name": "思维链效率与路径优化",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_014",
+        "source_node_name": "逻辑与数值联合推理",
+        "target_node_id": "node_220",
+        "target_node_name": "目标检测与边界框回归优化",
+        "confidence": 0.37,
+        "rationale": "结构相似度: 0.37 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_015",
+        "source_node_name": "幻觉检测与置信度评估",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_016",
+        "source_node_name": "知识编辑与事实一致性维护",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_017",
+        "source_node_name": "自然语言处理",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.44,
+        "rationale": "结构相似度: 0.44 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_089",
+        "source_node_name": "智能体",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.43,
+        "rationale": "结构相似度: 0.43 (度/入度/出度/关系类型分布)"
+      },
+      {
+        "source_node_id": "node_268",
+        "source_node_name": "大语言模型驱动的内容理解",
+        "target_node_id": "node_219",
+        "target_node_name": "计算机视觉",
+        "confidence": 0.41,
+        "rationale": "结构相似度: 0.41 (度/入度/出度/关系类型分布)"
+      }
+    ],
+    "failed_mappings": [],
+    "relation_preservation_rate": 0.8652,
+    "pass_rate": 1.0,
+    "metadata": {
+      "candidate_confidence": 0.4944,
+      "candidate_confidence_level": "medium",
+      "mapping_count": 22,
+      "coverage": 1.0
+    }
   }
 ]

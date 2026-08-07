@@ -1,8 +1,8 @@
 {
   "report_type": "phase1_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-07T18:47:28.081521",
-  "collect_time": "2026-08",
+  "generated_at": "2026-08-07T20:56:36.199891",
+  "collect_time": "",
   "stats": {
     "total": 311,
     "seed": 40,
@@ -95,6 +95,9 @@
     "graph_density_ratio": 0.0574,
     "ky_mode": "ke_edge_count"
   },
+  "diagnosis_losses": [
+    "维度稀释严重：有效维度(3.4)远低于节点数(311)，维度稀释率=1.1%"
+  ],
   "diagnosis": {
     "file": "2026-08-30_snapshot.json",
     "N": 311,

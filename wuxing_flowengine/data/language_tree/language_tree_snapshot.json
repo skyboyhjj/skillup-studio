@@ -732,25 +732,25 @@
     },
     {
       "id": "lang_0067",
-      "name": "突厥语系",
+      "name": "突厥语族（阿尔泰语系）",
       "level": 1,
       "parent_id": "lang_0001",
       "category": "root",
       "wuxing": "火",
       "cognitive_depth": "L1",
       "position": null,
-      "note": "语系"
+      "note": "语族（原误标为语系，2026-08-07 根据权威分类修正）"
     },
     {
       "id": "lang_0068",
       "name": "乌古斯语族",
       "level": 2,
       "parent_id": "lang_0067",
-      "category": "突厥语系",
+      "category": "突厥语族（阿尔泰语系）",
       "wuxing": "火",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "突厥语系 → 乌古斯语族"
+      "note": "突厥语族（阿尔泰语系） → 乌古斯语族"
     },
     {
       "id": "lang_0069",
@@ -790,11 +790,11 @@
       "name": "葛逻禄语族",
       "level": 2,
       "parent_id": "lang_0067",
-      "category": "突厥语系",
+      "category": "突厥语族（阿尔泰语系）",
       "wuxing": "土",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "突厥语系 → 葛逻禄语族"
+      "note": "突厥语族（阿尔泰语系） → 葛逻禄语族"
     },
     {
       "id": "lang_0073",
@@ -823,11 +823,11 @@
       "name": "钦察语族",
       "level": 2,
       "parent_id": "lang_0067",
-      "category": "突厥语系",
+      "category": "突厥语族（阿尔泰语系）",
       "wuxing": "木",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "突厥语系 → 钦察语族"
+      "note": "突厥语族（阿尔泰语系） → 钦察语族"
     },
     {
       "id": "lang_0076",
@@ -864,25 +864,26 @@
     },
     {
       "id": "lang_0079",
-      "name": "亚非语系",
+      "name": "阿菲罗-亚细亚语系",
+      "alt_name": "闪含语系/亚非语系",
       "level": 1,
       "parent_id": "lang_0001",
       "category": "root",
       "wuxing": "金",
       "cognitive_depth": "L1",
       "position": null,
-      "note": "语系"
+      "note": "语系（亦称闪含语系）"
     },
     {
       "id": "lang_0080",
       "name": "闪米特语族",
       "level": 2,
       "parent_id": "lang_0079",
-      "category": "亚非语系",
+      "category": "阿菲罗-亚细亚语系",
       "wuxing": "金",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "亚非语系 → 闪米特语族"
+      "note": "阿菲罗-亚细亚语系 → 闪米特语族"
     },
     {
       "id": "lang_0081",
@@ -933,11 +934,11 @@
       "name": "柏柏尔语族",
       "level": 2,
       "parent_id": "lang_0079",
-      "category": "亚非语系",
+      "category": "阿菲罗-亚细亚语系",
       "wuxing": "木",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "亚非语系 → 柏柏尔语族"
+      "note": "阿菲罗-亚细亚语系 → 柏柏尔语族"
     },
     {
       "id": "lang_0086",
@@ -966,11 +967,11 @@
       "name": "埃及语族",
       "level": 2,
       "parent_id": "lang_0079",
-      "category": "亚非语系",
+      "category": "阿菲罗-亚细亚语系",
       "wuxing": "土",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "亚非语系 → 埃及语族"
+      "note": "阿菲罗-亚细亚语系 → 埃及语族"
     },
     {
       "id": "lang_0089",
@@ -988,11 +989,11 @@
       "name": "库施特语族",
       "level": 2,
       "parent_id": "lang_0079",
-      "category": "亚非语系",
+      "category": "阿菲罗-亚细亚语系",
       "wuxing": "木",
       "cognitive_depth": "L2",
       "position": null,
-      "note": "亚非语系 → 库施特语族"
+      "note": "阿菲罗-亚细亚语系 → 库施特语族"
     },
     {
       "id": "lang_0091",
@@ -1015,6 +1016,94 @@
       "cognitive_depth": "L3",
       "position": null,
       "note": "埃塞俄比亚最多人口母语，分支扩张"
+    },
+    {
+      "id": "lang_0093",
+      "name": "苗瑶语族",
+      "level": 2,
+      "parent_id": "lang_0040",
+      "category": "汉藏语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "汉藏语系 → 苗瑶语族（争议归属：是否属汉藏有学术分歧）"
+    },
+    {
+      "id": "lang_0094",
+      "name": "苗语",
+      "level": 3,
+      "parent_id": "lang_0093",
+      "category": "苗瑶语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "分支扩散，声调丰富"
+    },
+    {
+      "id": "lang_0095",
+      "name": "瑶语",
+      "level": 3,
+      "parent_id": "lang_0093",
+      "category": "苗瑶语族",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "勉语分支，区域性创新"
+    },
+    {
+      "id": "lang_0096",
+      "name": "侗台语族（壮侗语族）",
+      "level": 2,
+      "parent_id": "lang_0040",
+      "category": "汉藏语系",
+      "wuxing": "水",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "汉藏语系 → 侗台语族（争议归属：是否属汉藏有学术分歧）"
+    },
+    {
+      "id": "lang_0097",
+      "name": "泰语",
+      "level": 3,
+      "parent_id": "lang_0096",
+      "category": "侗台语族（壮侗语族）",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "梵语/巴利语借词，南传佛教文化圈"
+    },
+    {
+      "id": "lang_0098",
+      "name": "壮语",
+      "level": 3,
+      "parent_id": "lang_0096",
+      "category": "侗台语族（壮侗语族）",
+      "wuxing": "木",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "中国最大少数民族语言，汉语深度接触"
+    },
+    {
+      "id": "lang_0099",
+      "name": "乍得语族",
+      "level": 2,
+      "parent_id": "lang_0079",
+      "category": "阿菲罗-亚细亚语系",
+      "wuxing": "木",
+      "cognitive_depth": "L2",
+      "position": null,
+      "note": "阿菲罗-亚细亚语系 → 乍得语族"
+    },
+    {
+      "id": "lang_0100",
+      "name": "豪萨语",
+      "level": 3,
+      "parent_id": "lang_0099",
+      "category": "乍得语族",
+      "wuxing": "火",
+      "cognitive_depth": "L3",
+      "position": null,
+      "note": "西非最大母语人口，阿拉伯语借词，贸易通用语"
     }
   ],
   "edges": [
@@ -1702,19 +1791,96 @@
       "source_id": "lang_0045",
       "target_id": "lang_0046",
       "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0040",
+      "target_id": "lang_0093",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0093",
+      "target_id": "lang_0094",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0093",
+      "target_id": "lang_0095",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0040",
+      "target_id": "lang_0096",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0096",
+      "target_id": "lang_0097",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0096",
+      "target_id": "lang_0098",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0079",
+      "target_id": "lang_0099",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0099",
+      "target_id": "lang_0100",
+      "relation": "parent_of"
+    },
+    {
+      "source_id": "lang_0094",
+      "target_id": "lang_0095",
+      "relation": "cognate_with"
+    },
+    {
+      "source_id": "lang_0097",
+      "target_id": "lang_0098",
+      "relation": "cognate_with"
     }
   ],
   "metadata": {
     "total_families": 5,
-    "total_subfamilies": 18,
-    "total_languages": 68,
+    "total_subfamilies": 21,
+    "total_languages": 73,
     "family_names": [
       "印欧语系",
       "汉藏语系",
       "南岛语系",
-      "突厥语系",
-      "亚非语系"
+      "突厥语族（阿尔泰语系）",
+      "阿菲罗-亚细亚语系"
     ],
-    "wuxing_mapping": "语言领域特化：木=扩张/分支/创新，火=交互/融合/借词，土=稳定/保守/连续，金=规则/形态/边界，水=适应/变体/吸收"
+    "wuxing_mapping": "语言领域特化：木=扩张/分支/创新，火=交互/融合/借词，土=稳定/保守/连续，金=规则/形态/边界，水=适应/变体/吸收",
+    "declaration": "五大代表语系快照，非完整谱系树",
+    "known_losses": [
+      "层级错位：突厥语族原标注为语系级",
+      "覆盖缺失：未含非洲/美洲/大洋洲语系",
+      "争议归属：苗瑶语族、侗台语族是否属汉藏语系存在学术分歧"
+    ],
+    "loss_stratification": {
+      "description": "语言树边的损耗率分层——对应「结构保持 = 保持 + 损耗 + 信度」三位一体",
+      "zones": {
+        "种子主导区": {
+          "loss_range": "10-30%",
+          "edge_types": ["parent_of"],
+          "description": "谱系继承边：同源词保持率 70-90%+（Swadesh 核心词），结构最稳定"
+        },
+        "结构保持区": {
+          "loss_range": "30-50%",
+          "edge_types": ["cognate_with"],
+          "description": "同源关系边：同源词语义漂移，结构保持但细节有损耗"
+        },
+        "缘主导区": {
+          "loss_range": "50%+",
+          "edge_types": ["borrows_from"],
+          "description": "借词关系边：rindu→miss 损耗 53%，情感词汇的谱系关系弱，锚定在文化情境而非生物基础"
+        }
+      },
+      "reference": "Swadesh 核心词跨语言保持率 70-90%+；情感词汇 rindu 损耗 53%（神经科学证据）"
+    }
   }
 }

@@ -15,58 +15,174 @@
         8.5891
       ]
     },
+    "乌古斯语族": {
+      "mean_S": 30.2013,
+      "std_S": 0.0,
+      "node_count_avg": 3.0,
+      "wuxing_profile": {
+        "火": 2.0,
+        "土": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        30.2013,
+        30.2013
+      ]
+    },
+    "亚非语系": {
+      "mean_S": 32.5529,
+      "std_S": 0.0,
+      "node_count_avg": 4.0,
+      "wuxing_profile": {
+        "金": 1.0,
+        "木": 2.0,
+        "土": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        32.5529,
+        32.5529
+      ]
+    },
     "交叉领域智能应用": {
-      "mean_S": 8.9985,
-      "std_S": 0.2501,
+      "mean_S": 13.2195,
+      "std_S": 7.4582,
       "node_count_avg": 7.5,
       "wuxing_profile": {
-        "火": 7.5
+        "火": 7.2,
+        "土": 1.0
       },
       "sample_count": 4,
       "S_range": [
         8.7484,
-        9.2486
+        26.1327
       ]
     },
     "具身智能与机器人": {
-      "mean_S": 35.9047,
-      "std_S": 0.7835,
+      "mean_S": 36.1303,
+      "std_S": 0.9852,
       "node_count_avg": 18.8,
       "wuxing_profile": {
         "木": 12.0,
-        "水": 5.8,
-        "金": 1.0
+        "水": 5.5,
+        "金": 1.2
       },
       "sample_count": 4,
       "S_range": [
         34.5477,
-        36.3571
+        37.2595
+      ]
+    },
+    "凯尔特语族": {
+      "mean_S": 21.6795,
+      "std_S": 0.0,
+      "node_count_avg": 4.0,
+      "wuxing_profile": {
+        "土": 1.0,
+        "木": 3.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        21.6795,
+        21.6795
+      ]
+    },
+    "南岛语系": {
+      "mean_S": 23.0776,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "木": 1.0,
+        "水": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        23.0776,
+        23.0776
+      ]
+    },
+    "印度-伊朗语族": {
+      "mean_S": 36.1429,
+      "std_S": 0.0,
+      "node_count_avg": 5.0,
+      "wuxing_profile": {
+        "木": 2.0,
+        "火": 1.0,
+        "金": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        36.1429,
+        36.1429
+      ]
+    },
+    "印欧语系": {
+      "mean_S": 44.0507,
+      "std_S": 0.0,
+      "node_count_avg": 7.0,
+      "wuxing_profile": {
+        "金": 1.0,
+        "火": 1.0,
+        "土": 3.0,
+        "木": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        44.0507,
+        44.0507
+      ]
+    },
+    "台湾南岛语族": {
+      "mean_S": 20.7584,
+      "std_S": 0.0,
+      "node_count_avg": 3.0,
+      "wuxing_profile": {
+        "木": 2.0,
+        "金": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        20.7584,
+        20.7584
+      ]
+    },
+    "埃及语族": {
+      "mean_S": 4.0717,
+      "std_S": 0.0,
+      "node_count_avg": 1.0,
+      "wuxing_profile": {
+        "土": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        4.0717,
+        4.0717
       ]
     },
     "多模态智能": {
-      "mean_S": 51.2707,
-      "std_S": 0.1798,
+      "mean_S": 50.9325,
+      "std_S": 0.5648,
       "node_count_avg": 30.8,
       "wuxing_profile": {
-        "水": 6.8,
+        "水": 7.2,
         "木": 17.2,
-        "火": 6.8
+        "火": 6.2
       },
       "sample_count": 4,
       "S_range": [
-        50.9619,
+        50.0014,
         51.4124
       ]
     },
     "大语言模型": {
-      "mean_S": 46.721,
-      "std_S": 2.8873,
+      "mean_S": 45.9882,
+      "std_S": 2.4474,
       "node_count_avg": 18.8,
       "wuxing_profile": {
-        "水": 8.8,
-        "金": 5.8,
+        "水": 9.0,
+        "金": 6.0,
         "土": 1.0,
-        "木": 2.8,
+        "木": 2.2,
         "火": 1.0
       },
       "sample_count": 4,
@@ -89,53 +205,166 @@
         16.9356
       ]
     },
+    "希腊语族": {
+      "mean_S": 4.0717,
+      "std_S": 0.0,
+      "node_count_avg": 1.0,
+      "wuxing_profile": {
+        "土": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        4.0717,
+        4.0717
+      ]
+    },
+    "库施特语族": {
+      "mean_S": 1.9479,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "木": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        1.9479,
+        1.9479
+      ]
+    },
     "推荐系统与信息检索": {
-      "mean_S": 39.5567,
-      "std_S": 0.0054,
+      "mean_S": 38.8119,
+      "std_S": 1.2919,
       "node_count_avg": 15.8,
       "wuxing_profile": {
-        "火": 11.8,
-        "木": 3.0,
+        "火": 12.0,
+        "木": 2.8,
         "水": 1.0
       },
       "sample_count": 4,
       "S_range": [
-        39.5536,
+        36.5743,
         39.5661
       ]
     },
+    "斯拉夫语族": {
+      "mean_S": 40.0362,
+      "std_S": 0.0,
+      "node_count_avg": 5.0,
+      "wuxing_profile": {
+        "土": 2.0,
+        "金": 2.0,
+        "火": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        40.0362,
+        40.0362
+      ]
+    },
+    "日耳曼语族": {
+      "mean_S": 34.4825,
+      "std_S": 0.0,
+      "node_count_avg": 7.0,
+      "wuxing_profile": {
+        "水": 4.0,
+        "金": 1.0,
+        "木": 1.0,
+        "土": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        34.4825,
+        34.4825
+      ]
+    },
     "智能体": {
-      "mean_S": 57.5965,
-      "std_S": 0.5708,
+      "mean_S": 58.2878,
+      "std_S": 0.8093,
       "node_count_avg": 31.0,
       "wuxing_profile": {
         "金": 2.0,
-        "水": 7.0,
-        "木": 15.0,
-        "火": 6.0,
-        "土": 1.0
+        "水": 6.8,
+        "木": 14.8,
+        "火": 6.2,
+        "土": 1.2
       },
       "sample_count": 4,
       "S_range": [
-        56.7977,
-        58.4119
+        57.5882,
+        59.5628
       ]
     },
     "机器学习基础": {
-      "mean_S": 50.329,
-      "std_S": 0.7477,
+      "mean_S": 50.533,
+      "std_S": 0.8511,
       "node_count_avg": 81.0,
       "wuxing_profile": {
-        "土": 58.8,
+        "土": 58.5,
         "水": 13.5,
-        "火": 5.0,
-        "木": 2.0,
-        "金": 1.8
+        "火": 4.8,
+        "木": 2.2,
+        "金": 2.0
       },
       "sample_count": 4,
       "S_range": [
         49.1,
-        51.0913
+        51.2442
+      ]
+    },
+    "柏柏尔语族": {
+      "mean_S": 1.9479,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "木": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        1.9479,
+        1.9479
+      ]
+    },
+    "汉藏语系": {
+      "mean_S": 27.8642,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "土": 1.0,
+        "金": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        27.8642,
+        27.8642
+      ]
+    },
+    "汉语族": {
+      "mean_S": 38.3454,
+      "std_S": 0.0,
+      "node_count_avg": 7.0,
+      "wuxing_profile": {
+        "水": 3.0,
+        "土": 2.0,
+        "木": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        38.3454,
+        38.3454
+      ]
+    },
+    "波罗的语族": {
+      "mean_S": 27.8642,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "土": 1.0,
+        "水": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        27.8642,
+        27.8642
       ]
     },
     "生成式AI": {
@@ -179,16 +408,46 @@
         21.9657
       ]
     },
+    "突厥语系": {
+      "mean_S": 39.9281,
+      "std_S": 0.0,
+      "node_count_avg": 3.0,
+      "wuxing_profile": {
+        "火": 1.0,
+        "土": 1.0,
+        "木": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        39.9281,
+        39.9281
+      ]
+    },
+    "罗曼语族": {
+      "mean_S": 35.8941,
+      "std_S": 0.0,
+      "node_count_avg": 6.0,
+      "wuxing_profile": {
+        "火": 4.0,
+        "土": 1.0,
+        "木": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        35.8941,
+        35.8941
+      ]
+    },
     "自然语言处理": {
-      "mean_S": 55.3136,
-      "std_S": 1.6377,
+      "mean_S": 55.2551,
+      "std_S": 1.5844,
       "node_count_avg": 17.0,
       "wuxing_profile": {
         "木": 2.0,
         "土": 1.5,
         "火": 7.8,
-        "金": 3.0,
-        "水": 2.8
+        "金": 2.8,
+        "水": 3.0
       },
       "sample_count": 4,
       "S_range": [
@@ -196,19 +455,48 @@
         56.8718
       ]
     },
+    "葛逻禄语族": {
+      "mean_S": 32.6295,
+      "std_S": 0.0,
+      "node_count_avg": 2.0,
+      "wuxing_profile": {
+        "土": 1.0,
+        "火": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        32.6295,
+        32.6295
+      ]
+    },
+    "藏缅语族": {
+      "mean_S": 33.4054,
+      "std_S": 0.0,
+      "node_count_avg": 4.0,
+      "wuxing_profile": {
+        "金": 1.0,
+        "火": 1.0,
+        "木": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        33.4054,
+        33.4054
+      ]
+    },
     "计算机视觉": {
-      "mean_S": 26.9046,
-      "std_S": 0.0433,
+      "mean_S": 25.7965,
+      "std_S": 1.882,
       "node_count_avg": 22.0,
       "wuxing_profile": {
-        "水": 19.0,
+        "水": 19.2,
         "木": 2.0,
         "金": 1.0
       },
       "sample_count": 4,
       "S_range": [
-        26.8475,
-        26.9694
+        22.537,
+        26.9007
       ]
     },
     "软件工程与编程": {
@@ -223,37 +511,82 @@
         6.1221,
         6.1221
       ]
+    },
+    "钦察语族": {
+      "mean_S": 39.9281,
+      "std_S": 0.0,
+      "node_count_avg": 3.0,
+      "wuxing_profile": {
+        "木": 1.0,
+        "土": 1.0,
+        "火": 1.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        39.9281,
+        39.9281
+      ]
+    },
+    "闪米特语族": {
+      "mean_S": 37.7949,
+      "std_S": 0.0,
+      "node_count_avg": 4.0,
+      "wuxing_profile": {
+        "火": 1.0,
+        "金": 1.0,
+        "土": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        37.7949,
+        37.7949
+      ]
+    },
+    "马来-波利尼西亚语族": {
+      "mean_S": 39.3676,
+      "std_S": 0.0,
+      "node_count_avg": 7.0,
+      "wuxing_profile": {
+        "火": 2.0,
+        "木": 3.0,
+        "水": 2.0
+      },
+      "sample_count": 1,
+      "S_range": [
+        39.3676,
+        39.3676
+      ]
     }
   },
   "calibration_table": [
     {
       "domain": "大语言模型",
-      "mean_S": 46.721,
-      "std_S": 2.8873,
+      "mean_S": 45.9882,
+      "std_S": 2.4474,
       "sample_count": 4,
       "node_count_avg": 18.8,
       "dominant_wx": "水"
     },
     {
       "domain": "具身智能与机器人",
-      "mean_S": 35.9047,
-      "std_S": 0.7835,
+      "mean_S": 36.1303,
+      "std_S": 0.9852,
       "sample_count": 4,
       "node_count_avg": 18.8,
       "dominant_wx": "木"
     },
     {
       "domain": "多模态智能",
-      "mean_S": 51.2707,
-      "std_S": 0.1798,
+      "mean_S": 50.9325,
+      "std_S": 0.5648,
       "sample_count": 4,
       "node_count_avg": 30.8,
       "dominant_wx": "木"
     },
     {
       "domain": "智能体",
-      "mean_S": 57.5965,
-      "std_S": 0.5708,
+      "mean_S": 58.2878,
+      "std_S": 0.8093,
       "sample_count": 4,
       "node_count_avg": 31.0,
       "dominant_wx": "木"
@@ -268,8 +601,8 @@
     },
     {
       "domain": "机器学习基础",
-      "mean_S": 50.329,
-      "std_S": 0.7477,
+      "mean_S": 50.533,
+      "std_S": 0.8511,
       "sample_count": 4,
       "node_count_avg": 81.0,
       "dominant_wx": "土"
@@ -284,24 +617,24 @@
     },
     {
       "domain": "计算机视觉",
-      "mean_S": 26.9046,
-      "std_S": 0.0433,
+      "mean_S": 25.7965,
+      "std_S": 1.882,
       "sample_count": 4,
       "node_count_avg": 22.0,
       "dominant_wx": "水"
     },
     {
       "domain": "交叉领域智能应用",
-      "mean_S": 8.9985,
-      "std_S": 0.2501,
+      "mean_S": 13.2195,
+      "std_S": 7.4582,
       "sample_count": 4,
       "node_count_avg": 7.5,
       "dominant_wx": "火"
     },
     {
       "domain": "推荐系统与信息检索",
-      "mean_S": 39.5567,
-      "std_S": 0.0054,
+      "mean_S": 38.8119,
+      "std_S": 1.2919,
       "sample_count": 4,
       "node_count_avg": 15.8,
       "dominant_wx": "火"

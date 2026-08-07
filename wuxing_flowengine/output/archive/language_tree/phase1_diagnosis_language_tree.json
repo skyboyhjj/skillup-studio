@@ -1,0 +1,628 @@
+{
+  "report_type": "phase1_diagnosis",
+  "version": "V1.2",
+  "generated_at": "2026-08-07T20:57:22.784580",
+  "collect_time": "language_tree",
+  "stats": {
+    "total": 100,
+    "seed": 6,
+    "current": 21,
+    "transcend": 73
+  },
+  "depth_dist": {
+    "L1": 6,
+    "L2": 21,
+    "L3": 73
+  },
+  "wuxing_dist": {
+    "土": 24,
+    "金": 12,
+    "水": 12,
+    "木": 33,
+    "火": 19
+  },
+  "four_dims": {
+    "O_t": 0.2617,
+    "E_u": 0.8374,
+    "C_k": 0.183,
+    "K_y": 0.2583
+  },
+  "tracks": {
+    "S_sum": 38.51,
+    "S_prod": 1.04,
+    "S_p": 34.9,
+    "S_formula": "power_mean",
+    "p": 0.5,
+    "p_label": "P忠恕中道",
+    "B": 38.51,
+    "C": 10.48,
+    "D": 1.02
+  },
+  "wuxing_confidence": {
+    "土": {
+      "point": 0.24,
+      "ci_low": 0.1659,
+      "ci_high": 0.3334,
+      "ci_width": 0.1675
+    },
+    "木": {
+      "point": 0.33,
+      "ci_low": 0.2452,
+      "ci_high": 0.4274,
+      "ci_width": 0.1822
+    },
+    "水": {
+      "point": 0.12,
+      "ci_low": 0.0671,
+      "ci_high": 0.201,
+      "ci_width": 0.1339
+    },
+    "火": {
+      "point": 0.19,
+      "ci_low": 0.1235,
+      "ci_high": 0.2794,
+      "ci_width": 0.1559
+    },
+    "金": {
+      "point": 0.12,
+      "ci_low": 0.0671,
+      "ci_high": 0.201,
+      "ci_width": 0.1339
+    },
+    "_meta": {
+      "node_count": 100,
+      "confidence_level": "高",
+      "confidence_score": 0.85,
+      "method": "wilson",
+      "z": 1.96
+    }
+  },
+  "S_p_confidence": {
+    "S": 30.8,
+    "effective_n": 3.06,
+    "confidence_level": "中",
+    "p": 0.5,
+    "p_label": "P忠恕中道"
+  },
+  "edge_quality": {
+    "edge_count": 147,
+    "node_count": 100,
+    "edge_ratio": 1.47,
+    "min_edge_ratio_ok": true,
+    "avg_degree": 2.94,
+    "max_degree": 8,
+    "graph_density_ratio": 0.3675,
+    "ky_mode": "graph_density"
+  },
+  "diagnosis_losses": [
+    "维度稀释：有效维度(3.1/4)，维度稀释率=76.5%"
+  ],
+  "diagnosis": {
+    "file": "language_tree_snapshot.json",
+    "N": 100,
+    "N_raw": 100,
+    "depth": null,
+    "layer_names": [
+      "种子层",
+      "现行层",
+      "超越层"
+    ],
+    "rings": [
+      {
+        "label": "种子层",
+        "concepts": [
+          {
+            "name": "人类语言",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "印欧语系",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "汉藏语系",
+            "wuxing": "土",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "南岛语系",
+            "wuxing": "木",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "突厥语族（阿尔泰语系）",
+            "wuxing": "火",
+            "cognitive_depth": "L1"
+          },
+          {
+            "name": "阿菲罗-亚细亚语系",
+            "wuxing": "金",
+            "cognitive_depth": "L1"
+          }
+        ]
+      },
+      {
+        "label": "现行层",
+        "concepts": [
+          {
+            "name": "日耳曼语族",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "罗曼语族",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "斯拉夫语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "印度-伊朗语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "凯尔特语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "希腊语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "波罗的语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "汉语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "藏缅语族",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "马来-波利尼西亚语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "台湾南岛语族",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "乌古斯语族",
+            "wuxing": "火",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "葛逻禄语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "钦察语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "闪米特语族",
+            "wuxing": "金",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "柏柏尔语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "埃及语族",
+            "wuxing": "土",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "库施特语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "苗瑶语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "侗台语族（壮侗语族）",
+            "wuxing": "水",
+            "cognitive_depth": "L2"
+          },
+          {
+            "name": "乍得语族",
+            "wuxing": "木",
+            "cognitive_depth": "L2"
+          }
+        ]
+      },
+      {
+        "label": "超越层",
+        "concepts": [
+          {
+            "name": "英语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "德语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "荷兰语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "瑞典语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "挪威语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "丹麦语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "冰岛语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "法语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "西班牙语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "意大利语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "葡萄牙语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "罗马尼亚语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "加泰罗尼亚语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "俄语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "波兰语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "捷克语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "乌克兰语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "塞尔维亚-克罗地亚语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "印地语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "波斯语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "梵语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "孟加拉语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "普什图语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "爱尔兰语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "威尔士语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "苏格兰盖尔语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "布列塔尼语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "希腊语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "立陶宛语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "拉脱维亚语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "官话",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "粤语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "闽语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "吴语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "客家话",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "赣语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "湘语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "藏语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "缅甸语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "彝语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "克伦语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "马来语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "印尼语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "他加禄语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "毛利语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "夏威夷语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "马达加斯加语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "斐济语",
+            "wuxing": "水",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "阿美语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "泰雅语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "排湾语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "土耳其语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "阿塞拜疆语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "土库曼语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "乌兹别克语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "维吾尔语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "哈萨克语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "吉尔吉斯语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "鞑靼语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "阿拉伯语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "希伯来语",
+            "wuxing": "金",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "阿姆哈拉语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "阿拉姆语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "塔马齐格特语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "卡比尔语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "科普特语",
+            "wuxing": "土",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "索马里语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "奥罗莫语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "苗语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "瑶语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "泰语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "壮语",
+            "wuxing": "木",
+            "cognitive_depth": "L3"
+          },
+          {
+            "name": "豪萨语",
+            "wuxing": "火",
+            "cognitive_depth": "L3"
+          }
+        ]
+      }
+    ]
+  }
+}

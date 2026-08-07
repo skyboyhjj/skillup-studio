@@ -1,26 +1,18 @@
 {
-  "pipeline": "wuxing_monthly_v1.2",
+  "pipeline": "wuxing_monthly_v1.3",
   "month": "2026-08",
-  "executed_at": "2026-08-06T10:33:54.349316",
-  "base_dir": "E:\\00-TRAEWK\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
+  "executed_at": "2026-08-07T18:48:11.251300",
+  "base_dir": "e:\\00-TRAEWK\\6a59e217b55e181ea97f0df3\\wuxing_flowengine",
   "phases": {
-    "phase1": "✓",
-    "phase2": "✓",
-    "phase3": "✓",
-    "phaseB": "✓",
-    "phaseC2": "✓",
-    "phaseC1": "✓",
-    "timeseries": "✓",
+    "phase0": "✓",
+    "phase1": "✗",
+    "phase2": "✗",
+    "phase3": "✗",
+    "phaseB": "✗",
+    "phaseC2": "✗",
+    "phaseC1": "✗",
+    "timeseries": "✗",
+    "phaseD": "✗",
     "validation": "✓"
-  },
-  "dao_realm": {
-    "stage": "克",
-    "S": 39.5,
-    "guidance": "层间张力显现，需正视冲突而非回避。"
-  },
-  "ky_enhancement": {
-    "K_y_original": 0.2908,
-    "K_y_enhanced": 0.2071,
-    "delta_K_y": -0.0837
   }
 }

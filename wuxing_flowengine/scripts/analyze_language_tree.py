@@ -2,14 +2,23 @@
 L3: 语言树五行诊断深度分析
 ========================
 输入: language_tree_snapshot.json + phase1_diagnosis_language_tree.json
-输出: 多维度分析报告
+输出: 多维度分析报告（含信度区间）
 """
 import json
 import os
+import sys
 import math
 from collections import Counter, defaultdict
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 导入信度工具
+sys.path.insert(0, os.path.join(BASE, 'scripts'))
+from confidence_interval import (
+    wuxing_confidence_interval, wuxing_confidence_summary,
+    sample_confidence_level, dimension_confidence
+)
+from dao_math import compute_S_p, compute_S_p_with_confidence, S_P_DEFAULT, p_label
 
 # ── 加载数据 ──
 with open(os.path.join(BASE, 'data', 'language_tree', 'language_tree_snapshot.json'), 'r', encoding='utf-8') as f:
@@ -79,66 +88,107 @@ for fam in families:
           f"{wx.get('土',0):>5} {wx.get('金',0):>5} {wx.get('水',0):>5} "
           f"{total:>5} {dominant:>4}")
 
+# 信度区间输出
+print(f"\n{'─' * 70}")
+print("五行信度区间 (Wilson 95% CI):")
+print(f"{'─' * 70}")
+for fam in families:
+    fnodes = family_nodes(fam)
+    fnodes_filtered = [n for n in fnodes if n['level'] >= 2]
+    if not fnodes_filtered:
+        fnodes_filtered = fnodes
+    wx = Counter(n['wuxing'] for n in fnodes_filtered)
+    total = len(fnodes_filtered)
+    wx_dist = {wx_name: wx.get(wx_name, 0) / max(total, 1)
+               for wx_name in ['木', '火', '土', '金', '水']}
+    ci = wuxing_confidence_interval(wx_dist, total)
+    print(f"\n  {fam} (n={total}, 置信度: {ci['_meta']['confidence_level']}):")
+    for wx_name in ['木', '火', '土', '金', '水']:
+        d = ci[wx_name]
+        print(f"    {wx_name}: {d['point']*100:.1f}% [{d['ci_low']*100:.1f}%-{d['ci_high']*100:.1f}%] "
+              f"(宽度={d['ci_width']*100:.1f}%)")
+
 # ============================================================
-# 二、语系级四维指标分析
+# 二、语系级四维指标分析（含信度）
 # ============================================================
 print("\n" + "=" * 70)
-print("二、语系级四维指标分析")
+print("二、语系级四维指标分析（含信度区间）")
 print("=" * 70)
 
 # 对每个语系单独计算四维
-def compute_family_dims(fnodes):
-    """对语系节点计算四维"""
+def compute_family_dims_with_confidence(fnodes):
+    """对语系节点计算四维 + S_p 信度区间"""
     wx = Counter(n['wuxing'] for n in fnodes)
     total = max(len(fnodes), 1)
+    n_categories = len(set(n.get('category', '') for n in fnodes))
     w = {wx_name: wx.get(wx_name, 0) / total for wx_name in ['木', '火', '土', '金', '水']}
 
-    # 简化四维计算（用 phase1 公式）
-    O_t = w['土'] * 0.6 + w['金'] * 0.3 + 0.1  # 简化
+    O_t = w['土'] * 0.6 + w['金'] * 0.3 + 0.1
     E_u = 1 - 0.5 * abs(w['木'] - 0.25) - 0.5 * abs(w['水'] - 0.25)
     C_k = w['水'] * 0.5 + w['火'] * 0.3 + w['木'] * 0.2
-    K_y = w['火'] * 0.4 + w['土'] * 0.3 + 0.3  # 简化，不用图密度
+    K_y = w['火'] * 0.4 + w['土'] * 0.3 + 0.3
 
-    # 裁剪
     O_t = max(0, min(1, O_t))
     E_u = max(0, min(1, E_u))
     C_k = max(0, min(1, C_k))
     K_y = max(0, min(1, K_y))
 
-    # S_p
-    from dao_math import compute_S_p, S_P_DEFAULT
-    S_p = compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT)
+    # 标准 S_p（上界）
+    S_p_upper = compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT)
 
-    return O_t, E_u, C_k, K_y, S_p, w
+    # 四维信度
+    dim_confs = dimension_confidence(
+        O_t, E_u, C_k, K_y,
+        node_count=total,
+        edge_count=total,  # 语系内无独立边统计，用节点数近似
+        depth_count=total,
+        domain_count=max(n_categories, 1)
+    )
 
-print(f"\n{'语系':<12} {'O_t':>6} {'E_u':>6} {'C_k':>6} {'K_y':>6} {'S_p':>6} {'阶段':>6}")
-print("-" * 60)
+    # S_p 信度（下界）
+    S_p_ci = compute_S_p_with_confidence(
+        [O_t, E_u, C_k, K_y],
+        dim_confidences=dim_confs
+    )
+    S_p_lower = S_p_ci['S']
+    effective_n = S_p_ci['effective_n']
+
+    return O_t, E_u, C_k, K_y, S_p_upper, S_p_lower, effective_n, w
+
+print(f"\n{'语系':<20} {'O_t':>6} {'E_u':>6} {'C_k':>6} {'K_y':>6} {'S_p(上界)':>10} {'S_p(下界)':>10} {'eff_n':>7} {'阶段':>6}")
+print("-" * 88)
 
 family_results = {}
 for fam in families:
     fnodes = family_nodes(fam)
-    # 排除语系自身的 L1 节点，只用 L2+L3
     fnodes_filtered = [n for n in fnodes if n['level'] >= 2]
     if not fnodes_filtered:
         fnodes_filtered = fnodes
-    O_t, E_u, C_k, K_y, S_p, w = compute_family_dims(fnodes_filtered)
-    family_results[fam] = (O_t, E_u, C_k, K_y, S_p, w)
+    O_t, E_u, C_k, K_y, S_p_upper, S_p_lower, effective_n, w = \
+        compute_family_dims_with_confidence(fnodes_filtered)
+    family_results[fam] = (O_t, E_u, C_k, K_y, S_p_upper, S_p_lower, effective_n, w)
 
-    # 阶段判定
-    if S_p >= 50:
+    # 阶段判定（用上界）
+    if S_p_upper >= 50:
         stage = "通"
-    elif S_p >= 40:
+    elif S_p_upper >= 40:
         stage = "变"
-    elif S_p >= 35:
+    elif S_p_upper >= 35:
         stage = "化"
-    elif S_p >= 30:
+    elif S_p_upper >= 30:
         stage = "克"
-    elif S_p >= 25:
+    elif S_p_upper >= 25:
         stage = "生"
     else:
         stage = "生"
 
-    print(f"{fam:<12} {O_t:>6.3f} {E_u:>6.3f} {C_k:>6.3f} {K_y:>6.3f} {S_p:>6.1f} {stage:>6}")
+    print(f"{fam:<20} {O_t:>6.3f} {E_u:>6.3f} {C_k:>6.3f} {K_y:>6.3f} {S_p_upper:>10.1f} {S_p_lower:>10.1f} {effective_n:>7.2f} {stage:>6}")
+
+# 维度稀释说明
+print(f"\n维度稀释说明:")
+print(f"  语言树节点总数: {len(nodes)}, 各语系有效维度见 eff_n 列")
+print(f"  原因: 层级结构导致信息重叠，实际独立信息量低于节点数")
+print(f"  S_p(上界): 全维度等权标准值; S_p(下界): 经信度加权调整后的保守值")
 
 # ============================================================
 # 三、语言演化机制 × 生克化通变
@@ -246,14 +296,14 @@ print(f"   知识树 CV(五行占比) = 知识树更集中（木/水占主导）
 # 2. E_u 最低的语系
 print(f"\n2. 演化不确定性最低的语系 (E_u越低越稳定):")
 sorted_fams = sorted(family_results.items(), key=lambda x: x[1][1], reverse=True)
-for fam, (O_t, E_u, C_k, K_y, S_p, w) in sorted_fams[:3]:
-    print(f"   {fam}: E_u={E_u:.3f}, S_p={S_p:.1f}")
+for fam, (O_t, E_u, C_k, K_y, S_p_upper, S_p_lower, effective_n, w) in sorted_fams[:3]:
+    print(f"   {fam}: E_u={E_u:.3f}, S_p(上界)={S_p_upper:.1f}, S_p(下界)={S_p_lower:.1f}, eff_n={effective_n:.2f}")
 
 # 3. S_p 最高的语系
 print(f"\n3. S_p 最高的语系 (道境指数高=结构成熟):")
 sorted_fams = sorted(family_results.items(), key=lambda x: x[1][4], reverse=True)
-for fam, (O_t, E_u, C_k, K_y, S_p, w) in sorted_fams[:3]:
-    print(f"   {fam}: S_p={S_p:.1f}, O_t={O_t:.3f}, E_u={E_u:.3f}")
+for fam, (O_t, E_u, C_k, K_y, S_p_upper, S_p_lower, effective_n, w) in sorted_fams[:3]:
+    print(f"   {fam}: S_p(上界)={S_p_upper:.1f}, S_p(下界)={S_p_lower:.1f}, O_t={O_t:.3f}, E_u={E_u:.3f}")
 
 # 4. 方法论验证
 print(f"\n4. 方法论普适性验证:")

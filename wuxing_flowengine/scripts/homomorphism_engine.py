@@ -41,6 +41,7 @@ from homomorphism_types import (
 from zhongshu_ethics import ZhongshuEthics, ZhongshuResult
 from spinor_formalism import SpinorHomomorphismBridge, DaoSpinorState
 from huihui_audit import HuihuiAuditor, audit_transfer
+from seed_cultivation import SeedCultivation, SeedCultivationResult, cultivate_seed
 
 
 class HomomorphismEngine:
@@ -84,6 +85,9 @@ class HomomorphismEngine:
         # Phase 6b 集成: 慧惠宪法审计
         self.enable_audit = enable_audit
         self.auditor = HuihuiAuditor() if enable_audit else None
+
+        # Phase B 集成: 种子培育（木·生）
+        self.seed_cultivator = SeedCultivation()
 
         self.transfer_history: List[dict] = []
 
@@ -322,6 +326,203 @@ class HomomorphismEngine:
 
         return result
 
+    # ── 木·生 种子培育集成（V1.2）──
+
+    def wood_grow_transfer(self, source_domain: str, target_domain: str,
+                           snapshot_month: str = None,
+                           wuxing_context: dict = None,
+                           # V1.1 新增参数
+                           time_scale: str = "skill",
+                           environmental_factors: dict = None,
+                           method_seed_occurrences: int = 0,
+                           method_seed_wuxing: str = "",
+                           topic_seed_wuxing: str = "",
+                           # V1.2 新增参数
+                           harvest_methodology_wuxing: str = "",
+                           migration_events: List[dict] = None) -> dict:
+        """
+        木·生 阶段的种子培育集成（V1.2）
+
+        与「土·通」并列的 SkillUP 种子培育子策略。
+        将杨振宁 taste 研究的三步法嵌入五行流转的"木·生"阶段：
+          Step 1 - 教学疑难切入（双种子画像：题目+方法）
+          Step 2 - 科教融合提炼前沿课题（缘四要素 Agent 翻译）
+          Step 3 - 师生共创突破（漂移检测 + 性决定审计·余弦相似度）
+
+        V1.2 修订（反者道之动·矛盾迭代引擎自查）：
+          ① 性决定降级为"路径一致性审计"（描述性，非预测性）
+          ② 余弦相似度可计算公式
+          ③ 失败者/跨界对照校准判别力
+          ④ 缘四要素 Agent 翻译
+          ⑤ 双引擎反向回路（通中生种）
+          ⑥ 预期值去伪
+
+        Args:
+            source_domain: 种子来源域（已掌握的知识领域）
+            target_domain: 培育目标域（要培育的新领域）
+            snapshot_month: 快照月份
+            wuxing_context: 五行诊断上下文
+            time_scale: 时间尺度（"talent" 或 "skill"）
+            environmental_factors: 缘四要素
+            method_seed_occurrences: 方法种子出现次数
+            method_seed_wuxing: 方法种子五行
+            topic_seed_wuxing: 题目种子五行
+            harvest_methodology_wuxing: 成果方法论五行（V1.2，用于余弦相似度审计）
+            migration_events: 迁移事件列表（V1.2，用于通中生种检测）
+
+        Returns:
+            增强版种子培育报告（含五行流转信息 + V1.2 新字段）
+        """
+        # 提取结构图
+        source_graph = None
+        target_graph = None
+        try:
+            source_graph = self.extractor.extract_from_snapshot(
+                snapshot_month or "2026-08", domain=source_domain
+            )
+            target_graph = self.extractor.extract_from_snapshot(
+                snapshot_month or "2026-08", domain=target_domain
+            )
+        except ValueError:
+            pass  # 无结构数据时使用默认培育逻辑
+
+        # 执行种子培育（V1.2 参数传递）
+        cultivation = self.seed_cultivator.cultivate(
+            source_domain, target_domain,
+            source_graph=source_graph,
+            target_graph=target_graph,
+            wuxing_context=wuxing_context,
+            environmental_factors=environmental_factors,
+            method_seed_occurrences=method_seed_occurrences,
+            method_seed_wuxing=method_seed_wuxing,
+            topic_seed_wuxing=topic_seed_wuxing,
+            harvest_methodology_wuxing=harvest_methodology_wuxing,
+            migration_events=migration_events,
+        )
+
+        result = cultivation.to_dict()
+
+        # 注入五行流转上下文
+        if wuxing_context:
+            result["wuxing_context"] = {
+                "current_stage": wuxing_context.get("stage", "生"),
+                "dominant_wx": wuxing_context.get("dominant_wx", "木"),
+                "H_ratio": wuxing_context.get("H_ratio", 0),
+                "S_p": wuxing_context.get("S_p", 0),
+            }
+
+        # 五行流转解读（V1.2 增强：含反向回路信息）
+        result["wood_grow_interpretation"] = self._interpret_wood_grow(cultivation)
+
+        return result
+
+    def _interpret_wood_grow(self, cultivation: SeedCultivationResult) -> dict:
+        """解读木·生流转结果（V1.2 增强：含反向回路 + 审计语义）"""
+        vitality = cultivation.seed_vitality
+        zone = cultivation.loss_zone
+        sn = cultivation.seedney_score
+        nd_score = cultivation.nature_determination_score
+        drift = cultivation.drift_analysis
+        method_seed = cultivation.method_seed
+
+        # 基础解读
+        interpretation = {
+            "phase": f"木·生（{vitality}）",
+            "seedney": sn,
+            "taste": cultivation.taste_score,
+            "nature_determination_audit": nd_score,  # V1.2: 审计（非检验）
+            "audit_note": "性决定审计：路径一致性描述，非成才判据",  # V1.2
+            "time_scale": cultivation.time_scale,
+        }
+
+        # V1.1: 双种子信息
+        interpretation["dual_seed"] = {
+            "topic": cultivation.topic_seed.get("wuxing", "?"),
+            "method": method_seed.get("wuxing", "?"),
+            "method_confirmation": method_seed.get("confirmation_status", "?"),
+            "method_occurrences": method_seed.get("occurrence_count", 0),
+        }
+
+        # V1.1: 漂移信息
+        if drift:
+            interpretation["drift"] = {
+                "type": drift.get("drift_type", "?"),
+                "detected": drift.get("detected", False),
+                "detail": drift.get("detail", ""),
+                "action": drift.get("action", ""),
+            }
+
+        # V1.2: 反向回路信息（通中生种）
+        reverse_seeds = cultivation.reverse_flow_seeds
+        if reverse_seeds:
+            interpretation["reverse_flow"] = {
+                "enabled": True,
+                "candidate_count": len(reverse_seeds),
+                "candidates": [
+                    {
+                        "domain": rs.get("source_domain", "?"),
+                        "wuxing": rs.get("method_seed_wuxing", "?"),
+                        "occurrence_count": rs.get("occurrence_count", 0),
+                    }
+                    for rs in reverse_seeds
+                ],
+                "note": "通中生种：迁移中检测到新种子候选，回流进入 Step 1",
+            }
+        else:
+            interpretation["reverse_flow"] = {
+                "enabled": False,
+                "candidate_count": 0,
+                "note": "未检测到通中生种回流信号",
+            }
+
+        if vitality == "结果":
+            interpretation.update({
+                "interpretation": (
+                    "木·生成功完成种子培育全周期：方法种子→成果方法论。"
+                    f"seedney={sn:.2f}，taste={cultivation.taste_score:.2f}。"
+                ),
+                "advice": "果实已成熟，可进入「火·化」阶段，将培育经验内化为能力。",
+                "classical_ref": "既知其子，复守其母。——种子已成果实，不忘源域根基（《道德经》第52章）",
+            })
+        elif vitality == "开花":
+            interpretation.update({
+                "interpretation": (
+                    "木·生正在接近完成：种子已开花，对称性结构基本保持。"
+                    f"seedney={sn:.2f}，需最后一步师生共创验证。"
+                ),
+                "advice": "增加验证场景，加速果实成熟。",
+                "classical_ref": "大曰逝，逝曰远，远曰反。——开花是将要回归的预兆（《道德经》第25章）",
+            })
+        elif zone == "种子主导区":
+            interpretation.update({
+                "interpretation": (
+                    "种子在核心结构区，损耗率低，结构保持良好。"
+                    f"seedney={sn:.2f}，方法种子值得一生保持。"
+                ),
+                "advice": "持续科教融合，强化方法种子→前沿课题映射。核心结构不宜急于求成。",
+                "classical_ref": "含德之厚，比于赤子。——核心结构如婴儿般纯粹（《道德经》第55章）",
+            })
+        elif zone == "结构保持区":
+            interpretation.update({
+                "interpretation": (
+                    "种子在结构保持区，部分结构有损耗但可培育。"
+                    f"seedney={sn:.2f}，需持续浇灌。"
+                ),
+                "advice": "合抱之木生于毫末——持续科教融合，损耗可逐步修复。",
+                "classical_ref": "合抱之木，生于毫末。——持续培育可成大树（《道德经》第64章）",
+            })
+        else:
+            interpretation.update({
+                "interpretation": (
+                    "种子在缘主导区，损耗率较高，结构保持困难。"
+                    f"seedney={sn:.2f}，不宜强求培育。"
+                ),
+                "advice": "不强求保持正是知的开始。回归教学疑难切入，重新识别有培育价值的种子。",
+                "classical_ref": "知不知，尚矣。——不强求是真正的智慧（《道德经》第71章）",
+            })
+
+        return interpretation
+
     def _interpret_earth_flow(self, result: dict) -> dict:
         """解读土·通流转结果"""
         score = result.get("step2", {}).get("relation_preservation_score", 0)
@@ -525,6 +726,10 @@ class HomomorphismEngine:
                 "zhongshu_low": sum(1 for s in zs_scores if s < 0.4),
             }
 
+        # Phase B: 种子培育统计
+        seed_stats = self.seed_cultivator.get_stats()
+        stats["seed_cultivation_stats"] = seed_stats
+
         return stats
 
     # ── Phase 5: 旋量形式化查询 ──
@@ -557,7 +762,7 @@ class HomomorphismEngine:
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("  同态映射引擎 — 土·通集成测试")
+    print("  同态映射引擎 — 土·通 & 木·生 集成测试 (V1.2)")
     print("=" * 70)
 
     engine = HomomorphismEngine()
@@ -614,10 +819,85 @@ if __name__ == '__main__':
     print(f"  偏差: {stats['deviations']}")
     print(f"  跳过: {stats['skipped']}")
 
+    # 测试 6: 木·生 种子培育集成（V1.2：含审计 + 反向回路参数）
+    print("\n[测试 6] 木·生 种子培育集成 (V1.2)")
+    # 模拟迁移事件用于通中生种检测
+    sample_migration_events = [
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+    ]
+    wood_result = engine.wood_grow_transfer(
+        "大语言模型", "自然语言处理",
+        wuxing_context={
+            "stage": "生",
+            "dominant_wx": "木",
+            "H_ratio": 0.55,
+            "S_p": 39.5,
+        },
+        method_seed_occurrences=4,
+        method_seed_wuxing="水",
+        harvest_methodology_wuxing="水",  # V1.2: 成果方法论与方法种子一致
+        migration_events=sample_migration_events,  # V1.2: 通中生种检测
+    )
+    wgi = wood_result.get("wood_grow_interpretation", {})
+    print(f"  阶段: {wgi.get('phase')}")
+    print(f"  解读: {wgi.get('interpretation')}")
+    print(f"  建议: {wgi.get('advice')}")
+    print(f"  经典: {wgi.get('classical_ref')}")
+    print(f"  种子质量: {wood_result.get('seedney_score', 0):.4f}")
+    print(f"  taste (妙): {wood_result.get('taste_score', 0):.4f}")
+    print(f"  种子活力: {wood_result.get('seed_vitality')}")
+    print(f"  损耗分层: {wood_result.get('loss_zone')}")
+    # V1.2 验证
+    nd_audit = wgi.get("nature_determination_audit", 0)
+    print(f"  性决定审计: {nd_audit:.4f} (V1.2 路径一致性描述)")
+    assert "audit_note" in wgi, "V1.2 解读应含审计标注"
+    # 验证反向回路
+    reverse_flow = wgi.get("reverse_flow", {})
+    print(f"  通中生种: {reverse_flow.get('candidate_count', 0)} 个候选")
+    assert reverse_flow.get("enabled") == True, "应检测到通中生种回流"
+    assert reverse_flow.get("candidate_count") == 1, "应有 1 个回流候选"
+    print("  ✅ 测试 6 通过")
+
+    # 测试 7: 木·生 低信度培育（V1.2：无迁移事件）
+    print("\n[测试 7] 木·生 低信度培育（无结构数据，V1.2）")
+    wood_result2 = engine.wood_grow_transfer(
+        "语言谱系树", "情感语义场",
+        wuxing_context={
+            "stage": "生",
+            "dominant_wx": "木",
+            "S_p": 35.6,
+        },
+        method_seed_wuxing="水",
+        harvest_methodology_wuxing="火",  # V1.2: 不同五行 → 低余弦相似度
+    )
+    wgi2 = wood_result2.get("wood_grow_interpretation", {})
+    print(f"  阶段: {wgi2.get('phase')}")
+    print(f"  种子质量: {wood_result2.get('seedney_score', 0):.4f}")
+    print(f"  损耗分层: {wood_result2.get('loss_zone')}")
+    print(f"  性决定审计: {wgi2.get('nature_determination_audit', 0):.4f}")
+    # 验证反向回路（无迁移事件时）
+    reverse_flow2 = wgi2.get("reverse_flow", {})
+    print(f"  通中生种: {reverse_flow2.get('candidate_count', 0)} 个候选")
+    assert reverse_flow2.get("enabled") == False, "无迁移事件时不应检测到回流"
+    assert "reverse_flow" in wgi2, "V1.2 解读应含反向回路字段"
+    print("  ✅ 测试 7 通过")
+
+    # 测试 8: 引擎统计（含种子培育）
+    print("\n[测试 8] 引擎统计（含种子培育）")
+    stats = engine.get_stats()
+    seed_stats = stats.get("seed_cultivation_stats", {})
+    print(f"  总迁移数: {stats['total_transfers']}")
+    print(f"  种子培育总数: {seed_stats.get('total', 0)}")
+    print(f"  种子培育成功率: {seed_stats.get('success_rate', 0):.0%}")
+    print(f"  平均种子质量: {seed_stats.get('avg_seedney', 0):.4f}")
+    print("  ✅ 测试 8 通过")
+
     # 保存报告
     path = engine.save_report(result)
     print(f"\n  报告已保存至: {path}")
 
     print("\n" + "=" * 70)
-    print("  测试完成")
+    print("  测试完成 (V1.2)")
     print("=" * 70)

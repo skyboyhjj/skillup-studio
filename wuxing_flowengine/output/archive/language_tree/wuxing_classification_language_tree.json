@@ -1,0 +1,802 @@
+[
+  {
+    "id": "node_001",
+    "name": "人类语言",
+    "level": 0,
+    "category": "root",
+    "wuxing": "土",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_002",
+    "name": "印欧语系",
+    "level": 1,
+    "category": "root",
+    "wuxing": "土",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_003",
+    "name": "日耳曼语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "金",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_004",
+    "name": "英语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_005",
+    "name": "德语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_006",
+    "name": "荷兰语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_007",
+    "name": "瑞典语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_008",
+    "name": "挪威语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_009",
+    "name": "丹麦语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_010",
+    "name": "冰岛语",
+    "level": 3,
+    "category": "日耳曼语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_011",
+    "name": "罗曼语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "火",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_012",
+    "name": "法语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_013",
+    "name": "西班牙语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_014",
+    "name": "意大利语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_015",
+    "name": "葡萄牙语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_016",
+    "name": "罗马尼亚语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_017",
+    "name": "加泰罗尼亚语",
+    "level": 3,
+    "category": "罗曼语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_018",
+    "name": "斯拉夫语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_019",
+    "name": "俄语",
+    "level": 3,
+    "category": "斯拉夫语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_020",
+    "name": "波兰语",
+    "level": 3,
+    "category": "斯拉夫语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_021",
+    "name": "捷克语",
+    "level": 3,
+    "category": "斯拉夫语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_022",
+    "name": "乌克兰语",
+    "level": 3,
+    "category": "斯拉夫语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_023",
+    "name": "塞尔维亚-克罗地亚语",
+    "level": 3,
+    "category": "斯拉夫语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_024",
+    "name": "印度-伊朗语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_025",
+    "name": "印地语",
+    "level": 3,
+    "category": "印度-伊朗语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_026",
+    "name": "波斯语",
+    "level": 3,
+    "category": "印度-伊朗语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_027",
+    "name": "梵语",
+    "level": 3,
+    "category": "印度-伊朗语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_028",
+    "name": "孟加拉语",
+    "level": 3,
+    "category": "印度-伊朗语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_029",
+    "name": "普什图语",
+    "level": 3,
+    "category": "印度-伊朗语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_030",
+    "name": "凯尔特语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_031",
+    "name": "爱尔兰语",
+    "level": 3,
+    "category": "凯尔特语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_032",
+    "name": "威尔士语",
+    "level": 3,
+    "category": "凯尔特语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_033",
+    "name": "苏格兰盖尔语",
+    "level": 3,
+    "category": "凯尔特语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_034",
+    "name": "布列塔尼语",
+    "level": 3,
+    "category": "凯尔特语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_035",
+    "name": "希腊语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_036",
+    "name": "希腊语",
+    "level": 3,
+    "category": "希腊语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_037",
+    "name": "波罗的语族",
+    "level": 2,
+    "category": "印欧语系",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_038",
+    "name": "立陶宛语",
+    "level": 3,
+    "category": "波罗的语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_039",
+    "name": "拉脱维亚语",
+    "level": 3,
+    "category": "波罗的语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_040",
+    "name": "汉藏语系",
+    "level": 1,
+    "category": "root",
+    "wuxing": "土",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_041",
+    "name": "汉语族",
+    "level": 2,
+    "category": "汉藏语系",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_042",
+    "name": "官话",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_043",
+    "name": "粤语",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_044",
+    "name": "闽语",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_045",
+    "name": "吴语",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_046",
+    "name": "客家话",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_047",
+    "name": "赣语",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_048",
+    "name": "湘语",
+    "level": 3,
+    "category": "汉语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_049",
+    "name": "藏缅语族",
+    "level": 2,
+    "category": "汉藏语系",
+    "wuxing": "金",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_050",
+    "name": "藏语",
+    "level": 3,
+    "category": "藏缅语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_051",
+    "name": "缅甸语",
+    "level": 3,
+    "category": "藏缅语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_052",
+    "name": "彝语",
+    "level": 3,
+    "category": "藏缅语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_053",
+    "name": "克伦语",
+    "level": 3,
+    "category": "藏缅语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_054",
+    "name": "南岛语系",
+    "level": 1,
+    "category": "root",
+    "wuxing": "木",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_055",
+    "name": "马来-波利尼西亚语族",
+    "level": 2,
+    "category": "南岛语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_056",
+    "name": "马来语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_057",
+    "name": "印尼语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_058",
+    "name": "他加禄语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_059",
+    "name": "毛利语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_060",
+    "name": "夏威夷语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_061",
+    "name": "马达加斯加语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_062",
+    "name": "斐济语",
+    "level": 3,
+    "category": "马来-波利尼西亚语族",
+    "wuxing": "水",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_063",
+    "name": "台湾南岛语族",
+    "level": 2,
+    "category": "南岛语系",
+    "wuxing": "水",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_064",
+    "name": "阿美语",
+    "level": 3,
+    "category": "台湾南岛语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_065",
+    "name": "泰雅语",
+    "level": 3,
+    "category": "台湾南岛语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_066",
+    "name": "排湾语",
+    "level": 3,
+    "category": "台湾南岛语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_067",
+    "name": "突厥语族（阿尔泰语系）",
+    "level": 1,
+    "category": "root",
+    "wuxing": "火",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_068",
+    "name": "乌古斯语族",
+    "level": 2,
+    "category": "突厥语族（阿尔泰语系）",
+    "wuxing": "火",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_069",
+    "name": "土耳其语",
+    "level": 3,
+    "category": "乌古斯语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_070",
+    "name": "阿塞拜疆语",
+    "level": 3,
+    "category": "乌古斯语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_071",
+    "name": "土库曼语",
+    "level": 3,
+    "category": "乌古斯语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_072",
+    "name": "葛逻禄语族",
+    "level": 2,
+    "category": "突厥语族（阿尔泰语系）",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_073",
+    "name": "乌兹别克语",
+    "level": 3,
+    "category": "葛逻禄语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_074",
+    "name": "维吾尔语",
+    "level": 3,
+    "category": "葛逻禄语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_075",
+    "name": "钦察语族",
+    "level": 2,
+    "category": "突厥语族（阿尔泰语系）",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_076",
+    "name": "哈萨克语",
+    "level": 3,
+    "category": "钦察语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_077",
+    "name": "吉尔吉斯语",
+    "level": 3,
+    "category": "钦察语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_078",
+    "name": "鞑靼语",
+    "level": 3,
+    "category": "钦察语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_079",
+    "name": "阿菲罗-亚细亚语系",
+    "level": 1,
+    "category": "root",
+    "wuxing": "金",
+    "cognitive_depth": "L1"
+  },
+  {
+    "id": "node_080",
+    "name": "闪米特语族",
+    "level": 2,
+    "category": "阿菲罗-亚细亚语系",
+    "wuxing": "金",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_081",
+    "name": "阿拉伯语",
+    "level": 3,
+    "category": "闪米特语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_082",
+    "name": "希伯来语",
+    "level": 3,
+    "category": "闪米特语族",
+    "wuxing": "金",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_083",
+    "name": "阿姆哈拉语",
+    "level": 3,
+    "category": "闪米特语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_084",
+    "name": "阿拉姆语",
+    "level": 3,
+    "category": "闪米特语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_085",
+    "name": "柏柏尔语族",
+    "level": 2,
+    "category": "阿菲罗-亚细亚语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_086",
+    "name": "塔马齐格特语",
+    "level": 3,
+    "category": "柏柏尔语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_087",
+    "name": "卡比尔语",
+    "level": 3,
+    "category": "柏柏尔语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_088",
+    "name": "埃及语族",
+    "level": 2,
+    "category": "阿菲罗-亚细亚语系",
+    "wuxing": "土",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_089",
+    "name": "科普特语",
+    "level": 3,
+    "category": "埃及语族",
+    "wuxing": "土",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_090",
+    "name": "库施特语族",
+    "level": 2,
+    "category": "阿菲罗-亚细亚语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_091",
+    "name": "索马里语",
+    "level": 3,
+    "category": "库施特语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_092",
+    "name": "奥罗莫语",
+    "level": 3,
+    "category": "库施特语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_093",
+    "name": "苗瑶语族",
+    "level": 2,
+    "category": "汉藏语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_094",
+    "name": "苗语",
+    "level": 3,
+    "category": "苗瑶语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_095",
+    "name": "瑶语",
+    "level": 3,
+    "category": "苗瑶语族",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_096",
+    "name": "侗台语族（壮侗语族）",
+    "level": 2,
+    "category": "汉藏语系",
+    "wuxing": "水",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_097",
+    "name": "泰语",
+    "level": 3,
+    "category": "侗台语族（壮侗语族）",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_098",
+    "name": "壮语",
+    "level": 3,
+    "category": "侗台语族（壮侗语族）",
+    "wuxing": "木",
+    "cognitive_depth": "L3"
+  },
+  {
+    "id": "node_099",
+    "name": "乍得语族",
+    "level": 2,
+    "category": "阿菲罗-亚细亚语系",
+    "wuxing": "木",
+    "cognitive_depth": "L2"
+  },
+  {
+    "id": "node_100",
+    "name": "豪萨语",
+    "level": 3,
+    "category": "乍得语族",
+    "wuxing": "火",
+    "cognitive_depth": "L3"
+  }
+]

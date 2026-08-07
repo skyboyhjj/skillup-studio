@@ -242,6 +242,58 @@ def classify_wx(name, category=''):
     return '土'
 
 
+def _build_diagnosis_losses(nodes, edges, S_p_confidence):
+    """构建诊断损耗标注列表。
+
+    对应「结构保持 = 保持 + 损耗 + 信度」三位一体中的损耗维度。
+    自动检测结构性损耗并标注，不假装精确。
+
+    Args:
+        nodes: 节点列表
+        edges: 边列表
+        S_p_confidence: compute_S_p_with_confidence 的返回值
+
+    Returns:
+        list[str]: 损耗标注条目
+    """
+    losses = []
+    n = len(nodes)
+    e = len(edges)
+    effective_n = S_p_confidence.get('effective_n', n)
+    DIM_COUNT = 4  # 四维指标体系
+
+    # 维度稀释检测：effective_n 相对于 4 维
+    if effective_n < DIM_COUNT:
+        ratio = effective_n / DIM_COUNT
+        if ratio < 0.5:
+            losses.append(
+                f"维度稀释严重：有效维度({effective_n:.1f}/{DIM_COUNT})，"
+                f"维度稀释率={ratio:.1%}"
+            )
+        else:
+            losses.append(
+                f"维度稀释：有效维度({effective_n:.1f}/{DIM_COUNT})，"
+                f"维度稀释率={ratio:.1%}"
+            )
+
+    # 边密度不足检测
+    edge_ratio = e / max(n, 1)
+    if edge_ratio < 0.5:
+        losses.append(
+            f"边密度不足：边数({e})/节点数({n})={edge_ratio:.2f}，"
+            f"关系数据稀疏，K_y 可信度受影响"
+        )
+
+    # 置信度检测
+    conf_level = S_p_confidence.get('confidence_level', '')
+    if conf_level == '低':
+        losses.append(
+            f"S_p 置信度低：四维信度不足，建议补充数据后重新校准"
+        )
+
+    return losses
+
+
 def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
         output_dir=None, config_path=None):
     """
@@ -447,6 +499,18 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
     S_prod = compute_S_old(O_t, E_u, C_k, K_y)  # 旧乘积
     S_p = compute_S_p([O_t, E_u, C_k, K_y], p=S_P_DEFAULT)  # 广义平均
 
+    # 预计算 S_p_confidence（供 diagnosis_losses 和输出引用）
+    S_p_confidence = compute_S_p_with_confidence(
+        [O_t, E_u, C_k, K_y],
+        dim_confidences=dimension_confidence(
+            O_t, E_u, C_k, K_y,
+            node_count=len(nodes),
+            edge_count=edge_count,
+            depth_count=len(nodes),
+            domain_count=len(set(n.get('category', '') for n in nodes))
+        )
+    )
+
     # 保存结果
     stats = {
         'total': len(nodes),
@@ -495,16 +559,7 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
             {wx: count / len(nodes) for wx, count in wuxing_dist.items()},
             len(nodes)
         ),
-        'S_p_confidence': compute_S_p_with_confidence(
-            [O_t, E_u, C_k, K_y],
-            dim_confidences=dimension_confidence(
-                O_t, E_u, C_k, K_y,
-                node_count=len(nodes),
-                edge_count=edge_count,
-                depth_count=len(nodes),  # 所有节点参与深度估算
-                domain_count=len(set(n.get('category', '') for n in nodes))
-            )
-        ),
+        'S_p_confidence': S_p_confidence,
         'edge_quality': {
             'edge_count': edge_count,
             'node_count': len(nodes),
@@ -515,6 +570,9 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
             'graph_density_ratio': round(graph_density_ratio, 4),
             'ky_mode': 'ke_edge_count' if ke_count > 0 else 'graph_density'
         },
+        'diagnosis_losses': _build_diagnosis_losses(
+            nodes, edges, S_p_confidence
+        ),
         'diagnosis': diagnosis
     }
 
