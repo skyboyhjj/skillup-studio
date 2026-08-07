@@ -83,6 +83,62 @@ def compute_S_old(O_t, E_u, C_k, K_y):
     return O_t * E_u * C_k * K_y * 100
 
 
+def compute_S_p_with_confidence(dims, dim_confidences=None, p=S_P_DEFAULT, scale=S_P_SCALE):
+    """
+    带信度边界的 S_p 计算。
+    
+    当某维度置信度低时，其权重降低——不对不确定的维度"强做可知"。
+    对应不确定理论：数据不足时不假装精确。
+    
+    Args:
+        dims: 四维值 [O_t, E_u, C_k, K_y]
+        dim_confidences: 各维度置信度 [c_O, c_E, c_C, c_K]，每个 ∈ [0, 1]
+                         如果为 None，则视为各维度置信度相同（退化为标准 S_p）
+        p: 恕度参数
+        scale: 输出缩放因子
+    
+    Returns:
+        {
+            "S": S_p 值,
+            "effective_n": 有效维度数,
+            "confidence_level": "高/中/低",
+            "p": 恕度参数,
+            "p_label": 恕度标签
+        }
+    """
+    if dim_confidences is None:
+        # 退化为标准 S_p
+        dim_confidences = [1.0] * len(dims)
+    
+    n = len(dims)
+    effective_n = sum(dim_confidences)
+    
+    # 置信度等级
+    if effective_n >= 3.5:
+        conf_level = "高"
+    elif effective_n >= 2.0:
+        conf_level = "中"
+    else:
+        conf_level = "低"
+    
+    # 使用置信度作为权重计算加权 S_p
+    # 归一化权重
+    wsum = sum(dim_confidences)
+    if wsum < 1e-9:
+        # 全部无置信度，退化为等权
+        S = compute_S_p(dims, p, scale)
+    else:
+        S = compute_S_p_weighted(dims, p, dim_confidences, scale)
+    
+    return {
+        "S": round(S, 1),
+        "effective_n": round(effective_n, 2),
+        "confidence_level": conf_level,
+        "p": p,
+        "p_label": p_label(p)
+    }
+
+
 def p_label(p):
     """返回 p 值的恕度标签"""
     labels = {

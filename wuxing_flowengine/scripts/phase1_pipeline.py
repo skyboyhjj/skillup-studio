@@ -8,7 +8,8 @@ import os
 import sys
 import math
 from collections import Counter
-from dao_math import compute_S_p, compute_S_old, S_P_DEFAULT, p_label
+from dao_math import compute_S_p, compute_S_old, S_P_DEFAULT, p_label, compute_S_p_with_confidence
+from confidence_interval import wuxing_confidence_interval, dimension_confidence
 from datetime import datetime
 
 # ============================================================
@@ -475,6 +476,20 @@ def run(base_dir, nodes_path=None, papers_path=None, month_label=None,
             'C': round(10.48, 2),
             'D': round(1.0218, 2)
         },
+        'wuxing_confidence': wuxing_confidence_interval(
+            {wx: count / len(nodes) for wx, count in wuxing_dist.items()},
+            len(nodes)
+        ),
+        'S_p_confidence': compute_S_p_with_confidence(
+            [O_t, E_u, C_k, K_y],
+            dim_confidences=dimension_confidence(
+                O_t, E_u, C_k, K_y,
+                node_count=len(nodes),
+                edge_count=edge_count,
+                depth_count=len(nodes),  # 所有节点参与深度估算
+                domain_count=len(set(n.get('category', '') for n in nodes))
+            )
+        ),
         'edge_quality': {
             'edge_count': edge_count,
             'node_count': len(nodes),

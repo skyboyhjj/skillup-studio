@@ -1,7 +1,7 @@
 {
   "report_type": "phase3_plus_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-06T10:33:54.282896",
+  "generated_at": "2026-08-07T00:14:59.381492",
   "phase": "3+",
   "month_label": "2026-08",
   "timestamp": "2026-08",
@@ -31,6 +31,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 9,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(9)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "root": {
@@ -53,6 +62,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 2,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(2)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "交叉领域智能应用": {
@@ -75,6 +93,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 8,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(8)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "具身智能与机器人": {
@@ -97,6 +124,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 19,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(19)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "多模态智能": {
@@ -119,6 +155,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 32,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(32)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "大语言模型": {
@@ -141,6 +186,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 20,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(20)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "安全可信与伦理": {
@@ -163,6 +217,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 13,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(13)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "推荐系统与信息检索": {
@@ -185,6 +248,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 16,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(16)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "智能体": {
@@ -207,6 +279,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 32,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(32)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "机器学习基础": {
@@ -229,6 +310,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 88,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(88)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "生成式AI": {
@@ -251,6 +341,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 9,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(9)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "知识表示与逻辑推理": {
@@ -273,6 +372,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 5,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(5)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "科学AI": {
@@ -295,6 +403,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 13,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(13)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "自然语言处理": {
@@ -317,6 +434,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 18,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(18)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "计算机视觉": {
@@ -339,6 +465,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 23,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(23)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     },
     "软件工程与编程": {
@@ -361,6 +496,15 @@
       "comparison": {
         "drift": 1.0,
         "direction": "显著漂移"
+      },
+      "drift_confidence": {
+        "drift": 1.0,
+        "effective_sample": 0,
+        "node_count": 4,
+        "paper_count": 0,
+        "confidence": "低",
+        "confidence_score": 0.0,
+        "warning": "领域节点数(4)或论文数(0)不足，漂移值 1.00 仅供参考，不应作为决策依据"
       }
     }
   },

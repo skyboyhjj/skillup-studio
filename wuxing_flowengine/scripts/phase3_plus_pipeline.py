@@ -7,6 +7,7 @@ import os
 import math
 from collections import Counter, defaultdict
 from datetime import datetime
+from confidence_interval import drift_confidence
 
 # 论文五行关键词
 PAPER_WUXING_KEYWORDS = {
@@ -206,7 +207,8 @@ def run(base_dir, papers_path=None, phase2_path=None, output_dir=None,
             'comparison': {
                 'drift': drift,
                 'direction': '显著漂移' if drift > 0.4 else ('轻度漂移' if drift > 0.15 else '基本一致')
-            }
+            },
+            'drift_confidence': drift_confidence(drift, node_count, paper_count)
         }
 
     # 构建输出

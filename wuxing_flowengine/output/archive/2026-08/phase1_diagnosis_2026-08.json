@@ -1,7 +1,7 @@
 {
   "report_type": "phase1_diagnosis",
   "version": "V1.2",
-  "generated_at": "2026-08-06T10:33:54.231262",
+  "generated_at": "2026-08-07T00:14:59.371695",
   "collect_time": "2026-08",
   "stats": {
     "total": 311,
@@ -38,6 +38,52 @@
     "B": 43.79,
     "C": 10.48,
     "D": 1.02
+  },
+  "wuxing_confidence": {
+    "土": {
+      "point": 0.2637,
+      "ci_low": 0.2176,
+      "ci_high": 0.3155,
+      "ci_width": 0.0979
+    },
+    "木": {
+      "point": 0.2219,
+      "ci_low": 0.179,
+      "ci_high": 0.2715,
+      "ci_width": 0.0925
+    },
+    "水": {
+      "point": 0.2572,
+      "ci_low": 0.2116,
+      "ci_high": 0.3087,
+      "ci_width": 0.0971
+    },
+    "火": {
+      "point": 0.1543,
+      "ci_low": 0.118,
+      "ci_high": 0.1991,
+      "ci_width": 0.0811
+    },
+    "金": {
+      "point": 0.1029,
+      "ci_low": 0.0732,
+      "ci_high": 0.1423,
+      "ci_width": 0.0691
+    },
+    "_meta": {
+      "node_count": 311,
+      "confidence_level": "高",
+      "confidence_score": 1.0,
+      "method": "wilson",
+      "z": 1.96
+    }
+  },
+  "S_p_confidence": {
+    "S": 31.8,
+    "effective_n": 3.38,
+    "confidence_level": "中",
+    "p": 0.5,
+    "p_label": "P忠恕中道"
   },
   "edge_quality": {
     "edge_count": 687,

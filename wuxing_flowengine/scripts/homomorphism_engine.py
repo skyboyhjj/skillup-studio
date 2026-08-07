@@ -40,6 +40,7 @@ from homomorphism_types import (
 )
 from zhongshu_ethics import ZhongshuEthics, ZhongshuResult
 from spinor_formalism import SpinorHomomorphismBridge, DaoSpinorState
+from huihui_audit import HuihuiAuditor, audit_transfer
 
 
 class HomomorphismEngine:
@@ -50,7 +51,8 @@ class HomomorphismEngine:
     """
 
     def __init__(self, base_dir: str = None, llm_matcher=None, llm_verifier=None,
-                 enable_zhongshu: bool = True, enable_spinor: bool = True):
+                 enable_zhongshu: bool = True, enable_spinor: bool = True,
+                 enable_audit: bool = True):
         """
         Args:
             base_dir: wuxing_flowengine 根目录
@@ -58,6 +60,7 @@ class HomomorphismEngine:
             llm_verifier: LLM 验证函数（可选）
             enable_zhongshu: 是否启用 P忠恕伦理校验（默认 True）
             enable_spinor: 是否启用旋量形式化跟踪（默认 True）
+            enable_audit: 是否启用慧惠宪法审计（默认 True）
         """
         if base_dir is None:
             base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,6 +80,10 @@ class HomomorphismEngine:
         # Phase 5 集成: 旋量形式化
         self.enable_spinor = enable_spinor
         self.spinor_bridge = SpinorHomomorphismBridge() if enable_spinor else None
+
+        # Phase 6b 集成: 慧惠宪法审计
+        self.enable_audit = enable_audit
+        self.auditor = HuihuiAuditor() if enable_audit else None
 
         self.transfer_history: List[dict] = []
 
@@ -140,6 +147,28 @@ class HomomorphismEngine:
                 "relation_types": target_graph.relation_types,
             },
         }
+
+        # ── Phase 6b: 慧惠宪法审计（transfer 前校验）──
+        if self.enable_audit:
+            audit_result = audit_transfer(
+                source_domain, target_domain,
+                source_node_count=source_graph.node_count,
+                target_node_count=target_graph.node_count,
+                auditor=self.auditor
+            )
+            result["huihui_audit"] = {
+                "passed": audit_result.passed,
+                "summary": audit_result.summary,
+                "checks": [
+                    {"check_name": c.check_name, "verdict": c.verdict, "reason": c.reason}
+                    for c in audit_result.checks
+                ]
+            }
+            if not audit_result.passed:
+                result["step2"] = {"status": "rejected", "reason": audit_result.summary}
+                result["step3"] = {"status": "skipped", "reason": "审计未通过"}
+                self.transfer_history.append(result)
+                return result
 
         # ── Step 2: 同态匹配 ──
         candidate = self.matcher.match(source_graph, target_graph, strategies)
@@ -340,6 +369,16 @@ class HomomorphismEngine:
 
         lines.append(f"\n  源域: {result.get('source_domain', '?')}")
         lines.append(f"  目标域: {result.get('target_domain', '?')}")
+
+        # Phase 6b: 慧惠宪法审计
+        ha = result.get("huihui_audit")
+        if ha:
+            lines.append(f"\n  ── 慧惠宪法审计 ──")
+            icon = "✅" if ha.get("passed") else "❌"
+            lines.append(f"    {icon} {ha.get('summary')}")
+            for c in ha.get("checks", []):
+                icon = {"PASS": "✓", "WARN": "⚠", "REJECT": "✗"}.get(c["verdict"], "?")
+                lines.append(f"      [{icon}] {c['check_name']}: {c['reason']}")
 
         # Step 1
         s1 = result.get("step1", {})
