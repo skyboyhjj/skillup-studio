@@ -89,6 +89,9 @@ class HomomorphismEngine:
         # Phase B 集成: 种子培育（木·生）
         self.seed_cultivator = SeedCultivation()
 
+        # G4: 通中生种 — 迁移事件日志
+        self._migration_event_log: List[dict] = []
+
         self.transfer_history: List[dict] = []
 
     # ── 三步协议主入口 ──
@@ -251,11 +254,101 @@ class HomomorphismEngine:
         # 记录历史
         self.transfer_history.append(result)
 
+        # ── G4: 通中生种 — 记录迁移事件 ──
+        self._record_migration_event(source_domain, target_domain, result)
+
+        # ── G4: 通中生种 — 反向回路检测 ──
+        reverse_flow_seeds = self.seed_cultivator._detect_reverse_flow_seeds(
+            self._migration_event_log
+        )
+        if reverse_flow_seeds:
+            result["reverse_flow_alert"] = {
+                "enabled": True,
+                "candidate_count": len(reverse_flow_seeds),
+                "candidates": [
+                    {
+                        "domain": rs.get("source_domain"),
+                        "wuxing": rs.get("method_seed_wuxing"),
+                        "occurrence_count": rs.get("occurrence_count"),
+                    }
+                    for rs in reverse_flow_seeds
+                ],
+                "note": "通中生种：迁移中检测到新种子候选，回流进入 Step 1",
+            }
+
         # ── Phase 5: 旋量形式化跟踪 ──
         if self.enable_spinor:
             self.spinor_bridge.track_transfer(source_domain, target_domain, result)
 
         return result
+
+    # ── G4: 通中生种 — 迁移事件日志与反向回路 ──
+
+    def _record_migration_event(self, source_domain: str, target_domain: str,
+                                 transfer_result: dict):
+        """
+        记录迁移事件到日志（G4）
+
+        每次 transfer() 调用后自动记录，用于后续通中生种检测。
+        价值评分逻辑：
+          - 固化成功（solidified=True）→ +2（关键贡献）
+          - 通过但未固化 → +1
+          - 未通过 → 0
+        """
+        solidified = transfer_result.get("solidified", False)
+        step3 = transfer_result.get("step3", {})
+        pass_rate = step3.get("pass_rate", 0)
+
+        if solidified:
+            value_score = 2
+        elif pass_rate >= 0.5:
+            value_score = 1
+        else:
+            value_score = 0
+
+        event = {
+            "domain": target_domain,
+            "source_domain": source_domain,
+            "wuxing": self._infer_domain_wuxing(target_domain),
+            "value_score": value_score,
+            "event_type": "transfer",
+            "timestamp": transfer_result.get("timestamp", ""),
+            "solidified": solidified,
+        }
+        self._migration_event_log.append(event)
+
+    def _infer_domain_wuxing(self, domain: str) -> str:
+        """推断领域五行（G4 辅助）"""
+        wuxing_keywords = {
+            "水": ["语言", "文本", "语义", "自然语言", "对话", "翻译", "语音"],
+            "土": ["模型", "学习", "知识", "基础", "数据", "训练", "表示"],
+            "火": ["视觉", "图像", "感知", "识别", "检测", "多模态", "视频"],
+            "金": ["结构", "逻辑", "推理", "数学", "优化", "算法", "安全"],
+            "木": ["生成", "创造", "进化", "创新", "设计", "智能", "机器人"],
+        }
+        for wx, keywords in wuxing_keywords.items():
+            for kw in keywords:
+                if kw in domain:
+                    return wx
+        return "土"
+
+    def get_reverse_flow_seeds(self) -> List[dict]:
+        """
+        获取通中生种候选（G4）
+
+        从迁移事件日志中检测达到阈值的新种子候选，
+        供外部（如 Phase 2 培育实验）调用。
+
+        Returns:
+            [{source_domain, method_seed_wuxing, occurrence_count, source: "通中生种"}]
+        """
+        return self.seed_cultivator._detect_reverse_flow_seeds(
+            self._migration_event_log
+        )
+
+    def get_migration_event_log(self) -> List[dict]:
+        """获取迁移事件日志（G4）"""
+        return list(self._migration_event_log)
 
     # ── 批量迁移 ──
 
@@ -326,7 +419,7 @@ class HomomorphismEngine:
 
         return result
 
-    # ── 木·生 种子培育集成（V1.2）──
+    # ── 木·生 种子培育集成（V1.3）──
 
     def wood_grow_transfer(self, source_domain: str, target_domain: str,
                            snapshot_month: str = None,
@@ -341,13 +434,23 @@ class HomomorphismEngine:
                            harvest_methodology_wuxing: str = "",
                            migration_events: List[dict] = None) -> dict:
         """
-        木·生 阶段的种子培育集成（V1.2）
+        木·生 阶段的种子培育集成（V1.3）
 
         与「土·通」并列的 SkillUP 种子培育子策略。
         将杨振宁 taste 研究的三步法嵌入五行流转的"木·生"阶段：
           Step 1 - 教学疑难切入（双种子画像：题目+方法）
-          Step 2 - 科教融合提炼前沿课题（缘四要素 Agent 翻译）
-          Step 3 - 师生共创突破（漂移检测 + 性决定审计·余弦相似度）
+          Step 2 - 科教融合提炼前沿课题（缘四要素 + 双轨培育：日益+日损）
+          Step 3 - 师生共创突破（双审计 + 漂移检测 + 为道日损减法）
+
+        V1.3 修订（儒道合流——思想底座补全）：
+          ① 双审计——宪法审计（德）优先于性决定审计（才）
+          ② 培育双轨——为学日益（加法）+ 为道日损（减法）并行
+          ③ 孔子六阶段——人才时间轴标准刻度
+          ④ 导师差异化——因材施教 + 不宰伦理
+          ⑤ 环境分阶段——子夏保护期→子张包容期
+          ⑥ 归朴循环——通中生种的哲学命名
+          ⑦ 无弃人底线——低信度≠废材，常善救人故无弃人
+          ⑧ 思想底座——大器免成 = 种子理论最古老表述
 
         V1.2 修订（反者道之动·矛盾迭代引擎自查）：
           ① 性决定降级为"路径一致性审计"（描述性，非预测性）
@@ -417,7 +520,7 @@ class HomomorphismEngine:
         return result
 
     def _interpret_wood_grow(self, cultivation: SeedCultivationResult) -> dict:
-        """解读木·生流转结果（V1.2 增强：含反向回路 + 审计语义）"""
+        """解读木·生流转结果（V1.3 增强：双审计 + 双轨 + 归朴 + 无弃人）"""
         vitality = cultivation.seed_vitality
         zone = cultivation.loss_zone
         sn = cultivation.seedney_score
@@ -433,7 +536,30 @@ class HomomorphismEngine:
             "nature_determination_audit": nd_score,  # V1.2: 审计（非检验）
             "audit_note": "性决定审计：路径一致性描述，非成才判据",  # V1.2
             "time_scale": cultivation.time_scale,
+            "confucius_stage": cultivation.confucius_stage,  # V1.3
+            "environment_phase": cultivation.environment_phase,  # V1.3
         }
+
+        # V1.3: 宪法审计结果（德·仁，优先）
+        ca = cultivation.constitution_audit
+        if ca:
+            interpretation["constitution_audit"] = {
+                "passed": ca.get("passed", False),
+                "priority": ca.get("priority", "?"),
+                "principle": ca.get("principle", "?"),
+                "checks_passed": sum(1 for c in ca.get("checks", []) if c.get("verdict") == "PASS"),
+                "checks_total": len(ca.get("checks", [])),
+            }
+
+        # V1.3: 培育双轨
+        dual = cultivation.nurture_dual_track
+        if dual:
+            interpretation["dual_track"] = {
+                "addition_count": len(dual.get("addition_events", [])),
+                "subtraction_count": len(dual.get("subtraction_events", [])),
+                "subtraction_reversible": dual.get("subtraction_reversible", True),
+                "principle": dual.get("principle", "?"),
+            }
 
         # V1.1: 双种子信息
         interpretation["dual_seed"] = {
@@ -452,7 +578,7 @@ class HomomorphismEngine:
                 "action": drift.get("action", ""),
             }
 
-        # V1.2: 反向回路信息（通中生种）
+        # V1.3: 归朴（原"通中生种"）
         reverse_seeds = cultivation.reverse_flow_seeds
         if reverse_seeds:
             interpretation["reverse_flow"] = {
@@ -466,14 +592,20 @@ class HomomorphismEngine:
                     }
                     for rs in reverse_seeds
                 ],
-                "note": "通中生种：迁移中检测到新种子候选，回流进入 Step 1",
+                "note": "归朴（复归于朴）：成器→迁移→归朴。土·通迁移中检测到新种子候选，回流进入 Step 1",
             }
         else:
             interpretation["reverse_flow"] = {
                 "enabled": False,
                 "candidate_count": 0,
-                "note": "未检测到通中生种回流信号",
+                "note": "未检测到归朴信号——复归于朴，成器之后回归本真，不被才能异化",
             }
+
+        # V1.3: 无弃人底线
+        interpretation["no_discard_guarantee"] = {
+            "enabled": cultivation.no_discard_guarantee,
+            "principle": "圣人常善救人，故无弃人——低信度≠废材，是待观察",
+        }
 
         if vitality == "结果":
             interpretation.update({
@@ -762,7 +894,7 @@ class HomomorphismEngine:
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("  同态映射引擎 — 土·通 & 木·生 集成测试 (V1.2)")
+    print("  同态映射引擎 — 土·通 & 木·生 集成测试 (V1.3)")
     print("=" * 70)
 
     engine = HomomorphismEngine()

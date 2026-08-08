@@ -60,5 +60,15 @@
       "H": "启发式规则 (calibratable) - 经验判断与专家知识，需数据校准",
       "D": "领域规则 (configurable) - 领域特定预设，可按需配置"
     }
+  },
+
+  "_seed_cultivation": "Phase 1.5 种育 V1.2 对照校准配置 (G1)",
+  "seed_cultivation": {
+    "contrast_calibration_enabled": true,
+    "contrast_cases_path": "data/contrast_cases.json",
+    "preset_seeds_path": "data/preset_seeds.json",
+    "nature_determination_threshold": 0.7,
+    "calibrated_threshold": null,
+    "_threshold_note": "calibrated_threshold 为 null 时使用默认 0.7；Phase 1.5 对照校准后自动填充"
   }
 }

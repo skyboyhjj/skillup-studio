@@ -1,0 +1,173 @@
+{
+  "_comment": "Phase 0 种子信号采集 — 候选种子清单 (V1.2 种育协议执行输出)",
+  "version": "V1.2",
+  "execution_date": "2026-08-08",
+  "signal_source": "慧惠×妙秒对话轨迹（数十轮）— 价值回填信号（+2 关键贡献）+ 情绪共振",
+  "total_candidates": 7,
+  "success_criterion": "≥5 个候选种子带五行画像",
+  "seeds": [
+    {
+      "id": "S1",
+      "label": "五行诊断",
+      "topic_seed": {
+        "description": "领域诊断分析",
+        "domains": ["道德经", "MIT", "智源", "BAAI", "语言树"],
+        "wuxing": "土",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "五行七维指标体系（频次/矩阵/路径/熵/重心/画像/判语）+ 生克化通变",
+        "wuxing": "土",
+        "occurrence_count": 5,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "5+",
+      "wuxing_profile": "土（承载）",
+      "phase2_selected": true,
+      "phase2_cultivation_target": "跨学科分析技能"
+    },
+    {
+      "id": "S2",
+      "label": "同态映射",
+      "topic_seed": {
+        "description": "跨域迁移",
+        "domains": ["知识迁移", "Agent Memory", "语言谱系", "情感语义"],
+        "wuxing": "金",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "三步协议（结构提取→同态匹配→迁移验证）",
+        "wuxing": "金",
+        "occurrence_count": 4,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "4+",
+      "wuxing_profile": "金（法则）",
+      "phase2_selected": true,
+      "phase2_cultivation_target": "跨域诊断咨询技能"
+    },
+    {
+      "id": "S3",
+      "label": "概念地图",
+      "topic_seed": {
+        "description": "知识可视化",
+        "domains": ["菲尔兹奖", "道德经", "智源", "BVS", "语言谱系"],
+        "wuxing": "木",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "三层环结构（种子/现行/超越）+ 五行八卦标注",
+        "wuxing": "木",
+        "occurrence_count": 6,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "6+",
+      "wuxing_profile": "木（生发）",
+      "phase2_selected": false
+    },
+    {
+      "id": "S4",
+      "label": "信度出口",
+      "topic_seed": {
+        "description": "不确定性与验证",
+        "domains": ["不确定微分几何", "S_p", "BVS", "语言树"],
+        "wuxing": "水",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "不假装精确（信度区间/0.7/0.4 阈值/允许不匹配）",
+        "wuxing": "水",
+        "occurrence_count": 4,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "4+",
+      "wuxing_profile": "水（不居）",
+      "phase2_selected": false
+    },
+    {
+      "id": "S5",
+      "label": "矛盾迭代引擎",
+      "topic_seed": {
+        "description": "复盘与战略",
+        "domains": ["五轮对话", "taste 总结", "种·育自查"],
+        "wuxing": "火",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "体-相-玄-用五步 + 主要矛盾 + 拷问三问",
+        "wuxing": "火",
+        "occurrence_count": 3,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "3+",
+      "wuxing_profile": "火（点燃）",
+      "phase2_selected": false
+    },
+    {
+      "id": "S6",
+      "label": "唯识种子",
+      "topic_seed": {
+        "description": "意识/心识读解",
+        "domains": ["三十颂", "思想种子", "王凤仪", "taste"],
+        "wuxing": "土",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "种子现行框架（三性/六义/性决定）",
+        "wuxing": "土",
+        "occurrence_count": 4,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "4+",
+      "wuxing_profile": "土（含藏）",
+      "phase2_selected": false
+    },
+    {
+      "id": "S7",
+      "label": "道境坐标系",
+      "topic_seed": {
+        "description": "存在度评估",
+        "domains": ["BAAI", "语言树", "孔子案例"],
+        "wuxing": "火",
+        "drift_allowed": true
+      },
+      "method_seed": {
+        "tool_preference": "四维指标（O_t/E_u/C_k/K_y）+ S_p 广义平均",
+        "wuxing": "火",
+        "occurrence_count": 3,
+        "confirmation_status": "确认种子",
+        "drift_allowed": false
+      },
+      "frequency": "3+",
+      "wuxing_profile": "火（升维）",
+      "phase2_selected": false
+    }
+  ],
+  "phase1_validation": {
+    "date": "2026-08-08",
+    "method": "已知答案回溯验证",
+    "benchmark_source": "妙秒档案中的真实 taste（用户画像：道德经深度读解、五行话语体系、唯识学、概念地图制作、公众号运营、体系化构建）",
+    "detection_rate": "6/6 = 100%",
+    "success_criterion": "≥80%",
+    "portrait_similarity": "目测 ≥0.7",
+    "same_source_bias": {
+      "detected": true,
+      "note": "V1.2 诚实声明：本验证的标尺与信号源来自同一轨迹，检出率 100% 是描述性结果（协议能描述已知路径），不构成预测力证据。预测力需 Phase 2 前瞻验证回答。"
+    }
+  },
+  "phase3_precheck": {
+    "subject": "妙秒（创始人）",
+    "pattern": "王虹模式",
+    "topic_drift": "道德经 → AI 思想 → 语言谱系 → 人才成长（持续漂移，正常缘漂移）",
+    "method_seed_maintained": "五行诊断（土）+ 同态映射（金）+ 信度出口（水）+ 概念地图（木）贯穿一切题目",
+    "nature_determination_similarity": "≈1.0",
+    "verdict": "预检通过 — 性决定保持（方法种子稳定）",
+    "significance": "种·育 V1.2 的双种子设计在创始人本人身上获得第一个活体验证"
+  }
+}

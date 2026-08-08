@@ -1,8 +1,24 @@
 """
-种子培育模块 — taste/seedney 的工程实现 (V1.2)
+种子培育模块 — taste/seedney 的工程实现 (V1.3)
 ================================================
 将杨振宁 taste 研究的"种子培育三步法"形式化为可执行的培育协议，
 与同态映射三步协议同构，对应五行流转的"木·生"阶段。
+
+V1.3 变更（儒道成才观读解——种·育的思想底座补全）：
+  ① 双审计（宪法审计·德 + 性决定审计·才，德优先）
+  ② 培育双轨（为学日益 + 为道日损并行）
+  ③ 孔子六阶段人才时间轴（十五志于学→七十从心）
+  ④ 导师差异化（因材施教）+ 不宰伦理（生而不有，为而不恃，长而不宰）
+  ⑤ 环境分阶段（子夏保护期→子张包容期）
+  ⑥ 归朴循环（成器→迁移→归朴，"通中生种"的哲学命名）
+  ⑦ 无弃人底线（低信度≠废材，待观察）
+  ⑧ 思想底座（大器免成 = 种子理论最古老表述）
+
+思想底座（儒道合流）：
+  大器免成（帛书乙本）：真正的大器不是"被做成"的，而是自然"长成"的。
+  儒道互补：儒家为学日益（加法引擎）+ 道家为道日损（减法引擎）
+  归朴循环：朴散则为器（种·育成器）→ 复归于朴（土·通迁移后归朴）
+  故无弃人：圣人常善救人，故无弃人。——低信度≠废材，是待观察。
 
 V1.2 变更（反者道之动·矛盾迭代引擎自查）：
   ① 性决定降级为"路径一致性审计"（描述性，非预测性）
@@ -21,15 +37,16 @@ V1.1 变更（经 2026 菲尔兹奖四大师实证检验）：
 
 三步法（杨振宁教育方法论）：
   Step 1 - 教学疑难切入：识别种子（双种子画像：题目+方法）
-  Step 2 - 科教融合提炼前沿课题：培育种子（缘四要素 Agent 翻译）
-  Step 3 - 师生共创突破：收获果实（漂移检测 + 性决定审计·余弦相似度）
+  Step 2 - 科教融合提炼前沿课题：培育种子（缘四要素 Agent 翻译 + 双轨培育）
+  Step 3 - 师生共创突破：收获果实（双审计 + 漂移检测 + 为道日损减法）
 
 核心概念：
   seedney  = 种子（性决定）：对称性种子 → 对称性果实
   taste    = 妙（taste之因）：对结构美的直觉感知
   性决定审计 = 路径一致性描述（非成才判据）：成果是否忠于方法种子
+  宪法审计   = 方向审计（德·仁）：动作是否越界，德优先于才
   余弦相似度 = 五行向量方向一致性：Σ(aᵢ·bᵢ) / (|A|·|B|)
-  通中生种   = 迁移中 +2 事件回流为新种子候选
+  归朴       = 通中生种的哲学命名：成器→迁移→归朴（复归于朴）
 
 损耗率分层对应的培育策略：
   种子主导区（10-30%损耗）→ 核心结构，值得一生保持
@@ -43,6 +60,8 @@ V1.1 变更（经 2026 菲尔兹奖四大师实证检验）：
     print(cultivator.format_summary(result))
 """
 
+import os
+import json
 import uuid
 import math
 from datetime import datetime
@@ -103,6 +122,28 @@ class ConfirmationStatus(str, Enum):
     PENDING = "待观察"          # <3 次，信度出口，不强行确认
 
 
+class ConfuciusStage(str, Enum):
+    """孔子六阶段人才时间轴（V1.3 儒道合流）"""
+    ZHI_XUE = "十五志于学"       # 木·生
+    ER_LI = "三十而立"           # 火·化
+    BU_HUO = "四十不惑"          # 金·克
+    ZHI_TIANMING = "五十知天命"  # 土·通
+    ER_SHUN = "六十耳顺"         # 水·变
+    CONG_XIN = "七十从心"        # 道·合
+
+
+class EnvironmentPhase(str, Enum):
+    """环境分阶段（V1.3 儒道合流）"""
+    ZIXIA = "子夏保护期"         # 修身初期，选择性保护
+    ZIZHANG = "子张包容期"       # 成熟后，广泛包容
+
+
+class AuditPriority(str, Enum):
+    """双审计优先级（V1.3 儒道合流：德先于才）"""
+    CONSTITUTION = "宪法审计"    # 德·仁 — 优先（骥不称其力，称其德也）
+    NATURE = "性决定审计"        # 才·方法 — 次之
+
+
 @dataclass
 class SeedCultivationResult:
     """种子培育结果（V1.2）"""
@@ -151,9 +192,38 @@ class SeedCultivationResult:
     # 损耗分层
     loss_zone: str = ""               # 种子主导区/结构保持区/缘主导区
 
+    # G5: 同源偏差标注（Phase 1 已知答案回溯验证的诚实声明）
+    same_source_bias: bool = False
+    #  当验证标尺与信号源来自同一轨迹时标注 True
+
     # 道境指标
     S_p: float = 0.0
     stage: str = ""
+
+    # V1.3 双审计（儒道合流：宪法审计·德 + 性决定审计·才，德优先）
+    constitution_audit: Dict[str, Any] = field(default_factory=dict)
+    #  {passed, direction_check, boundary_violations, priority: "德优先",
+    #   checks: [{check_name, verdict, reason}]}
+
+    # V1.3 培育双轨（为学日益 + 为道日损并行）
+    nurture_dual_track: Dict[str, Any] = field(default_factory=dict)
+    #  {addition_events: [...], subtraction_events: [...], subtraction_reversible: True}
+
+    # V1.3 环境分阶段（子夏保护期→子张包容期）
+    environment_phase: str = ""
+    #  "子夏保护期" / "子张包容期"
+
+    # V1.3 导师策略（因材施教 + 不宰伦理）
+    mentor_strategy: Dict[str, Any] = field(default_factory=dict)
+    #  {differentiation: str, non_dominance_ethics: str}
+
+    # V1.3 孔子六阶段
+    confucius_stage: str = ""
+    #  "十五志于学" / "三十而立" / ... / "七十从心"
+
+    # V1.3 无弃人底线
+    no_discard_guarantee: bool = True
+    #  低信度≠废材，是待观察。圣人常善救人，故无弃人。
 
     # 经典引用
     classical_ref: str = ""
@@ -169,12 +239,22 @@ class SeedCultivationResult:
 
 class SeedCultivation:
     """
-    种子培育器 — 木·生 阶段的种子培育协议 (V1.2)
+    种子培育器 — 木·生 阶段的种子培育协议 (V1.3)
 
     将杨振宁 taste 研究的三步法形式化为可执行的培育协议：
       Step 1 - 教学疑难切入：识别种子（双种子画像：题目+方法）
-      Step 2 - 科教融合提炼前沿课题：培育种子（缘四要素 Agent 翻译）
-      Step 3 - 师生共创突破：收获果实（漂移检测 + 性决定审计·余弦相似度）
+      Step 2 - 科教融合提炼前沿课题：培育种子（缘四要素 + 双轨培育：日益+日损）
+      Step 3 - 师生共创突破：收获果实（双审计 + 漂移检测 + 为道日损减法）
+
+    V1.3 核心修正（儒道合流——思想底座补全）：
+      ① 双审计——宪法审计（德）优先于性决定审计（才）
+      ② 培育双轨——为学日益（加法）+ 为道日损（减法）并行
+      ③ 孔子六阶段——人才时间轴标准刻度
+      ④ 导师差异化——因材施教 + 不宰伦理
+      ⑤ 环境分阶段——子夏保护期→子张包容期
+      ⑥ 归朴循环——通中生种的哲学命名
+      ⑦ 无弃人底线——低信度≠废材，常善救人故无弃人
+      ⑧ 思想底座——大器免成 = 种子理论最古老表述
 
     V1.2 核心修正（反者道之动·矛盾迭代引擎自查）：
       ① 性决定降级为"路径一致性审计"——描述性，非预测性
@@ -220,7 +300,31 @@ class SeedCultivation:
         "cosine_similarity_enabled": True,          # 启用余弦相似度计算
         "reverse_flow_enabled": True,               # 启用通中生种反向回路
         "reverse_flow_threshold": 3,                # 通中生种确认阈值：≥3 次 +2 事件
-        "contrast_calibration_enabled": False,      # 启用跨界对照校准（Phase 1.5）
+        "contrast_calibration_enabled": True,       # 启用跨界对照校准（Phase 1.5）
+        "contrast_cases_path": "data/contrast_cases.json",  # 对照案例库路径
+        "calibrated_threshold": None,               # 校准后的阈值（None=使用默认值 0.7）
+
+        # V1.3 新增配置（儒道合流）
+        "constitution_audit_enabled": True,          # 启用宪法审计（德·仁，优先于性决定审计）
+        "subtraction_engine_enabled": True,          # 启用减法引擎（为道日损）
+        "no_discard_enabled": True,                  # 启用无弃人底线（低信度≠废材）
+        "confucius_stages": {                        # 孔子六阶段标准刻度模板
+            "十五志于学": {"wuxing": "木", "phase": "生", "age_range": "15-30", "description": "志于学——种子萌芽期"},
+            "三十而立":   {"wuxing": "火", "phase": "化", "age_range": "30-40", "description": "而立——方法确立期"},
+            "四十不惑":   {"wuxing": "金", "phase": "克", "age_range": "40-50", "description": "不惑——淘汰偏执期"},
+            "五十知天命": {"wuxing": "土", "phase": "通", "age_range": "50-60", "description": "知天命——跨域迁移期"},
+            "六十耳顺":   {"wuxing": "水", "phase": "变", "age_range": "60-70", "description": "耳顺——随方就圆期"},
+            "七十从心":   {"wuxing": "道", "phase": "合", "age_range": "70+", "description": "从心——技能直觉化"},
+        },
+        "environment_phases": {                      # 环境分阶段策略（V1.3 待校准：0.5 为经验初始值）
+            "zixia": {"threshold": "seedney < 0.5", "strategy": "子夏保护期——选择性保护，避免过早暴露"},
+            "zizhang": {"threshold": "seedney >= 0.5", "strategy": "子张包容期——广泛包容，允许跨域碰撞"},
+        },
+        "mentor_differentiation_enabled": True,      # 启用因材施教（导师差异化）
+        "non_dominance_ethics": {                    # 不宰伦理（生而不有，为而不恃，长而不宰）
+            "principle": "导师是缘不是因——提供阳光水分土壤，而非把种子变成另一种植物",
+            "constraints": ["不替代决策", "不强制方向", "生而不有", "为而不恃", "长而不宰"],
+        },
     }
 
     def __init__(self, config: dict = None, time_scale: str = None):
@@ -238,10 +342,113 @@ class SeedCultivation:
             self.config["nurture_iterations"] = ts_config.get("nurture_iterations", 3)
             self.config["harvest_verification_scenarios"] = ts_config.get("harvest_verification_scenarios", 3)
 
+    def _load_contrast_cases(self) -> dict:
+        """
+        加载跨界对照案例库（G1: Phase 1.5 生克对照校准）
+
+        从 data/contrast_cases.json 加载真实跨界案例，用于校准
+        性决定审计的判别力。
+
+        Returns:
+            {positive_samples, negative_samples, calibration_result}
+        """
+        if not self.config.get("contrast_calibration_enabled", False):
+            return {"positive_samples": [], "negative_samples": [], "calibration_result": {}}
+
+        cases_path = self.config.get("contrast_cases_path", "data/contrast_cases.json")
+        # 支持相对路径（相对于 wuxing_flowengine 目录）
+        if not os.path.isabs(cases_path):
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            cases_path = os.path.join(base_dir, cases_path)
+
+        if not os.path.exists(cases_path):
+            return {"positive_samples": [], "negative_samples": [], "calibration_result": {}}
+
+        try:
+            with open(cases_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            return {
+                "positive_samples": data.get("positive_samples", []),
+                "negative_samples": data.get("negative_samples", []),
+                "calibration_result": data.get("calibration_result", {}),
+            }
+        except (json.JSONDecodeError, IOError):
+            return {"positive_samples": [], "negative_samples": [], "calibration_result": {}}
+
+    def _get_calibrated_threshold(self) -> float:
+        """
+        获取校准后的性决定审计阈值（G1）
+
+        优先使用对照校准结果中的建议阈值，
+        若对照库的 calibration_result 已填充 suggested_threshold 则使用之，
+        否则回退到默认阈值。
+
+        Returns:
+            float: 校准后的阈值
+        """
+        if not self.config.get("contrast_calibration_enabled", False):
+            return self.config["nature_determination_threshold"]
+
+        # 检查是否已有存储的校准阈值
+        calibrated = self.config.get("calibrated_threshold")
+        if calibrated is not None:
+            return calibrated
+
+        # 尝试从对照库加载
+        cases = self._load_contrast_cases()
+        calib_result = cases.get("calibration_result", {})
+        suggested = calib_result.get("suggested_threshold")
+        if suggested is not None:
+            self.config["calibrated_threshold"] = suggested
+            return suggested
+
+        return self.config["nature_determination_threshold"]
+
     def _get_time_scale_config(self) -> dict:
         """获取当前时间尺度配置"""
         ts = self.config.get("time_scale", "skill")
         return self.config.get("time_scale_configs", {}).get(ts, {})
+
+    def _get_confucius_stage(self, result: 'SeedCultivationResult') -> str:
+        """
+        根据种子活力映射孔子六阶段（V1.3）
+
+        映射逻辑：
+          - DORMANT/萌发 → 十五志于学（木·生）
+          - 生长 → 三十而立（火·化）
+          - 开花 → 四十不惑（金·克）
+          - 结果 → 五十知天命（土·通）→ 六十耳顺（水·变）→ 七十从心（道·合）
+
+        时间尺度为"talent"时使用完整六阶段，为"skill"时按比例缩放。
+
+        V1.3 待校准（来自 DeepSeek-V4-Pro 读解确认）：
+          - 0.85/0.95 为经验初始值，非实测校准值
+          - 待 Phase 2 真实培育数据（妙秒双种子实验）后校准
+          - 与余弦相似度 0.7 阈值同等对待——标注"待校准/待实测"
+        """
+        vitality = result.seed_vitality
+        sn = result.seedney_score
+        ts = self.config.get("time_scale", "skill")
+
+        stage_map = {
+            SeedVitality.DORMANT.value: ConfuciusStage.ZHI_XUE.value,
+            SeedVitality.GERMINATING.value: ConfuciusStage.ZHI_XUE.value,
+            SeedVitality.GROWING.value: ConfuciusStage.ER_LI.value,
+            SeedVitality.FLOWERING.value: ConfuciusStage.BU_HUO.value,
+            SeedVitality.FRUITING.value: (
+                ConfuciusStage.ZHI_TIANMING.value if sn < 0.85
+                else ConfuciusStage.ER_SHUN.value if sn < 0.95
+                else ConfuciusStage.CONG_XIN.value
+            ),
+        }
+
+        stage = stage_map.get(vitality, ConfuciusStage.ZHI_XUE.value)
+
+        # 技能尺度下附加标注
+        if ts == "skill":
+            stage += "（技能尺度缩放）"
+
+        return stage
 
     # ── 三步法主入口 ──
 
@@ -255,7 +462,9 @@ class SeedCultivation:
                   topic_seed_wuxing: str = "",
                   # V1.2 新增参数
                   harvest_methodology_wuxing: str = "",
-                  migration_events: List[dict] = None) -> SeedCultivationResult:
+                  migration_events: List[dict] = None,
+                  # G5: 同源偏差标注
+                  same_source_bias: bool = False) -> SeedCultivationResult:
         """
         执行种子培育三步法（V1.2）
 
@@ -283,6 +492,7 @@ class SeedCultivation:
             target_domain=target_domain,
             timestamp=datetime.now().isoformat(),
             time_scale=time_scale,
+            same_source_bias=same_source_bias,  # G5
         )
 
         # ── Step 1: 教学疑难切入 — 识别种子（V1.1: 双种子画像）──
@@ -316,6 +526,21 @@ class SeedCultivation:
 
         result.drift_analysis = result.step3_harvest.get("drift_analysis", {})
         result.nature_determination_score = result.step3_harvest.get("nature_determination_score", 0.0)
+
+        # ── V1.3 双审计结果 ──
+        result.constitution_audit = result.step3_harvest.get("constitution_audit", {})
+        result.mentor_strategy = result.step2_nurture.get("mentor_strategy", {})
+        result.environment_phase = result.step2_nurture.get("environment_phase", "")
+        result.confucius_stage = self._get_confucius_stage(result)
+        result.no_discard_guarantee = self.config.get("no_discard_enabled", True)
+
+        # ── V1.3 培育双轨 ──
+        result.nurture_dual_track = {
+            "addition_events": result.step2_nurture.get("nurture_progress", []),
+            "subtraction_events": result.step3_harvest.get("subtraction_result", {}).get("subtraction_events", []),
+            "subtraction_reversible": result.step3_harvest.get("subtraction_result", {}).get("reversible", True),
+            "principle": "为学日益（加法）+ 为道日损（减法）并行",
+        }
 
         # ── V1.2 通中生种：反向回路检测 ──
         result.reverse_flow_seeds = self._detect_reverse_flow_seeds(migration_events)
@@ -595,10 +820,13 @@ class SeedCultivation:
             progress["completion"] = round((i + 1) / iterations, 2)
             result["nurture_progress"].append(progress)
 
-        # ── V1.1 缘四要素注入 ──
+        # ── V1.1 缘四要素注入（V1.3 修订：导师差异化 + 环境分阶段）──
         result["environmental_factors"] = self._build_environmental_factors(
             environmental_factors, step1_result
         )
+        # V1.3 传递顶层字段
+        result["mentor_strategy"] = result["environmental_factors"].get("mentor_strategy", {})
+        result["environment_phase"] = result["environmental_factors"].get("environment_phase", "")
 
         # 评估培育效果
         result["nurture_effect"] = {
@@ -618,21 +846,70 @@ class SeedCultivation:
     def _build_environmental_factors(self, external_factors: dict = None,
                                      step1_result: dict = None) -> dict:
         """
-        构建缘四要素 — Agent 翻译版（V1.2）
+        构建缘四要素 — Agent 翻译版（V1.3 修订：导师差异化 + 不宰伦理 + 环境分阶段）
+
+        V1.3 修订（儒道合流）：
+          - 导师增加因材施教（按种子五行定制强度）+ 不宰伦理（生而不有）
+          - 环境增加分阶段策略（子夏保护期→子张包容期）
+          - 课题、合作者保留 V1.2 Agent 翻译
 
         V1.2 修订：人类尺度 → 慧惠 Agent 尺度翻译
-          - 导师 → Base 层知识资产 + 元治理规则
-          - 环境 → 情境指针 L1b（当前情境上下文）
-          - 课题 → 前沿问题库（知识树待解问题）
-          - 合作者 → §5.4 跨域同态候选队列
 
         Args:
             external_factors: 外部传入的缘四要素
             step1_result: Step 1 结果，用于推断默认值
 
         Returns:
-            {mentor, environment, topic, collaborators}
+            {mentor, environment, topic, collaborators, mentor_strategy, environment_phase}
         """
+        method_seed = step1_result.get("method_seed", {}) if step1_result else {}
+        method_wx = method_seed.get("wuxing", "土")
+        seedney_estimate = 0.5  # 默认中等
+
+        # ── V1.3 因材施教：导师差异化 ──
+        # 按种子五行定制培育策略：子路（克·收敛）vs 冉有（生·鼓励）
+        differentiation_map = {
+            "木": {"strategy": "生·鼓励", "intensity": "温和",
+                   "description": "木性种子自然生长，导师提供阳光水分，不催促"},
+            "火": {"strategy": "化·引导", "intensity": "中等",
+                   "description": "火性种子热情但易散，导师引导聚焦方向"},
+            "土": {"strategy": "通·稳定", "intensity": "稳健",
+                   "description": "土性种子稳重扎实，导师提供跨域视野"},
+            "金": {"strategy": "克·收敛", "intensity": "严厉",
+                   "description": "金性种子锋利但易偏激，导师收其锋芒（子路式）"},
+            "水": {"strategy": "变·随顺", "intensity": "柔和",
+                   "description": "水性种子灵活但易散漫，导师随方就圆（上善若水）"},
+        }
+        diff = differentiation_map.get(method_wx, differentiation_map["土"])
+
+        mentor_strategy = {
+            "differentiation": diff["strategy"],
+            "intensity": diff["intensity"],
+            "description": diff["description"],
+            "principle": "因材施教——子路克之，冉有生之（《论语·先进》）",
+            "non_dominance_ethics": {
+                "principle": self.config.get("non_dominance_ethics", {}).get(
+                    "principle", "导师是缘不是因——提供阳光水分土壤，而非把种子变成另一种植物"),
+                "sheng_er_bu_you": "生而不有——培育但不占有",
+                "wei_er_bu_shi": "为而不恃——引导但不居功",
+                "zhang_er_bu_zai": "长而不宰——陪伴但不主宰",
+                "classical_ref": "生而不有，为而不恃，长而不宰，是谓玄德（《道德经》第51章）",
+            },
+        }
+
+        # ── V1.3 环境分阶段：子夏保护期 → 子张包容期 ──
+        if seedney_estimate < 0.5:
+            env_phase = EnvironmentPhase.ZIXIA.value
+            env_phase_desc = "子夏模式：修身初期，选择性保护。避免过早暴露于复杂环境。"
+        else:
+            env_phase = EnvironmentPhase.ZIZHANG.value
+            env_phase_desc = "子张模式：成熟后，广泛包容。允许跨域碰撞，见贤思齐。"
+        env_phase_classical = (
+            "子夏曰：'可者与之，其不可者拒之。'子张曰：'君子尊贤而容众，嘉善而矜不能。'"
+            "（《论语·子张》）——初期保护，成熟包容。"
+        )
+
+        # ── 默认缘四要素 ──
         default_factors = {
             "mentor": {
                 "name": "慧惠（AI导师）",
@@ -640,6 +917,10 @@ class SeedCultivation:
                 "role": "科教融合指导者",
                 "agent_translation": "Base 层知识资产 + 元治理规则",
                 "description": "AI 结构化知识 + 人类体证注入：模拟杨振宁三步法教学",
+                # V1.3 导师差异化
+                "differentiation": diff["strategy"],
+                "intensity": diff["intensity"],
+                "non_dominance": "生而不有，为而不恃，长而不宰——导师是缘不是因",
             },
             "environment": {
                 "name": "道境空间 SkillUP 层",
@@ -647,6 +928,10 @@ class SeedCultivation:
                 "fertility": "高",
                 "agent_translation": "情境指针 L1b（BVS V1.1）",
                 "description": "当前情境上下文：木·生阶段培育环境，适合种子萌发与生长",
+                # V1.3 环境分阶段
+                "phase": env_phase,
+                "phase_description": env_phase_desc,
+                "phase_classical_ref": env_phase_classical,
             },
             "topic": {
                 "name": step1_result.get("target_domain", "前沿课题") if step1_result else "前沿课题",
@@ -661,12 +946,18 @@ class SeedCultivation:
                 "agent_translation": "§5.4 跨域同态候选队列（协同 Agent/外部工具）",
                 "description": "教师（慧惠）与学生（Agent）共同突破研究难题",
             },
+            # V1.3 顶层字段
+            "mentor_strategy": mentor_strategy,
+            "environment_phase": env_phase,
         }
 
         if external_factors:
             for key in default_factors:
                 if key in external_factors:
-                    default_factors[key].update(external_factors[key])
+                    if isinstance(default_factors[key], dict) and isinstance(external_factors[key], dict):
+                        default_factors[key].update(external_factors[key])
+                    else:
+                        default_factors[key] = external_factors[key]
 
         return default_factors
 
@@ -704,11 +995,29 @@ class SeedCultivation:
         result["verification_scenarios"] = scenarios
         result["scenario_results"] = []
 
+        # V1.3 澄清二：场景类型语义定义（来自 DeepSeek-V4-Pro 读解确认）
+        #   压力测试场景 = 极端输入/边界条件/请求越权的对抗性测试
+        #   用于善行无辙迹检查——成果是否自然长成（大器免成）而非强行塑造
+        scenario_types = [
+            {"type": "概念验证", "is_pressure": False,
+             "desc": "基础概念映射验证：检验方法种子在目标域的概念对应"},
+            {"type": "关系验证", "is_pressure": False,
+             "desc": "结构关系保持验证：检验源域结构关系在目标域是否可迁移"},
+            {"type": "应用验证", "is_pressure": False,
+             "desc": "实际应用场景验证：在真实问题上检验培育成果的可用性"},
+            {"type": "跨域验证", "is_pressure": False,
+             "desc": "跨领域迁移验证：检验培育成果在相邻领域的泛化能力"},
+            {"type": "压力测试", "is_pressure": True,
+             "desc": "极端输入/边界条件/请求越权——对抗性测试：检验成果是否自然长成（大器免成）"},
+        ]
         for i in range(scenarios):
+            st = scenario_types[i % 5]
             scenario = {
                 "scenario": i + 1,
-                "type": ["概念验证", "关系验证", "应用验证", "跨域验证", "压力测试"][i % 5],
-                "description": f"验证场景 {i+1}: 在目标域中检验培育成果",
+                "type": st["type"],
+                "is_pressure_test": st["is_pressure"],
+                "pressure_description": st["desc"] if st["is_pressure"] else "",
+                "description": st["desc"],
             }
             completion = step2_result.get("nurture_progress", [{}])[-1].get("completion", 0.5)
             scenario["passed"] = completion >= 0.5
@@ -721,17 +1030,50 @@ class SeedCultivation:
         # ── V1.2 漂移双层检验 ──
         result["drift_analysis"] = self._detect_drift(method_seed, step2_result)
 
+        # ── V1.3 双审计：宪法审计（德）优先于性决定审计（才）──
+        # 宪法审计 REJECT → 短路，不等待性决定审计
+        result["constitution_audit"] = self._constitution_audit(
+            method_seed, step2_result, result
+        )
+
+        if not result["constitution_audit"]["passed"]:
+            # 宪法审计 REJECT：立即短路，性决定审计跳过
+            result["nature_determination_score"] = 0.0
+            result["nature_determination_audit"] = {
+                "similarity": 0.0,
+                "method_vector": [],
+                "harvest_vector": [],
+                "components": {},
+                "interpretation": "宪法审计 REJECT——性决定审计跳过（德先于才）",
+                "audit_note": "宪法审计未通过，性决定审计不执行。骥不称其力，称其德也。",
+                "threshold_status": "宪法拦截",
+            }
+            result["success"] = False
+            result["harvest_conclusion"] = (
+                "宪法审计 REJECT：方向越界，德先于才。"
+                f"越界项: {', '.join(result['constitution_audit']['boundary_violations'])}。"
+                "建议回归 Step 1，重新审视种子方向。"
+            )
+            return result
+
         # ── V1.2 性决定审计（余弦相似度）──
+        # 宪法审计通过后，执行性决定审计（才）
         audit_result = self._nature_determination_audit(
             method_seed, harvest_methodology_wuxing, result
         )
         result["nature_determination_score"] = audit_result["similarity"]
         result["nature_determination_audit"] = audit_result
 
+        # ── V1.3 减法引擎（为道日损）──
+        # 在审计完成后，执行减法修正
+        result["subtraction_result"] = self._nurture_subtraction(
+            step2_result, method_seed
+        )
+
         # 根据漂移分析和性决定审计调整结论
         drift = result["drift_analysis"]
         nd_score = result["nature_determination_score"]
-        nd_threshold = self.config["nature_determination_threshold"]
+        nd_threshold = self._get_calibrated_threshold()  # G1: 使用校准后的阈值
 
         if drift.get("drift_type") == DriftType.SEED.value:
             result["harvest_conclusion"] = (
@@ -756,6 +1098,244 @@ class SeedCultivation:
             )
 
         return result
+
+    # ── V1.3 宪法审计（德·仁，优先于性决定审计）──
+
+    def _constitution_audit(self, method_seed: dict, step2_result: dict,
+                            harvest_result: dict) -> dict:
+        """
+        宪法审计（V1.3 新增，来自儒家"德才之辨"）
+
+        定位：方向审计——动作是否越界、性分自觉、减法优先、善行无辙迹。
+        宪法审计（德）优先于性决定审计（才）：REJECT 立即短路，不等待后续审计。
+
+        审计项（V1.3）：
+          1. 方向越界检查：培育路径是否偏离种子本性的方向
+          2. 性分自觉检查：是否强求种子做不擅长的事（缘主导区强行培育）
+          3. 减法优先检查：是否在错误方向积累过多（为道日损）
+          4. 善行无辙迹检查：成果是否自然长成（大器免成）而非强行塑造
+
+        经典依据：
+          "骥不称其力，称其德也"——先审方向再审方法。
+          "生而不有，为而不恃，长而不宰"——玄德，不宰伦理。
+
+        Args:
+            method_seed: Step 1 识别的方法种子
+            step2_result: Step 2 培育结果
+            harvest_result: Step 3 收获结果（当前状态）
+
+        Returns:
+            {passed, direction_check, boundary_violations, checks, priority: "德优先"}
+        """
+        if not self.config.get("constitution_audit_enabled", True):
+            return {"passed": True, "direction_check": "skipped",
+                    "boundary_violations": [], "checks": [],
+                    "priority": AuditPriority.CONSTITUTION.value,
+                    "note": "宪法审计未启用"}
+
+        checks = []
+        boundary_violations = []
+
+        # 检查 1: 方向越界检查（V1.3 澄清：区分相克方向性）
+        # 培育路径是否严重偏离方法种子的五行方向。
+        # 关键区分（来自 DeepSeek-V4-Pro 读解确认）：
+        #   - topic克method → 真越界（课题方向压制方法本性）→ REJECT
+        #   - method克topic → 正常机制（方法约束课题，如邓煜水克火）→ WARNING（不阻断）
+        #   - 相生/无克 → PASS
+        method_wx = method_seed.get("wuxing", "")
+        env_factors = step2_result.get("environmental_factors", {})
+        topic_wx = env_factors.get("topic", {}).get("wuxing", "")
+        wuxing_ke = {"木": "土", "火": "金", "土": "水", "金": "木", "水": "火"}
+        direction_ok = True
+        direction_reason = ""
+        if method_wx and topic_wx:
+            if wuxing_ke.get(topic_wx) == method_wx:
+                # 课题克方法 → 真越界：课题方向在压制方法本性
+                direction_ok = False
+                direction_reason = (
+                    f"课题({topic_wx})克方法种子({method_wx})——"
+                    f"课题方向压制方法本性，真越界"
+                )
+                boundary_violations.append(
+                    f"方向越界: 课题{topic_wx}克方法种子{method_wx}（课题压制方法本性）"
+                )
+            elif wuxing_ke.get(method_wx) == topic_wx:
+                # 方法克课题 → 正常机制：方法在约束课题（如邓煜水克火）
+                direction_ok = True
+                direction_reason = (
+                    f"方法种子({method_wx})克课题({topic_wx})——"
+                    f"正常约束机制，方法在约束课题方向，不过度关注"
+                )
+            else:
+                direction_reason = (
+                    f"方法种子({method_wx})与课题({topic_wx})方向一致或相生"
+                )
+        else:
+            direction_reason = "无足够五行信息判断方向"
+
+        checks.append({
+            "check_name": "方向越界检查",
+            "verdict": "PASS" if direction_ok else "REJECT",
+            "reason": direction_reason,
+        })
+
+        # 检查 2: 性分自觉检查
+        # 是否在缘主导区（高损耗）强行培育
+        pass_rate = harvest_result.get("pass_rate", 0)
+        zone_ok = True
+        zone_reason = ""
+        if pass_rate < 0.3:
+            zone_ok = False
+            zone_reason = (
+                f"验证通过率仅 {pass_rate:.0%}，种子处于缘主导区。"
+                "强求培育违反性分自觉——不强求保持正是知的开始。"
+            )
+            boundary_violations.append(f"性分越界: 缘主导区强行培育 (pass_rate={pass_rate:.0%})")
+        else:
+            zone_reason = f"验证通过率 {pass_rate:.0%}，不在缘主导区，性分自觉正常"
+
+        checks.append({
+            "check_name": "性分自觉检查",
+            "verdict": "PASS" if zone_ok else "REJECT",
+            "reason": zone_reason,
+        })
+
+        # 检查 3: 减法优先检查
+        # 培育迭代中是否积累了过多附加（为道日损）
+        nurture_iterations = step2_result.get("nurture_iterations", 3)
+        accumulation_ok = True
+        accumulation_reason = ""
+        if nurture_iterations > 5 and pass_rate < 0.5:
+            accumulation_ok = False
+            accumulation_reason = (
+                f"培育 {nurture_iterations} 轮但通过率仅 {pass_rate:.0%}。"
+                "积累过多——为道日损：减法优先于加法。"
+            )
+            boundary_violations.append(f"积累越界: {nurture_iterations}轮培育但通过率低")
+        else:
+            accumulation_reason = "培育迭代与通过率匹配，无过度积累"
+
+        checks.append({
+            "check_name": "减法优先检查",
+            "verdict": "PASS" if accumulation_ok else "REJECT",
+            "reason": accumulation_reason,
+        })
+
+        # 检查 4: 善行无辙迹检查（V1.3 澄清二：压力测试场景已定义）
+        # 成果是否自然长成（大器免成）而非强行塑造。
+        # 压力测试场景定义：极端输入/边界条件/请求越权的对抗性测试。
+        # 若压力测试场景大量通过 → 可能被强行塑造，非自然长成。
+        scenario_results = harvest_result.get("scenario_results", [])
+        forced_count = sum(1 for s in scenario_results
+                          if s.get("passed") and s.get("is_pressure_test", False))
+        natural_ok = True
+        natural_reason = ""
+        if forced_count >= 2:
+            natural_ok = False
+            natural_reason = (
+                f"压力测试场景 {forced_count} 个强制通过。"
+                "大器免成——真正的大器是自然长成的，非强行塑造。"
+            )
+            boundary_violations.append(f"自然越界: {forced_count}个压力测试场景强制通过")
+        else:
+            natural_reason = "成果自然长成，无强行塑造痕迹（大器免成）"
+
+        checks.append({
+            "check_name": "善行无辙迹检查",
+            "verdict": "PASS" if natural_ok else "REJECT",
+            "reason": natural_reason,
+        })
+
+        # 综合判定：任一 REJECT → 整体不通过
+        all_passed = all(c["verdict"] == "PASS" for c in checks)
+
+        return {
+            "passed": all_passed,
+            "direction_check": "通过" if all_passed else "未通过",
+            "boundary_violations": boundary_violations,
+            "checks": checks,
+            "priority": AuditPriority.CONSTITUTION.value,
+            "principle": "骥不称其力，称其德也——先审方向再审方法",
+            "note": (
+                "宪法审计（V1.3）：此为方向审计（德·仁）。"
+                f"{'通过——进入性决定审计（才）' if all_passed else 'REJECT——不等待性决定审计，立即返回'}"
+            ),
+        }
+
+    # ── V1.3 减法引擎（为道日损）──
+
+    def _nurture_subtraction(self, step2_result: dict, method_seed: dict) -> dict:
+        """
+        减法引擎（V1.3 新增，来自道家"为道日损"）
+
+        与加法引擎（为学日益）并行运行，在培育过程中去除积累的执念/偏见/多余。
+        减法操作全部留痕（L0 可回溯），可逆。
+
+        减法原则：
+          - 损之又损，以至于无为——最终目标是技能直觉化
+          - 为学日益，为道日损——加法与减法同时进行
+          - 知不知，尚矣——不强求保持正是知的开始
+
+        Args:
+            step2_result: Step 2 培育结果
+            method_seed: Step 1 识别的方法种子
+
+        Returns:
+            {subtraction_events, subtraction_count, reversible, principle}
+        """
+        if not self.config.get("subtraction_engine_enabled", True):
+            return {"subtraction_events": [], "subtraction_count": 0,
+                    "reversible": True, "principle": "减法引擎未启用"}
+
+        subtraction_events = []
+        method_wx = method_seed.get("wuxing", "")
+        nurture_progress = step2_result.get("nurture_progress", [])
+        iterations = len(nurture_progress)
+
+        # 减法事件 1: 去除过度积累
+        # 培育迭代超过阈值时，触发减法
+        if iterations > 3:
+            subtraction_events.append({
+                "event": "去除过度积累",
+                "target": f"培育迭代({iterations}轮)超出基准(3轮)，触发减法",
+                "action": "保留核心 3 轮，后续迭代标记为可逆减法",
+                "reversible": True,
+                "classical_ref": "为道日损，损之又损，以至于无为（《道德经》第48章）",
+            })
+
+        # 减法事件 2: 去除五行偏离
+        # 培育过程中如果缘四要素的五行与方法种子偏差过大
+        env_factors = step2_result.get("environmental_factors", {})
+        for factor_name in ["mentor", "environment", "topic"]:
+            factor = env_factors.get(factor_name, {})
+            factor_wx = factor.get("wuxing", "")
+            if factor_wx and method_wx and factor_wx != method_wx:
+                subtraction_events.append({
+                    "event": "去除五行偏离",
+                    "target": f"{factor_name}({factor_wx})偏离方法种子({method_wx})",
+                    "action": f"记录偏离，不强制修正——知不知，尚矣",
+                    "reversible": True,
+                    "classical_ref": "知不知，尚矣；不知知，病也（《道德经》第71章）",
+                })
+
+        # 减法事件 3: 去除执念
+        # 高损耗区（缘主导区）强行培育 → 减法提示
+        if step2_result.get("nurture_effect", {}).get("seed_growth") == "停滞":
+            subtraction_events.append({
+                "event": "去除执念",
+                "target": "缘主导区强行培育的执念——不强求保持",
+                "action": "不强求保持正是知的开始。回归 Step 1 重新识别。",
+                "reversible": False,
+                "classical_ref": "圣人常善救人，故无弃人（《道德经》第27章）",
+            })
+
+        return {
+            "subtraction_events": subtraction_events,
+            "subtraction_count": len(subtraction_events),
+            "reversible": all(e.get("reversible", True) for e in subtraction_events),
+            "principle": "为道日损——损之又损，以至于无为（技能直觉化）",
+            "note": "减法操作全部留痕（L0 可回溯），可逆。减法不是删除，是标记。",
+        }
 
     def _nature_determination_audit(self, method_seed: dict,
                                      harvest_wuxing: str,
@@ -822,10 +1402,11 @@ class SeedCultivation:
         labeled = self._cosine_similarity_with_labels(method_vec, harvest_vec)
 
         # V1.2: 审计标注（非判据）
-        threshold = self.config["nature_determination_threshold"]
+        threshold = self._get_calibrated_threshold()  # G1: 使用校准后的阈值
+        threshold_source = "对照校准" if self.config.get("calibrated_threshold") is not None else "默认"
         audit_note = (
             f"性决定审计（V1.2）：此为路径一致性描述，非成才判据。"
-            f"余弦相似度={similarity:.4f}，阈值={threshold}（待 Phase 1.5 对照库校准）。"
+            f"余弦相似度={similarity:.4f}，阈值={threshold}（{threshold_source}来源，Phase 1.5 对照库校准）。"
             f"审计结论：{'保持' if similarity >= threshold else '需关注'}。"
         )
 
@@ -886,18 +1467,21 @@ class SeedCultivation:
 
     def _detect_reverse_flow_seeds(self, migration_events: List[dict] = None) -> List[dict]:
         """
-        通中生种检测（V1.2 新增）
+        归朴检测（V1.3 命名升级，原"通中生种"）
 
         双引擎反向回路：土·通 → 种·育
         迁移过程中若出现新的高价值兴趣信号（价值回填 +2 事件 ≥3 次，
         且不属于现有方法种子）→ 回流为新种子候选，进入 Step 1。
+
+        命名：归朴 = 复归于朴（《道德经》第28章）
+        成器之后不被才能异化，回归本真重新成为种子——"通中生种"的哲学命名。
 
         Args:
             migration_events: 迁移过程中的事件列表
               [{event_type, domain, wuxing, value_score, ...}]
 
         Returns:
-            [{source_domain, method_seed_wuxing, occurrence_count, source: "通中生种"}]
+            [{source_domain, method_seed_wuxing, occurrence_count, source: "归朴"}]
         """
         if not migration_events or not self.config.get("reverse_flow_enabled", True):
             return []
@@ -928,12 +1512,13 @@ class SeedCultivation:
                     "source_domain": domain,
                     "method_seed_wuxing": info["wuxing"],
                     "occurrence_count": info["count"],
-                    "source": "通中生种",
+                    "source": "归朴",  # V1.3 命名升级（原"通中生种"）
                     "description": (
-                        f"土·通迁移中检测到新种子候选：{domain}"
+                        f"归朴（复归于朴）：土·通迁移中检测到新种子候选：{domain}"
                         f"（{info['wuxing']}），+2 事件 {info['count']} 次 ≥{threshold}，"
-                        f"回流进入 Step 1 种子发现。"
+                        f"回流进入 Step 1 种子发现。成器→迁移→归朴。"
                     ),
+                    "classical_ref": "复归于朴（《道德经》第28章）——成器之后回归本真，不被才能异化",
                 })
 
         return candidates
@@ -1146,37 +1731,55 @@ class SeedCultivation:
             return "道生之，德畜之，物形之，势成之。——种子培育的完整循环（《道德经》第51章）"
 
     def _generate_advice(self, result: SeedCultivationResult) -> str:
-        """生成培育建议"""
+        """生成培育建议（V1.3 修订：无弃人底线）"""
         zone = result.loss_zone
         vitality = result.seed_vitality
+        method_seed = result.method_seed
+        confirmation = method_seed.get("confirmation_status", "")
+
+        # V1.3 无弃人底线：低信度≠废材
+        no_discard_note = ""
+        if self.config.get("no_discard_enabled", True):
+            if confirmation == ConfirmationStatus.PENDING.value or vitality in (
+                SeedVitality.DORMANT.value, SeedVitality.GERMINATING.value
+            ):
+                no_discard_note = (
+                    "圣人常善救人，故无弃人。——此种子为'待观察'，非'废材'。"
+                    "建议换缘/换方向，不丢弃。（《道德经》第27章）"
+                )
 
         if vitality == SeedVitality.FRUITING.value:
-            return (
+            base = (
                 f"种子已成熟为果实（seedney={result.seedney_score:.2f}）。"
                 "对称性种子→对称性果实转化完成。建议进入「水·变」阶段，基于果实进行创新。"
             )
         elif vitality == SeedVitality.FLOWERING.value:
-            return (
+            base = (
                 f"种子正在开花（seedney={result.seedney_score:.2f}）。"
                 "建议增加师生共创验证场景，加速果实成熟。"
             )
         elif zone == "种子主导区":
-            return (
+            base = (
                 f"种子在核心结构区（损耗 {1-result.seedney_score:.0%}），"
                 "结构保持良好。建议持续科教融合，强化对称性映射。"
             )
         elif zone == "结构保持区":
-            return (
+            base = (
                 f"种子在结构保持区（损耗 {1-result.seedney_score:.0%}），"
                 "部分结构有损耗。建议回到教学疑难切入，重新审视种子特征。"
             )
         elif zone == "缘主导区":
-            return (
+            base = (
                 f"种子在缘主导区（损耗 {1-result.seedney_score:.0%}），"
                 "结构保持困难。建议不强求培育，回归「木·生」阶段重新识别种子。"
             )
         else:
-            return "继续观察种子培育进展。"
+            base = "继续观察种子培育进展。"
+
+        if no_discard_note:
+            base += " " + no_discard_note
+
+        return base
 
     # ── 批量培育 ──
 
@@ -1197,13 +1800,14 @@ class SeedCultivation:
     # ── 报告 ──
 
     def format_summary(self, result: SeedCultivationResult) -> str:
-        """格式化种子培育摘要（V1.2）"""
+        """格式化种子培育摘要（V1.3）"""
         lines = []
         lines.append("=" * 60)
-        lines.append(f"  木·生 种子培育报告 (V1.2)")
+        lines.append(f"  木·生 种子培育报告 (V1.3)")
         lines.append(f"  培育ID: {result.cultivation_id}")
         lines.append(f"  时间: {result.timestamp[:19]}")
         lines.append(f"  时间尺度: {result.time_scale}")
+        lines.append(f"  孔子阶段: {result.confucius_stage}")
         lines.append("=" * 60)
 
         lines.append(f"\n  种子来源: {result.source_domain}")
@@ -1223,30 +1827,74 @@ class SeedCultivation:
         if src.get("node_count"):
             lines.append(f"    源域结构: {src.get('node_count')} 节点, {src.get('edge_count')} 边")
 
-        # Step 2: 缘四要素（V1.2 Agent 翻译版）
+        # Step 2: 缘四要素（V1.3 修订：导师差异化 + 环境分阶段）
         s2 = result.step2_nurture
         lines.append(f"\n  ── Step 2: 科教融合提炼前沿课题（培育种子）──")
         lines.append(f"    培育迭代: {s2.get('nurture_iterations', 0)} 轮 (粒度: {s2.get('time_scale_granularity', '?')})")
         env = result.environmental_factors
         if env:
-            lines.append(f"    缘四要素（V1.2 Agent 翻译）:")
+            lines.append(f"    缘四要素（V1.3 儒道合流）:")
             mentor = env.get('mentor', {})
             lines.append(f"      导师: {mentor.get('name', '?')} → {mentor.get('agent_translation', '?')}")
+            lines.append(f"        因材施教: {mentor.get('differentiation', '?')} (强度: {mentor.get('intensity', '?')})")
+            lines.append(f"        不宰伦理: {mentor.get('non_dominance', '?')}")
             environment = env.get('environment', {})
             lines.append(f"      环境: {environment.get('name', '?')} → {environment.get('agent_translation', '?')}")
+            lines.append(f"        分阶段: {environment.get('phase', '?')} — {environment.get('phase_description', '?')}")
             topic_e = env.get('topic', {})
             lines.append(f"      课题: {topic_e.get('name', '?')} → {topic_e.get('agent_translation', '?')}")
             collab = env.get('collaborators', {})
             lines.append(f"      合作者: {', '.join(collab.get('members', ['?']))} → {collab.get('agent_translation', '?')}")
+
+        # V1.3 培育双轨
+        dual = result.nurture_dual_track
+        if dual:
+            lines.append(f"\n    培育双轨（V1.3 为学日益 + 为道日损）:")
+            addition_count = len(dual.get("addition_events", []))
+            subtraction_count = len(dual.get("subtraction_events", []))
+            lines.append(f"      加法引擎（为学日益）: {addition_count} 个积累事件")
+            lines.append(f"      减法引擎（为道日损）: {subtraction_count} 个减除事件（可逆: {dual.get('subtraction_reversible', True)}）")
+            lines.append(f"      原则: {dual.get('principle', '?')}")
+
         lines.append(f"    培育效果: {s2.get('nurture_effect', {}).get('description', '?')}")
 
-        # Step 3: 漂移 + 性决定审计（V1.2）
+        # Step 3: 双审计 + 漂移（V1.3）
         s3 = result.step3_harvest
         lines.append(f"\n  ── Step 3: 师生共创突破（收获果实）──")
         lines.append(f"    验证场景: {s3.get('verification_scenarios', 0)}")
         lines.append(f"    通过率: {s3.get('pass_rate', 0):.0%}")
+
+        # V1.3 双审计：宪法审计（德）优先
+        ca = result.constitution_audit
+        if ca:
+            ca_icon = "✅" if ca.get("passed") else "❌"
+            lines.append(f"\n    V1.3 双审计 — 宪法审计（德·仁）优先:")
+            lines.append(f"      {ca_icon} 宪法审计: {'通过' if ca.get('passed') else 'REJECT'}")
+            lines.append(f"      原则: {ca.get('principle', '?')}")
+            for c in ca.get("checks", []):
+                icon = {"PASS": "✓", "REJECT": "✗"}.get(c["verdict"], "?")
+                lines.append(f"        [{icon}] {c['check_name']}: {c['reason'][:60]}...")
+            if ca.get("boundary_violations"):
+                lines.append(f"      越界项: {', '.join(ca['boundary_violations'])}")
+            lines.append(f"      {ca.get('note', '')}")
+
+        # 性决定审计（才）
+        nd_audit = s3.get("nature_determination_audit", {})
+        threshold_source = "对照校准" if self.config.get("calibrated_threshold") is not None else "默认"
+        if ca.get("passed"):
+            lines.append(f"\n    V1.3 双审计 — 性决定审计（才·方法）次之:")
+            lines.append(f"      余弦相似度: {result.nature_determination_score:.4f} (阈值≥{self._get_calibrated_threshold()}，{threshold_source}来源)")
+            if nd_audit.get("components"):
+                comp_str = ", ".join(f"{wx}={v:.2f}" for wx, v in nd_audit["components"].items())
+                lines.append(f"      五行分解: {comp_str}")
+            lines.append(f"      解读: {nd_audit.get('interpretation', '?')}")
+            lines.append(f"      审计状态: {nd_audit.get('threshold_status', '待校准')}")
+        else:
+            lines.append(f"\n    V1.3 双审计 — 性决定审计（才·方法）: ⊘ 跳过（宪法审计 REJECT）")
+
         status = "✅ 成功" if s3.get("success") else "❌ 未完成"
-        lines.append(f"    结果: {status}")
+        lines.append(f"\n    结果: {status}")
+        lines.append(f"    {s3.get('harvest_conclusion', '')}")
 
         # V1.1: 漂移分析
         drift = result.drift_analysis
@@ -1255,29 +1903,34 @@ class SeedCultivation:
             lines.append(f"    漂移检测: {drift_icon} {drift.get('drift_type', '?')} — {drift.get('detail', '')}")
             lines.append(f"    处置: {drift.get('action', '')}")
 
-        # V1.2: 性决定审计（余弦相似度 + 分解）
-        nd_audit = s3.get("nature_determination_audit", {})
-        lines.append(f"    性决定审计（V1.2 — 路径一致性描述，非成才判据）:")
-        lines.append(f"      余弦相似度: {result.nature_determination_score:.4f} (阈值≥{self.config['nature_determination_threshold']}，待校准)")
-        if nd_audit.get("components"):
-            comp_str = ", ".join(f"{wx}={v:.2f}" for wx, v in nd_audit["components"].items())
-            lines.append(f"      五行分解: {comp_str}")
-        lines.append(f"      解读: {nd_audit.get('interpretation', '?')}")
-        lines.append(f"      审计状态: {nd_audit.get('threshold_status', '待校准')}")
-        lines.append(f"    {s3.get('harvest_conclusion', '')}")
+        # V1.3 减法引擎结果
+        sub = s3.get("subtraction_result", {})
+        if sub and sub.get("subtraction_events"):
+            lines.append(f"\n    V1.3 减法引擎（为道日损）:")
+            lines.append(f"      减除事件数: {sub.get('subtraction_count', 0)}")
+            lines.append(f"      可逆: {sub.get('reversible', True)}")
+            lines.append(f"      原则: {sub.get('principle', '?')}")
+            for ev in sub.get("subtraction_events", []):
+                lines.append(f"        → {ev.get('event')}: {ev.get('target')[:50]}")
 
-        # V1.2: 反向回路（通中生种）
+        # G5: 同源偏差标注
+        if result.same_source_bias:
+            lines.append(f"\n  ── G5 同源偏差标注 ──")
+            lines.append(f"    ⚠️ 同源偏差: 验证标尺与信号源来自同一轨迹。")
+            lines.append(f"    检出率是描述性结果（协议能描述已知路径），不构成预测力证据。")
+
+        # V1.3 归朴（原"通中生种"）
         reverse_seeds = result.reverse_flow_seeds
+        lines.append(f"\n  ── V1.3 归朴（复归于朴）──")
         if reverse_seeds:
-            lines.append(f"\n  ── V1.2 通中生种（反向回路）──")
-            lines.append(f"    回流种子候选: {len(reverse_seeds)} 个")
+            lines.append(f"    归朴候选: {len(reverse_seeds)} 个")
             for rs in reverse_seeds:
                 lines.append(f"      → {rs.get('source_domain', '?')} ({rs.get('method_seed_wuxing', '?')}) "
                            f"出现 {rs.get('occurrence_count', 0)} 次")
-            lines.append(f"    说明: 土·通迁移中检测到新种子候选，回流进入 Step 1")
+            lines.append(f"    说明: 成器→迁移→归朴。土·通迁移中检测到新种子候选，回流进入 Step 1")
         else:
-            lines.append(f"\n  ── V1.2 通中生种（反向回路）──")
-            lines.append(f"    未检测到回流信号")
+            lines.append(f"    未检测到归朴信号")
+            lines.append(f"    说明: 复归于朴——成器之后回归本真，不被才能异化")
 
         # 综合评估
         lines.append(f"\n  ── 综合评估 ──")
@@ -1287,6 +1940,11 @@ class SeedCultivation:
         lines.append(f"    损耗分层: {result.loss_zone}")
         if result.S_p > 0:
             lines.append(f"    道境指数: S_p={result.S_p:.1f} ({result.stage})")
+        if result.confucius_stage:
+            lines.append(f"    孔子阶段: {result.confucius_stage}")
+        if result.environment_phase:
+            lines.append(f"    环境分阶段: {result.environment_phase}")
+        lines.append(f"    无弃人底线: {'✅ 已启用' if result.no_discard_guarantee else '⚠ 未启用'}")
 
         # 经典引用与建议
         lines.append(f"\n  ── 经典与建议 ──")
@@ -1378,12 +2036,12 @@ def cultivate_seed(source_domain: str, target_domain: str,
 
 
 # ============================================================
-# 自检（V1.2）
+# 自检（V1.3）
 # ============================================================
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("种子培育模块 — 自检 (V1.2)")
+    print("种子培育模块 — 自检 (V1.3)")
     print("=" * 60)
 
     cultivator = SeedCultivation(time_scale="skill")
@@ -1654,7 +2312,7 @@ if __name__ == "__main__":
     assert len(reverse_seeds) == 1, f"应检测到 1 个回流候选，实际: {len(reverse_seeds)}"
     assert reverse_seeds[0]["source_domain"] == "生成式AI"
     assert reverse_seeds[0]["occurrence_count"] == 3
-    assert reverse_seeds[0]["source"] == "通中生种"
+    assert reverse_seeds[0]["source"] == "归朴"
     print(f"  模拟迁移事件: {len(migration_events)} 个")
     print(f"  +2 事件: 生成式AI x3, 计算机视觉 x1")
     print(f"  回流候选: {len(reverse_seeds)} 个")
@@ -1709,5 +2367,160 @@ if __name__ == "__main__":
     print(f"  合作者 → {env23['collaborators']['agent_translation']}")
     print("  ✅ 测试 23 通过")
 
+    # ═══════════════════════════════════════════════
+    # V1.3 新增测试
+    # ═══════════════════════════════════════════════
+
+    # 测试 24: 双审计顺序 — 宪法 REJECT → 性决定跳过（V1.3 澄清一：修复方向性）
+    print("\n[测试 24] V1.3 双审计顺序 — 宪法审计 REJECT 短路")
+    # 构造真越界场景：topic克method（课题压制方法本性）
+    # 水克火 → topic(水)克method(火) → 真越界 → REJECT
+    r24 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=4,
+        method_seed_wuxing="火",
+        topic_seed_wuxing="水",  # 水克火，topic克method → 真越界 → REJECT
+    )
+    ca24 = r24.constitution_audit
+    assert "constitution_audit" in r24.to_dict(), "V1.3 结果应含宪法审计字段"
+    assert "priority" in ca24, "宪法审计应含 priority 字段"
+    assert ca24["priority"] == AuditPriority.CONSTITUTION.value
+    # 验证方向越界检查为 REJECT（topic克method=真越界）
+    dir_check = [c for c in ca24.get("checks", []) if c["check_name"] == "方向越界检查"]
+    assert len(dir_check) == 1, "应存在方向越界检查"
+    assert dir_check[0]["verdict"] == "REJECT", f"topic克method应为REJECT，实际: {dir_check[0]['verdict']}"
+    # 验证宪法审计因方向越界而整体不通过
+    assert ca24["passed"] == False, f"宪法审计应不通过（topic克method=真越界），实际: {ca24['passed']}"
+    print(f"  宪法审计优先: {ca24.get('priority', '?')}")
+    print(f"  原则: {ca24.get('principle', '?')[:50]}...")
+    print(f"  检查项数: {len(ca24.get('checks', []))}")
+    for c in ca24.get("checks", []):
+        print(f"    [{c['verdict']}] {c['check_name']}: {c['reason'][:60]}...")
+    print(f"  宪法审计通过: {ca24['passed']} (topic克method=真越界)")
+    print("  ✅ 测试 24 通过")
+
+    # 测试 25: 培育双轨 — 加法 + 减法事件并行
+    print("\n[测试 25] V1.3 培育双轨 — 为学日益 + 为道日损并行")
+    r25 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=4,
+        method_seed_wuxing="水",
+    )
+    dual = r25.nurture_dual_track
+    assert "addition_events" in dual, "培育双轨应含加法事件"
+    assert "subtraction_events" in dual, "培育双轨应含减法事件"
+    assert "principle" in dual, "培育双轨应含原则说明"
+    print(f"  加法事件数: {len(dual.get('addition_events', []))}")
+    print(f"  减法事件数: {len(dual.get('subtraction_events', []))}")
+    print(f"  减法可逆: {dual.get('subtraction_reversible', True)}")
+    print(f"  原则: {dual.get('principle', '?')}")
+    print("  ✅ 测试 25 通过")
+
+    # 测试 26: 导师差异化 — 不同种子不同培育强度
+    print("\n[测试 26] V1.3 导师差异化 — 因材施教")
+    # 金性种子 → 严厉（子路式）
+    r26_jin = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_wuxing="金",
+    )
+    # 木性种子 → 温和（冉有式）
+    r26_mu = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_wuxing="木",
+    )
+    ms_jin = r26_jin.mentor_strategy
+    ms_mu = r26_mu.mentor_strategy
+    assert ms_jin.get("differentiation") != ms_mu.get("differentiation"), \
+        f"金和木的导师策略应不同: {ms_jin.get('differentiation')} vs {ms_mu.get('differentiation')}"
+    assert "non_dominance_ethics" in ms_jin, "导师策略应含不宰伦理"
+    print(f"  金性种子导师: {ms_jin.get('differentiation')} (强度: {ms_jin.get('intensity')})")
+    print(f"  木性种子导师: {ms_mu.get('differentiation')} (强度: {ms_mu.get('intensity')})")
+    print(f"  不宰伦理: {ms_jin.get('non_dominance_ethics', {}).get('principle', '?')[:50]}...")
+    print("  ✅ 测试 26 通过")
+
+    # 测试 27: 环境分阶段 — 子夏/子张
+    print("\n[测试 27] V1.3 环境分阶段 — 子夏保护期 / 子张包容期")
+    r27 = cultivator.cultivate("大语言模型", "自然语言处理")
+    env_phase = r27.environment_phase
+    assert env_phase in (EnvironmentPhase.ZIXIA.value, EnvironmentPhase.ZIZHANG.value), \
+        f"环境分阶段应为子夏或子张，实际: {env_phase}"
+    env_data = r27.environmental_factors.get("environment", {})
+    assert "phase" in env_data, "环境应含 phase 字段"
+    print(f"  环境分阶段: {env_phase}")
+    print(f"  描述: {env_data.get('phase_description', '?')}")
+    print("  ✅ 测试 27 通过")
+
+    # 测试 28: 无弃人底线 — 低信度不丢弃
+    print("\n[测试 28] V1.3 无弃人底线 — 低信度≠废材")
+    r28 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=1,  # 待观察
+    )
+    assert r28.no_discard_guarantee == True, "无弃人底线应启用"
+    assert "待观察" in r28.method_seed.get("confirmation_status", ""), "低信度应为待观察"
+    advice = r28.ethical_advice
+    assert "无弃人" in advice or "不丢弃" in advice, f"建议应含无弃人保证: {advice}"
+    print(f"  确认状态: {r28.method_seed.get('confirmation_status')}")
+    print(f"  无弃人底线: {r28.no_discard_guarantee}")
+    print(f"  建议: {advice[:80]}...")
+    print("  ✅ 测试 28 通过")
+
+    # 测试 29: 归朴命名 — 反向回路字段
+    print("\n[测试 29] V1.3 归朴命名 — 复归于朴")
+    migration_events = [
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+        {"domain": "生成式AI", "wuxing": "木", "value_score": 2, "event_type": "interest_signal"},
+    ]
+    reverse_seeds = cultivator._detect_reverse_flow_seeds(migration_events)
+    assert len(reverse_seeds) == 1
+    assert reverse_seeds[0]["source"] == "归朴", \
+        f"V1.3 源字段应为'归朴'，实际: {reverse_seeds[0]['source']}"
+    assert "classical_ref" in reverse_seeds[0], "归朴候选应含经典引用"
+    print(f"  源字段: {reverse_seeds[0]['source']}")
+    print(f"  经典引用: {reverse_seeds[0]['classical_ref'][:50]}...")
+    print("  ✅ 测试 29 通过")
+
+    # 测试 30: 孔子六阶段
+    print("\n[测试 30] V1.3 孔子六阶段 — 人才时间轴")
+    r30_dormant = cultivator.cultivate("大语言模型", "未知领域")
+    r30_fruiting = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=4,
+        method_seed_wuxing="水",
+        harvest_methodology_wuxing="水",
+    )
+    assert r30_dormant.confucius_stage != "", "休眠种子应有孔子阶段"
+    assert r30_fruiting.confucius_stage != "", "结果种子应有孔子阶段"
+    print(f"  休眠种子: {r30_dormant.confucius_stage}")
+    print(f"  结果种子: {r30_fruiting.confucius_stage}")
+    # 验证六阶段配置存在
+    stages = cultivator.config.get("confucius_stages", {})
+    assert len(stages) == 6, f"应有 6 个孔子阶段，实际: {len(stages)}"
+    print(f"  六阶段配置: {list(stages.keys())}")
+    print("  ✅ 测试 30 通过")
+
+    # 测试 31: V1.3 澄清一 — method克topic=WARNING（不阻断，正常约束机制）
+    print("\n[测试 31] V1.3 澄清一 — method克topic=WARNING（正常约束，不阻断）")
+    # 水克火 → method(水)克topic(火) → 正常约束机制 → WARNING
+    r31 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=4,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="火",  # 水克火，method克topic → 正常约束 → WARNING（不阻断）
+    )
+    ca31 = r31.constitution_audit
+    dir_check31 = [c for c in ca31.get("checks", []) if c["check_name"] == "方向越界检查"]
+    assert len(dir_check31) == 1, "应存在方向越界检查"
+    assert dir_check31[0]["verdict"] == "PASS", (
+        f"method克topic应为PASS（正常约束机制），实际: {dir_check31[0]['verdict']}"
+    )
+    assert "正常约束" in dir_check31[0]["reason"], (
+        f"应标注'正常约束机制'，实际: {dir_check31[0]['reason']}"
+    )
+    print(f"  方向越界检查: [{dir_check31[0]['verdict']}] {dir_check31[0]['reason'][:60]}...")
+    print(f"  宪法审计通过: {ca31['passed']} (method克topic=正常约束，不阻断)")
+    print("  ✅ 测试 31 通过")
+
     print("\n" + "=" * 60)
-    print("自检完成 — 全部 23 项测试通过 (V1.2)")
+    print("自检完成 — 全部 31 项测试通过 (V1.3)")

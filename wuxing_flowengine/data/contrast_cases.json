@@ -1,0 +1,83 @@
+{
+  "_comment": "Phase 1.5 生克对照校准 — 真实跨界案例库 (V1.2)",
+  "version": "V1.2",
+  "purpose": "检验性决定审计的判别力：余弦相似度能否区分生（保持）与克（漂移）",
+  "calibration_method": "正样本（性决定保持者）vs 负样本（跨界成功但性漂移者），余弦相似度分布分离度 ≥80% 为判别力充足",
+  "positive_samples": [
+    {
+      "id": "P1",
+      "label": "杨振宁（四大师-典范）",
+      "method_wuxing": "金",
+      "harvest_wuxing": "金",
+      "description": "对称性方法论贯穿一生：规范场论→Yang-Baxter方程→taste研究。题目多次漂移，方法种子（对称性思维）始终如一。",
+      "source": "种育提案V1.1/V1.2 + 菲尔兹奖四大师实证",
+      "nature_determination": "保持"
+    },
+    {
+      "id": "P2",
+      "label": "妙秒（创始人）",
+      "method_wuxing": "土",
+      "harvest_wuxing": "土",
+      "description": "王虹模式：题目从道德经漂移到种·育，五行诊断（土）方法论贯穿一切。",
+      "source": "Phase 0/1 执行报告 2026-08-08",
+      "nature_determination": "保持"
+    },
+    {
+      "id": "P3",
+      "label": "王虹（数学-保持）",
+      "method_wuxing": "水",
+      "harvest_wuxing": "水",
+      "description": "题目从 Fourier 限制漂移到挂谷、解耦不变，但分析方法论（水）保持。",
+      "source": "种育提案V1.2",
+      "nature_determination": "保持"
+    },
+    {
+      "id": "P4",
+      "label": "Peter Scholze（数学-保持）",
+      "method_wuxing": "金",
+      "harvest_wuxing": "金",
+      "description": "完美空间（perfectoid spaces）方法论贯穿：p进几何→Langlands纲领。",
+      "source": "种育提案V1.1 菲尔兹奖四大师",
+      "nature_determination": "保持"
+    }
+  ],
+  "negative_samples": [
+    {
+      "id": "N1",
+      "label": "纯数学→金融工程（跨界漂移）",
+      "method_wuxing": "金",
+      "harvest_wuxing": "土",
+      "description": "数学推理方法论（金）转为金融建模（土），方法种子发生性漂移，但跨界成功。",
+      "source": "种育V1.2 Phase 1.5 规划",
+      "nature_determination": "漂移"
+    },
+    {
+      "id": "N2",
+      "label": "物理学→生物信息学（跨界漂移）",
+      "method_wuxing": "金",
+      "harvest_wuxing": "木",
+      "description": "物理实验方法论（金）转为生物数据分析（木），方法种子发生性漂移，但产出显著。",
+      "source": "种育V1.2 Phase 1.5 规划",
+      "nature_determination": "漂移"
+    },
+    {
+      "id": "N3",
+      "label": "计算机科学→产品管理（跨界漂移）",
+      "method_wuxing": "金",
+      "harvest_wuxing": "土",
+      "description": "算法思维（金）转为产品方法论（土），技术种子→管理种子，典型的性漂移跨界。",
+      "source": "种育V1.2 Phase 1.5 规划",
+      "nature_determination": "漂移"
+    }
+  ],
+  "calibration_result": {
+    "_status": "pending",
+    "_note": "待 Phase 1.5 执行后填充实际校准结果",
+    "positive_scores": [],
+    "negative_scores": [],
+    "separation": null,
+    "discriminative": null,
+    "suggested_threshold": null,
+    "current_threshold": 0.7
+  }
+}
