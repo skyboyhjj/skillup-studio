@@ -1,7 +1,9 @@
 """
-CASE-LIU 柳智宇同态映射验证 — 自动化测试（6 项断言）
-=====================================================
-基于《验证任务_CASE-LIU柳智宇同态映射.md》§四 预期输出与断言。
+CASE-LIU 柳智宇同态映射验证 — 自动化测试（7 项断言，REV1）
+===========================================================
+基于《验证任务_CASE-LIU柳智宇同态映射.md》§四 + REV1 修订。
+REV1: 增量审计断言修正——允许子类标签（链式映射贡献/关系核体现），
+      新增引擎输出与任务书 §二 逐项一致性检查。
 
 运行:
     python -m pytest test_homo_liu.py -v
@@ -108,10 +110,10 @@ def test_chain_retention():
         f"链式复合 {chain_ret} 超出 [0.63, 0.90]（分段积={product:.4f}）"
 
 
-# ── 测试 4: 增量审计 3 项，全部"不破坏保持" ──
+# ── 测试 4: 增量审计 3 项，全部为"增量"且不破坏保持（REV1：允许子类标签）──
 
 def test_increment_audit():
-    """增量审计 3 项，全部不破坏保持"""
+    """增量审计：3 项，全部为'增量'且不破坏保持（允许子类标签：链式映射贡献/关系核体现）"""
     task_data = load_task()
     engine = HomomorphismEngine()
     result = engine.transfer_from_graph(
@@ -123,11 +125,34 @@ def test_increment_audit():
     inc = result["increment_audit"]
     assert len(inc) == 3, f"增量项应为 3，实际 {len(inc)}"
     for i in inc:
-        assert "不破坏保持" in i["judgement"] or "增量" in i["judgement"], \
-            f"增量项 {i['item']} 应不破坏保持，实际 {i['judgement']}"
+        j = i["judgement"]
+        # ① 必须以"增量"开头（是增量，不是损耗/破坏）
+        assert j.startswith("增量"), f"判定应以'增量'开头: {j}"
+        # ② 不得含独立的"破坏"（排除"不破坏"中的"破坏"——"增量不破坏保持"允许）
+        assert "破坏" not in j.replace("不破坏", ""), f"增量不得破坏保持: {j}"
 
 
-# ── 测试 5: 迁移验证 4/4 PASS ──
+# ── 测试 5: 增量审计与任务书 §二 逐项一致（REV1 新增）──
+
+def test_increment_audit_matches_task_spec():
+    """REV1 新增：引擎增量输出与任务书 §二 increment_audit_expected 逐项一致"""
+    task_data = load_task()
+    engine = HomomorphismEngine()
+    result = engine.transfer_from_graph(
+        task_data["source_domain"],
+        task_data["target_domain"],
+        task_data["candidate_mappings"],
+    )
+
+    engine_items = {i["item"]: i["judgement"] for i in result["increment_audit"]}
+    spec_items = {i["item"]: i["judgement"] for i in task_data["increment_audit_expected"]}
+    assert set(engine_items.keys()) == set(spec_items.keys()), "增量项清单不一致"
+    for item in spec_items:
+        assert engine_items[item] == spec_items[item], \
+            f"{item} 判定不一致: 引擎={engine_items[item]}, 预期={spec_items[item]}"
+
+
+# ── 测试 6: 迁移验证 4/4 PASS ──
 
 def test_scenarios_all_pass():
     """迁移验证 4/4 PASS"""
@@ -146,7 +171,7 @@ def test_scenarios_all_pass():
         assert s["result"] == "PASS", f"场景 {s['id']}({s['name']}) 应为 PASS，实际 {s['result']}"
 
 
-# ── 测试 6: 壳核审计三层判定正确 + H1 挂载 ──
+# ── 测试 7: 壳核审计三层判定正确 + H1 挂载 ──
 
 def test_shell_nucleus():
     """壳核审计：数学=壳（可换）、逻辑=核（可迁）、追问=方向核（保持，挂H1）"""
@@ -173,7 +198,7 @@ def test_shell_nucleus():
 
 if __name__ == "__main__":
     print("=" * 70)
-    print("  CASE-LIU 柳智宇同态映射验证 — 自动化测试 (6 项)")
+    print("  CASE-LIU 柳智宇同态映射验证 — 自动化测试 (7 项，REV1)")
     print("=" * 70)
 
     test_funcs = [
@@ -181,6 +206,7 @@ if __name__ == "__main__":
         test_average_retention,
         test_chain_retention,
         test_increment_audit,
+        test_increment_audit_matches_task_spec,
         test_scenarios_all_pass,
         test_shell_nucleus,
     ]
