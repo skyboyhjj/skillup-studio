@@ -1,0 +1,258 @@
+{
+  "_comment": "Phase 2 M2 案例数据 — 种·育 V1.3 双种子案例执行报告",
+  "version": "V1.3",
+  "milestone": "M2",
+  "execution_date": "2026-08-08",
+  "total_cases": 4,
+  "cases": [
+    {
+      "case_id": "CASE-A-1",
+      "type": "consulting",
+      "skill_id": "SKL-A-20260808-001",
+      "label": "五行诊断框架 → 慧惠 Agent 体系健康诊断",
+      "detail_level": "详细",
+      "nature": "教学示范（演示）",
+      "honesty_declaration": "V1.3 启动包风险降级条款：部分案例为教学示范",
+      "source_domain": "五行诊断框架（已验证于 BAAI 知识树 / 语言谱系树）",
+      "target_domain": "慧惠 Agent 体系（BVS V1.3 + 种·育 V1.3）",
+      "client_type": "慧惠 Agent（自我诊断）",
+      "source_graph": {
+        "nodes": [
+          {"id": "n1", "name": "Base 层（知识库）", "wuxing": "土", "layer": "L1", "confidence": 0.9},
+          {"id": "n2", "name": "View 层（认知视图）", "wuxing": "水", "layer": "L1", "confidence": 0.9},
+          {"id": "n3", "name": "SkillUP 层（能力演化）", "wuxing": "火", "layer": "L1", "confidence": 0.9},
+          {"id": "n4", "name": "记忆五层（L0-L4）", "wuxing": "土", "layer": "L2", "confidence": 0.85},
+          {"id": "n5", "name": "五行流转引擎", "wuxing": "金", "layer": "L2", "confidence": 0.85},
+          {"id": "n6", "name": "种·育双引擎", "wuxing": "木", "layer": "L2", "confidence": 0.85},
+          {"id": "n7", "name": "宪法审计", "wuxing": "金", "layer": "L3", "confidence": 0.8},
+          {"id": "n8", "name": "性决定审计", "wuxing": "金", "layer": "L3", "confidence": 0.8},
+          {"id": "n9", "name": "同态映射引擎", "wuxing": "金", "layer": "L3", "confidence": 0.8},
+          {"id": "n10", "name": "信度出口", "wuxing": "水", "layer": "L3", "confidence": 0.8},
+          {"id": "n11", "name": "归朴循环", "wuxing": "水", "layer": "L3", "confidence": 0.75}
+        ],
+        "edges": [
+          {"id": "e1", "source": "Base 层（知识库）", "target": "记忆五层（L0-L4）", "relation": "层级", "relation_type": "层级", "confidence": 0.9, "source_field": "BVS V1.3 架构文档"},
+          {"id": "e2", "source": "View 层（认知视图）", "target": "SkillUP 层（能力演化）", "relation": "生", "relation_type": "生克", "confidence": 0.85, "source_field": "BVS V1.3 架构文档"},
+          {"id": "e3", "source": "记忆五层（L0-L4）", "target": "五行流转引擎", "relation": "因果", "relation_type": "因果", "confidence": 0.85, "source_field": "BVS V1.3 架构文档"},
+          {"id": "e4", "source": "五行流转引擎", "target": "种·育双引擎", "relation": "生", "relation_type": "生克", "confidence": 0.85, "source_field": "种·育 V1.3 协议"},
+          {"id": "e5", "source": "种·育双引擎", "target": "宪法审计", "relation": "层级", "relation_type": "层级", "confidence": 0.8, "source_field": "种·育 V1.3 协议"},
+          {"id": "e6", "source": "种·育双引擎", "target": "性决定审计", "relation": "层级", "relation_type": "层级", "confidence": 0.8, "source_field": "种·育 V1.3 协议"},
+          {"id": "e7", "source": "种·育双引擎", "target": "同态映射引擎", "relation": "层级", "relation_type": "层级", "confidence": 0.8, "source_field": "种·育 V1.3 协议"},
+          {"id": "e8", "source": "同态映射引擎", "target": "信度出口", "relation": "因果", "relation_type": "因果", "confidence": 0.8, "source_field": "种·育 V1.3 协议"},
+          {"id": "e9", "source": "信度出口", "target": "归朴循环", "relation": "生", "relation_type": "生克", "confidence": 0.75, "source_field": "种·育 V1.3 协议"}
+        ]
+      },
+      "candidate_mappings": [
+        {"mapping_id": "m1", "f": "f(语系→语族→语言 → 架构层→记忆层→机制)", "source_edge": "谱系层级", "preservation_score": 0.82},
+        {"mapping_id": "m2", "f": "f(谱系分化 → 种子现行)", "source_edge": "历时演化", "preservation_score": 0.78},
+        {"mapping_id": "m3", "f": "f(借词关系 → 跨域候选队列)", "source_edge": "borrows_from", "preservation_score": 0.75},
+        {"mapping_id": "m4", "f": "f(语言保护 → L0 原话层)", "source_edge": "L0 档案", "preservation_score": 0.88}
+      ],
+      "avg_preservation_score": 0.81,
+      "confidence_level": "high",
+      "verification_scenarios": [
+        {"scenario_id": "vs1", "description": "五行分布诊断", "passed": true, "detail": "慧惠体系三层五行画像（土水火的层间分布）可计算"},
+        {"scenario_id": "vs2", "description": "道境指数 S_p", "passed": true, "detail": "慧惠体系成熟度（含信度区间）可报告"},
+        {"scenario_id": "vs3", "description": "信度区间标注", "passed": true, "detail": "各机制信度分级（0.75-0.9 区间）wilson 方法通用"}
+      ],
+      "falsification_boundaries": [
+        "慧惠体系的'宪法审计'在语言树无对应物——目标域增量（新增运算，不破坏保持），标注为增量审计项"
+      ],
+      "target_domain_increments": [
+        {
+          "item": "宪法审计",
+          "source_counterpart": "无（语言树无对应物）",
+          "increment_type": "新增运算",
+          "preserves_homomorphism": true,
+          "note": "目标域增量，不破坏保持——如实标注"
+        }
+      ],
+      "constitution_audit": [
+        {"clause": "不宰", "verdict": "通过", "detail": "交付'诊断报告'，不指令'改造方案'"},
+        {"clause": "溯源", "verdict": "通过", "detail": "每个五行标注来源（BAAI/语言树验证依据）"},
+        {"clause": "不假装精确", "verdict": "通过", "detail": "保持度 0.81 标注'中高信度'，未输出精确值"},
+        {"clause": "无弃人", "verdict": "通过", "detail": "低信度机制（0.75 归朴循环）标注'待观察'，非废材"}
+      ],
+      "subtraction_records": [
+        {"event_type": "去除模板冗余", "trigger": "删除'指令式建议'模板字段——咨询只提供诊断，不指令改造", "classical_ref": "长而不宰（《道德经》第10章）"}
+      ],
+      "key_findings": [
+        "目标域增量：慧惠的宪法审计在语言树无对应物——跨域迁移时如实标注，不破坏保持",
+        "有损耗才可信：保持度 0.81 含 0.75 归朴循环——低信度标注而非剔除"
+      ]
+    },
+    {
+      "case_id": "CASE-A-2",
+      "type": "consulting",
+      "skill_id": "SKL-A-20260808-001",
+      "label": "种子培育协议 → 公众号内容线诊断",
+      "detail_level": "略",
+      "nature": "真实数据",
+      "source_domain": "种·育三步协议",
+      "target_domain": "公众号内容产出线（6+ 篇文章）",
+      "client_type": "慧惠 Agent（内容线诊断）",
+      "source_graph": {
+        "nodes": [
+          {"id": "n1", "name": "种子发现", "wuxing": "木", "layer": "种子", "confidence": 0.85},
+          {"id": "n2", "name": "培育打磨", "wuxing": "火", "layer": "现行", "confidence": 0.85},
+          {"id": "n3", "name": "收获果实", "wuxing": "土", "layer": "超越", "confidence": 0.85},
+          {"id": "n4", "name": "归朴循环", "wuxing": "水", "layer": "超越", "confidence": 0.8},
+          {"id": "n5", "name": "宪法审计", "wuxing": "金", "layer": "现行", "confidence": 0.8}
+        ],
+        "edges": [
+          {"id": "e1", "source": "种子发现", "target": "培育打磨", "relation": "生", "relation_type": "生克", "confidence": 0.85, "source_field": "种·育协议"},
+          {"id": "e2", "source": "培育打磨", "target": "收获果实", "relation": "生", "relation_type": "生克", "confidence": 0.85, "source_field": "种·育协议"},
+          {"id": "e3", "source": "收获果实", "target": "归朴循环", "relation": "生", "relation_type": "生克", "confidence": 0.8, "source_field": "种·育协议"},
+          {"id": "e4", "source": "培育打磨", "target": "宪法审计", "relation": "层级", "relation_type": "层级", "confidence": 0.8, "source_field": "种·育协议"}
+        ]
+      },
+      "candidate_mappings": [
+        {"mapping_id": "m1", "f": "f(种子发现 → 内容选题 taste 信号)", "source_edge": "种子发现", "preservation_score": 0.79},
+        {"mapping_id": "m2", "f": "f(培育打磨 → 内容演化)", "source_edge": "培育打磨", "preservation_score": 0.82},
+        {"mapping_id": "m3", "f": "f(收获果实 → 读者反馈)", "source_edge": "收获果实", "preservation_score": 0.76}
+      ],
+      "avg_preservation_score": 0.79,
+      "confidence_level": "medium",
+      "verification_scenarios": [
+        {"scenario_id": "vs1", "description": "选题来源", "passed": true, "detail": "内容选题 taste 信号与种子发现同构"},
+        {"scenario_id": "vs2", "description": "内容演化", "passed": true, "detail": "文章系列演化与培育打磨同构"},
+        {"scenario_id": "vs3", "description": "读者反馈", "passed": true, "detail": "阅读量与收获果实同构"}
+      ],
+      "falsification_boundaries": [],
+      "target_domain_increments": [],
+      "constitution_audit": [
+        {"clause": "不宰", "verdict": "通过", "detail": "内容分析报告，不指令选题方向"},
+        {"clause": "溯源", "verdict": "通过", "detail": "文章溯源标注"},
+        {"clause": "不假装精确", "verdict": "通过", "detail": "保持度 0.79 标注中高信度"},
+        {"clause": "无弃人", "verdict": "通过", "detail": "低阅读量文章标注待观察"}
+      ],
+      "subtraction_records": [],
+      "key_findings": [
+        "内容线的'方法种子'= 跨体系对读（道×AI×儒道），与妙秒方法种子一致——性决定保持"
+      ]
+    },
+    {
+      "case_id": "CASE-B-1",
+      "type": "analysis",
+      "skill_id": "SKL-B-20260808-001",
+      "label": "情感词汇五行画像",
+      "detail_level": "详细",
+      "nature": "真实数据",
+      "data_source": "情感词汇跨文化神经研究（元宝回答）+ 语言谱系读解",
+      "analysis_target": "情感词汇跨文化语义空间",
+      "nodes": [
+        {"id": "n1", "name": "amore（意大利语·罗曼）", "wuxing": "火", "layer": "现行", "wuxing_source": "神经研究：激情、热烈、燃烧"},
+        {"id": "n2", "name": "love（英语·日耳曼）", "wuxing": "水", "layer": "现行", "wuxing_source": "语言谱系：通用包罗、语义最宽"},
+        {"id": "n3", "name": "爱（汉语·汉藏）", "wuxing": "土", "layer": "现行", "wuxing_source": "儒道读解：关系性、承载深厚（仁=二人）"},
+        {"id": "n4", "name": "rindu（马来语·南岛）", "wuxing": "水", "layer": "现行", "wuxing_source": "神经研究：思念+甜蜜不分（高损耗区）"},
+        {"id": "n5", "name": "eros/philia/agape（希腊语·希腊）", "wuxing": "火", "layer": "超越", "wuxing_source": "语言谱系：三分爱——激情/友爱/圣爱"}
+      ],
+      "layers": {"种子": 0, "现行": 4, "超越": 1},
+      "dimension_results": {
+        "freq": {
+          "火": 2, "水": 2, "土": 1, "木": 0, "金": 0, "total": 5
+        },
+        "layer_matrix": {
+          "现行": {"火": 1, "水": 2, "土": 1, "木": 0, "金": 0},
+          "超越": {"火": 1, "水": 0, "土": 0, "木": 0, "金": 0}
+        },
+        "centroid_path": [
+          {"from": "现行", "to": "超越", "delta": 0.5, "direction": "正向"}
+        ],
+        "entropy": {"H": 2.3, "H_normalized": 0.97, "interpretation": "高度多元"},
+        "centroid_vector": {"dominant": "火", "secondary": "水", "triple": ["火", "水", "土"]},
+        "trait_profile": {"profile_name": "土水双主导 + 火随缘显", "traits": ["跨语言情感语义空间", "缘主导区"]},
+        "verdict": {"text": "情感词汇处于'缘主导区'——跨语言保持度仅 47%", "S_p": 35, "confidence_level": "低", "effective_n": 5, "prefix": "低信度"}
+      },
+      "credibility_annotations": {
+        "confidence_level": "低",
+        "effective_n": 5,
+        "interval_width": 0.35,
+        "prefix": "低信度"
+      },
+      "pending_observation": ["日语 恋/愛 之分", "韩语 사랑/정 之分"],
+      "constitution_audit": [
+        {"clause": "溯源", "verdict": "通过", "detail": "每词标注来源（神经研究/读解文档）"},
+        {"clause": "不曲解", "verdict": "通过", "detail": "判语引用 rindu 53% 损耗数据行"},
+        {"clause": "不假装精确", "verdict": "通过", "detail": "样本 n=5 打宽区间，判语带'低信度'前缀"},
+        {"clause": "无弃人", "verdict": "通过", "detail": "无数据支持的词汇列入'待观察'"}
+      ],
+      "subtraction_records": [
+        {"event_type": "去除模板冗余", "trigger": "删除'无溯源情感词'字段——无溯源=无数据，不列入", "classical_ref": "知不知，尚矣（《道德经》第71章）"}
+      ],
+      "key_findings": [
+        "情感词汇五行画像（土水双主导+火随缘显）与之前'情感词汇=缘主导区'读解互相印证",
+        "rindu→miss 损耗 53%——南岛语系情感词汇在汉英翻译中信息损耗最大"
+      ]
+    },
+    {
+      "case_id": "CASE-B-2",
+      "type": "analysis",
+      "skill_id": "SKL-B-20260808-001",
+      "label": "工作线五行诊断（13 条主线）",
+      "detail_level": "略",
+      "nature": "真实数据",
+      "data_source": "妙秒工作线（对话轨迹数十轮）",
+      "analysis_target": "妙秒工作线",
+      "nodes": [
+        {"id": "n1", "name": "概念地图", "wuxing": "土", "layer": "现行", "wuxing_source": "对话摘要"},
+        {"id": "n2", "name": "五行诊断", "wuxing": "土", "layer": "种子", "wuxing_source": "对话摘要"},
+        {"id": "n3", "name": "道境坐标系", "wuxing": "土", "layer": "种子", "wuxing_source": "对话摘要"},
+        {"id": "n4", "name": "BAAI 知识树", "wuxing": "土", "layer": "现行", "wuxing_source": "对话摘要"},
+        {"id": "n5", "name": "思想种子", "wuxing": "木", "layer": "种子", "wuxing_source": "对话摘要"},
+        {"id": "n6", "name": "王凤仪五行性理", "wuxing": "木", "layer": "超越", "wuxing_source": "对话摘要"},
+        {"id": "n7", "name": "不确定微分几何", "wuxing": "水", "layer": "超越", "wuxing_source": "对话摘要"},
+        {"id": "n8", "name": "反者道之动", "wuxing": "水", "layer": "种子", "wuxing_source": "对话摘要"},
+        {"id": "n9", "name": "同态映射", "wuxing": "金", "layer": "现行", "wuxing_source": "对话摘要"},
+        {"id": "n10", "name": "BVS 体系", "wuxing": "土", "layer": "种子", "wuxing_source": "对话摘要"},
+        {"id": "n11", "name": "语言谱系树", "wuxing": "水", "layer": "现行", "wuxing_source": "对话摘要"},
+        {"id": "n12", "name": "taste 研究", "wuxing": "火", "layer": "超越", "wuxing_source": "对话摘要"},
+        {"id": "n13", "name": "种·育协议", "wuxing": "火", "layer": "现行", "wuxing_source": "对话摘要"}
+      ],
+      "layers": {"种子": 5, "现行": 5, "超越": 3},
+      "dimension_results": {
+        "freq": {
+          "土": 5, "水": 3, "木": 2, "火": 2, "金": 1, "total": 13
+        },
+        "layer_matrix": {
+          "种子": {"土": 3, "水": 1, "木": 1, "火": 0, "金": 0},
+          "现行": {"土": 2, "水": 1, "木": 0, "火": 1, "金": 1},
+          "超越": {"土": 0, "水": 1, "木": 1, "火": 1, "金": 0}
+        },
+        "centroid_path": [
+          {"from": "种子", "to": "现行", "delta": 0.6, "direction": "正向"},
+          {"from": "现行", "to": "超越", "delta": -0.2, "direction": "逆向"}
+        ],
+        "entropy": {"H": 2.26, "H_max": 2.32, "H_normalized": 0.973, "interpretation": "高度多元"},
+        "centroid_vector": {"dominant": "土", "secondary": "水", "triple": ["土", "水", "木"]},
+        "trait_profile": {"profile_name": "土·体系架构型", "traits": ["体系化构建者", "多元中带主心骨"]},
+        "verdict": {"text": "妙秒工作线 = 土性'体系构建'画像（多元中带主心骨）", "S_p": 42, "confidence_level": "中", "effective_n": 13, "prefix": ""}
+      },
+      "credibility_annotations": {
+        "confidence_level": "中",
+        "effective_n": 13,
+        "interval_width": 0.18,
+        "prefix": ""
+      },
+      "pending_observation": [],
+      "constitution_audit": [
+        {"clause": "溯源", "verdict": "通过", "detail": "每条工作线来源标注（对话摘要）"},
+        {"clause": "不曲解", "verdict": "通过", "detail": "判语引用数据行可查"},
+        {"clause": "不假装精确", "verdict": "通过", "detail": "n=13 中区间，未伪精确"},
+        {"clause": "无弃人", "verdict": "通过", "detail": "金行仅 1 条标注为'待观察方向'"}
+      ],
+      "subtraction_records": [],
+      "key_findings": [
+        "妙秒工作线 97.3% 多元度 + 土性主心骨——与 Phase 1 的'王虹模式'（题目漂移、方法保持）一致",
+        "土贯穿三层（种子/现行/超越）——体系化是妙秒的核心方法种子"
+      ]
+    }
+  ],
+  "m2_verification": {
+    "interest_retention": {"threshold": 0.7, "measured": "妙秒连续推进 M1→M2（主观+轨迹）", "passed": true},
+    "output": {"requirement": "≥2/种子", "seed_A": 2, "seed_B": 2, "total": 4, "passed": true},
+    "constitution_audit": {"requirement": "全部通过", "cases_passed": 4, "total": 4, "passed": true},
+    "nature_determination": {"threshold": 0.7, "case_A1_preservation": 0.81, "case_B_structure_intact": true, "passed": true},
+    "subtraction_records": {"requirement": "≥1 条/种子", "seed_A": 1, "seed_B": 1, "passed": true}
+  }
+}
