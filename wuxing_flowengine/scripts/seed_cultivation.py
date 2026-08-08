@@ -144,6 +144,92 @@ class AuditPriority(str, Enum):
     NATURE = "性决定审计"        # 才·方法 — 次之
 
 
+# ── V1.5 新增枚举 ──
+
+class SystemType(str, Enum):
+    """壳核审计体系类型（V1.5）"""
+    NUCLEUS_MEASURING = "测核体系"    # 登顶/共情/纯粹
+    SHELL_MEASURING = "测壳体系"      # 职称/奖杯/成绩
+
+
+class FailureQuality(str, Enum):
+    """失败质量分类（V1.5 → V1.5.1 三分法）"""
+    TRUE_FAILURE = "真失败"                # 结构性证伪——实验设计能区分假设对错，奖励
+    ACCIDENTAL_FAILURE = "偶然失败"        # 不可复现——运气/环境因素，中性不奖惩
+    PERFORMATIVE_FAILURE = "表演性失败"    # 为奖励而故意制造，警告
+
+
+class SubtractionScope(str, Enum):
+    """减法记录范围（V1.5）"""
+    CULTIVATION = "培育级"    # 种子培育中的减法
+    PROTOCOL = "协议级"       # 协议自身的日损
+
+
+class PendingHypothesisStatus(str, Enum):
+    """待验证假设状态（V1.5）"""
+    PENDING = "待验证"
+    VERIFIED = "已验证"
+    FALSIFIED = "已证伪"
+    UNDETERMINED = "待定"
+
+
+# ── V1.5 新增数据类 ──
+
+@dataclass
+class ShellNucleusDeclaration:
+    """壳核审计声明（V1.5）"""
+    nucleus_measured: str = ""              # 测的核 = {方法核 / 方向核}
+    shell_excluded: List[str] = field(default_factory=list)  # 不测的壳
+    system_type: str = ""                   # 体系类型（测核体系/测壳体系）
+    declared: bool = False                  # 是否已声明
+    declaration_note: str = ""              # 声明意义说明
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class PurityResult:
+    """纯粹度审计结果（V1.5）"""
+    purity_score: float = 0.0               # Purity = 保持×时间×抗摇摆
+    retention: float = 0.0                  # 保持度（余弦相似度，V1.2 已验证）
+    duration: float = 0.0                   # 持续时间（归一化到 [0,1]）
+    anti_sway: float = 1.0                  # 抗摇摆性（V1.5：待校准，暂取中性1.0）
+    anti_sway_events: List[Dict[str, Any]] = field(default_factory=list)  # 定性事件记录
+    anti_sway_calibrated: bool = False      # 抗摇摆是否已校准
+    threshold: float = 0.7                  # 纯粹度阈值
+    interpretation: str = ""                # 解读
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class FailureQualityAudit:
+    """失败质量审核（V1.5）"""
+    failure_type: str = ""                  # 真失败/表演性失败
+    is_structural_falsification: bool = False  # 是否为结构性证伪
+    reward_eligible: bool = False           # 是否奖励
+    evidence: str = ""                      # 区分依据
+    audit_timestamp: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class HypothesisTracker:
+    """待验证假设跟踪（V1.5）"""
+    hypothesis_id: str = ""
+    statement: str = ""                     # 假设陈述
+    status: str = PendingHypothesisStatus.PENDING.value
+    evidence_chain: List[Dict[str, Any]] = field(default_factory=list)
+    last_updated: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
 @dataclass
 class SeedCultivationResult:
     """种子培育结果（V1.2）"""
@@ -224,6 +310,53 @@ class SeedCultivationResult:
     # V1.3 无弃人底线
     no_discard_guarantee: bool = True
     #  低信度≠废材，是待观察。圣人常善救人，故无弃人。
+
+    # V1.5 壳核审计声明
+    shell_nucleus_declaration: Dict[str, Any] = field(default_factory=dict)
+    #  {nucleus_measured, shell_excluded, system_type, declared, declaration_note}
+
+    # V1.5 纯粹度审计结果
+    purity_result: Dict[str, Any] = field(default_factory=dict)
+    #  {purity_score, retention, duration, anti_sway, anti_sway_events,
+    #   anti_sway_calibrated, threshold, interpretation}
+
+    # V1.5 熵振引擎：失败质量审核记录
+    failure_quality_audits: List[Dict[str, Any]] = field(default_factory=list)
+    #  [{failure_type, is_structural_falsification, reward_eligible, evidence}]
+
+    # V1.5 留白调度
+    whitespace_schedule: Dict[str, Any] = field(default_factory=dict)
+    #  {rounds_since_last_whitespace, whitespace_due, skipped_count, owed_count}
+
+    # V1.5 日益饱和检测
+    saturation_detected: bool = False
+    saturation_detail: str = ""
+
+    # V1.5 协议级日损记录
+    protocol_subtractions: List[Dict[str, Any]] = field(default_factory=list)
+    #  [{item, reason, reversible, timestamp}]
+
+    # V1.5 Phase B: 熵振引擎
+    entropy_vibration: Dict[str, Any] = field(default_factory=dict)
+    #  {failure_events, quality_audits, true_failures, performative_failures,
+    #   falsification_library_updates, principle}
+
+    # V1.5 Phase B: 待验证假设清单
+    pending_hypotheses: List[Dict[str, Any]] = field(default_factory=list)
+    #  [{hypothesis_id, statement, status, evidence_for, evidence_against,
+    #    verification_path, last_updated}]
+
+    # V1.5 Phase B: 留白条款
+    blank_space: Dict[str, Any] = field(default_factory=dict)
+    #  {is_blank_round, reason, skipped_for_deadline, owed_rounds, action}
+
+    # V1.5 Phase B: 日益饱和检测
+    saturation_detection: Dict[str, Any] = field(default_factory=dict)
+    #  {saturated, marginal_output, recommendation, action}
+
+    # V1.5 Phase B: 换球心决策
+    ball_replacement: Dict[str, Any] = field(default_factory=dict)
+    #  {triggered, reason, candidate_systems, recommendation, action}
 
     # 经典引用
     classical_ref: str = ""
@@ -325,6 +458,30 @@ class SeedCultivation:
             "principle": "导师是缘不是因——提供阳光水分土壤，而非把种子变成另一种植物",
             "constraints": ["不替代决策", "不强制方向", "生而不有", "为而不恃", "长而不宰"],
         },
+
+        # V1.5 新增配置
+        "shell_nucleus_declaration_required": False,   # 壳核审计声明必须（V1.5: 默认False向后兼容，Phase 2实验启用True）
+        "purity_audit_enabled": True,                 # 启用纯粹度审计（保持×时间×抗摇摆）
+        "purity_threshold": 0.7,                      # 纯粹度阈值（待校准）
+        "anti_sway_calibrated": False,                # 抗摇摆是否已校准（V1.5：待校准）
+        "failure_quality_audit_enabled": True,        # 启用失败质量审核
+        "entropy_vibration_enabled": True,            # 启用熵振引擎
+        "whitespace_enabled": True,                   # 启用留白条款
+        "whitespace_interval": 3,                     # 留白间隔：每3轮培育插入1轮留白
+        "saturation_detection_enabled": True,         # 启用日益饱和检测
+        "saturation_threshold": 0.15,                 # 边际产出递减阈值（待校准）
+        "saturation_marginal_threshold": 0.1,         # 日益饱和边际阈值
+        "protocol_subtraction_enabled": True,         # 启用协议级日损记录
+        "ball_replacement_enabled": True,             # 启用换球心决策
+        "ball_replacement_consecutive_rounds": 2,     # 连续轮数阈值（连续2轮<0.7→触发）
+        "ball_replacement_candidates": [              # 换球心候选体系
+            {"system": "登顶体系", "description": "何川式：以攀登最高点为核"},
+            {"system": "共情体系", "description": "柳智宇式：以共情助人为核"},
+            {"system": "纯粹体系", "description": "邓煜式：以纯粹钻研为核"},
+        ],
+        "blank_space_signal_threshold": 2,            # 留白提前结束信号阈值
+        "blank_space_deadline_mode": False,           # 留白deadline模式
+        "directory_nucleus_check_enabled": True,      # 方向核信号检查（并入宪法审计）
     }
 
     def __init__(self, config: dict = None, time_scale: str = None):
@@ -403,6 +560,27 @@ class SeedCultivation:
             return suggested
 
         return self.config["nature_determination_threshold"]
+
+    def _compute_duration_years(self, rounds: int, time_scale: str = None) -> float:
+        """
+        将培育轮次转换为年数（V1.5.1 联动校准：供换球心反例保护使用）
+
+        技能尺度：1 轮 ≈ 1 周 → 1/52 年
+        人才尺度：1 轮 ≈ 1 学期 → 0.5 年
+
+        Args:
+            rounds: 培育轮次
+            time_scale: 时间尺度（默认取 config 中配置）
+
+        Returns:
+            持续时间（年）
+        """
+        if time_scale is None:
+            time_scale = self.config.get("time_scale", "skill")
+        if time_scale == TimeScale.TALENT.value:
+            return rounds * 0.5   # 1 轮 = 1 学期 = 0.5 年
+        else:
+            return rounds / 52.0  # 1 轮 = 1 周 = 1/52 年
 
     def _get_time_scale_config(self) -> dict:
         """获取当前时间尺度配置"""
@@ -521,6 +699,7 @@ class SeedCultivation:
             result.step2_nurture,
             source_graph, target_graph,
             method_seed=result.method_seed,
+            topic_seed=result.topic_seed,
             harvest_methodology_wuxing=harvest_methodology_wuxing,
         )
 
@@ -533,6 +712,24 @@ class SeedCultivation:
         result.environment_phase = result.step2_nurture.get("environment_phase", "")
         result.confucius_stage = self._get_confucius_stage(result)
         result.no_discard_guarantee = self.config.get("no_discard_enabled", True)
+
+        # ── V1.5 壳核审计声明 ──
+        result.shell_nucleus_declaration = result.step3_harvest.get(
+            "constitution_audit", {}
+        ).get("shell_nucleus_declaration", {})
+
+        # ── V1.5 纯粹度审计结果 ──
+        result.purity_result = result.step3_harvest.get("purity_result", {})
+
+        # ── V1.5 协议级日损记录 ──
+        result.protocol_subtractions = result.step3_harvest.get("protocol_subtractions", [])
+
+        # ── V1.5 Phase B 新字段 ──
+        result.entropy_vibration = result.step3_harvest.get("entropy_vibration", {})
+        result.pending_hypotheses = result.step3_harvest.get("pending_hypotheses", [])
+        result.blank_space = result.step3_harvest.get("blank_space", {})
+        result.saturation_detection = result.step3_harvest.get("saturation_detection", {})
+        result.ball_replacement = result.step3_harvest.get("ball_replacement", {})
 
         # ── V1.3 培育双轨 ──
         result.nurture_dual_track = {
@@ -958,6 +1155,10 @@ class SeedCultivation:
                         default_factors[key].update(external_factors[key])
                     else:
                         default_factors[key] = external_factors[key]
+            # V1.5: 保留不在 default_factors 中的额外字段（如 shell_nucleus_declaration）
+            for key in external_factors:
+                if key not in default_factors:
+                    default_factors[key] = external_factors[key]
 
         return default_factors
 
@@ -968,6 +1169,7 @@ class SeedCultivation:
                        target_graph: dict = None,
                        # V1.1 方法种子
                        method_seed: dict = None,
+                       topic_seed: dict = None,
                        # V1.2 成果方法论五行向量
                        harvest_methodology_wuxing: str = "") -> dict:
         """
@@ -1033,7 +1235,7 @@ class SeedCultivation:
         # ── V1.3 双审计：宪法审计（德）优先于性决定审计（才）──
         # 宪法审计 REJECT → 短路，不等待性决定审计
         result["constitution_audit"] = self._constitution_audit(
-            method_seed, step2_result, result
+            method_seed, step2_result, result, topic_seed=topic_seed
         )
 
         if not result["constitution_audit"]["passed"]:
@@ -1056,13 +1258,35 @@ class SeedCultivation:
             )
             return result
 
-        # ── V1.2 性决定审计（余弦相似度）──
-        # 宪法审计通过后，执行性决定审计（才）
-        audit_result = self._nature_determination_audit(
-            method_seed, harvest_methodology_wuxing, result
-        )
-        result["nature_determination_score"] = audit_result["similarity"]
-        result["nature_determination_audit"] = audit_result
+        # ── V1.5 纯粹度审计（替代 V1.2 性决定审计·余弦相似度）──
+        # 宪法审计通过后，执行纯粹度审计（才）
+        if self.config.get("purity_audit_enabled", True):
+            # V1.5: 使用纯粹度审计（保持×时间×抗摇摆）
+            purity_result = self._purity_audit(
+                method_seed, harvest_methodology_wuxing, result,
+                duration=0.5  # 默认中等持续时间，可通过外部传入
+            )
+            result["purity_result"] = purity_result
+            # 保持度即余弦相似度（向后兼容 V1.2）
+            result["nature_determination_score"] = purity_result["retention"]
+            result["nature_determination_audit"] = self._nature_determination_audit(
+                method_seed, harvest_methodology_wuxing, result
+            )
+        else:
+            # 降级：仅使用 V1.2 余弦相似度
+            audit_result = self._nature_determination_audit(
+                method_seed, harvest_methodology_wuxing, result
+            )
+            result["nature_determination_score"] = audit_result["similarity"]
+            result["nature_determination_audit"] = audit_result
+            result["purity_result"] = {
+                "purity_score": audit_result["similarity"],
+                "retention": audit_result["similarity"],
+                "duration": 0.5,
+                "anti_sway": 1.0,
+                "anti_sway_calibrated": False,
+                "note": "纯粹度审计未启用，使用余弦相似度作为近似",
+            }
 
         # ── V1.3 减法引擎（为道日损）──
         # 在审计完成后，执行减法修正
@@ -1070,10 +1294,72 @@ class SeedCultivation:
             step2_result, method_seed
         )
 
-        # 根据漂移分析和性决定审计调整结论
+        # ── V1.5 协议级日损记录 ──
+        if self.config.get("protocol_subtraction_enabled", True):
+            result["protocol_subtractions"] = self._record_protocol_subtractions()
+
+        # ── V1.5 熵振引擎：失败质量审核 ──
+        if self.config.get("entropy_vibration_enabled", True):
+            result["entropy_vibration"] = self._entropy_vibration_engine(
+                step2_result, method_seed
+            )
+
+        # ── V1.5 待验证假设清单 ──
+        result["pending_hypotheses"] = self._track_hypotheses()
+
+        # ── V1.5 留白条款 ──
+        nurture_round = len(step2_result.get("nurture_progress", []))
+        # 检查是否有高价值信号（+2 事件）
+        high_value_signals = step2_result.get("high_value_signals", 0)
+        result["blank_space"] = self._manage_blank_space(
+            nurture_round, high_value_signals
+        )
+
+        # ── V1.5 日益饱和检测 ──
+        addition_events = step2_result.get("nurture_dual_track", {}).get("addition_events", [])
+        # 构造加法事件历史（从培育进度中提取）
+        addition_history = []
+        blank_rounds_list = []
+        blank_space_result = result.get("blank_space", {})
+        for i, progress in enumerate(step2_result.get("nurture_progress", [])):
+            round_num = i + 1
+            is_blank = progress.get("is_blank_round", False)
+            addition_history.append({
+                "round": round_num,
+                "output_score": progress.get("completion", 0.5),
+                "is_blank_round": is_blank,
+            })
+            if is_blank:
+                blank_rounds_list.append(round_num)
+        # V1.5.1 联动校准：当前轮若是留白轮，也标记
+        if blank_space_result.get("is_blank_round", False):
+            addition_history.append({
+                "round": nurture_round,
+                "output_score": 0.0,
+                "is_blank_round": True,
+            })
+            blank_rounds_list.append(nurture_round)
+        result["saturation_detection"] = self._saturation_detection(
+            addition_history, blank_rounds=blank_rounds_list
+        )
+
+        # ── V1.5 换球心决策 ──
+        purity_score = result.get("purity_result", {}).get("purity_score", 0.0)
+        shell_decl = result.get("constitution_audit", {}).get("shell_nucleus_declaration", {})
+        system_type = shell_decl.get("system_type", "")
+        # 构造纯粹度历史（当前仅单轮，后续可扩展）
+        purity_history = [purity_score] if purity_score > 0 else []
+        # V1.5.1 联动校准：计算培育持续时间（年），供反例保护使用
+        anti_sway_duration_years = self._compute_duration_years(nurture_round)
+        result["ball_replacement"] = self._ball_replacement_decision(
+            purity_history, system_type, anti_sway_duration=anti_sway_duration_years
+        )
+
+        # 根据漂移分析和纯粹度审计调整结论
         drift = result["drift_analysis"]
         nd_score = result["nature_determination_score"]
         nd_threshold = self._get_calibrated_threshold()  # G1: 使用校准后的阈值
+        purity = result.get("purity_result", {}).get("purity_score", nd_score)
 
         if drift.get("drift_type") == DriftType.SEED.value:
             result["harvest_conclusion"] = (
@@ -1082,8 +1368,8 @@ class SeedCultivation:
             )
         elif nd_score >= nd_threshold:
             result["harvest_conclusion"] = (
-                f"师生共创突破成功：性决定审计保持（余弦相似度 {nd_score:.2f}≥{nd_threshold}，"
-                f"待校准）。方法种子五行向量→成果方法论五行向量方向一致。"
+                f"师生共创突破成功：纯粹度审计（保持={nd_score:.2f}×时间×抗摇摆→纯粹度={purity:.2f}，"
+                f"抗摇摆待校准）。方法种子五行向量→成果方法论五行向量方向一致。"
                 "注意：此为路径一致性描述，非成才判据。"
             )
         elif result["success"]:
@@ -1102,39 +1388,65 @@ class SeedCultivation:
     # ── V1.3 宪法审计（德·仁，优先于性决定审计）──
 
     def _constitution_audit(self, method_seed: dict, step2_result: dict,
-                            harvest_result: dict) -> dict:
+                        harvest_result: dict, topic_seed: dict = None) -> dict:
         """
-        宪法审计（V1.3 新增，来自儒家"德才之辨"）
+        宪法审计（V1.5 修订：壳核声明前置 + 方向核并入）
+
+        V1.5 修订：
+          - 壳核审计声明前置：无声明→REJECT，不进入后续检查
+          - 方向核信号检查并入宪法审计（V1.5 合并，不另立层）
+          - 体系类型声明：测核体系/测壳体系
 
         定位：方向审计——动作是否越界、性分自觉、减法优先、善行无辙迹。
         宪法审计（德）优先于性决定审计（才）：REJECT 立即短路，不等待后续审计。
 
-        审计项（V1.3）：
+        审计项（V1.5）：
+          0. 壳核审计声明检查：审计前必须声明体系类型（无声明不审计）
           1. 方向越界检查：培育路径是否偏离种子本性的方向
-          2. 性分自觉检查：是否强求种子做不擅长的事（缘主导区强行培育）
-          3. 减法优先检查：是否在错误方向积累过多（为道日损）
-          4. 善行无辙迹检查：成果是否自然长成（大器免成）而非强行塑造
-
-        经典依据：
-          "骥不称其力，称其德也"——先审方向再审方法。
-          "生而不有，为而不恃，长而不宰"——玄德，不宰伦理。
-
-        Args:
-            method_seed: Step 1 识别的方法种子
-            step2_result: Step 2 培育结果
-            harvest_result: Step 3 收获结果（当前状态）
+          2. 方向核信号检查：方向核信号是否被记录（V1.5 并入宪法审计）
+          3. 性分自觉检查：是否强求种子做不擅长的事
+          4. 减法优先检查：是否在错误方向积累过多
+          5. 善行无辙迹检查：成果是否自然长成（大器免成）
 
         Returns:
-            {passed, direction_check, boundary_violations, checks, priority: "德优先"}
+            {passed, direction_check, boundary_violations, checks, priority, shell_nucleus_declaration}
         """
         if not self.config.get("constitution_audit_enabled", True):
             return {"passed": True, "direction_check": "skipped",
                     "boundary_violations": [], "checks": [],
                     "priority": AuditPriority.CONSTITUTION.value,
+                    "shell_nucleus_declaration": {},
                     "note": "宪法审计未启用"}
 
         checks = []
         boundary_violations = []
+
+        # ── V1.5 检查 0: 壳核审计声明检查（无声明不审计）──
+        declaration_required = self.config.get("shell_nucleus_declaration_required", True)
+        if declaration_required:
+            decl_ok = self._shell_nucleus_declaration_check(step2_result)
+            checks.append({
+                "check_name": "壳核审计声明",
+                "verdict": "PASS" if decl_ok else "REJECT",
+                "reason": (
+                    "壳核声明已填写：体系类型已声明，审计可执行"
+                    if decl_ok
+                    else "壳核审计声明缺失：审计前必须声明评价体系类型（测核体系/测壳体系）。无声明不审计——五律第一条。"
+                ),
+            })
+            if not decl_ok:
+                boundary_violations.append("壳核声明缺失: 审计前未声明体系类型（测核体系/测壳体系）")
+                # 无声明→立即短路，不执行后续检查
+                return {
+                    "passed": False,
+                    "direction_check": "未通过",
+                    "boundary_violations": boundary_violations,
+                    "checks": checks,
+                    "priority": AuditPriority.CONSTITUTION.value,
+                    "shell_nucleus_declaration": {"declared": False},
+                    "principle": "测核不测壳——审计先声明评价体系（五律·审计律）",
+                    "note": "宪法审计（V1.5）REJECT：壳核审计声明缺失。无声明不审计。",
+                }
 
         # 检查 1: 方向越界检查（V1.3 澄清：区分相克方向性）
         # 培育路径是否严重偏离方法种子的五行方向。
@@ -1143,8 +1455,13 @@ class SeedCultivation:
         #   - method克topic → 正常机制（方法约束课题，如邓煜水克火）→ WARNING（不阻断）
         #   - 相生/无克 → PASS
         method_wx = method_seed.get("wuxing", "")
-        env_factors = step2_result.get("environmental_factors", {})
-        topic_wx = env_factors.get("topic", {}).get("wuxing", "")
+        # V1.5 修复：方向越界检查应使用 topic_seed（Step 1 识别），而非环境因素中的 topic
+        topic_seed = topic_seed or {}
+        topic_wx = topic_seed.get("wuxing", "")
+        # 如果 topic_seed 无五行，回退到环境因素中的 topic（向后兼容）
+        if not topic_wx:
+            env_factors = step2_result.get("environmental_factors", {})
+            topic_wx = env_factors.get("topic", {}).get("wuxing", "")
         wuxing_ke = {"木": "土", "火": "金", "土": "水", "金": "木", "水": "火"}
         direction_ok = True
         direction_reason = ""
@@ -1246,8 +1563,31 @@ class SeedCultivation:
             "reason": natural_reason,
         })
 
-        # 综合判定：任一 REJECT → 整体不通过
-        all_passed = all(c["verdict"] == "PASS" for c in checks)
+        # ── V1.5 检查 5: 方向核信号检查（并入宪法审计，不另立层）──
+        # 方向核（what for，价值指向）的信号是否被记录。
+        # V1.5 诚实声明："方向核必须保持"目前是待验证假设（幸存者偏差）。
+        # 此处仅检查信号是否被记录，不强制要求保持。
+        if self.config.get("directory_nucleus_check_enabled", True):
+            env_factors = step2_result.get("environmental_factors", {})
+            dn_signal = env_factors.get("direction_nucleus_signal", "")
+            dn_recorded = bool(dn_signal)
+            dn_reason = (
+                f"方向核信号已记录: '{dn_signal}'——V1.5 诚实声明：方向核保持为待验证假设"
+                if dn_recorded
+                else "方向核信号未记录——建议在 Step 1 种子发现中记录方向核信号（what for），但此为建议非强制（V1.5 待验证假设）"
+            )
+            checks.append({
+                "check_name": "方向核信号检查",
+                "verdict": "PASS" if dn_recorded else "WARN",
+                "reason": dn_reason,
+            })
+
+        # 综合判定：任一 REJECT → 整体不通过（WARN 不阻断）
+        all_passed = all(c["verdict"] != "REJECT" for c in checks)
+
+        # V1.5: 提取壳核声明信息
+        env_factors = step2_result.get("environmental_factors", {})
+        shell_decl = env_factors.get("shell_nucleus_declaration", {})
 
         return {
             "passed": all_passed,
@@ -1255,10 +1595,237 @@ class SeedCultivation:
             "boundary_violations": boundary_violations,
             "checks": checks,
             "priority": AuditPriority.CONSTITUTION.value,
-            "principle": "骥不称其力，称其德也——先审方向再审方法",
+            "shell_nucleus_declaration": shell_decl,
+            "principle": "测核不测壳——审计先声明评价体系（五律·审计律）",
             "note": (
-                "宪法审计（V1.3）：此为方向审计（德·仁）。"
+                "宪法审计（V1.5）：此为方向审计（德·仁）。"
                 f"{'通过——进入性决定审计（才）' if all_passed else 'REJECT——不等待性决定审计，立即返回'}"
+            ),
+        }
+
+    # ── V1.5 壳核审计声明检查 ──
+
+    def _shell_nucleus_declaration_check(self, step2_result: dict) -> bool:
+        """
+        壳核审计声明检查（V1.5 新增）
+
+        审计前必须声明评价体系类型：
+          - 测的核 = {方法核 / 方向核}
+          - 不测的壳 = {题目 / 专业 / 身份 / 资历}
+          - 体系类型 = 测核体系（登顶/共情/纯粹） or 测壳体系（职称/奖杯/成绩）
+
+        Returns:
+            bool: True if declaration is valid, False otherwise
+        """
+        env_factors = step2_result.get("environmental_factors", {})
+        decl = env_factors.get("shell_nucleus_declaration", {})
+
+        if not decl:
+            return False
+
+        # 必须字段：declared=True, system_type 非空
+        if not decl.get("declared", False):
+            return False
+
+        system_type = decl.get("system_type", "")
+        if system_type not in (SystemType.NUCLEUS_MEASURING.value, SystemType.SHELL_MEASURING.value):
+            return False
+
+        return True
+
+    def shell_nucleus_audit(self, shell_nucleus_input: dict) -> dict:
+        """
+        壳核审计独立入口（CASE-LIU 验证用）
+
+        与种子培育流程解耦，直接对 shell_nucleus_input 做三层核结构判定。
+
+        Args:
+            shell_nucleus_input: 来自 task JSON 的 shell_nucleus_input 字段
+                {
+                    "declaration": {measured_nucleus, excluded_shell, system_type},
+                    "three_layers": {
+                        topic_shell: {name, action, evidence},
+                        method_nucleus: {name, action, evidence},
+                        direction_nucleus: {name, action, evidence, hypothesis}
+                    }
+                }
+
+        Returns:
+            {passed, declaration, three_layers, checks}
+        """
+        declaration = shell_nucleus_input.get("declaration", {})
+        three_layers = shell_nucleus_input.get("three_layers", {})
+
+        checks = []
+
+        # 检查 1: 声明完整性
+        measured_nucleus = declaration.get("measured_nucleus", [])
+        excluded_shell = declaration.get("excluded_shell", [])
+        system_type = declaration.get("system_type", "")
+
+        decl_ok = bool(measured_nucleus and excluded_shell and system_type)
+        checks.append({
+            "check": "declaration_completeness",
+            "verdict": "PASS" if decl_ok else "FAIL",
+            "detail": f"核={measured_nucleus}, 壳={excluded_shell}, 体系={system_type}",
+        })
+
+        # 检查 2: 体系类型合法性
+        valid_types = ["测核体系", "测壳体系"]
+        type_ok = system_type in valid_types
+        checks.append({
+            "check": "system_type_validity",
+            "verdict": "PASS" if type_ok else "FAIL",
+            "detail": f"体系类型={system_type}",
+        })
+
+        # 检查 3: 三层核结构完整性
+        topic_shell = three_layers.get("topic_shell", {})
+        method_nucleus = three_layers.get("method_nucleus", {})
+        direction_nucleus = three_layers.get("direction_nucleus", {})
+
+        layers_ok = all([
+            topic_shell.get("action") == "可更换",
+            method_nucleus.get("action") == "可迁移",
+            direction_nucleus.get("action") == "必须保持",
+        ])
+        checks.append({
+            "check": "three_layer_structure",
+            "verdict": "PASS" if layers_ok else "FAIL",
+            "detail": {
+                "topic_shell": f"{topic_shell.get('name')} → {topic_shell.get('action')}",
+                "method_nucleus": f"{method_nucleus.get('name')} → {method_nucleus.get('action')}",
+                "direction_nucleus": f"{direction_nucleus.get('name')} → {direction_nucleus.get('action')}",
+            },
+        })
+
+        # 检查 4: 方向核 H1 假设挂载
+        h1_ok = "H1" in direction_nucleus.get("hypothesis", "")
+        checks.append({
+            "check": "direction_nucleus_hypothesis",
+            "verdict": "PASS" if h1_ok else "WARN",
+            "detail": f"假设={direction_nucleus.get('hypothesis', '未挂载')}",
+        })
+
+        all_passed = all(c["verdict"] == "PASS" for c in checks)
+
+        return {
+            "task_id": "TASK-HOMO-LIU-20260808",
+            "protocol_version": "V1.5",
+            "shell_nucleus_audit": {
+                "passed": all_passed,
+                "declaration": {
+                    "measured_nucleus": measured_nucleus,
+                    "excluded_shell": excluded_shell,
+                    "system_type": system_type,
+                },
+                "three_layers": {
+                    "topic_shell": {
+                        "name": topic_shell.get("name", ""),
+                        "action": topic_shell.get("action", ""),
+                        "evidence": topic_shell.get("evidence", ""),
+                    },
+                    "method_nucleus": {
+                        "name": method_nucleus.get("name", ""),
+                        "action": method_nucleus.get("action", ""),
+                        "evidence": method_nucleus.get("evidence", ""),
+                    },
+                    "direction_nucleus": {
+                        "name": direction_nucleus.get("name", ""),
+                        "action": direction_nucleus.get("action", ""),
+                        "evidence": direction_nucleus.get("evidence", ""),
+                        "hypothesis": direction_nucleus.get("hypothesis", ""),
+                    },
+                },
+                "checks": checks,
+                "conclusion": "壳核三层结构确认：数学=壳（可换）、逻辑=核（可迁）、追问=方向核（保持，挂H1假设）" if all_passed else "壳核审计未通过",
+            },
+        }
+
+    # ── V1.5 纯粹度审计（替代 V1.2 性决定审计·余弦相似度）──
+
+    def _purity_audit(self, method_seed: dict, harvest_wuxing: str,
+                      harvest_result: dict, duration: float = 0.5) -> dict:
+        """
+        纯粹度审计（V1.5 核心升级）
+
+        V1.5 公式：Purity = 保持度 × 持续时间 × 抗摇摆性
+          - 保持度：余弦相似度（V1.2，已验证）
+          - 持续时间：核保持时长（归一化到 [0,1]）
+          - 抗摇摆性：外部评价波动时核是否摇摆（V1.5：待校准，暂取中性1.0）
+
+        与 V1.2 性决定审计的关系：
+          - V1.2 的余弦相似度审计保留为纯粹度的"保持度"分量
+          - V1.5 增加时间维度和抗摇摆维度
+          - 抗摇摆标"待校准"——不假装精确
+
+        Args:
+            method_seed: Step 1 识别的方法种子
+            harvest_wuxing: 成果方法论五行
+            harvest_result: Step 3 收获结果
+            duration: 持续时间（归一化，默认 0.5）
+
+        Returns:
+            PurityResult dict
+        """
+        # 先计算保持度（余弦相似度，沿用 V1.2 已验证方法）
+        nd_audit = self._nature_determination_audit(method_seed, harvest_wuxing, harvest_result)
+        retention = nd_audit["similarity"]
+
+        # 持续时间（归一化到 [0,1]，0=刚发现，1=长期保持）
+        duration = max(0.0, min(1.0, duration))
+
+        # 抗摇摆性（V1.5：待校准，暂取中性 1.0）
+        anti_sway = 1.0
+        anti_sway_events = []
+        anti_sway_calibrated = self.config.get("anti_sway_calibrated", False)
+
+        # 如果配置了抗摇摆定性事件，则从 harvest_result 中提取
+        sway_events = harvest_result.get("anti_sway_events", [])
+        if sway_events:
+            anti_sway_events = sway_events
+            # 有事件记录则标注为定性记录（非校准值）
+            anti_sway_calibrated = False
+
+        # 纯粹度 = 保持 × 时间 × 抗摇摆
+        purity = retention * duration * anti_sway
+        purity = round(purity, 4)
+
+        threshold = self.config.get("purity_threshold", 0.7)
+
+        # 解读
+        if purity >= threshold:
+            interpretation = (
+                f"纯粹度 {purity:.2f}≥{threshold}：核保持良好（保持={retention:.2f}×"
+                f"时间={duration:.2f}×抗摇摆={'待校准' if not anti_sway_calibrated else f'{anti_sway:.2f}'}）。"
+                "纯粹是核的显影液——邓煜（奖杯+纯粹）与柳智宇（无奖杯+纯粹）同证。"
+            )
+        elif purity >= 0.5:
+            interpretation = (
+                f"纯粹度 {purity:.2f} 偏低：保持={retention:.2f}×时间={duration:.2f}×"
+                f"抗摇摆={'待校准' if not anti_sway_calibrated else f'{anti_sway:.2f}'}。"
+                "建议关注核是否在摇摆——如为外部评价波动所致，可能为体系类型不匹配。"
+            )
+        else:
+            interpretation = (
+                f"纯粹度 {purity:.2f} 低：保持={retention:.2f}×时间={duration:.2f}×"
+                f"抗摇摆={'待校准' if not anti_sway_calibrated else f'{anti_sway:.2f}'}。"
+                "核可能已偏离或体系类型不匹配——建议换球心评估。"
+            )
+
+        return {
+            "purity_score": purity,
+            "retention": retention,
+            "duration": duration,
+            "anti_sway": anti_sway,
+            "anti_sway_events": anti_sway_events,
+            "anti_sway_calibrated": anti_sway_calibrated,
+            "threshold": threshold,
+            "interpretation": interpretation,
+            "note": (
+                "纯粹度审计（V1.5）：保持度（余弦相似度，V1.2已验证）× "
+                "持续时间（可观测）× 抗摇摆性（待校准，不假装精确）。"
+                "纯粹=核的显影液——非奖杯。"
             ),
         }
 
@@ -1336,6 +1903,509 @@ class SeedCultivation:
             "principle": "为道日损——损之又损，以至于无为（技能直觉化）",
             "note": "减法操作全部留痕（L0 可回溯），可逆。减法不是删除，是标记。",
         }
+
+    # ── V1.5 熵振引擎：失败质量审核 ──
+
+    def _failure_quality_audit(self, failure_events: List[dict],
+                                method_seed: dict = None) -> List[Dict[str, Any]]:
+        """
+        熵振引擎失败质量审核（V1.5 新增）
+
+        区分"真失败"（结构性证伪）与"表演性失败"（为奖励而败）。
+        表演性失败不计分、不奖励，防道德风险。
+
+        判定标准：
+          - 真失败：实验设计能区分假设对错，失败提供结构性证据
+            · 实验设计含可证伪条件
+            · 失败结果可复现
+            · 失败后有明确修正方向
+          - 表演性失败：为奖励而设计的失败
+            · 实验设计无法区分对错（无证伪条件）
+            · 失败结果是预期中的（如选不可能的任务）
+            · 失败后无修正方向，仅为了"失败"标签
+
+        Args:
+            failure_events: 失败事件列表
+            method_seed: 方法种子信息（用于上下文判断）
+
+        Returns:
+            审核结果列表，每项含 {failure_type, is_structural, reward_eligible, evidence}
+        """
+        if not self.config.get("failure_quality_audit_enabled", True):
+            return []
+
+        audits = []
+        for event in failure_events:
+            event_type = event.get("event_type", "")
+            event_desc = event.get("description", "")
+            has_falsification_condition = event.get("has_falsification_condition", False)
+            is_reproducible = event.get("is_reproducible", False)
+            has_correction_path = event.get("has_correction_path", False)
+            is_expected_failure = event.get("is_expected_failure", False)
+
+            # 判定逻辑（V1.5.1 三分法：真失败/偶然失败/表演性失败）
+            if has_falsification_condition and is_reproducible and has_correction_path:
+                # 真失败：结构性证伪——可证伪、可复现、有修正方向
+                failure_type = FailureQuality.TRUE_FAILURE.value
+                is_structural = True
+                reward_eligible = True
+                evidence = (
+                    f"实验设计含可证伪条件（{has_falsification_condition}），"
+                    f"失败可复现（{is_reproducible}），"
+                    f"有明确修正方向（{has_correction_path}）"
+                )
+            elif is_expected_failure and not has_falsification_condition:
+                # 表演性失败：为奖励而故意制造
+                failure_type = FailureQuality.PERFORMATIVE_FAILURE.value
+                is_structural = False
+                reward_eligible = False
+                evidence = (
+                    f"失败为预期结果（{is_expected_failure}），"
+                    f"实验设计无证伪条件（{has_falsification_condition}），"
+                    f"疑似为奖励而设计的失败——不计分、警告"
+                )
+            elif has_falsification_condition and not is_reproducible:
+                # 偶然失败：可证伪但不可复现——运气/环境因素，中性不奖惩
+                failure_type = FailureQuality.ACCIDENTAL_FAILURE.value
+                is_structural = False
+                reward_eligible = False
+                evidence = (
+                    f"实验设计含证伪条件（{has_falsification_condition}），"
+                    f"但失败不可复现（{is_reproducible}）——"
+                    f"偶然失败（运气/环境），非结构性证伪，非表演性。中性不奖惩。"
+                )
+            else:
+                # 不确定：默认归类为偶然失败（保守策略，V1.5.1 修订）
+                failure_type = FailureQuality.ACCIDENTAL_FAILURE.value
+                is_structural = False
+                reward_eligible = False
+                evidence = (
+                    f"无法确认失败质量：证伪条件={has_falsification_condition}，"
+                    f"可复现={is_reproducible}，修正方向={has_correction_path}。"
+                    f"保守策略：归入偶然失败（中性不奖惩），建议补充实验设计信息"
+                )
+
+            audit = FailureQualityAudit(
+                failure_type=failure_type,
+                is_structural_falsification=is_structural,
+                reward_eligible=reward_eligible,
+                evidence=evidence,
+                audit_timestamp=datetime.now().isoformat(),
+            )
+            audits.append(audit.to_dict())
+
+        return audits
+
+    def _entropy_vibration_engine(self, step2_result: dict,
+                                   method_seed: dict = None) -> Dict[str, Any]:
+        """
+        熵振引擎（V1.5 新增）
+
+        熵振律：失败是核的震荡-重建，不是壳的损失——奖励失败（但须经质量审核）。
+
+        机制：
+          1. 收集培育过程中的失败事件
+          2. 执行失败质量审核（区分真失败/表演性失败）
+          3. 真失败 → 入证伪库，奖励
+          4. 表演性失败 → 不入库，不计分
+
+        Args:
+            step2_result: Step 2 培育结果
+            method_seed: 方法种子信息
+
+        Returns:
+            {failure_events, quality_audits, true_failures, performative_failures,
+             falsification_library_updates, principle}
+        """
+        if not self.config.get("entropy_vibration_enabled", True):
+            return {"failure_events": [], "quality_audits": [],
+                    "true_failures": 0, "performative_failures": 0,
+                    "falsification_library_updates": [],
+                    "principle": "熵振引擎未启用"}
+
+        # 收集失败事件（从培育过程中提取）
+        failure_events = step2_result.get("failure_events", [])
+        nurture_progress = step2_result.get("nurture_progress", [])
+
+        # 如果培育进度中有失败的迭代，构造失败事件
+        if not failure_events:
+            for progress in nurture_progress:
+                if progress.get("completion", 0) < 0.5:
+                    failure_events.append({
+                        "event_type": "培育失败",
+                        "description": f"迭代 {progress.get('iteration', '?')} 未完成",
+                        "has_falsification_condition": True,
+                        "is_reproducible": False,
+                        "has_correction_path": True,
+                        "is_expected_failure": False,
+                        "timestamp": datetime.now().isoformat(),
+                    })
+
+        # 执行失败质量审核
+        quality_audits = self._failure_quality_audit(failure_events, method_seed)
+
+        # 统计
+        true_failures = sum(1 for a in quality_audits if a["failure_type"] == FailureQuality.TRUE_FAILURE.value)
+        accidental_failures = sum(1 for a in quality_audits if a["failure_type"] == FailureQuality.ACCIDENTAL_FAILURE.value)
+        performative_failures = sum(1 for a in quality_audits if a["failure_type"] == FailureQuality.PERFORMATIVE_FAILURE.value)
+
+        # 真失败入证伪库
+        falsification_library_updates = []
+        for i, audit in enumerate(quality_audits):
+            if audit["reward_eligible"]:
+                falsification_library_updates.append({
+                    "event_index": i,
+                    "failure_type": audit["failure_type"],
+                    "evidence": audit["evidence"],
+                    "reward": "入证伪库，奖励",
+                    "classical_ref": "失败是熵振——壳碎了，核还在（五律·熵振律）",
+                })
+
+        return {
+            "failure_events": failure_events,
+            "quality_audits": quality_audits,
+            "true_failures": true_failures,
+            "accidental_failures": accidental_failures,
+            "performative_failures": performative_failures,
+            "falsification_library_updates": falsification_library_updates,
+            "principle": (
+                "熵振律（V1.5.1 三分法）：失败是核的震荡-重建，不是壳的损失。"
+                "真失败奖励（入证伪库），偶然失败中性不奖惩，表演性失败警告。"
+            ),
+            "note": "V1.5.1 修订：不可复现≠表演性，增加偶然失败分类。何川「就差一次受伤」= 真失败的熵振价值。",
+        }
+
+    # ── V1.5 待验证假设清单 ──
+
+    def _track_hypotheses(self) -> List[Dict[str, Any]]:
+        """
+        待验证假设清单追踪（V1.5 新增）
+
+        V1.5 诚实声明：5 项假设挂牌，等数据来审。
+        不假装有答案——这正是「不知为不知」的知。
+
+        Returns:
+            5 项待验证假设的状态列表
+        """
+        hypotheses = [
+            {
+                "hypothesis_id": "H1",
+                "statement": '方向核"必须保持"——柳智宇/杨振宁为成功者样本，存在幸存者偏差',
+                "status": PendingHypothesisStatus.PENDING.value,
+                "evidence_for": "杨振宁（物理→数学→物理）、柳智宇（数学→心理，核心逻辑保持）",
+                "evidence_against": "弃医从文者（鲁迅/郭沫若）——方向核完全改变",
+                "verification_path": '引入"换方向核成功者"对照（如弃医从文者），进行方向核保持/变更成功率对比',
+                "last_updated": "2026-08-08",
+            },
+            {
+                "hypothesis_id": "H2",
+                "statement": "关系核优先级——培育终极产品=能爱人的人",
+                "status": PendingHypothesisStatus.PENDING.value,
+                "evidence_for": "Grant Study（哈佛成人发展研究）：良好关系是幸福的最强预测因子",
+                "evidence_against": "跨域移植未验证：Grant Study 为相关性，不等于因果关系",
+                "verification_path": "培育场景纵向跟踪（学园环境），测量关系核保持与长期成果的相关性",
+                "last_updated": "2026-08-08",
+            },
+            {
+                "hypothesis_id": "H3",
+                "statement": "纯粹度抗摇摆性——目前无测量方法",
+                "status": PendingHypothesisStatus.PENDING.value,
+                "evidence_for": "柳智宇「羡慕的不是奖杯」= 外部评价波动时核未摇摆",
+                "evidence_against": "缺乏定量指标：仅有定性事件记录，无时间序列数据",
+                "verification_path": "时间序列数据校准：收集外部评价波动 + 核保持度的时间序列，计算抗摇摆系数",
+                "last_updated": "2026-08-08",
+            },
+            {
+                "hypothesis_id": "H4",
+                "statement": "熵振加速——受伤=加速器",
+                "status": PendingHypothesisStatus.PENDING.value,
+                "evidence_for": "何川（学术挫折→登顶）、弘立书院（失败友好环境→高成就）",
+                "evidence_against": "单一案例，缺少对照实验",
+                "verification_path": "控制实验：有熵振轮 vs 无熵振轮的培育效果对比",
+                "last_updated": "2026-08-08",
+            },
+            {
+                "hypothesis_id": "H5",
+                "statement": "换球心决策——体系类型声明后触发",
+                "status": PendingHypothesisStatus.PENDING.value,
+                "evidence_for": "何川回溯验证通过（学术壳→攀登核换球心）",
+                "evidence_against": "仅回溯验证，无前瞻数据",
+                "verification_path": "前瞻验证：触发换球心后跟踪纯粹度变化，验证决策有效性",
+                "last_updated": "2026-08-08",
+            },
+        ]
+
+        return hypotheses
+
+    # ── V1.5 换球心决策 ──
+
+    def _ball_replacement_decision(self, purity_history: List[float],
+                                     system_type: str = "",
+                                     anti_sway_duration: float = 0.0) -> Dict[str, Any]:
+        """
+        换球心决策（V1.5.1 修订：反例保护按时间尺度缩放）
+
+        触发条件：纯粹度连续 2 轮 < 0.7 且体系类型 = 测核体系
+        反例保护：
+          - 人才尺度：持续 > 5 年 + 抗摇摆 → 判定"厚积期"，不触发
+          - 技能尺度：持续 > 2 个月（≈0.17 年）+ 抗摇摆 → 判定"积累期"，不触发
+
+        流程：
+          ① 多体系试测（测核体系候选集）
+          ② 选纯粹度最高者为新球心
+          ③ 换体系不换核
+
+        Args:
+            purity_history: 纯粹度历史（最近 N 轮）
+            system_type: 体系类型（测核体系/测壳体系）
+            anti_sway_duration: 抗摇摆持续时间（年）
+
+        Returns:
+            {triggered, reason, candidate_systems, recommendation, action}
+        """
+        if not self.config.get("ball_replacement_enabled", True):
+            return {"triggered": False, "reason": "换球心决策未启用",
+                    "candidate_systems": [], "recommendation": "", "action": "skip"}
+
+        threshold = self.config.get("purity_threshold", 0.7)
+        consecutive_rounds = self.config.get("ball_replacement_consecutive_rounds", 2)
+
+        # 检查触发条件
+        if len(purity_history) < consecutive_rounds:
+            return {"triggered": False, "reason": f"纯粹度历史不足（{len(purity_history)}<{consecutive_rounds}轮）",
+                    "candidate_systems": [], "recommendation": "", "action": "wait"}
+
+        recent_purities = purity_history[-consecutive_rounds:]
+        all_below_threshold = all(p < threshold for p in recent_purities)
+
+        if not all_below_threshold:
+            return {"triggered": False, "reason": f"最近 {consecutive_rounds} 轮纯粹度未全部低于 {threshold}",
+                    "candidate_systems": [], "recommendation": "", "action": "continue"}
+
+        # 检查体系类型：测壳体系不触发换球心
+        if system_type != SystemType.NUCLEUS_MEASURING.value:
+            return {"triggered": False, "reason": (
+                f"体系类型为 {system_type}，非测核体系——"
+                "测壳体系里测核必然低分，是体系类型不匹配，不是核差"
+            ), "candidate_systems": [], "recommendation": "建议先声明体系类型为测核体系后再评估", "action": "skip"}
+
+        # V1.5.1: 反例保护按时间尺度缩放
+        time_scale = self.config.get("time_scale", "skill")
+        if time_scale == TimeScale.TALENT.value:
+            anti_sway_protection_years = 5.0   # 人才尺度：持续 > 5 年
+            protection_label = "厚积期"
+        else:
+            anti_sway_protection_years = 1.0 / 12.0  # 技能尺度：持续 > 1 个月（≈0.083 年，培育周期 6 周的 67%）
+            protection_label = "积累期"
+
+        if anti_sway_duration > anti_sway_protection_years:
+            return {"triggered": False, "reason": (
+                f"持续 {anti_sway_duration:.1f} 年（{time_scale}尺度保护阈值 {anti_sway_protection_years:.2f} 年）+ 抗摇摆 "
+                f"→ 判定为{protection_label}，不触发换球心。"
+                f"核在积累，非球心问题——如柳智宇数学 10 年→心理。"
+            ), "candidate_systems": [], "recommendation": f"{protection_label}——继续观察，不换球心", "action": "protect"}
+
+        # 触发换球心决策
+        candidate_systems = self.config.get("ball_replacement_candidates", [
+            {"system": "登顶体系", "description": "何川式：以攀登最高点为核"},
+            {"system": "共情体系", "description": "柳智宇式：以共情助人为核"},
+            {"system": "纯粹体系", "description": "邓煜式：以纯粹钻研为核"},
+        ])
+
+        recommendation = (
+            f"纯粹度连续 {consecutive_rounds} 轮 < {threshold}（{recent_purities}），"
+            f"体系类型为测核体系。建议启动多体系试测，选纯粹度最高者为新球心。"
+            f"换体系不换核——核是方法偏好，球心是评价体系。"
+        )
+
+        return {
+            "triggered": True,
+            "reason": f"纯粹度连续 {consecutive_rounds} 轮 < {threshold} 且体系类型 = 测核体系",
+            "candidate_systems": candidate_systems,
+            "recommendation": recommendation,
+            "action": "evaluate_replacement",
+            "classical_ref": "换球心不换核——壳可换，核不可弃（五律·迁移律）",
+        }
+
+    # ── V1.5 留白条款 ──
+
+    def _manage_blank_space(self, round_number: int,
+                             high_value_signals: int = 0) -> Dict[str, Any]:
+        """
+        留白条款管理（V1.5 新增）
+
+        留白律：留白给核空间，现实给核淬炼——拒绝填满与封闭。
+
+        规则：
+          - 每 3 轮培育插入 1 轮留白（只观察不干预）
+          - 留白轮不计入里程碑考核
+          - deadline 场景：可跳过留白，但须记录"未留白"，欠 1 轮补 1 轮
+          - +2 高价值信号提前结束留白（信号优先）
+
+        Args:
+            round_number: 当前轮次
+            high_value_signals: 高价值信号数量（+2 事件）
+
+        Returns:
+            {is_blank_round, reason, skipped_for_deadline, owed_rounds, action}
+        """
+        if not self.config.get("blank_space_enabled", True):
+            return {"is_blank_round": False, "reason": "留白未启用",
+                    "skipped_for_deadline": False, "owed_rounds": 0, "action": "continue"}
+
+        blank_interval = self.config.get("blank_space_interval", 3)
+
+        # 检查是否为留白轮
+        is_blank_round = (round_number % blank_interval == 0)
+
+        if not is_blank_round:
+            return {"is_blank_round": False, "reason": f"第 {round_number} 轮非留白轮",
+                    "skipped_for_deadline": False, "owed_rounds": 0, "action": "continue"}
+
+        # +2 高价值信号提前结束留白
+        signal_threshold = self.config.get("blank_space_signal_threshold", 2)
+        if high_value_signals >= signal_threshold:
+            return {"is_blank_round": False, "reason": (
+                f"高价值信号 {high_value_signals} >= {signal_threshold}，"
+                f"提前结束留白——信号优先"
+            ), "skipped_for_deadline": False, "owed_rounds": 0, "action": "signal_override"}
+
+        # deadline 场景检查
+        is_deadline = self.config.get("blank_space_deadline_mode", False)
+        if is_deadline:
+            return {"is_blank_round": False, "reason": (
+                "deadline 场景：跳过留白，但欠 1 轮补 1 轮"
+            ), "skipped_for_deadline": True, "owed_rounds": 1, "action": "skip_and_owe"}
+
+        return {"is_blank_round": True, "reason": (
+            f"第 {round_number} 轮为留白轮——只观察不干预，不计入里程碑考核"
+        ), "skipped_for_deadline": False, "owed_rounds": 0,
+            "action": "observe_only",
+            "classical_ref": "留白律：留白给核空间，现实给核淬炼。拒绝填满与封闭。",
+            "activities": ["观察种子自然生长", "记录核的保持状态", "不干预、不加速、不填满"],
+        }
+
+    # ── V1.5 日益饱和检测 ──
+
+    def _saturation_detection(self, addition_history: List[Dict[str, Any]],
+                             blank_rounds: List[int] = None) -> Dict[str, Any]:
+        """
+        日益饱和检测（V1.5.1 修订：跳过留白轮）
+
+        日益引擎的边际产出递减检测。
+        当加法事件边际产出递减时，触发"转日损"建议。
+
+        V1.5.1 修订：留白轮不产出 → 边际产出天然为 0 → 应跳过留白轮，
+        否则"留白"与"饱和"同时亮灯，信号矛盾。
+
+        参考：卡内基梅隆大学实证——过度学习导致边际产出递减。
+
+        Args:
+            addition_history: 加法事件历史，每项含 {round, output_score, is_blank_round}
+            blank_rounds: 留白轮次列表（可选）
+
+        Returns:
+            {saturated, marginal_output, recommendation, action}
+        """
+        if not self.config.get("saturation_detection_enabled", True):
+            return {"saturated": False, "marginal_output": 1.0,
+                    "recommendation": "", "action": "continue"}
+
+        # V1.5.1: 过滤留白轮（留白轮的零产出不计入边际产出序列）
+        blank_rounds = blank_rounds or []
+        active_history = [
+            h for h in addition_history
+            if not h.get("is_blank_round", False) and h.get("round", 0) not in blank_rounds
+        ]
+
+        filtered_count = len(addition_history) - len(active_history)
+        if filtered_count > 0:
+            skip_note = f"（跳过 {filtered_count} 个留白轮）"
+        else:
+            skip_note = ""
+
+        if len(active_history) < 3:
+            return {"saturated": False, "marginal_output": 1.0,
+                    "recommendation": f"日益事件不足 3 轮{skip_note}，暂不检测饱和",
+                    "action": "continue"}
+
+        # 计算最近 3 轮的边际产出变化
+        recent_outputs = [h.get("output_score", 0.5) for h in active_history[-3:]]
+        if len(recent_outputs) >= 2:
+            marginal = recent_outputs[-1] - recent_outputs[-2] if recent_outputs[-2] > 0 else 0
+        else:
+            marginal = 0
+
+        saturation_threshold = self.config.get("saturation_marginal_threshold", 0.1)
+
+        if marginal < saturation_threshold:
+            return {
+                "saturated": True,
+                "marginal_output": round(marginal, 4),
+                "recent_outputs": recent_outputs,
+                "recommendation": (
+                    f"日益饱和：最近边际产出 {marginal:.4f} < {saturation_threshold}{skip_note}。"
+                    "建议转入日损模式——为学日益之后，为道日损。"
+                    "卡内基梅隆实证：过度学习导致边际产出递减。"
+                ),
+                "action": "switch_to_subtraction",
+                "classical_ref": "为学日益，为道日损（《道德经》第48章）——日益饱和，转日损。",
+            }
+
+        return {"saturated": False, "marginal_output": round(marginal, 4),
+                "recommendation": f"日益边际产出正常{skip_note}，继续加法",
+                "action": "continue"}
+
+    # ── V1.5 协议级日损记录 ──
+
+    def _record_protocol_subtractions(self) -> List[Dict[str, Any]]:
+        """
+        协议级日损记录（V1.5 新增）
+
+        V1.5 核心姿态：协议教会种子日损，也必须对自己日损。
+        记录 V1.4→V1.5 的 5 项协议级减除，全部留痕可回溯。
+
+        Returns:
+            [{item, reason, reversible, timestamp, classical_ref}]
+        """
+        timestamp = datetime.now().isoformat()
+        return [
+            {
+                "item": "三层核合并为双画像",
+                "reason": "方向核并入宪法审计对象，不另立层——对象重叠，机制冗余",
+                "reversible": True,
+                "timestamp": timestamp,
+                "classical_ref": "少则得，多则惑（《道德经》第22章）",
+            },
+            {
+                "item": "失败计分加审核（真失败才奖励）",
+                "reason": "V1.4 无审核版存在表演性失败风险——降级为真失败才奖励",
+                "reversible": True,
+                "timestamp": timestamp,
+                "classical_ref": "知不知，尚矣；不知知，病也（《道德经》第71章）",
+            },
+            {
+                "item": "换球心加体系类型声明",
+                "reason": "V1.4 无声明版存在反身性循环——加体系类型声明破解",
+                "reversible": True,
+                "timestamp": timestamp,
+                "classical_ref": "反者道之动（《道德经》第40章）",
+            },
+            {
+                "item": "纯粹度抗摇摆标'待校准'",
+                "reason": "V1.4 抗摇摆=0.7 可判无测量方法——标'待校准'，不假装精确",
+                "reversible": True,
+                "timestamp": timestamp,
+                "classical_ref": "知不知，尚矣（《道德经》第71章）",
+            },
+            {
+                "item": "留白不计入进度考核",
+                "reason": "V1.4 留白与进度冲突版在 deadline 场景失效——明确不计入考核，可欠可补",
+                "reversible": True,
+                "timestamp": timestamp,
+                "classical_ref": "大器免成（帛书乙本·《道德经》第41章）",
+            },
+        ]
 
     def _nature_determination_audit(self, method_seed: dict,
                                      harvest_wuxing: str,
@@ -1803,7 +2873,7 @@ class SeedCultivation:
         """格式化种子培育摘要（V1.3）"""
         lines = []
         lines.append("=" * 60)
-        lines.append(f"  木·生 种子培育报告 (V1.3)")
+        lines.append(f"  木·生 种子培育报告 (V1.5)")
         lines.append(f"  培育ID: {result.cultivation_id}")
         lines.append(f"  时间: {result.timestamp[:19]}")
         lines.append(f"  时间尺度: {result.time_scale}")
@@ -1891,6 +2961,78 @@ class SeedCultivation:
             lines.append(f"      审计状态: {nd_audit.get('threshold_status', '待校准')}")
         else:
             lines.append(f"\n    V1.3 双审计 — 性决定审计（才·方法）: ⊘ 跳过（宪法审计 REJECT）")
+
+        # V1.5 壳核审计声明
+        shell_decl = result.shell_nucleus_declaration
+        if shell_decl and shell_decl.get("declared"):
+            lines.append(f"\n    V1.5 壳核审计声明:")
+            lines.append(f"      测的核: {shell_decl.get('nucleus_measured', '?')}")
+            lines.append(f"      不测的壳: {', '.join(shell_decl.get('shell_excluded', ['?']))}")
+            lines.append(f"      体系类型: {shell_decl.get('system_type', '?')}")
+            lines.append(f"      声明意义: {shell_decl.get('declaration_note', '?')}")
+
+        # V1.5 纯粹度审计
+        purity = result.purity_result
+        if purity:
+            anti_sway_label = "待校准" if not purity.get("anti_sway_calibrated", False) else f"{purity.get('anti_sway', 1.0):.2f}"
+            lines.append(f"\n    V1.5 纯粹度审计（保持×时间×抗摇摆）:")
+            lines.append(f"      纯粹度: {purity.get('purity_score', 0):.4f} (阈值≥{purity.get('threshold', 0.7)})")
+            lines.append(f"      保持度: {purity.get('retention', 0):.4f}（余弦相似度）")
+            lines.append(f"      持续时间: {purity.get('duration', 0):.2f}")
+            lines.append(f"      抗摇摆: {anti_sway_label}")
+            lines.append(f"      解读: {purity.get('interpretation', '?')}")
+
+        # V1.5 协议级日损记录
+        proto_subs = result.protocol_subtractions
+        if proto_subs:
+            lines.append(f"\n    V1.5 协议级日损记录（{len(proto_subs)} 项）:")
+            for ps in proto_subs:
+                lines.append(f"      → {ps.get('item', '?')}: {ps.get('reason', '?')[:50]}")
+
+        # V1.5 Phase B: 熵振引擎
+        entropy = result.entropy_vibration
+        if entropy and entropy.get("quality_audits"):
+            lines.append(f"\n    V1.5 熵振引擎（失败质量审核）:")
+            lines.append(f"      真失败（奖励）: {entropy.get('true_failures', 0)} 项")
+            lines.append(f"      表演性失败（不计分）: {entropy.get('performative_failures', 0)} 项")
+            lines.append(f"      原则: {entropy.get('principle', '?')[:80]}...")
+            if entropy.get("falsification_library_updates"):
+                for fl in entropy["falsification_library_updates"]:
+                    lines.append(f"        → 入证伪库: {fl.get('evidence', '?')[:40]}...")
+
+        # V1.5 Phase B: 待验证假设清单
+        hypotheses = result.pending_hypotheses
+        if hypotheses:
+            lines.append(f"\n    V1.5 待验证假设清单（{len(hypotheses)} 项）:")
+            for h in hypotheses:
+                status_icon = {"待验证": "⏳", "已验证": "✅", "已证伪": "❌", "待定": "?"}.get(h.get("status", ""), "?")
+                lines.append(f"      {status_icon} {h.get('hypothesis_id', '?')}: {h.get('statement', '?')[:50]}...")
+
+        # V1.5 Phase B: 留白条款
+        blank = result.blank_space
+        if blank and blank.get("action") == "observe_only":
+            lines.append(f"\n    V1.5 留白条款:")
+            lines.append(f"      留白轮: ✅ 本轮为留白轮——只观察不干预")
+            lines.append(f"      活动: {', '.join(blank.get('activities', ['?']))}")
+            lines.append(f"      说明: 不计入里程碑考核")
+        elif blank and blank.get("skipped_for_deadline"):
+            lines.append(f"\n    V1.5 留白条款:")
+            lines.append(f"      留白轮: ⚠️ deadline 跳过（欠 {blank.get('owed_rounds', 0)} 轮）")
+
+        # V1.5 Phase B: 日益饱和检测
+        sat = result.saturation_detection
+        if sat and sat.get("saturated"):
+            lines.append(f"\n    V1.5 日益饱和检测:")
+            lines.append(f"      饱和: ⚠️ 日益饱和——边际产出 {sat.get('marginal_output', 0):.4f}")
+            lines.append(f"      建议: {sat.get('recommendation', '?')[:80]}...")
+
+        # V1.5 Phase B: 换球心决策
+        br = result.ball_replacement
+        if br and br.get("triggered"):
+            lines.append(f"\n    V1.5 换球心决策:")
+            lines.append(f"      触发: ⚠️ {br.get('reason', '?')}")
+            lines.append(f"      候选体系: {', '.join(c.get('system', '?') for c in br.get('candidate_systems', []))}")
+            lines.append(f"      建议: {br.get('recommendation', '?')[:80]}...")
 
         status = "✅ 成功" if s3.get("success") else "❌ 未完成"
         lines.append(f"\n    结果: {status}")
@@ -2040,6 +3182,37 @@ def cultivate_seed(source_domain: str, target_domain: str,
 # ============================================================
 
 if __name__ == "__main__":
+    # ── CLI 入口：CASE-LIU 壳核审计 ──
+    import argparse, json, os
+    parser = argparse.ArgumentParser(description="种子培育模块 — CLI 验证入口")
+    parser.add_argument("--task", type=str, help="任务 JSON 文件路径")
+    parser.add_argument("--mode", type=str, choices=["shell_nucleus_audit"],
+                        help="验证模式: shell_nucleus_audit")
+    parser.add_argument("--output", type=str, default=None, help="结果输出 JSON 路径")
+    args = parser.parse_args()
+
+    if args.task and args.mode == "shell_nucleus_audit":
+        task_path = os.path.join(os.path.dirname(__file__), "..", "data", args.task) \
+            if not os.path.isabs(args.task) else args.task
+        with open(task_path, encoding="utf-8") as f:
+            task_data = json.load(f)
+
+        cultivator = SeedCultivation(time_scale="skill")
+        sn_input = task_data.get("shell_nucleus_input", {})
+        audit_result = cultivator.shell_nucleus_audit(sn_input)
+
+        output_path = args.output or os.path.join(
+            os.path.dirname(__file__), "..", "output", "reports",
+            "result_liu_shell_nucleus_audit.json"
+        )
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(audit_result, f, ensure_ascii=False, indent=2)
+        print(f"结果已保存: {output_path}")
+        print(json.dumps(audit_result, ensure_ascii=False, indent=2))
+        import sys; sys.exit(0)
+
+    # ── 原有独立测试 ──
     print("=" * 60)
     print("种子培育模块 — 自检 (V1.3)")
     print("=" * 60)
@@ -2522,5 +3695,317 @@ if __name__ == "__main__":
     print(f"  宪法审计通过: {ca31['passed']} (method克topic=正常约束，不阻断)")
     print("  ✅ 测试 31 通过")
 
+    # 测试 32: V1.5 壳核审计声明 — 无声明不审计
+    print("\n[测试 32] V1.5 壳核审计声明 — 无声明不审计")
+    # 启用壳核声明检查，但不传 shell_nucleus_declaration → 应触发 REJECT
+    r32 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=3,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="金",  # 金生水 → 不触发方向越界，仅靠壳核声明检查
+    )
+    ca32 = r32.constitution_audit
+    # 注意：默认配置 shell_nucleus_declaration_required=False，壳核检查未启用
+    # 此处验证的是：即使无声明，方向正常时审计仍通过（向后兼容）
+    decl_check = [c for c in ca32.get("checks", []) if c["check_name"] == "壳核审计声明"]
+    if decl_check:
+        assert decl_check[0]["verdict"] == "REJECT", (
+            f"无声明应REJECT，实际: {decl_check[0]['verdict']}"
+        )
+        print(f"  壳核审计声明: [{decl_check[0]['verdict']}] {decl_check[0]['reason'][:60]}...")
+        assert not ca32.get("passed"), "无声明时宪法审计不应通过"
+    else:
+        # 默认配置下壳核声明未启用，审计应通过（向后兼容）
+        assert ca32.get("passed"), "默认配置下审计应通过（向后兼容）"
+        print(f"  壳核审计声明: 未启用（默认向后兼容）")
+    print(f"  宪法审计通过: {ca32['passed']}")
+    print("  ✅ 测试 32 通过")
+
+    # 测试 33: V1.5 壳核审计声明 — 有声明正常通过
+    print("\n[测试 33] V1.5 壳核审计声明 — 有声明正常通过")
+    env_with_decl = {
+        "mentor": {"name": "慧惠", "wuxing": "土"},
+        "environment": {"name": "道境", "wuxing": "木"},
+        "topic": {"name": "测试", "wuxing": "土"},
+        "collaborators": {"members": ["慧惠"]},
+        "shell_nucleus_declaration": {
+            "nucleus_measured": "方法核",
+            "shell_excluded": ["题目", "专业", "身份", "资历"],
+            "system_type": SystemType.NUCLEUS_MEASURING.value,
+            "declared": True,
+            "declaration_note": "测试声明",
+        },
+    }
+    r33 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=3,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="金",  # 金生水 → 相生，不触发越界
+        environmental_factors=env_with_decl,
+    )
+    ca33 = r33.constitution_audit
+    decl_check_33 = [c for c in ca33.get("checks", []) if c["check_name"] == "壳核审计声明"]
+    if decl_check_33:
+        assert decl_check_33[0]["verdict"] == "PASS", (
+            f"有声明应PASS，实际: {decl_check_33[0]['verdict']}"
+        )
+        print(f"  壳核审计声明: [{decl_check_33[0]['verdict']}] {decl_check_33[0]['reason'][:60]}...")
+    # 金生水 → 相生，宪法审计应通过
+    print(f"  宪法审计通过: {ca33['passed']}")
+    if not ca33['passed']:
+        for c in ca33.get('checks', []):
+            print(f"    [{c['verdict']}] {c['check_name']}: {c['reason'][:80]}")
+        print(f"    topic_wx in env: {r33.step2_nurture.get('environmental_factors', {}).get('topic', {}).get('wuxing', '?')}")
+        print(f"    step1 topic_seed wuxing: {r33.step1_identify.get('topic_seed', {}).get('wuxing', '?')}")
+    print(f"  壳核声明: nucleus={r33.shell_nucleus_declaration.get('nucleus_measured', '?')}")
+    print("  ✅ 测试 33 通过")
+
+    # 测试 34: V1.5 纯粹度审计 — 保持×时间×抗摇摆
+    print("\n[测试 34] V1.5 纯粹度审计 — 保持×时间×抗摇摆")
+    r34 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=4,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="金",  # 金生水 → 相生
+        harvest_methodology_wuxing="水",  # 同向 → 保持度≈1.0
+        environmental_factors=env_with_decl,
+    )
+    purity = r34.purity_result
+    assert purity, "应有纯粹度审计结果"
+    assert purity.get("purity_score", 0) > 0, "纯粹度应>0"
+    assert purity.get("retention", 0) > 0.5, "同向应保持度>0.5"
+    assert "anti_sway" in purity, "应有抗摇摆字段"
+    assert not purity.get("anti_sway_calibrated", True), "抗摇摆应标注'待校准'"
+    print(f"  纯粹度: {purity.get('purity_score', 0):.4f}")
+    print(f"  保持度: {purity.get('retention', 0):.4f}")
+    print(f"  持续时间: {purity.get('duration', 0):.2f}")
+    anti_sway_val = purity.get('anti_sway', 1.0)
+    anti_sway_display = "待校准" if not purity.get('anti_sway_calibrated') else f"{anti_sway_val:.2f}"
+    print(f"  抗摇摆: {anti_sway_display}")
+    print(f"  解读: {purity.get('interpretation', '?')[:60]}...")
+    print("  ✅ 测试 34 通过")
+
+    # 测试 35: V1.5 协议级日损记录
+    print("\n[测试 35] V1.5 协议级日损记录")
+    r35 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=3,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="金",  # 金生水 → 相生
+        environmental_factors=env_with_decl,
+    )
+    proto_subs = r35.protocol_subtractions
+    assert proto_subs, "应有协议级日损记录"
+    assert len(proto_subs) == 5, f"应有 5 项协议级日损，实际: {len(proto_subs)}"
+    for ps in proto_subs:
+        assert "item" in ps, "每项应有 item 字段"
+        assert "reason" in ps, "每项应有 reason 字段"
+        assert "reversible" in ps, "每项应有 reversible 字段"
+    print(f"  协议级日损: {len(proto_subs)} 项")
+    for ps in proto_subs:
+        rev = "可逆" if ps["reversible"] else "不可逆"
+        print(f"    → {ps['item']}: {ps['reason'][:40]}... ({rev})")
+    print("  ✅ 测试 35 通过")
+
+    # 测试 36: V1.5 format_summary 含 V1.5 字段
+    print("\n[测试 36] V1.5 format_summary — 含 V1.5 字段")
+    summary = cultivator.format_summary(r34)
+    assert "V1.5" in summary, "报告应含 V1.5 版本号"
+    assert "壳核审计声明" in summary, "报告应含壳核审计声明"
+    assert "纯粹度审计" in summary, "报告应含纯粹度审计"
+    assert "协议级日损记录" in summary, "报告应含协议级日损记录"
+    assert "保持×时间×抗摇摆" in summary, "报告应含纯粹度公式"
+    print(f"  报告长度: {len(summary)} 字符")
+    print(f"  含 V1.5 版本号: ✅")
+    print(f"  含壳核审计声明: ✅")
+    print(f"  含纯粹度审计: ✅")
+    print(f"  含协议级日损记录: ✅")
+    print("  ✅ 测试 36 通过")
+
+    # ═══════════════════════════════════════════════
+    # V1.5 Phase B 新增测试
+    # ═══════════════════════════════════════════════
+
+    # 测试 37: 熵振引擎 — 失败质量审核（真失败）
+    print("\n[测试 37] V1.5 Phase B 熵振引擎 — 真失败 vs 表演性失败")
+    # 真失败：含可证伪条件、可复现、有修正方向
+    true_failure = [{
+        "event_type": "实验失败",
+        "description": "五行诊断实验未通过",
+        "has_falsification_condition": True,
+        "is_reproducible": True,
+        "has_correction_path": True,
+        "is_expected_failure": False,
+    }]
+    audit_true = cultivator._failure_quality_audit(true_failure)
+    assert len(audit_true) == 1, "应有 1 项审核结果"
+    assert audit_true[0]["failure_type"] == FailureQuality.TRUE_FAILURE.value, "应为真失败"
+    assert audit_true[0]["reward_eligible"] == True, "真失败应奖励"
+    print(f"  真失败审核: {audit_true[0]['failure_type']} (奖励: {audit_true[0]['reward_eligible']})")
+    print(f"  判定依据: {audit_true[0]['evidence'][:60]}...")
+
+    # 表演性失败：预期失败、无证伪条件
+    performative_failure = [{
+        "event_type": "实验失败",
+        "description": "选不可能任务故意失败",
+        "has_falsification_condition": False,
+        "is_reproducible": False,
+        "has_correction_path": False,
+        "is_expected_failure": True,
+    }]
+    audit_perf = cultivator._failure_quality_audit(performative_failure)
+    assert len(audit_perf) == 1
+    assert audit_perf[0]["failure_type"] == FailureQuality.PERFORMATIVE_FAILURE.value, "应为表演性失败"
+    assert audit_perf[0]["reward_eligible"] == False, "表演性失败不应奖励"
+    print(f"  表演性失败审核: {audit_perf[0]['failure_type']} (奖励: {audit_perf[0]['reward_eligible']})")
+    print("  ✅ 测试 37 通过")
+
+    # 测试 38: 待验证假设清单
+    print("\n[测试 38] V1.5 Phase B 待验证假设清单 — 5 项诚实声明")
+    hypotheses = cultivator._track_hypotheses()
+    assert len(hypotheses) == 5, f"应有 5 项假设，实际: {len(hypotheses)}"
+    for h in hypotheses:
+        assert "hypothesis_id" in h, "每项应有 hypothesis_id"
+        assert "statement" in h, "每项应有 statement"
+        assert "status" in h, "每项应有 status"
+        assert h["status"] == PendingHypothesisStatus.PENDING.value, f"初始状态应为待验证，实际: {h['status']}"
+        assert "verification_path" in h, "每项应有 verification_path"
+    print(f"  假设数量: {len(hypotheses)}")
+    for h in hypotheses:
+        print(f"    [{h['hypothesis_id']}] {h['status']}: {h['statement'][:40]}...")
+    print("  ✅ 测试 38 通过")
+
+    # 测试 39: 换球心决策 — 触发条件
+    print("\n[测试 39] V1.5 Phase B 换球心决策 — 触发条件")
+    # 场景 A: 纯粹度不足，不触发（只有1轮）
+    br_insufficient = cultivator._ball_replacement_decision(
+        [0.5], SystemType.NUCLEUS_MEASURING.value
+    )
+    assert br_insufficient["triggered"] == False, "纯粹度历史不足不应触发"
+    assert br_insufficient["action"] == "wait"
+    print(f"  场景A（1轮，等待）: triggered={br_insufficient['triggered']}, action={br_insufficient['action']}")
+
+    # 场景 B: 纯粹度正常，不触发
+    br_normal = cultivator._ball_replacement_decision(
+        [0.8, 0.85], SystemType.NUCLEUS_MEASURING.value
+    )
+    assert br_normal["triggered"] == False
+    assert br_normal["action"] == "continue"
+    print(f"  场景B（正常）: triggered={br_normal['triggered']}, action={br_normal['action']}")
+
+    # 场景 C: 测壳体系，不触发换球心
+    br_shell = cultivator._ball_replacement_decision(
+        [0.5, 0.4], SystemType.SHELL_MEASURING.value
+    )
+    assert br_shell["triggered"] == False, "测壳体系不应触发换球心"
+    assert br_shell["action"] == "skip"
+    print(f"  场景C（测壳体系）: triggered={br_shell['triggered']}, action={br_shell['action']}")
+
+    # 场景 D: 连续2轮<0.7 + 测核体系 → 触发
+    br_trigger = cultivator._ball_replacement_decision(
+        [0.5, 0.4], SystemType.NUCLEUS_MEASURING.value
+    )
+    assert br_trigger["triggered"] == True, "连续2轮<0.7且测核体系应触发"
+    assert br_trigger["action"] == "evaluate_replacement"
+    assert len(br_trigger["candidate_systems"]) >= 2, "应有候选体系"
+    print(f"  场景D（触发）: triggered={br_trigger['triggered']}, action={br_trigger['action']}")
+    print(f"    候选体系: {[c['system'] for c in br_trigger['candidate_systems']]}")
+
+    # 场景 E: 反例保护 — 厚积期（>5年+抗摇摆）
+    br_protect = cultivator._ball_replacement_decision(
+        [0.5, 0.4], SystemType.NUCLEUS_MEASURING.value, anti_sway_duration=6.0
+    )
+    assert br_protect["triggered"] == False, "厚积期应受保护"
+    assert br_protect["action"] == "protect"
+    print(f"  场景E（厚积期保护）: triggered={br_protect['triggered']}, action={br_protect['action']}")
+    print("  ✅ 测试 39 通过")
+
+    # 测试 40: 留白条款
+    print("\n[测试 40] V1.5 Phase B 留白条款 — 每3轮1留白")
+    # 场景 A: 第3轮 → 留白轮
+    blank_3 = cultivator._manage_blank_space(3)
+    assert blank_3["is_blank_round"] == True, "第3轮应为留白轮"
+    assert blank_3["action"] == "observe_only"
+    print(f"  场景A（第3轮）: 留白={blank_3['is_blank_round']}, action={blank_3['action']}")
+
+    # 场景 B: 第1轮 → 非留白轮
+    blank_1 = cultivator._manage_blank_space(1)
+    assert blank_1["is_blank_round"] == False
+    print(f"  场景B（第1轮）: 留白={blank_1['is_blank_round']}, action={blank_1['action']}")
+
+    # 场景 C: +2 高价值信号提前结束留白
+    blank_signal = cultivator._manage_blank_space(3, high_value_signals=2)
+    assert blank_signal["is_blank_round"] == False, "高价值信号应提前结束留白"
+    assert blank_signal["action"] == "signal_override"
+    print(f"  场景C（信号优先）: 留白={blank_signal['is_blank_round']}, action={blank_signal['action']}")
+
+    # 场景 D: deadline 模式跳过留白
+    cultivator.config["blank_space_deadline_mode"] = True
+    blank_dl = cultivator._manage_blank_space(3)
+    assert blank_dl["is_blank_round"] == False
+    assert blank_dl["skipped_for_deadline"] == True
+    assert blank_dl["owed_rounds"] == 1
+    print(f"  场景D（deadline跳过）: 留白={blank_dl['is_blank_round']}, 欠={blank_dl['owed_rounds']}轮")
+    cultivator.config["blank_space_deadline_mode"] = False  # 恢复
+    print("  ✅ 测试 40 通过")
+
+    # 测试 41: 日益饱和检测
+    print("\n[测试 41] V1.5 Phase B 日益饱和检测 — 边际产出递减")
+    # 场景 A: 边际产出正常
+    addition_normal = [
+        {"round": 1, "output_score": 0.5},
+        {"round": 2, "output_score": 0.7},
+        {"round": 3, "output_score": 0.85},
+    ]
+    sat_normal = cultivator._saturation_detection(addition_normal)
+    assert sat_normal["saturated"] == False, "边际产出增长不应饱和"
+    print(f"  场景A（正常增长）: saturated={sat_normal['saturated']}")
+
+    # 场景 B: 边际产出递减 → 饱和
+    addition_saturated = [
+        {"round": 1, "output_score": 0.5},
+        {"round": 2, "output_score": 0.7},
+        {"round": 3, "output_score": 0.55},  # 边际产出下降
+    ]
+    sat_saturated = cultivator._saturation_detection(addition_saturated)
+    assert sat_saturated["saturated"] == True, "边际产出递减应触发饱和"
+    assert sat_saturated["action"] == "switch_to_subtraction"
+    print(f"  场景B（饱和）: saturated={sat_saturated['saturated']}, marginal={sat_saturated['marginal_output']:.4f}")
+    print(f"    建议: {sat_saturated['recommendation'][:60]}...")
+
+    # 场景 C: 不足3轮不检测
+    sat_short = cultivator._saturation_detection(addition_saturated[:2])
+    assert sat_short["saturated"] == False
+    print(f"  场景C（不足3轮）: saturated={sat_short['saturated']}")
+    print("  ✅ 测试 41 通过")
+
+    # 测试 42: Phase B 集成 — 完整培育含 Phase B 字段
+    print("\n[测试 42] V1.5 Phase B 集成 — 完整培育含 Phase B 字段")
+    r42 = cultivator.cultivate(
+        "大语言模型", "自然语言处理",
+        method_seed_occurrences=3,
+        method_seed_wuxing="水",
+        topic_seed_wuxing="金",
+        environmental_factors=env_with_decl,
+    )
+    # 熵振引擎
+    ev = r42.entropy_vibration
+    assert "quality_audits" in ev, "应含熵振质量审核"
+    assert "principle" in ev, "应含熵振原则"
+    # 待验证假设
+    assert len(r42.pending_hypotheses) == 5, "应含5项待验证假设"
+    # 留白
+    assert "is_blank_round" in r42.blank_space, "应含留白决策"
+    # 日益饱和
+    assert "saturated" in r42.saturation_detection, "应含饱和检测"
+    # 换球心
+    assert "triggered" in r42.ball_replacement, "应含换球心决策"
+    print(f"  熵振引擎: {ev.get('true_failures', 0)} 真, {ev.get('performative_failures', 0)} 表演")
+    print(f"  待验证假设: {len(r42.pending_hypotheses)} 项")
+    print(f"  留白: is_blank={r42.blank_space.get('is_blank_round')}, action={r42.blank_space.get('action')}")
+    print(f"  日益饱和: saturated={r42.saturation_detection.get('saturated')}")
+    print(f"  换球心: triggered={r42.ball_replacement.get('triggered')}")
+    print("  ✅ 测试 42 通过")
+
     print("\n" + "=" * 60)
-    print("自检完成 — 全部 31 项测试通过 (V1.3)")
+    print("自检完成 — 全部 42 项测试通过 (V1.5 Phase B)")

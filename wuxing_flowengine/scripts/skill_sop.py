@@ -1004,7 +1004,9 @@ class WuxingAnalysisTemplate:
                                  dim4: dict, dim5: dict,
                                  small_sample_mode: bool = False) -> dict:
         """D6: 特质画像——矩阵+熵+路径的组合解读（v1.1: n<10 降级为画像提示）"""
-        dominant = dim5.get("dominant", "无")
+        # V1.5.1: 优先使用 dominant_label（与 D5 保持一致），并列时显示完整清单
+        dominant = dim5.get("dominant_label", dim5.get("dominant", "无"))
+        dominant_raw = dim5.get("dominant", "无")  # 用于画像匹配
         entropy = dim4.get("H_normalized", 0)
         path = dim3.get("path", [])
         matrix = dim2.get("matrix", {})
@@ -1012,15 +1014,15 @@ class WuxingAnalysisTemplate:
         # v1.1: 小样本模式——降级为画像提示，不做画像库匹配
         if small_sample_mode:
             hint_traits = []
-            if dominant == "木":
+            if dominant_raw == "木":
                 hint_traits.append("木·生发倾向")
-            elif dominant == "火":
+            elif dominant_raw == "火":
                 hint_traits.append("火·化育倾向")
-            elif dominant == "土":
+            elif dominant_raw == "土":
                 hint_traits.append("土·承载倾向")
-            elif dominant == "金":
+            elif dominant_raw == "金":
                 hint_traits.append("金·克制倾向")
-            elif dominant == "水":
+            elif dominant_raw == "水":
                 hint_traits.append("水·变通倾向")
 
             if entropy > 0.7:
@@ -1029,7 +1031,7 @@ class WuxingAnalysisTemplate:
                 hint_traits.append("高度聚焦")
 
             return {
-                "profile_name": f"画像提示（{dominant}主导，n={dim1.get('total', 0)}）",
+                "profile_name": f"画像提示（{dominant}，n={dim1.get('total', 0)}）",
                 "traits": hint_traits,
                 "profile_match_confidence": 0,
                 "small_sample_mode": True,
@@ -1038,15 +1040,15 @@ class WuxingAnalysisTemplate:
 
         # 标准模式：画像库匹配
         traits = []
-        if dominant == "木":
+        if dominant_raw == "木":
             traits.append("生发型——创造力强，善于开创")
-        elif dominant == "火":
+        elif dominant_raw == "火":
             traits.append("化育型——内化能力强，善于转化")
-        elif dominant == "土":
+        elif dominant_raw == "土":
             traits.append("承载型——稳定厚重，善于整合")
-        elif dominant == "金":
+        elif dominant_raw == "金":
             traits.append("克制型——精准犀利，善于批判")
-        elif dominant == "水":
+        elif dominant_raw == "水":
             traits.append("变通型——灵活多变，善于创新")
 
         if entropy > 0.7:
@@ -1063,11 +1065,11 @@ class WuxingAnalysisTemplate:
 
         # 画像库匹配
         profile_name = "通用画像"
-        if dominant in ("土", "金") and entropy < 0.5:
-            profile_name = f"{dominant}·系统架构型"
-        elif dominant in ("木", "火") and entropy > 0.5:
-            profile_name = f"{dominant}·生态发散型"
-        elif dominant == "水":
+        if dominant_raw in ("土", "金") and entropy < 0.5:
+            profile_name = f"{dominant_raw}·系统架构型"
+        elif dominant_raw in ("木", "火") and entropy > 0.5:
+            profile_name = f"{dominant_raw}·生态发散型"
+        elif dominant_raw == "水":
             profile_name = "水·变通演化型"
 
         return {

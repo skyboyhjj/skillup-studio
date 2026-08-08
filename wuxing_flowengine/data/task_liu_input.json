@@ -1,0 +1,77 @@
+{
+  "task_id": "TASK-HOMO-LIU-20260808",
+  "protocol_version": "V1.5",
+  "source_domain": {
+    "name": "数学训练（方法种子=逻辑思辨）",
+    "nodes": [
+      {"id": "s1", "name": "公理化", "wuxing": "金"},
+      {"id": "s2", "name": "逻辑推演", "wuxing": "金"},
+      {"id": "s3", "name": "抽象化", "wuxing": "金"},
+      {"id": "s4", "name": "精确性", "wuxing": "金"},
+      {"id": "s5", "name": "证明", "wuxing": "金"}
+    ],
+    "edges": [
+      {"from": "s1", "to": "s2", "relation": "推演", "confidence": 0.9},
+      {"from": "s1", "to": "s3", "relation": "派生", "confidence": 0.85},
+      {"from": "s2", "to": "s5", "relation": "前提_结论", "confidence": 0.9},
+      {"from": "s3", "to": "s4", "relation": "提炼", "confidence": 0.85},
+      {"from": "s5", "to": "s4", "relation": "检验", "confidence": 0.8}
+    ]
+  },
+  "target_domain": {
+    "name": "心理咨询",
+    "nodes": [
+      {"id": "t1", "name": "认知模型框架", "wuxing": "水"},
+      {"id": "t2", "name": "情绪因果链", "wuxing": "水"},
+      {"id": "t3", "name": "情绪模式识别", "wuxing": "水"},
+      {"id": "t4", "name": "干预效果评估", "wuxing": "水"}
+    ]
+  },
+  "candidate_mappings": [
+    {"id": "m1", "source": "s1", "target": "t1", "relation_kept": "公理化→框架", "expected_retention": 0.85},
+    {"id": "m2", "source": "s2", "target": "t2", "relation_kept": "推演→因果链", "expected_retention": 0.90},
+    {"id": "m3", "source": "s3", "target": "t3", "relation_kept": "抽象→模式识别", "expected_retention": 0.82},
+    {"id": "m4", "source": "s4", "target": "t2", "relation_kept": "精确→概念澄清", "expected_retention": 0.88},
+    {"id": "m5", "source": "s5", "target": "t4", "relation_kept": "证明→干预评估", "expected_retention": 0.80}
+  ],
+  "chain_mappings": [
+    {
+      "id": "chain1",
+      "from": "数学",
+      "via": "佛学（因明/唯识）",
+      "to": "心理学",
+      "segments": [
+        {"from": "数学", "to": "佛学", "expected_retention": 0.88, "bridge": "因明学/唯识学（与数学逻辑结构同构）"},
+        {"from": "佛学", "to": "心理", "expected_retention": 0.83, "bridge": "唯识底座（八识/种子现行）"}
+      ]
+    }
+  ],
+  "verification_scenarios": [
+    {"id": "vs1", "name": "焦虑剖析", "mapping_id": "m2", "check": "用逻辑拆解焦虑认知链条（前提→结论保持）", "expected": "PASS"},
+    {"id": "vs2", "name": "模式识别", "mapping_id": "m3", "check": "剥离具体找情绪模式（抽象保持）", "expected": "PASS"},
+    {"id": "vs3", "name": "干预验证", "mapping_id": "m5", "check": "方案效果假设检验（证明保持）", "expected": "PASS"},
+    {"id": "vs4", "name": "概念澄清", "mapping_id": "m4", "check": "模糊情绪精确化（定义保持）", "expected": "PASS"}
+  ],
+  "increment_audit_expected": [
+    {"item": "共情/倾听", "source_counterpart": "无", "judgement": "增量不破坏保持"},
+    {"item": "身体觉察/内观", "source_counterpart": "无（来自佛学中间域）", "judgement": "增量，链式映射贡献"},
+    {"item": "关系建立", "source_counterpart": "无", "judgement": "增量，关系核体现"}
+  ],
+  "shell_nucleus_input": {
+    "declaration": {
+      "measured_nucleus": ["方法核（逻辑思辨）", "方向核（向内追问）"],
+      "excluded_shell": ["数学专业", "IMO 满分", "MIT offer", "出家身份"],
+      "system_type": "测核体系"
+    },
+    "three_layers": {
+      "topic_shell": {"name": "数学研究", "action": "可更换", "evidence": "2010 放弃 MIT offer"},
+      "method_nucleus": {"name": "逻辑思辨", "action": "可迁移", "evidence": "数学→佛学→心理全程保持"},
+      "direction_nucleus": {"name": "向内追问", "action": "必须保持", "evidence": "耕读社→出家→心理 20 年", "hypothesis": "H1（待验证）"}
+    }
+  },
+  "wuxing_annotation": {
+    "source": "金（逻辑思辨）",
+    "target": "水（共情/心理）",
+    "relation": "金生水——理性的极致是通往共情的路"
+  }
+}

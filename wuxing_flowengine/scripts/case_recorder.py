@@ -47,6 +47,12 @@ class SubtractionEventType(str, Enum):
     OVER_ACCUMULATION = "去除过度积累"   # v1.1 M3: 样本不足时强行高级运算
 
 
+class SubtractionScope(str, Enum):
+    """减法记录范围（V1.5）"""
+    CULTIVATION = "培育级"    # 种子培育中的减法
+    PROTOCOL = "协议级"       # 协议自身的日损
+
+
 class AuditVerdict(str, Enum):
     """宪法审计判定"""
     PASS = "通过"
@@ -70,6 +76,7 @@ class SubtractionEvent:
     classical_ref: str = ""
     skill_id: str = ""
     case_id: str = ""
+    scope: str = ""        # V1.5: 减法范围（培育级/协议级）
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -507,6 +514,83 @@ class CaseRecorder:
             classical_ref="少则得，多则惑（《道德经》第22章）",
             skill_id="SKL-B-20260808-001",
             case_id="M3-复盘-B",
+        ))
+
+        for event in events:
+            self.record_subtraction(event)
+
+        return events
+
+    def record_protocol_subtractions(self) -> List[SubtractionEvent]:
+        """
+        V1.5: 记录协议级日损事件
+
+        协议教会种子日损，也必须对自己日损。
+        记录 V1.4→V1.5 的 5 项协议级减除，全部留痕可回溯。
+
+        Returns:
+            List[SubtractionEvent]: 记录的 5 条协议级日损事件
+        """
+        events = []
+
+        # 1. 三层核合并为双画像
+        events.append(SubtractionEvent(
+            event_id="sub_proto_v15_001",
+            event_type=SubtractionEventType.OVER_PROCESS,
+            trigger="三层核合并为双画像（方向核并入宪法审计）",
+            action="对象重叠、机制冗余——方向核并入宪法审计对象，不另立层",
+            timestamp=datetime.now().isoformat(),
+            reversible=True,
+            classical_ref="少则得，多则惑（《道德经》第22章）",
+            scope=SubtractionScope.PROTOCOL.value,
+        ))
+
+        # 2. 失败计分加审核
+        events.append(SubtractionEvent(
+            event_id="sub_proto_v15_002",
+            event_type=SubtractionEventType.OBSESSION,
+            trigger="失败计分加审核（真失败才奖励）",
+            action="V1.4 无审核版存在表演性失败风险——降级为真失败才奖励",
+            timestamp=datetime.now().isoformat(),
+            reversible=True,
+            classical_ref="知不知，尚矣；不知知，病也（《道德经》第71章）",
+            scope=SubtractionScope.PROTOCOL.value,
+        ))
+
+        # 3. 换球心加体系类型声明
+        events.append(SubtractionEvent(
+            event_id="sub_proto_v15_003",
+            event_type=SubtractionEventType.OVER_PROCESS,
+            trigger="换球心加体系类型声明",
+            action="V1.4 无声明版存在反身性循环——加体系类型声明破解",
+            timestamp=datetime.now().isoformat(),
+            reversible=True,
+            classical_ref="反者道之动（《道德经》第40章）",
+            scope=SubtractionScope.PROTOCOL.value,
+        ))
+
+        # 4. 纯粹度抗摇摆标'待校准'
+        events.append(SubtractionEvent(
+            event_id="sub_proto_v15_004",
+            event_type=SubtractionEventType.OBSESSION,
+            trigger="纯粹度抗摇摆标'待校准'",
+            action="V1.4 抗摇摆=0.7 可判无测量方法——标'待校准'，不假装精确",
+            timestamp=datetime.now().isoformat(),
+            reversible=True,
+            classical_ref="知不知，尚矣（《道德经》第71章）",
+            scope=SubtractionScope.PROTOCOL.value,
+        ))
+
+        # 5. 留白不计入进度考核
+        events.append(SubtractionEvent(
+            event_id="sub_proto_v15_005",
+            event_type=SubtractionEventType.OVER_PROCESS,
+            trigger="留白不计入进度考核",
+            action="V1.4 留白与进度冲突版在 deadline 场景失效——明确不计入考核，可欠可补",
+            timestamp=datetime.now().isoformat(),
+            reversible=True,
+            classical_ref="大器免成（帛书乙本·《道德经》第41章）",
+            scope=SubtractionScope.PROTOCOL.value,
         ))
 
         for event in events:

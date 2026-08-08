@@ -1,0 +1,300 @@
+{
+  "task_id": "TASK-HOMO-LIU-20260808",
+  "protocol_version": "V1.5",
+  "generated_at": "2026-08-08",
+  "modes": {
+    "homo_verify": {
+      "task_id": "TASK-HOMO-LIU-20260808",
+      "protocol_version": "V1.5",
+      "source_domain": "数学训练（方法种子=逻辑思辨）",
+      "target_domain": "心理咨询",
+      "source_graph": {
+        "node_count": 5,
+        "edge_count": 5,
+        "nodes": [
+          {
+            "id": "s1",
+            "name": "公理化",
+            "wuxing": "金"
+          },
+          {
+            "id": "s2",
+            "name": "逻辑推演",
+            "wuxing": "金"
+          },
+          {
+            "id": "s3",
+            "name": "抽象化",
+            "wuxing": "金"
+          },
+          {
+            "id": "s4",
+            "name": "精确性",
+            "wuxing": "金"
+          },
+          {
+            "id": "s5",
+            "name": "证明",
+            "wuxing": "金"
+          }
+        ]
+      },
+      "target_graph": {
+        "node_count": 4,
+        "edge_count": 0,
+        "nodes": [
+          {
+            "id": "t1",
+            "name": "认知模型框架",
+            "wuxing": "水"
+          },
+          {
+            "id": "t2",
+            "name": "情绪因果链",
+            "wuxing": "水"
+          },
+          {
+            "id": "t3",
+            "name": "情绪模式识别",
+            "wuxing": "水"
+          },
+          {
+            "id": "t4",
+            "name": "干预效果评估",
+            "wuxing": "水"
+          }
+        ]
+      },
+      "mappings": [
+        {
+          "id": "m1",
+          "source": "公理化",
+          "target": "认知模型框架",
+          "source_wuxing": "金",
+          "target_wuxing": "水",
+          "relation_kept": "公理化→框架",
+          "retention": 0.85,
+          "expected_retention": 0.85,
+          "deviation": 0.0,
+          "confidence": "high"
+        },
+        {
+          "id": "m2",
+          "source": "逻辑推演",
+          "target": "情绪因果链",
+          "source_wuxing": "金",
+          "target_wuxing": "水",
+          "relation_kept": "推演→因果链",
+          "retention": 0.93,
+          "expected_retention": 0.9,
+          "deviation": 0.03,
+          "confidence": "high"
+        },
+        {
+          "id": "m3",
+          "source": "抽象化",
+          "target": "情绪模式识别",
+          "source_wuxing": "金",
+          "target_wuxing": "水",
+          "relation_kept": "抽象→模式识别",
+          "retention": 0.8,
+          "expected_retention": 0.82,
+          "deviation": -0.02,
+          "confidence": "high"
+        },
+        {
+          "id": "m4",
+          "source": "精确性",
+          "target": "情绪因果链",
+          "source_wuxing": "金",
+          "target_wuxing": "水",
+          "relation_kept": "精确→概念澄清",
+          "retention": 0.93,
+          "expected_retention": 0.88,
+          "deviation": 0.05,
+          "confidence": "high"
+        },
+        {
+          "id": "m5",
+          "source": "证明",
+          "target": "干预效果评估",
+          "source_wuxing": "金",
+          "target_wuxing": "水",
+          "relation_kept": "证明→干预评估",
+          "retention": 0.78,
+          "expected_retention": 0.8,
+          "deviation": -0.02,
+          "confidence": "high"
+        }
+      ],
+      "average_retention": 0.858,
+      "increment_audit": [
+        {
+          "item": "共情/倾听",
+          "source_counterpart": "无",
+          "judgement": "增量不破坏保持"
+        },
+        {
+          "item": "身体觉察/内观",
+          "source_counterpart": "无（来自佛学中间域）",
+          "judgement": "增量，链式映射贡献"
+        },
+        {
+          "item": "关系建立",
+          "source_counterpart": "无",
+          "judgement": "增量，关系核体现"
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "vs1",
+          "name": "焦虑剖析",
+          "mapping_id": "m2",
+          "check": "用逻辑拆解焦虑认知链条（前提→结论保持）",
+          "expected": "PASS",
+          "result": "PASS",
+          "retention": 0.93
+        },
+        {
+          "id": "vs2",
+          "name": "模式识别",
+          "mapping_id": "m3",
+          "check": "剥离具体找情绪模式（抽象保持）",
+          "expected": "PASS",
+          "result": "PASS",
+          "retention": 0.8
+        },
+        {
+          "id": "vs3",
+          "name": "干预验证",
+          "mapping_id": "m5",
+          "check": "方案效果假设检验（证明保持）",
+          "expected": "PASS",
+          "result": "PASS",
+          "retention": 0.78
+        },
+        {
+          "id": "vs4",
+          "name": "概念澄清",
+          "mapping_id": "m4",
+          "check": "模糊情绪精确化（定义保持）",
+          "expected": "PASS",
+          "result": "PASS",
+          "retention": 0.93
+        }
+      ],
+      "wuxing_annotation": {
+        "source": "金（逻辑思辨）",
+        "target": "水（共情/心理）",
+        "relation": "金生水——理性的极致是通往共情的路"
+      }
+    },
+    "chain_verify": {
+      "chain_id": "chain1",
+      "from": "数学",
+      "via": "佛学（因明/唯识）",
+      "to": "心理",
+      "segment_retentions": [
+        {
+          "from": "数学",
+          "to": "佛学",
+          "bridge": "因明学/唯识学（与数学逻辑结构同构）",
+          "retention": 0.88
+        },
+        {
+          "from": "佛学",
+          "to": "心理",
+          "bridge": "唯识底座（八识/种子现行）",
+          "retention": 0.83
+        }
+      ],
+      "segments_product": 0.7304,
+      "bridge_gain": 0.1,
+      "bridge_gain_rationale": "唯识中间域贡献增量（内观/身体觉察）——链式映射非纯损耗",
+      "composite": 0.8034,
+      "direct_comparison": {
+        "direct_mapping_retention": 0.85,
+        "chain_composite": 0.8034,
+        "chain_vs_direct": "链式复合 0.8034 vs 直接映射 0.85",
+        "note": "链式复合约等于直接映射——中间域（佛学）作为桥梁未显著损耗，且贡献了增量（内观/身体觉察）"
+      }
+    },
+    "shell_nucleus_audit": {
+      "passed": true,
+      "declaration": {
+        "measured_nucleus": [
+          "方法核（逻辑思辨）",
+          "方向核（向内追问）"
+        ],
+        "excluded_shell": [
+          "数学专业",
+          "IMO 满分",
+          "MIT offer",
+          "出家身份"
+        ],
+        "system_type": "测核体系"
+      },
+      "three_layers": {
+        "topic_shell": {
+          "name": "数学研究",
+          "action": "可更换",
+          "evidence": "2010 放弃 MIT offer"
+        },
+        "method_nucleus": {
+          "name": "逻辑思辨",
+          "action": "可迁移",
+          "evidence": "数学→佛学→心理全程保持"
+        },
+        "direction_nucleus": {
+          "name": "向内追问",
+          "action": "必须保持",
+          "evidence": "耕读社→出家→心理 20 年",
+          "hypothesis": "H1（待验证）"
+        }
+      },
+      "checks": [
+        {
+          "check": "declaration_completeness",
+          "verdict": "PASS",
+          "detail": "核=['方法核（逻辑思辨）', '方向核（向内追问）'], 壳=['数学专业', 'IMO 满分', 'MIT offer', '出家身份'], 体系=测核体系"
+        },
+        {
+          "check": "system_type_validity",
+          "verdict": "PASS",
+          "detail": "体系类型=测核体系"
+        },
+        {
+          "check": "three_layer_structure",
+          "verdict": "PASS",
+          "detail": {
+            "topic_shell": "数学研究 → 可更换",
+            "method_nucleus": "逻辑思辨 → 可迁移",
+            "direction_nucleus": "向内追问 → 必须保持"
+          }
+        },
+        {
+          "check": "direction_nucleus_hypothesis",
+          "verdict": "PASS",
+          "detail": "假设=H1（待验证）"
+        }
+      ],
+      "conclusion": "壳核三层结构确认：数学=壳（可换）、逻辑=核（可迁）、追问=方向核（保持，挂H1假设）"
+    }
+  },
+  "summary": {
+    "homo_verify": {
+      "average_retention": 0.858,
+      "mapping_count": 5,
+      "scenario_pass_rate": "4/4"
+    },
+    "chain_verify": {
+      "composite": 0.8034,
+      "bridge_gain": 0.1,
+      "direct_vs_chain": "链式复合 0.8034 vs 直接映射 0.85"
+    },
+    "shell_nucleus_audit": {
+      "passed": true,
+      "system_type": "测核体系"
+    }
+  }
+}
