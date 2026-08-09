@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "source": "arxiv",
+  "timestamp": "2026-08-09",
+  "query": {
+    "category": "cs.AI",
+    "month": "2026-07",
+    "max_results": 50
+  },
+  "nodes": [
+    {
+      "id": "cs.AI",
+      "name": "cs.AI",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 50
+    }
+  ],
+  "sample_entries": [
+    {
+      "title": "ORCA: ORgan-Centroid Aggregation for Training-Free 3D CT Visual Token Compression",
+      "published": "2026-07-31T23:27:39Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "primary_category": "cs.CV",
+      "author_count": 9,
+      "summary_len": 1379
+    },
+    {
+      "title": "Bayesian and Motivated Reasoning in AI Agents",
+      "published": "2026-07-31T23:02:58Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "primary_category": "cs.AI",
+      "author_count": 1,
+      "summary_len": 1126
+    },
+    {
+      "title": "RMSWeb: Reflection, Failure-Mode Mining, and Salvage-DS for Web Agent Reinforcement Learning",
+      "published": "2026-07-31T22:57:16Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "primary_category": "cs.AI",
+      "author_count": 11,
+      "summary_len": 1480
+    },
+    {
+      "title": "Learning to Coordinate Symbolic Tools: LLM Agents for Verified Sum-of-Squares Certificates",
+      "published": "2026-07-31T22:26:45Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.AI"
+      ],
+      "primary_category": "cs.AI",
+      "author_count": 5,
+      "summary_len": 1799
+    },
+    {
+      "title": "Trust and Its Betrayal under Three Representational Strategies",
+      "published": "2026-07-31T22:15:31Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.AI"
+      ],
+      "primary_category": "cs.AI",
+      "author_count": 2,
+      "summary_len": 1584
+    }
+  ],
+  "extract_validation": {
+    "total": 50,
+    "field_complete": 50,
+    "month_matched": 50,
+    "primary_cat_matched": 20,
+    "extract_ok": false
+  },
+  "compliance": {
+    "requests": 1,
+    "interval_compliant": true,
+    "avg_latency_s": 12.34,
+    "min_interval_s": 3.0,
+    "user_agent": "wuxing-flowengine-test/0.1 (harmless verification; contact: local research)",
+    "note": "间隔合规"
+  }
+}

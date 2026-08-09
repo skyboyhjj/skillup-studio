@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "source": "baai",
+  "timestamp": "2026-05",
+  "nodes": [
+    {
+      "id": "生成式 AI",
+      "name": "生成式 AI",
+      "parent": "AI 知识树",
+      "wuxing": "木",
+      "weight": 30
+    },
+    {
+      "id": "交叉领域智能应用",
+      "name": "交叉领域智能应用",
+      "parent": "AI 知识树",
+      "wuxing": "火",
+      "weight": 30
+    },
+    {
+      "id": "软件工程与编程",
+      "name": "软件工程与编程",
+      "parent": "AI 知识树",
+      "wuxing": "土",
+      "weight": 29
+    },
+    {
+      "id": "具身智能与机器人",
+      "name": "具身智能与机器人",
+      "parent": "AI 知识树",
+      "wuxing": "木",
+      "weight": 28
+    },
+    {
+      "id": "自然语言处理",
+      "name": "自然语言处理",
+      "parent": "AI 知识树",
+      "wuxing": "水",
+      "weight": 27
+    },
+    {
+      "id": "机器学习基础",
+      "name": "机器学习基础",
+      "parent": "AI 知识树",
+      "wuxing": "土",
+      "weight": 27
+    },
+    {
+      "id": "安全、可信与伦理",
+      "name": "安全、可信与伦理",
+      "parent": "AI 知识树",
+      "wuxing": "金",
+      "weight": 27
+    },
+    {
+      "id": "计算机视觉",
+      "name": "计算机视觉",
+      "parent": "AI 知识树",
+      "wuxing": "水",
+      "weight": 27
+    },
+    {
+      "id": "推荐系统与信息检索",
+      "name": "推荐系统与信息检索",
+      "parent": "AI 知识树",
+      "wuxing": "火",
+      "weight": 27
+    },
+    {
+      "id": "多模态智能",
+      "name": "多模态智能",
+      "parent": "AI 知识树",
+      "wuxing": "木",
+      "weight": 24
+    },
+    {
+      "id": "知识表示与逻辑推理",
+      "name": "知识表示与逻辑推理",
+      "parent": "AI 知识树",
+      "wuxing": "金",
+      "weight": 17
+    },
+    {
+      "id": "大语言模型",
+      "name": "大语言模型",
+      "parent": "AI 知识树",
+      "wuxing": "水",
+      "weight": 15
+    },
+    {
+      "id": "其他AI领域",
+      "name": "其他AI领域",
+      "parent": "AI 知识树",
+      "wuxing": "水",
+      "weight": 7
+    }
+  ],
+  "meta": {
+    "node_count": 13,
+    "total_weight": 315,
+    "domains_covered": 13,
+    "api_used": "hub-notion.baai.ac.cn/api_v2/api",
+    "papers_file": "papers_2026-05.json"
+  },
+  "generated_at": "2026-08-09T11:02:07.768732"
+}

@@ -1,0 +1,78 @@
+{
+  "case_id": "CASE-A-20260808-84aa",
+  "skill_id": "SKL-A-20260808-001",
+  "timestamp": "2026-08-08T18:29:48.893021",
+  "status": "草稿",
+  "basic_info": {
+    "date": "2026-08-08",
+    "source_domain": "大语言模型",
+    "target_domain": "自然语言处理",
+    "client_type": "企业客户"
+  },
+  "step_records": {},
+  "constitution_audit": [
+    {
+      "clause": "不宰",
+      "verdict": "通过",
+      "detail": "交付物含可选方案而非唯一指令",
+      "evidence": "候选映射数: 2"
+    },
+    {
+      "clause": "溯源",
+      "verdict": "通过",
+      "detail": "关系图每边带 source 字段",
+      "evidence": "信度标注数: 1"
+    },
+    {
+      "clause": "不假装精确",
+      "verdict": "通过",
+      "detail": "低信度映射标注'待验证'",
+      "evidence": "低信度边数: 0"
+    },
+    {
+      "clause": "无弃人",
+      "verdict": "通过",
+      "detail": "案例已记录，不因结构不佳丢弃",
+      "evidence": "节点数: 22"
+    }
+  ],
+  "constitution_passed": true,
+  "subtraction_records": [],
+  "deliverables": [],
+  "notes": "",
+  "version": "v1.0",
+  "source_domain": "大语言模型",
+  "target_domain": "自然语言处理",
+  "client_type": "企业客户",
+  "node_count": 22,
+  "edge_count": 178,
+  "source_structure": {},
+  "relationship_types": {},
+  "credibility_annotations": [
+    {
+      "edge_id": "e1",
+      "source_node": "A",
+      "target_node": "B",
+      "relation": "生",
+      "confidence": 0.85,
+      "source_field": "访谈记录第3段"
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "mapping_id": "m1",
+      "f": "映射1",
+      "preservation_score": 0.7
+    },
+    {
+      "mapping_id": "m2",
+      "f": "映射2（可选）",
+      "preservation_score": 0.5
+    }
+  ],
+  "preservation_score": 0.0,
+  "confidence_level": "",
+  "verification_scenarios": [],
+  "falsification_boundaries": [],
+  "migration_path": {}
+}

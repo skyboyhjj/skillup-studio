@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "source": "arxiv",
+  "timestamp": "2026-08-09",
+  "query": {
+    "category": "cs.LG",
+    "month": "2026-07",
+    "max_results": 50
+  },
+  "nodes": [
+    {
+      "id": "cs.LG",
+      "name": "cs.LG",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 50
+    }
+  ],
+  "sample_entries": [
+    {
+      "title": "CurveShift: Is Agent Progress Scalar? Separating Level from Shape",
+      "published": "2026-07-31T23:58:25Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "primary_category": "cs.CL",
+      "author_count": 11,
+      "summary_len": 1876
+    },
+    {
+      "title": "Ensemble of Unsupervised Deep Learning for Clustering Imbalanced Tabular Data",
+      "published": "2026-07-31T23:28:11Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.LG"
+      ],
+      "primary_category": "cs.LG",
+      "author_count": 4,
+      "summary_len": 1304
+    },
+    {
+      "title": "RMSWeb: Reflection, Failure-Mode Mining, and Salvage-DS for Web Agent Reinforcement Learning",
+      "published": "2026-07-31T22:57:16Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "primary_category": "cs.AI",
+      "author_count": 11,
+      "summary_len": 1480
+    },
+    {
+      "title": "Neural operator learning for collision-aware trajectory planning of spacecraft swarms",
+      "published": "2026-07-31T22:10:47Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.LG",
+        "cs.MA",
+        "eess.SY"
+      ],
+      "primary_category": "cs.LG",
+      "author_count": 5,
+      "summary_len": 1149
+    },
+    {
+      "title": "Agentic Bayesian Optimization through Surrogate-Augmented Autoresearch",
+      "published": "2026-07-31T22:01:18Z",
+      "month": "2026-07",
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "primary_category": "cs.LG",
+      "author_count": 6,
+      "summary_len": 1852
+    }
+  ],
+  "extract_validation": {
+    "total": 50,
+    "field_complete": 50,
+    "month_matched": 50,
+    "primary_cat_matched": 29,
+    "extract_ok": false
+  },
+  "compliance": {
+    "requests": 1,
+    "interval_compliant": true,
+    "avg_latency_s": 10.45,
+    "min_interval_s": 3.0,
+    "user_agent": "wuxing-flowengine-test/0.1 (harmless verification; contact: local research)",
+    "note": "间隔合规"
+  }
+}

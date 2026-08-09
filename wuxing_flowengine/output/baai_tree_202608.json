@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "source": "baai",
+  "timestamp": "2026-08",
+  "nodes": [],
+  "meta": {
+    "node_count": 0,
+    "total_weight": 0,
+    "domains_covered": 0,
+    "api_used": "hub-notion.baai.ac.cn/api_v2/api",
+    "papers_file": "papers_2026-08.json"
+  },
+  "generated_at": "2026-08-09T11:17:52.705391"
+}
