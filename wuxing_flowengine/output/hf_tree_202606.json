@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "source": "huggingface",
+  "timestamp": "2026-08-09",
+  "month": "2026-06",
+  "source_type": "real",
+  "source_type_note": "HuggingFace API collected (huggingface.co/api/models)",
+  "nodes": [
+    {
+      "id": "hf:text-generation",
+      "name": "text-generation",
+      "parent": "huggingface",
+      "wuxing": "水",
+      "weight": 2042,
+      "pages_used": 20
+    },
+    {
+      "id": "hf:text-classification",
+      "name": "text-classification",
+      "parent": "huggingface",
+      "wuxing": "金",
+      "weight": 1722,
+      "pages_used": 4
+    },
+    {
+      "id": "hf:token-classification",
+      "name": "token-classification",
+      "parent": "huggingface",
+      "wuxing": "金",
+      "weight": 941,
+      "pages_used": 3
+    },
+    {
+      "id": "hf:question-answering",
+      "name": "question-answering",
+      "parent": "huggingface",
+      "wuxing": "火",
+      "weight": 38,
+      "pages_used": 1
+    },
+    {
+      "id": "hf:summarization",
+      "name": "summarization",
+      "parent": "huggingface",
+      "wuxing": "水",
+      "weight": 24,
+      "pages_used": 1
+    },
+    {
+      "id": "hf:translation",
+      "name": "translation",
+      "parent": "huggingface",
+      "wuxing": "水",
+      "weight": 174,
+      "pages_used": 3
+    },
+    {
+      "id": "hf:image-classification",
+      "name": "image-classification",
+      "parent": "huggingface",
+      "wuxing": "木",
+      "weight": 415,
+      "pages_used": 2
+    },
+    {
+      "id": "hf:image-text-to-text",
+      "name": "image-text-to-text",
+      "parent": "huggingface",
+      "wuxing": "木",
+      "weight": 2513,
+      "pages_used": 7
+    },
+    {
+      "id": "hf:text-to-image",
+      "name": "text-to-image",
+      "parent": "huggingface",
+      "wuxing": "木",
+      "weight": 6219,
+      "pages_used": 8
+    },
+    {
+      "id": "hf:automatic-speech-recognition",
+      "name": "automatic-speech-recognition",
+      "parent": "huggingface",
+      "wuxing": "水",
+      "weight": 1233,
+      "pages_used": 3
+    },
+    {
+      "id": "hf:reinforcement-learning",
+      "name": "reinforcement-learning",
+      "parent": "huggingface",
+      "wuxing": "金",
+      "weight": 840,
+      "pages_used": 3
+    },
+    {
+      "id": "hf:text-to-text",
+      "name": "text-to-text",
+      "parent": "huggingface",
+      "wuxing": "水",
+      "weight": 0,
+      "pages_used": 0
+    }
+  ],
+  "meta": {
+    "node_count": 12,
+    "total_weight": 16161,
+    "tags_used": 12,
+    "tags_zero": 1,
+    "api_used": "huggingface.co/api/models (cursor pagination, createdAt filter)",
+    "max_pages_per_tag": 20
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "source": "github",
+  "timestamp": "2026-08-09",
+  "month": "2026-07",
+  "source_type": "real",
+  "source_type_note": "GitHub Search API collected (api.github.com/search/repositories)",
+  "nodes": [
+    {
+      "id": "github:llm",
+      "name": "llm",
+      "parent": "github",
+      "wuxing": "水",
+      "weight": 15205
+    },
+    {
+      "id": "github:large-language-models",
+      "name": "large-language-models",
+      "parent": "github",
+      "wuxing": "水",
+      "weight": 284
+    },
+    {
+      "id": "github:machine-learning",
+      "name": "machine-learning",
+      "parent": "github",
+      "wuxing": "土",
+      "weight": 10432
+    },
+    {
+      "id": "github:deep-learning",
+      "name": "deep-learning",
+      "parent": "github",
+      "wuxing": "水",
+      "weight": 2688
+    },
+    {
+      "id": "github:natural-language-processing",
+      "name": "natural-language-processing",
+      "parent": "github",
+      "wuxing": "水",
+      "weight": 354
+    },
+    {
+      "id": "github:computer-vision",
+      "name": "computer-vision",
+      "parent": "github",
+      "wuxing": "木",
+      "weight": 3474
+    },
+    {
+      "id": "github:reinforcement-learning",
+      "name": "reinforcement-learning",
+      "parent": "github",
+      "wuxing": "金",
+      "weight": 587
+    },
+    {
+      "id": "github:multimodal",
+      "name": "multimodal",
+      "parent": "github",
+      "wuxing": "木",
+      "weight": 275
+    },
+    {
+      "id": "github:agents",
+      "name": "agents",
+      "parent": "github",
+      "wuxing": "火",
+      "weight": 1863
+    },
+    {
+      "id": "github:autonomous-agents",
+      "name": "autonomous-agents",
+      "parent": "github",
+      "wuxing": "火",
+      "weight": 589
+    },
+    {
+      "id": "github:retrieval-augmented-generation",
+      "name": "retrieval-augmented-generation",
+      "parent": "github",
+      "wuxing": "金",
+      "weight": 882
+    },
+    {
+      "id": "github:graph-neural-network",
+      "name": "graph-neural-network",
+      "parent": "github",
+      "wuxing": "土",
+      "weight": 18
+    },
+    {
+      "id": "github:federated-learning",
+      "name": "federated-learning",
+      "parent": "github",
+      "wuxing": "金",
+      "weight": 63
+    },
+    {
+      "id": "github:robotics",
+      "name": "robotics",
+      "parent": "github",
+      "wuxing": "金",
+      "weight": 1477
+    }
+  ],
+  "meta": {
+    "node_count": 14,
+    "total_weight": 38191,
+    "topics_used": 14,
+    "topics_zero": 0,
+    "api_used": "api.github.com/search/repositories (total_count, per_page=1)",
+    "token_used": false
+  }
+}
