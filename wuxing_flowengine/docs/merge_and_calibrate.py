@@ -39,17 +39,17 @@ CANONICAL_WUXING = {
     # BAAI 领域（简化映射，待校准）
     "LLM": "水", "NLP": "水", "计算机视觉": "木", "CV": "木",
 }
-# GitHub/HF 主题 → 五行（v2: 2026-08-09 对齐生产版 TAG_WUXING 5 处修正）
-# 原则：水=语言/流动/模型、火=交互/活跃、木=感知/生发/视觉、
-#       土=基础/承载、金=结构/精确/分类
+# GitHub/HF 主题 → 五行（v2: 2026-08-09 对齐生产版 TAG_WUXING 5 处修正 + 对齐 github_collect 4 处）
+# 原则：水=语言/流动/模型、火=交互/活跃/智能体、木=感知/生发/视觉、
+#       土=基础/承载/工程、金=结构/精确/分类
 TOPIC_WUXING = {
     "llm": "水", "large-language-models": "水",
-    "machine-learning": "土", "deep-learning": "土",
+    "machine-learning": "土", "deep-learning": "水",
     "natural-language-processing": "水", "computer-vision": "木",
-    "reinforcement-learning": "金", "multimodal": "火",
-    "agents": "木", "autonomous-agents": "木",
+    "reinforcement-learning": "金", "multimodal": "木",
+    "agents": "火", "autonomous-agents": "火",
     "retrieval-augmented-generation": "金",
-    "graph-neural-network": "金", "federated-learning": "金",
+    "graph-neural-network": "土", "federated-learning": "金",
     "robotics": "金",
     "text-generation": "水", "text-classification": "金",
     "token-classification": "金", "question-answering": "火",
@@ -57,12 +57,18 @@ TOPIC_WUXING = {
     "image-classification": "木", "image-text-to-text": "木",
     "text-to-image": "木", "automatic-speech-recognition": "水",
     "text-to-text": "水",
-    # v2 变更记录（5 处）：
-    #   text-classification:     水→金（分类=结构/精确）
-    #   token-classification:    水→金（分类=结构/精确）
-    #   question-answering:      水→火（问答=交互活跃）
-    #   image-text-to-text:      火→木（视觉-语言=感知生发）
-    #   reinforcement-learning:  火→金（RL=策略结构）
+    # v2 变更记录：
+    #   HF 5 处（对齐 hf_collect.py TAG_WUXING）：
+    #     text-classification:     水→金（分类=结构/精确）
+    #     token-classification:    水→金（分类=结构/精确）
+    #     question-answering:      水→火（问答=交互活跃）
+    #     image-text-to-text:      火→木（视觉-语言=感知生发）
+    #     reinforcement-learning:  火→金（RL=策略结构）
+    #   GitHub 4 处（对齐 github_collect.py TOPIC_WUXING）：
+    #     deep-learning:           土→水（水=模型）
+    #     multimodal:              火→木（木=感知/视觉）
+    #     agents:                  木→火（火=智能体）
+    #     graph-neural-network:    金→土（土=基础/工程）
 }
 WUXING_ORDER = ["木", "火", "土", "金", "水"]
 SOURCES = ["baai", "arxiv", "github", "huggingface"]
@@ -117,8 +123,8 @@ def check_hf_cross_source_consistency(strict=True):
 
     return result
 SOURCE_GLOBS = {
-    "baai": "knowledge_tree_*.json",
-    "arxiv": "ai_tree_*.json",
+    "baai": "baai_tree_*.json",
+    "arxiv": "arxiv_ai_tree_*.json",
     "github": "github_tree_*.json",
     "huggingface": "hf_tree_*.json",
 }
@@ -242,31 +248,36 @@ def build_series_records(series):
 
 # ============ 系数校准 ============
 def calibrate(records):
-    """数据驱动校准：观测分布 → v1.1_calibrated 建议"""
+    """数据驱动校准：观测分布 → v1.1_calibrated 建议（排除空月后）"""
     dims = ["O_t", "E_u", "C_k", "K_y"]
-    calib = {"v0_1_initial": COEFF_V0, "observed": {}, "v1_1_calibrated": {}}
+    calib = {"v0_1_initial": COEFF_V0, "observed": {}, "v1_1_calibrated": {},
+             "calibration_filter": "excluded n_nodes=0 empty months"}
 
-    variances = {}
     for d in dims:
         values = [r[d] for r in records if d in r]
         if len(values) < 3:
             calib["observed"][d] = {"n": len(values), "note": "数据不足，维持 v0.1_initial"}
-            variances[d] = 1e-6
             continue
         mean = statistics.mean(values)
         stdev = statistics.stdev(values) if len(values) > 1 else 0.0
         cv = stdev / mean if mean > 0 else 0.0
         lo, hi = min(values), max(values)
-        variance = stdev ** 2
-        variances[d] = variance if variance > 1e-9 else 1e-9
+
+        # 判别区分度：CV=0 表示所有值相同（如 K_y 全 1.0），无区分度
+        if cv == 0.0:
+            discrimination = "无区分度（恒定，权重归零）"
+        elif cv > 0.1:
+            discrimination = "有区分度"
+        else:
+            discrimination = "低区分度（恒定，待真实引擎）"
+
         calib["observed"][d] = {
             "n": len(values), "mean": round(mean, 4), "stdev": round(stdev, 4),
             "cv": round(cv, 4), "range": [round(lo, 4), round(hi, 4)],
-            "discrimination": "有区分度" if cv > 0.1 else "低区分度（恒定，待真实引擎）",
+            "discrimination": discrimination,
         }
 
-    # S_p 权重：逆方差加权（区分度高的维度权重低？——不对：区分度=信息量，应让区分度高的权重大）
-    # 校准原则：S_p 权重 ∝ 区分度（CV）——让 S_p 主要由有区分度的维度驱动
+    # S_p 权重 ∝ 区分度（CV）——CV=0 的维度权重归零
     cvs = {d: calib["observed"].get(d, {}).get("cv", 0.0) for d in dims}
     total_cv = sum(cvs.values()) or 1e-9
     weights = {d: round(cv / total_cv, 4) for d, cv in cvs.items()}
@@ -277,7 +288,7 @@ def calibrate(records):
                               "basis": f"观测 CV={cvs[d]}，区分度加权"}
                          for d in dims},
         "S_p": {"formula": "power_mean(p=0.5, scale=100)", "weights": weights,
-                "note": "权重 ∝ 区分度（CV）——区分度高的维度主导 S_p"},
+                "note": "权重 ∝ 区分度（CV）——区分度高的维度主导 S_p，CV=0 维度权重归零"},
         "warning": "v1.1_calibrated 为数据驱动草案，真实引擎接入后复核",
     }
     return calib
@@ -312,8 +323,14 @@ def main():
     records = build_series_records(series)
     print(f"\n[诊断] {total_records} 条（源×月）记录")
 
+    # 2.5 校准前过滤：排除空月（n_nodes=0），避免伪区分度
+    calib_records = [r for r in records if r.get("n_nodes", 0) > 0]
+    excluded_empty = total_records - len(calib_records)
+    if excluded_empty > 0:
+        print(f"[过滤] 排除 {excluded_empty} 条空月记录（n_nodes=0），校准使用 {len(calib_records)} 条")
+
     # 3. 校准
-    calib = calibrate(records)
+    calib = calibrate(calib_records)
     print("\n[观测分布]")
     for d, obs in calib["observed"].items():
         if "n" in obs and obs["n"] >= 3:
@@ -322,17 +339,19 @@ def main():
 
     print("\n[v1.1_calibrated 草案] S_p 权重（∝ 区分度）:")
     for d, w in calib["v1_1_calibrated"]["S_p"]["weights"].items():
-        print(f"  {d}: {w}（CV={cvs_ if False else ''}）" if False else f"  {d}: {w}")
+        cv_val = calib["observed"].get(d, {}).get("cv", "?")
+        print(f"  {d}: {w}（CV={cv_val}）")
 
     # 4. 输出
+    output_dir = Path(args.dir)
     merged = {"generated": date.today().strftime("%Y-%m-%d"), "records": records}
     calib["records_count"] = total_records
-    Path("merged_series.json").write_text(
+    (output_dir / "merged_series.json").write_text(
         json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
-    Path("calibration_report.json").write_text(
+    (output_dir / "calibration_report.json").write_text(
         json.dumps(calib, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    print(f"\n[输出] merged_series.json（{total_records} 条）+ calibration_report.json")
+    print(f"\n[输出] {output_dir}/merged_series.json（{total_records} 条）+ calibration_report.json")
     print("=" * 64)
 
 

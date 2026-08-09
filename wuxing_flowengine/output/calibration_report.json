@@ -1,0 +1,112 @@
+{
+  "v0_1_initial": {
+    "O_t": {
+      "formula": "dominant_share",
+      "note": "主导五行占比",
+      "status": "v0.1_initial"
+    },
+    "E_u": {
+      "formula": "1 - H_norm",
+      "note": "熵确定度",
+      "status": "v0.1_initial"
+    },
+    "C_k": {
+      "formula": "same_wuxing_ratio",
+      "note": "同五行分类占比",
+      "status": "v0.1_initial"
+    },
+    "K_y": {
+      "formula": "category_density",
+      "note": "分类数密度（无结构边）",
+      "status": "v0.1_initial"
+    },
+    "S_p": {
+      "formula": "power_mean(p=0.5, scale=100)",
+      "note": "四维等权",
+      "status": "v0.1_initial"
+    }
+  },
+  "observed": {
+    "O_t": {
+      "n": 10,
+      "mean": 0.3962,
+      "stdev": 0.1402,
+      "cv": 0.354,
+      "range": [
+        0.2603,
+        0.6506
+      ],
+      "discrimination": "有区分度"
+    },
+    "E_u": {
+      "n": 10,
+      "mean": 0.1405,
+      "stdev": 0.1571,
+      "cv": 1.118,
+      "range": [
+        0.0153,
+        0.4406
+      ],
+      "discrimination": "有区分度"
+    },
+    "C_k": {
+      "n": 10,
+      "mean": 0.3962,
+      "stdev": 0.1402,
+      "cv": 0.354,
+      "range": [
+        0.2603,
+        0.6506
+      ],
+      "discrimination": "有区分度"
+    },
+    "K_y": {
+      "n": 10,
+      "mean": 1.0,
+      "stdev": 0.0,
+      "cv": 0.0,
+      "range": [
+        1.0,
+        1.0
+      ],
+      "discrimination": "无区分度（恒定，权重归零）"
+    }
+  },
+  "v1_1_calibrated": {
+    "coefficients": {
+      "O_t": {
+        "weight": 0.1939,
+        "status": "v1.1_calibrated(草案)",
+        "basis": "观测 CV=0.354，区分度加权"
+      },
+      "E_u": {
+        "weight": 0.6123,
+        "status": "v1.1_calibrated(草案)",
+        "basis": "观测 CV=1.118，区分度加权"
+      },
+      "C_k": {
+        "weight": 0.1939,
+        "status": "v1.1_calibrated(草案)",
+        "basis": "观测 CV=0.354，区分度加权"
+      },
+      "K_y": {
+        "weight": 0.0,
+        "status": "v1.1_calibrated(草案)",
+        "basis": "观测 CV=0.0，区分度加权"
+      }
+    },
+    "S_p": {
+      "formula": "power_mean(p=0.5, scale=100)",
+      "weights": {
+        "O_t": 0.1939,
+        "E_u": 0.6123,
+        "C_k": 0.1939,
+        "K_y": 0.0
+      },
+      "note": "权重 ∝ 区分度（CV）——区分度高的维度主导 S_p，CV=0 维度权重归零"
+    },
+    "warning": "v1.1_calibrated 为数据驱动草案，真实引擎接入后复核"
+  },
+  "calibration_filter": "excluded n_nodes=0 empty months",
+  "records_count": 11
+}
