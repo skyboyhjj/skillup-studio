@@ -41,8 +41,47 @@
       "via": "佛学（因明/唯识）",
       "to": "心理学",
       "segments": [
-        {"from": "数学", "to": "佛学", "expected_retention": 0.88, "bridge": "因明学/唯识学（与数学逻辑结构同构）"},
-        {"from": "佛学", "to": "心理", "expected_retention": 0.83, "bridge": "唯识底座（八识/种子现行）"}
+        {
+          "from": "数学",
+          "to": "佛学",
+          "bridge": "因明学/唯识学（与数学逻辑结构同构）",
+          "expected_retention": 0.88,
+          "source_domain": { "$ref": "#/source_domain" },
+          "target_domain": {
+            "name": "佛学（因明/唯识）",
+            "nodes": [
+              {"id": "b1", "name": "因明三支作法", "wuxing": "金"},
+              {"id": "b2", "name": "唯识八识体系", "wuxing": "水"},
+              {"id": "b3", "name": "空性逻辑", "wuxing": "金"},
+              {"id": "b4", "name": "缘起性空", "wuxing": "土"},
+              {"id": "b5", "name": "止观双运", "wuxing": "水"}
+            ],
+            "edges": [
+              {"from": "b1", "to": "b3", "relation": "推演", "confidence": 0.90},
+              {"from": "b3", "to": "b4", "relation": "前提_结论", "confidence": 0.85},
+              {"from": "b2", "to": "b5", "relation": "派生", "confidence": 0.80},
+              {"from": "b4", "to": "b5", "relation": "相生", "confidence": 0.70}
+            ]
+          },
+          "candidate_mappings": [
+            {"id": "c1_1", "source": "s1", "target": "b1", "relation_kept": "公理化→三支作法", "expected_retention": 0.88},
+            {"id": "c1_2", "source": "s2", "target": "b3", "relation_kept": "推演→空性逻辑", "expected_retention": 0.90},
+            {"id": "c1_3", "source": "s3", "target": "b4", "relation_kept": "抽象→缘起", "expected_retention": 0.85}
+          ]
+        },
+        {
+          "from": "佛学",
+          "to": "心理",
+          "bridge": "唯识底座（八识/种子现行）",
+          "expected_retention": 0.83,
+          "source_domain": { "$ref": "#/chain_mappings/0/segments/0/target_domain" },
+          "target_domain": { "$ref": "#/target_domain" },
+          "candidate_mappings": [
+            {"id": "c2_1", "source": "b2", "target": "t1", "relation_kept": "八识→认知框架", "expected_retention": 0.85},
+            {"id": "c2_2", "source": "b5", "target": "t2", "relation_kept": "止观→情绪觉察", "expected_retention": 0.82},
+            {"id": "c2_3", "source": "b4", "target": "t3", "relation_kept": "缘起→模式识别", "expected_retention": 0.80}
+          ]
+        }
       ]
     }
   ],

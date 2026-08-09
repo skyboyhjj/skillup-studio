@@ -1,0 +1,65 @@
+{
+  "task_id": "TASK-HOMO-LIU-20260808",
+  "protocol_version": "V1.5",
+  "shell_nucleus_audit": {
+    "passed": true,
+    "declaration": {
+      "measured_nucleus": [
+        "方法核（逻辑思辨）",
+        "方向核（向内追问）"
+      ],
+      "excluded_shell": [
+        "数学专业",
+        "IMO 满分",
+        "MIT offer",
+        "出家身份"
+      ],
+      "system_type": "测核体系"
+    },
+    "three_layers": {
+      "topic_shell": {
+        "name": "数学研究",
+        "action": "可更换",
+        "evidence": "2010 放弃 MIT offer"
+      },
+      "method_nucleus": {
+        "name": "逻辑思辨",
+        "action": "可迁移",
+        "evidence": "数学→佛学→心理全程保持"
+      },
+      "direction_nucleus": {
+        "name": "向内追问",
+        "action": "必须保持",
+        "evidence": "耕读社→出家→心理 20 年",
+        "hypothesis": "H1（待验证）"
+      }
+    },
+    "checks": [
+      {
+        "check": "declaration_completeness",
+        "verdict": "PASS",
+        "detail": "核=['方法核（逻辑思辨）', '方向核（向内追问）'], 壳=['数学专业', 'IMO 满分', 'MIT offer', '出家身份'], 体系=测核体系"
+      },
+      {
+        "check": "system_type_validity",
+        "verdict": "PASS",
+        "detail": "体系类型=测核体系"
+      },
+      {
+        "check": "three_layer_structure",
+        "verdict": "PASS",
+        "detail": {
+          "topic_shell": "数学研究 → 可更换",
+          "method_nucleus": "逻辑思辨 → 可迁移",
+          "direction_nucleus": "向内追问 → 必须保持"
+        }
+      },
+      {
+        "check": "direction_nucleus_hypothesis",
+        "verdict": "PASS",
+        "detail": "假设=H1（待验证）"
+      }
+    ],
+    "conclusion": "壳核三层结构确认：数学=壳（可换）、逻辑=核（可迁）、追问=方向核（保持，挂H1假设）"
+  }
+}

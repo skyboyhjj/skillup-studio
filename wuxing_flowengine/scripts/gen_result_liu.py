@@ -1,11 +1,11 @@
-"""生成 CASE-LIU 验证结果 result.json"""
+"""生成 CASE-LIU 验证结果 result.json（REV2：图驱动全链路）"""
 import json
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from homomorphism_engine import HomomorphismEngine
+from homomorphism_engine import HomomorphismEngine, resolve_json_refs
 from seed_cultivation import SeedCultivation
 
 # Load task
@@ -21,8 +21,12 @@ homo = engine.transfer_from_graph(
     task["candidate_mappings"], task.get("verification_scenarios", [])
 )
 
-# 2. chain_verify
-chain = engine.transfer_chain(task["chain_mappings"][0]["segments"])
+# 2. chain_verify（REV2：解析 $ref + 传入直接映射保持度）
+resolved = resolve_json_refs(task)
+chain = engine.transfer_chain(
+    resolved["chain_mappings"][0]["segments"],
+    direct_retention=homo["average_retention"],
+)
 
 # 3. shell_nucleus_audit
 cultivator = SeedCultivation(time_scale="skill")
@@ -50,7 +54,9 @@ result = {
         "chain_verify": {
             "composite": chain["composite"],
             "bridge_gain": chain["bridge_gain"],
-            "direct_vs_chain": chain["direct_comparison"]["chain_vs_direct"],
+            "segment_count": chain.get("segment_count", 2),
+            "direct_vs_chain": chain.get("direct_comparison", {}).get("verdict", "N/A"),
+            "delta": chain.get("direct_comparison", {}).get("delta", 0),
         },
         "shell_nucleus_audit": {
             "passed": sn["shell_nucleus_audit"]["passed"],
@@ -68,15 +74,23 @@ with open(output_path, "w", encoding="utf-8") as f:
 
 # Console summary
 print("=" * 60)
-print("  CASE-LIU 柳智宇同态映射验证 — 结果摘要")
+print("  CASE-LIU 柳智宇同态映射验证 — 结果摘要 (REV2)")
 print("=" * 60)
 print(f"\n  [homo_verify] 平均保持度: {homo['average_retention']}")
 print(f"    映射数: {len(homo['mappings'])}")
 print(f"    场景通过率: {scenario_pass}/{scenario_total}")
 print(f"    增量审计: {len(homo['increment_audit'])} 项，全部不破坏保持")
-print(f"\n  [chain_verify] 链式复合: {chain['composite']}")
+print(f"\n  [chain_verify] 分段数: {chain.get('segment_count', 2)}")
+for sr in chain.get("segment_results", []):
+    print(f"    段 {sr['from']}→{sr['to']}: retention={sr['retention']} (预期 {sr['expected_retention']})")
+print(f"    分段积: {chain['segments_product']}")
 print(f"    桥梁增益: {chain['bridge_gain']}")
-print(f"    对比: {chain['direct_comparison']['chain_vs_direct']}")
+print(f"    链式复合: {chain['composite']}")
+dc = chain.get("direct_comparison", {})
+if dc:
+    print(f"    直接映射: {dc.get('direct_mapping_retention')}")
+    print(f"    偏差: {dc.get('delta')}")
+    print(f"    判定: {dc.get('verdict')}")
 print(f"\n  [shell_nucleus_audit] 通过: {sn['shell_nucleus_audit']['passed']}")
 print(f"    体系类型: {sn['shell_nucleus_audit']['declaration']['system_type']}")
 print(f"\n  result.json -> {output_path}")

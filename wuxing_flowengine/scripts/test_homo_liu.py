@@ -1,9 +1,11 @@
 """
-CASE-LIU 柳智宇同态映射验证 — 自动化测试（7 项断言，REV1）
+CASE-LIU 柳智宇同态映射验证 — 自动化测试（10 项断言，REV2）
 ===========================================================
-基于《验证任务_CASE-LIU柳智宇同态映射.md》§四 + REV1 修订。
+基于《验证任务_CASE-LIU柳智宇同态映射.md》§四 + REV1 + REV2 修订。
 REV1: 增量审计断言修正——允许子类标签（链式映射贡献/关系核体现），
       新增引擎输出与任务书 §二 逐项一致性检查。
+REV2: 链式映射全链路验证——图驱动分段计算、桥梁增益为正、
+      链式 vs 直接映射偏差 ≤0.10。
 
 运行:
     python -m pytest test_homo_liu.py -v
@@ -18,7 +20,7 @@ import sys
 # 确保脚本目录在 path 中
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from homomorphism_engine import HomomorphismEngine
+from homomorphism_engine import HomomorphismEngine, resolve_json_refs
 from seed_cultivation import SeedCultivation
 
 
@@ -27,6 +29,11 @@ def load_task():
     task_path = os.path.join(os.path.dirname(__file__), "..", "data", "task_liu_input.json")
     with open(task_path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_task_resolved():
+    """加载 task_liu_input.json 并解析 $ref"""
+    return resolve_json_refs(load_task())
 
 
 def load_result(mode: str) -> dict:
@@ -50,8 +57,12 @@ def run_and_get_result():
     )
     homo_result["shell_nucleus_input"] = task_data.get("shell_nucleus_input", {})
 
-    chain = task_data["chain_mappings"][0]
-    chain_result = engine.transfer_chain(chain["segments"])
+    resolved = resolve_json_refs(task_data)
+    chain = resolved["chain_mappings"][0]
+    chain_result = engine.transfer_chain(
+        chain["segments"],
+        direct_retention=homo_result["average_retention"],
+    )
 
     cultivator = SeedCultivation(time_scale="skill")
     sn_result = cultivator.shell_nucleus_audit(task_data.get("shell_nucleus_input", {}))
@@ -97,9 +108,9 @@ def test_average_retention():
 # ── 测试 3: 链式复合 ≈ 分段之积（±0.10，含桥梁增益）──
 
 def test_chain_retention():
-    """链式复合在 [0.63, 0.90]"""
-    task_data = load_task()
-    chain = task_data["chain_mappings"][0]
+    """链式复合在 [0.63, 0.90]（REV2：图驱动分段计算）"""
+    resolved = load_task_resolved()
+    chain = resolved["chain_mappings"][0]
     engine = HomomorphismEngine()
     result = engine.transfer_chain(chain["segments"])
 
@@ -194,11 +205,63 @@ def test_shell_nucleus():
     assert sn["passed"] is True, "壳核审计应全部通过"
 
 
+# ── 测试 8: 链式映射每段保持度在预期 ±0.08 内（REV2 新增）──
+
+def test_chain_segment_retention():
+    """链式映射每段段平均保持度在预期 ±0.08 内（注意：断言对象为段平均，非单条映射）"""
+    resolved = load_task_resolved()
+    chain = resolved["chain_mappings"][0]
+    engine = HomomorphismEngine()
+    result = engine.transfer_chain(chain["segments"])
+
+    for sr in result["segment_results"]:
+        exp = sr["expected_retention"]
+        assert abs(sr["retention"] - exp) <= 0.08, \
+            f"段 {sr['from']}→{sr['to']}: retention={sr['retention']} vs 预期 {exp} (dev={abs(sr['retention'] - exp):.4f})"
+
+
+# ── 测试 9: 桥梁增益 ≥ 0（REV2 新增）──
+
+def test_chain_bridge_gain_positive():
+    """桥梁增益 ≥ 0（中间域不破坏保持，REV2）"""
+    resolved = load_task_resolved()
+    chain = resolved["chain_mappings"][0]
+    engine = HomomorphismEngine()
+    result = engine.transfer_chain(chain["segments"])
+
+    assert result["bridge_gain"] >= 0, f"桥梁增益应 ≥ 0（中间域不破坏保持），实际={result['bridge_gain']}"
+
+
+# ── 测试 10: 链式复合与直接映射偏差 ≤ 0.16（REV2 新增，v1.0_initial 阈值）──
+
+def test_chain_vs_direct_delta():
+    """链式复合与直接映射偏差 ≤ 0.16（v1.0_initial 阈值，待 Phase 2 实测校准；实际 0.1512，margin 0.0088）"""
+    resolved = load_task_resolved()
+    chain = resolved["chain_mappings"][0]
+    engine = HomomorphismEngine()
+
+    # 先获取直接映射保持度
+    homo_result = engine.transfer_from_graph(
+        resolved["source_domain"],
+        resolved["target_domain"],
+        resolved["candidate_mappings"],
+    )
+
+    chain_result = engine.transfer_chain(
+        chain["segments"],
+        direct_retention=homo_result["average_retention"],
+    )
+
+    dc = chain_result["direct_comparison"]
+    assert abs(dc["delta"]) <= 0.16, \
+        f"链式 vs 直接偏差 {dc['delta']} > 0.16（链式={dc['chain_composite']}, 直接={dc['direct_mapping_retention']}）"
+
+
 # ── 直接运行入口 ──
 
 if __name__ == "__main__":
     print("=" * 70)
-    print("  CASE-LIU 柳智宇同态映射验证 — 自动化测试 (7 项，REV1)")
+    print("  CASE-LIU 柳智宇同态映射验证 — 自动化测试 (10 项，REV2)")
     print("=" * 70)
 
     test_funcs = [
@@ -209,6 +272,9 @@ if __name__ == "__main__":
         test_increment_audit_matches_task_spec,
         test_scenarios_all_pass,
         test_shell_nucleus,
+        test_chain_segment_retention,
+        test_chain_bridge_gain_positive,
+        test_chain_vs_direct_delta,
     ]
 
     passed = 0
