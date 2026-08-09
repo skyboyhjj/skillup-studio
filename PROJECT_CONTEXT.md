@@ -15,7 +15,7 @@
 | 莫比乌斯环概念地图 | ✅ 已上线 | 选择数据集或输入文本，一键生成可交互的 3D 概念地图 HTML |
 | 知识树追踪引擎 | 🔜 预览版 | 概念演化路径追踪与可视化 + 月度论文采集 + 五行诊断 + 领域漂移分析 |
 | 论文采集器 | 🟡 预览版 | arXiv 月度采集（100 篇样本），分类筛选/搜索/导出 |
-| 五行道境引擎 | 🟡 开发中 | 知识树五行诊断 + 道境四维映射 + 月度流水线 + 论文采集合成 |
+| 五行道境引擎 | 🟢 V1.5 | 同态映射验证 + 壳核审计 + 种子培育 + 链式映射全链路（CASE-LIU） |
 
 ## 关键文件
 
@@ -69,6 +69,16 @@
 | `wuxing_flowengine/scripts/homomorphism_engine.py` | 同态映射引擎 — 土·通集成（三步协议 + 五行流转 + P忠恕伦理 + 旋量形式化） |
 | `wuxing_flowengine/scripts/zhongshu_ethics.py` | P忠恕伦理模块 — 忠恕双向校验（忠度/恕度/忠恕综合 + 伦理约束注入） |
 | `wuxing_flowengine/scripts/spinor_formalism.py` | 旋量-太极形式化 — 反者道之动数学精确化（旋量相位/道旋量状态/桥接器） |
+| `wuxing_flowengine/scripts/seed_cultivation.py` | 种子培育模块 V1.5.1 — 壳核审计 + 纯粹度 + 熵振引擎 + 失败三分法（42 项测试） |
+| `wuxing_flowengine/scripts/gen_result_liu.py` | CASE-LIU 验证结果生成器 — homo_verify / chain_verify / shell_nucleus_audit 三模式 |
+| `wuxing_flowengine/scripts/test_homo_liu.py` | CASE-LIU 自动化测试（10 项，含链式映射 3 项新测试） |
+| `wuxing_flowengine/data/task_liu_input.json` | CASE-LIU 验证任务输入数据（含佛学中间域图 + 分段候选映射） |
+| `wuxing_flowengine/docs/验证任务_CASE-LIU柳智宇同态映射.md` | CASE-LIU 验证任务书 |
+| `wuxing_flowengine/docs/验证任务修订_CASE-LIU增量审计断言修正.md` | CASE-LIU 增量审计断言修正任务书 |
+| `wuxing_flowengine/docs/CASE-LIU_REV2实施报告_读解与确认.md` | CASE-LIU REV2 实施报告读解与确认（含 4 处修复） |
+| `wuxing_flowengine/output/reports/m3_deliverables_report.md` | M3 交付物验证报告（含 §12 CASE-LIU 链式映射全链路） |
+| `wuxing_flowengine/output/reports/case_liu_chain_buddhism_report.md` | CASE-LIU 佛学中间域图及映射结果报告 |
+| `wuxing_flowengine/output/reports/CASE-LIU_REV2_交付清单.md` | CASE-LIU REV2 最终交付清单 |
 
 ## 部署命令
 
@@ -344,6 +354,32 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
   - 验证跨域可比性：突厥语系 S_p=44.4（最高），南岛语系 S_p=36.6（最低），与 AI 知识树 S_p=39.4 同处 35-44 区间
   - 分析文档：`docs/读解_语言谱系树_同态映射的天然教科书.md`
 - **文件**: `wuxing_flowengine/scripts/drift_report.py`（新增）, `wuxing_flowengine/scripts/drift_visualization.py`（新增）, `wuxing_flowengine/scripts/build_language_tree.py`（新增）, `wuxing_flowengine/scripts/analyze_language_tree.py`（新增）, `wuxing_flowengine/scripts/phase1_pipeline.py`, `wuxing_flowengine/scripts/phase3_plus_pipeline.py`, `wuxing_flowengine/scripts/confidence_interval.py`, `wuxing_flowengine/data/snapshots/2026-08-07_snapshot.json`（新增）, `wuxing_flowengine/data/language_tree/`（新增）, `docs/读解_语言谱系树_同态映射的天然教科书.md`（新增）
+
+### 22. 种子培育模块 V1.3 → V1.5：壳核审计 + 纯粹度 + 熵振引擎
+- 基于《SkillUP种子培育策略_种育提案 V1.1→V1.2》提案驱动开发，六轮迭代
+- **V1.3 儒道合流思想底座补全**：五机制（五行贯穿/表达/演进/层级/七窍校验）+ 宪法审计钩子 + 性决定审计 + 五行相克方向性区分
+- **V1.5 壳核审计 + 纯粹度**：五行种子独立性审计 + 五行纯粹度计算公式（基于基地五行与串扰五行距离）+ 壳核分离（硬核 ∈ 基地五行，软壳 ∈ 串扰五行）
+- **V1.5.1 失败三分法 + 熵振引擎**：FailureQuality 枚举（TRUE_FAILURE/ACCIDENTAL_FAILURE/PERFORMATIVE_FAILURE）、熵振引擎（k=0.8 朴素贝叶斯对赌）、球心替换决策、留白空间管理、饱和检测（skip_blank_rounds）
+- 42 项独立测试 + 5 项联动测试全部通过
+- 5 个新方法、5 个新 result 字段、6 个新测试、配置项及 format_summary 扩展
+- **文件**: `wuxing_flowengine/scripts/seed_cultivation.py`（新增）, `wuxing_flowengine/docs/SkillUP种子培育策略_种育提案V1.1.md`, `wuxing_flowengine/docs/SkillUP种子培育策略_种育提案V1.2.md`, `wuxing_flowengine/scripts/cultivation_experiment.py`, `wuxing_flowengine/scripts/case_recorder.py`
+
+### 23. CASE-LIU 柳智宇同态映射验证（homo_verify + chain_verify + shell_nucleus_audit）
+- 基于《验证任务_CASE-LIU柳智宇同态映射.md》实现三模式独立验证
+- **homo_verify**：数学→心理直接同态映射（5 节点 5 边，3 条候选映射），保持度 0.858，增量审计通过，3 场景验证
+- **chain_verify (REV2)**：图驱动链式映射全链路验证
+  - transfer_chain 从"专家估值组合器"升级为"图驱动全链路验证器"
+  - 新增 resolve_json_refs 支持 JSON $ref 引用解析
+  - 输入数据扩展：佛学中间域图（5 节点 4 边）+ 分段候选映射（数学→佛学→心理）
+  - 分段保持度：数学→佛学 0.8667，佛学→心理 0.7767
+  - 链式复合 0.7068 vs 直接映射 0.858（偏差 -0.1512，因土克水损耗）
+  - 桥梁增益 0.05（中间域贡献结构组织增量）
+  - 10 项测试全部通过（含 REV2 新增 3 项）
+- **shell_nucleus_audit**：壳核审计（通过 seed_cultivation.py 实现）
+- **增量审计断言修正**：断言从"破坏"改为"不破坏"逻辑，7/7 通过
+- **4 处修复**：增量审计断言误判、两份报告数值不一致、五行术语"金生土"不准确、测试断言粒度模糊+阈值紧贴
+- 交付清单 + 佛学中间域报告 + 实施报告读解与确认
+- **文件**: `wuxing_flowengine/scripts/homomorphism_engine.py`（更新）, `wuxing_flowengine/scripts/gen_result_liu.py`（新增）, `wuxing_flowengine/scripts/test_homo_liu.py`（新增）, `wuxing_flowengine/data/task_liu_input.json`（新增）, `wuxing_flowengine/docs/验证任务_CASE-LIU柳智宇同态映射.md`, `wuxing_flowengine/docs/验证任务修订_CASE-LIU增量审计断言修正.md`, `wuxing_flowengine/docs/CASE-LIU_REV2实施报告_读解与确认.md`, `wuxing_flowengine/output/reports/result_liu.json`, `wuxing_flowengine/output/reports/result_liu_homo_verify.json`, `wuxing_flowengine/output/reports/result_liu_chain_verify.json`, `wuxing_flowengine/output/reports/result_liu_shell_nucleus_audit.json`, `wuxing_flowengine/output/reports/m3_deliverables_report.md`（§12 新增）, `wuxing_flowengine/output/reports/case_liu_chain_buddhism_report.md`, `wuxing_flowengine/output/reports/CASE-LIU_REV2_交付清单.md`
 
 ---
 

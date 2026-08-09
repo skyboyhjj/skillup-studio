@@ -1,6 +1,8 @@
-# 五行道境流引擎 (Wuxing Dao-Realm Flow Engine)
+# 五行道境流引擎 (Wuxing Dao-Realm Flow Engine) V1.5
 
 基于五行（金木水火土）哲学框架的 AI 研究领域趋势诊断与追踪系统。将 AI 前沿概念映射到五行体系，通过多阶段管道分析认知深度、领域分布和道境演化阶段。
+
+**V1.5 新增**：种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）+ 同态映射全链路验证（CASE-LIU 柳智宇跨域验证）+ 失败三分法 + 链式映射图驱动升级
 
 ## 核心概念
 
@@ -29,17 +31,26 @@ wuxing_flowengine/
 │   ├── formal_rules.wrl             # 形式规则 (F, 8条, calibratable)
 │   ├── heuristic_rules.wrl          # 启发式规则 (H, 19条, calibratable)
 │   └── domain_rules.wrl             # 领域规则 (D, 4条, configurable)
-├── scripts/                         # 核心脚本
+├── scripts/                         # 核心脚本（50+ 模块）
 │   ├── monthly_pipeline.py          # 月度编排器入口（主入口）
 │   ├── phase1_pipeline.py           # Phase 1: 认知深度估算 + 五行映射 + 道境诊断
 │   ├── phase2_pipeline.py           # Phase 2: 双层标注 + Spinor 层构建 + 领域追踪
 │   ├── phase3_plus_pipeline.py      # Phase 3+: 论文五行分类 + 领域漂移分析
 │   ├── dao_realm_engine.py          # 道境融合诊断引擎（统一入口）
 │   ├── stage_engine.py              # 阶段判定引擎（生/克/化/通/变）
+│   ├── homomorphism_engine.py       # 同态映射引擎（三步协议 + 链式映射 + 图驱动全链路）
+│   ├── homomorphism_matcher.py      # 同态匹配器（五行/结构/LLM 三策略）
+│   ├── homomorphism_types.py        # 同态映射核心数据类型
+│   ├── structure_extractor.py       # 结构提取器（Step 1）
+│   ├── transfer_validator.py        # 迁移验证器（Step 3）
+│   ├── seed_cultivation.py          # 种子培育模块 V1.5.1（壳核审计 + 纯粹度 + 熵振）
+│   ├── zhongshu_ethics.py           # P忠恕伦理模块（忠恕双向校验）
+│   ├── spinor_formalism.py          # 旋量-太极形式化
+│   ├── gen_result_liu.py            # CASE-LIU 验证结果生成器
+│   ├── test_homo_liu.py             # CASE-LIU 自动化测试（10 项）
 │   ├── timeseries_analysis.py       # 时间序列分析（多月份趋势对比）
 │   ├── domain_calibration.py        # 领域基准校准（跨领域 S 值归一化）
 │   ├── k_y_enhancer.py              # K_y 缘位增强（图密度混合 E_relation）
-│   ├── edge_generator.py            # 边生成器（概念间关系构建）
 │   ├── wuxing_dsl.py                # 五行 DSL 引擎（生克规则 + 画像库）
 │   ├── guidance.py                  # 导航建议生成
 │   ├── data_validator.py            # 数据质量验证（五检查点）
@@ -50,9 +61,8 @@ wuxing_flowengine/
 │   ├── drift_report.py              # 领域漂移报告生成器 (P1#3)
 │   ├── drift_visualization.py       # 领域漂移可视化 (P1#3)
 │   ├── confidence_interval.py       # 信度区间计算（Wilson 区间等）
-│   ├── build_snapshot.py            # 快照构建器
-│   ├── gen_monthly_snapshots.py     # 月度快照模拟生成
-│   └── validator.py                 # 输出合法性验证
+│   ├── calibrate_coefficients.py    # 系数校准实验（灵敏度/可辨识性/边界）
+│   └── ...                          # 更多脚本模块
 ├── tests/                           # 测试
 │   ├── test_cases.py                # 自动化验证脚本
 │   ├── xiaohe_case.json             # 小禾案例测试数据
@@ -65,6 +75,15 @@ wuxing_flowengine/
     ├── domain_calibration_baseline.json  # 领域校准基线
     ├── validation_report_2026-08.md      # 验证报告
     ├── pipeline_comparison_report.md     # 流水线对比报告
+    ├── reports/                          # 报告目录
+    │   ├── m3_deliverables_report.md     # M3 交付物验证报告（含 CASE-LIU §12）
+    │   ├── case_liu_chain_buddhism_report.md  # CASE-LIU 佛学中间域报告
+    │   ├── CASE-LIU_REV2_交付清单.md     # CASE-LIU REV2 交付清单
+    │   ├── result_liu.json               # CASE-LIU 统一验证结果
+    │   ├── result_liu_homo_verify.json   # 同态验证结果
+    │   ├── result_liu_chain_verify.json  # 链式验证结果
+    │   ├── result_liu_shell_nucleus_audit.json  # 壳核审计结果
+    │   └── V1.5_*.md                    # V1.5 版本文档
     └── archive/
         ├── 2026-05/                 # 2026-05 月度归档
         ├── 2026-06/                 # 2026-06 月度归档
@@ -235,6 +254,32 @@ S_p 仅作为**"化"判定的单一输入条件**，不替代全局阶段判定�
 | K_y | +0.0016 ↑ | 缘位关系密度持续增长 |
 
 > ⚠️ **数据边界**：05-07月为真实 API 数据（hub.baai.ac.cn），08月为知识树快照。四维指标趋势反映真实月度变化。完整验证结果见 `output/validation_report_2026-08.md`。
+
+## V1.5 新增模块
+
+### 种子培育（Seed Cultivation）
+
+`scripts/seed_cultivation.py` — 壳核审计 + 纯粹度 + 熵振引擎 V1.5.1
+
+- **壳核审计**：种子五行独立性审计 + 五行纯粹度计算（基于基地五行与串扰五行距离）
+- **宪法审计（德·仁）**：优先于性决定审计，REJECT 时立即短路返回
+- **失败三分法**：TRUE_FAILURE（奖励）/ ACCIDENTAL_FAILURE（中性）/ PERFORMATIVE_FAILURE（警告）
+- **熵振引擎**：k=0.8 朴素贝叶斯对赌，球心替换决策，留白空间管理，饱和检测
+- **42 项独立测试 + 5 项联动测试全部通过**
+
+### 同态映射验证（CASE-LIU）
+
+`scripts/homomorphism_engine.py` + `scripts/gen_result_liu.py` + `scripts/test_homo_liu.py`
+
+- **三模式独立**：homo_verify / chain_verify / shell_nucleus_audit
+- **homo_verify**：数学→心理直接同态映射，保持度 0.858
+- **chain_verify (REV2)**：图驱动链式映射全链路（数学→佛学→心理）
+  - 分段保持度：0.8667（数学→佛学）/ 0.7767（佛学→心理）
+  - 链式复合 0.7068 vs 直接映射 0.858（偏差 -0.1512）
+  - 桥梁增益 0.05（中间域贡献结构组织增量）
+- **10 项测试全部通过**
+
+> 详见 `output/reports/m3_deliverables_report.md` §12、`output/reports/case_liu_chain_buddhism_report.md`、`output/reports/CASE-LIU_REV2_交付清单.md`
 
 ## License
 
