@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "source": "arxiv",
+  "timestamp": "2026-07",
+  "nodes": [
+    {
+      "id": "cs.AI",
+      "name": "cs.AI",
+      "parent": "cs",
+      "wuxing": "火",
+      "weight": 2220
+    },
+    {
+      "id": "cs.LG",
+      "name": "cs.LG",
+      "parent": "cs",
+      "wuxing": "土",
+      "weight": 2726
+    },
+    {
+      "id": "cs.CL",
+      "name": "cs.CL",
+      "parent": "cs",
+      "wuxing": "水",
+      "weight": 1166
+    },
+    {
+      "id": "cs.CV",
+      "name": "cs.CV",
+      "parent": "cs",
+      "wuxing": "木",
+      "weight": 2607
+    },
+    {
+      "id": "cs.NE",
+      "name": "cs.NE",
+      "parent": "cs",
+      "wuxing": "水",
+      "weight": 84
+    },
+    {
+      "id": "cs.MA",
+      "name": "cs.MA",
+      "parent": "cs",
+      "wuxing": "木",
+      "weight": 121
+    },
+    {
+      "id": "cs.RO",
+      "name": "cs.RO",
+      "parent": "cs",
+      "wuxing": "金",
+      "weight": 982
+    },
+    {
+      "id": "cs.HC",
+      "name": "cs.HC",
+      "parent": "cs",
+      "wuxing": "火",
+      "weight": 344
+    },
+    {
+      "id": "cs.IR",
+      "name": "cs.IR",
+      "parent": "cs",
+      "wuxing": "金",
+      "weight": 295
+    },
+    {
+      "id": "cs.MM",
+      "name": "cs.MM",
+      "parent": "cs",
+      "wuxing": "火",
+      "weight": 35
+    },
+    {
+      "id": "stat.ML",
+      "name": "stat.ML",
+      "parent": "stat",
+      "wuxing": "土",
+      "weight": 302
+    }
+  ],
+  "meta": {
+    "node_count": 11,
+    "total_weight": 10882,
+    "unique_papers": 10882,
+    "categories_used": 11,
+    "categories_zero": 0,
+    "api_used": "export.arxiv.org/api/query",
+    "wuxing_fixes_applied": 7,
+    "wuxing_annotation_version": "v1"
+  }
+}

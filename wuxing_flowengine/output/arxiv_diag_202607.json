@@ -1,0 +1,79 @@
+{
+  "month": "2026-07",
+  "source": "arxiv_ai",
+  "diagnosis": {
+    "engine": "fallback_v0.1_initial",
+    "wuxing_dist": {
+      "木": 0.2507,
+      "火": 0.2388,
+      "土": 0.2783,
+      "金": 0.1173,
+      "水": 0.1149
+    },
+    "wuxing_confidence": {
+      "木": {
+        "point": 0.2507,
+        "ci_low": 0.2426,
+        "ci_high": 0.2589,
+        "ci_width": 0.0163
+      },
+      "火": {
+        "point": 0.2388,
+        "ci_low": 0.2309,
+        "ci_high": 0.2469,
+        "ci_width": 0.016
+      },
+      "土": {
+        "point": 0.2783,
+        "ci_low": 0.2699,
+        "ci_high": 0.2868,
+        "ci_width": 0.0168
+      },
+      "金": {
+        "point": 0.1173,
+        "ci_low": 0.1114,
+        "ci_high": 0.1235,
+        "ci_width": 0.0121
+      },
+      "水": {
+        "point": 0.1149,
+        "ci_low": 0.109,
+        "ci_high": 0.121,
+        "ci_width": 0.012
+      }
+    },
+    "four_dims": {
+      "O_t": 0.2783,
+      "E_u": 0.0402,
+      "C_k": 0.2727,
+      "K_y": 1.0
+    },
+    "tracks": {
+      "S_p": 31.65,
+      "p": 0.5,
+      "p_label": "P忠恕中道"
+    },
+    "S_p_confidence": {
+      "S": 27.54,
+      "effective_n": 3,
+      "confidence_level": "低（fallback）"
+    },
+    "entropy": {
+      "H": 2.2287,
+      "H_norm": 0.9598
+    },
+    "dominant": "土",
+    "second": "木",
+    "stage": "克·约束竞争",
+    "verdict": "克·约束竞争（土主导，次木）"
+  },
+  "meta": {
+    "node_count": 11,
+    "total_weight": 10882,
+    "wuxing_mapping": "AI_CATEGORY_WUXING (canonical, arbitration-confirmed)",
+    "wuxing_annotation_version": "v1",
+    "wuxing_annotation_rationale": "语义映射：土=承载/水=流动/木=生发/金=结构/火=活跃",
+    "engine": "fallback_v0.1_initial",
+    "generated_at": "2026-08-09T14:09:19.670891"
+  }
+}

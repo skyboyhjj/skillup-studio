@@ -1,0 +1,77 @@
+{
+  "series": [
+    {
+      "month": "2026-06",
+      "file": "arxiv_ai_tree_202606.json",
+      "four_dims": {
+        "O_t": 0.2811,
+        "E_u": 0.0293,
+        "C_k": 0.2727,
+        "K_y": 1.0
+      },
+      "S_p": 30.9,
+      "dominant": "土",
+      "wuxing_dist": {
+        "木": 0.2279,
+        "火": 0.2304,
+        "土": 0.2811,
+        "金": 0.1204,
+        "水": 0.1402
+      },
+      "wuxing_annotation_version": "v1"
+    },
+    {
+      "month": "2026-07",
+      "file": "arxiv_ai_tree_202607.json",
+      "four_dims": {
+        "O_t": 0.2783,
+        "E_u": 0.0402,
+        "C_k": 0.2727,
+        "K_y": 1.0
+      },
+      "S_p": 31.65,
+      "dominant": "土",
+      "wuxing_dist": {
+        "木": 0.2507,
+        "火": 0.2388,
+        "土": 0.2783,
+        "金": 0.1173,
+        "水": 0.1149
+      },
+      "wuxing_annotation_version": "v1"
+    },
+    {
+      "month": "2026-08",
+      "file": "arxiv_ai_tree_202608.json",
+      "four_dims": {
+        "O_t": 0.2854,
+        "E_u": 0.0395,
+        "C_k": 0.2727,
+        "K_y": 1.0
+      },
+      "S_p": 31.79,
+      "dominant": "火",
+      "wuxing_dist": {
+        "木": 0.2525,
+        "火": 0.2854,
+        "土": 0.2251,
+        "金": 0.11,
+        "水": 0.127
+      },
+      "wuxing_annotation_version": "v1"
+    }
+  ],
+  "dominant_path": [
+    "土",
+    "土",
+    "火"
+  ],
+  "annotation_versions": {
+    "2026-06": "v1",
+    "2026-07": "v1",
+    "2026-08": "v1"
+  },
+  "annotation_source": "AI_CATEGORY_WUXING (canonical, arbitration-confirmed)",
+  "annotation_rationale": "语义映射：土=承载/水=流动/木=生发/金=结构/火=活跃",
+  "fixes_applied_total": 14
+}
