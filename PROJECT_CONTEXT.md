@@ -84,6 +84,7 @@
 | `wuxing_flowengine/scripts/shell_nucleus_analysis_v2.py` | 壳核回归对比分析（双口径收敛判定） |
 | `wuxing_flowengine/output/reports/c1_v2_regression_report.md` | C1 回归对比报告（v2 真实引擎 vs fallback） |
 | `wuxing_flowengine/output/reports/c1_shell_nucleus_wuxing_report_v2.md` | 壳核画像分化五行分析报告 V2 |
+| `wuxing_flowengine/output/reports/P0_里程碑交付总结报告.md` | P0 里程碑交付总结报告（回归结论 + 技术决策 + 下一步计划） |
 | `wuxing_flowengine/docs/arxiv_ai_collect.py` | arXiv AI 子领域月度采集器（11 分类） |
 | `wuxing_flowengine/docs/github_collect.py` | GitHub 月度采集器（topic 搜索，统一 schema） |
 | `wuxing_flowengine/docs/hf_collect.py` | HuggingFace 月度采集器（cursor 分页，统一 schema） |
@@ -424,6 +425,16 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **五行知识错误修正**：木→水非相生（相生为水→木），引擎不生成边是正确行为，非缺陷
 - **3 处旧值同步**：K_y 0.1271→0.1457、C_k 描述更新、E_u 表格 0.033→0.025-0.034
 - **文件**: `wuxing_flowengine/output/reports/c1_v2_regression_report.md`, `wuxing_flowengine/diagnose/engine_adapter_v2.py`, `wuxing_flowengine/scripts/shell_nucleus_analysis_v2.py`
+
+### 28. P0 里程碑交付总结报告（P0-0~P0-3 + 回归结论 + 下一步计划）
+- 汇总 P0 全部子任务交付物：P0-0 接口验证、P0-1 EngineAdapterV2（12/12 单元）、P0-2 C1 回归对比、P0-3 + 后续修复
+- **回归结论**：壳核 S_p 收敛维持（绝对差 0.97 < 5 点），"同一存在度"确认为真信号；五行画像差异方向一致（水 +17.7pp、土 -11.2pp、火 -7.1pp）
+- **Fallback 三大问题解决**：C_k 共线解除、K_y 区分恢复、E_u 低值解释为均匀多样性
+- **关键技术决策**：引擎纯净原则、空月回退、weight 加权展开、双口径收敛判定
+- **四层生态梯度**：S_p 壳核（7.5-8.5）→ 工程/模型层（14.2-14.8）翻倍
+- **下一步**：P1-2 8 月补采（9 月初）→ P1-3 5 个月时间序列（9-10 月）→ P2-1 壳核相位差模型（10 月）→ P2-2 四层联立动力学模型（10 月）
+- **逆相生回流假设**（P2 候选研究点）：当前 3/3 样本主导行切换全部为逆相生（子归母），对应"反者道之动"，待 5 个月时间序列后检验
+- **文件**: `wuxing_flowengine/output/reports/P0_里程碑交付总结报告.md`
 
 ---
 

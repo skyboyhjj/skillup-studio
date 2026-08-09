@@ -78,7 +78,7 @@ hui-skill-cn/
 │       │   ├── engine_adapter_v2.py   # 真实引擎适配层（P0-1，时间演化模式）
 │       │   └── engine_v2_series.json  # 真实引擎诊断结果
 │       ├── output/                    # 诊断输出报告 + 验证结果 + 四源树文件
-│       │   ├── reports/               # CASE-LIU 报告 + M3 交付物 + C1 回归对比报告
+│       │   ├── reports/               # CASE-LIU 报告 + M3 交付物 + C1 回归对比 + P0 里程碑总结
 │       │   ├── archive/               # 4 个月度归档（2026-05/06/07/08）
 │       │   └── *.json                 # 四源月度树文件（baai/arxiv/github/hf）
 │       └── docs/                      # 设计文档 + 验证任务书 + 实施报告 + 真实引擎接入规划
