@@ -73,5 +73,7 @@
   },
   "annotation_source": "AI_CATEGORY_WUXING (canonical, arbitration-confirmed)",
   "annotation_rationale": "语义映射：土=承载/水=流动/木=生发/金=结构/火=活跃",
-  "fixes_applied_total": 14
+  "fixes_applied_total": 14,
+  "source_type": "real",
+  "source_type_note": "All tree files collected from arXiv API (export.arxiv.org/api/query)"
 }

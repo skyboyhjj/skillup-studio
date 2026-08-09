@@ -98,6 +98,8 @@
       "stat.ML": "水→土"
     },
     "wuxing_annotation_version": "v1",
-    "wuxing_fixed_at": "2026-08-09T14:07:10.835088"
+    "wuxing_fixed_at": "2026-08-09T14:07:10.835088",
+    "source_type": "real",
+    "source_type_note": "arXiv API collected (export.arxiv.org/api/query)"
   }
 }
