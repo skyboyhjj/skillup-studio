@@ -60,8 +60,8 @@ TOPIC_WUXING = {
 }
 WUXING_ORDER = ["木", "火", "土", "金", "水"]
 SOURCE_GLOBS = {
-    "baai": "knowledge_tree_*.json",
-    "arxiv": "ai_tree_*.json",
+    "baai": "baai_tree_*.json",
+    "arxiv": "arxiv_ai_tree_*.json",
     "github": "github_tree_*.json",
     "huggingface": "hf_tree_*.json",
 }

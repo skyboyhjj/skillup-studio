@@ -1,0 +1,567 @@
+{
+  "generated": "2026-08-09",
+  "engine": "wuxing_diagnose_v2 (via EngineAdapterV2, 时间演化模式)",
+  "records": [
+    {
+      "source": "baai",
+      "months": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08"
+      ],
+      "O_t": 0.3313,
+      "E_u": 0.0333,
+      "C_k": 0.0,
+      "K_y": 0.1271,
+      "S_p": 7.76,
+      "dominant": "水",
+      "n_nodes": 43,
+      "engine": "wuxing_diagnose_v2",
+      "v2_extra": {
+        "dim1_freq": {
+          "木": {
+            "count": 165,
+            "pct": 0.2055
+          },
+          "火": {
+            "count": 131,
+            "pct": 0.1631
+          },
+          "土": {
+            "count": 126,
+            "pct": 0.1569
+          },
+          "金": {
+            "count": 115,
+            "pct": 0.1432
+          },
+          "水": {
+            "count": 266,
+            "pct": 0.3313
+          }
+        },
+        "dim2_layers": {
+          "种子层": {
+            "count": 400,
+            "wuxing": {
+              "水": 133,
+              "木": 82,
+              "金": 58,
+              "土": 76,
+              "火": 51
+            }
+          },
+          "现行层": {
+            "count": 403,
+            "wuxing": {
+              "水": 133,
+              "木": 83,
+              "金": 57,
+              "火": 80,
+              "土": 50
+            }
+          },
+          "超越层": {
+            "count": 0,
+            "wuxing": {}
+          }
+        },
+        "dim3_edges": [],
+        "dim3_profile": {
+          "layer_dominants": {
+            "种子层": "水",
+            "现行层": "水",
+            "超越层": "—"
+          },
+          "path": "水→水→—",
+          "sheng_count": 0,
+          "ke_count": 0,
+          "matches_profile": false
+        },
+        "dim4_entropy": {
+          "ratio": 0.0985,
+          "details": [
+            0.2055,
+            0.1553,
+            0.1501,
+            0.1432,
+            0.3313,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "dim5_compass": {
+          "cx": 0.1155,
+          "cy": -0.1518,
+          "magnitude": 0.1907
+        },
+        "k_y_enhancer": {
+          "e_relation": 0.0493
+        }
+      }
+    },
+    {
+      "source": "arxiv",
+      "months": [
+        "2026-06",
+        "2026-07",
+        "2026-08"
+      ],
+      "O_t": 0.2746,
+      "E_u": 0.0335,
+      "C_k": 0.0,
+      "K_y": 0.2079,
+      "S_p": 8.45,
+      "dominant": "土",
+      "n_nodes": 33,
+      "engine": "wuxing_diagnose_v2",
+      "v2_extra": {
+        "dim1_freq": {
+          "木": {
+            "count": 6410,
+            "pct": 0.2395
+          },
+          "火": {
+            "count": 6397,
+            "pct": 0.239
+          },
+          "土": {
+            "count": 7351,
+            "pct": 0.2746
+          },
+          "金": {
+            "count": 3163,
+            "pct": 0.1182
+          },
+          "水": {
+            "count": 3444,
+            "pct": 0.1287
+          }
+        },
+        "dim2_layers": {
+          "种子层": {
+            "count": 13364,
+            "wuxing": {
+              "火": 3079,
+              "土": 3756,
+              "水": 1874,
+              "木": 3046,
+              "金": 1609
+            }
+          },
+          "现行层": {
+            "count": 10882,
+            "wuxing": {
+              "火": 2599,
+              "土": 3028,
+              "水": 1250,
+              "木": 2728,
+              "金": 1277
+            }
+          },
+          "超越层": {
+            "count": 2519,
+            "wuxing": {
+              "火": 719,
+              "土": 567,
+              "水": 320,
+              "木": 636,
+              "金": 277
+            }
+          }
+        },
+        "dim3_edges": [],
+        "dim3_profile": {
+          "layer_dominants": {
+            "种子层": "土",
+            "现行层": "土",
+            "超越层": "火"
+          },
+          "path": "土→土→火",
+          "sheng_count": 0,
+          "ke_count": 0,
+          "matches_profile": false
+        },
+        "dim4_entropy": {
+          "ratio": 0.1993,
+          "details": [
+            0.2388,
+            0.2345,
+            0.2796,
+            0.1189,
+            0.1263,
+            0.2516,
+            0.2601,
+            0.2489,
+            0.1135,
+            0.1206
+          ]
+        },
+        "dim5_compass": {
+          "cx": 0.0353,
+          "cy": 0.1969,
+          "magnitude": 0.2
+        },
+        "k_y_enhancer": {
+          "e_relation": 0.0997
+        }
+      }
+    },
+    {
+      "source": "github",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "O_t": 0.4874,
+      "E_u": 0.1901,
+      "C_k": 0.0,
+      "K_y": 0.1383,
+      "S_p": 14.18,
+      "dominant": "水",
+      "n_nodes": 28,
+      "engine": "wuxing_diagnose_v2",
+      "v2_extra": {
+        "dim1_freq": {
+          "木": {
+            "count": 10689,
+            "pct": 0.0946
+          },
+          "火": {
+            "count": 7215,
+            "pct": 0.0638
+          },
+          "土": {
+            "count": 31186,
+            "pct": 0.2759
+          },
+          "金": {
+            "count": 8837,
+            "pct": 0.0782
+          },
+          "水": {
+            "count": 55089,
+            "pct": 0.4874
+          }
+        },
+        "dim2_layers": {
+          "种子层": {
+            "count": 36634,
+            "wuxing": {
+              "水": 18027,
+              "土": 10286,
+              "木": 3191,
+              "金": 2819,
+              "火": 2311
+            }
+          },
+          "现行层": {
+            "count": 38191,
+            "wuxing": {
+              "水": 18531,
+              "土": 10450,
+              "木": 3749,
+              "金": 3009,
+              "火": 2452
+            }
+          },
+          "超越层": {
+            "count": 38191,
+            "wuxing": {
+              "水": 18531,
+              "土": 10450,
+              "木": 3749,
+              "金": 3009,
+              "火": 2452
+            }
+          }
+        },
+        "dim3_edges": [],
+        "dim3_profile": {
+          "layer_dominants": {
+            "种子层": "水",
+            "现行层": "水",
+            "超越层": "水"
+          },
+          "path": "水→水→水",
+          "sheng_count": 0,
+          "ke_count": 0,
+          "matches_profile": false
+        },
+        "dim4_entropy": {
+          "ratio": 0.2,
+          "details": [
+            0.0923,
+            0.0636,
+            0.2772,
+            0.0779,
+            0.4886,
+            0.0982,
+            0.0642,
+            0.2736,
+            0.0788,
+            0.4852
+          ]
+        },
+        "dim5_compass": {
+          "cx": -0.0216,
+          "cy": -0.2866,
+          "magnitude": 0.2874
+        },
+        "k_y_enhancer": {
+          "e_relation": 0.1
+        }
+      }
+    },
+    {
+      "source": "huggingface",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "O_t": 0.5444,
+      "E_u": 0.3764,
+      "C_k": 0.0,
+      "K_y": 0.0346,
+      "S_p": 14.77,
+      "dominant": "水",
+      "n_nodes": 24,
+      "engine": "wuxing_diagnose_v2",
+      "v2_extra": {
+        "dim1_freq": {
+          "木": {
+            "count": 18883,
+            "pct": 0.2846
+          },
+          "火": {
+            "count": 168,
+            "pct": 0.0025
+          },
+          "土": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "金": {
+            "count": 11173,
+            "pct": 0.1684
+          },
+          "水": {
+            "count": 36122,
+            "pct": 0.5444
+          }
+        },
+        "dim2_layers": {
+          "种子层": {
+            "count": 16162,
+            "wuxing": {
+              "水": 3474,
+              "金": 3503,
+              "火": 38,
+              "木": 9147
+            }
+          },
+          "现行层": {
+            "count": 25092,
+            "wuxing": {
+              "水": 16324,
+              "金": 3835,
+              "火": 65,
+              "木": 4868
+            }
+          },
+          "超越层": {
+            "count": 25092,
+            "wuxing": {
+              "水": 16324,
+              "金": 3835,
+              "火": 65,
+              "木": 4868
+            }
+          }
+        },
+        "dim3_edges": [],
+        "dim3_profile": {
+          "layer_dominants": {
+            "种子层": "木",
+            "现行层": "水",
+            "超越层": "水"
+          },
+          "path": "木→水→水",
+          "sheng_count": 0,
+          "ke_count": 0,
+          "matches_profile": false
+        },
+        "dim4_entropy": {
+          "ratio": 0.2242,
+          "details": [
+            0.289,
+            0.0025,
+            0.1793,
+            0.3231,
+            0.194,
+            0.0026,
+            0.1528,
+            0.6506
+          ]
+        },
+        "dim5_compass": {
+          "cx": 0.3174,
+          "cy": -0.6144,
+          "magnitude": 0.6915
+        },
+        "k_y_enhancer": {
+          "e_relation": 0.1121
+        }
+      }
+    }
+  ],
+  "fallback_comparison": [
+    {
+      "source": "baai",
+      "months": [
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08"
+      ],
+      "last_month": "2026-08",
+      "fallback": {
+        "O_t": 0.0,
+        "E_u": 1.0,
+        "C_k": 0.0,
+        "K_y": 0.0
+      },
+      "fallback_S_p": 6.25,
+      "fallback_dominant": "木",
+      "v2": {
+        "O_t": 0.3313,
+        "E_u": 0.0333,
+        "C_k": 0.0,
+        "K_y": 0.1271
+      },
+      "v2_S_p": 7.76,
+      "v2_dominant": "水",
+      "deltas": {
+        "O_t": 0.3313,
+        "E_u": -0.9667,
+        "C_k": 0.0,
+        "K_y": 0.1271,
+        "S_p": 1.51
+      },
+      "issues_resolved": {
+        "C_k_neq_O_t": true,
+        "K_y_discrimination": true
+      }
+    },
+    {
+      "source": "arxiv",
+      "months": [
+        "2026-06",
+        "2026-07",
+        "2026-08"
+      ],
+      "last_month": "2026-08",
+      "fallback": {
+        "O_t": 0.2854,
+        "E_u": 0.0395,
+        "C_k": 0.2854,
+        "K_y": 1.0
+      },
+      "fallback_S_p": 32.13,
+      "fallback_dominant": "火",
+      "v2": {
+        "O_t": 0.2746,
+        "E_u": 0.0335,
+        "C_k": 0.0,
+        "K_y": 0.2079
+      },
+      "v2_S_p": 8.45,
+      "v2_dominant": "土",
+      "deltas": {
+        "O_t": -0.0108,
+        "E_u": -0.006,
+        "C_k": -0.2854,
+        "K_y": -0.7921,
+        "S_p": -23.68
+      },
+      "issues_resolved": {
+        "C_k_neq_O_t": true,
+        "K_y_discrimination": true
+      }
+    },
+    {
+      "source": "github",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "last_month": "2026-07",
+      "fallback": {
+        "O_t": 0.4852,
+        "E_u": 0.1862,
+        "C_k": 0.4852,
+        "K_y": 1.0
+      },
+      "fallback_S_p": 49.87,
+      "fallback_dominant": "水",
+      "v2": {
+        "O_t": 0.4874,
+        "E_u": 0.1901,
+        "C_k": 0.0,
+        "K_y": 0.1383
+      },
+      "v2_S_p": 14.18,
+      "v2_dominant": "水",
+      "deltas": {
+        "O_t": 0.0022,
+        "E_u": 0.0039,
+        "C_k": -0.4852,
+        "K_y": -0.8617,
+        "S_p": -35.69
+      },
+      "issues_resolved": {
+        "C_k_neq_O_t": true,
+        "K_y_discrimination": true
+      }
+    },
+    {
+      "source": "huggingface",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "last_month": "2026-07",
+      "fallback": {
+        "O_t": 0.6506,
+        "E_u": 0.4406,
+        "C_k": 0.6506,
+        "K_y": 1.0
+      },
+      "fallback_S_p": 67.12,
+      "fallback_dominant": "水",
+      "v2": {
+        "O_t": 0.5444,
+        "E_u": 0.3764,
+        "C_k": 0.0,
+        "K_y": 0.0346
+      },
+      "v2_S_p": 14.77,
+      "v2_dominant": "水",
+      "deltas": {
+        "O_t": -0.1062,
+        "E_u": -0.0642,
+        "C_k": -0.6506,
+        "K_y": -0.9654,
+        "S_p": -52.35
+      },
+      "issues_resolved": {
+        "C_k_neq_O_t": true,
+        "K_y_discrimination": true
+      }
+    }
+  ]
+}
