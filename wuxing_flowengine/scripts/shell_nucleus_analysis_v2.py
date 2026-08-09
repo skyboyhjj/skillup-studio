@@ -68,15 +68,24 @@ def main():
     if baai and arxiv:
         diff = abs(baai["S_p"] - arxiv["S_p"])
         fb_diff = abs(FALLBACK_HISTORY["baai"]["S_p_mean"] - FALLBACK_HISTORY["arxiv"]["S_p_mean"])
-        print(f"  fallback 壳核差: {fb_diff:.2f}（收敛区间 31-34）")
-        print(f"  v2 壳核差:       {diff:.2f}（壳 {baai['S_p']} vs 核 {arxiv['S_p']}）")
+        # 双口径：绝对差 + 相对差（以两者均值作分母）
+        fb_mean = (FALLBACK_HISTORY["baai"]["S_p_mean"] + FALLBACK_HISTORY["arxiv"]["S_p_mean"]) / 2
+        v2_mean = (baai["S_p"] + arxiv["S_p"]) / 2
+        fb_rel = fb_diff / fb_mean * 100 if fb_mean > 0 else 0
+        v2_rel = diff / v2_mean * 100 if v2_mean > 0 else 0
+        print(f"  fallback 壳核差: 绝对 {fb_diff:.2f}（相对 {fb_rel:.1f}%，均值 {fb_mean:.2f}）")
+        print(f"  v2 壳核差:       绝对 {diff:.2f}（相对 {v2_rel:.1f}%，均值 {v2_mean:.2f}）")
+        print(f"  壳 S_p={baai['S_p']}  核 S_p={arxiv['S_p']}")
         if diff <= 5:
-            verdict = "✅ 收敛结论仍成立（差异 < 5 点）——'同一存在度'升级为真信号"
+            verdict = "✅ 收敛结论仍成立（绝对差 < 5 点）——'同一存在度'升级为真信号"
         elif diff <= 10:
-            verdict = "⚠️ 收敛减弱（差异 5-10 点）——'同一存在度'存疑，需更多月份"
+            verdict = "⚠️ 收敛减弱（绝对差 5-10 点）——'同一存在度'存疑，需更多月份"
         else:
-            verdict = "❌ 收敛结论被推翻（差异 > 10 点）——'同一存在度'是 fallback 伪影"
+            verdict = "❌ 收敛结论被推翻（绝对差 > 10 点）——'同一存在度'是 fallback 伪影"
         print(f"  判定: {verdict}")
+        if v2_rel > fb_rel:
+            print(f"  注意: v2 相对差 {v2_rel:.1f}% > fallback {fb_rel:.1f}%，因 v2 S_p 绝对值下移 ~4 倍，"
+                  f"收敛以绝对差为准，相对差供参考")
     else:
         missing = [s for s in ["baai", "arxiv"] if s not in records]
         print(f"  ⚠️ 缺少源数据: {missing}——完整壳核对比需 BAAI + arXiv 生产数据")

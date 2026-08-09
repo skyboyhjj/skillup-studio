@@ -200,36 +200,41 @@ class EngineAdapterV2:
     def build_rings(self, series):
         """时间演化模式：最早月→种子层，中间月→现行层，最近月→超越层
 
+        空月过滤：跳过 n_nodes=0 的月份，避免空月伪影（如 BAAI 08 月未发布）。
+        回退示例：BAAI 05/06/07/08 → 08 空月被跳过 → 取 05/06/07（保住"均衡态→水主导"完整演化）。
+
         返回 (rings, months)。不足 3 个月时：
           - 2 个月 → 种子层=最早月，现行层=次月，超越层=现行层镜像（无演化边）
           - 1 个月 → 单层镜像填充（种子=现行=超越=同月，无演化边）
         """
         months = sorted(series.keys())
         nodes_by_month = {m: self.annotate(list(series[m])) for m in months}
+        # 过滤空月（n_nodes=0），避免超越层空伪影
+        active_months = [m for m in months if nodes_by_month.get(m)]
 
-        if len(months) >= 3:
-            triple = [months[-3], months[-2], months[-1]]
+        if len(active_months) >= 3:
+            triple = [active_months[-3], active_months[-2], active_months[-1]]
             mapping = {m: l for m, l in zip(triple, LAYER_LABELS)}
             rings = [{"label": mapping[m], "month": m,
                       "concepts": self.expand_nodes(nodes_by_month[m])}
                      for m in triple]
-        elif len(months) == 2:
+        elif len(active_months) == 2:
             rings = [
-                {"label": "种子层", "month": months[0],
-                 "concepts": self.expand_nodes(nodes_by_month[months[0]])},
-                {"label": "现行层", "month": months[1],
-                 "concepts": self.expand_nodes(nodes_by_month[months[1]])},
-                {"label": "超越层", "month": months[1],
-                 "concepts": self.expand_nodes(nodes_by_month[months[1]])},
+                {"label": "种子层", "month": active_months[0],
+                 "concepts": self.expand_nodes(nodes_by_month[active_months[0]])},
+                {"label": "现行层", "month": active_months[1],
+                 "concepts": self.expand_nodes(nodes_by_month[active_months[1]])},
+                {"label": "超越层", "month": active_months[1],
+                 "concepts": self.expand_nodes(nodes_by_month[active_months[1]])},
             ]
-        elif len(months) == 1:
-            m = months[0]
+        elif len(active_months) == 1:
+            m = active_months[0]
             concepts = self.expand_nodes(nodes_by_month[m])
             rings = [{"label": l, "month": m, "concepts": list(concepts)}
                      for l in LAYER_LABELS]
         else:
             rings = []
-        return rings, months
+        return rings, active_months
 
     # ---------- 诊断 ----------
     def diagnose_source(self, source, months_nodes):
