@@ -193,6 +193,45 @@ def classify_wuxing(tag: str) -> str:
     return TAG_WUXING.get(tag, "水")
 
 
+def check_hf_wuxing_consistency(nodes, strict=True):
+    """HF 标注一致性校验：输出节点 wuxing vs TAG_WUXING canonical。
+
+    防止采集器内置标注与输出数据不一致。
+    参考：docs/arXiv五行标注仲裁确认文档.md 决议 2（扩展至 HF 源）
+
+    Args:
+        nodes: 输出节点列表（含 name/wuxing 字段）
+        strict: True=不一致时抛 ValueError，False=返回差异列表
+
+    Returns:
+        dict: {consistent, mismatches, fix_count, annotation_version}
+    """
+    mismatches = {}
+    for n in nodes:
+        tag = n.get("name", "")
+        if tag not in TAG_WUXING:
+            continue
+        actual = n.get("wuxing", "")
+        expected = TAG_WUXING[tag]
+        if actual != expected:
+            mismatches[tag] = (actual, expected)
+
+    result = {
+        "consistent": len(mismatches) == 0,
+        "mismatches": mismatches,
+        "fix_count": len(mismatches),
+        "annotation_version": "v2",
+    }
+
+    if not result["consistent"] and strict:
+        raise ValueError(
+            f"HF 标注源分裂 {len(mismatches)} 处: {mismatches}——"
+            f"采集器 TAG_WUXING 与输出节点不一致，检查 classify_wuxing() 调用"
+        )
+
+    return result
+
+
 # ============ 主流程 ============
 def main():
     parser = argparse.ArgumentParser(description="HuggingFace 模型月度采集器")
@@ -278,6 +317,11 @@ def main():
             "pages_used": pages_used,
         })
 
+    # ===== 标注一致性校验（采集器内置标注 vs 输出节点） =====
+    consistency = check_hf_wuxing_consistency(nodes, strict=True)
+    print(f"[一致性] HF 标注校验: {'通过' if consistency['consistent'] else '不一致'}"
+          f"（{consistency['fix_count']} 处差异）")
+
     # ===== 输出：节点树（四源统一 schema） =====
     tree = {
         "schema_version": "1.0",
@@ -286,6 +330,7 @@ def main():
         "month": month_str,
         "source_type": "real",
         "source_type_note": "HuggingFace API collected (huggingface.co/api/models)",
+        "wuxing_annotation_version": "v2",
         "nodes": nodes,
         "meta": {
             "node_count": len(nodes),
