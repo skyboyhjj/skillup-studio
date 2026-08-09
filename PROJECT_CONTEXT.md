@@ -79,6 +79,14 @@
 | `wuxing_flowengine/output/reports/m3_deliverables_report.md` | M3 交付物验证报告（含 §12 CASE-LIU 链式映射全链路） |
 | `wuxing_flowengine/output/reports/case_liu_chain_buddhism_report.md` | CASE-LIU 佛学中间域图及映射结果报告 |
 | `wuxing_flowengine/output/reports/CASE-LIU_REV2_交付清单.md` | CASE-LIU REV2 最终交付清单 |
+| `wuxing_flowengine/diagnose/engine_adapter_v2.py` | 真实引擎适配层（时间演化模式 + 空月回退 + weight 加权展开） |
+| `wuxing_flowengine/diagnose/engine_v2_series.json` | 真实引擎四源诊断结果 |
+| `wuxing_flowengine/scripts/shell_nucleus_analysis_v2.py` | 壳核回归对比分析（双口径收敛判定） |
+| `wuxing_flowengine/output/reports/c1_v2_regression_report.md` | C1 回归对比报告（v2 真实引擎 vs fallback） |
+| `wuxing_flowengine/output/reports/c1_shell_nucleus_wuxing_report_v2.md` | 壳核画像分化五行分析报告 V2 |
+| `wuxing_flowengine/docs/arxiv_ai_collect.py` | arXiv AI 子领域月度采集器（11 分类） |
+| `wuxing_flowengine/docs/github_collect.py` | GitHub 月度采集器（topic 搜索，统一 schema） |
+| `wuxing_flowengine/docs/hf_collect.py` | HuggingFace 月度采集器（cursor 分页，统一 schema） |
 
 ## 部署命令
 
@@ -380,6 +388,42 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **4 处修复**：增量审计断言误判、两份报告数值不一致、五行术语"金生土"不准确、测试断言粒度模糊+阈值紧贴
 - 交付清单 + 佛学中间域报告 + 实施报告读解与确认
 - **文件**: `wuxing_flowengine/scripts/homomorphism_engine.py`（更新）, `wuxing_flowengine/scripts/gen_result_liu.py`（新增）, `wuxing_flowengine/scripts/test_homo_liu.py`（新增）, `wuxing_flowengine/data/task_liu_input.json`（新增）, `wuxing_flowengine/docs/验证任务_CASE-LIU柳智宇同态映射.md`, `wuxing_flowengine/docs/验证任务修订_CASE-LIU增量审计断言修正.md`, `wuxing_flowengine/docs/CASE-LIU_REV2实施报告_读解与确认.md`, `wuxing_flowengine/output/reports/result_liu.json`, `wuxing_flowengine/output/reports/result_liu_homo_verify.json`, `wuxing_flowengine/output/reports/result_liu_chain_verify.json`, `wuxing_flowengine/output/reports/result_liu_shell_nucleus_audit.json`, `wuxing_flowengine/output/reports/m3_deliverables_report.md`（§12 新增）, `wuxing_flowengine/output/reports/case_liu_chain_buddhism_report.md`, `wuxing_flowengine/output/reports/CASE-LIU_REV2_交付清单.md`
+
+### 24. 四源月度管线（Phase A+B）：BAAI + arXiv + GitHub + HuggingFace
+- Phase A (P0 双源)：BAAI Hub API + arXiv API 月度采集，6/7/8 月数据就绪
+- Phase B (P1 双源)：GitHub Search API + HuggingFace API 月度采集，6/7 月数据就绪
+- 四源统一 schema（source_type + meta + nodes），canonical 五行映射 v2
+- 跨源五行分布验证：arXiv 6/7/8 月 13,364/10,882/2,519 篇，BAAI 6/7 月 400/403 篇
+- 壳核数据特征：arXiv 水占 ~34% vs BAAI ~33%，8 月火反超确认为真实信号
+- GitHub 6/7 月 36k/38k repos，HuggingFace 6/7 月 16k/25k models
+- 双格式树文件（arxiv_ai_tree + arxiv_tree）同步维护，source_type: "real"
+- **文件**: `wuxing_flowengine/docs/arxiv_ai_collect.py`, `wuxing_flowengine/docs/github_collect.py`, `wuxing_flowengine/docs/hf_collect.py`, `wuxing_flowengine/output/arxiv_ai_tree_*.json`, `wuxing_flowengine/output/baai_tree_*.json`, `wuxing_flowengine/output/github_tree_*.json`, `wuxing_flowengine/output/hf_tree_*.json`
+
+### 25. 真实引擎接入（P0-0/P0-1）：EngineAdapterV2 + 单元验证
+- EngineAdapterV2：将四源单层树文件适配为 wuxing_diagnose_v2 的三层 rings 结构（时间演化模式）
+- 解决 fallback 三大问题：C_k ≡ O_t 共线（解除）、K_y = 1.0 零区分（恢复）、E_u 低值（dim4/dim5 补充）
+- 时间演化模式（方案 A）：最早月→种子层、中间月→现行层、最近月→超越层
+- 空月回退：BAAI 08 月为空时自动跳过，取 05/06/07（保住"均衡态→水主导"完整演化）
+- weight 加权展开：解决 v2 等权计数缺陷，concepts 展开使引擎统计等价于 weight 加权
+- 12/12 单元验证通过（EngineAdapterV2_单元验证报告.md）
+- **文件**: `wuxing_flowengine/diagnose/engine_adapter_v2.py`, `wuxing_flowengine/diagnose/engine_v2_series.json`, `wuxing_flowengine/docs/真实引擎接入wuxing_diagnose_v2/真实引擎接入_任务规划_P0-1.md`, `wuxing_flowengine/docs/真实引擎接入wuxing_diagnose_v2/EngineAdapterV2_单元验证报告.md`
+
+### 26. C1 回归对比（P0-2）：真实引擎壳核收敛验证
+- 使用 EngineAdapterV2 重跑四源诊断，生成 engine_v2_series.json
+- shell_nucleus_analysis_v2.py 双口径收敛判定（绝对差 + 相对差）
+- 核心结论：壳核 S_p 收敛维持（绝对差 0.97 < 5 点），"同一存在度"是真信号
+- 四源全维度对比：壳核 S_p 7.5-8.5 vs 工程/模型层 14.2-14.8
+- 五行画像差异方向一致：水 +17.7pp（壳高）、土 -11.2pp（核高）、火 -7.1pp（核高）
+- C_k=0 精确语义：有主导行演化但演化无生克关系（BAAI 木→水、arXiv 土→火 均为非生非克方向）
+- **文件**: `wuxing_flowengine/output/reports/c1_v2_regression_report.md`, `wuxing_flowengine/scripts/shell_nucleus_analysis_v2.py`, `wuxing_flowengine/output/engine_v2_series.json`
+
+### 27. C1 报告多轮修复（P0-3 + 后续）
+- **P0-3 壳核报告 4 处修复**：均值掩盖极端波动（水梯度 43.3%→均值+范围）、显著性标注（t 检验 + n=3）、范围标注风格统一、相位差因果推断标注
+- **E_u 解读方向修正**：低 E_u = 高熵 = 均匀多样（非"集中"），E_u 真正价值在学术层 vs 模型层梯度
+- **收敛双口径并报**：绝对差 + 相对差，明确"更紧密"不成立（两口径方向不一致），改"维持"
+- **五行知识错误修正**：木→水非相生（相生为水→木），引擎不生成边是正确行为，非缺陷
+- **3 处旧值同步**：K_y 0.1271→0.1457、C_k 描述更新、E_u 表格 0.033→0.025-0.034
+- **文件**: `wuxing_flowengine/output/reports/c1_v2_regression_report.md`, `wuxing_flowengine/diagnose/engine_adapter_v2.py`, `wuxing_flowengine/scripts/shell_nucleus_analysis_v2.py`
 
 ---
 

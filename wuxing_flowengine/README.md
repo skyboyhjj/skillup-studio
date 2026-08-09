@@ -2,7 +2,7 @@
 
 基于五行（金木水火土）哲学框架的 AI 研究领域趋势诊断与追踪系统。将 AI 前沿概念映射到五行体系，通过多阶段管道分析认知深度、领域分布和道境演化阶段。
 
-**V1.5 新增**：种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）+ 同态映射全链路验证（CASE-LIU 柳智宇跨域验证）+ 失败三分法 + 链式映射图驱动升级
+**V1.5 新增**：种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）+ 同态映射全链路验证（CASE-LIU 柳智宇跨域验证）+ 失败三分法 + 链式映射图驱动升级 + 四源月度管线（BAAI + arXiv + GitHub + HuggingFace）+ 真实引擎接入（EngineAdapterV2）
 
 ## 核心概念
 
@@ -25,7 +25,9 @@ wuxing_flowengine/
 │       ├── 2026-07-30_snapshot.json # 7月 (302 节点, 662 边) [基准]
 │       └── 2026-08-30_snapshot.json # 8月 (311 节点, 687 边)
 ├── diagnose/                        # 诊断模块
-│   └── wuxing_diagnose_v2.py        # 五行诊断引擎（环分析、熵、罗盘）
+│   ├── wuxing_diagnose_v2.py        # 五行诊断引擎（环分析、熵、罗盘）
+│   ├── engine_adapter_v2.py         # 真实引擎适配层（时间演化模式 + 空月回退）
+│   └── engine_v2_series.json        # 真实引擎四源诊断结果
 ├── rules/                           # WRL 规则文件（P1#4 可审计性）
 │   ├── classical_rules.wrl          # 经典规则 (C, 4条, immutable)
 │   ├── formal_rules.wrl             # 形式规则 (F, 8条, calibratable)
@@ -62,16 +64,22 @@ wuxing_flowengine/
 │   ├── drift_visualization.py       # 领域漂移可视化 (P1#3)
 │   ├── confidence_interval.py       # 信度区间计算（Wilson 区间等）
 │   ├── calibrate_coefficients.py    # 系数校准实验（灵敏度/可辨识性/边界）
+│   ├── shell_nucleus_analysis_v2.py  # 壳核回归对比分析（P0-2，双口径收敛判定）
 │   └── ...                          # 更多脚本模块
 ├── tests/                           # 测试
 │   ├── test_cases.py                # 自动化验证脚本
 │   ├── xiaohe_case.json             # 小禾案例测试数据
 │   ├── kongzi_case.json             # 孔子案例测试数据
 │   └── daodejing_concepts.json      # 道德经概念测试数据
-└── output/                          # 输出（按月份归档）
+└── output/                          # 输出（按月份归档 + 四源树文件）
     ├── papers_2026-05.json          # 2026-05 论文数据
     ├── papers_2026-06.json          # 2026-06 论文数据
     ├── papers_2026-07.json          # 2026-07 论文数据
+    ├── baai_tree_*.json             # BAAI 月度树文件（壳）
+    ├── arxiv_ai_tree_*.json         # arXiv AI 月度树文件（核）
+    ├── github_tree_*.json           # GitHub 月度树文件
+    ├── hf_tree_*.json               # HuggingFace 月度树文件
+    ├── engine_v2_series.json        # 真实引擎四源诊断结果
     ├── domain_calibration_baseline.json  # 领域校准基线
     ├── validation_report_2026-08.md      # 验证报告
     ├── pipeline_comparison_report.md     # 流水线对比报告
@@ -79,6 +87,8 @@ wuxing_flowengine/
     │   ├── m3_deliverables_report.md     # M3 交付物验证报告（含 CASE-LIU §12）
     │   ├── case_liu_chain_buddhism_report.md  # CASE-LIU 佛学中间域报告
     │   ├── CASE-LIU_REV2_交付清单.md     # CASE-LIU REV2 交付清单
+    │   ├── c1_v2_regression_report.md    # C1 回归对比报告（v2 vs fallback）
+    │   ├── c1_shell_nucleus_wuxing_report_v2.md  # 壳核画像分化报告 V2
     │   ├── result_liu.json               # CASE-LIU 统一验证结果
     │   ├── result_liu_homo_verify.json   # 同态验证结果
     │   ├── result_liu_chain_verify.json  # 链式验证结果
@@ -256,6 +266,33 @@ S_p 仅作为**"化"判定的单一输入条件**，不替代全局阶段判定�
 > ⚠️ **数据边界**：05-07月为真实 API 数据（hub.baai.ac.cn），08月为知识树快照。四维指标趋势反映真实月度变化。完整验证结果见 `output/validation_report_2026-08.md`。
 
 ## V1.5 新增模块
+
+### 真实引擎接入（EngineAdapterV2）
+
+`diagnose/engine_adapter_v2.py` — 将四源单层树文件适配为 wuxing_diagnose_v2 三层 rings 结构
+
+- **时间演化模式**：最早月→种子层、中间月→现行层、最近月→超越层
+- **空月回退**：自动跳过 n_nodes=0 的月份，BAAI 08 空月→05/06/07
+- **weight 加权展开**：解决 v2 等权计数缺陷，concepts 展开使统计等价于 weight 加权
+- **解决 fallback 三大问题**：C_k 共线解除、K_y 区分恢复、E_u 语义修正
+- **12/12 单元验证通过**
+
+### 壳核回归对比（P0-2）
+
+`scripts/shell_nucleus_analysis_v2.py` + `output/reports/c1_v2_regression_report.md`
+
+- 真实引擎下壳核 S_p 收敛验证（绝对差 0.97 < 5 点）
+- 双口径收敛判定（绝对差 + 相对差）
+- 四源全维度对比（壳核 vs 工程/模型层）
+- C_k=0 精确语义：有主导行演化但演化无生克关系
+
+### 四源月度管线
+
+`docs/arxiv_ai_collect.py` + `docs/github_collect.py` + `docs/hf_collect.py`
+
+- BAAI + arXiv + GitHub + HuggingFace 四源统一 schema 月度采集
+- canonical 五行映射 v2，跨源五行分布验证
+- 壳核数据特征：arXiv 水 ~34% vs BAAI ~33%，8 月火反超
 
 ### 种子培育（Seed Cultivation）
 
