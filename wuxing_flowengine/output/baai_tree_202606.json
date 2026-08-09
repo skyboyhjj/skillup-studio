@@ -114,7 +114,8 @@
     "total_weight": 400,
     "domains_covered": 15,
     "api_used": "hub-notion.baai.ac.cn/api_v2/api",
-    "papers_file": "papers_2026-06.json"
+    "papers_file": "papers_2026-06.json",
+    "annotation_version": "v2"
   },
   "generated_at": "2026-08-09T11:02:07.664818"
 }

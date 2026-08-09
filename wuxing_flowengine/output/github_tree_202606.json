@@ -111,6 +111,7 @@
     "topics_used": 14,
     "topics_zero": 0,
     "api_used": "api.github.com/search/repositories (total_count, per_page=1)",
-    "token_used": false
+    "token_used": false,
+    "annotation_version": "v2"
   }
 }

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-08-09",
+  "description": "四源统一五行标注映射表（canonical）。任意源节点标注变更须同步更新此表。",
+  "annotation_version": "v2",
+  "sources": {
+    "arxiv": {
+      "description": "arXiv AI 子领域 11 分类",
+      "nodes": {
+        "cs.AI": "火",
+        "cs.LG": "土",
+        "cs.CL": "水",
+        "cs.CV": "木",
+        "cs.NE": "水",
+        "cs.MA": "木",
+        "cs.RO": "金",
+        "cs.HC": "火",
+        "cs.IR": "金",
+        "cs.MM": "火",
+        "stat.ML": "土"
+      }
+    },
+    "baai": {
+      "description": "BAAI Hub 知识树 15 领域",
+      "nodes": {
+        "大语言模型": "水",
+        "自然语言处理": "水",
+        "具身智能与机器人": "木",
+        "知识表示与逻辑推理": "金",
+        "其他AI领域": "水",
+        "多模态智能": "木",
+        "安全、可信与伦理": "金",
+        "交叉领域智能应用": "火",
+        "推荐系统与信息检索": "火",
+        "智能体": "火",
+        "软件工程与编程": "土",
+        "生成式 AI": "木",
+        "机器学习基础": "土",
+        "科学 AI": "水",
+        "计算机视觉": "水"
+      }
+    },
+    "github": {
+      "description": "GitHub 仓库 14 主题",
+      "nodes": {
+        "github:llm": "水",
+        "github:large-language-models": "水",
+        "github:machine-learning": "土",
+        "github:deep-learning": "水",
+        "github:natural-language-processing": "水",
+        "github:computer-vision": "木",
+        "github:reinforcement-learning": "金",
+        "github:multimodal": "木",
+        "github:agents": "火",
+        "github:autonomous-agents": "火",
+        "github:retrieval-augmented-generation": "金",
+        "github:graph-neural-network": "土",
+        "github:federated-learning": "金",
+        "github:robotics": "金"
+      }
+    },
+    "huggingface": {
+      "description": "HuggingFace 模型 12 标签",
+      "nodes": {
+        "hf:text-generation": "水",
+        "hf:text-classification": "金",
+        "hf:token-classification": "金",
+        "hf:question-answering": "火",
+        "hf:summarization": "水",
+        "hf:translation": "水",
+        "hf:image-classification": "木",
+        "hf:image-text-to-text": "木",
+        "hf:text-to-image": "木",
+        "hf:automatic-speech-recognition": "水",
+        "hf:reinforcement-learning": "金",
+        "hf:text-to-text": "水"
+      }
+    }
+  },
+  "statistics": {
+    "total_nodes": 52,
+    "conflicts": 0,
+    "notes": "四源命名空间独立（cs.XX / 中文 / github:XX / hf:XX），无跨源冲突"
+  }
+}

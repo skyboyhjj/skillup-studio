@@ -225,6 +225,126 @@ class ValidationReport:
         return '\n'.join(lines)
 
 
+# ============================================================
+# 树文件级验证（七检查点 #1-6，Phase B 质量门）
+# ============================================================
+
+VALID_WUXING = {"木", "火", "土", "金", "水"}
+
+
+def validate_tree_file(tree: dict, source: str, month: str,
+                       history: dict = None) -> dict:
+    """
+    树文件级七检查点 #1-6。
+    
+    Args:
+        tree: 树文件 JSON 对象
+        source: 数据源标识（arxiv/baai/github/huggingface）
+        month: 月份 YYYY-MM
+        history: {source: {month: n_nodes}} 近 3 月历史（检查点 4 用）
+    
+    Returns:
+        {checkpoint: "pass"|"FAIL(reason)"|"warn(message)"}
+    """
+    results = {}
+    nodes = tree.get("nodes", [])
+    n_nodes = len(nodes)
+
+    # --- 检查点 1: schema 完整性 ---
+    schema_ok = True
+    missing = []
+    if "schema_version" not in tree:
+        missing.append("schema_version")
+        schema_ok = False
+    if "source" not in tree:
+        missing.append("source")
+        schema_ok = False
+    for i, node in enumerate(nodes):
+        for field in ["id", "name", "weight"]:
+            if field not in node:
+                missing.append(f"nodes[{i}].{field}")
+                schema_ok = False
+    results["schema"] = "pass" if schema_ok else f"FAIL(missing: {missing})"
+
+    # --- 检查点 2: 五行合法性 ---
+    bad_wuxing = []
+    for i, node in enumerate(nodes):
+        wx = node.get("wuxing")
+        if wx is not None and wx not in VALID_WUXING:
+            bad_wuxing.append(f"nodes[{i}].wuxing={wx}")
+    results["wuxing"] = "pass" if not bad_wuxing else f"FAIL({bad_wuxing})"
+
+    # --- 检查点 3: 权重为正 ---
+    zero_or_neg = []
+    for i, node in enumerate(nodes):
+        w = node.get("weight", 0)
+        if w <= 0:
+            zero_or_neg.append(f"nodes[{i}].weight={w}")
+    results["weight"] = "pass" if not zero_or_neg else f"warn({zero_or_neg})"
+
+    # --- 检查点 4: 量级合理性 ---
+    if history and source in history:
+        hist = history[source]
+        if hist:
+            avg = sum(hist.values()) / len(hist)
+            if avg > 0:
+                ratio = n_nodes / avg
+                if ratio > 3:
+                    results["volume"] = f"warn(n_nodes={n_nodes}, 近3月均值={avg:.0f}, 比率={ratio:.1f}x > 3x)"
+                elif ratio < 0.3:
+                    results["volume"] = f"warn(n_nodes={n_nodes}, 近3月均值={avg:.0f}, 比率={ratio:.1f}x < 0.3x)"
+                else:
+                    results["volume"] = "pass"
+            else:
+                results["volume"] = "pass"
+        else:
+            results["volume"] = "pass"
+    else:
+        results["volume"] = "pass"
+
+    # --- 检查点 5: 空月检测 ---
+    if n_nodes == 0:
+        results["empty"] = "FAIL(n=0, 建议回退至前一有效月)"
+    else:
+        results["empty"] = "pass"
+
+    # --- 检查点 6: 截断检测 ---
+    meta = tree.get("meta", {})
+    if meta.get("truncation_warning"):
+        results["truncation"] = f"warn({meta['truncation_warning']})"
+    elif "MAX_PAGES" in str(meta.get("collector", "")):
+        results["truncation"] = "warn(采集器有 MAX_PAGES 限制，可能截断)"
+    else:
+        results["truncation"] = "pass"
+
+    return results
+
+
+def validate_tree_files_batch(tree_files: dict) -> dict:
+    """
+    批量验证多源多月树文件。
+    
+    Args:
+        tree_files: {(source, month): tree_dict}
+    
+    Returns:
+        {(source, month): {checkpoint: result}}
+    """
+    # 构建历史数据（近 3 月 n_nodes）
+    history = {}
+    for (source, month), tree in tree_files.items():
+        history.setdefault(source, {})[month] = len(tree.get("nodes", []))
+
+    results = {}
+    for (source, month), tree in tree_files.items():
+        # 近 3 月（不含当前月）
+        hist = {m: n for m, n in history.get(source, {}).items() if m < month}
+        hist = dict(sorted(hist.items())[-3:])
+        results[(source, month)] = validate_tree_file(tree, source, month, {source: hist})
+
+    return results
+
+
 def validate_all(all_data, expected_domains=None):
     """
     一键执行所有五个检查点的验证

@@ -332,19 +332,20 @@
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
 
                         <!-- Product 3: 知识树追踪引擎 -->
-                        <div id="product-flowengine" class="md:col-span-5 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">
+                        <a href="tracker.html" id="product-flowengine" class="md:col-span-5 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col no-underline">
                             <div class="mb-4 flex items-center justify-between">
                                 <i data-lucide="activity" class="w-9 h-9 text-primary"></i>
-                                <span class="badge-coming-soon px-3 py-1 rounded-full text-xs font-medium">敬请期待</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-medium" style="background-color: rgba(201, 122, 42, 0.12); color: var(--state-warning);">预览版</span>
                             </div>
                             <h3 class="text-xl font-bold tracking-tight">知识树追踪引擎</h3>
                             <p class="mt-1 text-sm" style="color: var(--brand-card-muted);">五行诊断 &#183; 月度追踪 &#183; 领域图谱</p>
                             <p class="mt-3 text-sm leading-relaxed" style="color: var(--brand-card-muted);">
-                                基于五行理论的 AI 知识领域动态追踪，月度论文采集、结构诊断与趋势分析。
+                                基于五行理论的 AI 知识领域动态追踪，四源（BAAI/arXiv/GitHub/HF）月度数据采集、壳核结构诊断与趋势分析。
                             </p>
                             <div class="mt-4 flex flex-wrap gap-3 text-xs font-medium">
-                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">15 领域</span>
-                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">2.19 边密度</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">四源管线</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">六区仪表盘</span>
+                                <span class="px-2.5 py-1 rounded-full" style="background-color: rgba(201, 75, 58, 0.08); color: var(--brand-primary);">壳核画像</span>
                             </div>
                             <hr class="my-5" style="border-color: rgba(0,0,0,0.06);">
                             <div class="space-y-2.5 text-xs">
@@ -357,7 +358,12 @@
                                     <span class="text-primary">完整追踪 &#183; 论文采集 &#183; 时间序列分析 &#183; API 访问</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="mt-5 pt-1">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+                                    进入追踪引擎 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </span>
+                            </div>
+                        </a>
 
                         <!-- Product 4: 论文采集器 -->
                         <div id="product-paper" class="md:col-span-7 card-hover bg-card text-card-foreground rounded-xl p-8 flex flex-col">

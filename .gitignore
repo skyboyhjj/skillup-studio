@@ -125,3 +125,10 @@ wuxing_flowengine/scripts/debug_format.py
 # 大型数据文件
 # ============================================================
 wuxing_flowengine/output/papers_*.json
+
+# ============================================================
+# 诊断报告 & 运行输出（自动生成）
+# ============================================================
+wuxing_flowengine/output/reports/
+wuxing_flowengine/output/runs/
+wuxing_flowengine/output/dashboard_data.json

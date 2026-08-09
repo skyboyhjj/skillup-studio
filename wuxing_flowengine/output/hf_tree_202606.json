@@ -109,7 +109,7 @@
     "tags_used": 12,
     "tags_zero": 1,
     "api_used": "huggingface.co/api/models (cursor pagination, createdAt filter)",
-    "max_pages_per_tag": 20
-  },
-  "wuxing_annotation_version": "v2"
+    "max_pages_per_tag": 20,
+    "annotation_version": "v2"
+  }
 }

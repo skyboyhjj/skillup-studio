@@ -1,0 +1,338 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-08-09T21:43:49.639909",
+  "provenance": {
+    "collector": "v1.2",
+    "annotation": "v2",
+    "coeff": "v1.1_calibrated",
+    "engine": "wuxing_diagnose_v2 (via EngineAdapterV2)",
+    "engine_output": "E:\\00-TRAEWK\\6a59e217b55e181ea97f0df3\\wuxing_flowengine\\output\\engine_v2_series.json"
+  },
+  "monthly": [
+    {
+      "source": "baai",
+      "month": "2026-07",
+      "months": [
+        "2026-05",
+        "2026-06",
+        "2026-07"
+      ],
+      "S_p": 7.48,
+      "O_t": 0.3059,
+      "E_u": 0.0254,
+      "C_k": 0.0,
+      "K_y": 0.1457,
+      "dominant": "水",
+      "wuxing": {
+        "木": 22.1,
+        "火": 16.8,
+        "土": 16.3,
+        "金": 14.2,
+        "水": 30.6
+      },
+      "evolution": {
+        "path": "木→水→水",
+        "edges": [],
+        "profile_match": false
+      },
+      "n_nodes": 43
+    },
+    {
+      "source": "arxiv",
+      "month": "2026-08",
+      "months": [
+        "2026-06",
+        "2026-07",
+        "2026-08"
+      ],
+      "S_p": 8.45,
+      "O_t": 0.2746,
+      "E_u": 0.0335,
+      "C_k": 0.0,
+      "K_y": 0.2079,
+      "dominant": "土",
+      "wuxing": {
+        "木": 23.9,
+        "火": 23.9,
+        "土": 27.5,
+        "金": 11.8,
+        "水": 12.9
+      },
+      "evolution": {
+        "path": "土→土→火",
+        "edges": [],
+        "profile_match": false
+      },
+      "n_nodes": 33
+    },
+    {
+      "source": "github",
+      "month": "2026-07",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "S_p": 14.18,
+      "O_t": 0.4874,
+      "E_u": 0.1901,
+      "C_k": 0.0,
+      "K_y": 0.1383,
+      "dominant": "水",
+      "wuxing": {
+        "木": 9.5,
+        "火": 6.4,
+        "土": 27.6,
+        "金": 7.8,
+        "水": 48.7
+      },
+      "evolution": {
+        "path": "水→水→水",
+        "edges": [],
+        "profile_match": false
+      },
+      "n_nodes": 28
+    },
+    {
+      "source": "huggingface",
+      "month": "2026-07",
+      "months": [
+        "2026-06",
+        "2026-07"
+      ],
+      "S_p": 14.77,
+      "O_t": 0.5444,
+      "E_u": 0.3764,
+      "C_k": 0.0,
+      "K_y": 0.0346,
+      "dominant": "水",
+      "wuxing": {
+        "木": 28.5,
+        "火": 0.2,
+        "土": 0.0,
+        "金": 16.8,
+        "水": 54.4
+      },
+      "evolution": {
+        "path": "木→水→水",
+        "edges": [],
+        "profile_match": false
+      },
+      "n_nodes": 24
+    }
+  ],
+  "shell_nucleus": {
+    "shell": "baai",
+    "nucleus": "arxiv",
+    "S_p_shell": 7.48,
+    "S_p_nucleus": 8.45,
+    "S_p_diff": 0.97,
+    "water_gradient": [
+      33.1,
+      12.7,
+      48.9,
+      43.3
+    ],
+    "shell_wuxing": {
+      "木": 22.4,
+      "火": 16.9,
+      "土": 16.4,
+      "金": 14.2,
+      "水": 30.1
+    },
+    "nucleus_wuxing": {
+      "木": 24.4,
+      "火": 25.1,
+      "土": 26.2,
+      "金": 11.6,
+      "水": 12.7
+    },
+    "cosine_similarity": 0.891,
+    "l1_divergence": 0.2,
+    "four_layer": [
+      {
+        "source": "baai",
+        "layer": "规划层（壳）",
+        "role": "机构'应该做什么'",
+        "water": 33.1,
+        "S_p_v1_1": 11.7,
+        "dist": {
+          "木": 20.5,
+          "火": 16.3,
+          "土": 15.7,
+          "金": 14.3,
+          "水": 33.1
+        },
+        "dominant": "水"
+      },
+      {
+        "source": "arxiv",
+        "layer": "产出层（核）",
+        "role": "研究者'实际在做什么'",
+        "water": 12.7,
+        "S_p_v1_1": 10.4,
+        "dist": {
+          "木": 24.4,
+          "火": 25.2,
+          "土": 26.2,
+          "金": 11.6,
+          "水": 12.7
+        },
+        "dominant": "土"
+      },
+      {
+        "source": "github",
+        "layer": "工程层",
+        "role": "开发者'在构建什么'",
+        "water": 48.9,
+        "S_p_v1_1": 29.1,
+        "dist": {
+          "木": 9.3,
+          "火": 6.4,
+          "土": 27.7,
+          "金": 7.8,
+          "水": 48.9
+        },
+        "dominant": "水"
+      },
+      {
+        "source": "huggingface",
+        "layer": "模型层",
+        "role": "模型'被部署什么'",
+        "water": 43.3,
+        "S_p_v1_1": 48.2,
+        "dist": {
+          "木": 38.0,
+          "火": 0.2,
+          "土": 0.0,
+          "金": 18.5,
+          "水": 43.3
+        },
+        "dominant": "水"
+      }
+    ]
+  },
+  "quality": {
+    "run_id": "2026-07",
+    "generated": "2026-08-09T21:43:48.943382",
+    "status": {
+      "a": "success",
+      "g": "success",
+      "h": "warning"
+    },
+    "warnings": [
+      "[huggingface/2026-07] weight: warn(['nodes[11].weight=0'])"
+    ],
+    "failures": [],
+    "verdict": "⚠ 存在 warning 项，建议检查后进入诊断"
+  },
+  "time_series": [
+    {
+      "source": "arxiv",
+      "month": "2026-06",
+      "O_t": 0.2811,
+      "E_u": 0.0293,
+      "dominant": "土",
+      "total": 13364,
+      "n_nodes": 11
+    },
+    {
+      "source": "arxiv",
+      "month": "2026-07",
+      "O_t": 0.2783,
+      "E_u": 0.0402,
+      "dominant": "土",
+      "total": 10882,
+      "n_nodes": 11
+    },
+    {
+      "source": "arxiv",
+      "month": "2026-08",
+      "O_t": 0.2854,
+      "E_u": 0.0395,
+      "dominant": "火",
+      "total": 2519,
+      "n_nodes": 11
+    },
+    {
+      "source": "baai",
+      "month": "2026-05",
+      "O_t": 0.2603,
+      "E_u": 0.0153,
+      "dominant": "木",
+      "total": 315,
+      "n_nodes": 13
+    },
+    {
+      "source": "baai",
+      "month": "2026-06",
+      "O_t": 0.3325,
+      "E_u": 0.0375,
+      "dominant": "水",
+      "total": 400,
+      "n_nodes": 15
+    },
+    {
+      "source": "baai",
+      "month": "2026-07",
+      "O_t": 0.33,
+      "E_u": 0.0383,
+      "dominant": "水",
+      "total": 403,
+      "n_nodes": 15
+    },
+    {
+      "source": "baai",
+      "month": "2026-08",
+      "O_t": 0.0,
+      "E_u": 1.0,
+      "dominant": "木",
+      "total": 0,
+      "n_nodes": 0
+    },
+    {
+      "source": "github",
+      "month": "2026-06",
+      "O_t": 0.4921,
+      "E_u": 0.1986,
+      "dominant": "水",
+      "total": 36634,
+      "n_nodes": 14
+    },
+    {
+      "source": "github",
+      "month": "2026-07",
+      "O_t": 0.4852,
+      "E_u": 0.1862,
+      "dominant": "水",
+      "total": 38191,
+      "n_nodes": 14
+    },
+    {
+      "source": "huggingface",
+      "month": "2026-06",
+      "O_t": 0.566,
+      "E_u": 0.3798,
+      "dominant": "木",
+      "total": 16161,
+      "n_nodes": 12
+    },
+    {
+      "source": "huggingface",
+      "month": "2026-07",
+      "O_t": 0.6506,
+      "E_u": 0.4406,
+      "dominant": "水",
+      "total": 25091,
+      "n_nodes": 12
+    }
+  ],
+  "papers": [
+    "papers_2026-05.json",
+    "papers_2026-06.json",
+    "papers_2026-07.json",
+    "papers_2026-08.json",
+    "papers_202606.json",
+    "papers_202607.json",
+    "papers_202608.json"
+  ]
+}

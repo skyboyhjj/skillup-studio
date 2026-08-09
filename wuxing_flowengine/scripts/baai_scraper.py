@@ -11,6 +11,7 @@ BAAI Hub 论文采集脚本 V2
 6. 弹窗是浏览器自动化的第一道坎 — 本脚本使用 API，无此问题
 7. 数据验证必须在流水线中 — 语言检测、去重、数量一致性、格式一致性
 """
+import argparse
 import json
 import urllib.request
 import urllib.parse
@@ -19,6 +20,7 @@ import sys
 import time
 import re
 from collections import Counter, defaultdict
+from datetime import datetime
 
 # 16 个领域
 DOMAINS = [
@@ -421,8 +423,98 @@ def validate_papers_batch(papers):
     }
 
 
+# BAAI 领域 → 五行映射（与 baai_to_tree.py 保持一致）
+DOMAIN_WUXING = {
+    "具身智能与机器人": "木", "多模态智能": "木", "生成式AI": "木", "生成式 AI": "木",
+    "智能体": "火", "推荐系统与信息检索": "火", "交叉领域智能应用": "火",
+    "机器学习基础": "土", "AI系统与硬件": "土", "AI 系统与硬件": "土", "软件工程与编程": "土",
+    "安全可信与伦理": "金", "安全、可信与伦理": "金", "知识表示与逻辑推理": "金",
+    "大语言模型": "水", "自然语言处理": "水", "计算机视觉": "水",
+    "科学AI": "水", "科学 AI": "水", "其他AI领域": "水", "其他 AI 领域": "水",
+}
+
+
+def _classify_wuxing(domain: str) -> str:
+    """BAAI 领域 → 五行"""
+    if domain in DOMAIN_WUXING:
+        return DOMAIN_WUXING[domain]
+    normalized = domain.replace(" ", "")
+    for key, wx in DOMAIN_WUXING.items():
+        if key.replace(" ", "") == normalized:
+            return wx
+    return "水"
+
+
+def _build_tree_file(valid_data: dict, month_suffix: str) -> str:
+    """将采集的论文数据转换为四源统一 schema 树文件"""
+    year = 2026
+    month_num = int(month_suffix)
+    month_str = f"{year}-{month_num:02d}"
+    papers = valid_data.get(month_suffix, [])
+
+    if not papers:
+        return None
+
+    domain_counts = Counter()
+    for p in papers:
+        domain = p.get("domain", "未知")
+        domain_counts[domain] += 1
+
+    nodes = []
+    for domain, count in domain_counts.most_common():
+        nodes.append({
+            "id": domain, "name": domain, "parent": "AI 知识树",
+            "wuxing": _classify_wuxing(domain), "weight": count,
+        })
+
+    tree = {
+        "schema_version": "1.1",
+        "source": "baai",
+        "source_type": "real",
+        "month": month_str,
+        "meta": {
+            "node_count": len(nodes),
+            "total_weight": sum(domain_counts.values()),
+            "domains_covered": len(domain_counts),
+            "collector": "baai_scraper.py v2.1",
+            "collected_at": datetime.now().isoformat(),
+            "annotation_version": "v2",
+        },
+        "nodes": nodes,
+    }
+
+    out_name = f"baai_tree_{year}{month_num:02d}.json"
+    out_path = os.path.join(OUTPUT_DIR, out_name)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(tree, f, ensure_ascii=False, indent=2)
+
+    print(f"\n[树文件] {out_path} ({len(nodes)} 节点, {tree['meta']['total_weight']} 篇)")
+    wx_dist = Counter()
+    for node in nodes:
+        wx_dist[node["wuxing"]] += node["weight"]
+    total = tree["meta"]["total_weight"]
+    for wx in ["木", "火", "土", "金", "水"]:
+        count = wx_dist.get(wx, 0)
+        print(f"  [{wx}] {count:4d} 篇 ({count/total*100:5.1f}%)" if total else f"  [{wx}] 0 篇")
+    return out_path
+
+
 def main():
-    targets = sys.argv[1:] if len(sys.argv) > 1 else ['05', '06', '07']
+    parser = argparse.ArgumentParser(description="BAAI Hub 论文采集 V2")
+    parser.add_argument("--month", default=None,
+                        help="月份 YYYY-MM（默认最近完整月；可多次指定，如 --month 2026-07）")
+    parser.add_argument("targets", nargs="*", default=None,
+                        help="月后缀（兼容旧调用：05 06 07）")
+    args = parser.parse_args()
+
+    # 解析 targets：--month 优先，否则位置参数，否则默认 05/06/07
+    if args.month:
+        targets = [args.month.split("-")[1]]
+    elif args.targets:
+        targets = args.targets
+    else:
+        targets = ['05', '06', '07']
+
     print("=" * 70)
     print(f"BAAI Hub 论文采集 V2 (2026-{', '.join(targets)})")
     print("=" * 70)
@@ -534,6 +626,18 @@ def main():
     total_papers = sum(len(valid[t]) for t in targets)
     print(f"  总计: {total_papers} 篇论文 ({len(targets)} 个月)")
     print(f"  跨月一致性: {'✓ 通过' if not consistency_issues else f'⚠ {len(consistency_issues)} 个问题'}")
+
+    # 生成四源统一 schema 树文件
+    print("\n" + "=" * 70)
+    print("生成树文件（四源统一 schema）")
+    print("=" * 70)
+    for t in targets:
+        tree_path = _build_tree_file(valid, t)
+        if tree_path:
+            print(f"  ✓ {t} 月树文件: {tree_path}")
+        else:
+            print(f"  ⚠ {t} 月无数据，跳过树文件生成")
+
     print("=" * 70)
 
 

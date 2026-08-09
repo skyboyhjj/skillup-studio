@@ -89,8 +89,8 @@
     "categories_zero": 0,
     "api_used": "export.arxiv.org/api/query",
     "wuxing_fixes_applied": 7,
-    "wuxing_annotation_version": "v1",
     "source_type": "real",
-    "source_type_note": "arXiv API collected (export.arxiv.org/api/query)"
+    "source_type_note": "arXiv API collected (export.arxiv.org/api/query)",
+    "annotation_version": "v2"
   }
 }

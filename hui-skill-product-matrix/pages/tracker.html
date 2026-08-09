@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hui-skill · 知识树追踪引擎</title>
+    <style id="theme-vars">
+/* ============================================================
+   hui-skill.cn — 产品矩阵品牌色系
+   道境空间 × 现代科技：墨色为主，朱砂为辅
+   ============================================================ */
+
+:root {
+  --brand-primary: #C94B3A;
+  --brand-primary-hover: #B33E2E;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: rgba(201, 75, 58, 0.08);
+  --brand-primary-medium: rgba(201, 75, 58, 0.15);
+
+  --brand-background: #FAF8F5;
+  --brand-foreground: #1A1715;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1A1715;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1A1715;
+  --brand-muted: #F2EFEB;
+  --brand-muted-foreground: #6B6560;
+  --brand-border: #E5E0DA;
+  --brand-input: #E5E0DA;
+  --brand-ring: rgba(201, 75, 58, 0.35);
+
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 12px;
+  --brand-radius-xl: 16px;
+
+  --state-success: #2D8C4E;
+  --state-warning: #C97A2A;
+  --state-error: #C94B3A;
+  --state-info: #3A6BC9;
+
+  /* 五行配色 */
+  --wx-wood: #2ecc71;
+  --wx-fire: #e74c3c;
+  --wx-earth: #d4a44a;
+  --wx-metal: #f1c40f;
+  --wx-water: #3498db;
+}
+
+.dark {
+  --brand-background: #141210;
+  --brand-foreground: #EDE8E3;
+  --brand-card: #1C1A17;
+  --brand-card-foreground: #EDE8E3;
+  --brand-popover: #1C1A17;
+  --brand-popover-foreground: #EDE8E3;
+  --brand-muted: #252320;
+  --brand-muted-foreground: #9B948E;
+  --brand-border: #2E2B27;
+  --brand-input: #2E2B27;
+  --brand-ring: rgba(201, 75, 58, 0.45);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+    --radius-xl: var(--brand-radius-xl);
+  }
+    </style>
+    <style>
+/* 五行配色辅助 */
+.wx-wood { color: var(--wx-wood); }
+.wx-fire { color: var(--wx-fire); }
+.wx-earth { color: var(--wx-earth); }
+.wx-metal { color: var(--wx-metal); }
+.wx-water { color: var(--wx-water); }
+.bg-wx-wood { background: var(--wx-wood); }
+.bg-wx-fire { background: var(--wx-fire); }
+.bg-wx-earth { background: var(--wx-earth); }
+.bg-wx-metal { background: var(--wx-metal); }
+.bg-wx-water { background: var(--wx-water); }
+.border-wx-wood { border-color: var(--wx-wood); }
+.border-wx-fire { border-color: var(--wx-fire); }
+.border-wx-earth { border-color: var(--wx-earth); }
+.border-wx-metal { border-color: var(--wx-metal); }
+.border-wx-water { border-color: var(--wx-water); }
+
+/* 导航 */
+.nav-link { transition: color 0.2s; }
+.nav-link:hover { color: var(--brand-primary); }
+.nav-link.active { color: var(--brand-primary); border-bottom: 2px solid var(--brand-primary); }
+
+/* 筛选面板 */
+.filter-panel { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; }
+
+/* 手绘图 */
+.chart-bar { transition: height 0.5s ease, background 0.3s; border-radius: 4px 4px 0 0; }
+.chart-bar:hover { opacity: 0.85; }
+
+/* 雷达图 */
+.radar-svg { max-width: 100%; height: auto; }
+
+/* 状态徽章 */
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.status-dot.success { background: var(--state-success); }
+.status-dot.warning { background: var(--state-warning); }
+.status-dot.error { background: var(--state-error); }
+.status-dot.rollback { background: var(--state-info); }
+
+/* 质量矩阵 */
+.quality-cell { width: 28px; height: 28px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+.quality-cell.pass { background: #e8f5e9; color: var(--state-success); }
+.quality-cell.fail { background: #fce4e4; color: var(--state-error); }
+.quality-cell.warn { background: #fef3e0; color: var(--state-warning); }
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .filter-panel { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; z-index: 50;
+    transform: translateX(-100%); transition: transform 0.3s; background: var(--brand-card);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.1); padding: 1rem; }
+  .filter-panel.open { transform: translateX(0); }
+  .filter-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 49; }
+  .filter-overlay.open { display: block; }
+}
+
+/* 加载动画 */
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.skeleton { background: linear-gradient(90deg, var(--brand-muted) 25%, var(--brand-border) 50%, var(--brand-muted) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--brand-radius-md); }
+    </style>
+</head>
+<body class="bg-background text-foreground min-h-screen">
+<!-- ============================================================
+     顶部导航
+     ============================================================ -->
+<nav class="sticky top-0 z-40 bg-card/95 backdrop-blur border-b border-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <a href="index.html" class="font-bold text-lg text-primary">hui·skill</a>
+      <span class="text-muted-foreground text-sm">|</span>
+      <a href="tracker.html" class="nav-link active text-sm font-medium">追踪引擎</a>
+      <a href="papers.html" class="nav-link text-sm text-muted-foreground">论文采集器</a>
+      <a href="annotate.html" class="nav-link text-sm text-muted-foreground">标注平台</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-md hover:bg-muted transition" title="切换主题">
+        <i data-lucide="sun" class="w-4 h-4 dark:hidden"></i>
+        <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+      </button>
+      <a href="index.html" class="text-sm text-muted-foreground hover:text-primary transition flex items-center gap-1">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> 返回矩阵
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<header class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-4">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+      <h1 class="text-2xl font-bold" id="heroTitle">知识树追踪引擎</h1>
+      <p class="text-muted-foreground text-sm mt-1" id="heroSubtitle">月度概览 · 加载中...</p>
+    </div>
+    <div class="flex items-center gap-4" id="heroStatus">
+      <div class="flex items-center gap-2 text-sm">
+        <span class="skeleton" style="width:80px;height:20px;"></span>
+      </div>
+    </div>
+  </div>
+  <!-- 采集状态条 -->
+  <div class="flex flex-wrap gap-3 mt-4" id="sourceStatusBar"></div>
+</header>
+
+<!-- ============================================================
+     统计概览卡片
+     ============================================================ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 mb-6">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3" id="statsCards">
+    <!-- 骨架屏 -->
+    <div class="skeleton" style="height:88px;"></div>
+    <div class="skeleton" style="height:88px;"></div>
+    <div class="skeleton" style="height:88px;"></div>
+    <div class="skeleton" style="height:88px;"></div>
+    <div class="skeleton" style="height:88px;"></div>
+    <div class="skeleton" style="height:88px;"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     主体：筛选 + 内容
+     ============================================================ -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+  <div class="flex gap-6">
+    <!-- 左侧筛选面板 -->
+    <aside class="filter-panel w-[260px] shrink-0 hidden md:block" id="filterPanel">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-sm">筛选</h3>
+        <button onclick="resetFilters()" class="text-xs text-muted-foreground hover:text-primary transition">重置</button>
+      </div>
+
+      <!-- 源筛选 -->
+      <div class="mb-4">
+        <label class="text-xs text-muted-foreground font-medium mb-2 block">数据源</label>
+        <div id="sourceFilter" class="space-y-1"></div>
+      </div>
+
+      <!-- 月份筛选 -->
+      <div class="mb-4">
+        <label class="text-xs text-muted-foreground font-medium mb-2 block">月份</label>
+        <div id="monthFilter" class="space-y-1"></div>
+      </div>
+
+      <!-- 五行元素筛选 -->
+      <div class="mb-4">
+        <label class="text-xs text-muted-foreground font-medium mb-2 block">五行元素</label>
+        <div id="wuxingFilter" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <!-- 搜索 -->
+      <div class="mb-4">
+        <label class="text-xs text-muted-foreground font-medium mb-2 block">搜索</label>
+        <input type="text" id="searchInput" placeholder="标题/摘要/作者/ID..."
+          class="w-full text-xs px-3 py-2 rounded-md border border-input bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition"
+          oninput="applyFilters()">
+      </div>
+
+      <!-- 导出 -->
+      <button onclick="exportCSV()" class="w-full text-xs py-2 px-3 rounded-md border border-border bg-card text-foreground hover:bg-muted transition flex items-center justify-center gap-1.5">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> 导出 CSV
+      </button>
+      <button onclick="exportJSON()" class="w-full mt-2 text-xs py-2 px-3 rounded-md border border-border bg-card text-foreground hover:bg-muted transition flex items-center justify-center gap-1.5">
+        <i data-lucide="file-json" class="w-3.5 h-3.5"></i> 导出 JSON
+      </button>
+    </aside>
+
+    <!-- 筛选遮罩（移动端） -->
+    <div class="filter-overlay" id="filterOverlay" onclick="closeFilter()"></div>
+
+    <!-- 移动端筛选按钮 -->
+    <button id="filterBtn" onclick="openFilter()" class="md:hidden fixed bottom-4 right-4 z-30 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center">
+      <i data-lucide="sliders-horizontal" class="w-5 h-5"></i>
+    </button>
+
+    <!-- 主体内容 -->
+    <main class="flex-1 min-w-0 space-y-6">
+      <!-- ① 五行画像 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone1">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="radar" class="w-5 h-5 text-primary"></i> 五行画像（四源对比）
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div id="wuxingRadar"></div>
+          <div id="wuxingBars"></div>
+        </div>
+      </section>
+
+      <!-- ② 水梯度 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone2">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="droplets" class="w-5 h-5 wx-water"></i> 水梯度（四层生态）
+        </h2>
+        <div id="waterGradient"></div>
+      </section>
+
+      <!-- ③ 演化路径 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone3">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="git-branch" class="w-5 h-5 text-primary"></i> 演化路径
+        </h2>
+        <div id="evolutionPaths"></div>
+      </section>
+
+      <!-- ④ 趋势 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone4">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="trending-up" class="w-5 h-5 text-primary"></i> 趋势（S_p + 月度时间序列）
+        </h2>
+        <div id="trendChart"></div>
+      </section>
+
+      <!-- ⑤ 质量区 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone5">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-5 h-5 text-primary"></i> 质量门
+        </h2>
+        <div id="qualityMatrix"></div>
+      </section>
+
+      <!-- ⑥ 论文列表 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone6">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="file-text" class="w-5 h-5 text-primary"></i> 论文列表
+        </h2>
+        <div id="paperList">
+          <p class="text-sm text-muted-foreground">论文数据按需加载（papers-YYYY-MM.json）</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ============================================================
+     Scripts
+     ============================================================ -->
+<script>
+// ============================================================
+// 全局状态
+// ============================================================
+let dashboardData = null;
+let filters = {
+  sources: new Set(),
+  months: new Set(),
+  wuxing: new Set(),
+  search: ''
+};
+
+const WUXING = ['木', '火', '土', '金', '水'];
+const WUXING_COLORS = {
+  '木': 'var(--wx-wood)',
+  '火': 'var(--wx-fire)',
+  '土': 'var(--wx-earth)',
+  '金': 'var(--wx-metal)',
+  '水': 'var(--wx-water)'
+};
+const SOURCE_LABELS = {
+  'arxiv': 'arXiv',
+  'arxiv_ai': 'arXiv AI',
+  'baai': 'BAAI',
+  'github': 'GitHub',
+  'huggingface': 'HuggingFace'
+};
+
+// ============================================================
+// 数据加载
+// ============================================================
+async function loadData() {
+  try {
+    // 优先从 ../data/ 加载，fallback 到 ../wuxing_flowengine/output/
+    const paths = [
+      '../data/dashboard_data.json',
+      '../../wuxing_flowengine/output/dashboard_data.json'
+    ];
+    let resp;
+    for (const p of paths) {
+      try {
+        resp = await fetch(p);
+        if (resp.ok) break;
+      } catch (e) { continue; }
+    }
+    if (!resp || !resp.ok) throw new Error('数据加载失败');
+    dashboardData = await resp.json();
+    initFilters();
+    renderAll();
+  } catch (e) {
+    console.error('数据加载失败:', e);
+    document.getElementById('heroSubtitle').textContent = '数据加载失败，请确认 dashboard_data.json 路径';
+  }
+}
+
+// ============================================================
+// 筛选初始化
+// ============================================================
+function initFilters() {
+  if (!dashboardData) return;
+
+  // 源筛选
+  const sources = new Set();
+  dashboardData.monthly.forEach(r => sources.add(r.source));
+  const srcDiv = document.getElementById('sourceFilter');
+  srcDiv.innerHTML = [...sources].map(s => `
+    <label class="flex items-center gap-2 text-xs cursor-pointer hover:text-foreground transition">
+      <input type="checkbox" value="${s}" checked onchange="toggleFilter('sources', '${s}'); applyFilters();"
+        class="rounded border-input text-primary focus:ring-ring">
+      ${SOURCE_LABELS[s] || s}
+    </label>
+  `).join('');
+
+  // 月份筛选
+  const months = new Set();
+  dashboardData.time_series.forEach(r => months.add(r.month));
+  const monDiv = document.getElementById('monthFilter');
+  monDiv.innerHTML = [...months].sort().reverse().map(m => `
+    <label class="flex items-center gap-2 text-xs cursor-pointer hover:text-foreground transition">
+      <input type="checkbox" value="${m}" checked onchange="toggleFilter('months', '${m}'); applyFilters();"
+        class="rounded border-input text-primary focus:ring-ring">
+      ${m}
+    </label>
+  `).join('');
+
+  // 五行筛选
+  const wxDiv = document.getElementById('wuxingFilter');
+  wxDiv.innerHTML = WUXING.map(wx => `
+    <button onclick="toggleFilter('wuxing', '${wx}'); applyFilters();"
+      class="text-xs px-2 py-1 rounded-full border transition ${filters.wuxing.has(wx) ? 'border-wx-'+['wood','fire','earth','metal','water'][WUXING.indexOf(wx)]+' bg-wx-'+['wood','fire','earth','metal','water'][WUXING.indexOf(wx)]+' text-white' : 'border-border bg-muted text-muted-foreground'}"
+      id="wxBtn-${wx}">
+      ${wx}
+    </button>
+  `).join('');
+
+  // 初始全选
+  sources.forEach(s => filters.sources.add(s));
+  months.forEach(m => filters.months.add(m));
+}
+
+function toggleFilter(type, value) {
+  if (filters[type].has(value)) {
+    filters[type].delete(value);
+  } else {
+    filters[type].add(value);
+  }
+  updateWuxingButtons();
+}
+
+function updateWuxingButtons() {
+  WUXING.forEach((wx, i) => {
+    const btn = document.getElementById('wxBtn-' + wx);
+    if (!btn) return;
+    const colorKey = ['wood','fire','earth','metal','water'][i];
+    if (filters.wuxing.has(wx)) {
+      btn.className = `text-xs px-2 py-1 rounded-full border transition border-wx-${colorKey} bg-wx-${colorKey} text-white`;
+    } else {
+      btn.className = 'text-xs px-2 py-1 rounded-full border transition border-border bg-muted text-muted-foreground';
+    }
+  });
+}
+
+function resetFilters() {
+  if (!dashboardData) return;
+  filters.sources.clear();
+  filters.months.clear();
+  filters.wuxing.clear();
+  filters.search = '';
+  document.getElementById('searchInput').value = '';
+  dashboardData.monthly.forEach(r => filters.sources.add(r.source));
+  dashboardData.time_series.forEach(r => filters.months.add(r.month));
+  initFilters();
+  updateWuxingButtons();
+  applyFilters();
+}
+
+function applyFilters() {
+  filters.search = document.getElementById('searchInput')?.value || '';
+  renderAll();
+}
+
+// ============================================================
+// 渲染
+// ============================================================
+function renderAll() {
+  if (!dashboardData) return;
+  renderHero();
+  renderStats();
+  renderWuxingPortrait();
+  renderWaterGradient();
+  renderEvolutionPaths();
+  renderTrendChart();
+  renderQualityMatrix();
+  renderPaperList();
+  lucide.createIcons();
+}
+
+// --- Hero ---
+function renderHero() {
+  const lastMonth = dashboardData.monthly[0]?.month || '---';
+  document.getElementById('heroSubtitle').textContent = `月度概览 · ${lastMonth}`;
+
+  // 采集状态条
+  const statusBar = document.getElementById('sourceStatusBar');
+  const quality = dashboardData.quality || {};
+  const status = quality.status || {};
+  const sourceSources = [...new Set(dashboardData.monthly.map(r => r.source))];
+
+  statusBar.innerHTML = sourceSources.map(s => {
+    const st = status[s] || 'unknown';
+    const icons = { success: 'check-circle', failed: 'x-circle', warning: 'alert-triangle', rollback: 'rotate-ccw', unknown: 'help-circle' };
+    const colors = { success: 'text-[var(--state-success)]', failed: 'text-[var(--state-error)]', warning: 'text-[var(--state-warning)]', rollback: 'text-[var(--state-info)]', unknown: 'text-muted-foreground' };
+    const labels = { success: '正常', failed: '失败', warning: '警告', rollback: '回退', unknown: '未知' };
+    return `<div class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-muted">
+      <span class="status-dot ${st}"></span>
+      ${SOURCE_LABELS[s] || s}: ${labels[st] || st}
+    </div>`;
+  }).join('');
+}
+
+// --- 统计卡片 ---
+function renderStats() {
+  const sn = dashboardData.shell_nucleus || {};
+  const monthly = dashboardData.monthly || [];
+  const arxiv = monthly.find(r => r.source === 'arxiv' || r.source === 'arxiv_ai') || {};
+  const baai = monthly.find(r => r.source === 'baai') || {};
+
+  const cards = [
+    { label: '壳 S_p', value: sn.S_p_shell?.toFixed(2) || '--', sub: 'BAAI', icon: 'shield' },
+    { label: '核 S_p', value: sn.S_p_nucleus?.toFixed(2) || '--', sub: 'arXiv', icon: 'atom' },
+    { label: '收敛差', value: sn.S_p_diff?.toFixed(2) || '--', sub: '|壳-核|', icon: 'diff' },
+    { label: '主导行', value: (arxiv.dominant || '--') + ' / ' + (baai.dominant || '--'), sub: '核/壳', icon: 'compass' },
+    { label: '演化路径', value: arxiv.evolution?.path || '--', sub: '核', icon: 'git-branch' },
+    { label: '数据质量', value: dashboardData.quality?.verdict?.includes('全部通过') ? '通过' : '注意', sub: dashboardData.quality?.warnings?.length + ' 警告', icon: 'shield-check' }
+  ];
+
+  document.getElementById('statsCards').innerHTML = cards.map(c => `
+    <div class="bg-card rounded-xl border border-border p-3">
+      <div class="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+        <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i> ${c.label}
+      </div>
+      <div class="text-lg font-bold">${c.value}</div>
+      <div class="text-xs text-muted-foreground">${c.sub}</div>
+    </div>
+  `).join('');
+}
+
+// --- ① 五行画像 ---
+function renderWuxingPortrait() {
+  const monthly = getFilteredMonthly();
+  if (monthly.length === 0) {
+    document.getElementById('wuxingRadar').innerHTML = '<p class="text-sm text-muted-foreground">无匹配数据</p>';
+    document.getElementById('wuxingBars').innerHTML = '';
+    return;
+  }
+
+  // 堆叠条形图
+  renderWuxingBars(monthly);
+
+  // 雷达图（SVG）
+  renderRadarChart(monthly);
+}
+
+function renderWuxingBars(monthly) {
+  const container = document.getElementById('wuxingBars');
+  const maxVal = Math.max(...monthly.flatMap(r => WUXING.map(wx => r.wuxing?.[wx] || 0)));
+
+  container.innerHTML = monthly.map(r => `
+    <div class="mb-3">
+      <div class="text-xs font-medium mb-1">${SOURCE_LABELS[r.source] || r.source}</div>
+      <div class="space-y-1">
+        ${WUXING.map(wx => {
+          const val = r.wuxing?.[wx] || 0;
+          const pct = maxVal > 0 ? (val / maxVal * 100) : 0;
+          return `<div class="flex items-center gap-2 text-xs">
+            <span class="w-4 text-right wx-${['wood','fire','earth','metal','water'][WUXING.indexOf(wx)]}">${wx}</span>
+            <div class="flex-1 h-4 bg-muted rounded-full overflow-hidden">
+              <div class="chart-bar h-full" style="width:${pct}%;background:${WUXING_COLORS[wx]};min-width:${val > 0 ? '2px' : '0'}"></div>
+            </div>
+            <span class="w-10 text-right text-muted-foreground">${val}%</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRadarChart(monthly) {
+  const container = document.getElementById('wuxingRadar');
+  const cx = 150, cy = 150, r = 120;
+  const angles = WUXING.map((_, i) => (Math.PI * 2 * i / 5) - Math.PI / 2);
+
+  const points = (values) => angles.map((a, i) => {
+    const v = (values[i] || 0) / 100;
+    return `${cx + r * v * Math.cos(a)},${cy + r * v * Math.sin(a)}`;
+  }).join(' ');
+
+  // 网格
+  const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
+  const gridPaths = gridLevels.map(lvl => {
+    const pts = angles.map(a => `${cx + r * lvl * Math.cos(a)},${cy + r * lvl * Math.sin(a)}`).join(' ');
+    return `<polygon points="${pts}" fill="none" stroke="var(--brand-border)" stroke-width="0.5"/>`;
+  }).join('');
+
+  // 轴线
+  const axisLines = angles.map(a =>
+    `<line x1="${cx}" y1="${cy}" x2="${cx + r * Math.cos(a)}" y2="${cy + r * Math.sin(a)}" stroke="var(--brand-border)" stroke-width="0.5"/>`
+  ).join('');
+
+  // 标签
+  const labels = WUXING.map((wx, i) =>
+    `<text x="${cx + (r + 20) * Math.cos(angles[i])}" y="${cy + (r + 20) * Math.sin(angles[i])}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="var(--brand-foreground)">${wx}</text>`
+  ).join('');
+
+  // 多边形
+  const polys = monthly.map((r, idx) => {
+    const values = WUXING.map(wx => r.wuxing?.[wx] || 0);
+    const colors = ['#C94B3A', '#3A6BC9', '#2D8C4E', '#C97A2A'];
+    const color = colors[idx % colors.length];
+    return `<polygon points="${points(values)}" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="1.5"/>`;
+  }).join('');
+
+  container.innerHTML = `
+    <svg viewBox="0 0 300 300" class="radar-svg">
+      ${gridPaths}${axisLines}${labels}${polys}
+    </svg>
+    <div class="flex flex-wrap gap-3 mt-2 justify-center">
+      ${monthly.map((r, idx) => {
+        const colors = ['#C94B3A', '#3A6BC9', '#2D8C4E', '#C97A2A'];
+        return `<span class="text-xs flex items-center gap-1">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${colors[idx % colors.length]}"></span>
+          ${SOURCE_LABELS[r.source] || r.source}
+        </span>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// --- ② 水梯度 ---
+function renderWaterGradient() {
+  const sn = dashboardData.shell_nucleus || {};
+  const fourLayer = sn.four_layer || [];
+  const waterGradient = sn.water_gradient || [];
+
+  if (fourLayer.length === 0) {
+    document.getElementById('waterGradient').innerHTML = '<p class="text-sm text-muted-foreground">无数据</p>';
+    return;
+  }
+
+  const maxWater = Math.max(...waterGradient, 50);
+  const layers = ['规划层（壳）', '产出层（核）', '工程层', '模型层'];
+
+  document.getElementById('waterGradient').innerHTML = `
+    <div class="space-y-3">
+      ${fourLayer.map((l, i) => {
+        const pct = maxWater > 0 ? (l.water / maxWater * 100) : 0;
+        return `
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <span class="font-medium">${l.layer}</span>
+            <span class="text-muted-foreground">${l.role}</span>
+            <span class="wx-water font-semibold">${l.water}%</span>
+          </div>
+          <div class="h-6 bg-muted rounded-full overflow-hidden">
+            <div class="chart-bar h-full bg-wx-water" style="width:${pct}%"></div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <p class="text-xs text-muted-foreground mt-3">
+      S_p 值: ${fourLayer.map(l => `${l.layer.split('（')[0]}=${l.S_p_v1_1?.toFixed(1) || '--'}`).join(' | ')}
+    </p>
+  `;
+}
+
+// --- ③ 演化路径 ---
+function renderEvolutionPaths() {
+  const monthly = getFilteredMonthly();
+  if (monthly.length === 0) {
+    document.getElementById('evolutionPaths').innerHTML = '<p class="text-sm text-muted-foreground">无匹配数据</p>';
+    return;
+  }
+
+  document.getElementById('evolutionPaths').innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      ${monthly.map(r => {
+        const ev = r.evolution || {};
+        const path = ev.path || '--';
+        const steps = path.split('→').filter(Boolean);
+        return `
+        <div class="border border-border rounded-lg p-3">
+          <div class="text-xs font-medium mb-2">${SOURCE_LABELS[r.source] || r.source}</div>
+          <div class="flex items-center gap-2 text-sm">
+            ${steps.map((s, i) => `
+              <span class="px-2 py-1 rounded text-xs font-medium text-white bg-wx-${['wood','fire','earth','metal','water'][WUXING.indexOf(s)] || 'wood'}">${s}</span>
+              ${i < steps.length - 1 ? '<span class="text-muted-foreground">→</span>' : ''}
+            `).join('')}
+          </div>
+          <div class="text-xs text-muted-foreground mt-1">
+            ${ev.profile_match ? '✓ 匹配典型画像' : '非典型画像'}
+            ${ev.edges?.length > 0 ? ` | ${ev.edges.length} 条边` : ''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// --- ④ 趋势图 ---
+function renderTrendChart() {
+  const ts = getFilteredTimeSeries();
+  if (ts.length === 0) {
+    document.getElementById('trendChart').innerHTML = '<p class="text-sm text-muted-foreground">无匹配数据</p>';
+    return;
+  }
+
+  // 按源分组
+  const groups = {};
+  ts.forEach(r => {
+    if (!groups[r.source]) groups[r.source] = [];
+    groups[r.source].push(r);
+  });
+
+  const allMonths = [...new Set(ts.map(r => r.month))].sort();
+  const sources = Object.keys(groups);
+  const colors = ['#C94B3A', '#3A6BC9', '#2D8C4E', '#C97A2A'];
+
+  // 手绘 SVG 折线图
+  const w = 600, h = 200, pad = { top: 20, right: 20, bottom: 30, left: 50 };
+  const plotW = w - pad.left - pad.right;
+  const plotH = h - pad.top - pad.bottom;
+
+  const allOts = ts.map(r => r.O_t);
+  const minOt = Math.min(...allOts, 0);
+  const maxOt = Math.max(...allOts, 0.6);
+
+  const xScale = (i) => pad.left + (plotW * i / Math.max(allMonths.length - 1, 1));
+  const yScale = (v) => pad.top + plotH - (plotH * (v - minOt) / Math.max(maxOt - minOt, 0.01));
+
+  const lines = sources.map((src, si) => {
+    const data = groups[src];
+    const pts = allMonths.map((m, i) => {
+      const rec = data.find(r => r.month === m);
+      return rec ? `${xScale(i)},${yScale(rec.O_t)}` : null;
+    }).filter(Boolean);
+    return `<polyline points="${pts.join(' ')}" fill="none" stroke="${colors[si % colors.length]}" stroke-width="2"/>`;
+  }).join('');
+
+  // Y 轴标签
+  const yLabels = [minOt, (minOt + maxOt) / 2, maxOt].map(v =>
+    `<text x="${pad.left - 5}" y="${yScale(v) + 4}" text-anchor="end" font-size="10" fill="var(--brand-muted-foreground)">${v.toFixed(2)}</text>`
+  ).join('');
+
+  // X 轴标签
+  const xLabels = allMonths.map((m, i) =>
+    `<text x="${xScale(i)}" y="${h - 5}" text-anchor="middle" font-size="10" fill="var(--brand-muted-foreground)">${m.slice(5)}</text>`
+  ).join('');
+
+  document.getElementById('trendChart').innerHTML = `
+    <svg viewBox="0 0 ${w} ${h}" class="w-full" style="max-height:220px;">
+      ${yLabels}${xLabels}
+      ${lines}
+      ${allMonths.map((m, i) => {
+        const y = yScale(minOt);
+        return `<line x1="${xScale(i)}" y1="${y}" x2="${xScale(i)}" y2="${y + plotH}" stroke="var(--brand-border)" stroke-width="0.5" stroke-dasharray="2,2"/>`;
+      }).join('')}
+    </svg>
+    <div class="flex flex-wrap gap-3 mt-2 justify-center">
+      ${sources.map((s, i) => `
+        <span class="text-xs flex items-center gap-1">
+          <span style="display:inline-block;width:10px;height:2px;background:${colors[i % colors.length]}"></span>
+          ${SOURCE_LABELS[s] || s} (O_t)
+        </span>
+      `).join('')}
+    </div>
+  `;
+}
+
+// --- ⑤ 质量矩阵 ---
+function renderQualityMatrix() {
+  const quality = dashboardData.quality || {};
+  const warnings = quality.warnings || [];
+  const failures = quality.failures || [];
+
+  document.getElementById('qualityMatrix').innerHTML = `
+    <div class="mb-3">
+      <span class="text-sm font-medium">裁决: </span>
+      <span class="text-sm ${quality.verdict?.includes('全部通过') ? 'text-[var(--state-success)]' : 'text-[var(--state-warning)]'}">${quality.verdict || '--'}</span>
+    </div>
+    ${failures.length > 0 ? `
+      <div class="mb-2">
+        <div class="text-xs font-medium text-[var(--state-error)] mb-1">❌ 失败 (${failures.length})</div>
+        ${failures.map(f => `<div class="text-xs text-muted-foreground ml-2">${f}</div>`).join('')}
+      </div>
+    ` : ''}
+    ${warnings.length > 0 ? `
+      <div class="mb-2">
+        <div class="text-xs font-medium text-[var(--state-warning)] mb-1">⚠ 警告 (${warnings.length})</div>
+        ${warnings.map(w => `<div class="text-xs text-muted-foreground ml-2">${w}</div>`).join('')}
+      </div>
+    ` : ''}
+    ${failures.length === 0 && warnings.length === 0 ? '<p class="text-sm text-[var(--state-success)]">✓ 全部通过</p>' : ''}
+  `;
+}
+
+// --- ⑥ 论文列表 ---
+function renderPaperList() {
+  const papers = dashboardData.papers || [];
+  document.getElementById('paperList').innerHTML = papers.length > 0 ? `
+    <p class="text-sm text-muted-foreground mb-2">${papers.length} 个论文数据文件可用</p>
+    <div class="space-y-1">
+      ${papers.map(p => `<div class="text-xs text-muted-foreground flex items-center gap-2">
+        <i data-lucide="file" class="w-3 h-3"></i> ${p}
+      </div>`).join('')}
+    </div>
+  ` : '<p class="text-sm text-muted-foreground">暂无论文数据文件</p>';
+}
+
+// --- 筛选后的数据 ---
+function getFilteredMonthly() {
+  if (!dashboardData) return [];
+  return (dashboardData.monthly || []).filter(r => {
+    if (filters.sources.size > 0 && !filters.sources.has(r.source)) return false;
+    return true;
+  });
+}
+
+function getFilteredTimeSeries() {
+  if (!dashboardData) return [];
+  return (dashboardData.time_series || []).filter(r => {
+    if (filters.sources.size > 0 && !filters.sources.has(r.source)) return false;
+    if (filters.months.size > 0 && !filters.months.has(r.month)) return false;
+    return true;
+  });
+}
+
+// ============================================================
+// 导出
+// ============================================================
+function exportCSV() {
+  const monthly = getFilteredMonthly();
+  if (monthly.length === 0) return alert('无数据可导出');
+  const headers = ['source', 'month', 'S_p', 'O_t', 'E_u', 'C_k', 'K_y', 'dominant', 'wuxing_木', 'wuxing_火', 'wuxing_土', 'wuxing_金', 'wuxing_水', 'evolution_path'];
+  const rows = monthly.map(r => [
+    r.source, r.month, r.S_p, r.O_t, r.E_u, r.C_k, r.K_y, r.dominant,
+    r.wuxing?.木 || '', r.wuxing?.火 || '', r.wuxing?.土 || '', r.wuxing?.金 || '', r.wuxing?.水 || '',
+    r.evolution?.path || ''
+  ]);
+  const csv = '\uFEFF' + headers.join(',') + '\n' + rows.map(r => r.join(',')).join('\n');
+  downloadFile(csv, `dashboard_${new Date().toISOString().slice(0,10)}.csv`, 'text/csv');
+}
+
+function exportJSON() {
+  const data = {
+    monthly: getFilteredMonthly(),
+    shell_nucleus: dashboardData.shell_nucleus,
+    time_series: getFilteredTimeSeries(),
+    quality: dashboardData.quality
+  };
+  downloadFile(JSON.stringify(data, null, 2), `dashboard_${new Date().toISOString().slice(0,10)}.json`, 'application/json');
+}
+
+function downloadFile(content, filename, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// 主题切换
+// ============================================================
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark');
+  document.documentElement.classList.toggle('light');
+  lucide.createIcons();
+}
+
+// ============================================================
+// 移动端筛选
+// ============================================================
+function openFilter() {
+  document.getElementById('filterPanel').classList.add('open');
+  document.getElementById('filterOverlay').classList.add('open');
+}
+
+function closeFilter() {
+  document.getElementById('filterPanel').classList.remove('open');
+  document.getElementById('filterOverlay').classList.remove('open');
+}
+
+// ============================================================
+// 启动
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  lucide.createIcons();
+});
+</script>
+</body>
+</html>
