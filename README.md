@@ -11,7 +11,7 @@
 |------|------|------|
 | 知识图谱标注平台 | 已上线 | 专为道境空间概念设计的智能标注工作台，支持 6 维标注（五行、八卦、认知深度等）、规则推理、数据交换 |
 | 莫比乌斯概念地图 | 已上线 | 3D 交互式知识可视化，一键生成可交互的莫比乌斯环概念地图，支持文本提取与 11 组预设数据集 |
-| 知识树追踪引擎 | 预览版 | 四源月度管线（BAAI + arXiv + GitHub + HuggingFace），基于五行理论的时间序列诊断、壳核画像分化与趋势分析 |
+| 知识树追踪引擎 | 预览版 | 四源月度管线（BAAI + arXiv + GitHub + HuggingFace），`run_pipeline.py` 统一入口，基于五行理论的时间序列诊断、壳核画像分化与趋势分析，支持 cron 定时自动采集 |
 | 论文采集器 | 预览版 | arXiv 自动化月度采集，覆盖 11 个 AI 子领域；100 篇样本可筛选/搜索/导出 |
 | 五行道境引擎 | V1.5 | 同态映射验证 + 壳核审计 + 种子培育 + 链式映射全链路 + 真实引擎接入（EngineAdapterV2） |
 
@@ -63,13 +63,19 @@ hui-skill-cn/
 │       ├── config/                    # 流水线配置
 │       ├── rules/                     # WRL 规则文件（4类35条，含审计元数据）
 │       ├── scripts/                   # Python 核心脚本
+│       │   ├── run_pipeline.py        # 统一管线入口（一键全链路）
+│       │   ├── pipeline_orchestrator.py  # 四源并行采集调度器
+│       │   ├── build_dashboard_data.py   # 仪表盘数据打包（含任务状态判定）
+│       │   ├── hf_collect.py          # HuggingFace 采集器 v0.2（端点failover+重试）
+│       │   ├── github_collect.py      # GitHub 采集器 v0.2（超时拆分+重试）
+│       │   ├── arxiv_collect.py       # arXiv 采集器 v0.3（超时拆分）
 │       │   ├── homomorphism_engine.py # 同态映射引擎（三步协议 + 链式映射 + 图驱动全链路）
 │       │   ├── seed_cultivation.py    # 种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）
 │       │   ├── zhongshu_ethics.py     # P忠恕伦理模块（忠恕双向校验）
 │       │   ├── spinor_formalism.py    # 旋量-太极形式化
 │       │   ├── dao_realm_engine.py    # 道境融合诊断引擎
 │       │   ├── stage_engine.py        # 生克化通变五阶段判定引擎
-│       │   ├── monthly_pipeline.py    # 月度编排器
+│       │   ├── monthly_pipeline.py    # 月度编排器（旧版，由 run_pipeline.py 替代）
 │       │   ├── shell_nucleus_analysis_v2.py  # 壳核回归对比分析（P0-2）
 │       │   └── ...                    # 50+ 脚本模块
 │       ├── data/                      # 知识树数据 + 标注数据 + 验证任务输入
@@ -114,8 +120,10 @@ npx wrangler pages dev . --port 10081
 ### 后端 — 五行知识图谱引擎
 
 ```bash
-cd backend/wuxing_flowengine
-python scripts/monthly_pipeline.py
+cd wuxing_flowengine
+python scripts/run_pipeline.py              # 全链路（采集→质量门→诊断→仪表盘→部署）
+python scripts/run_pipeline.py --skip-collect  # 跳过采集（已有数据）
+python scripts/run_pipeline.py --month 2026-08  # 指定月份
 ```
 
 ## 设计系统

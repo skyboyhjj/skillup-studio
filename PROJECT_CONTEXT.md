@@ -47,6 +47,12 @@
 | `wuxing_flowengine/scripts/baai_scraper.py` | BAAI Hub 论文采集（reports_graph/reports_detail API + Tiptap JSON 解析） |
 | `wuxing_flowengine/scripts/data_validator.py` | 数据验证模块（五检查点：语言/数量/覆盖/重复/一致性） |
 | `wuxing_flowengine/scripts/monthly_pipeline.py` | 月度编排器（Phase 1→2→3+ + 时间序列 + 验证） |
+| `wuxing_flowengine/scripts/run_pipeline.py` | 统一管线入口 — 7 阶段全链路（采集→部署），支持 cron 定时调度 |
+| `wuxing_flowengine/scripts/pipeline_orchestrator.py` | 四源并行采集调度器（源级 env 注入 + 超时 + 重试） |
+| `wuxing_flowengine/scripts/build_dashboard_data.py` | 仪表盘数据打包 + 任务状态判定（区分 total=0 vs 采集失败） |
+| `wuxing_flowengine/scripts/hf_collect.py` | HuggingFace 采集器 v0.2（端点 failover + 超时拆分 + 3 次重试） |
+| `wuxing_flowengine/scripts/github_collect.py` | GitHub 采集器 v0.2（超时拆分 + 3 次重试） |
+| `wuxing_flowengine/scripts/arxiv_collect.py` | arXiv 采集器 v0.3（超时拆分） |
 | `wuxing_flowengine/scripts/phase3_plus_pipeline.py` | Phase 3+ 流水线（论文五行分类 + 领域漂移分析 + 领域名规范化） |
 | `wuxing_flowengine/scripts/domain_calibration.py` | 领域基准校准 |
 | `wuxing_flowengine/scripts/timeseries_analysis.py` | 时间序列分析（多月份 delta 链） |
@@ -85,9 +91,8 @@
 | `wuxing_flowengine/output/reports/c1_v2_regression_report.md` | C1 回归对比报告（v2 真实引擎 vs fallback） |
 | `wuxing_flowengine/output/reports/c1_shell_nucleus_wuxing_report_v2.md` | 壳核画像分化五行分析报告 V2 |
 | `wuxing_flowengine/output/reports/P0_里程碑交付总结报告.md` | P0 里程碑交付总结报告（回归结论 + 技术决策 + 下一步计划） |
-| `wuxing_flowengine/docs/arxiv_ai_collect.py` | arXiv AI 子领域月度采集器（11 分类） |
-| `wuxing_flowengine/docs/github_collect.py` | GitHub 月度采集器（topic 搜索，统一 schema） |
-| `wuxing_flowengine/docs/hf_collect.py` | HuggingFace 月度采集器（cursor 分页，统一 schema） |
+| `hui-skill-product-matrix/pages/tracker.html` | 知识树追踪引擎仪表盘（任务确认/撤销 + 6 区域联动 + 源标识统一） |
+| `wuxing_flowengine/docs/01-调度器/` | 调度器文档（HF API 根因分析 + 四源数据复验） |
 
 ## 部署命令
 
@@ -435,6 +440,33 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - **下一步**：P1-2 8 月补采（9 月初）→ P1-3 5 个月时间序列（9-10 月）→ P2-1 壳核相位差模型（10 月）→ P2-2 四层联立动力学模型（10 月）
 - **逆相生回流假设**（P2 候选研究点）：当前 3/3 样本主导行切换全部为逆相生（子归母），对应"反者道之动"，待 5 个月时间序列后检验
 - **文件**: `wuxing_flowengine/output/reports/P0_里程碑交付总结报告.md`
+
+### 29. 管线健壮性升级 + 定时调度 + 前端联动 + 仪表盘完善
+
+- **采集器健壮性升级（v0.2/v0.3）**：
+  - `hf_collect.py` v0.2：端点 failover（huggingface.co → hf-mirror.com）、`HF_API_BASE` 环境变量覆盖、连接/读取超时拆分（10s + 30s）、每端点 3 次指数退避重试（1s/2s/4s）、端点审计
+  - `github_collect.py` v0.2：超时拆分 + 3 次指数退避重试
+  - `arxiv_collect.py` v0.3：超时拆分（连接 10s + 读取 30s）
+- **调度器升级**（`pipeline_orchestrator.py`）：
+  - `SourceSpec` 新增 `env` 字段，支持源级环境变量注入（如 `HF_API_BASE` 透传）
+  - `_run_source` 方法合并环境变量传递给子进程
+- **任务状态判定增强**（`build_dashboard_data.py`）：
+  - 新增 `_check_tree_errors` 函数，通过树文件 `error` 字段和 `meta.source_type` 区分 `total=0`（真实空月）vs 采集失败
+  - 失败状态显示为深红色加深告警感知
+- **前端仪表盘多区域联动**：
+  - 任务确认/撤销功能（点击确认 + Ctrl+Click 撤销，localStorage 持久化）
+  - 6 区域联动：Hero 源状态条、统计卡片-数据质量、质量门、运维-采集成功率、运维-告警触发、下一步行动
+  - 源标识统一为全称/标准缩写（ArX/BAAI/Git/HF），适配 4 字符宽度
+  - 事件委托重构解决 Ctrl+Click 撤销失效问题
+- **统一管线入口**（`run_pipeline.py`）：
+  - 7 阶段全链路（采集→统一→质量门→诊断→壳核→仪表盘→部署）
+  - 支持 `--skip-collect`、`--from`、`--dry-run`、`--json` 参数
+  - 关键阶段失败自动终止，运行日志输出至 `output/runs/`
+- **定时调度**：
+  - 激活 cron 月度自动采集任务："月度全链路采集与模型验证"
+  - 每月 3 日 09:00（北京时间）自动执行 `run_pipeline.py` 全链路
+  - 从旧 `auto_monthly.py`（仅 BAAI）升级为四源全链路
+- **文件**: `wuxing_flowengine/scripts/run_pipeline.py`（新增）、`wuxing_flowengine/scripts/pipeline_orchestrator.py`（更新）、`wuxing_flowengine/scripts/hf_collect.py`（v0.2）、`wuxing_flowengine/scripts/github_collect.py`（v0.2）、`wuxing_flowengine/scripts/arxiv_collect.py`（v0.3）、`wuxing_flowengine/scripts/build_dashboard_data.py`（更新）、`hui-skill-product-matrix/pages/tracker.html`（更新）、`README.md`、`PROJECT_CONTEXT.md`
 
 ---
 

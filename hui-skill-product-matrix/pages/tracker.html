@@ -237,25 +237,25 @@
 
       <!-- 源筛选 -->
       <div class="mb-4">
-        <label class="text-xs text-muted-foreground font-medium mb-2 block">数据源</label>
+        <span class="text-xs text-muted-foreground font-medium mb-2 block">数据源</span>
         <div id="sourceFilter" class="space-y-1"></div>
       </div>
 
       <!-- 月份筛选 -->
       <div class="mb-4">
-        <label class="text-xs text-muted-foreground font-medium mb-2 block">月份</label>
+        <span class="text-xs text-muted-foreground font-medium mb-2 block">月份</span>
         <div id="monthFilter" class="space-y-1"></div>
       </div>
 
       <!-- 五行元素筛选 -->
       <div class="mb-4">
-        <label class="text-xs text-muted-foreground font-medium mb-2 block">五行元素</label>
+        <span class="text-xs text-muted-foreground font-medium mb-2 block">五行元素</span>
         <div id="wuxingFilter" class="flex flex-wrap gap-1.5"></div>
       </div>
 
       <!-- 搜索 -->
       <div class="mb-4">
-        <label class="text-xs text-muted-foreground font-medium mb-2 block">搜索</label>
+        <label class="text-xs text-muted-foreground font-medium mb-2 block" for="searchInput">搜索</label>
         <input type="text" id="searchInput" placeholder="标题/摘要/作者/ID..."
           class="w-full text-xs px-3 py-2 rounded-md border border-input bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition"
           oninput="applyFilters()">
@@ -406,6 +406,39 @@ async function loadData() {
     }
     if (!resp || !resp.ok) throw new Error('数据加载失败');
     dashboardData = await resp.json();
+
+    // 从后端同步已验证任务（桥接 localStorage + 后端 JSON）
+    try {
+      const vr = await fetch('/api/verified');
+      if (vr.ok) {
+        const backendVerified = await vr.json();
+        // 以后端为可信源：替换本地 localStorage（包含删除操作）
+        const localVerified = getConfirmedTasks();
+        const backendKeys = new Set(Object.keys(backendVerified));
+        let changed = false;
+        // 移除本地有但后端已删除的条目
+        for (const key of Object.keys(localVerified)) {
+          if (!backendKeys.has(key)) {
+            delete localVerified[key];
+            changed = true;
+          }
+        }
+        // 添加后端有但本地没有的条目
+        for (const [key, event] of Object.entries(backendVerified)) {
+          if (!localVerified[key]) {
+            localVerified[key] = event;
+            changed = true;
+          }
+        }
+        if (changed) {
+          localStorage.setItem('wuxing_verified_tasks', JSON.stringify(localVerified));
+        }
+      }
+    } catch (e) {
+      // 后端不可达时使用 localStorage 离线模式
+      console.log('后端桥接不可达，使用 localStorage 离线模式');
+    }
+
     initFilters();
     renderAll();
   } catch (e) {
@@ -1046,27 +1079,58 @@ function renderMonitoringPanel() {
 // --- ⑦ 每月任务概览 ---
 
 // 读取已确认任务（共享辅助函数，所有渲染区复用）
+// 返回 { key: { by, at } } 格式的验证事件记录
 function getConfirmedTasks() {
   try {
-    return JSON.parse(localStorage.getItem('wuxing_confirmed_tasks') || '{}');
+    return JSON.parse(localStorage.getItem('wuxing_verified_tasks') || '{}');
   } catch(e) {
     return {};
   }
 }
 
-// 确认待确认任务（localStorage 持久化，触发全量重渲染）
-function confirmTask(month, source) {
-  const confirmed = getConfirmedTasks();
-  confirmed[month + '|' + source] = true;
-  localStorage.setItem('wuxing_confirmed_tasks', JSON.stringify(confirmed));
+// 确认待确认任务 → 记录 human-reviewed 验证事件（localStorage + 后端 JSON 双写，触发全量重渲染）
+async function confirmTask(month, source) {
+  const verified = getConfirmedTasks();
+  const key = month + '|' + source;
+  const event = {
+    by: 'human:user',
+    at: new Date().toISOString()
+  };
+  verified[key] = event;
+  localStorage.setItem('wuxing_verified_tasks', JSON.stringify(verified));
+
+  // 桥接到后端 JSON 持久化（OKF 导出可读取）
+  try {
+    await fetch('/api/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ month, source })
+    });
+  } catch (e) {
+    console.warn('后端桥接失败（离线模式，仅 localStorage 生效）:', e.message);
+  }
+
   renderAll();  // 全量重渲染，确保所有区域同步更新
 }
 
-// 取消确认（Ctrl+点击，触发全量重渲染）
-function unconfirmTask(month, source) {
-  const confirmed = getConfirmedTasks();
-  delete confirmed[month + '|' + source];
-  localStorage.setItem('wuxing_confirmed_tasks', JSON.stringify(confirmed));
+// 取消确认（Ctrl+点击）→ 移除 human-reviewed 事件，回退到 machine-confirmed 或 unverified
+async function unconfirmTask(month, source) {
+  const verified = getConfirmedTasks();
+  const key = month + '|' + source;
+  delete verified[key];
+  localStorage.setItem('wuxing_verified_tasks', JSON.stringify(verified));
+
+  // 桥接到后端 JSON 持久化
+  try {
+    await fetch('/api/unverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ month, source })
+    });
+  } catch (e) {
+    console.warn('后端桥接失败（离线模式，仅 localStorage 生效）:', e.message);
+  }
+
   renderAll();  // 全量重渲染，确保所有区域同步更新
 }
 
@@ -1084,7 +1148,29 @@ function renderTaskOverview() {
   }
 
   // 读取已确认项（共享辅助函数）
-  const confirmed = getConfirmedTasks();
+  const verified = getConfirmedTasks();
+
+  // 信任层级辅助
+  function getEffectiveTrustTier(taskInfo, key) {
+    // human-reviewed: 用户手动确认（以 localStorage 为准，后端已同步）
+    if (verified[key]) return 'human-reviewed';
+    // 以下基于 dashboard_data.json 的静态判定（后端未确认时）
+    // 注意：静态 trust_tier 可能因 build_dashboard_data.py 合并过 verified_tasks.json
+    // 而残留 "human-reviewed"，此时应回退到 status 判定
+    const staticTier = taskInfo.trust_tier || '';
+    if (staticTier === 'machine-confirmed') return 'machine-confirmed';
+    if (staticTier === 'human-reviewed') {
+      // 静态文件残留的 human-reviewed，但 localStorage 中无记录 → 已撤销
+      // 回退到 status 判定
+      if (taskInfo.status === 'executed') return 'machine-confirmed';
+      return 'unverified';
+    }
+    // unverified: 待确认或失败
+    if (taskInfo.status === 'to_confirm' || taskInfo.status === 'failed') return 'unverified';
+    // pending: 无数据
+    if (taskInfo.status === 'pending') return 'pending';
+    return staticTier || 'unverified';
+  }
 
   const SOURCE_ICONS = {
     'baai': 'BAAI',
@@ -1110,28 +1196,43 @@ function renderTaskOverview() {
       const taskInfo = monthTasks[src] || {};
       let status = taskInfo.status || 'pending';
       const key = `${mon}|${src}`;
-      if ((status === 'to_confirm' || status === 'pending') && confirmed[key]) {
+      const trustTier = getEffectiveTrustTier(taskInfo, key);
+
+      // 确定显示状态
+      if (verified[key]) {
         status = 'confirmed';
       }
       effectiveSummary[status === 'confirmed' ? 'executed' : status]++;
       const icon = SOURCE_ICONS[src] || src[0].toUpperCase();
+
+      // 信任层级徽标
+      let tierBadge = '';
+      if (trustTier === 'human-reviewed') {
+        tierBadge = '<span class="trust-badge human-reviewed" title="人工复核: ' + (verified[key] ? verified[key].at.slice(0,10) : '') + '">&#x1F464;</span>';
+      } else if (trustTier === 'machine-confirmed') {
+        tierBadge = '<span class="trust-badge machine-confirmed" title="机器确认: 质量门通过">&#x2699;</span>';
+      }
+
       let dataAttrs = '';
       let title = '';
       if (status === 'confirmed') {
         dataAttrs = ' data-action="unconfirm" data-month="' + mon + '" data-source="' + src + '"';
-        title = ' title="已确认 — Ctrl+点击取消"';
+        title = ' title="人工复核 — Ctrl+点击取消"';
       } else if (taskInfo.status === 'to_confirm' || taskInfo.status === 'pending') {
         dataAttrs = ' data-action="confirm" data-month="' + mon + '" data-source="' + src + '"';
-        title = ' title="' + STATUS_LABELS[taskInfo.status] + ' — 点击确认接受"';
+        title = ' title="' + STATUS_LABELS[taskInfo.status] + ' — 点击确认"';
       }
-      return '<div class="task-cell ' + status + '"' + dataAttrs + title + '>' + icon + '</div>';
+      return '<div class="task-cell-trust">' +
+        '<div class="task-cell ' + status + '"' + dataAttrs + title + '>' + icon + '</div>' +
+        tierBadge +
+        '</div>';
     }).join('');
 
     const stats = sources.map(src => {
       const taskInfo = monthTasks[src] || {};
       const key = `${mon}|${src}`;
       let s = taskInfo.status || 'pending';
-      if ((s === 'to_confirm' || s === 'pending') && confirmed[key]) s = 'executed';
+      if ((s === 'to_confirm' || s === 'pending') && verified[key]) s = 'executed';
       return s;
     });
     const done = stats.filter(s => s === 'executed' || s === 'confirmed').length;

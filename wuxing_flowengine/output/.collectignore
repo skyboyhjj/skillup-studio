@@ -1,0 +1,8 @@
+# .collectignore —— Phase B 质量门排除清单
+# 非四源月度树（静态图谱/原始抓取，不参与月度质量门）
+knowledge_tree_standardized.json
+knowledge_tree_raw.json
+# 排除原始论文大文件（非知识树概念）
+output/papers_*.json
+# 临时运行日志
+output/runs/*.json

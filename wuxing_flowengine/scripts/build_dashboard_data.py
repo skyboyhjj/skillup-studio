@@ -25,6 +25,7 @@ from typing import Optional
 # ============================================================
 
 SCRIPTS_DIR = Path(__file__).parent
+REPO_ROOT = SCRIPTS_DIR.parent.parent.resolve()
 OUTPUT_DIR = SCRIPTS_DIR.parent / "output"
 REPORT_DIR = OUTPUT_DIR / "reports"
 
@@ -32,6 +33,9 @@ DEFAULT_ENGINE = OUTPUT_DIR / "engine_v2_series.json"
 DEFAULT_SHELL = OUTPUT_DIR / "shell_nucleus_analysis.json"
 DEFAULT_QUALITY = REPORT_DIR / "quality_2026-07.json"
 DEFAULT_OUTPUT = OUTPUT_DIR / "dashboard_data.json"
+VERIFIED_FILE = OUTPUT_DIR / "verified_tasks.json"
+
+AGENTS_MD_PATH = REPO_ROOT / "AGENTS.md"
 
 
 # ============================================================
@@ -45,6 +49,16 @@ def load_json(path: Path) -> Optional[dict]:
         return None
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_verified_tasks() -> dict:
+    """
+    加载前端持久化的已验证任务记录。
+
+    verified_tasks.json 由 verified_server.py 维护，
+    格式: {"2026-08|huggingface": {"by": "human:user", "at": "2026-08-10T20:00:00Z"}}
+    """
+    return load_json(VERIFIED_FILE) or {}
 
 
 # ============================================================
@@ -388,6 +402,9 @@ def build_task_overview(time_series: list, quality_data: dict, quality_raw: dict
     Returns:
         {"tasks": {}, "summary": {}, "status_criteria": {}, "action_guidance": [...]}
     """
+    # 加载前端桥接的已验证任务（human-reviewed 状态）
+    verified_tasks_data = load_verified_tasks()
+
     # 收集所有源×月
     sources = set()
     months = set()
@@ -569,10 +586,39 @@ def build_task_overview(time_series: list, quality_data: dict, quality_raw: dict
                     can_proceed = False
                     action = "已完成（默认通过）"
 
+            # 信任层级映射（OKF 可信度模型）
+            # unverified → machine-confirmed → human-reviewed
+            trust_tier = "unverified"
+            verified = []
+            if status == "executed":
+                # 质量门全部通过 → machine-confirmed
+                qs_check = per_month_status.get((src, mon), quality_status.get(src, "unknown"))
+                if qs_check == "success":
+                    trust_tier = "machine-confirmed"
+                    verified = [{
+                        "by": "process:quality-gate",
+                        "at": quality_data.get("generated", datetime.now().isoformat())
+                    }]
+                else:
+                    trust_tier = "unverified"
+            elif status == "to_confirm":
+                trust_tier = "unverified"
+            elif status == "failed":
+                trust_tier = "unverified"
+            # pending: 无数据，信任不可判定
+
+            # 检查前端 human-reviewed 桥接（verified_tasks.json）
+            vr_key = f"{mon}|{src}"
+            if vr_key in verified_tasks_data:
+                trust_tier = "human-reviewed"
+                verified.append(verified_tasks_data[vr_key])
+
             tasks[mon][src] = {
                 "status": status,
                 "can_proceed": can_proceed,
-                "action": action
+                "action": action,
+                "trust_tier": trust_tier,
+                "verified": verified
             }
 
     # 汇总
@@ -635,6 +681,25 @@ def build_task_overview(time_series: list, quality_data: dict, quality_raw: dict
     # 按优先级排序：can_proceed=True 优先
     action_guidance.sort(key=lambda x: (0 if x["can_proceed"] else 1, x["month"], x["source"]))
 
+    # 信任层级汇总
+    trust_tiers_summary = {
+        "machine_confirmed": 0,
+        "unverified": 0,
+        "human_reviewed": 0,
+        "pending": 0,
+    }
+    for mon_data in tasks.values():
+        for info in mon_data.values():
+            tt = info.get("trust_tier", "unverified")
+            if tt == "machine-confirmed":
+                trust_tiers_summary["machine_confirmed"] += 1
+            elif tt == "unverified":
+                trust_tiers_summary["unverified"] += 1
+            elif tt == "human-reviewed":
+                trust_tiers_summary["human_reviewed"] += 1
+            elif info.get("status") == "pending":
+                trust_tiers_summary["pending"] += 1
+
     return {
         "tasks": tasks,
         "summary": summary,
@@ -642,6 +707,7 @@ def build_task_overview(time_series: list, quality_data: dict, quality_raw: dict
         "pending_wait": pending_wait,
         "status_criteria": status_criteria,
         "action_guidance": action_guidance,
+        "trust_tiers": trust_tiers_summary,
         "sources": sorted(sources),
         "months": sorted_months,
         "latest_month": latest_month,
@@ -747,6 +813,145 @@ def build_dashboard(engine_path: str = None,
 
 
 # ============================================================
+# AGENTS.md 生成
+# ============================================================
+
+OPENWIKI_START = "<!-- OPENWIKI:START -->"
+OPENWIKI_END = "<!-- OPENWIKI:END -->"
+
+
+def update_agents_md(dashboard: dict) -> bool:
+    """
+    生成/更新 AGENTS.md，写入 OPENWIKI 块。
+
+    仅在 <!-- OPENWIKI:START -->...<!-- OPENWIKI:END --> 范围内写入，
+    保留块外已有人工内容。文件不存在时自动创建。
+
+    Returns:
+        True 表示内容有变更，False 表示无变更
+    """
+    monthly = dashboard.get("monthly", [])
+    shell_nuc = dashboard.get("shell_nucleus", {})
+    quality = dashboard.get("quality", {})
+    task = dashboard.get("task_overview", {})
+    task_summary = task.get("summary", {})
+    monitoring = dashboard.get("monitoring", {})
+    metrics = monitoring.get("metrics", {})
+    alerts = monitoring.get("alerts", [])
+
+    # 构建源状态
+    source_status_lines = []
+    source_labels = {
+        "baai": "BAAI Hub (智源)", "arxiv": "arXiv",
+        "github": "GitHub", "huggingface": "HuggingFace"
+    }
+    for rec in monthly:
+        src = rec["source"]
+        label = source_labels.get(src, src)
+        sp = rec.get("S_p", "?")
+        dom = rec.get("dominant", "?")
+        months = rec.get("months", [])
+        source_status_lines.append(
+            f"| {label} | S_p={sp} | 主导行: {dom} | {', '.join(months)} |"
+        )
+
+    # 构建告警行
+    alert_lines = ""
+    if alerts:
+        for a in alerts:
+            alert_lines += f"- [{a.get('severity', '?').upper()}] {a.get('message', '?')}\n"
+    else:
+        alert_lines = "- 无告警\n"
+
+    # 构建下一步行动
+    action_guidance = task.get("action_guidance", [])
+    pending_actions = [a for a in action_guidance if a.get("can_proceed")]
+    action_lines = ""
+    if pending_actions:
+        for a in pending_actions[:5]:
+            action_lines += f"- [{a.get('priority', '?').upper()}] {a.get('month', '?')} {a.get('source', '?')}: {a.get('action', '?')}\n"
+    else:
+        action_lines = "- 所有任务已完成，无需操作\n"
+
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    block = f"""{OPENWIKI_START}
+## 知识树追踪引擎 — 当前状态
+
+> 自动生成于 {now} | 引擎: wuxing_diagnose_v2 (EngineAdapterV2)
+
+### 四源诊断
+
+| 源 | S_p | 主导行 | 月份 |
+|----|-----|--------|------|
+{chr(10).join(source_status_lines)}
+
+### 壳核收敛
+
+- 壳 S_p: {shell_nuc.get('S_p_shell', '?')} (BAAI 规划层)
+- 核 S_p: {shell_nuc.get('S_p_nucleus', '?')} (arXiv 产出层)
+- 绝对差: {shell_nuc.get('S_p_diff', '?')} (< 5 点 → 收敛维持)
+- 余弦相似度: {shell_nuc.get('cosine_similarity', '?')}
+
+### 质量门
+
+- 判定: {quality.get('verdict', 'N/A')}
+- 通过: {quality.get('pass_count', '?')} | 警告: {quality.get('warn_count', '?')} | 失败: {quality.get('fail_count', '?')}
+
+### 任务概览
+
+- 已执行: {task_summary.get('executed', 0)} | 待确认: {task_summary.get('to_confirm', 0)} | 待执行: {task_summary.get('pending', 0)} | 失败: {task_summary.get('failed', 0)}
+
+### 运维监控
+
+- 采集成功率: {metrics.get('success_rate', {}).get('value', '?')}%
+- 告警: {len(alerts)} 条
+
+### 告警详情
+
+{alert_lines}
+### 下一步行动
+
+{action_lines}
+### 关键文件
+
+- 仪表盘: [tracker.html](hui-skill-product-matrix/pages/tracker.html)
+- 诊断数据: [engine_v2_series.json](wuxing_flowengine/diagnose/engine_v2_series.json)
+- 仪表盘数据: [dashboard_data.json](hui-skill-product-matrix/data/dashboard_data.json)
+- OKF 导出: [output/archive/](wuxing_flowengine/output/archive/)
+{OPENWIKI_END}"""
+
+    # 读取现有文件
+    existing = ""
+    if AGENTS_MD_PATH.exists():
+        existing = AGENTS_MD_PATH.read_text(encoding="utf-8")
+
+    # 替换或追加 OPENWIKI 块
+    if OPENWIKI_START in existing and OPENWIKI_END in existing:
+        before = existing[:existing.index(OPENWIKI_START)]
+        after = existing[existing.index(OPENWIKI_END) + len(OPENWIKI_END):]
+        new_content = before + block + after
+    else:
+        # 文件不存在或无 OPENWIKI 块 → 创建/追加
+        if existing:
+            new_content = existing.rstrip() + "\n\n" + block + "\n"
+        else:
+            new_content = f"# AGENTS.md — AI Agent 项目上下文\n\n{block}\n"
+
+    # 检查是否有变更（排除时间戳行，避免每次运行都误判为变更）
+    def _strip_timestamp(text: str) -> str:
+        """移除时间戳行用于比较"""
+        import re
+        return re.sub(r'> 自动生成于 \d{4}-\d{2}-\d{2} \d{2}:\d{2}.*', '> 自动生成于', text)
+
+    if _strip_timestamp(new_content).strip() == _strip_timestamp(existing).strip():
+        return False
+
+    AGENTS_MD_PATH.write_text(new_content, encoding="utf-8")
+    return True
+
+
+# ============================================================
 # CLI
 # ============================================================
 
@@ -787,6 +992,13 @@ def main():
               f"告警={len(m.get('alerts',[]))} 条")
         to = dashboard.get('task_overview', {})
         print(f"  任务概览: {to.get('summary',{})}")
+
+        # 生成/更新 AGENTS.md
+        changed = update_agents_md(dashboard)
+        if changed:
+            print(f"✓ AGENTS.md 已更新: {AGENTS_MD_PATH}")
+        else:
+            print(f"  AGENTS.md 无变更")
 
 
 if __name__ == "__main__":

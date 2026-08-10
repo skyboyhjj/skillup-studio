@@ -1,0 +1,18 @@
+# .knowledgeignore — OKF 导出忽略规则
+# 语法兼容 .gitignore：每行一个 glob 模式，# 注释，空行忽略，! 取反。
+# 模式匹配 OKF Bundle 内的相对路径（如 "domains/github.md"）。
+#
+# 通配符：
+#   *     匹配任意字符（不含 /）
+#   **    匹配任意字符（含 /），跨目录
+#   ?     匹配单个字符
+#   / 开头 锚定到 bundle 根目录
+#   / 结尾 仅匹配目录
+#   !     取反（重新包含被忽略的路径）
+#
+# 示例（取消注释即可启用）：
+# diagnostics/              # 跳过整个诊断目录
+# diagnostics/wuxing-profile.md  # 跳过五行画像诊断
+# domains/github.md         # 跳过 GitHub 领域文档
+# **/index.md               # 跳过所有 index.md（慎用，会破坏导航）
+# monthly/                  # 跳过月度快照

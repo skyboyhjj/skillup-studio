@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "generated": "2026-08-10T13:27:19.459584",
+  "generated": "2026-08-10T20:01:02.422414",
   "provenance": {
     "collector": "v1.2",
     "annotation": "v2",
@@ -41,6 +41,7 @@
       "source": "arxiv",
       "month": "2026-08",
       "months": [
+        "2026-05",
         "2026-06",
         "2026-07",
         "2026-08"
@@ -63,61 +64,65 @@
         "edges": [],
         "profile_match": false
       },
-      "n_nodes": 33
+      "n_nodes": 44
     },
     {
       "source": "github",
-      "month": "2026-07",
+      "month": "2026-08",
       "months": [
+        "2026-05",
         "2026-06",
-        "2026-07"
+        "2026-07",
+        "2026-08"
       ],
-      "S_p": 14.18,
-      "O_t": 0.4874,
-      "E_u": 0.1901,
+      "S_p": 14.02,
+      "O_t": 0.478,
+      "E_u": 0.188,
       "C_k": 0.0,
-      "K_y": 0.1383,
+      "K_y": 0.1391,
       "dominant": "水",
       "wuxing": {
-        "木": 9.5,
-        "火": 6.4,
-        "土": 27.6,
-        "金": 7.8,
-        "水": 48.7
+        "木": 10.0,
+        "火": 6.0,
+        "土": 28.5,
+        "金": 7.7,
+        "水": 47.8
       },
       "evolution": {
         "path": "水→水→水",
         "edges": [],
         "profile_match": false
       },
-      "n_nodes": 28
+      "n_nodes": 56
     },
     {
       "source": "huggingface",
-      "month": "2026-07",
+      "month": "2026-08",
       "months": [
+        "2026-05",
         "2026-06",
-        "2026-07"
+        "2026-07",
+        "2026-08"
       ],
-      "S_p": 14.77,
-      "O_t": 0.5444,
-      "E_u": 0.3764,
+      "S_p": 13.72,
+      "O_t": 0.5159,
+      "E_u": 0.324,
       "C_k": 0.0,
-      "K_y": 0.0346,
+      "K_y": 0.0377,
       "dominant": "水",
       "wuxing": {
-        "木": 28.5,
-        "火": 0.2,
+        "木": 30.4,
+        "火": 2.7,
         "土": 0.0,
-        "金": 16.8,
-        "水": 54.4
+        "金": 15.3,
+        "水": 51.6
       },
       "evolution": {
         "path": "木→水→水",
         "edges": [],
         "profile_match": false
       },
-      "n_nodes": 24
+      "n_nodes": 48
     }
   ],
   "shell_nucleus": {
@@ -212,18 +217,18 @@
     ]
   },
   "quality": {
-    "run_id": "2026-08",
-    "generated": "2026-08-10T13:27:18.266506",
+    "run_id": "2026-07",
+    "generated": "2026-08-10T13:00:12.903184",
     "status": {
       "arxiv_ai": "success",
       "github": "success",
       "huggingface": "warning"
     },
     "warnings": [
-      "[huggingface/2026-08] weight: warn(['nodes[11].weight=0'])",
+      "[huggingface/2026-07] weight: warn(['nodes[11].weight=0'])",
       "[huggingface/2026-05] weight: warn(['nodes[0].weight=0', 'nodes[1].weight=0', 'nodes[2].weight=0', 'nodes[5].weight=0', 'nodes[6].weight=0', 'nodes[7].weight=0', 'nodes[8].weight=0', 'nodes[9].weight=0', 'nodes[10].weight=0', 'nodes[11].weight=0'])",
       "[huggingface/2026-06] weight: warn(['nodes[11].weight=0'])",
-      "[huggingface/2026-07] weight: warn(['nodes[11].weight=0'])"
+      "[huggingface/2026-08] weight: warn(['nodes[11].weight=0'])"
     ],
     "failures": [],
     "verdict": "⚠ 存在 warning 项，建议检查后进入诊断"
@@ -365,7 +370,7 @@
         "status": "ok"
       },
       "pipeline_elapsed": {
-        "value": 0.8,
+        "value": 1.6,
         "unit": "s",
         "threshold": "3600s",
         "status": "ok"
@@ -395,7 +400,7 @@
     ],
     "total_sources": 3,
     "success_count": 2,
-    "generated": "2026-08-10T13:27:19.459584"
+    "generated": "2026-08-10T20:01:02.417676"
   },
   "task_overview": {
     "tasks": {
@@ -403,88 +408,160 @@
         "arxiv": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "baai": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成（默认通过）"
+          "action": "已完成（默认通过）",
+          "trust_tier": "unverified",
+          "verified": []
         },
         "github": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "huggingface": {
           "status": "to_confirm",
           "can_proceed": true,
-          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+          "trust_tier": "unverified",
+          "verified": []
         }
       },
       "2026-06": {
         "arxiv": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "baai": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成（默认通过）"
+          "action": "已完成（默认通过）",
+          "trust_tier": "unverified",
+          "verified": []
         },
         "github": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "huggingface": {
           "status": "to_confirm",
           "can_proceed": true,
-          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+          "trust_tier": "unverified",
+          "verified": []
         }
       },
       "2026-07": {
         "arxiv": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "baai": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成（默认通过）"
+          "action": "已完成（默认通过）",
+          "trust_tier": "unverified",
+          "verified": []
         },
         "github": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "huggingface": {
           "status": "to_confirm",
           "can_proceed": true,
-          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+          "trust_tier": "unverified",
+          "verified": []
         }
       },
       "2026-08": {
         "arxiv": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "baai": {
           "status": "pending",
           "can_proceed": false,
-          "action": "等待 BAAI 月末报告发布（次月初可用）"
+          "action": "等待 BAAI 月末报告发布（次月初可用）",
+          "trust_tier": "unverified",
+          "verified": []
         },
         "github": {
           "status": "executed",
           "can_proceed": false,
-          "action": "已完成，无需操作"
+          "action": "已完成，无需操作",
+          "trust_tier": "machine-confirmed",
+          "verified": [
+            {
+              "by": "process:quality-gate",
+              "at": "2026-08-10T13:00:12.903184"
+            }
+          ]
         },
         "huggingface": {
           "status": "to_confirm",
           "can_proceed": true,
-          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+          "trust_tier": "unverified",
+          "verified": []
         }
       }
     },
@@ -560,6 +637,12 @@
         "priority": "normal"
       }
     ],
+    "trust_tiers": {
+      "machine_confirmed": 8,
+      "unverified": 8,
+      "human_reviewed": 0,
+      "pending": 0
+    },
     "sources": [
       "arxiv",
       "baai",
@@ -574,6 +657,6 @@
     ],
     "latest_month": "2026-08",
     "current_month": "2026-08",
-    "generated": "2026-08-10T13:27:19.459584"
+    "generated": "2026-08-10T20:01:02.421097"
   }
 }

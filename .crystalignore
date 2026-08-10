@@ -1,0 +1,16 @@
+# .crystalignore — 晶体导出忽略规则
+# 语法兼容 .gitignore：每行一个 glob 模式，# 注释，空行忽略，! 取反。
+# 模式匹配晶体输出目录内的相对路径（如 "diagnosis/baai.md"）。
+#
+# 通配符：
+#   *     匹配任意字符（不含 /）
+#   **    匹配任意字符（含 /），跨目录
+#   ?     匹配单个字符
+#   / 开头 锚定到晶体根目录
+#   / 结尾 仅匹配目录
+#   !     取反（重新包含被忽略的路径）
+#
+# 示例（取消注释即可启用）：
+# diagnosis/github.md         # 跳过 GitHub 诊断晶体
+# diagnosis/huggingface.md    # 跳过 HuggingFace 诊断晶体
+# index.md                    # 跳过索引文件（慎用，会破坏导航）

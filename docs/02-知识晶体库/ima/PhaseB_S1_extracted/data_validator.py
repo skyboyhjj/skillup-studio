@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 data_validator.py —— Phase B 质量门（七检查点 + 自愈三态 + 排除清单）
+========================================================================
+对齐《晶体Schema与PhaseB_接口契约》（IF-2026-006）§三：
 
-对齐《晶体Schema与PhaseB_接口契约》（IF-2026-006）:
   七检查点：schema 完整性 / 五行合法 / 权重为正 / 量级合理性 /
             空月检测 / 截断检测 / 标注一致性
   自愈三态：pass（通过）/ warn（降级继续）/ fail（阻断）
@@ -11,68 +12,33 @@ data_validator.py —— Phase B 质量门（七检查点 + 自愈三态 + 排�
   输出：quality_report.json（含 verified 契约字段）
 
 用法：
-  python data_validator.py --dir output            # 扫描目录内所有 *_tree_*.json
-  python data_validator.py --month 2026-08         # 只查指定月份
-  python data_validator.py --dir output --write    # 顺带写 quality_report.json
+  python data_validator.py --dir .            # 扫描目录内所有 *_tree_*.json
+  python data_validator.py --month 2026-08    # 只查指定月份
+  python data_validator.py --dir . --write    # 顺带写 quality_report.json
 
-零依赖（标准库）。适配本项目的四源树文件命名规范。
+零依赖（标准库）。
 """
 
 import argparse
 import json
+import glob
 import re
 import statistics
-from datetime import datetime
+from datetime import date
 from pathlib import Path
 
-# ============================================================
-# 项目路径配置
-# ============================================================
-
-SCRIPTS_DIR = Path(__file__).parent.resolve()
-PROJECT_DIR = SCRIPTS_DIR.parent.resolve()
-OUTPUT_DIR = PROJECT_DIR / "output"
-CONFIG_DIR = PROJECT_DIR / "config"
-CANONICAL_PATH = CONFIG_DIR / "canonical_wuxing_mapping.json"
-
 WUXING_ORDER = ["木", "火", "土", "金", "水"]
+CANONICAL_WUXING = {
+    "cs.AI": "火", "cs.LG": "土", "cs.CL": "水", "cs.CV": "木",
+    "cs.NE": "水", "cs.MA": "木", "cs.RO": "金", "cs.HC": "火",
+    "cs.IR": "金", "cs.MM": "火", "stat.ML": "土",
+    "LLM": "水", "NLP": "水", "计算机视觉": "木", "CV": "木",
+}
 VOLUME_RATIO_WARN = 3.0   # 量级比历史均值 >3x 或 <0.33x → warn
-EMPTY_IS_FAIL = True      # 空月 → fail
+EMPTY_IS_FAIL = True      # 空月 → fail（除非回退机制已处理）
 
-
-# ============================================================
-# canonical 五行映射加载
-# ============================================================
-
-def load_canonical() -> dict:
-    """从 canonical_wuxing_mapping.json 加载标准五行映射"""
-    if not CANONICAL_PATH.exists():
-        return {}
-    data = json.loads(CANONICAL_PATH.read_text(encoding="utf-8"))
-    sources = data.get("sources", {})
-    mapping = {}
-    for src, src_data in sources.items():
-        for node_id, wuxing in src_data.get("nodes", {}).items():
-            mapping[node_id] = wuxing
-    return mapping
-
-
-CANONICAL_WUXING = None  # lazy load
-
-
-def get_canonical() -> dict:
-    global CANONICAL_WUXING
-    if CANONICAL_WUXING is None:
-        CANONICAL_WUXING = load_canonical()
-    return CANONICAL_WUXING
-
-
-# ============================================================
-# 工具函数
-# ============================================================
 
 def extract_month(filename: str) -> str:
-    """从文件名中提取月份"""
     m = re.search(r"(\d{4})-(\d{2})", filename)
     if m:
         return f"{m.group(1)}-{m.group(2)}"
@@ -83,24 +49,7 @@ def extract_month(filename: str) -> str:
     return "unknown"
 
 
-def find_tree_files(directory: Path, month: str = None) -> list:
-    """查找目录下的四源树文件"""
-    patterns = [
-        "baai_tree_*.json",
-        "arxiv_ai_tree_*.json",
-        "github_tree_*.json",
-        "hf_tree_*.json",
-    ]
-    files = []
-    for pat in patterns:
-        for f in sorted(directory.glob(pat)):
-            files.append(str(f))
-    if month:
-        files = [f for f in files if extract_month(f) == month]
-    return files
-
-
-def load_collectignore(directory: Path) -> list:
+def load_collectignore(directory: Path):
     """解析 .collectignore（每行一个排除模式，支持 # 注释）"""
     excludes = []
     f = directory / ".collectignore"
@@ -112,16 +61,12 @@ def load_collectignore(directory: Path) -> list:
     return excludes
 
 
-# ============================================================
-# 七检查点
-# ============================================================
-
-def check_schema(tree: dict) -> tuple:
+def check_schema(tree):
     """检查点 1：schema 完整性"""
     issues = []
     if not isinstance(tree, dict):
         return "fail", "树文件不是 JSON 对象"
-    for k in ["source", "nodes"]:
+    for k in ["schema_version", "source", "month", "nodes"]:
         if k not in tree:
             issues.append(f"缺顶层字段 {k}")
     nodes = tree.get("nodes", [])
@@ -134,12 +79,11 @@ def check_schema(tree: dict) -> tuple:
                     issues.append(f"节点[{i}] 缺字段 {k}")
     if issues:
         return "fail", "; ".join(issues[:5])
-    sv = tree.get("schema_version", "?")
-    return "pass", f"schema v{sv} 完整，{len(nodes)} 节点"
+    return "pass", f"schema v{tree.get('schema_version', '?')} 完整，{len(nodes)} 节点"
 
 
-def check_wuxing(tree: dict) -> tuple:
-    """检查点 2：五行合法（未标注 → warn 提示将按 canonical 映射）"""
+def check_wuxing(tree):
+    """检查点 2：五行合法（已标注节点；未标注 → warn 提示将按 canonical）"""
     nodes = tree.get("nodes", [])
     unlabeled = 0
     invalid = []
@@ -157,7 +101,7 @@ def check_wuxing(tree: dict) -> tuple:
     return "pass", f"全部 {len(nodes)} 节点五行合法"
 
 
-def check_weight(tree: dict) -> tuple:
+def check_weight(tree):
     """检查点 3：权重为正"""
     nodes = tree.get("nodes", [])
     zeros = [n.get("id") for n in nodes if n.get("weight", 1) == 0]
@@ -169,15 +113,13 @@ def check_weight(tree: dict) -> tuple:
     return "pass", f"全部 {len(nodes)} 节点权重为正"
 
 
-def check_volume(tree: dict, history: dict) -> tuple:
+def check_volume(tree, history):
     """检查点 4：量级合理性（与同源历史均值比）"""
     nodes = tree.get("nodes", [])
-    src = tree.get("source", "?")
     total = sum(n.get("weight", 0) for n in nodes)
-    src_history = history.get(src, [])
-    if not src_history or len(src_history) < 2:
-        return "pass", f"无历史可比（total={total}），记录基线"
-    mean = statistics.mean(src_history)
+    if not history:
+        return "pass", f"无历史可比，记录基线（total={total}）"
+    mean = statistics.mean(history)
     if mean <= 0:
         return "pass", "历史均值异常（≤0），跳过量级检查"
     ratio = total / mean
@@ -187,40 +129,36 @@ def check_volume(tree: dict, history: dict) -> tuple:
     return "pass", f"量级正常（{ratio:.2f}x 历史均值）"
 
 
-def check_empty(tree: dict) -> tuple:
+def check_empty(tree):
     """检查点 5：空月检测"""
     nodes = tree.get("nodes", [])
     if len(nodes) == 0:
         return "fail", "空月（n_nodes=0）——需回退或补采"
-    total_weight = sum(n.get("weight", 0) for n in nodes)
-    if total_weight == 0:
+    if sum(n.get("weight", 0) for n in nodes) == 0:
         return "fail", "全 0 伪数据（total_weight=0）——采集失败未显式化"
-    return "pass", f"{len(nodes)} 节点，total_weight={total_weight}"
+    return "pass", f"{len(nodes)} 节点，total_weight={sum(n.get('weight',0) for n in nodes)}"
 
 
-def check_truncation(tree: dict) -> tuple:
+def check_truncation(tree):
     """检查点 6：截断检测"""
     meta = tree.get("meta", {})
     max_pages = meta.get("max_pages_per_tag") or meta.get("max_pages")
+    api = str(meta.get("api", ""))
     if max_pages:
         return "warn", f"采集页数上限 {max_pages}（可能截断）——需人工确认"
-    collector_version = meta.get("collector_version", "")
-    trun = tree.get("truncation", {})
-    if trun.get("is_truncated"):
-        return "warn", "truncation.is_truncated=true——采集可能不完整"
+    if "MAX_PAGES" in api:
+        return "warn", "meta 提及 MAX_PAGES，疑似截断风险"
     return "pass", "未见截断标记"
 
 
-def check_annotation(tree: dict) -> tuple:
+def check_annotation(tree):
     """检查点 7：标注一致性（canonical 对照）"""
     nodes = tree.get("nodes", [])
-    canonical = get_canonical()
     mismatches = []
     for n in nodes:
         cid = str(n.get("id", ""))
         w = n.get("wuxing")
-        # 尝试多种 id 格式匹配 canonical
-        expect = canonical.get(cid) or canonical.get(f"github:{cid}") or canonical.get(f"hf:{cid}")
+        expect = CANONICAL_WUXING.get(cid)
         if w and expect and w != expect:
             mismatches.append(f"{cid}: 树={w} vs canonical={expect}")
     if mismatches:
@@ -239,29 +177,29 @@ CHECKERS = [
 ]
 
 
-# ============================================================
-# 单树校验
-# ============================================================
-
-def validate_tree(tree: dict, filepath: str, history: dict, excludes: list) -> dict:
+def validate_tree(tree, path, history, excludes):
     """单树检查 → {检查点: 状态} + 状态汇总"""
     src = tree.get("source", "?")
     node_ids = {str(n.get("id", "")) for n in tree.get("nodes", [])}
 
     # 文件级排除：整个文件被 .collectignore 命中 → 跳过检查
-    file_excluded = [e for e in excludes if e in str(filepath)]
+    file_excluded = [e for e in excludes if e in str(path)]
     if file_excluded:
         return {
             "source": src, "month": tree.get("month"),
-            "path": str(filepath), "checks": {},
+            "path": str(path), "checks": {},
             "verdict": "excluded",
             "excluded": file_excluded,
         }
 
+    # 节点级排除：被排除的节点 id 不参与检查
+    node_excludes = {e.split(":", 1)[-1] for e in excludes
+                     if ":" in e and e.split(":")[-1] in node_ids}
+
     results = {}
     for name, fn in CHECKERS:
         if name == "volume":
-            status, msg = fn(tree, history)
+            status, msg = fn(tree, history.get(src, []))
         else:
             status, msg = fn(tree)
         results[name] = {"status": status, "message": msg}
@@ -275,32 +213,25 @@ def validate_tree(tree: dict, filepath: str, history: dict, excludes: list) -> d
         verdict = "pass_all"
     return {
         "source": src, "month": tree.get("month"),
-        "path": str(filepath), "checks": results,
+        "path": str(path), "checks": results,
         "verdict": verdict,
-        "excluded": list(file_excluded),
+        "excluded": list(file_excluded) + list(node_excludes),
     }
 
 
-# ============================================================
-# 主流程
-# ============================================================
-
 def main():
-    parser = argparse.ArgumentParser(description="Phase B 质量门（七检查点 + 三态 + 排除清单）")
-    parser.add_argument("--dir", default="output", help="树文件目录（默认 output/）")
+    parser = argparse.ArgumentParser(description="Phase B 质量门（七检查点 + 三态）")
+    parser.add_argument("--dir", default=".", help="树文件目录")
     parser.add_argument("--month", default=None, help="只检查指定月份 YYYY-MM")
     parser.add_argument("--write", action="store_true", help="写 quality_report.json")
     args = parser.parse_args()
 
     directory = Path(args.dir)
-    if not directory.is_absolute():
-        directory = PROJECT_DIR / directory
-
-    files = find_tree_files(directory, args.month)
+    files = sorted(glob.glob(str(directory / "*_tree_*.json")))
+    if args.month:
+        files = [f for f in files if extract_month(f) == args.month]
     if not files:
         print("❌ 未找到树文件")
-        print(f"   目录: {directory}")
-        print(f"   预期模式: baai_tree_*.json / arxiv_ai_tree_*.json / github_tree_*.json / hf_tree_*.json")
         return
 
     excludes = load_collectignore(directory)
@@ -324,7 +255,7 @@ def main():
 
     report = {
         "month": args.month,
-        "generated": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated": date.today().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "checks": {},
         "warnings": [],
         "collectignore": excludes,
@@ -379,7 +310,7 @@ def main():
             print(f"  ⚠️ {w}")
 
     if args.write:
-        out = OUTPUT_DIR / "quality_report.json"
+        out = Path("quality_report.json")
         out.write_text(json.dumps(report, ensure_ascii=False, indent=2),
                        encoding="utf-8")
         print(f"[输出] {out}")

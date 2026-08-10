@@ -1,0 +1,179 @@
+# 知识晶体 Schema v1.0
+# 三方融合提案的核心接口定义
+# 位置: wuxing_flowengine/config/crystal_schema.yaml
+
+schema_version: "1.0"
+generated: "2026-08-10"
+description: >
+  知识晶体 = OKF 结构层（可验证）× 五行语义层（可诊断）× 引用计算层（可计算）。
+  晶体是 Markdown 文件 + YAML frontmatter，不依赖数据库/向量库/运行时。
+
+# ============================================================
+# 晶体类型
+# ============================================================
+types:
+  DiagnosisResult:
+    description: 四源管线诊断输出——每月每源一条诊断记录的晶体封装
+    source: engine_v2_series.json
+    fields:
+      required:
+        - type
+        - title
+        - description
+        - generated
+        - sources
+        - status
+        - x-wuxing
+        - x-compute
+      optional:
+        - verified
+        - x-relation
+
+  KnowledgeDomain:
+    description: 概念图谱节点——领域/概念的知识晶体封装
+    source: canonical_wuxing_mapping.json + 概念图谱
+    fields:
+      required:
+        - type
+        - title
+        - description
+        - generated
+        - sources
+        - status
+        - x-wuxing
+      optional:
+        - verified
+        - x-compute
+        - x-relation
+
+  ClassicalInsight:
+    description: 经典文本解读——道德经等经典的逐章晶体封装
+    source: 经典解读 Markdown 文件
+    fields:
+      required:
+        - type
+        - title
+        - description
+        - generated
+        - sources
+        - status
+        - x-wuxing
+      optional:
+        - verified
+        - x-relation
+        - x-compute
+
+  TizhengCard:
+    description: 体证卡片——用户践行反馈的唯一新实体，回流公共智慧池
+    source: 镜鉴入口 → 用户践行记录
+    fields:
+      required:
+        - type
+        - title
+        - description
+        - generated
+        - verified
+        - sources
+        - status
+        - x-wuxing
+        - x-relation
+      optional:
+        - x-compute
+
+# ============================================================
+# 字段定义
+# ============================================================
+fields:
+  type:
+    type: enum
+    values: [KnowledgeDomain, DiagnosisResult, ClassicalInsight, TizhengCard]
+    description: 晶体类型，决定必需字段集合
+
+  title:
+    type: string
+    description: 晶体标题（人类可读）
+    example: "计算机视觉领域月度画像"
+
+  description:
+    type: string
+    description: 一句话描述
+    example: "CV 领域 2026-08 月度知识树节点诊断"
+
+  generated:
+    type: object
+    description: 生成溯源（谁、何时产生此晶体）
+    fields:
+      by: { type: string, description: "生成器标识", example: "export_crystals.py/1.0" }
+      at: { type: datetime, description: "生成时间", example: "2026-08-10T09:00:00Z" }
+
+  verified:
+    type: list
+    description: >
+      验证事件列表。两级验证：
+      - process:quality-gate — 机器确认（质量门通过）
+      - human:<id> — 人工复核（用户在前端点击确认）
+    items:
+      by: { type: string, example: "process:quality-gate" }
+      at: { type: datetime, example: "2026-08-10T09:01:00Z" }
+
+  sources:
+    type: list
+    description: 数据来源引用（引用不复制原则）
+    items:
+      id: { type: string, description: "来源标识" }
+      resource: { type: string, description: "文件名或 URL" }
+      usage_count: { type: integer, optional: true, description: "使用量" }
+
+  status:
+    type: enum
+    values: [draft, current, deprecated, retired]
+    description: >
+      晶体生命周期：
+      - draft: 草稿（刚生成，未审核）
+      - current: 当前有效（通过质量门或人工确认）
+      - deprecated: 已过时（有新版本替代，但数据仍可引用）
+      - retired: 已退役（数据不再有效，仅供历史参考）
+
+  x-wuxing:
+    type: object
+    description: 五行语义层——可参与五行诊断计算
+    fields:
+      dominant: { type: enum, values: [木, 火, 土, 金, 水], description: "主导行" }
+      sp: { type: number, description: "存在度 S_p ∈ [20, 80]", example: 39.4 }
+      stage: { type: enum, values: [生, 克, 乘, 侮, 变], description: "阶段判定" }
+      shell_sp: { type: number, optional: true, description: "壳 S_p（BAAI 规划层）" }
+      nucleus_sp: { type: number, optional: true, description: "核 S_p（arXiv 产出层）" }
+      evolution: { type: string, optional: true, description: "演化路径", example: "木→水→水" }
+
+  x-compute:
+    type: object
+    description: 可计算层——引用计算层 JSON，不复制数据（奥卡姆原则）
+    fields:
+      ref: { type: string, description: "计算层 JSON 引用路径", example: "engine_v2_series.json#arxiv" }
+      c_k: { type: number, description: "因果激活度（层间生克边数）" }
+      k_y: { type: number, description: "缘位协调度（五行互补性）" }
+
+  x-relation:
+    type: object
+    description: 晶体间关系——用于检索和组装
+    optional: true
+    fields:
+      validates: { type: list, description: "验证了哪些认知晶体", items: { type: string } }
+      challenges: { type: list, description: "颠覆了哪些认知晶体", items: { type: string } }
+      depends_on: { type: list, description: "依赖哪些晶体", items: { type: string } }
+      related_to: { type: list, description: "关联哪些晶体", items: { type: string } }
+
+# ============================================================
+# 设计原则
+# ============================================================
+principles:
+  - name: "引用不复制"
+    description: "x-compute.ref 引用计算层 JSON，晶体只做结构化封装，不复制数据"
+  - name: "两级验证"
+    description: "verified 分 process:quality-gate（机器）和 human:<id>（人工）两级"
+  - name: "生命周期显式"
+    description: "status 从 draft → current → deprecated → retired，知识过时显式标记"
+  - name: "Base 铁律"
+    description: "只组织，不生产——晶体库封装已有知识，不创造新知识"
+  - name: "奥卡姆剃刀"
+    description: "不需要新数据库/向量库/运行时/框架，全部复用现有资产"
