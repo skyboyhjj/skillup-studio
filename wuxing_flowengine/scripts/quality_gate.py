@@ -26,7 +26,7 @@ from collections import defaultdict
 # 确保 scripts/ 在 path 中，以便导入同目录模块
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from data_validator import validate_tree_file, VALID_WUXING
+from data_validator import validate_tree, WUXING_ORDER as VALID_WUXING, load_collectignore
 from annotation_check import load_canonical, validate_annotation
 
 
@@ -48,11 +48,14 @@ def discover_tree_files(month: str = None) -> dict:
     发现所有树文件。
 
     Returns:
-        {(source, month): {"path": str, "tree": dict}}
+        {(source, month): {"path": str, "tree": dict, "empty": bool}}
     """
     tree_files = {}
     for f in TREE_DIR.glob("*_tree_*.json"):
-        # 跳过 ai_tree 旧格式（arxiv_ai_tree 与 arxiv_tree 重复时取 arxiv_tree）
+        # 跳过 ai_tree 旧格式（与 arxiv_tree 重复时只保留 arxiv_tree）
+        if "_ai_tree_" in f.name:
+            continue
+
         with open(f, "r", encoding="utf-8") as fh:
             tree = json.load(fh)
 
@@ -62,11 +65,13 @@ def discover_tree_files(month: str = None) -> dict:
         if month and tree_month != month:
             continue
 
-        # 跳过空月（无采集数据）
-        if not tree.get("nodes"):
-            tree_files[(source, tree_month)] = {"path": str(f), "tree": tree}
-        else:
-            tree_files[(source, tree_month)] = {"path": str(f), "tree": tree}
+        # 标记空月（无采集数据）
+        is_empty = not tree.get("nodes")
+        tree_files[(source, tree_month)] = {
+            "path": str(f),
+            "tree": tree,
+            "empty": is_empty,
+        }
 
     return tree_files
 
@@ -95,6 +100,7 @@ def run_quality_gate(month: str = None) -> dict:
     """
     canonical = load_canonical()
     tree_files = discover_tree_files(month)
+    excludes = load_collectignore(TREE_DIR)
 
     # 构建历史数据（近 3 月 n_nodes）
     history = defaultdict(dict)
@@ -108,28 +114,32 @@ def run_quality_gate(month: str = None) -> dict:
 
     for (source, m), info in sorted(tree_files.items()):
         tree = info["tree"]
+        filepath = info["path"]
 
         # 近 3 月历史（不含当前月）
         hist = {k: v for k, v in history.get(source, {}).items() if k < m}
         hist = dict(sorted(hist.items())[-3:])
 
-        # 检查点 1-6
-        result = validate_tree_file(tree, source, m, {source: hist})
+        # 检查点 1-6（data_validator 七检查点，annotation 由下方覆盖）
+        result = validate_tree(tree, filepath, hist, excludes)
 
-        # 检查点 7: 标注一致性
-        result["annotation"] = validate_annotation(tree, canonical, source)
+        # 检查点 7: 标注一致性（使用 annotation_check 模块，覆盖 data_validator 内置的 annotation）
+        ann_str = validate_annotation(tree, canonical, source)
+        ann_status = "fail" if ann_str.startswith("FAIL") else "warn" if ann_str.startswith("warn") else "pass"
+        result["checks"]["annotation"] = {"status": ann_status, "message": ann_str}
 
         checks[f"{source}/{m}"] = result
 
         # 收集警告和失败
-        for ck, r in result.items():
-            if r.startswith("FAIL"):
-                all_failures.append(f"[{source}/{m}] {ck}: {r}")
-            elif r.startswith("warn"):
-                all_warnings.append(f"[{source}/{m}] {ck}: {r}")
+        for ck, r in result.get("checks", {}).items():
+            status = r.get("status", "?") if isinstance(r, dict) else "?"
+            msg = r.get("message", "") if isinstance(r, dict) else str(r)
+            if status == "fail":
+                all_failures.append(f"[{source}/{m}] {ck}: {msg}")
+            elif status == "warn":
+                all_warnings.append(f"[{source}/{m}] {ck}: {msg}")
 
     # 标注一致性总览
-    # 过滤有效源（source 不是 "unknown"）
     annotation_summary = run_annotation_summary(checks, canonical)
 
     # 整体裁决
@@ -157,15 +167,15 @@ def run_quality_gate(month: str = None) -> dict:
 def run_annotation_summary(checks: dict, canonical: dict) -> dict:
     """汇总标注一致性"""
     canonical_ver = canonical.get("annotation_version", "unknown")
-    versions = defaultdict(list)
     mismatch_count = 0
     new_node_count = 0
 
     for key, result in checks.items():
-        ann = result.get("annotation", "pass")
-        if ann.startswith("FAIL"):
+        ann = result.get("checks", {}).get("annotation", {})
+        ann_status = ann.get("status", "pass") if isinstance(ann, dict) else "pass"
+        if ann_status == "fail":
             mismatch_count += 1
-        elif ann.startswith("warn"):
+        elif ann_status == "warn":
             new_node_count += 1
 
     return {
@@ -203,15 +213,17 @@ def print_summary(report: dict):
     for key, result in report["checks"].items():
         statuses = []
         for ck in ["schema", "wuxing", "weight", "volume", "empty", "truncation", "annotation"]:
-            r = result.get(ck, "?")
-            if r == "pass":
+            r = result.get("checks", {}).get(ck, {})
+            status = r.get("status", "?") if isinstance(r, dict) else "?"
+            msg = r.get("message", "") if isinstance(r, dict) else str(r)
+            if status == "pass":
                 statuses.append(f"  ✓ {ck}")
-            elif r.startswith("FAIL"):
-                statuses.append(f"  ❌ {ck}: {r}")
-            elif r.startswith("warn"):
-                statuses.append(f"  ⚠ {ck}: {r}")
+            elif status == "fail":
+                statuses.append(f"  ❌ {ck}: {msg}")
+            elif status == "warn":
+                statuses.append(f"  ⚠ {ck}: {msg}")
             else:
-                statuses.append(f"  ? {ck}: {r}")
+                statuses.append(f"  ? {ck}: {msg}")
         print(f"\n[{key}]")
         for s in statuses:
             print(s)
