@@ -73,7 +73,7 @@
         "hf:text-to-image": "木",
         "hf:automatic-speech-recognition": "水",
         "hf:reinforcement-learning": "金",
-        "hf:text-to-text": "水"
+        "hf:text2text-generation": "水"
       }
     }
   },

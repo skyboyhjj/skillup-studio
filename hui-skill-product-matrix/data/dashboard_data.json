@@ -1,6 +1,6 @@
 {
   "schema_version": "1.1",
-  "generated": "2026-08-09T21:43:49.639909",
+  "generated": "2026-08-10T13:27:19.459584",
   "provenance": {
     "collector": "v1.2",
     "annotation": "v2",
@@ -212,14 +212,17 @@
     ]
   },
   "quality": {
-    "run_id": "2026-07",
-    "generated": "2026-08-09T21:43:48.943382",
+    "run_id": "2026-08",
+    "generated": "2026-08-10T13:27:18.266506",
     "status": {
-      "a": "success",
-      "g": "success",
-      "h": "warning"
+      "arxiv_ai": "success",
+      "github": "success",
+      "huggingface": "warning"
     },
     "warnings": [
+      "[huggingface/2026-08] weight: warn(['nodes[11].weight=0'])",
+      "[huggingface/2026-05] weight: warn(['nodes[0].weight=0', 'nodes[1].weight=0', 'nodes[2].weight=0', 'nodes[5].weight=0', 'nodes[6].weight=0', 'nodes[7].weight=0', 'nodes[8].weight=0', 'nodes[9].weight=0', 'nodes[10].weight=0', 'nodes[11].weight=0'])",
+      "[huggingface/2026-06] weight: warn(['nodes[11].weight=0'])",
       "[huggingface/2026-07] weight: warn(['nodes[11].weight=0'])"
     ],
     "failures": [],
@@ -334,5 +337,243 @@
     "papers_202606.json",
     "papers_202607.json",
     "papers_202608.json"
-  ]
+  ],
+  "monitoring": {
+    "metrics": {
+      "success_rate": {
+        "value": 66.7,
+        "unit": "%",
+        "threshold": "75%",
+        "status": "error"
+      },
+      "truncation_rate": {
+        "value": 0.0,
+        "unit": "%",
+        "threshold": "0%",
+        "status": "ok"
+      },
+      "empty_months": {
+        "value": 1,
+        "unit": "个",
+        "threshold": "0",
+        "status": "warning"
+      },
+      "annotation_drift": {
+        "value": 0,
+        "unit": "处",
+        "threshold": "0",
+        "status": "ok"
+      },
+      "pipeline_elapsed": {
+        "value": 0.8,
+        "unit": "s",
+        "threshold": "3600s",
+        "status": "ok"
+      },
+      "volume_alerts": {
+        "value": 0,
+        "unit": "处",
+        "threshold": "0",
+        "status": "ok"
+      }
+    },
+    "alerts": [
+      {
+        "level": "error",
+        "metric": "采集成功率",
+        "value": "66.7%",
+        "threshold": "< 75%",
+        "message": "采集成功率 66.7% 低于 75% 阈值"
+      },
+      {
+        "level": "warning",
+        "metric": "空月数",
+        "value": "1",
+        "threshold": "> 0",
+        "message": "1 个源×月数据为空"
+      }
+    ],
+    "total_sources": 3,
+    "success_count": 2,
+    "generated": "2026-08-10T13:27:19.459584"
+  },
+  "task_overview": {
+    "tasks": {
+      "2026-05": {
+        "arxiv": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "baai": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成（默认通过）"
+        },
+        "github": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "huggingface": {
+          "status": "to_confirm",
+          "can_proceed": true,
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+        }
+      },
+      "2026-06": {
+        "arxiv": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "baai": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成（默认通过）"
+        },
+        "github": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "huggingface": {
+          "status": "to_confirm",
+          "can_proceed": true,
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+        }
+      },
+      "2026-07": {
+        "arxiv": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "baai": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成（默认通过）"
+        },
+        "github": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "huggingface": {
+          "status": "to_confirm",
+          "can_proceed": true,
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+        }
+      },
+      "2026-08": {
+        "arxiv": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "baai": {
+          "status": "pending",
+          "can_proceed": false,
+          "action": "等待 BAAI 月末报告发布（次月初可用）"
+        },
+        "github": {
+          "status": "executed",
+          "can_proceed": false,
+          "action": "已完成，无需操作"
+        },
+        "huggingface": {
+          "status": "to_confirm",
+          "can_proceed": true,
+          "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])"
+        }
+      }
+    },
+    "summary": {
+      "executed": 11,
+      "to_confirm": 4,
+      "pending": 1,
+      "failed": 0
+    },
+    "pending_proceed": 0,
+    "pending_wait": 1,
+    "status_criteria": {
+      "executed": {
+        "label": "已执行",
+        "description": "有数据（total > 0）且质量门检查全部通过（status=success）",
+        "next_action": "无需操作"
+      },
+      "to_confirm": {
+        "label": "待确认",
+        "description": "有数据但质量门检查存在 warning（如 weight=0、截断等），需人工审核 warning 内容后决定接受或重采",
+        "next_action": "审核 warning → 接受则标记完成，否则重采"
+      },
+      "pending": {
+        "label": "待执行",
+        "description": "无数据或 total=0，且未被标记为失败。可继续执行采集（需注意数据源可用性约束，如 BAAI 月末发布）",
+        "next_action": "can_proceed=True → 执行采集；can_proceed=False → 等待就绪"
+      },
+      "failed": {
+        "label": "失败",
+        "description": "无数据且存在空月/采集失败标记（如 API 限流、网络超时），需排查原因后重试",
+        "next_action": "排查失败原因（日志: output/runs/）→ 重试采集"
+      }
+    },
+    "action_guidance": [
+      {
+        "month": "2026-05",
+        "source": "huggingface",
+        "status": "to_confirm",
+        "can_proceed": true,
+        "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+        "priority": "high"
+      },
+      {
+        "month": "2026-06",
+        "source": "huggingface",
+        "status": "to_confirm",
+        "can_proceed": true,
+        "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+        "priority": "high"
+      },
+      {
+        "month": "2026-07",
+        "source": "huggingface",
+        "status": "to_confirm",
+        "can_proceed": true,
+        "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+        "priority": "high"
+      },
+      {
+        "month": "2026-08",
+        "source": "huggingface",
+        "status": "to_confirm",
+        "can_proceed": true,
+        "action": "审核质量警告后确认：warn(['nodes[11].weight=0'])",
+        "priority": "high"
+      },
+      {
+        "month": "2026-08",
+        "source": "baai",
+        "status": "pending",
+        "can_proceed": false,
+        "action": "等待 BAAI 月末报告发布（次月初可用）",
+        "priority": "normal"
+      }
+    ],
+    "sources": [
+      "arxiv",
+      "baai",
+      "github",
+      "huggingface"
+    ],
+    "months": [
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08"
+    ],
+    "latest_month": "2026-08",
+    "current_month": "2026-08",
+    "generated": "2026-08-10T13:27:19.459584"
+  }
 }

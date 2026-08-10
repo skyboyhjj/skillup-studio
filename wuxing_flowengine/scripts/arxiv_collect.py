@@ -29,6 +29,7 @@ arXiv AI 子领域月度采集器 (W2)
 import argparse
 import json
 import re
+import socket
 import sys
 import time
 import urllib.error
@@ -41,10 +42,12 @@ from pathlib import Path
 
 # ============ 配置 ============
 ARXIV_API_URL = "http://export.arxiv.org/api/query"
-USER_AGENT = "wuxing-flowengine-arxiv-collector/0.2 (monthly snapshot; non-commercial research)"
+USER_AGENT = "wuxing-flowengine-arxiv-collector/0.3 (monthly snapshot; non-commercial research)"
 MIN_INTERVAL = 3.0          # 合规：请求最小间隔（秒）
 MAX_PER_PAGE = 2000         # arXiv API 单页上限
 MAX_PER_CATEGORY = 5000     # 每分类每月采集上限（保护）
+CONNECT_TIMEOUT_S = 10      # 连接超时（秒）
+READ_TIMEOUT_S = 30         # 读取超时（秒）
 ATOM_NS = {"atom": "http://www.w3.org/2005/Atom",
            "arxiv": "http://arxiv.org/schemas/atom",
            "opensearch": "http://a9.com/-/spec/opensearch/1.1/"}
@@ -158,7 +161,7 @@ class PoliteFetcher:
         self.retry_stats = {"total_retries": 0, "retry_successes": 0}
 
     def fetch(self, url):
-        """带指数退避重试的请求"""
+        """带指数退避重试 + 超时拆分（连接 10s + 读取 30s）的请求（v0.3）"""
         elapsed = time.time() - self.last_request_time
         if elapsed < self.min_interval:
             time.sleep(self.min_interval - elapsed)
@@ -168,8 +171,10 @@ class PoliteFetcher:
             self.last_request_time = time.time()
             req = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
             t0 = time.time()
+            old_timeout = socket.getdefaulttimeout()
+            socket.setdefaulttimeout(CONNECT_TIMEOUT_S)  # 连接超时 10s
             try:
-                with urllib.request.urlopen(req, timeout=30) as resp:
+                with urllib.request.urlopen(req, timeout=READ_TIMEOUT_S) as resp:  # 读取超时 30s
                     body = resp.read().decode("utf-8")
                 dt = time.time() - t0
                 self.request_log.append({
@@ -188,6 +193,8 @@ class PoliteFetcher:
             except Exception as e:
                 last_error = str(e)
                 self.retry_stats["total_retries"] += 1
+            finally:
+                socket.setdefaulttimeout(old_timeout)
 
             # 指数退避：5s → 10s → 20s
             if attempt < self.max_retries:
@@ -225,6 +232,10 @@ class PoliteFetcher:
                 "requests_retried": len(retried),
                 "max_retries": self.max_retries,
                 "retry_base_delay_s": self.retry_base_delay,
+            },
+            "timeout": {
+                "connect_s": CONNECT_TIMEOUT_S,
+                "read_s": READ_TIMEOUT_S,
             },
             "note": "间隔合规" if ok else "存在间隔不足或请求错误",
             "error_details": [e["error"] for e in errors] if errors else [],
@@ -424,6 +435,8 @@ def main():
             "categories_used": len(categories),
             "categories_zero": sum(1 for cat in categories if cat_counter.get(cat, 0) == 0),
             "api_used": "export.arxiv.org/api/query",
+            "collector_version": "0.3",
+            "timeout": {"connect_s": CONNECT_TIMEOUT_S, "read_s": READ_TIMEOUT_S},
         },
     }
     tree_path = OUTPUT_DIR / f"arxiv_tree_{year}{month:02d}.json"

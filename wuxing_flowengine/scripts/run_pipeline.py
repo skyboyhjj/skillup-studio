@@ -39,6 +39,7 @@ from typing import Optional
 SCRIPTS_DIR = Path(__file__).parent.resolve()
 PROJECT_DIR = SCRIPTS_DIR.parent.resolve()
 OUTPUT_DIR = PROJECT_DIR / "output"
+REPORT_DIR = OUTPUT_DIR / "reports"
 DIAGNOSE_DIR = PROJECT_DIR / "diagnose"
 FRONTEND_DATA_DIR = PROJECT_DIR.parent / "hui-skill-product-matrix" / "data"
 FRONTEND_PAGES_DIR = PROJECT_DIR.parent / "hui-skill-product-matrix" / "pages"
@@ -163,7 +164,7 @@ def run_full_pipeline(month: str = None,
         ("shell", "壳核分析",
          [PYTHON, str(SHELL_NUCLEUS)]),
         ("dashboard", "仪表盘打包",
-         [PYTHON, str(BUILD_DASHBOARD)]),
+         [PYTHON, str(BUILD_DASHBOARD), "--quality", str(REPORT_DIR / f"quality_{month}.json")]),
         ("deploy", "前端部署",
          None),  # 特殊处理：复制文件
     ]

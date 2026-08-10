@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "source": "github",
+  "timestamp": "2026-08-10",
+  "month": "2026-08",
+  "source_type": "real",
+  "nodes": [
+    {
+      "id": "github:llm",
+      "name": "llm",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 3434
+    },
+    {
+      "id": "github:large-language-models",
+      "name": "large-language-models",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 69
+    },
+    {
+      "id": "github:machine-learning",
+      "name": "machine-learning",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 2545
+    },
+    {
+      "id": "github:deep-learning",
+      "name": "deep-learning",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 661
+    },
+    {
+      "id": "github:natural-language-processing",
+      "name": "natural-language-processing",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 73
+    },
+    {
+      "id": "github:computer-vision",
+      "name": "computer-vision",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 933
+    },
+    {
+      "id": "github:reinforcement-learning",
+      "name": "reinforcement-learning",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 163
+    },
+    {
+      "id": "github:multimodal",
+      "name": "multimodal",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 107
+    },
+    {
+      "id": "github:agents",
+      "name": "agents",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 420
+    },
+    {
+      "id": "github:autonomous-agents",
+      "name": "autonomous-agents",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 126
+    },
+    {
+      "id": "github:retrieval-augmented-generation",
+      "name": "retrieval-augmented-generation",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 193
+    },
+    {
+      "id": "github:graph-neural-network",
+      "name": "graph-neural-network",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 1
+    },
+    {
+      "id": "github:federated-learning",
+      "name": "federated-learning",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 27
+    },
+    {
+      "id": "github:robotics",
+      "name": "robotics",
+      "parent": "github",
+      "wuxing": null,
+      "weight": 387
+    }
+  ],
+  "meta": {
+    "node_count": 14,
+    "total_weight": 9139,
+    "api": "api.github.com/search/repositories (total_count)",
+    "authenticated": true,
+    "annotation_version": "v2"
+  }
+}

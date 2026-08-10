@@ -130,6 +130,25 @@
 .quality-cell.fail { background: #fce4e4; color: var(--state-error); }
 .quality-cell.warn { background: #fef3e0; color: var(--state-warning); }
 
+/* 监控仪表盘 */
+.monitor-gauge { position: relative; width: 100%; height: 8px; background: var(--brand-muted); border-radius: 4px; overflow: hidden; }
+.monitor-gauge-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.monitor-gauge-fill.ok { background: var(--state-success); }
+.monitor-gauge-fill.warning { background: var(--state-warning); }
+.monitor-gauge-fill.error { background: var(--state-error); }
+
+/* 任务概览矩阵 */
+.task-cell { width: 44px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; transition: transform 0.15s; }
+.task-cell:hover { transform: scale(1.1); }
+.task-cell.executed { background: #e8f5e9; color: var(--state-success); cursor: default; }
+.task-cell.to_confirm { background: #fef3e0; color: var(--state-warning); cursor: pointer; }
+.task-cell.to_confirm:hover { background: #fde6b3; }
+.task-cell.confirmed { background: #d4edda; color: var(--state-success); cursor: pointer; border-bottom: 2px solid var(--state-success); }
+.task-cell.confirmed:hover { background: #c3e6cb; }
+.task-cell.pending { background: #f5d68a; color: #854d0e; cursor: pointer; }
+.task-cell.pending:hover { background: #e8c56a; }
+.task-cell.failed { background: #fce4e4; color: #b91c1c; }
+
 /* 响应式 */
 @media (max-width: 768px) {
   .filter-panel { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; z-index: 50;
@@ -304,8 +323,28 @@
         <div id="qualityMatrix"></div>
       </section>
 
-      <!-- ⑥ 论文列表 -->
+      <!-- ⑥ 运维监控面板 -->
       <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone6">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="activity" class="w-5 h-5 text-primary"></i> 运维监控面板
+        </h2>
+        <div id="monitoringPanel">
+          <div class="skeleton" style="height:120px;"></div>
+        </div>
+      </section>
+
+      <!-- ⑦ 每月任务概览 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone7">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <i data-lucide="clipboard-list" class="w-5 h-5 text-primary"></i> 每月任务概览
+        </h2>
+        <div id="taskOverview">
+          <div class="skeleton" style="height:160px;"></div>
+        </div>
+      </section>
+
+      <!-- ⑧ 论文列表 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone8">
         <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
           <i data-lucide="file-text" class="w-5 h-5 text-primary"></i> 论文列表
         </h2>
@@ -473,6 +512,8 @@ function renderAll() {
   renderEvolutionPaths();
   renderTrendChart();
   renderQualityMatrix();
+  renderMonitoringPanel();
+  renderTaskOverview();
   renderPaperList();
   lucide.createIcons();
 }
@@ -482,20 +523,49 @@ function renderHero() {
   const lastMonth = dashboardData.monthly[0]?.month || '---';
   document.getElementById('heroSubtitle').textContent = `月度概览 · ${lastMonth}`;
 
-  // 采集状态条
+  // 采集状态条（基于确认状态调整）
   const statusBar = document.getElementById('sourceStatusBar');
   const quality = dashboardData.quality || {};
   const status = quality.status || {};
   const sourceSources = [...new Set(dashboardData.monthly.map(r => r.source))];
+  const confirmed = getConfirmedTasks();
+  const taskOverview = dashboardData.task_overview || {};
+  const tasks = taskOverview.tasks || {};
+  const months = taskOverview.months || [];
+
+  // 计算每个源有多少待确认/待执行任务及已确认数量
+  const sourceConfirmStats = {};
+  sourceSources.forEach(src => {
+    sourceConfirmStats[src] = { toConfirm: 0, pending: 0, confirmed: 0 };
+    months.forEach(mon => {
+      const key = `${mon}|${src}`;
+      const ti = (tasks[mon] || {})[src] || {};
+      if (ti.status === 'to_confirm' || ti.status === 'pending') {
+        if (confirmed[key]) {
+          sourceConfirmStats[src].confirmed++;
+        } else if (ti.status === 'to_confirm') {
+          sourceConfirmStats[src].toConfirm++;
+        } else {
+          sourceConfirmStats[src].pending++;
+        }
+      }
+    });
+  });
 
   statusBar.innerHTML = sourceSources.map(s => {
     const st = status[s] || 'unknown';
+    const cs = sourceConfirmStats[s] || { toConfirm: 0, pending: 0, confirmed: 0 };
+    // 如果该源所有待确认/待执行任务都已确认，则将状态提升为 success
+    let effectiveSt = st;
+    if (cs.toConfirm === 0 && cs.pending === 0 && cs.confirmed > 0) {
+      effectiveSt = 'success';
+    }
     const icons = { success: 'check-circle', failed: 'x-circle', warning: 'alert-triangle', rollback: 'rotate-ccw', unknown: 'help-circle' };
     const colors = { success: 'text-[var(--state-success)]', failed: 'text-[var(--state-error)]', warning: 'text-[var(--state-warning)]', rollback: 'text-[var(--state-info)]', unknown: 'text-muted-foreground' };
     const labels = { success: '正常', failed: '失败', warning: '警告', rollback: '回退', unknown: '未知' };
     return `<div class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-muted">
-      <span class="status-dot ${st}"></span>
-      ${SOURCE_LABELS[s] || s}: ${labels[st] || st}
+      <span class="status-dot ${effectiveSt}"></span>
+      ${SOURCE_LABELS[s] || s}: ${labels[effectiveSt] || effectiveSt}
     </div>`;
   }).join('');
 }
@@ -507,13 +577,28 @@ function renderStats() {
   const arxiv = monthly.find(r => r.source === 'arxiv' || r.source === 'arxiv_ai') || {};
   const baai = monthly.find(r => r.source === 'baai') || {};
 
+  // 计算有效警告数（扣除已确认任务的警告）
+  const confirmed = getConfirmedTasks();
+  const quality = dashboardData.quality || {};
+  const rawWarnings = quality.warnings || [];
+  const activeWarnings = rawWarnings.filter(w => {
+    // 警告格式: "[huggingface/2026-05] weight: ..."
+    const match = w.match(/^\[(\w+)\/(\d{4}-\d{2})\]/);
+    if (!match) return true;
+    const key = `${match[2]}|${match[1]}`;
+    return !confirmed[key];
+  });
+  const confirmedWarningCount = rawWarnings.length - activeWarnings.length;
+  const qualityLabel = activeWarnings.length === 0 ? '通过' : '注意';
+  const qualitySub = activeWarnings.length + ' 警告' + (confirmedWarningCount > 0 ? ' (' + confirmedWarningCount + ' 已确认)' : '');
+
   const cards = [
     { label: '壳 S_p', value: sn.S_p_shell?.toFixed(2) || '--', sub: 'BAAI', icon: 'shield' },
     { label: '核 S_p', value: sn.S_p_nucleus?.toFixed(2) || '--', sub: 'arXiv', icon: 'atom' },
     { label: '收敛差', value: sn.S_p_diff?.toFixed(2) || '--', sub: '|壳-核|', icon: 'diff' },
     { label: '主导行', value: (arxiv.dominant || '--') + ' / ' + (baai.dominant || '--'), sub: '核/壳', icon: 'compass' },
     { label: '演化路径', value: arxiv.evolution?.path || '--', sub: '核', icon: 'git-branch' },
-    { label: '数据质量', value: dashboardData.quality?.verdict?.includes('全部通过') ? '通过' : '注意', sub: dashboardData.quality?.warnings?.length + ' 警告', icon: 'shield-check' }
+    { label: '数据质量', value: qualityLabel, sub: qualitySub, icon: 'shield-check' }
   ];
 
   document.getElementById('statsCards').innerHTML = cards.map(c => `
@@ -761,13 +846,31 @@ function renderTrendChart() {
 // --- ⑤ 质量矩阵 ---
 function renderQualityMatrix() {
   const quality = dashboardData.quality || {};
-  const warnings = quality.warnings || [];
+  const rawWarnings = quality.warnings || [];
   const failures = quality.failures || [];
+
+  // 过滤已确认任务的警告
+  const confirmed = getConfirmedTasks();
+  const activeWarnings = rawWarnings.filter(w => {
+    const match = w.match(/^\[(\w+)\/(\d{4}-\d{2})\]/);
+    if (!match) return true;
+    const key = `${match[2]}|${match[1]}`;
+    return !confirmed[key];
+  });
+  const confirmedCount = rawWarnings.length - activeWarnings.length;
+
+  // 裁决文案：无未确认警告 → 视为通过
+  const effectiveVerdict = activeWarnings.length === 0 && failures.length === 0
+    ? '✓ 全部通过（含 ' + confirmedCount + ' 项已确认警告）'
+    : quality.verdict || '--';
+  const verdictClass = activeWarnings.length === 0 && failures.length === 0
+    ? 'text-[var(--state-success)]'
+    : (quality.verdict?.includes('全部通过') ? 'text-[var(--state-success)]' : 'text-[var(--state-warning)]');
 
   document.getElementById('qualityMatrix').innerHTML = `
     <div class="mb-3">
       <span class="text-sm font-medium">裁决: </span>
-      <span class="text-sm ${quality.verdict?.includes('全部通过') ? 'text-[var(--state-success)]' : 'text-[var(--state-warning)]'}">${quality.verdict || '--'}</span>
+      <span class="text-sm ${verdictClass}">${effectiveVerdict}</span>
     </div>
     ${failures.length > 0 ? `
       <div class="mb-2">
@@ -775,17 +878,418 @@ function renderQualityMatrix() {
         ${failures.map(f => `<div class="text-xs text-muted-foreground ml-2">${f}</div>`).join('')}
       </div>
     ` : ''}
-    ${warnings.length > 0 ? `
+    ${activeWarnings.length > 0 ? `
       <div class="mb-2">
-        <div class="text-xs font-medium text-[var(--state-warning)] mb-1">⚠ 警告 (${warnings.length})</div>
-        ${warnings.map(w => `<div class="text-xs text-muted-foreground ml-2">${w}</div>`).join('')}
+        <div class="text-xs font-medium text-[var(--state-warning)] mb-1">⚠ 警告 (${activeWarnings.length})</div>
+        ${activeWarnings.map(w => `<div class="text-xs text-muted-foreground ml-2">${w}</div>`).join('')}
       </div>
-    ` : ''}
-    ${failures.length === 0 && warnings.length === 0 ? '<p class="text-sm text-[var(--state-success)]">✓ 全部通过</p>' : ''}
+    ` : (rawWarnings.length > 0 ? `
+      <div class="mb-2">
+        <div class="text-xs font-medium text-[var(--state-success)] mb-1">✓ 已确认警告 (${confirmedCount})</div>
+        ${rawWarnings.map(w => `<div class="text-xs text-muted-foreground ml-2 line-through opacity-60">${w}</div>`).join('')}
+      </div>
+    ` : '')}
+    ${failures.length === 0 && activeWarnings.length === 0 && rawWarnings.length === 0 ? '<p class="text-sm text-[var(--state-success)]">✓ 全部通过</p>' : ''}
   `;
 }
 
-// --- ⑥ 论文列表 ---
+// --- ⑥ 运维监控面板 ---
+function renderMonitoringPanel() {
+  const monitoring = dashboardData.monitoring || {};
+  const metrics = monitoring.metrics || {};
+  const rawAlerts = monitoring.alerts || [];
+
+  // 基于确认状态重算指标
+  const confirmed = getConfirmedTasks();
+  const taskOverview = dashboardData.task_overview || {};
+  const tasks = taskOverview.tasks || {};
+  const months = taskOverview.months || [];
+  const sources = taskOverview.sources || [];
+
+  // 统计总任务数和已确认任务数
+  let totalTasks = 0;
+  let confirmedTasks = 0;
+  let pendingConfirmTasks = 0;  // 待确认或待执行的任务数
+  months.forEach(mon => {
+    const monthTasks = tasks[mon] || {};
+    sources.forEach(src => {
+      const ti = monthTasks[src] || {};
+      if (ti.status) {
+        totalTasks++;
+        const key = `${mon}|${src}`;
+        if (confirmed[key]) {
+          confirmedTasks++;
+        } else if (ti.status === 'to_confirm' || ti.status === 'pending') {
+          pendingConfirmTasks++;
+        }
+      }
+    });
+  });
+
+  // 重算采集成功率：确认后的任务视为成功
+  const rawSuccessRate = parseFloat(metrics.success_rate?.value) || 0;
+  const adjustedSuccessRate = totalTasks > 0
+    ? Math.round((rawSuccessRate * totalTasks / 100 + confirmedTasks) / totalTasks * 100)
+    : rawSuccessRate;
+
+  // 过滤告警：排除已确认任务相关的告警
+  const activeAlerts = rawAlerts.filter(a => {
+    // 检查告警是否与已确认任务相关
+    if (a.metric === '采集成功率' && pendingConfirmTasks === 0) return false;
+    // 对于空月数告警，检查是否都来自已确认任务
+    if (a.metric === '空月数') {
+      let pendingEmpty = 0;
+      months.forEach(mon => {
+        const monthTasks = tasks[mon] || {};
+        sources.forEach(src => {
+          const ti = monthTasks[src] || {};
+          const key = `${mon}|${src}`;
+          if (ti.status === 'pending' && !confirmed[key]) pendingEmpty++;
+        });
+      });
+      if (pendingEmpty === 0) return false;
+    }
+    return true;
+  });
+
+  const metricDefs = [
+    { key: 'success_rate', label: '采集成功率', icon: 'check-circle', invert: false },
+    { key: 'truncation_rate', label: '截断率', icon: 'scissors', invert: true },
+    { key: 'empty_months', label: '空月数', icon: 'calendar-x', invert: true },
+    { key: 'annotation_drift', label: '标注漂移', icon: 'git-compare', invert: true },
+    { key: 'pipeline_elapsed', label: '管线耗时', icon: 'clock', invert: true },
+    { key: 'volume_alerts', label: '量级异常', icon: 'bar-chart', invert: true }
+  ];
+
+  // 指标卡片
+  const metricCards = metricDefs.map(def => {
+    const m = metrics[def.key] || {};
+    // 采集成功率使用调整后的值
+    const val = def.key === 'success_rate' ? adjustedSuccessRate : (m.value !== undefined ? m.value : '--');
+    const unit = def.key === 'success_rate' ? '%' : (m.unit || '');
+    // 采集成功率状态根据调整后的值重新判定
+    let status = m.status || 'ok';
+    if (def.key === 'success_rate') {
+      const adjRate = parseFloat(val) || 0;
+      const threshold = parseFloat(m.threshold) || 75;
+      status = adjRate >= threshold ? 'ok' : 'error';
+    }
+    const threshold = m.threshold || '';
+
+    let gaugePct = 0;
+    let gaugeColor = 'ok';
+    if (def.key === 'success_rate') {
+      gaugePct = Math.min(parseFloat(val) || 0, 100);
+      gaugeColor = status === 'error' ? 'error' : 'ok';
+    } else if (def.key === 'truncation_rate') {
+      gaugePct = Math.min(parseFloat(val) || 0, 100);
+      gaugeColor = status === 'warning' ? 'warning' : 'ok';
+    } else if (def.key === 'pipeline_elapsed') {
+      gaugePct = Math.min(((parseFloat(val) || 0) / 3600) * 100, 100);
+      gaugeColor = status === 'warning' ? 'warning' : 'ok';
+    } else {
+      gaugePct = parseFloat(val) > 0 ? 30 : 0;
+      gaugeColor = status === 'warning' ? 'warning' : 'ok';
+    }
+
+    return `
+      <div class="border border-border rounded-lg p-3">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-muted-foreground flex items-center gap-1">
+            <i data-lucide="${def.icon}" class="w-3.5 h-3.5"></i> ${def.label}
+          </span>
+          <span class="text-xs px-1.5 py-0.5 rounded-full ${status === 'ok' ? 'bg-[#e8f5e9] text-[var(--state-success)]' : status === 'warning' ? 'bg-[#fef3e0] text-[var(--state-warning)]' : 'bg-[#fce4e4] text-[var(--state-error)]'}">
+            ${status === 'ok' ? '✓' : status === 'warning' ? '⚠' : '✗'}
+          </span>
+        </div>
+        <div class="text-lg font-bold mb-1">${val}<span class="text-xs text-muted-foreground ml-1">${unit}</span></div>
+        <div class="monitor-gauge">
+          <div class="monitor-gauge-fill ${gaugeColor}" style="width:${gaugePct}%"></div>
+        </div>
+        <div class="text-xs text-muted-foreground mt-1">阈值: ${threshold}</div>
+      </div>`;
+  }).join('');
+
+  // 告警列表
+  const alertSection = activeAlerts.length > 0 ? `
+    <div class="mt-4 border-t border-border pt-4">
+      <div class="text-xs font-medium text-muted-foreground mb-2">告警触发 (${activeAlerts.length})</div>
+      <div class="space-y-1.5">
+        ${activeAlerts.map(a => `
+          <div class="flex items-start gap-2 text-xs p-2 rounded-md ${a.level === 'error' ? 'bg-[#fce4e4]' : 'bg-[#fef3e0]'}">
+            <span class="${a.level === 'error' ? 'text-[var(--state-error)]' : 'text-[var(--state-warning)]'} mt-0.5">${a.level === 'error' ? '✗' : '⚠'}</span>
+            <div>
+              <span class="font-medium">${a.metric}:</span>
+              <span class="text-muted-foreground">${a.value}（阈值 ${a.threshold}）</span>
+              <div class="text-muted-foreground">${a.message}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : (rawAlerts.length > 0 ? `
+    <div class="mt-4 border-t border-border pt-4">
+      <div class="text-xs font-medium text-[var(--state-success)] flex items-center gap-1">
+        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+        全部告警已消除（${rawAlerts.length} 条原始告警因任务确认已解除）
+      </div>
+    </div>` : '<div class="mt-4 border-t border-border pt-4 text-xs text-[var(--state-success)] flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> 全部指标正常，无告警触发</div>');
+
+  document.getElementById('monitoringPanel').innerHTML = `
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      ${metricCards}
+    </div>
+    ${alertSection}
+  `;
+}
+
+// --- ⑦ 每月任务概览 ---
+
+// 读取已确认任务（共享辅助函数，所有渲染区复用）
+function getConfirmedTasks() {
+  try {
+    return JSON.parse(localStorage.getItem('wuxing_confirmed_tasks') || '{}');
+  } catch(e) {
+    return {};
+  }
+}
+
+// 确认待确认任务（localStorage 持久化，触发全量重渲染）
+function confirmTask(month, source) {
+  const confirmed = getConfirmedTasks();
+  confirmed[month + '|' + source] = true;
+  localStorage.setItem('wuxing_confirmed_tasks', JSON.stringify(confirmed));
+  renderAll();  // 全量重渲染，确保所有区域同步更新
+}
+
+// 取消确认（Ctrl+点击，触发全量重渲染）
+function unconfirmTask(month, source) {
+  const confirmed = getConfirmedTasks();
+  delete confirmed[month + '|' + source];
+  localStorage.setItem('wuxing_confirmed_tasks', JSON.stringify(confirmed));
+  renderAll();  // 全量重渲染，确保所有区域同步更新
+}
+
+function renderTaskOverview() {
+  const to = dashboardData.task_overview || {};
+  const tasks = to.tasks || {};
+  const sources = to.sources || [];
+  const months = to.months || [];
+  const summary = to.summary || {};
+  const latestMonth = to.latest_month || '';
+
+  if (months.length === 0) {
+    document.getElementById('taskOverview').innerHTML = '<p class="text-sm text-muted-foreground">暂无任务数据</p>';
+    return;
+  }
+
+  // 读取已确认项（共享辅助函数）
+  const confirmed = getConfirmedTasks();
+
+  const SOURCE_ICONS = {
+    'baai': 'BAAI',
+    'arxiv': 'ArX',
+    'github': 'Git',
+    'huggingface': 'HF'
+  };
+
+  const STATUS_LABELS = {
+    'executed': '已执行',
+    'to_confirm': '待确认',
+    'pending': '待执行',
+    'failed': '失败'
+  };
+
+  // 重新计算摘要（含已确认覆盖）
+  const effectiveSummary = { executed: 0, to_confirm: 0, pending: 0, failed: 0 };
+  const reversedMonths = [...months].reverse();
+
+  const matrixRows = reversedMonths.map(mon => {
+    const monthTasks = tasks[mon] || {};
+    const cells = sources.map(src => {
+      const taskInfo = monthTasks[src] || {};
+      let status = taskInfo.status || 'pending';
+      const key = `${mon}|${src}`;
+      if ((status === 'to_confirm' || status === 'pending') && confirmed[key]) {
+        status = 'confirmed';
+      }
+      effectiveSummary[status === 'confirmed' ? 'executed' : status]++;
+      const icon = SOURCE_ICONS[src] || src[0].toUpperCase();
+      let dataAttrs = '';
+      let title = '';
+      if (status === 'confirmed') {
+        dataAttrs = ' data-action="unconfirm" data-month="' + mon + '" data-source="' + src + '"';
+        title = ' title="已确认 — Ctrl+点击取消"';
+      } else if (taskInfo.status === 'to_confirm' || taskInfo.status === 'pending') {
+        dataAttrs = ' data-action="confirm" data-month="' + mon + '" data-source="' + src + '"';
+        title = ' title="' + STATUS_LABELS[taskInfo.status] + ' — 点击确认接受"';
+      }
+      return '<div class="task-cell ' + status + '"' + dataAttrs + title + '>' + icon + '</div>';
+    }).join('');
+
+    const stats = sources.map(src => {
+      const taskInfo = monthTasks[src] || {};
+      const key = `${mon}|${src}`;
+      let s = taskInfo.status || 'pending';
+      if ((s === 'to_confirm' || s === 'pending') && confirmed[key]) s = 'executed';
+      return s;
+    });
+    const done = stats.filter(s => s === 'executed' || s === 'confirmed').length;
+    const total = stats.length;
+
+    return `
+      <tr class="border-b border-border">
+        <td class="py-2 pr-4 text-xs font-medium whitespace-nowrap ${mon === latestMonth ? 'text-primary' : ''}">
+          ${mon}${mon === latestMonth ? ' <span class="text-xs text-muted-foreground">(当前)</span>' : ''}
+        </td>
+        <td class="py-2">
+          <div class="flex items-center gap-1">${cells}</div>
+        </td>
+        <td class="py-2 pl-2 text-xs text-muted-foreground">${done}/${total} 完成</td>
+      </tr>`;
+  }).join('');
+
+  // 摘要卡片配置
+  const summaryCards = [
+    { key: 'executed', label: '已执行', color: 'var(--state-success)', bg: '#e8f5e9' },
+    { key: 'to_confirm', label: '待确认', color: 'var(--state-warning)', bg: '#fef3e0' },
+    { key: 'pending', label: '待执行', color: '#854d0e', bg: '#f5d68a' },
+    { key: 'failed', label: '失败', color: '#b91c1c', bg: '#fce4e4' }
+  ];
+
+  document.getElementById('taskOverview').innerHTML = `
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+      ${summaryCards.map(c => `
+        <div class="border border-border rounded-lg p-3 text-center">
+          <div class="text-2xl font-bold" style="color:${c.color}">${effectiveSummary[c.key] || 0}</div>
+          <div class="text-xs text-muted-foreground">${c.label}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-xs text-muted-foreground border-b border-border">
+            <th class="text-left py-1 pr-4 font-medium">月份</th>
+            <th class="text-left py-1 font-medium">源状态</th>
+            <th class="text-left py-1 pl-2 font-medium">进度</th>
+          </tr>
+        </thead>
+        <tbody>${matrixRows}</tbody>
+      </table>
+    </div>
+    <div class="flex items-center gap-4 mt-3 text-xs text-muted-foreground">
+      <span class="flex items-center gap-1"><span class="task-cell executed" style="width:16px;height:16px;font-size:7px;">ArX</span> 已执行</span>
+      <span class="flex items-center gap-1"><span class="task-cell confirmed" style="width:16px;height:16px;font-size:7px;border-bottom-width:1px;">ArX</span> 已确认 <span class="text-muted-foreground">(Ctrl+点击取消)</span></span>
+      <span class="flex items-center gap-1"><span class="task-cell to_confirm" style="width:16px;height:16px;font-size:7px;cursor:pointer;">!</span> 待确认 <span class="text-muted-foreground">(点击确认)</span></span>
+      <span class="flex items-center gap-1"><span class="task-cell pending" style="width:16px;height:16px;font-size:7px;cursor:pointer;">-</span> 待执行 <span class="text-muted-foreground">(点击确认)</span></span>
+      <span class="flex items-center gap-1"><span class="task-cell failed" style="width:16px;height:16px;font-size:8px;">✗</span> 失败</span>
+    </div>
+    ${renderStatusCriteria(to.status_criteria)}
+    ${renderActionGuidance(to.action_guidance, to.pending_proceed, to.pending_wait, to.current_month)}
+  `;
+}
+
+// 状态判定标准说明卡片
+function renderStatusCriteria(criteria) {
+  if (!criteria || Object.keys(criteria).length === 0) return '';
+
+  const STATUS_META = {
+    'executed': { icon: 'check-circle', color: 'var(--state-success)', bg: '#e8f5e9' },
+    'to_confirm': { icon: 'alert-triangle', color: 'var(--state-warning)', bg: '#fef3e0' },
+    'pending': { icon: 'clock', color: '#854d0e', bg: '#f5d68a' },
+    'failed': { icon: 'x-circle', color: '#b91c1c', bg: '#fce4e4' }
+  };
+
+  return `
+    <div class="mt-4 border-t border-border pt-4">
+      <div class="text-xs font-medium text-muted-foreground mb-2">状态判定标准</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        ${Object.entries(criteria).map(([key, c]) => {
+          const meta = STATUS_META[key] || { icon: 'help-circle', color: 'var(--brand-muted-foreground)', bg: 'var(--brand-muted)' };
+          return `
+          <div class="border border-border rounded-lg p-3" style="border-left: 3px solid ${meta.color}">
+            <div class="flex items-center gap-1.5 mb-1">
+              <i data-lucide="${meta.icon}" class="w-3.5 h-3.5" style="color:${meta.color}"></i>
+              <span class="text-xs font-semibold">${c.label}</span>
+            </div>
+            <div class="text-xs text-muted-foreground">${c.description}</div>
+            <div class="text-xs mt-1" style="color:${meta.color}">→ ${c.next_action}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+// 行动指引列表
+function renderActionGuidance(guidance, pendingProceed, pendingWait, currentMonth) {
+  if (!guidance || guidance.length === 0) return '';
+
+  const SOURCE_LABELS_LOCAL = {
+    'baai': 'BAAI', 'arxiv': 'arXiv', 'github': 'GitHub', 'huggingface': 'HuggingFace'
+  };
+  const STATUS_BADGES = {
+    'pending': '<span class="text-xs px-1.5 py-0.5 rounded" style="background:#f5d68a;color:#854d0e;">待执行</span>',
+    'to_confirm': '<span class="text-xs px-1.5 py-0.5 rounded" style="background:#fef3e0;color:var(--state-warning);">待确认</span>',
+    'failed': '<span class="text-xs px-1.5 py-0.5 rounded" style="background:#fce4e4;color:#b91c1c;">失败</span>'
+  };
+
+  // 过滤已确认任务（确认后不再显示在行动指引中）
+  const confirmed = getConfirmedTasks();
+  const activeGuidance = guidance.filter(g => {
+    const key = `${g.month}|${g.source}`;
+    return !confirmed[key];
+  });
+
+  const canProceed = activeGuidance.filter(g => g.can_proceed);
+  const mustWait = activeGuidance.filter(g => !g.can_proceed);
+
+  return `
+    <div class="mt-4 border-t border-border pt-4">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-medium text-muted-foreground">下一步行动</div>
+        <div class="text-xs text-muted-foreground">
+          当前月份: ${currentMonth || '--'}
+        </div>
+      </div>
+
+      ${canProceed.length > 0 ? `
+      <div class="mb-3">
+        <div class="text-xs font-medium text-[var(--state-success)] mb-1.5">
+          ✓ 可立即执行（${canProceed.length} 项）
+        </div>
+        <div class="space-y-1">
+          ${canProceed.map(g => `
+          <div class="flex items-center gap-2 text-xs p-2 rounded-md bg-[#e8f5e9] border border-[#c8e6c9]">
+            <span class="font-medium">${g.month}</span>
+            <span class="text-muted-foreground">${SOURCE_LABELS_LOCAL[g.source] || g.source}</span>
+            ${STATUS_BADGES[g.status] || ''}
+            <span class="text-muted-foreground flex-1">${g.action}</span>
+          </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${mustWait.length > 0 ? `
+      <div>
+        <div class="text-xs font-medium text-[var(--state-warning)] mb-1.5">
+          ⏳ 需等待就绪（${mustWait.length} 项）
+        </div>
+        <div class="space-y-1">
+          ${mustWait.map(g => `
+          <div class="flex items-center gap-2 text-xs p-2 rounded-md bg-[#fef3e0] border border-[#fde6b3]">
+            <span class="font-medium">${g.month}</span>
+            <span class="text-muted-foreground">${SOURCE_LABELS_LOCAL[g.source] || g.source}</span>
+            ${STATUS_BADGES[g.status] || ''}
+            <span class="text-muted-foreground flex-1">${g.action}</span>
+          </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${canProceed.length === 0 && mustWait.length === 0 ? '<div class="text-xs text-[var(--state-success)] flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> 所有任务已完成，无待办事项</div>' : ''}
+    </div>`;
+}
+
+// --- ⑧ 论文列表 ---
 function renderPaperList() {
   const papers = dashboardData.papers || [];
   document.getElementById('paperList').innerHTML = papers.length > 0 ? `
@@ -877,7 +1381,22 @@ function closeFilter() {
 // ============================================================
 // 启动
 // ============================================================
+// 任务概览点击事件委托（使用 addEventListener 替代 inline onclick，更可靠）
 document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('taskOverview').addEventListener('click', (e) => {
+    const cell = e.target.closest('[data-action]');
+    if (!cell) return;
+    const action = cell.dataset.action;
+    const month = cell.dataset.month;
+    const source = cell.dataset.source;
+    if (!month || !source) return;
+    if (action === 'confirm') {
+      confirmTask(month, source);
+    } else if (action === 'unconfirm' && (e.ctrlKey || e.metaKey)) {
+      unconfirmTask(month, source);
+    }
+  });
+
   loadData();
   lucide.createIcons();
 });

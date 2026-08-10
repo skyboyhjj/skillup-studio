@@ -146,7 +146,7 @@ def run_quality_gate(month: str = None) -> dict:
         "schema_version": "1.1",
         "total_sources": len(set(s for s, _ in tree_files)),
         "total_files": len(tree_files),
-        "checks": {".".join(k): v for k, v in checks.items()},
+        "checks": {k.replace("/", "_"): v for k, v in checks.items()},
         "annotation_summary": annotation_summary,
         "verdict": verdict,
         "warnings": all_warnings,

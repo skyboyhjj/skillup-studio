@@ -21,6 +21,7 @@ GitHub 主题月度采集器（W3）
 import argparse
 import json
 import os
+import socket
 import time
 import urllib.parse
 import urllib.request
@@ -32,6 +33,10 @@ GITHUB_SEARCH_URL = "https://api.github.com/search/repositories"
 GITHUB_API_URL = "https://api.github.com"
 MIN_INTERVAL_AUTH = 2.0      # 认证：30 req/min → 2 秒
 MIN_INTERVAL_ANON = 6.0      # 未认证：10 req/min → 6 秒
+CONNECT_TIMEOUT_S = 10       # 连接超时（秒）
+READ_TIMEOUT_S = 30          # 读取超时（秒）
+RETRY_ATTEMPTS = 3            # 每 topic 重试次数（含首次）
+RETRY_BACKOFF = [1, 2, 4]     # 指数退避（秒）
 
 # AI 主题白名单（与 arXiv 11 分类对应）
 AI_TOPICS = [
@@ -63,46 +68,77 @@ class GitHubFetcher:
         self.request_log = []
 
     def fetch_json(self, url):
-        elapsed = time.time() - self.last_request_time
-        if elapsed < self.min_interval:
-            time.sleep(self.min_interval - elapsed)
-        self.last_request_time = time.time()
+        """带超时拆分 + 指数退避重试的请求（v0.2）"""
+        last_error = None
+        for attempt in range(RETRY_ATTEMPTS):
+            elapsed = time.time() - self.last_request_time
+            if elapsed < self.min_interval:
+                time.sleep(self.min_interval - elapsed)
+            self.last_request_time = time.time()
 
-        headers = {
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "wuxing-flowengine-github-collector/0.1 (monthly snapshot; non-commercial)",
-        }
-        if self.authenticated:
-            headers["Authorization"] = f"Bearer {self.token}"
+            headers = {
+                "Accept": "application/vnd.github+json",
+                "User-Agent": "wuxing-flowengine-github-collector/0.2 (monthly snapshot; non-commercial)",
+            }
+            if self.authenticated:
+                headers["Authorization"] = f"Bearer {self.token}"
 
-        req = urllib.request.Request(url, headers=headers)
-        t0 = time.time()
-        try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-            status = 200
-        except Exception as e:
-            self.request_log.append({"url": url[:80], "status": "ERROR", "error": str(e)})
-            raise
-        dt = time.time() - t0
+            req = urllib.request.Request(url, headers=headers)
+            t0 = time.time()
+            old_timeout = socket.getdefaulttimeout()
+            socket.setdefaulttimeout(CONNECT_TIMEOUT_S)  # 连接超时 10s
+            try:
+                with urllib.request.urlopen(req, timeout=READ_TIMEOUT_S) as resp:  # 读取超时 30s
+                    data = json.loads(resp.read().decode("utf-8"))
+                status = 200
+                dt = time.time() - t0
+                self.request_log.append({
+                    "url": url[:80] + "...",
+                    "status": status,
+                    "latency_s": round(dt, 2),
+                    "interval_ok": elapsed >= self.min_interval - 0.1,
+                    "attempts": attempt + 1,
+                })
+                return data
+            except Exception as e:
+                last_error = str(e)
+                dt = time.time() - t0
+                if attempt < RETRY_ATTEMPTS - 1:
+                    backoff = RETRY_BACKOFF[min(attempt, len(RETRY_BACKOFF) - 1)]
+                    time.sleep(backoff)
+            finally:
+                socket.setdefaulttimeout(old_timeout)
+
         self.request_log.append({
-            "url": url[:80] + "...",
-            "status": status,
-            "latency_s": round(dt, 2),
-            "interval_ok": elapsed >= self.min_interval - 0.1,
+            "url": url[:80],
+            "status": "ERROR",
+            "error": last_error,
+            "attempts": RETRY_ATTEMPTS,
         })
-        return data
+        raise Exception(last_error)
 
     def compliance_report(self):
         n = len(self.request_log)
         if n == 0:
             return {"requests": 0}
         ok = all(r.get("status") == 200 and r.get("interval_ok", True) for r in self.request_log)
+        retried = [r for r in self.request_log if r.get("attempts", 1) > 1]
+        errors = [r for r in self.request_log if r.get("status") == "ERROR"]
         return {
             "requests": n,
             "authenticated": self.authenticated,
             "interval_compliant": ok,
             "min_interval_s": self.min_interval,
+            "retry": {
+                "requests_retried": len(retried),
+                "max_retries": RETRY_ATTEMPTS - 1,
+                "backoff_s": RETRY_BACKOFF,
+            },
+            "timeout": {
+                "connect_s": CONNECT_TIMEOUT_S,
+                "read_s": READ_TIMEOUT_S,
+            },
+            "error_details": [e["error"] for e in errors] if errors else [],
             "note": "认证模式" if self.authenticated else "未认证模式（建议设置 GITHUB_TOKEN）",
         }
 
@@ -167,6 +203,9 @@ def main():
             "total_weight": sum(n.get("weight", 0) for n in nodes),
             "api": "api.github.com/search/repositories (total_count)",
             "authenticated": fetcher.authenticated,
+            "collector_version": "0.2",
+            "retry": RETRY_ATTEMPTS,
+            "timeout": {"connect_s": CONNECT_TIMEOUT_S, "read_s": READ_TIMEOUT_S},
         },
     }
     out = Path(f"github_tree_{month_str}.json")

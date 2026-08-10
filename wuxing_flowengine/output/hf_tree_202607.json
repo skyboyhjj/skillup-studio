@@ -95,12 +95,13 @@
       "pages_used": 2
     },
     {
-      "id": "hf:text-to-text",
-      "name": "text-to-text",
+      "id": "hf:text2text-generation",
+      "name": "text2text-generation",
       "parent": "huggingface",
       "wuxing": "水",
       "weight": 0,
-      "pages_used": 0
+      "pages_used": 0,
+      "note": "tag renamed from text-to-text; re-collect pending (HF API unreachable)"
     }
   ],
   "meta": {

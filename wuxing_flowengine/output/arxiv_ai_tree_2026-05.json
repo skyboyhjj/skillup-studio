@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "source": "arxiv_ai",
+  "timestamp": "2026-08-10",
+  "month": "2026-05",
+  "nodes": [
+    {
+      "id": "cs.AI",
+      "name": "cs.AI",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 4105
+    },
+    {
+      "id": "cs.LG",
+      "name": "cs.LG",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 6773
+    },
+    {
+      "id": "cs.CL",
+      "name": "cs.CL",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 3335
+    },
+    {
+      "id": "cs.CV",
+      "name": "cs.CV",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 4935
+    },
+    {
+      "id": "cs.NE",
+      "name": "cs.NE",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 202
+    },
+    {
+      "id": "cs.MA",
+      "name": "cs.MA",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 328
+    },
+    {
+      "id": "cs.RO",
+      "name": "cs.RO",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 1385
+    },
+    {
+      "id": "cs.HC",
+      "name": "cs.HC",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 597
+    },
+    {
+      "id": "cs.IR",
+      "name": "cs.IR",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 513
+    },
+    {
+      "id": "cs.MM",
+      "name": "cs.MM",
+      "parent": "cs",
+      "wuxing": null,
+      "weight": 77
+    },
+    {
+      "id": "stat.ML",
+      "name": "stat.ML",
+      "parent": "stat",
+      "wuxing": null,
+      "weight": 883
+    }
+  ],
+  "meta": {
+    "node_count": 11,
+    "total_weight": 23133,
+    "unique_papers": 15521,
+    "categories_used": 11,
+    "annotation_version": "v2"
+  }
+}

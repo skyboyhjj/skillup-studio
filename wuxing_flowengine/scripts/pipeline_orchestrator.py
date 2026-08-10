@@ -52,6 +52,7 @@ class SourceSpec:
     output_glob: str             # 输出文件 glob（用于幂等检查）
     timeout: int = DEFAULT_TIMEOUT_S
     enabled: bool = True
+    env: dict = None             # 源级环境变量（如 HF_API_BASE 镜像端点）
 
 
 # 生产侧四源注册表（命令路径可经 --dir 覆盖）
@@ -70,7 +71,8 @@ def build_sources(script_dir: str = ".") -> dict:
         "github": SourceSpec("github", [sys.executable, str(d / "github_collect.py")],
                              "github_tree_*.json"),
         "huggingface": SourceSpec("huggingface", [sys.executable, str(d / "hf_collect.py")],
-                                  "hf_tree_*.json"),
+                                  "hf_tree_*.json",
+                                  env={"HF_API_BASE": os.environ.get("HF_API_BASE", "")}),
     }
     for name, spec in specs.items():
         script = spec.cmd[-1]
@@ -140,6 +142,12 @@ class PipelineOrchestrator:
             return status
 
         cmd = spec.cmd + ["--month", month]
+
+        # 源级环境变量注入（如 HF_API_BASE 镜像端点）
+        env = os.environ.copy()
+        source_env = spec.env or {}
+        env.update(source_env)
+
         for attempt in range(RETRY_ATTEMPTS):
             status["attempts"] = attempt + 1
             status["status"] = RUNNING
@@ -147,7 +155,7 @@ class PipelineOrchestrator:
             try:
                 proc = subprocess.run(
                     cmd, cwd=str(self.workdir), capture_output=True, text=True,
-                    timeout=spec.timeout,
+                    timeout=spec.timeout, env=env,
                 )
                 elapsed = time.time() - t0
                 status["elapsed_s"] = round(elapsed, 1)
