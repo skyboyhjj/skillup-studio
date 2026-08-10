@@ -102,10 +102,10 @@ def run_quality_gate(month: str = None) -> dict:
     tree_files = discover_tree_files(month)
     excludes = load_collectignore(TREE_DIR)
 
-    # 构建历史数据（近 3 月 n_nodes）
+    # 构建历史数据（近 3 月 total_weight，对齐 check_volume 契约）
     history = defaultdict(dict)
     for (source, m), info in tree_files.items():
-        history[source][m] = len(info["tree"].get("nodes", []))
+        history[source][m] = sum(n.get("weight", 0) for n in info["tree"].get("nodes", []))
 
     # 执行七检查点
     checks = {}
@@ -115,13 +115,17 @@ def run_quality_gate(month: str = None) -> dict:
     for (source, m), info in sorted(tree_files.items()):
         tree = info["tree"]
         filepath = info["path"]
+        tree_month = tree.get("month", "")
 
-        # 近 3 月历史（不含当前月）
-        hist = {k: v for k, v in history.get(source, {}).items() if k < m}
-        hist = dict(sorted(hist.items())[-3:])
+        # 近 3 月历史（不含当前月），构造 {source: [weights]} 格式（check_volume 契约）
+        hist_weights = {
+            s: [history[s][mm] for mm in sorted(history[s]) if mm < tree_month]
+            for s in history
+        }
+        hist_weights = {s: ws[-3:] for s, ws in hist_weights.items() if ws}
 
         # 检查点 1-6（data_validator 七检查点，annotation 由下方覆盖）
-        result = validate_tree(tree, filepath, hist, excludes)
+        result = validate_tree(tree, filepath, hist_weights, excludes)
 
         # 检查点 7: 标注一致性（使用 annotation_check 模块，覆盖 data_validator 内置的 annotation）
         ann_str = validate_annotation(tree, canonical, source)
