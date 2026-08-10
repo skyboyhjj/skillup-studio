@@ -1,12 +1,17 @@
 // Cloudflare Pages Function - API 代理
-// 将 /api/* 请求转发到后端服务器 http://121.41.215.36:8000
+// 将 /api/* 请求转发到后端服务器
+// 部署前需在 Cloudflare Dashboard > Settings > Environment Variables 中设置:
+//   API_TARGET = http://<your-server-ip>:8000
 
 export async function onRequest(context) {
-  const { request } = context;
+  const { request, env } = context;
   const url = new URL(request.url);
 
+  // 从环境变量读取后端地址，未配置时使用占位符（会返回 502）
+  const apiBase = env.API_TARGET || 'http://DEPLOY_SERVER:8000';
+
   // 构建后端目标 URL
-  const targetUrl = 'http://121.41.215.36:8000' + url.pathname + url.search;
+  const targetUrl = apiBase + url.pathname + url.search;
 
   // 克隆请求并修改 Host header
   // 使用 new Request(url, originalRequest) 确保 body 和 headers 正确传递

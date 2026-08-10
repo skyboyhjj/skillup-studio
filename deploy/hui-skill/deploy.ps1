@@ -1,12 +1,15 @@
 # hui-skill.cn 部署脚本 (PowerShell)
-# 用途: 将 frontend/studio/ 同步到 121.41.215.36 服务器
+# 用途: 将 frontend/studio/ 同步到部署服务器
 # 前置: 已配置 SSH 密钥 (见下方密钥配置说明)
+# 用法: 设置环境变量后运行
+#   $env:HUI_SKILL_DEPLOY_HOST = "<your-server-ip>"
+#   .\deploy.ps1
 
 param(
     [switch]$nginx,      # 仅上传 Nginx 配置
     [switch]$full,       # 完整部署: 前端 + Nginx 配置
     [string]$user = "root",
-    [string]$host = "121.41.215.36"
+    [string]$host = $env:HUI_SKILL_DEPLOY_HOST
 )
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -22,12 +25,12 @@ $sshTarget = "$user@$host"
 #    ssh-keygen -t ed25519 -C "deploy@hui-skill" -f $env:USERPROFILE\.ssh\hui-skill_deploy
 #
 # 2. 复制公钥到服务器:
-#    type $env:USERPROFILE\.ssh\hui-skill_deploy.pub | ssh root@121.41.215.36 "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys"
+#    type $env:USERPROFILE\.ssh\hui-skill_deploy.pub | ssh root@<your-server-ip> "mkdir -p ~/.ssh ; cat >> ~/.ssh/authorized_keys"
 #
 # 3. 配置 SSH config (可选，简化连接):
 #    编辑 $env:USERPROFILE\.ssh\config，添加:
 #    Host hui-skill
-#        HostName 121.41.215.36
+#        HostName <your-server-ip>
 #        User root
 #        IdentityFile ~/.ssh/hui-skill_deploy
 #
@@ -96,6 +99,14 @@ nginx -t && systemctl reload nginx && echo 'Nginx 配置已生效'
 # ============================================
 # 主流程
 # ============================================
+
+if (-not $host) {
+    Write-Host "错误: 未设置部署主机地址!" -ForegroundColor Red
+    Write-Host "请设置环境变量后重试:" -ForegroundColor Yellow
+    Write-Host '  $env:HUI_SKILL_DEPLOY_HOST = "<your-server-ip>"' -ForegroundColor Yellow
+    Write-Host "  .\deploy.ps1" -ForegroundColor Yellow
+    exit 1
+}
 
 if (-not (Test-SSH)) {
     Write-Host "SSH 连接失败! 请先配置密钥 (见脚本顶部注释)" -ForegroundColor Red

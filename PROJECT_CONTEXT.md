@@ -106,7 +106,7 @@
 .\deploy\hui-skill\deploy.ps1 -full
 ```
 
-前置: 已配置 SSH 密钥到 `root@121.41.215.36`（见 `deploy.ps1` 顶部注释）。
+前置: 已配置 SSH 密钥到部署服务器（见 `deploy.ps1` 顶部注释）。
 
 ## 站点架构
 
@@ -168,7 +168,7 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 - 涉及：`pages/index.html`、`pages/annotate.html`、`colors_and_type.css`、`.design`、编排文件
 
 ### 5. 服务器带宽监控方案 & 实际流量分析
-- 服务器 21.41.215.36，按使用流量计费，50 Mbps 峰值带宽
+- 服务器按使用流量计费，50 Mbps 峰值带宽
 - 分析 7/24-7/31 阿里云 OMS 流量数据（738 条小时级记录）
 - 结果：7 天总流出 99.19 MB，峰值带宽 15.78 kbps（利用率 0.03%），带宽远未触及上限
 - 文档：`docs/network-monitoring.md`（含 vnstat / Nginx 日志分析 / GoAccess / 限流四种方案）
@@ -476,6 +476,15 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
 1. 读取 `PROJECT_CONTEXT.md`，与本地实际状态比较
 2. 如有冲突（文件不存在、接口变更、架构调整等），提示用户处理
 3. 无冲突则提交，并在提交后更新 `PROJECT_CONTEXT.md` 的相关条目
+4. **数据隐私检查（强制）**：提交前必须扫描以下敏感信息，确认未泄露：
+   - 公网 IP 地址（如 `121.41.215.36`）— 用描述性指代替代（如"部署服务器"）
+   - SSH 密钥路径、用户名+主机组合（如 `root@1.2.3.4`）
+   - API 密钥、Token、密码、Cookie、Session ID
+   - 数据库连接字符串（含用户名/密码）
+   - 第三方服务 Access Key / Secret Key
+   - 个人邮箱、手机号（除项目文档明确要求外）
+   - 内网拓扑细节（端口、服务名、IP 段）
+   - 检查工具：`git diff --staged` 中人工复核，或使用 `gitleaks detect` 自动化扫描
 
 ## 待办 / 已完成 工作流
 

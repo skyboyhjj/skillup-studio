@@ -1,6 +1,6 @@
 # hui-skill.cn 带宽监控方案 & 实际流量分析
 
-> 服务器: 21.41.215.36 | 计费模式: 按使用流量计费 | 峰值带宽: 50 Mbps
+> 服务器: 部署服务器 | 计费模式: 按使用流量计费 | 峰值带宽: 50 Mbps
 
 ---
 
@@ -152,7 +152,7 @@ goaccess /var/log/nginx/access.log \
     -o /var/www/html/report.html
 ```
 
-访问 `http://21.41.215.36/report.html` 查看实时流量仪表盘。
+访问 `http://<server-ip>/report.html` 查看实时流量仪表盘。
 
 ### 3.4 Nginx 限流保护（防爬虫/突发）
 

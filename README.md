@@ -147,7 +147,7 @@ python scripts/run_pipeline.py --month 2026-08  # 指定月份
 ## 部署
 
 - **meta-skill.org**: Cloudflare Pages (`frontend/studio/`)
-- **hui-skill.cn**: Nginx 自部署 (`21.41.215.36`)，按流量计费（50 Mbps 峰值）
+- **hui-skill.cn**: Nginx 自部署，按流量计费（50 Mbps 峰值）
 
 详见 `docs/network-monitoring.md` 和 `deploy/nginx/hui-skill.cn.conf`。
 
