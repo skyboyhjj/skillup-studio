@@ -24,6 +24,10 @@ sources:
 - [GitHub 领域月度画像](diagnosis/github.md) — S_p=14.18, 主导行: 水 ⚙️
 - [HuggingFace 领域月度画像](diagnosis/huggingface.md) — S_p=14.77, 主导行: 水 👤
 
+## 经典解读 (81)
+
+- [道德经 81 章 ClassicalInsight 晶体](classical/index.md) — AI 初审（draft），待导师确认
+
 ## 壳核收敛
 
 - 壳 S_p: 7.48 (BAAI)
