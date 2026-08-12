@@ -468,6 +468,43 @@ frontend/studio/  ──rsync────>  Nginx (hui-skill.cn)
   - 从旧 `auto_monthly.py`（仅 BAAI）升级为四源全链路
 - **文件**: `wuxing_flowengine/scripts/run_pipeline.py`（新增）、`wuxing_flowengine/scripts/pipeline_orchestrator.py`（更新）、`wuxing_flowengine/scripts/hf_collect.py`（v0.2）、`wuxing_flowengine/scripts/github_collect.py`（v0.2）、`wuxing_flowengine/scripts/arxiv_collect.py`（v0.3）、`wuxing_flowengine/scripts/build_dashboard_data.py`（更新）、`hui-skill-product-matrix/pages/tracker.html`（更新）、`README.md`、`PROJECT_CONTEXT.md`
 
+### 30. 道经知识晶体库 S1-S4 + B体证回流全链路
+
+- **S1-S4 四层构建**：81 章经典晶体（`build_classical_crystals_v02.py`）+ 167 概念五行词典 + 597 SPO 三元组 + 648 镜鉴条目
+- **S3 TizhengCard 体证卡片生成器**（`build_tizheng_card.py`）：输入事件 + 四维自评 → 五行诊断 → 镜鉴匹配 → 推荐补益章
+- **S4 View 层检索**（`retrieve_crystals.py`）：三类晶体统一检索（classical/diagnosis/tizheng/wisdom），支持五行补益、关键词、状态过滤、JSON 输出
+- **B体证回流**（DS-B-2026-001 v1.1）：
+  - B-1 填证（`complete_tizheng.py`）：draft → completed，三问自检（≥10字 + 无模板残留 + 具体性）
+  - B-2 入池（`pool_tizheng.py`）：三道护栏（匿名化扫描 + 完整度校验 + 用户确认）→ wisdom/ 目录
+  - 共享契约 `contracts.py`：VALID_TYPES + WUXING_ORDER + 生克映射
+  - 体证池条目 ID：`w-{YYYYMMDD}-{HHMMSS}-{hash6}.md`
+- **质量门联动**：`export_crystals.py` 在 verdict=fail 时返回 None（阻断），`pool_tizheng.py` 入池时回注 `daojing_database_v2.json` 的 `x_application` 字段
+- 全书五行画像：土 42%、水 30%、木 11%、火 6%、金 6%
+- **文件**: `wuxing_flowengine/scripts/build_classical_crystals_v02.py`, `wuxing_flowengine/scripts/build_tizheng_card.py`, `wuxing_flowengine/scripts/complete_tizheng.py`, `wuxing_flowengine/scripts/pool_tizheng.py`, `wuxing_flowengine/scripts/retrieve_crystals.py`, `wuxing_flowengine/scripts/export_crystals.py`, `wuxing_flowengine/scripts/contracts.py`, `wuxing_flowengine/data/daojing_database_v2.json`, `wuxing_flowengine/data/concept_wuxing_dict_v1_3.json`, `docs/02-知识晶体库/S1-S4_最终交付报告.md`, `docs/02-知识晶体库/体证回流_完整设计方案_DS-B-2026-001_v1.1.md`
+
+### 31. C-Mirror 前端镜鉴入口 [MIRROR:EVENT] 双模架构
+
+- **双模架构**（DS-C-2026-001）：在线模式（Python `mirror_server.py` API 桥接）+ 离线模式（纯客户端 JS + `mirror_data.json` 静态数据）
+- **6 个 API 端点**：health / event / card / complete / pool / retrieve
+- **前端改造**（`tracker.html` zone9）：导航栏新增【镜鉴】按钮 + Section ⑨（事件输入 + 四维滑块 + 卡片生成/下载/填证/入池）
+- **模式检测**：`/api/mirror/health` 2秒超时 → 自动切换在线/离线，离线时填证/入池按钮置灰
+- **离线引擎**：`mirror_data.json`（81 章 648 维度条目），纯 JS 实现维度分析 + 镜鉴匹配 + 推荐生成
+- **5 项修复**：维度评分映射 bug（中文键名兼容）、"洞察：镜鉴："冗余前缀、推荐经典数量与列表不匹配、下载 .md 含按钮文本、入池按钮 showPoolPanel() 缺失 + 填证重复提交
+- **接口契约** IF-C-2026-011：在线/离线数据流 + 字段映射（practice→done, reflection→cognition_shift）
+- **文件**: `wuxing_flowengine/scripts/mirror_server.py`（新增）, `wuxing_flowengine/scripts/build_mirror_data.py`（新增）, `hui-skill-product-matrix/data/mirror_data.json`（新增）, `hui-skill-product-matrix/pages/tracker.html`（更新）, `docs/02-知识晶体库/前端镜鉴入口_完整设计方案_DS-C-2026-001.md`, `docs/02-知识晶体库/接口契约_IF-C-2026-011.md`
+
+### 32. D-Wuxing-KG 道经五行图谱合入
+
+- **6 章脏标题修复**：`daojing_database_v2.json` 中第 41-46 章 `chapter_title` 从 Markdown 截断/引文残留修复为标准章名
+  - 41: `### 一、文本细读` → `第四十一章`、42: `### 一、文本细读` → `第四十二章`、43: `### 一、文本细读` → `第四十三章`
+  - 44: `> 名与身孰亲？…` → `第44章`、45: `> 大成若缺…` → `第45章`、46: `> 天下有道…` → `第46章`
+- **精准合入策略**：D-Wuxing-KG 数据库为旧版（39 处差异），仅合入 6 章标题修复，保留当前 S2-domain 富化标题
+- **五行图谱生成器**（`build_wuxing_graph.py`）：81 章 dominant → 五行生态环（节点大小∝章数）+ 章节生克四邻（母/子/所不胜/所胜）双视图
+- 零依赖 SVG 可视化，点击五行/章节即展开生克网络
+- 章间关系统计：克(44%)>生(27%)>同气(28%)——"反者道之动"的章间版图谱
+- 联动更新：`mirror_data.json` 重新生成
+- **文件**: `wuxing_flowengine/scripts/build_wuxing_graph.py`（新增）, `wuxing_flowengine/output/wuxing_graph/daojing_wuxing_graph.json`（新增）, `wuxing_flowengine/data/daojing_database_v2.json`（修复）, `hui-skill-product-matrix/data/mirror_data.json`（更新）, `docs/02-知识晶体库/D-Wuxing-KG/`
+
 ---
 
 ## 版本控制约定

@@ -12,6 +12,7 @@
 | 知识图谱标注平台 | 已上线 | 专为道境空间概念设计的智能标注工作台，支持 6 维标注（五行、八卦、认知深度等）、规则推理、数据交换 |
 | 莫比乌斯概念地图 | 已上线 | 3D 交互式知识可视化，一键生成可交互的莫比乌斯环概念地图，支持文本提取与 11 组预设数据集 |
 | 知识树追踪引擎 | 预览版 | 四源月度管线（BAAI + arXiv + GitHub + HuggingFace），`run_pipeline.py` 统一入口，基于五行理论的时间序列诊断、壳核画像分化与趋势分析，支持 cron 定时自动采集 |
+| 道经知识晶体库 | 预览版 | 81 章经典晶体 + 167 概念 + 597 SPO 三元组 + 648 镜鉴条目，支持 S4 检索、五行补益、体证回流（填证→入池）全链路，前端镜鉴入口 [MIRROR:EVENT] 双模架构（在线/离线） |
 | 论文采集器 | 预览版 | arXiv 自动化月度采集，覆盖 11 个 AI 子领域；100 篇样本可筛选/搜索/导出 |
 | 五行道境引擎 | V1.5 | 同态映射验证 + 壳核审计 + 种子培育 + 链式映射全链路 + 真实引擎接入（EngineAdapterV2） |
 
@@ -37,7 +38,14 @@ hui-skill-cn/
 │
 ├── docs/                              # 文档
 │   ├── network-monitoring.md          # 带宽监控方案 + 实际流量分析
-│   └── design/                        # 设计系统文档
+│   ├── design/                        # 设计系统文档
+│   └── 02-知识晶体库/                   # 知识晶体库设计文档
+│       ├── S2-domain/                 # 概念级 dominant 标注
+│       ├── S3/                        # TizhengCard 体证卡片生成器
+│       ├── S4/                        # View 层检索
+│       ├── B体证/                      # 体证回流设计（填证→入池）
+│       ├── C-mirror/                  # 前端镜鉴入口设计
+│       └── D-Wuxing-KG/              # 道经五行图谱（章间生克网络）
 │
 ├── frontend/                          # 前端模块
 │   ├── product-matrix/                # 产品矩阵（产品矩阵首页 + 标注平台）
@@ -70,13 +78,21 @@ hui-skill-cn/
 │       │   ├── github_collect.py      # GitHub 采集器 v0.2（超时拆分+重试）
 │       │   ├── arxiv_collect.py       # arXiv 采集器 v0.3（超时拆分）
 │       │   ├── homomorphism_engine.py # 同态映射引擎（三步协议 + 链式映射 + 图驱动全链路）
-│       │   ├── seed_cultivation.py    # 种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）
+│   │   ├── seed_cultivation.py    # 种子培育模块（壳核审计 + 纯粹度 + 熵振引擎）
 │       │   ├── zhongshu_ethics.py     # P忠恕伦理模块（忠恕双向校验）
 │       │   ├── spinor_formalism.py    # 旋量-太极形式化
 │       │   ├── dao_realm_engine.py    # 道境融合诊断引擎
 │       │   ├── stage_engine.py        # 生克化通变五阶段判定引擎
 │       │   ├── monthly_pipeline.py    # 月度编排器（旧版，由 run_pipeline.py 替代）
 │       │   ├── shell_nucleus_analysis_v2.py  # 壳核回归对比分析（P0-2）
+│       │   ├── build_classical_crystals_v02.py  # 经典晶体生成器（81 章）
+│       │   ├── build_tizheng_card.py  # TizhengCard 体证卡片生成器
+│       │   ├── complete_tizheng.py    # 体证填证完成流程（B-1）
+│       │   ├── pool_tizheng.py        # 体证入池流程（B-2，三道护栏）
+│       │   ├── retrieve_crystals.py   # S4 View 层检索（三类晶体 + 五行补益）
+│       │   ├── build_mirror_data.py   # 镜鉴数据生成（mirror_data.json）
+│       │   ├── mirror_server.py       # 镜鉴 API 桥接服务器（6 端点）
+│       │   ├── build_wuxing_graph.py  # 道经五行图谱生成器（章间生克网络）
 │       │   └── ...                    # 50+ 脚本模块
 │       ├── data/                      # 知识树数据 + 标注数据 + 验证任务输入
 │       ├── diagnose/                  # 五行诊断模块
@@ -125,6 +141,15 @@ python scripts/run_pipeline.py              # 全链路（采集→质量门→�
 python scripts/run_pipeline.py --skip-collect  # 跳过采集（已有数据）
 python scripts/run_pipeline.py --month 2026-08  # 指定月份
 ```
+
+### 前端 — 镜鉴入口 [MIRROR:EVENT]（本地预览）
+
+```bash
+cd wuxing_flowengine/scripts
+python mirror_server.py --port 8081         # 启动 API 桥接服务器
+```
+
+访问 http://localhost:8081/pages/tracker.html → 导航栏【镜鉴】按钮
 
 ## 设计系统
 
