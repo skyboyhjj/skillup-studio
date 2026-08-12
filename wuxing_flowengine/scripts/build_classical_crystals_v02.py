@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-build_classical_crystals.py v0.2 —— S2 经典晶体化（三源归一）
+build_classical_crystals_v02.py v0.2 —— S2 经典晶体化（三源归一）
 =============================================================
 将五步读解 81 章 + daojingDatabaseV2 结构 + 镜鉴矩阵 合成为 ClassicalInsight 晶体
 （对齐契约 IF-2026-006 §二）。
@@ -19,8 +19,8 @@ build_classical_crystals.py v0.2 —— S2 经典晶体化（三源归一）
   - status: draft（AI 初审）——导师确认后 --verified-by
 
 用法：
-  python build_classical_crystals.py --md-dir uploads --db verify/daojing_database_v2.json
-  python build_classical_crystals.py --md-dir uploads --db verify/daojing_database_v2.json --verified-by master
+  python build_classical_crystals_v02.py --md-dir uploads --db verify/daojing_database_v2.json
+  python build_classical_crystals_v02.py --md-dir uploads --db verify/daojing_database_v2.json --verified-by master
 """
 
 import argparse
