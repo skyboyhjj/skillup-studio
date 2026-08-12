@@ -23,13 +23,10 @@ import re
 import sys
 from pathlib import Path
 
-VALID_WUXING = ["木", "火", "土", "金", "水"]
-CRYSTAL_DIRS = ["classical", "diagnosis", "tizheng"]
+from contracts import WUXING_ORDER, VALID_TYPES, SHENG_CYCLE, KE_MAP
 
-# 五行相生（补益环）：木→火→土→金→水→木
-SHENG_CYCLE = {"木": "火", "火": "土", "土": "金", "金": "水", "水": "木"}
-# 五行相克：木克土 土克水 水克火 火克金 金克木
-KE_MAP = {"木": "土", "土": "水", "水": "火", "火": "金", "金": "木"}
+VALID_WUXING = WUXING_ORDER
+CRYSTAL_DIRS = ["classical", "diagnosis", "tizheng", "wisdom"]
 
 
 def parse_frontmatter(text: str) -> dict:
@@ -88,6 +85,13 @@ def scan_crystals(root: Path) -> list:
                 "dimension": fm.get("dimension", ""),
                 "classic": fm.get("classic", ""),
                 "recommend": fm.get("recommend", []),
+                # WisdomInsight 信任标记（M2 入池写入，检索端展示）
+                "sample_size": fm.get("sample_size", ""),
+                "anonymization": fm.get("anonymization", ""),
+                "depth_wc": (re.search(r"word_count:\s*(\d+)", fm.get("depth", "")) or [None, ""])[1]
+                            if isinstance(fm.get("depth"), str) else "",
+                "has_situation": (re.search(r"has_situation:\s*(true|false)", fm.get("depth", "")) or [None, ""])[1]
+                                 if isinstance(fm.get("depth"), str) else "",
                 "text": extract_text_scope(txt),
                 "keywords": (fm.get("title", "") + " " + fm.get("description", "")),
             })
@@ -95,8 +99,8 @@ def scan_crystals(root: Path) -> list:
 
 
 def wuxing_match(c: dict, wx: str) -> bool:
-    """五行匹配：经典/诊断按 dominant；体证按 weak（缺失行）"""
-    if c["type"] == "TizhengCard":
+    """五行匹配：经典/诊断按 dominant；体证/智慧条目按 weak（缺失行）"""
+    if c["type"] in ("TizhengCard", "WisdomInsight"):
         return c.get("weak") == wx or c.get("complement") == wx
     return c.get("dominant") == wx
 
@@ -131,6 +135,7 @@ def bu_wuxing(crystals: list, wx: str) -> dict:
         "ke_to": [k for k, v in KE_MAP.items() if v == wx],  # wx 所克（所胜）
         "classics": [],    # dominant=wx 的经典章
         "tizheng": [],     # weak=wx 的体证卡片
+        "wisdom": [],      # weak=wx 的公共智慧条目（M2 入池，样本量透明）
         "diagnosis": [],   # dominant=wx 的诊断
     }
     for c in crystals:
@@ -138,6 +143,8 @@ def bu_wuxing(crystals: list, wx: str) -> dict:
             bu["classics"].append({"chapter": c["title"], "file": c["file"]})
         elif c["type"] == "TizhengCard" and (c.get("weak") == wx or c.get("complement") == wx):
             bu["tizheng"].append({"title": c["title"], "file": c["file"], "classic": c.get("classic")})
+        elif c["type"] == "WisdomInsight" and (c.get("weak") == wx or c.get("complement") == wx):
+            bu["wisdom"].append({"title": c["title"], "file": c["file"], "sample_size": c.get("sample_size")})
         elif c["type"] == "DiagnosisResult" and c.get("dominant") == wx:
             bu["diagnosis"].append({"title": c["title"], "file": c["file"]})
     return bu
@@ -164,6 +171,13 @@ def render_markdown(results: list, bu: dict = None) -> str:
             out.append("")
             for t in bu["tizheng"]:
                 out.append(f"- {t['title']} → 关联经典 {t['classic']}（{t['file']}）")
+        if bu["wisdom"]:
+            out.append("")
+            out.append(f"## 公共智慧（weak={bu['weak']}，{len(bu['wisdom'])} 条）")
+            out.append("")
+            for w in bu["wisdom"]:
+                ss = f"（体证 {w['sample_size']} 人）" if w.get("sample_size") else ""
+                out.append(f"- {w['title']}{ss}（{w['file']}）")
         if bu["diagnosis"]:
             out.append("")
             out.append("## 相关诊断")
@@ -177,7 +191,17 @@ def render_markdown(results: list, bu: dict = None) -> str:
             tag = f"[{c['type']}]"
             wx = f" | 五行: {c['dominant'] or c['weak'] or '-'}"
             st = f" | status: {c['status']}"
-            out.append(f"- {tag} **{c['title']}**{wx}{st}（{c['file']}）")
+            line = f"- {tag} **{c['title']}**{wx}{st}（{c['file']}）"
+            if c["type"] == "WisdomInsight":
+                trust = []
+                if c.get("sample_size"):
+                    depth_note = " · 深度体证" if c.get("has_situation") == "true" else ""
+                    trust.append(f"体证 {c['sample_size']} 人{depth_note}")
+                if c.get("anonymization"):
+                    trust.append(f"匿名化：{c['anonymization']}（模式扫描）")
+                if trust:
+                    line += "  → " + " | ".join(trust)
+            out.append(line)
     return "\n".join(out)
 
 
@@ -188,7 +212,7 @@ def main():
     parser.add_argument("--wuxing", choices=VALID_WUXING, help="按五行检索（经典/诊断 dominant；体证 weak）")
     parser.add_argument("--kw", help="关键词检索（标题/描述/正文前 600 字）")
     parser.add_argument("--status", help="按状态过滤（draft/current/deprecated/retired）")
-    parser.add_argument("--type", dest="ctype", choices=["ClassicalInsight", "DiagnosisResult", "TizhengCard"],
+    parser.add_argument("--type", dest="ctype", choices=VALID_TYPES[1:],  # 去掉 KnowledgeDomain（预留）
                         help="按类型过滤")
     parser.add_argument("--bu", choices=VALID_WUXING, help="五行补益检索（缺该行 → 推荐经典 + 相关体证）")
     parser.add_argument("--json", action="store_true", help="JSON 输出（机器读）")

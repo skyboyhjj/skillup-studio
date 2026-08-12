@@ -24,12 +24,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-WUXING_ORDER = ["木", "火", "土", "金", "水"]
-DIMENSION_WUXING = {"时位轴": "火", "宇位轴": "土", "识位轴": "水", "缘位轴": "木"}
-DIMENSION_KEYS = {"时位轴": "shi", "宇位轴": "yu", "识位轴": "identify", "缘位轴": "yuan"}
-DIMENSION_CN = {"时位轴": "时", "宇位轴": "宇", "识位轴": "识", "缘位轴": "缘"}
-VALID_VERIFIED = re.compile(r"^(process:[a-z-]+|human:[a-z0-9_-]+)$")
-VALID_TYPES = ["KnowledgeDomain", "DiagnosisResult", "ClassicalInsight", "TizhengCard"]
+from contracts import WUXING_ORDER, DIMENSION_WUXING, DIMENSION_KEYS, DIMENSION_CN, VALID_VERIFIED, VALID_TYPES
 
 
 def render_frontmatter(fields: dict) -> str:

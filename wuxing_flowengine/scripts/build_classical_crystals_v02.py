@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-build_classical_crystals_v02.py v0.2 —— S2 经典晶体化（三源归一）
+build_classical_crystals.py v0.2 —— S2 经典晶体化（三源归一）
 =============================================================
 将五步读解 81 章 + daojingDatabaseV2 结构 + 镜鉴矩阵 合成为 ClassicalInsight 晶体
 （对齐契约 IF-2026-006 §二）。
@@ -19,8 +19,8 @@ build_classical_crystals_v02.py v0.2 —— S2 经典晶体化（三源归一）
   - status: draft（AI 初审）——导师确认后 --verified-by
 
 用法：
-  python build_classical_crystals_v02.py --md-dir uploads --db verify/daojing_database_v2.json
-  python build_classical_crystals_v02.py --md-dir uploads --db verify/daojing_database_v2.json --verified-by master
+  python build_classical_crystals.py --md-dir uploads --db verify/daojing_database_v2.json
+  python build_classical_crystals.py --md-dir uploads --db verify/daojing_database_v2.json --verified-by master
 """
 
 import argparse
@@ -30,9 +30,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-WUXING_ORDER = ["木", "火", "土", "金", "水"]
-VALID_TYPES = ["KnowledgeDomain", "DiagnosisResult", "ClassicalInsight", "TizhengCard"]
-VALID_VERIFIED = re.compile(r"^(process:[a-z-]+|human:[a-z0-9_-]+)$")
+from contracts import WUXING_ORDER, VALID_TYPES, VALID_VERIFIED
 
 # 四维→五行映射定案（DEC-2026-009 V1.1）：识水/缘木/宇土/时火；玄鉴决策中心=金（义·统摄决断）
 DIMENSION_WUXING = {"时位轴": "火", "宇位轴": "土", "识位轴": "水", "缘位轴": "木"}
@@ -71,7 +69,7 @@ def extract_chapter_num(title: str):
 def render_frontmatter(fields: dict) -> str:
     lines = ["---"]
     for k, v in fields.items():
-        if k in ("generated", "verified", "sources", "x-wuxing", "x-mirror", "x-compute"):
+        if k in ("generated", "verified", "sources", "x-wuxing", "x-mirror", "x-compute", "x-application"):
             continue
         lines.append(f"{k}: {v if v is not None else 'null'}")
     if fields.get("generated"):
@@ -86,7 +84,7 @@ def render_frontmatter(fields: dict) -> str:
             lines.append(f"  - id: {s['id']}")
             if s.get("resource"):
                 lines.append(f"    resource: {s['resource']}")
-    for section in ("x-wuxing", "x-mirror", "x-compute"):
+    for section in ("x-wuxing", "x-mirror", "x-compute", "x-application"):
         if fields.get(section):
             lines.append(f"{section}:")
             for k, v in fields[section].items():
@@ -122,7 +120,7 @@ def crystal_file(fields, body) -> str:
 def parse_wubu_dir(md_dir: Path):
     """解析五步读解目录 → {章号: {title, original, steps, spo}}"""
     chapters = {}
-    for f in sorted(md_dir.glob("**/第*章_五步读解.md")):
+    for f in sorted(md_dir.glob("第*章_五步读解.md")):
         text = f.read_text(encoding="utf-8", errors="replace")
         # 按章节标题切分（兼容 # 和 ##、阿拉伯/中文数字）
         blocks = []
@@ -243,9 +241,13 @@ def build_crystal(num: int, wubu, db_entry, verified_by: str = None):
             "daily_mirror": {k: v for k, v in dm.items() if v} or None,
         },
         "x-compute": {"spo_count": len(spo), "spo_ref": f"daojing_database_v2.json#{num}"},
+        # M3 回注读取（方案 A）：x_application 来自数据库（数据源是可信源，重生成不丢）
+        "x-application": db.get("x_application") or None,
     }
     # 去空
     fields["x-mirror"] = {k: v for k, v in fields["x-mirror"].items() if v}
+    if fields.get("x-application") is None:
+        del fields["x-application"]
 
     # 正文
     body = [f"# 第{num}章", ""]

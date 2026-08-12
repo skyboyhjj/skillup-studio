@@ -44,10 +44,7 @@ CANONICAL_MAPPING = CONFIG_DIR / "canonical_wuxing_mapping.json"
 CRYSTALIGNORE_FILE = REPO_ROOT / ".crystalignore"
 QUALITY_REPORT = OUTPUT_DIR / "quality_report.json"
 
-# 校验常量（对齐 IF-2026-006 §2.4）
-WUXING_ORDER = ["木", "火", "土", "金", "水"]
-VALID_TYPES = ["KnowledgeDomain", "DiagnosisResult", "ClassicalInsight", "TizhengCard"]
-VALID_VERIFIED = re.compile(r"^(process:[a-z-]+|human:[a-z0-9_-]+)$")
+from contracts import WUXING_ORDER, VALID_TYPES, VALID_VERIFIED, DIMENSION_WUXING, DIMENSION_KEYS
 
 # 四源元信息
 SOURCE_META = {
