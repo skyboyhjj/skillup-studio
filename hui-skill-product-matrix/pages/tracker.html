@@ -176,6 +176,7 @@
       <a href="tracker.html" class="nav-link active text-sm font-medium">追踪引擎</a>
       <a href="papers.html" class="nav-link text-sm text-muted-foreground">论文采集器</a>
       <a href="annotate.html" class="nav-link text-sm text-muted-foreground">标注平台</a>
+      <a href="#zone9" onclick="scrollToZone9()" class="nav-link text-sm text-muted-foreground">镜鉴</a>
     </div>
     <div class="flex items-center gap-3">
       <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-md hover:bg-muted transition" title="切换主题">
@@ -350,6 +351,86 @@
         </h2>
         <div id="paperList">
           <p class="text-sm text-muted-foreground">论文数据按需加载（papers-YYYY-MM.json）</p>
+        </div>
+      </section>
+
+      <!-- ⑨ 镜鉴入口 -->
+      <section class="bg-card rounded-xl border border-border p-4 sm:p-6" id="zone9">
+        <h2 class="text-lg font-semibold mb-1 flex items-center gap-2">
+          <span>镜鉴入口</span>
+          <span class="text-xs px-2 py-0.5 rounded-full" id="modeBadge">检测中...</span>
+        </h2>
+        <p class="text-xs text-muted-foreground mb-4" id="modeHint">正在检测服务器状态...</p>
+
+        <!-- 事件输入 -->
+        <div class="mb-4">
+          <label class="text-sm font-medium mb-1.5 block">事件描述</label>
+          <textarea id="mirrorEvent" class="w-full bg-muted border border-border rounded-lg px-3 py-2 text-sm resize-none"
+            placeholder="描述一个今天发生的具体事件，如：会议上对下属提案感到不耐烦……" rows="3" maxlength="500"></textarea>
+          <div class="text-xs text-muted-foreground text-right mt-0.5"><span id="mirrorCharCount">0</span>/500</div>
+        </div>
+
+        <!-- 四维评分 -->
+        <div class="mb-4">
+          <label class="text-sm font-medium mb-1.5 block">四维自评（1-10）</label>
+          <div class="space-y-2" id="mirrorScoreSliders">
+            <div class="flex items-center gap-3">
+              <span class="text-xs w-24 wx-fire">时位轴（火）</span>
+              <input type="range" min="1" max="10" value="5" data-dim="shi" class="flex-1 h-1.5">
+              <span class="text-xs w-6 text-right" data-dim-val="shi">5</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs w-24 wx-earth">宇位轴（土）</span>
+              <input type="range" min="1" max="10" value="5" data-dim="yu" class="flex-1 h-1.5">
+              <span class="text-xs w-6 text-right" data-dim-val="yu">5</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs w-24 wx-water">识位轴（水）</span>
+              <input type="range" min="1" max="10" value="5" data-dim="identify" class="flex-1 h-1.5">
+              <span class="text-xs w-6 text-right" data-dim-val="identify">5</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs w-24 wx-wood">缘位轴（木）</span>
+              <input type="range" min="1" max="10" value="5" data-dim="yuan" class="flex-1 h-1.5">
+              <span class="text-xs w-6 text-right" data-dim-val="yuan">5</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="mirrorGo" class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition">
+          生成体证卡片
+        </button>
+
+        <!-- 结果区 -->
+        <div id="mirrorResult" class="mt-4 hidden"></div>
+
+        <!-- 填证面板（在线模式） -->
+        <div id="mirrorEvidencePanel" class="mt-4 hidden">
+          <div class="border border-border rounded-lg p-4 space-y-3">
+            <h3 class="text-sm font-semibold">填证</h3>
+            <textarea id="evPractice" class="w-full bg-muted border border-border rounded-lg px-3 py-2 text-sm resize-none"
+              placeholder="实操：我做了什么……" rows="2"></textarea>
+            <textarea id="evExperience" class="w-full bg-muted border border-border rounded-lg px-3 py-2 text-sm resize-none"
+              placeholder="体验：我的感受是什么……" rows="2"></textarea>
+            <textarea id="evReflection" class="w-full bg-muted border border-border rounded-lg px-3 py-2 text-sm resize-none"
+              placeholder="反思：验证/颠覆了哪个认知……" rows="2"></textarea>
+            <div class="flex gap-2">
+              <button id="evSubmit" class="px-3 py-1.5 bg-primary text-primary-foreground rounded-md text-xs font-medium">提交填证</button>
+              <button id="evPool" class="px-3 py-1.5 border border-border rounded-md text-xs text-muted-foreground">入池</button>
+              <button id="evCancel" class="px-3 py-1.5 border border-border rounded-md text-xs text-muted-foreground">取消</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 入池预览面板 -->
+        <div id="mirrorPoolPanel" class="mt-4 hidden"></div>
+
+        <!-- 卡片列表 -->
+        <div class="mt-6 pt-4 border-t border-border" id="mirrorCardList">
+          <h3 class="text-sm font-semibold mb-3">本地草稿</h3>
+          <div id="mirrorCardsContainer" class="space-y-2">
+            <p class="text-xs text-muted-foreground">暂无草稿</p>
+          </div>
         </div>
       </section>
     </main>
@@ -551,7 +632,399 @@ function renderAll() {
   lucide.createIcons();
 }
 
-// --- Hero ---
+// ============================================================
+// ⑨ 镜鉴入口 — 双模引擎
+// ============================================================
+let MIRROR_MODE = 'detecting'; // 'online' | 'offline' | 'detecting'
+let mirrorData = null;
+let currentCardPath = null;  // 当前生成卡片的服务端路径
+
+const DIM_WUXING = { '时位轴': '火', '宇位轴': '土', '识位轴': '水', '缘位轴': '木' };
+const DIM_KEYS = ['时位轴', '宇位轴', '识位轴', '缘位轴'];
+const DIM_CN = { '时位轴': '时', '宇位轴': '宇', '识位轴': '识', '缘位轴': '缘' };
+const WX_COLORS = { '水': 'var(--wx-water)', '木': 'var(--wx-wood)', '火': 'var(--wx-fire)', '土': 'var(--wx-earth)', '金': 'var(--wx-metal)' };
+
+// --- 模式检测 ---
+async function detectMode() {
+  try {
+    const ctrl = new AbortController();
+    const timeout = setTimeout(() => ctrl.abort(), 2000);
+    const resp = await fetch('/api/mirror/health', { signal: ctrl.signal });
+    clearTimeout(timeout);
+    if (resp.ok) {
+      MIRROR_MODE = 'online';
+      setModeUI('online');
+      return;
+    }
+  } catch (e) { /* offline */ }
+  MIRROR_MODE = 'offline';
+  setModeUI('offline');
+  await loadMirrorData();
+}
+
+function setModeUI(mode) {
+  const badge = document.getElementById('modeBadge');
+  const hint = document.getElementById('modeHint');
+  if (mode === 'online') {
+    badge.textContent = '在线';
+    badge.className = 'text-xs px-2 py-0.5 rounded-full bg-wx-wood text-white';
+    hint.textContent = '完整 SOP 流程可用（填证 / 入池 / 检索）';
+  } else {
+    badge.textContent = '离线';
+    badge.className = 'text-xs px-2 py-0.5 rounded-full bg-[var(--state-warning)] text-white';
+    hint.textContent = '离线模式 · 填证入池需启动 mirror_server.py 后刷新';
+    // 填证/入池按钮置灰
+    document.getElementById('evSubmit').disabled = true;
+    document.getElementById('evSubmit').title = '离线模式不可用 · 启动 mirror_server.py 后刷新';
+    document.getElementById('evPool').disabled = true;
+    document.getElementById('evPool').title = '离线模式不可用 · 启动 mirror_server.py 后刷新';
+  }
+}
+
+// --- 离线数据加载 ---
+async function loadMirrorData() {
+  try {
+    const resp = await fetch('../data/mirror_data.json');
+    if (resp.ok) {
+      mirrorData = await resp.json();
+    }
+  } catch (e) {
+    console.warn('mirror_data.json 加载失败，离线模式不可用');
+  }
+}
+
+// --- 离线引擎 ---
+function offlineMirror(event, scores) {
+  if (!mirrorData) return null;
+  const dimScores = {};
+  DIM_KEYS.forEach(d => dimScores[d] = scores[mirrorData.dimension_keys[d]] || 5);
+  const lowest = DIM_KEYS.reduce((a, b) => dimScores[a] < dimScores[b] ? a : b);
+  const weakWx = mirrorData.dimension_wuxing[lowest];
+  const pLevel = dimScores[lowest] < 5 ? '低' : '高';
+
+  // 触发匹配
+  let matched = null;
+  for (const [num, ch] of Object.entries(mirrorData.chapters)) {
+    const dim = ch.dimensions?.[lowest]?.[pLevel];
+    if (!dim) continue;
+    const hit = dim.triggers.filter(t => t && event.includes(t));
+    if (hit.length > 0) {
+      matched = { chapter: parseInt(num), title: ch.title, dimension: lowest,
+        p_level: pLevel, triggers: hit, insight_desc: dim.insight_desc,
+        action_desc: dim.action_desc, reflection: dim.reflection };
+      break;
+    }
+  }
+  // fallback: 第1章
+  if (!matched) {
+    const fb = mirrorData.chapters['1']?.dimensions?.[lowest]?.[pLevel];
+    matched = { chapter: 1, title: mirrorData.chapters['1']?.title || '',
+      dimension: lowest, p_level: pLevel, triggers: [],
+      insight_desc: fb?.insight_desc || '', action_desc: fb?.action_desc || '',
+      reflection: fb?.reflection || '' };
+  }
+
+  // 推荐
+  const wxChs = mirrorData.wuxing_chapters[weakWx] || [];
+  const recs = wxChs.map(n => {
+    const ch = mirrorData.chapters[n];
+    return `第${n}章 · ${ch?.title || ''}`;
+  });
+
+  return { lowest_dimension: lowest, weak_wuxing: weakWx, p_level: pLevel,
+    mirror: matched, recommendations: recs, weak_chapter_count: wxChs.length };
+}
+
+// --- 在线 API ---
+async function onlineMirror(event, scores) {
+  const resp = await fetch('/api/mirror/event', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event, scores })
+  });
+  return resp.json();
+}
+
+async function onlineCard(event, scores) {
+  const resp = await fetch('/api/mirror/card', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event, scores, user: 'hjj' })
+  });
+  return resp.json();
+}
+
+// --- 生成卡片（统一入口） ---
+async function generateCard() {
+  const event = document.getElementById('mirrorEvent').value.trim();
+  if (!event) return alert('请输入事件描述');
+
+  const scores = {};
+  document.querySelectorAll('#mirrorScoreSliders input[type=range]').forEach(sl => {
+    scores[sl.dataset.dim] = parseInt(sl.value);
+  });
+
+  document.getElementById('mirrorGo').disabled = true;
+  document.getElementById('mirrorGo').textContent = '生成中...';
+
+  let result;
+  if (MIRROR_MODE === 'online') {
+    result = await onlineMirror(event, scores);
+    if (result.ok) {
+      // 同时生成卡片落盘
+      const cardRes = await onlineCard(event, scores);
+      if (cardRes.ok) currentCardPath = cardRes.card_path;
+    }
+  } else {
+    result = offlineMirror(event, scores);
+    if (result) result.ok = true;
+  }
+
+  document.getElementById('mirrorGo').disabled = false;
+  document.getElementById('mirrorGo').textContent = '生成体证卡片';
+
+  if (result && result.ok) {
+    renderCardResult(result);
+    saveToLocal(event, scores, result);
+  } else {
+    alert('生成失败：' + (result?.error || '未知错误'));
+  }
+}
+
+// --- 渲染卡片 ---
+let cardStatus = 'draft';  // 当前卡片状态：draft | completed | pooled
+
+function renderCardResult(result) {
+  const m = result.mirror;
+  // 数据库 insight_desc 已含"镜鉴："前缀，渲染时剥离
+  const insight = (m.insight_desc || '').replace(/^镜鉴：\s*/, '');
+  // 推荐章数：显示实际展示数量（最多5）和总数
+  const recs = (result.recommendations || []);
+  const shown = recs.slice(0, 5);
+  const recLabel = recs.length > 5
+    ? `推荐经典（共${recs.length}章，前5）：`
+    : `推荐经典（${recs.length}章）：`;
+  
+  cardStatus = 'draft';
+  const div = document.getElementById('mirrorResult');
+  div.className = 'mt-4 border border-border rounded-lg p-4 space-y-3';
+  div.innerHTML = `
+    <div class="flex items-center gap-2 text-sm font-semibold">
+      <span>体证卡片 · ${DIM_CN[result.lowest_dimension]}位·${result.p_level}</span>
+    </div>
+    <div class="text-sm space-y-1" id="mirrorCardContent">
+      <p><span class="font-medium">📖 第${m.chapter}章 · ${m.title}</span></p>
+      ${insight ? `<p class="text-muted-foreground"><span class="font-medium">洞察：</span>${insight}</p>` : ''}
+      ${m.action_desc ? `<p class="text-muted-foreground"><span class="font-medium">今日功课：</span>${m.action_desc}</p>` : ''}
+      ${m.reflection ? `<p class="text-muted-foreground">🤔 <span class="font-medium">反思：</span>${m.reflection}</p>` : ''}
+    </div>
+    <div class="text-xs text-muted-foreground space-y-0.5" id="mirrorCardMeta">
+      <p><span class="font-medium">五行补益：</span>${result.lowest_dimension} → <span style="color:${WX_COLORS[result.weak_wuxing]}">${result.weak_wuxing}弱</span>（补${result.weak_wuxing}）</p>
+      <p><span class="font-medium">${recLabel}</span>${shown.join(' / ')}</p>
+    </div>
+    <div class="flex gap-2 pt-1" id="mirrorCardActions">
+      <button onclick="downloadCard()" class="px-3 py-1 text-xs border border-border rounded-md">下载 .md</button>
+      <button onclick="copyCard()" class="px-3 py-1 text-xs border border-border rounded-md">复制</button>
+      ${MIRROR_MODE === 'online' ? `
+        <button onclick="showEvidencePanel()" class="px-3 py-1 text-xs bg-primary text-primary-foreground rounded-md">填证</button>
+        <button onclick="showPoolPanel()" class="px-3 py-1 text-xs border border-border rounded-md">入池</button>
+      ` : `
+        <button disabled class="px-3 py-1 text-xs border border-border rounded-md opacity-50" title="离线模式不可用">填证</button>
+        <button disabled class="px-3 py-1 text-xs border border-border rounded-md opacity-50" title="离线模式不可用">入池</button>
+      `}
+    </div>
+  `;
+}
+
+// --- 下载/复制 ---
+function getCardText() {
+  const content = document.getElementById('mirrorCardContent');
+  const meta = document.getElementById('mirrorCardMeta');
+  let text = '';
+  if (content) text += content.innerText + '\n';
+  if (meta) text += meta.innerText;
+  return text.trim();
+}
+
+function downloadCard() {
+  const text = getCardText();
+  if (!text) return;
+  const blob = new Blob(['# 体证卡片\n\n' + text], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `tizheng_card_${new Date().toISOString().slice(0,10)}.md`;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function copyCard() {
+  const text = getCardText();
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => alert('已复制'));
+}
+
+// --- 填证面板 ---
+function showEvidencePanel() {
+  if (cardStatus === 'completed') {
+    alert('当前卡片已完成填证，请重新生成卡片后再填证');
+    return;
+  }
+  // 每次打开清空输入
+  document.getElementById('evPractice').value = '';
+  document.getElementById('evExperience').value = '';
+  document.getElementById('evReflection').value = '';
+  document.getElementById('mirrorEvidencePanel').classList.remove('hidden');
+}
+
+document.getElementById('evCancel').addEventListener('click', () => {
+  document.getElementById('mirrorEvidencePanel').classList.add('hidden');
+});
+
+document.getElementById('evSubmit').addEventListener('click', async () => {
+  if (!currentCardPath) return alert('请先生成卡片');
+  if (cardStatus === 'completed') {
+    alert('当前卡片已完成填证，请重新生成卡片');
+    return;
+  }
+  const evidence = {
+    practice: document.getElementById('evPractice').value.trim(),
+    experience: document.getElementById('evExperience').value.trim(),
+    reflection: document.getElementById('evReflection').value.trim(),
+  };
+  if (!evidence.practice || !evidence.experience || !evidence.reflection) {
+    return alert('三问均需填写');
+  }
+  const resp = await fetch('/api/mirror/complete', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ card_path: currentCardPath, evidence })
+  });
+  const data = await resp.json();
+  if (resp.ok) {
+    cardStatus = 'completed';
+    alert('填证完成！卡片状态：completed');
+    // 清空输入并隐藏面板
+    document.getElementById('evPractice').value = '';
+    document.getElementById('evExperience').value = '';
+    document.getElementById('evReflection').value = '';
+    document.getElementById('mirrorEvidencePanel').classList.add('hidden');
+  } else {
+    alert('填证未通过：\n' + (data.problems || data.error || '未知错误'));
+  }
+});
+
+// --- 入池面板 ---
+async function showPoolPanel() {
+  if (!currentCardPath) return alert('请先生成卡片');
+  if (cardStatus !== 'completed') {
+    alert('请先完成填证后再入池');
+    return;
+  }
+  const resp = await fetch('/api/mirror/pool', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ card_path: currentCardPath })
+  });
+  const data = await resp.json();
+  const panel = document.getElementById('mirrorPoolPanel');
+  panel.classList.remove('hidden');
+  if (data.stage === 'await_confirm') {
+    panel.innerHTML = `
+      <div class="border border-border rounded-lg p-4 space-y-3">
+        <h3 class="text-sm font-semibold">入池预览</h3>
+        <div class="text-xs text-muted-foreground">
+          <p class="flex items-center gap-1"><span class="text-[var(--state-success)]">✓</span> 护栏1 · 匿名化扫描：已扫描姓名/手机/邮箱/身份证/公司名/地点</p>
+          <p class="flex items-center gap-1"><span class="text-[var(--state-success)]">✓</span> 护栏2 · 完整度检查：通过</p>
+          <p class="text-xs mt-1">${data.scan_boundary || ''}</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="confirmPool()" class="px-3 py-1.5 bg-primary text-primary-foreground rounded-md text-xs">确认入池</button>
+          <button onclick="document.getElementById('mirrorPoolPanel').classList.add('hidden')" class="px-3 py-1.5 border border-border rounded-md text-xs">取消</button>
+        </div>
+      </div>`;
+  } else if (data.ok) {
+    panel.innerHTML = `<div class="text-xs text-[var(--state-success)]">✓ 已入池（${data.wisdom_id}）</div>`;
+  } else {
+    panel.innerHTML = `<div class="text-xs text-[var(--state-error)]">入池失败：${data.error || ''}</div>`;
+  }
+}
+
+document.getElementById('evPool').addEventListener('click', showPoolPanel);
+
+async function confirmPool() {
+  const resp = await fetch('/api/mirror/pool', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ card_path: currentCardPath, confirm: true })
+  });
+  const data = await resp.json();
+  const panel = document.getElementById('mirrorPoolPanel');
+  if (data.ok) {
+    panel.innerHTML = `<div class="text-xs text-[var(--state-success)]">✓ 已入池（${data.wisdom_id}）</div>`;
+  } else {
+    panel.innerHTML = `<div class="text-xs text-[var(--state-error)]">入池失败：${data.error || ''}</div>`;
+  }
+}
+
+// --- localStorage 持久化 ---
+function saveToLocal(event, scores, result) {
+  const key = 'mirror_cards';
+  let store = { version: 1, cards: [] };
+  try { store = JSON.parse(localStorage.getItem(key)) || store; } catch (e) {}
+  if (store.cards.length >= 50) store.cards.shift(); // FIFO
+  store.cards.push({
+    id: 'tizheng_' + new Date().toISOString().replace(/[:.]/g, '').slice(0, 15),
+    event, scores, result, status: 'draft',
+    generated: new Date().toISOString()
+  });
+  localStorage.setItem(key, JSON.stringify(store));
+  renderMirrorCards();
+}
+
+function renderMirrorCards() {
+  const key = 'mirror_cards';
+  let store = { version: 1, cards: [] };
+  try { store = JSON.parse(localStorage.getItem(key)) || store; } catch (e) {}
+  const container = document.getElementById('mirrorCardsContainer');
+  if (store.cards.length === 0) {
+    container.innerHTML = '<p class="text-xs text-muted-foreground">暂无草稿</p>';
+    return;
+  }
+  container.innerHTML = store.cards.reverse().map(c => `
+    <div class="flex items-center justify-between text-xs p-2 rounded-md bg-muted/50">
+      <span class="truncate flex-1">${c.event.slice(0, 30)}...（${c.result?.lowest_dimension ? DIM_CN[c.result.lowest_dimension] + '位·' + c.result.p_level : ''}）</span>
+      <span class="text-muted-foreground ml-2">${c.generated?.slice(0, 10) || ''}</span>
+      <button onclick="deleteLocalCard('${c.id}')" class="ml-2 text-muted-foreground hover:text-[var(--state-error)]">✕</button>
+    </div>
+  `).join('');
+}
+
+function deleteLocalCard(id) {
+  const key = 'mirror_cards';
+  let store = { version: 1, cards: [] };
+  try { store = JSON.parse(localStorage.getItem(key)) || store; } catch (e) {}
+  store.cards = store.cards.filter(c => c.id !== id);
+  localStorage.setItem(key, JSON.stringify(store));
+  renderMirrorCards();
+}
+
+// --- 事件绑定 ---
+document.getElementById('mirrorGo').addEventListener('click', generateCard);
+
+// 滑块实时更新数值
+document.querySelectorAll('#mirrorScoreSliders input[type=range]').forEach(sl => {
+  sl.addEventListener('input', () => {
+    const valEl = document.querySelector(`[data-dim-val="${sl.dataset.dim}"]`);
+    if (valEl) valEl.textContent = sl.value;
+  });
+});
+
+// 事件字符计数
+document.getElementById('mirrorEvent').addEventListener('input', (e) => {
+  document.getElementById('mirrorCharCount').textContent = e.target.value.length;
+});
+
+// 导航滚动
+function scrollToZone9() {
+  document.getElementById('zone9').scrollIntoView({ behavior: 'smooth' });
+}
+
+// --- renderHero (zone9 不影响) ---
 function renderHero() {
   const lastMonth = dashboardData.monthly[0]?.month || '---';
   document.getElementById('heroSubtitle').textContent = `月度概览 · ${lastMonth}`;
@@ -1499,6 +1972,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadData();
+  detectMode();
+  renderMirrorCards();
   lucide.createIcons();
 });
 </script>

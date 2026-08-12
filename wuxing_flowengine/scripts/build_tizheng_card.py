@@ -220,7 +220,7 @@ def main():
     parser.add_argument("--scores", required=True, help="四维评分: shi,yu,identify,yuan 或 7,6,3,5（时,宇,识,缘）")
     parser.add_argument("--user", default="hjj", help="用户 id")
     parser.add_argument("--db", default="verify/daojing_database_v2.json", help="结构库")
-    parser.add_argument("--fallback-chapter", type=int, default=10, help="无触发命中时的默认章")
+    parser.add_argument("--fallback-chapter", type=int, default=1, help="无触发命中时的默认章（SOP Step 5：第1章·识位轴·低）")
     parser.add_argument("--generated-at", default=None, help="事件日期 YYYY-MM-DD")
     parser.add_argument("--out", default="output/crystals/tizheng", help="输出目录")
     args = parser.parse_args()
