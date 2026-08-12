@@ -81,12 +81,18 @@ def build_mirror_data(db_path: Path, out_path: Path):
         encoding="utf-8"
     )
 
-    # 统计
-    n_chapters = len(chapters)
+    # 写入后校验：JSON 可解析 + 数据完整性
+    written = json.loads(out_path.read_text(encoding="utf-8"))
+    n_chapters = len(written.get("chapters", {}))
     n_entries = sum(
         sum(len(level) for level in (ch.get("dimensions", {}).values()))
-        for ch in chapters.values()
+        for ch in written["chapters"].values()
     )
+    if n_chapters != 81:
+        raise RuntimeError(f"章节数异常: {n_chapters}/81")
+    if n_entries != 648:
+        raise RuntimeError(f"维度条目异常: {n_entries}/648")
+
     size_kb = out_path.stat().st_size / 1024
     print(f"[mirror_data] {n_chapters} 章 · {n_entries} 维度条目 · {size_kb:.0f} KB")
     print(f"[输出] {out_path}")
