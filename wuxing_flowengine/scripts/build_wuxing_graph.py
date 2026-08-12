@@ -3,7 +3,7 @@
 """
 build_wuxing_graph.py —— D 道经五行图谱生成器
 ================================================================
-输入：daojing_database_v2.json（81 章 dominant）
+输入：daojing_database_v2.json（81 章 dominant）+ 五步读解（可选，标题优选源）
 输出：
   output/wuxing_graph/daojing_wuxing_graph.json   图谱数据（节点/边/统计）
   output/wuxing_graph/daojing_wuxing_graph.html   可视化（零依赖 SVG，五行生态环 + 章节生克四邻）
@@ -13,17 +13,75 @@ build_wuxing_graph.py —— D 道经五行图谱生成器
   - 边   = 章间生克：两章 dominant 关系（生/克/同气/无关）
   - 布局 = 五行生态环（环形 + 中心玄鉴金？——五行环：木火土金水顺时针相生，隔位相克）
 
+标题策略（P1 防脏标题传导）：
+  - 读解优先：从五步读解 .md 文件提取章节标题（人撰，可信源）
+  - 数据库回退：读解缺失时用 daojing_database_v2.json 的 chapter_title
+  - 与 build_classical_crystals_v02.py 的"读解优先、数据库回退"策略一致
+
 用法：
-  python build_wuxing_graph.py --db verify/daojing_database_v2.json --out output/wuxing_graph
+  python build_wuxing_graph.py --db wuxing_flowengine/data/daojing_database_v2.json --out wuxing_flowengine/output/wuxing_graph
+  python build_wuxing_graph.py --md-dir docs/02-知识晶体库/classical_extracted/five-step_reading  # 指定读解目录
 """
 
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 
 # 五行相生环：木→火→土→金→水→木
 SHENG_CYCLE = {"木": "火", "火": "土", "土": "金", "金": "水", "水": "木"}
+
+# 中文数字映射（与 build_classical_crystals_v02.py 一致）
+CN_NUM = {'一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10}
+
+
+def cn2num(s: str) -> int:
+    """中文数字→阿拉伯数字（与 build_classical_crystals_v02.py 一致）"""
+    s = s.strip()
+    if '十' not in s:
+        return CN_NUM.get(s, 0)
+    parts = s.split('十')
+    if parts[0] == '' and parts[1] == '':
+        return 10
+    if parts[0] == '':
+        return 10 + CN_NUM.get(parts[1], 0)
+    if parts[1] == '':
+        return CN_NUM.get(parts[0], 0) * 10
+    return CN_NUM.get(parts[0], 0) * 10 + CN_NUM.get(parts[1], 0)
+
+
+def extract_chapter_num(title: str):
+    """从标题提取章号（阿拉伯/中文数字兼容）"""
+    m = re.match(r'^第(.+?)章', title)
+    if not m:
+        return None
+    num = m.group(1)
+    if num.isdigit():
+        return int(num)
+    return cn2num(num)
+
+
+def parse_wubu_titles(md_dir: Path) -> dict:
+    """解析五步读解目录 → {章号: 标题}（读解优先可信源）
+    
+    与 build_classical_crystals_v02.py 的 parse_wubu_dir() 标题提取逻辑一致。
+    标题格式：
+      - 上经：## 第1章 道可道（道之总纲，本体论）
+      - 下经：## 第四十一章 / ## 第50章 出生入死
+    """
+    titles = {}
+    if not md_dir or not md_dir.exists():
+        return titles
+    for f in sorted(md_dir.rglob("第*章_五步读解.md")):
+        for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
+            m = re.match(r'^#{1,2}\s*(第.+?章)[^\n]*', line)
+            if m:
+                n = extract_chapter_num(m.group(1))
+                if n and 1 <= n <= 81:
+                    title = line.strip().lstrip("#").strip()
+                    titles[n] = title
+    return titles
 # 五行相克：木克土 土克水 水克火 火克金 金克木
 KE_MAP = {"木": "土", "土": "水", "水": "火", "火": "金", "金": "木"}
 WUXING_ORDER = ["木", "火", "土", "金", "水"]
@@ -46,19 +104,37 @@ def relation(a: str, b: str) -> str:
     return "无关"
 
 
-def build_graph(db_path: Path) -> dict:
+def build_graph(db_path: Path, wubu_titles: dict = None) -> dict:
+    """构建五行图谱。标题策略：读解优先（wubu_titles），数据库回退（chapter_title）。"""
+    wubu_titles = wubu_titles or {}
     db = json.loads(db_path.read_text(encoding="utf-8"))
 
-    # 1. 收集 81 章 dominant
-    chapters = []          # {num, title, dominant}
+    # 1. 收集 81 章 dominant + 标题（读解优先、数据库回退）
+    chapters = []          # {num, title, dominant, title_source}
     by_wx = {w: [] for w in WUXING_ORDER}
+    read_first_count = 0
     for num in range(1, 82):
         node = db.get(str(num), {})
         dom = (node.get("x_wuxing") or {}).get("dominant")
         if not dom:
             continue
-        chapters.append({"num": num, "title": node.get("chapter_title", ""), "dominant": dom})
-        by_wx[dom].append({"num": num, "title": node.get("chapter_title", "")})
+        # 标题策略：读解优先 → 数据库回退 → 纯章号
+        db_title = node.get("chapter_title", "")
+        if num in wubu_titles:
+            title = wubu_titles[num]
+            title_source = "wubu"
+            read_first_count += 1
+        elif db_title:
+            title = db_title
+            title_source = "database"
+        else:
+            title = f"第{num}章"
+            title_source = "fallback"
+        chapters.append({
+            "num": num, "title": title, "dominant": dom,
+            "title_source": title_source,
+        })
+        by_wx[dom].append({"num": num, "title": title})
 
     # 2. 五行节点（大小 = 章数）
     wx_nodes = []
@@ -103,6 +179,11 @@ def build_graph(db_path: Path) -> dict:
     stats = {
         "total_chapters": len(chapters),
         "wuxing_dist": dict(dist),
+        "title_strategy": {
+            "read_first_count": read_first_count,
+            "read_first_ratio": f"{read_first_count}/{len(chapters)}",
+            "note": "P1 防脏标题传导：读解优先（人撰可信源），数据库回退。与 build_classical_crystals_v02.py 一致",
+        },
         "edge_types": {"生": sum(1 for e in wx_edges if e["type"] == "生"),
                        "克": sum(1 for e in wx_edges if e["type"] == "克")},
         "relation_counts": {"生": 0, "克": 0, "同气": 0, "无关": 0},
@@ -307,6 +388,8 @@ def render_html(g: dict) -> str:
 def main():
     parser = argparse.ArgumentParser(description="D 道经五行图谱生成器")
     parser.add_argument("--db", default="wuxing_flowengine/data/daojing_database_v2.json", help="结构库")
+    parser.add_argument("--md-dir", default="docs/02-知识晶体库/classical_extracted/five-step_reading",
+                        help="五步读解目录（标题优选源，P1 防脏标题传导）")
     parser.add_argument("--out", default="wuxing_flowengine/output/wuxing_graph", help="输出目录")
     args = parser.parse_args()
 
@@ -314,7 +397,11 @@ def main():
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    graph = build_graph(db_path)
+    # P1 读解优先：从五步读解提取标题（人撰可信源）
+    md_dir = Path(args.md_dir)
+    wubu_titles = parse_wubu_titles(md_dir)
+
+    graph = build_graph(db_path, wubu_titles)
     (out_dir / "daojing_wuxing_graph.json").write_text(
         json.dumps(graph, ensure_ascii=False, indent=1), encoding="utf-8")
     (out_dir / "daojing_wuxing_graph.html").write_text(
@@ -325,6 +412,7 @@ def main():
     print("=" * 68)
     s = graph["stats"]
     print(f"[章节] {s['total_chapters']}/81 章（有 dominant）")
+    print(f"[标题] 读解优先 {s['title_strategy']['read_first_ratio']} 章，数据库回退 {s['total_chapters'] - s['title_strategy']['read_first_count']} 章")
     print(f"[分布] {s['wuxing_dist']}")
     print(f"[章间关系] 生={s['relation_counts']['生']} 克={s['relation_counts']['克']} "
           f"同气={s['relation_counts']['同气']} 无关={s['relation_counts']['无关']}")
