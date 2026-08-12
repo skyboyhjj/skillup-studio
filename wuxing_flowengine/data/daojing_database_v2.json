@@ -183,7 +183,15 @@
     "context": "玄之又玄，众妙之门"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 4,
+    "木": 1
+   },
+   "concepts": 5
+  }
  },
  "2": {
   "chapter_title": "天下皆知",
@@ -369,7 +377,18 @@
     "context": "夫唯弗居，是以不去"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "金": 1,
+    "木": 2,
+    "火": 2,
+    "土": 2,
+    "水": 2
+   },
+   "concepts": 9
+  }
  },
  "3": {
   "chapter_title": "不尚贤",
@@ -555,7 +574,15 @@
     "context": "不见可欲，使民心不乱"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 5,
+    "水": 2
+   },
+   "concepts": 7
+  }
  },
  "4": {
   "chapter_title": "道冲",
@@ -732,7 +759,15 @@
     "context": "挫其锐，解其纷"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "木": 1,
+    "水": 6
+   },
+   "concepts": 7
+  }
  },
  "5": {
   "chapter_title": "天地不仁",
@@ -927,7 +962,17 @@
     "context": "不如守中"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 2,
+    "土": 4,
+    "木": 1,
+    "金": 2
+   },
+   "concepts": 9
+  }
  },
  "6": {
   "chapter_title": "谷神不死",
@@ -1104,7 +1149,15 @@
     "context": "用之不勤"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 5,
+    "土": 1
+   },
+   "concepts": 6
+  }
  },
  "7": {
   "chapter_title": "天长地久",
@@ -1290,7 +1343,15 @@
     "context": "非以其无私邪？故能成其私"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 6,
+    "土": 1
+   },
+   "concepts": 7
+  }
  },
  "8": {
   "chapter_title": "上善若水",
@@ -1485,7 +1546,15 @@
     "context": "夫唯不争，故无尤"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 6,
+    "木": 1
+   },
+   "concepts": 7
+  }
  },
  "9": {
   "chapter_title": "持而盈之",
@@ -1671,7 +1740,15 @@
     "context": "金玉满堂，莫之能守"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "土": 1,
+    "金": 4
+   },
+   "concepts": 5
+  }
  },
  "10": {
   "chapter_title": "· 载营魄抱一",
@@ -1848,7 +1925,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 2,
+    "土": 3
+   },
+   "concepts": 5
+  }
  },
  "11": {
   "chapter_title": "· 三十辐共一毂",
@@ -2025,7 +2110,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "木": 1,
+    "水": 1
+   },
+   "concepts": 2
+  }
  },
  "12": {
   "chapter_title": "· 五色令人目盲",
@@ -2211,7 +2304,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 1
+   },
+   "concepts": 1
+  }
  },
  "13": {
   "chapter_title": "宠辱若惊",
@@ -2407,7 +2507,16 @@
     "context": "无身→以身为天下"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "水": 1,
+    "火": 4,
+    "土": 3
+   },
+   "concepts": 8
+  }
  },
  "14": {
   "chapter_title": "视之不见",
@@ -2613,7 +2722,15 @@
     "context": "能知古始，是谓道纪"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 6,
+    "金": 2
+   },
+   "concepts": 8
+  }
  },
  "15": {
   "chapter_title": "古之善为士者",
@@ -2819,7 +2936,16 @@
     "context": "夫唯不盈，故能蔽不新成"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 7,
+    "木": 1,
+    "土": 1
+   },
+   "concepts": 9
+  }
  },
  "16": {
   "chapter_title": "致虚守静",
@@ -3014,7 +3140,17 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "土": 1,
+    "木": 1,
+    "火": 1,
+    "水": 4
+   },
+   "concepts": 7
+  }
  },
  "17": {
   "chapter_title": "太上不知有之",
@@ -3182,7 +3318,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 3
+   },
+   "concepts": 3
+  }
  },
  "18": {
   "chapter_title": "大道废有仁义",
@@ -3350,7 +3493,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "木": 1
+   },
+   "concepts": 1
+  }
  },
  "19": {
   "chapter_title": "· 绝圣弃智",
@@ -3527,7 +3677,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "木": 1
+   },
+   "concepts": 1
+  }
  },
  "20": {
   "chapter_title": "· 绝学无忧",
@@ -3704,7 +3861,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 3,
+    "土": 1
+   },
+   "concepts": 4
+  }
  },
  "21": {
   "chapter_title": "· 孔德之容惟道是从",
@@ -3890,7 +4055,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "水": 1,
+    "木": 1
+   },
+   "concepts": 2
+  }
  },
  "22": {
   "chapter_title": "曲则全",
@@ -4076,7 +4249,17 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "金": 1,
+    "火": 1,
+    "水": 3,
+    "土": 1
+   },
+   "concepts": 6
+  }
  },
  "23": {
   "chapter_title": "希言自然",
@@ -4253,7 +4436,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 3,
+    "土": 2
+   },
+   "concepts": 5
+  }
  },
  "24": {
   "chapter_title": "企者不立",
@@ -4439,7 +4630,17 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "火": 1,
+    "水": 2,
+    "金": 1,
+    "木": 1
+   },
+   "concepts": 5
+  }
  },
  "25": {
   "chapter_title": "有物混成先天地生",
@@ -4663,7 +4864,17 @@
     "context": "道法自然"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "土": 4,
+    "水": 5,
+    "火": 1,
+    "金": 1
+   },
+   "concepts": 11
+  }
  },
  "26": {
   "chapter_title": "重为轻根静为躁君",
@@ -4859,7 +5070,17 @@
     "context": "躁则失君"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "火": 2,
+    "金": 1,
+    "土": 3,
+    "水": 1
+   },
+   "concepts": 7
+  }
  },
  "27": {
   "chapter_title": "善行无辙迹",
@@ -5055,7 +5276,18 @@
     "context": "不贵其师，不爱其资，虽智大迷"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "土": 2,
+    "金": 2,
+    "水": 2,
+    "木": 3,
+    "火": 1
+   },
+   "concepts": 10
+  }
  },
  "28": {
   "chapter_title": "· 知其雄守其雌",
@@ -5277,7 +5509,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "金": 1,
+    "木": 1,
+    "土": 1
+   },
+   "concepts": 3
+  }
  },
  "29": {
   "chapter_title": "· 将欲取天下而为之",
@@ -5481,7 +5722,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "木": 1,
+    "土": 3,
+    "火": 1
+   },
+   "concepts": 5
+  }
  },
  "30": {
   "chapter_title": "· 以道佐人主者不以兵强天下",
@@ -5712,7 +5962,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "火": 1,
+    "金": 2
+   },
+   "concepts": 3
+  }
  },
  "31": {
   "chapter_title": "兵者不祥",
@@ -5898,7 +6156,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "金": 1,
+    "土": 2,
+    "水": 1
+   },
+   "concepts": 4
+  }
  },
  "32": {
   "chapter_title": "道常无名",
@@ -6084,7 +6351,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "木": 2,
+    "水": 1,
+    "土": 4
+   },
+   "concepts": 7
+  }
  },
  "33": {
   "chapter_title": "自知者明",
@@ -6270,7 +6546,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "金": 1,
+    "火": 1,
+    "水": 1
+   },
+   "concepts": 3
+  }
  },
  "34": {
   "chapter_title": "大道泛兮其可左右",
@@ -6456,7 +6741,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "木": 1,
+    "水": 4,
+    "金": 1
+   },
+   "concepts": 6
+  }
  },
  "35": {
   "chapter_title": "执大象天下往",
@@ -6633,7 +6927,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 2
+   },
+   "concepts": 3
+  }
  },
  "36": {
   "chapter_title": "将欲歙之必固张之",
@@ -6819,7 +7121,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "土": 1,
+    "水": 3,
+    "金": 2
+   },
+   "concepts": 6
+  }
  },
  "37": {
   "chapter_title": "道常无为而无不为",
@@ -7014,7 +7325,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "木": 1,
+    "水": 2,
+    "土": 3
+   },
+   "concepts": 6
+  }
  },
  "38": {
   "chapter_title": "· 上德不德是以有德",
@@ -7200,7 +7520,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 1
+   },
+   "concepts": 1
+  }
  },
  "39": {
   "chapter_title": "· 昔之得一者",
@@ -7386,7 +7713,17 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 2,
+    "木": 1,
+    "金": 1,
+    "土": 3
+   },
+   "concepts": 7
+  }
  },
  "40": {
   "chapter_title": "· 反者道之动 弱者道之用",
@@ -7554,7 +7891,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "木": 2,
+    "水": 3,
+    "火": 1
+   },
+   "concepts": 6
+  }
  },
  "41": {
   "chapter_title": "### 一、文本细读",
@@ -7740,7 +8086,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 3,
+    "木": 1
+   },
+   "concepts": 4
+  }
  },
  "42": {
   "chapter_title": "### 一、文本细读",
@@ -7926,7 +8280,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "水": 2,
+    "木": 2
+   },
+   "concepts": 4
+  }
  },
  "43": {
   "chapter_title": "### 一、文本细读",
@@ -8094,7 +8456,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 3
+   },
+   "concepts": 4
+  }
  },
  "44": {
   "chapter_title": "> 名与身孰亲？身与货孰多？得与亡孰",
@@ -8271,7 +8641,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "金": 2,
+    "水": 1
+   },
+   "concepts": 3
+  }
  },
  "45": {
   "chapter_title": "> 大成若缺，其用不弊。大盈若冲，其",
@@ -8457,7 +8835,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "土": 1,
+    "火": 1,
+    "水": 1
+   },
+   "concepts": 3
+  }
  },
  "46": {
   "chapter_title": "> 天下有道，却走马以粪。天下无道",
@@ -8634,7 +9021,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "火": 1
+   },
+   "concepts": 1
+  }
  },
  "47": {
   "chapter_title": "不出户知天下",
@@ -8802,7 +9196,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 1
+   },
+   "concepts": 2
+  }
  },
  "48": {
   "chapter_title": "为学日益为道日损",
@@ -8979,7 +9381,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2,
+    "水": 1,
+    "火": 1
+   },
+   "concepts": 4
+  }
  },
  "49": {
   "chapter_title": "圣人常无心以百姓心为心",
@@ -9165,7 +9576,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2
+   },
+   "concepts": 2
+  }
  },
  "50": {
   "chapter_title": "出生入死",
@@ -9342,7 +9760,14 @@
     "context": "以其生生之厚。"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 1
+   },
+   "concepts": 1
+  }
  },
  "51": {
   "chapter_title": "道生之德畜之",
@@ -9528,7 +9953,15 @@
     "context": "生而不有。"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "水": 2,
+    "木": 2
+   },
+   "concepts": 4
+  }
  },
  "52": {
   "chapter_title": "天下有始",
@@ -9732,7 +10165,16 @@
     "context": "用其光，复归其明，无遗身殃，是为袭常。"
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "金": 1,
+    "火": 1,
+    "土": 1
+   },
+   "concepts": 3
+  }
  },
  "53": {
   "chapter_title": "：非道之径 盗夸之诫",
@@ -9918,7 +10360,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2,
+    "水": 1
+   },
+   "concepts": 3
+  }
  },
  "54": {
   "chapter_title": "：善建不拔 修德于身",
@@ -10104,7 +10554,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 4
+   },
+   "concepts": 4
+  }
  },
  "55": {
   "chapter_title": "：含德之厚 赤子之道",
@@ -10290,7 +10747,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "火",
+   "dist": {
+    "水": 1,
+    "火": 1
+   },
+   "concepts": 2
+  }
  },
  "56": {
   "chapter_title": "：知者不言，言者不知——玄同之境",
@@ -10467,7 +10932,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 2
+   },
+   "concepts": 2
+  }
  },
  "57": {
   "chapter_title": "：以正治国，以奇用兵——无为而天下归",
@@ -10653,7 +11125,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2
+   },
+   "concepts": 2
+  }
  },
  "58": {
   "chapter_title": "：其政闷闷，其民淳淳——祸福相倚的辩",
@@ -10857,7 +11336,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 3,
+    "火": 2
+   },
+   "concepts": 5
+  }
  },
  "59": {
   "chapter_title": "治人事天莫若啬",
@@ -11043,7 +11530,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 1
+   },
+   "concepts": 1
+  }
  },
  "60": {
   "chapter_title": "治大国若烹小鲜",
@@ -11220,7 +11714,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 1
+   },
+   "concepts": 2
+  }
  },
  "61": {
   "chapter_title": "大国者下流",
@@ -11406,7 +11908,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 3,
+    "土": 1
+   },
+   "concepts": 4
+  }
  },
  "62": {
   "chapter_title": "道者万物之奥",
@@ -11574,7 +12084,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "金": 1,
+    "水": 1
+   },
+   "concepts": 2
+  }
  },
  "63": {
   "chapter_title": "为无为事无事味无味",
@@ -11760,7 +12278,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 2
+   },
+   "concepts": 3
+  }
  },
  "64": {
   "chapter_title": "其安易持其未兆易谋",
@@ -11946,7 +12472,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2
+   },
+   "concepts": 2
+  }
  },
  "65": {
   "chapter_title": "：玄德深远 稽式大顺",
@@ -12123,7 +12656,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "水": 2
+   },
+   "concepts": 2
+  }
  },
  "66": {
   "chapter_title": "：善下为王 不争之争",
@@ -12300,7 +12840,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 3
+   },
+   "concepts": 3
+  }
  },
  "67": {
   "chapter_title": "：三宝护身 慈俭不先",
@@ -12486,7 +13033,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "水": 2,
+    "金": 2,
+    "木": 1
+   },
+   "concepts": 5
+  }
  },
  "68": {
   "chapter_title": "：不争之德 配天古极",
@@ -12663,7 +13219,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "金": 1,
+    "土": 1,
+    "水": 2
+   },
+   "concepts": 4
+  }
  },
  "69": {
   "chapter_title": "：哀兵必胜 轻敌丧宝",
@@ -12840,7 +13405,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "木": 1,
+    "金": 1,
+    "火": 1
+   },
+   "concepts": 3
+  }
  },
  "70": {
   "chapter_title": "：被褐怀玉 知希则贵",
@@ -13026,7 +13600,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 2
+   },
+   "concepts": 3
+  }
  },
  "71": {
   "chapter_title": "知不知尚矣",
@@ -13194,7 +13776,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 1
+   },
+   "concepts": 1
+  }
  },
  "72": {
   "chapter_title": "民不畏威则大威至",
@@ -13389,7 +13978,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 3
+   },
+   "concepts": 3
+  }
  },
  "73": {
   "chapter_title": "勇于敢则杀勇于不敢则活",
@@ -13575,7 +14171,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 1
+   },
+   "concepts": 1
+  }
  },
  "74": {
   "chapter_title": "：民不畏死，奈何以死惧之",
@@ -13761,7 +14364,17 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "木": 1,
+    "土": 2,
+    "水": 1,
+    "金": 1
+   },
+   "concepts": 5
+  }
  },
  "75": {
   "chapter_title": "：民之饥，以其上食税之多",
@@ -13947,7 +14560,14 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 5
+   },
+   "concepts": 5
+  }
  },
  "76": {
   "chapter_title": "：人之生也柔弱，其死也坚强",
@@ -14133,7 +14753,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "水",
+   "dist": {
+    "土": 1,
+    "水": 2,
+    "金": 1
+   },
+   "concepts": 4
+  }
  },
  "77": {
   "chapter_title": "：张弓之道 损补天衡",
@@ -14310,7 +14939,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2,
+    "水": 1
+   },
+   "concepts": 3
+  }
  },
  "78": {
   "chapter_title": "：水之柔弱 正言若反",
@@ -14487,7 +15124,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "金",
+   "dist": {
+    "水": 2,
+    "金": 2
+   },
+   "concepts": 4
+  }
  },
  "79": {
   "chapter_title": "：执契不责 天道与善",
@@ -14664,7 +15309,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "木",
+   "dist": {
+    "水": 1,
+    "木": 1,
+    "土": 1
+   },
+   "concepts": 3
+  }
  },
  "80": {
   "chapter_title": "：小国寡民——全书社会理想",
@@ -14832,7 +15486,16 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "土": 2,
+    "金": 1,
+    "木": 1
+   },
+   "concepts": 4
+  }
  },
  "81": {
   "chapter_title": "：信言不美——全书终章与首尾呼应",
@@ -15018,6 +15681,15 @@
     "context": ""
    }
   ],
-  "cross_references": []
+  "cross_references": [],
+  "x_wuxing": {
+   "dominant": "土",
+   "dist": {
+    "水": 1,
+    "土": 2,
+    "火": 1
+   },
+   "concepts": 4
+  }
  }
 }

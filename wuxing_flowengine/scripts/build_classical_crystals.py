@@ -234,8 +234,9 @@ def build_crystal(num: int, wubu, db_entry, verified_by: str = None):
         "x-wuxing": {
             "dimension_map": DIMENSION_WUXING,
             "xuanjian": XUANJIAN_WUXING,
-            "dominant": None,
-            "note": "四维映射定案（DEC-2026-009 V1.1）：识水/缘木/宇土/时火；玄鉴决策中心=金（义·统摄决断）；dominant 待概念级标注",
+            "dominant": (db.get("x_wuxing") or {}).get("dominant"),
+            "dist": (db.get("x_wuxing") or {}).get("dist"),
+            "note": "四维映射定案（DEC-2026-009 V1.1）：识水/缘木/宇土/时火；玄鉴决策中心=金；dominant=概念级标注（S2/S3）或待SPO补充",
         },
         "x-mirror": {
             "dimensions": dim_summary or None,
